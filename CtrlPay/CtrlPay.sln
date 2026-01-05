@@ -1,13 +1,25 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.36203.30 d17.14
+VisualStudioVersion = 17.14.36203.30
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlPay.Core", "CtrlPay.Core\CtrlPay.Core.csproj", "{02AF9A11-93CB-4A34-ADFF-F273A466F64A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlPay.Database", "CtrlPay.Database\CtrlPay.Database.csproj", "{BD85614F-654E-4D1B-A34C-7FEBDCC757AF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlPay.API", "CtrlPay.API\CtrlPay.API.csproj", "{4B1DB71F-ACB5-4923-8337-BA55F6B39229}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlPay.Avalonia", "CtrlPay.Avalonia\CtrlPay.Avalonia\CtrlPay.Avalonia.csproj", "{6B139DB1-E7E6-472D-BBC3-4EF5AD76FBE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlPay.Avalonia.Android", "CtrlPay.Avalonia\CtrlPay.Avalonia.Android\CtrlPay.Avalonia.Android.csproj", "{91FA34A6-3A35-4F45-B64B-454C01887311}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlPay.Avalonia.Desktop", "CtrlPay.Avalonia\CtrlPay.Avalonia.Desktop\CtrlPay.Avalonia.Desktop.csproj", "{DA0302B0-8B74-4647-AEB9-467DC9F2C580}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlPay.Avalonia.iOS", "CtrlPay.Avalonia\CtrlPay.Avalonia.iOS\CtrlPay.Avalonia.iOS.csproj", "{E378D90E-308F-4FA1-82AF-06DA903EBD13}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlPay.Avalonia.Browser", "CtrlPay.Avalonia\CtrlPay.Avalonia.Browser\CtrlPay.Avalonia.Browser.csproj", "{79302AF5-FCAB-4404-BEEE-CBBEEB71C988}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CtrlPay.Repos", "CtrlPay.Repos\CtrlPay.Repos.csproj", "{ED7C8D17-8801-4B0B-B641-2E82F0311B73}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +39,30 @@ Global
 		{4B1DB71F-ACB5-4923-8337-BA55F6B39229}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B1DB71F-ACB5-4923-8337-BA55F6B39229}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B1DB71F-ACB5-4923-8337-BA55F6B39229}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B139DB1-E7E6-472D-BBC3-4EF5AD76FBE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B139DB1-E7E6-472D-BBC3-4EF5AD76FBE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B139DB1-E7E6-472D-BBC3-4EF5AD76FBE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B139DB1-E7E6-472D-BBC3-4EF5AD76FBE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91FA34A6-3A35-4F45-B64B-454C01887311}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91FA34A6-3A35-4F45-B64B-454C01887311}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91FA34A6-3A35-4F45-B64B-454C01887311}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91FA34A6-3A35-4F45-B64B-454C01887311}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA0302B0-8B74-4647-AEB9-467DC9F2C580}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA0302B0-8B74-4647-AEB9-467DC9F2C580}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA0302B0-8B74-4647-AEB9-467DC9F2C580}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA0302B0-8B74-4647-AEB9-467DC9F2C580}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E378D90E-308F-4FA1-82AF-06DA903EBD13}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E378D90E-308F-4FA1-82AF-06DA903EBD13}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E378D90E-308F-4FA1-82AF-06DA903EBD13}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E378D90E-308F-4FA1-82AF-06DA903EBD13}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79302AF5-FCAB-4404-BEEE-CBBEEB71C988}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79302AF5-FCAB-4404-BEEE-CBBEEB71C988}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79302AF5-FCAB-4404-BEEE-CBBEEB71C988}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79302AF5-FCAB-4404-BEEE-CBBEEB71C988}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED7C8D17-8801-4B0B-B641-2E82F0311B73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED7C8D17-8801-4B0B-B641-2E82F0311B73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED7C8D17-8801-4B0B-B641-2E82F0311B73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED7C8D17-8801-4B0B-B641-2E82F0311B73}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
