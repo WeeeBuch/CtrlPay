@@ -1,4 +1,4 @@
-@CtrlPay.API_HostAddress = http://localhost:5181
+@CtrlPay.API_HostAddress = http://localhost:5241
 
 GET {{CtrlPay.API_HostAddress}}/weatherforecast/
 Accept: application/json
