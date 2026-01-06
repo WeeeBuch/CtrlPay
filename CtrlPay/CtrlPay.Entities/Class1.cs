@@ -1,4 +1,4 @@
-﻿namespace CtrlPay.Database
+﻿namespace CtrlPay.Entities
 {
     public class Class1
     {

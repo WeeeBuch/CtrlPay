@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CtrlPay.Core\CtrlPay.Core.csproj" />
-    <ProjectReference Include="..\CtrlPay.Database\CtrlPay.Database.csproj" />
+    <ProjectReference Include="..\CtrlPay.Entities\CtrlPay.Entities.csproj" />
   </ItemGroup>
 
 </Project>
