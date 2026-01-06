@@ -10,4 +10,10 @@
     <ProjectReference Include="..\CtrlPay.Entities\CtrlPay.Entities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.20" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Proxies" Version="8.0.20" />
+    <PackageReference Include="MySql.EntityFrameworkCore" Version="8.0.20" />
+  </ItemGroup>
+
 </Project>
