@@ -9,7 +9,16 @@
         <local:ViewLocator/>
     </Application.DataTemplates>
 
+    <Application.Resources>
+      <ResourceDictionary>
+        <ResourceDictionary.MergedDictionaries>
+          <ResourceInclude Source="avares://CtrlPay.Avalonia/Styles/DarkColors.axaml"/>
+        </ResourceDictionary.MergedDictionaries>
+      </ResourceDictionary>
+    </Application.Resources>
+
     <Application.Styles>
         <FluentTheme />
+        <StyleInclude Source="avares://CtrlPay.Avalonia/Styles/Styles.axaml"/>
     </Application.Styles>
 </Application>
