@@ -37,16 +37,16 @@ namespace CtrlPay.Entities
         public string PostalCode { get; set; }
         [Column("city")]
         public string City { get; set; }
-        //[Column("photo")]
-        //public Image Image { get; set; }
+        [Column("photo")]
+        public byte[] Image { get; set; }
         [Column("xmr_address")]
         public string XmrAddress { get; set; }
 
         [ForeignKey(nameof(UserId))]
         public virtual User User { get; set; }
         [ForeignKey(nameof(ReportsToId))]
-        public virtual Employee ReportsTo { get; set; }
-
-
+        public virtual Employee Supervisor { get; set; }
+        public virtual List<Employee> Subordinates { get; set; }
+        public virtual List<WorkRecord> WorkRecords { get; set; }
     }
 }
