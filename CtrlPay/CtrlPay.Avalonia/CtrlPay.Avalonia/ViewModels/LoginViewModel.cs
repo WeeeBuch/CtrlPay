@@ -1,5 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CtrlPay.Avalonia.Views;
+using CtrlPay.Repos;
+using System;
+using System.ComponentModel;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -42,18 +46,35 @@ public partial class LoginViewModel : ViewModelBase
     [ObservableProperty]
     private string regConfirmPassword;
 
+    public event Action? LoginSucceeded;
+
     [RelayCommand]
     private void Register()
     {
-        Title = $"Register clicked! Username: {RegUsername}, Email: {RegEmail}";
+        bool succes = Repo.Register(RegUsername, RegEmail, RegPassword, RegConfirmPassword);
+
+        if (succes) 
+        {
+            LoginSucceeded?.Invoke();
+        }
+        else
+        {
+            Message = Repo.RegisterFailedMessage();
+        }
     }
 
     [RelayCommand]
     private void Login()
     {
-        Title = $"Login clicked! Username: {Username}";
+        bool succes = Repo.Login(Username, Password);
+
+        if (succes) { }
+        else
+        {
+            Message = Repo.LoginFailedMessage();
+        }
     }
 
     [ObservableProperty]
-    private string title = "Welcome to Avalonia!";
+    public string message = "";
 }

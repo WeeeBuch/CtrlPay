@@ -29,7 +29,7 @@
                     <TextBox Name="PasswordTextBox" 
                              Watermark="Heslo" PasswordChar="#"/>
                     <Button Name="LoginButton" Content="Přihlásit se"
-                            FontWeight="Bold"/>
+                            FontWeight="Bold" Command="{Binding LoginCommand}"/>
                 </StackPanel>
 
                 <!-- Register Fields (skryté) -->
@@ -39,14 +39,18 @@
                              Watermark="Uživatelské jméno" />
                     <TextBox Name="RegEmailTextBox" Watermark="Email" />
                     <TextBox Name="RegPasswordTextBox" 
-                             Watermark="Heslo" PasswordChar="●"/>
+                             Watermark="Heslo" PasswordChar="#"/>
                     <TextBox Name="RegConfirmPasswordTextBox" 
-                             Watermark="Potvrzení hesla" PasswordChar="●"/>
+                             Watermark="Potvrzení hesla" PasswordChar="#"/>
                     <Button Name="RegisterButton" Content="Registrovat se"
-                            FontWeight="Bold"/>
+                            FontWeight="Bold" Command="{Binding RegisterCommand}"/>
                 </StackPanel>
             </StackPanel>
         </Border>
+
+        <TextBlock Grid.Row="2" Text="{Binding Message}" 
+                   Foreground="{DynamicResource Brush.Error}" 
+                   HorizontalAlignment="Center" Margin="0,10,0,0"/>
 
         <!-- Footer -->
         <TextBlock Grid.Row="3" Text="© 2026 CtrlPay" FontSize="12" 
