@@ -1,4 +1,6 @@
 ﻿using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using CtrlPay.Avalonia.ViewModels;
 using System;
 
 namespace CtrlPay.Avalonia.Desktop
