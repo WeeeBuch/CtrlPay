@@ -1,12 +1,33 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CtrlPay.Entities
 {
-    internal class LoyalCustomer
+    [Table("LoyalCustomer")]
+    public class LoyalCustomer
     {
+        [Column("id")]
+        [Key]
+        public int Id { get; set; }
+        [Column("customer_id")]
+        private int CustomerId { get; set; }
+        [Column("user_id")]
+        private int UserId { get; set; }
+        [Column("account_id")]
+        private int AccountId { get; set; }
+        [Column("our_xmr")]
+        public decimal OurXMR { get; set; }
+
+        [ForeignKey("CustomerId")]
+        public virtual Customer Customer { get; set; }
+        [ForeignKey("UserId")]
+        public virtual User User { get; set; }
+        [ForeignKey("AccountId")]
+        public virtual Account Account { get; set; }
     }
 }
