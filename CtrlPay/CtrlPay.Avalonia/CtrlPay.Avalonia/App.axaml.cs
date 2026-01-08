@@ -30,10 +30,7 @@ namespace CtrlPay.Avalonia
             }
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
             {
-                singleViewPlatform.MainView = new MainView
-                {
-                    DataContext = new MainViewModel()
-                };
+                singleViewPlatform.MainView = new LoginView();
             }
 
             base.OnFrameworkInitializationCompleted();

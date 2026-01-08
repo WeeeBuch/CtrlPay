@@ -1,0 +1,40 @@
+<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  
+    <!-- ===== ZÁKLAD ===== -->
+    <Color x:Key="Color.Background">#1E1E1E</Color>
+    <Color x:Key="Color.Surface">#333333</Color>
+    <Color x:Key="Color.Border">#262626</Color>
+
+    <Color x:Key="Color.Text.Primary">#F2F2F2</Color>
+    <Color x:Key="Color.Text.Secondary">#B3B3B3</Color>
+    <Color x:Key="Color.Text.Disabled">#707070</Color>
+
+    <!-- ===== AKCENT ===== -->
+    <Color x:Key="Color.Accent">#00b32d</Color>
+    <Color x:Key="Color.Accent.Hover">#009926</Color>
+    <Color x:Key="Color.Accent.Pressed">#00661a</Color>
+
+    <!-- ===== STAVY ===== -->
+    <Color x:Key="Color.Error">#E53935</Color>
+    <Color x:Key="Color.Warning">#FB8C00</Color>
+    <Color x:Key="Color.Success">#43A047</Color>
+
+    <!-- ===== BRUSHES ===== -->
+    <SolidColorBrush x:Key="Brush.Background" Color="{DynamicResource Color.Background}" />
+    <SolidColorBrush x:Key="Brush.Surface" Color="{DynamicResource Color.Surface}" />
+    <SolidColorBrush x:Key="Brush.Border" Color="{DynamicResource Color.Border}" />
+
+    <SolidColorBrush x:Key="Brush.Text.Primary" Color="{DynamicResource Color.Text.Primary}" />
+    <SolidColorBrush x:Key="Brush.Text.Secondary" Color="{DynamicResource Color.Text.Secondary}" />
+    <SolidColorBrush x:Key="Brush.Text.Disabled" Color="{DynamicResource Color.Text.Disabled}" />
+
+    <SolidColorBrush x:Key="Brush.Accent" Color="{DynamicResource Color.Accent}" />
+    <SolidColorBrush x:Key="Brush.Accent.Hover" Color="{DynamicResource Color.Accent.Hover}" />
+    <SolidColorBrush x:Key="Brush.Accent.Pressed" Color="{DynamicResource Color.Accent.Pressed}" />
+
+    <SolidColorBrush x:Key="Brush.Error" Color="{DynamicResource Color.Error}" />
+    <SolidColorBrush x:Key="Brush.Warning" Color="{DynamicResource Color.Warning}" />
+    <SolidColorBrush x:Key="Brush.Success" Color="{DynamicResource Color.Success}" />
+
+</ResourceDictionary>
