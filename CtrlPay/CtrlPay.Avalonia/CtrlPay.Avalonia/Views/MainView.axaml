@@ -12,5 +12,9 @@
     <vm:MainViewModel />
   </Design.DataContext>
 
-  <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+  <Grid>
+    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>    
+    <Button Content="Click Me" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20"
+            Command="{Binding ClickMeCommand}"/>
+  </Grid>
 </UserControl>

@@ -6,5 +6,10 @@ namespace CtrlPay.Avalonia.ViewModels
     {
         [ObservableProperty]
         private string _greeting = "Welcome to Avalonia!";
+
+        public void ClickMeCommand()
+        {
+            Greeting = "You clicked the button!";
+        }
     }
 }
