@@ -10,17 +10,9 @@ public partial class LoginWindow : Window
     {
         InitializeComponent();
 
-        var vm = new LoginViewModel();
-        vm.LoginSucceeded += OnLoginSucceeded;
+        var navigation = new NavigationService();
+        navigation.RegisterLogin(this);
 
-        DataContext = vm;
-    }
-
-    private void OnLoginSucceeded()
-    {
-        var mainWindow = new MainWindow();
-        mainWindow.Show();
-
-        Close();
+        DataContext = new LoginViewModel(navigation);
     }
 }

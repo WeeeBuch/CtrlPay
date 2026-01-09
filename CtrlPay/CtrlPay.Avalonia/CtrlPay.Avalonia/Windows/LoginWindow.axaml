@@ -3,11 +3,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:local="using:CtrlPay.Avalonia"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="400"
         x:Class="CtrlPay.Avalonia.LoginWindow"
         xmlns:views="using:CtrlPay.Avalonia.Views"
         xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
         xmlns:avalonia="using:CtrlPay.Avalonia"
+        Width="350" Height="400"
+        WindowStartupLocation="CenterScreen"
         Title="Login to CtrlPay">
-        <avalonia:LoginView/>
+    <avalonia:LoginView/>
 </Window>

@@ -68,7 +68,11 @@ public partial class LoginViewModel : ViewModelBase
     {
         bool succes = Repo.Login(Username, Password);
 
-        if (succes) { }
+        if (succes) 
+        {
+            _navigation.ShowMainWindow();
+            _navigation.CloseLogin();
+        }
         else
         {
             Message = Repo.LoginFailedMessage();
@@ -77,4 +81,11 @@ public partial class LoginViewModel : ViewModelBase
 
     [ObservableProperty]
     public string message = "";
+
+    private readonly INavigationService _navigation;
+
+    public LoginViewModel(INavigationService navigation)
+    {
+        _navigation = navigation;
+    }
 }

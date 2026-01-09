@@ -15,7 +15,7 @@ namespace CtrlPay.Repos
              *
              * Vrací true, pokud je přihlášení úspěšné, jinak false
              */
-            return false;
+            return true;
         }
 
         public static string LoginFailedMessage()
