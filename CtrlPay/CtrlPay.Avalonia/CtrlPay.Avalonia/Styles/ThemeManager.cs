@@ -9,8 +9,18 @@ namespace CtrlPay.Avalonia.Styles
     {
         public enum AppTheme
         {
-            Dark,
-            DarkGreen
+            Lime,
+            Blue,
+            DarkGreen,
+            DarkOrange,
+            Green,
+            LightBlue,
+            LightOrange,
+            Orange,
+            Pink,
+            Purple,
+            Red,
+            Tourquise
         }
 
         public static void Apply(AppTheme theme)
@@ -19,19 +29,29 @@ namespace CtrlPay.Avalonia.Styles
 
             resources.MergedDictionaries.Clear();
 
-            var uri = theme switch
-            {
-                AppTheme.Dark => new Uri("avares://CtrlPay.Avalonia/Styles/DarkColors.axaml"),
-                AppTheme.DarkGreen => new Uri("avares://CtrlPay.Avalonia/Styles/DarkGreenColors.axaml"),
-                _ => throw new ArgumentOutOfRangeException()
-            };
+            var uri = GetUri(theme);
 
-            ResourceInclude resourcer = new(uri)
+            resources.MergedDictionaries.Add(new ResourceInclude(uri)
             {
                 Source = uri
-            };
-
-            resources.MergedDictionaries.Add(resourcer);
+            });
         }
+
+        public static Uri GetUri(AppTheme theme) => theme switch
+        {
+            AppTheme.Lime => new Uri("avares://CtrlPay.Avalonia/Styles/Lime.axaml"),
+            AppTheme.Blue => new Uri("avares://CtrlPay.Avalonia/Styles/Blue.axaml"),
+            AppTheme.DarkGreen => new Uri("avares://CtrlPay.Avalonia/Styles/DarkGreen.axaml"),
+            AppTheme.DarkOrange => new Uri("avares://CtrlPay.Avalonia/Styles/DarkOrange.axaml"),
+            AppTheme.Green => new Uri("avares://CtrlPay.Avalonia/Styles/Green.axaml"),
+            AppTheme.LightBlue => new Uri("avares://CtrlPay.Avalonia/Styles/LightBlue.axaml"),
+            AppTheme.LightOrange => new Uri("avares://CtrlPay.Avalonia/Styles/LightOrange.axaml"),
+            AppTheme.Orange => new Uri("avares://CtrlPay.Avalonia/Styles/Orange.axaml"),
+            AppTheme.Pink => new Uri("avares://CtrlPay.Avalonia/Styles/Pink.axaml"),
+            AppTheme.Purple => new Uri("avares://CtrlPay.Avalonia/Styles/Purple.axaml"),
+            AppTheme.Red => new Uri("avares://CtrlPay.Avalonia/Styles/Red.axaml"),
+            AppTheme.Tourquise => new Uri("avares://CtrlPay.Avalonia/Styles/Turquoise.axaml"),
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 }

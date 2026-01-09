@@ -2,9 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   
     <!-- ===== ZÁKLAD ===== -->
-    <Color x:Key="Color.Background">#141A1F</Color>
-    <Color x:Key="Color.Surface">#1C242B</Color>
-    <Color x:Key="Color.Border">#27313A</Color>
+    <Color x:Key="Color.Background">#191f28</Color>
+    <Color x:Key="Color.Surface">#303741</Color>
+    <Color x:Key="Color.Border">#2f3540</Color>
 
     <!-- ===== TEXT ===== -->
     <Color x:Key="Color.Text.Primary">#E6F1F4</Color>
@@ -12,9 +12,9 @@
     <Color x:Key="Color.Text.Disabled">#5E6E76</Color>
 
     <!-- ===== AKCENT ===== -->
-    <Color x:Key="Color.Accent">#3FD6B3</Color>
-    <Color x:Key="Color.Accent.Hover">#5BE0C2</Color>
-    <Color x:Key="Color.Accent.Pressed">#2BB89A</Color>
+    <Color x:Key="Color.Accent">#000</Color>
+    <Color x:Key="Color.Accent.Hover">#000</Color>
+    <Color x:Key="Color.Accent.Pressed">#000</Color>
 
     <!-- ===== STAVY ===== -->
     <Color x:Key="Color.Error">#E05A5A</Color>
