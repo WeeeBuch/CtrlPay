@@ -2,23 +2,24 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   
     <!-- ===== ZÁKLAD ===== -->
-    <Color x:Key="Color.Background">#1E1E1E</Color>
-    <Color x:Key="Color.Surface">#333333</Color>
-    <Color x:Key="Color.Border">#262626</Color>
+    <Color x:Key="Color.Background">#141A1F</Color>
+    <Color x:Key="Color.Surface">#1C242B</Color>
+    <Color x:Key="Color.Border">#27313A</Color>
 
-    <Color x:Key="Color.Text.Primary">#F2F2F2</Color>
-    <Color x:Key="Color.Text.Secondary">#B3B3B3</Color>
-    <Color x:Key="Color.Text.Disabled">#707070</Color>
+    <!-- ===== TEXT ===== -->
+    <Color x:Key="Color.Text.Primary">#E6F1F4</Color>
+    <Color x:Key="Color.Text.Secondary">#A8BDC6</Color>
+    <Color x:Key="Color.Text.Disabled">#5E6E76</Color>
 
     <!-- ===== AKCENT ===== -->
-    <Color x:Key="Color.Accent">#00b32d</Color>
-    <Color x:Key="Color.Accent.Hover">#009926</Color>
-    <Color x:Key="Color.Accent.Pressed">#00661a</Color>
+    <Color x:Key="Color.Accent">#126967</Color>
+    <Color x:Key="Color.Accent.Hover">#0a8076</Color>
+    <Color x:Key="Color.Accent.Pressed">#35c1a9</Color>
 
     <!-- ===== STAVY ===== -->
-    <Color x:Key="Color.Error">#E53935</Color>
-    <Color x:Key="Color.Warning">#FB8C00</Color>
-    <Color x:Key="Color.Success">#43A047</Color>
+    <Color x:Key="Color.Error">#E05A5A</Color>
+    <Color x:Key="Color.Warning">#E0A84A</Color>
+    <Color x:Key="Color.Success">#4FD1A5</Color>
 
     <!-- ===== BRUSHES ===== -->
     <SolidColorBrush x:Key="Brush.Background" Color="{DynamicResource Color.Background}" />
