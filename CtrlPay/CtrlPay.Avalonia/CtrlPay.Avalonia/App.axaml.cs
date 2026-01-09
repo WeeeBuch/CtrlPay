@@ -3,6 +3,7 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Avalonia.Views;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace CtrlPay.Avalonia
         public override void Initialize()
         {
             AvaloniaXamlLoader.Load(this);
+            ThemeManager.Apply(ThemeManager.AppTheme.Lime);
         }
 
         public override void OnFrameworkInitializationCompleted()
