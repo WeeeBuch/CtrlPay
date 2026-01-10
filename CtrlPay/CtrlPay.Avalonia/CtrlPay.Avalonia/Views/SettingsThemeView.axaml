@@ -95,7 +95,7 @@
                        Width="128" Height="128" 
                        RenderOptions.BitmapInterpolationMode="HighQuality"/>
 
-                <TextBlock Text="CrtlPay"
+                <TextBlock Text="CtrlPay"
                            FontSize="50" 
                            Foreground="{DynamicResource Color.Accent}"
                            FontWeight="Bold"
