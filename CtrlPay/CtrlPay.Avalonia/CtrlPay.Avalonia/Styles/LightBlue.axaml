@@ -1,6 +1,9 @@
 <ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-  
+    
+    <!-- ===== IKONA ===== -->
+    <Bitmap x:Key="Path.AppIcon">avares://CtrlPay.Avalonia/Assets/IconLightBlue.png</Bitmap>
+
     <!-- ===== ZÁKLAD ===== -->
     <Color x:Key="Color.Background">#141A1F</Color>
     <Color x:Key="Color.Surface">#1C242B</Color>

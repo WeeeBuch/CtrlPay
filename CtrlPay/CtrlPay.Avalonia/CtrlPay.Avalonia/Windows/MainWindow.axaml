@@ -10,5 +10,5 @@
         Icon="/Assets/avalonia-logo.ico"
         WindowStartupLocation="CenterScreen"
         Title="CtrlPay">
-        <avalonia:MainView/>
+        <avalonia:SettingsThemeView/>
 </Window>
