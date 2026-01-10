@@ -1,14 +1,22 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:CtrlPay.Avalonia"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CtrlPay.Avalonia.MainView">
+             x:Class="CtrlPay.Avalonia.MainView"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             x:DataType="vm:MainViewModel"
+             Background="{DynamicResource Color.Background}">
   
-    <Grid>
-        <TextBlock Text="Welcome to CtrlPay!" 
-                   HorizontalAlignment="Center" 
-                   VerticalAlignment="Center"
-                   FontSize="24"/>
+    <Grid ColumnDefinitions="200, *">
+        <local:NavbarView Grid.Column="0"/>
+
+        <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+            <ContentControl Grid.Column="1" 
+                        Content="{Binding CurrentPage}" 
+                        Margin="20">
+            </ContentControl>
+        </ScrollViewer>
     </Grid>
 </UserControl>

@@ -18,7 +18,9 @@ namespace CtrlPay.Avalonia.Desktop
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
+                .With(new SkiaOptions { })
                 .WithInterFont()
-                .LogToTrace();
+                .LogToTrace()
+                .UseSkia();
     }
 }

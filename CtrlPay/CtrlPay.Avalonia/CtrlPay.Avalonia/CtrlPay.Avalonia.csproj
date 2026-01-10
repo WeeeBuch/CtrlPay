@@ -9,6 +9,14 @@
   <ItemGroup>
     <AvaloniaResource Include="Assets\**" />
   </ItemGroup>
+  
+  <ItemGroup>
+    <Compile Remove="Assets\Icons\Icons.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <AvaloniaResource Include="Icons.cs" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia" />
@@ -20,6 +28,7 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="CommunityToolkit.Mvvm" />
+    <PackageReference Include="Svg.Controls.Skia.Avalonia" />
   </ItemGroup>
 
   <ItemGroup>
