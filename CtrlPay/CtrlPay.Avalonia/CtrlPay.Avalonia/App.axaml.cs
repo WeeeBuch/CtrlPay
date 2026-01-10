@@ -1,4 +1,4 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
@@ -14,8 +14,8 @@ namespace CtrlPay.Avalonia
     {
         public override void Initialize()
         {
-            AvaloniaXamlLoader.Load(this);
             ThemeManager.Apply(ThemeManager.AppTheme.Lime);
+            AvaloniaXamlLoader.Load(this);
         }
 
         public override void OnFrameworkInitializationCompleted()
