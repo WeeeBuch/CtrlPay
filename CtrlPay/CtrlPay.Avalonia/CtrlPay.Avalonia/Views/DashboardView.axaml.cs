@@ -4,11 +4,10 @@ using Avalonia.Markup.Xaml;
 
 namespace CtrlPay.Avalonia;
 
-public partial class MainView : UserControl
+public partial class DashboardView : UserControl
 {
-    public MainView()
+    public DashboardView()
     {
         InitializeComponent();
-        DataContext = new ViewModels.MainViewModel();
     }
 }

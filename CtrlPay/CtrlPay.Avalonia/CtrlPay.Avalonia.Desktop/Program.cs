@@ -1,4 +1,6 @@
 ﻿using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using CtrlPay.Avalonia.ViewModels;
 using System;
 
 namespace CtrlPay.Avalonia.Desktop
@@ -16,7 +18,9 @@ namespace CtrlPay.Avalonia.Desktop
         public static AppBuilder BuildAvaloniaApp()
             => AppBuilder.Configure<App>()
                 .UsePlatformDetect()
+                .With(new SkiaOptions { })
                 .WithInterFont()
-                .LogToTrace();
+                .LogToTrace()
+                .UseSkia();
     }
 }
