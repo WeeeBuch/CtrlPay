@@ -10,7 +10,7 @@ namespace CtrlPay.Repos
     {
         public static bool Register(string username, string email, string password, string confirmPassword)
         {
-            /*
+            /* TODO: Register logic
              * Tu logika pro registraci
              *
              * Vrací true, pokud je registrace úspěšná, jinak false
@@ -19,7 +19,7 @@ namespace CtrlPay.Repos
         }
         public static string RegisterFailedMessage()
         {
-            /* 
+            /* TODO: Register failed logic
              * Zde se vrátí message jestli je třeba heslo špatně nebo jménu atd.
              */
             return "Registrace se nezdařila. Zkontrolujte něco co se nepovedlo.";
