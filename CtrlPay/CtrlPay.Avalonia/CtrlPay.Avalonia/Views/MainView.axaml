@@ -9,8 +9,8 @@
              x:DataType="vm:MainViewModel"
              Background="{DynamicResource Color.Background}">
   
-    <Grid ColumnDefinitions="200, *">
-        <local:NavbarView Grid.Column="0"/>
+    <Grid ColumnDefinitions="Auto, *">
+        <local:NavbarView Grid.Column="0" Margin="0"/>
 
         <ScrollViewer Grid.Column="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
             <ContentControl Grid.Column="1" 
