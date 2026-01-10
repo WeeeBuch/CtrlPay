@@ -1,4 +1,4 @@
-<Window xmlns="https://github.com/avaloniaui"
+﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:avalonia="using:CtrlPay.Avalonia"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
@@ -10,5 +10,5 @@
         Icon="/Assets/avalonia-logo.ico"
         WindowStartupLocation="CenterScreen"
         Title="CtrlPay">
-        <avalonia:SettingsThemeView/>
+        <avalonia:MainView/>
 </Window>
