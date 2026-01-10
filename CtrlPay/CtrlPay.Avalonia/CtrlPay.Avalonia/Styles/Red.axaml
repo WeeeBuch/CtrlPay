@@ -1,10 +1,11 @@
-<ResourceDictionary xmlns="https://github.com/avaloniaui"
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   
     <!-- ===== IKONA ===== -->
     <Bitmap x:Key="Path.AppIcon">avares://CtrlPay.Avalonia/Assets/IconRed.png</Bitmap>
+    <WindowIcon x:Key="Path.AppIcon.ico">avares://CtrlPay.Avalonia/Assets/AppIcons/IconRed.ico</WindowIcon>
 
-    <!-- ===== Z�KLAD ===== -->
+    <!-- ===== ZÁKLAD ===== -->
     <Color x:Key="Color.Background">#141A1F</Color>
     <Color x:Key="Color.Surface">#1C242B</Color>
     <Color x:Key="Color.Border">#27313A</Color>

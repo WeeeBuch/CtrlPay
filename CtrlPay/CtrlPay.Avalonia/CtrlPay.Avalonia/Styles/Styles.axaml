@@ -51,7 +51,9 @@
     </Style>
 
     <Style Selector="ListBoxItem:pointerover /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource Color.Accent.Hover}" /> </Style>
+        <Setter Property="Background" Value="transparent" /> 
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
 
     <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
         <Setter Property="Background" Value="{DynamicResource Color.Surface}" /> </Style>
