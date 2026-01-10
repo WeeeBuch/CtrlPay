@@ -10,7 +10,7 @@ namespace CtrlPay.Repos
     {
         public static bool Login(string username, string password)
         {
-            /*
+            /* TODO: Loginování logic
              * Tu logika pro přihlášení
              *
              * Vrací true, pokud je přihlášení úspěšné, jinak false
@@ -20,7 +20,7 @@ namespace CtrlPay.Repos
 
         public static string LoginFailedMessage()
         {
-            /* 
+            /* TODO: login failed logic
              * Zde se vrátí message jestli je třeba heslo špatně nebo jménu atd.
              */
             return "Přihlášení se nezdařilo. Zkontrolujte něco co se nepovedlo.";
