@@ -1,0 +1,106 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:styles="using:CtrlPay.Avalonia.Styles"
+             x:Class="CtrlPay.Avalonia.SettingsThemeView"
+             xmlns:conv="using:CtrlPay.Avalonia.Converters"
+             Background="{DynamicResource Brush.Background}"
+             x:DataType="vm:SettingsThemeViewModel">
+
+    <UserControl.Resources>
+        <conv:ThemeToColorConverter x:Key="ThemeToColorConverter" />
+    </UserControl.Resources>
+
+    <UserControl.Styles>
+        <Style Selector="ListBoxItem">
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+    
+        <Style Selector="ListBoxItem:selected /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+    
+        <Style Selector="ListBoxItem:hover /template/ ContentPresenter">
+            <Setter Property="Background" Value="Transparent" />
+        </Style>
+
+        <Style Selector="ListBoxItem:selected Border">
+            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" />
+            <Setter Property="RenderTransform" Value="scale(1.0)" />
+        </Style>
+    
+        <Style Selector="ListBoxItem">
+            <Setter Property="Transitions">
+                <Transitions>
+                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.2" />
+                </Transitions>
+            </Setter>
+        </Style>
+    </UserControl.Styles>
+
+  <StackPanel Spacing="20" Margin="20">
+        <TextBlock Text="Nastavení vzhledu" FontSize="20" FontWeight="Bold"/>
+        
+        <ListBox ItemsSource="{Binding AvailableThemes}" 
+                 SelectedItem="{Binding SelectedTheme}"
+                 Background="Transparent">
+            
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="styles:ThemeManager+AppTheme">
+                    <Border Width="140" Height="90" 
+                            Margin="8"
+                            CornerRadius="10" 
+                            Background="#1C242B" 
+                            BorderThickness="2"
+                            ClipToBounds="True">
+            
+                        <Grid RowDefinitions="*, Auto">
+                
+                            <Panel Grid.Row="0" Background="{Binding Converter={StaticResource ThemeToColorConverter}}">
+                                <TextBlock Text="Aa" 
+                                           FontSize="24" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource Color.Text.Primary}"
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center" />
+                            </Panel>
+                
+                            <Border Grid.Row="1" Background="#27313A" Padding="1,4" CornerRadius="10">
+                                <TextBlock Text="{Binding}" 
+                                           FontSize="12"
+                                           HorizontalAlignment="Center"
+                                           Foreground="#E6F1F4"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+      
+        <Border Background="{DynamicResource Brush.Surface}" 
+                Padding="10" 
+                CornerRadius="5">
+            <StackPanel Orientation="Horizontal">
+				<Image Source="{DynamicResource Path.AppIcon}" 
+                       Width="500" Height="500" />
+
+                <TextBlock Text="CrtlPay"
+                           FontSize="50" 
+                           Foreground="{DynamicResource Color.Accent}"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center" VerticalAlignment="Center"
+                           Margin="50,0,0,0"/>
+            </StackPanel>
+        </Border>
+    </StackPanel>
+</UserControl>
