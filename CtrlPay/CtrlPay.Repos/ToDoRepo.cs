@@ -8,5 +8,6 @@ namespace CtrlPay.Repos
 {
     public static class ToDoRepo
     {
+        //TODO: Metody do repos: 0
     }
 }
