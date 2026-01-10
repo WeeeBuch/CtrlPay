@@ -20,7 +20,8 @@ namespace CtrlPay.Avalonia.Styles
             Pink,
             Purple,
             Red,
-            Tourquise
+            Tourquise,
+            Yellow
         }
 
         public static void Apply(AppTheme theme)
@@ -51,6 +52,7 @@ namespace CtrlPay.Avalonia.Styles
             AppTheme.Purple => new Uri("avares://CtrlPay.Avalonia/Styles/Purple.axaml"),
             AppTheme.Red => new Uri("avares://CtrlPay.Avalonia/Styles/Red.axaml"),
             AppTheme.Tourquise => new Uri("avares://CtrlPay.Avalonia/Styles/Turquoise.axaml"),
+            AppTheme.Yellow => new Uri("avares://CtrlPay.Avalonia/Styles/Yellow.axaml"),
             _ => throw new ArgumentOutOfRangeException()
         };
     }
