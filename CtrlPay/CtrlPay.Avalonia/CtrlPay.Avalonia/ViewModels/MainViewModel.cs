@@ -2,6 +2,7 @@
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using System;
 using System.Collections.ObjectModel;
 
@@ -16,7 +17,20 @@ namespace CtrlPay.Avalonia.ViewModels
         private NavItem _selectedNavigationItem;
 
         [ObservableProperty]
-        private string dashboardIcon = IconData.Dashboard;
+        private bool _isPaneOpen = true;
+
+        public double PaneWidth => IsPaneOpen ? 200 : 65;
+
+        // A uprav TogglePane, aby o tom dal vědět
+        [RelayCommand]
+        private void TogglePane()
+        {
+            IsPaneOpen = !IsPaneOpen;
+            OnPropertyChanged(nameof(PaneWidth));
+        }
+
+        [ObservableProperty]
+        private string menuIcon = IconData.Menu;
 
         public ObservableCollection<NavItem> NavigationItems { get; }
 
@@ -24,7 +38,8 @@ namespace CtrlPay.Avalonia.ViewModels
         {
             NavigationItems =
             [
-                new NavItem("Nastavení", new SettingsThemeView(), IconData.CogOutline)
+                new NavItem("Dashboard", new DashboardView(), IconData.Dashboard),
+                new NavItem("Nastavení", new SettingsThemeView(), IconData.Cog)
             ];
 
             // Výchozí stránka
