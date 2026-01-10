@@ -1,8 +1,9 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Avalonia.Views;
 using System.Linq;
@@ -13,6 +14,7 @@ namespace CtrlPay.Avalonia
     {
         public override void Initialize()
         {
+            ThemeManager.Apply(ThemeManager.AppTheme.Lime);
             AvaloniaXamlLoader.Load(this);
         }
 
@@ -23,17 +25,11 @@ namespace CtrlPay.Avalonia
                 // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
-                desktop.MainWindow = new MainWindow
-                {
-                    DataContext = new MainViewModel()
-                };
+                desktop.MainWindow = new LoginWindow();
             }
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
             {
-                singleViewPlatform.MainView = new MainView
-                {
-                    DataContext = new MainViewModel()
-                };
+                singleViewPlatform.MainView = new LoginView();
             }
 
             base.OnFrameworkInitializationCompleted();

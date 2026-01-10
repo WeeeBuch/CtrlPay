@@ -5,10 +5,11 @@ using CtrlPay.Avalonia.ViewModels;
 
 namespace CtrlPay.Avalonia;
 
-public partial class LoginView : UserControl
+public partial class SettingsThemeView : UserControl
 {
-    public LoginView()
+    public SettingsThemeView()
     {
         InitializeComponent();
+        DataContext = new SettingsThemeViewModel();
     }
 }
