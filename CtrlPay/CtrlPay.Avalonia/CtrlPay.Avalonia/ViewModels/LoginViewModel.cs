@@ -49,7 +49,7 @@ public partial class LoginViewModel : ViewModelBase
     [RelayCommand]
     private void Register()
     {
-        bool succes = Repo.Register(RegUsername, RegEmail, RegPassword, RegConfirmPassword);
+        bool succes = AuthRepo.Register(RegUsername, RegEmail, RegPassword, RegConfirmPassword);
 
         if (succes) 
         {
@@ -58,14 +58,14 @@ public partial class LoginViewModel : ViewModelBase
         }
         else
         {
-            Message = Repo.RegisterFailedMessage();
+            Message = AuthRepo.RegisterFailedMessage();
         }
     }
 
     [RelayCommand]
     private void Login()
     {
-        bool succes = Repo.Login(Username, Password);
+        bool succes = AuthRepo.Login(Username, Password);
 
         if (succes) 
         {
@@ -74,7 +74,7 @@ public partial class LoginViewModel : ViewModelBase
         }
         else
         {
-            Message = Repo.LoginFailedMessage();
+            Message = AuthRepo.LoginFailedMessage();
         }
     }
 
