@@ -1,0 +1,51 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="450"
+             x:Class="CtrlPay.Avalonia.TransactionListPiece"
+             x:DataType="vm:TransactionListPieceModel">
+  
+    <Border Background="{DynamicResource Color.Background}" 
+            BorderBrush="{DynamicResource Color.Border}" 
+            BorderThickness="2" 
+            CornerRadius="15" 
+            Padding="15">
+    
+        <ScrollViewer HorizontalScrollBarVisibility="Disabled"
+                      VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Transactions}">
+                <ItemsControl.DataTemplates>
+                    
+                    <DataTemplate DataType="vm:SeparatorItemViewModel">
+                        <Grid ColumnDefinitions="*,Auto,*" Margin="0,15">
+                            <Separator Grid.Column="0" Foreground="#33FFFFFF"/>
+                            <TextBlock Grid.Column="1" Text="{Binding Label}" 
+                                       Margin="10,0" FontSize="11" Foreground="#66FFFFFF"/>
+                            <Separator Grid.Column="2" Foreground="#33FFFFFF"/>
+                        </Grid>
+                    </DataTemplate>
+
+                    <DataTemplate DataType="vm:TransactionItemViewModel">
+                        <Border Background="{DynamicResource Color.Surface}" 
+                                CornerRadius="8" 
+                                Margin="0,5" 
+                                Padding="15,10"
+                                BorderBrush="{DynamicResource Color.Border}"
+                                BorderThickness="1">
+                            <Grid ColumnDefinitions="*, Auto, Auto">
+                                <TextBlock Text="{Binding Title}" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Grid.Column="1" Text="{Binding Amount, StringFormat=\{0:N8\}}" 
+                                           FontWeight="Bold" Margin="0,0,10,0" VerticalAlignment="Center" Foreground="White"/>
+                                <TextBlock Grid.Column="2" Text="XMR" Foreground="#888888" 
+                                           FontSize="12" VerticalAlignment="Center"/>
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                    
+                </ItemsControl.DataTemplates>
+            </ItemsControl>
+        </ScrollViewer>
+    </Border>
+</UserControl>
