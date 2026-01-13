@@ -24,18 +24,23 @@ namespace CtrlPay.Avalonia.Styles
             Yellow
         }
 
+        private static ResourceInclude? _themeResources;
+
         public static void Apply(AppTheme theme)
         {
             var resources = Application.Current!.Resources;
 
-            resources.MergedDictionaries.Clear();
+            if (_themeResources != null)
+                resources.MergedDictionaries.Remove(_themeResources);
 
             var uri = GetUri(theme);
 
-            resources.MergedDictionaries.Add(new ResourceInclude(uri)
+            _themeResources = new ResourceInclude(uri)
             {
                 Source = uri
-            });
+            };
+
+            resources.MergedDictionaries.Add(_themeResources);
         }
 
         public static Uri GetUri(AppTheme theme) => theme switch

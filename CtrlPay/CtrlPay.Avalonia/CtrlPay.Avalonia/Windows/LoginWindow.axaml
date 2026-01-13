@@ -11,6 +11,6 @@
         Width="350" Height="400"
         Icon="{DynamicResource Path.AppIcon.ico}"
         WindowStartupLocation="CenterScreen"
-        Title="Login to CtrlPay">
+        Title="{DynamicResource LoginWindow.Title}">
     <avalonia:LoginView/>
 </Window>

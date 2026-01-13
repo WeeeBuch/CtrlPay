@@ -1,0 +1,24 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Global -->
+    <x:String x:Key="App.Title">App.Title</x:String>
+    <x:String x:Key="App.Watermark">© 2026 CtrlPay</x:String>
+
+    <!-- Login Window -->
+    <x:String x:Key="LoginWindow.Title">LoginWindow.Title</x:String>
+
+    <!-- Login View -->
+    <x:String x:Key="LoginView.Button.Switch.Login">LoginView.Button.Switch.Login</x:String>
+    <x:String x:Key="LoginView.Button.Switch.Register">LoginView.Button.Switch.Register</x:String>
+    <x:String x:Key="LoginView.Button.Login">LoginView.Button.Login</x:String>
+    <x:String x:Key="LoginView.Button.Register">LoginView.Button.Register</x:String>
+
+    <x:String x:Key="LoginView.Watermark.Username">LoginView.Watermark.Username</x:String>
+    <x:String x:Key="LoginView.Watermark.Password">LoginView.Watermark.Password</x:String>
+    <x:String x:Key="LoginView.Watermark.ConfirmPassword">LoginView.Watermark.ConfirmPassword</x:String>
+    <x:String x:Key="LoginView.Watermark.Email">LoginView.Watermark.Email</x:String>
+
+
+
+</ResourceDictionary>

@@ -1,0 +1,44 @@
+﻿using Avalonia;
+using Avalonia.Markup.Xaml.Styling;
+using System;
+using System.Collections.Generic;
+using static CtrlPay.Avalonia.Styles.ThemeManager;
+
+namespace CtrlPay.Avalonia.Translations
+{
+    internal static class TranslationManager
+    {
+        public enum AppLanguage
+        {
+            Base,
+            English
+        }
+
+        private static ResourceInclude? _translationResources;
+
+        public static void Apply(AppLanguage language)
+        {
+            var resources = Application.Current!.Resources;
+
+            if (_translationResources != null)
+                resources.MergedDictionaries.Remove(_translationResources);
+
+            var uri = GetUri(language);
+
+            _translationResources = new ResourceInclude(uri)
+            {
+                Source = uri
+            };
+
+            resources.MergedDictionaries.Add(_translationResources);
+        }
+
+        public static Uri GetUri(AppLanguage language) => language switch
+        {
+            AppLanguage.English => new Uri("avares://CtrlPay.Avalonia/Translations/English.axaml"),
+            AppLanguage.Base => new Uri("avares://CtrlPay.Avalonia/Translations/TranslationBase.axaml"),
+            _ => throw new ArgumentOutOfRangeException()
+        };
+
+    }
+}

@@ -9,6 +9,6 @@
         x:Class="CtrlPay.Avalonia.Views.MainWindow"
         Icon="{DynamicResource Path.AppIcon.ico}"
         WindowStartupLocation="CenterScreen"
-        Title="CtrlPay">
+        Title="{DynamicResource App.Title}">
         <avalonia:MainView/>
 </Window>

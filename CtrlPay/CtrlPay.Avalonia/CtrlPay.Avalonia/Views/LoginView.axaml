@@ -12,9 +12,9 @@
         <!-- Přepínací panel Přihlásit / Registrovat -->
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" 
                     Margin="0,20,0,0" Spacing="20" Grid.Row="0">
-            <Button Content="Přihlásit" Width="100" 
+            <Button Content="{DynamicResource LoginView.Button.Switch.Login}" Width="100" 
                     Command="{Binding ToggleLoginCommand}"/>
-            <Button Content="Registrovat" Width="100" 
+            <Button Content="{DynamicResource LoginView.Button.Switch.Register}" Width="100" 
                     Command="{Binding ToggleRegisterCommand}"/>
         </StackPanel>
 
@@ -25,10 +25,10 @@
                 <!-- Login Fields -->
                 <StackPanel x:Name="LoginForm" Spacing="10" IsVisible="{Binding IsLoginSelected}">
                     <TextBox Name="UsernameTextBox" 
-                             Watermark="Uživatelské jméno" />
+                             Watermark="{DynamicResource LoginView.Watermark.Username}" />
                     <TextBox Name="PasswordTextBox" 
-                             Watermark="Heslo" PasswordChar="#"/>
-                    <Button Name="LoginButton" Content="Přihlásit se"
+                             Watermark="{DynamicResource LoginView.Watermark.Password}" PasswordChar="#"/>
+                    <Button Name="LoginButton" Content="{DynamicResource LoginView.Button.Login}"
                             FontWeight="Bold" Command="{Binding LoginCommand}"/>
                 </StackPanel>
 
@@ -36,13 +36,13 @@
                 <StackPanel x:Name="RegisterForm" Spacing="10" 
                             IsVisible="{Binding !IsLoginSelected}">
                     <TextBox Name="RegUsernameTextBox" 
-                             Watermark="Uživatelské jméno" />
-                    <TextBox Name="RegEmailTextBox" Watermark="Email" />
+                             Watermark="{DynamicResource LoginView.Watermark.Username}" />
+                    <TextBox Name="RegEmailTextBox" Watermark="{DynamicResource LoginView.Watermark.Email}" />
                     <TextBox Name="RegPasswordTextBox" 
-                             Watermark="Heslo" PasswordChar="#"/>
+                             Watermark="{DynamicResource LoginView.Watermark.Password}" PasswordChar="#"/>
                     <TextBox Name="RegConfirmPasswordTextBox" 
-                             Watermark="Potvrzení hesla" PasswordChar="#"/>
-                    <Button Name="RegisterButton" Content="Registrovat se"
+                             Watermark="{DynamicResource LoginView.Watermark.ConfirmPassword}" PasswordChar="#"/>
+                    <Button Name="RegisterButton" Content="{DynamicResource LoginView.Button.Register}"
                             FontWeight="Bold" Command="{Binding RegisterCommand}"/>
                 </StackPanel>
             </StackPanel>
@@ -53,7 +53,7 @@
                    HorizontalAlignment="Center" Margin="0,10,0,0"/>
 
         <!-- Footer -->
-        <TextBlock Grid.Row="3" Text="© 2026 CtrlPay" FontSize="12" 
+        <TextBlock Grid.Row="3" Text="{DynamicResource App.Watermark}" FontSize="12" 
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
     </Grid>
 </UserControl>

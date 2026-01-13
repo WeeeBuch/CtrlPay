@@ -4,6 +4,7 @@ using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
 using CtrlPay.Avalonia.Styles;
+using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Avalonia.Views;
 using System.Linq;
@@ -15,6 +16,7 @@ namespace CtrlPay.Avalonia
         public override void Initialize()
         {
             ThemeManager.Apply(ThemeManager.AppTheme.Lime);
+            TranslationManager.Apply(TranslationManager.AppLanguage.Base);
             AvaloniaXamlLoader.Load(this);
         }
 
