@@ -20,7 +20,11 @@
                     DataContext="{Binding PendingCredits}"/>
 
       <!-- Popisky listů -->
+      <p:TransactionListPiece Grid.Row="2" Grid.Column="0"
+                                DataContext="{Binding CreditTransactionList}"/>
 
+      <p:TransactionListPiece Grid.Row="2" Grid.Column="2"
+                                DataContext="{Binding PendingTransactionList}"/>
 	  
   </Grid>
 </UserControl>
