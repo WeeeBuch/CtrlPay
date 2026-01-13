@@ -2,12 +2,25 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CtrlPay.Avalonia.DashboardView">
+             mc:Ignorable="d" d:DesignWidth="1250" d:DesignHeight="720"
+             Background="{DynamicResource Color.Background}"
+             x:Class="CtrlPay.Avalonia.DashboardView"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             x:DataType="vm:DashboardViewModel"
+             xmlns:p="using:CtrlPay.Avalonia">
 
-  <TextBox Text="Toto je Dashboard View" 
-           HorizontalAlignment="Center" 
-           VerticalAlignment="Center" 
-           FontSize="24"/>
+  <Grid ColumnDefinitions="*,20,*"
+        RowDefinitions="150,50,*">
 
+      <!-- Horní čítače -->
+      <p:CounterPiece Grid.Row="0" Grid.Column="0" 
+                DataContext="{Binding TotalCredits}"/>
+
+      <p:CounterPiece Grid.Row="0" Grid.Column="2" 
+                    DataContext="{Binding PendingCredits}"/>
+
+      <!-- Popisky listů -->
+
+	  
+  </Grid>
 </UserControl>
