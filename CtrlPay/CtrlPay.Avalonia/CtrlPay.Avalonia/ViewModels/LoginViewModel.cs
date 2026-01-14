@@ -46,8 +46,6 @@ public partial class LoginViewModel : ViewModelBase
     [ObservableProperty]
     private string regConfirmPassword;
 
-    public event Action? LoginSucceeded;
-
     [RelayCommand]
     private void Register()
     {
@@ -55,7 +53,8 @@ public partial class LoginViewModel : ViewModelBase
 
         if (succes) 
         {
-            LoginSucceeded?.Invoke();
+            _navigation.ShowMainWindow();
+            _navigation.CloseLogin();
         }
         else
         {
