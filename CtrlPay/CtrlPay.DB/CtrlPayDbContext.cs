@@ -31,6 +31,7 @@ namespace CtrlPay.DB
             //optionsBuilder.UseMySQL();
             
         }
+
         override protected void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<PayrollApproval>()

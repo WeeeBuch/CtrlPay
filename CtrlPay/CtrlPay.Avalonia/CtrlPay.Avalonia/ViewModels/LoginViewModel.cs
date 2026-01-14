@@ -38,7 +38,7 @@ public partial class LoginViewModel : ViewModelBase
     private string regUsername;
 
     [ObservableProperty]
-    private string regEmail;
+    private string regCode;
 
     [ObservableProperty]
     private string regPassword;
@@ -46,16 +46,15 @@ public partial class LoginViewModel : ViewModelBase
     [ObservableProperty]
     private string regConfirmPassword;
 
-    public event Action? LoginSucceeded;
-
     [RelayCommand]
     private void Register()
     {
-        bool succes = AuthRepo.Register(RegUsername, RegEmail, RegPassword, RegConfirmPassword);
+        bool succes = AuthRepo.Register(RegUsername, RegCode, RegPassword, RegConfirmPassword);
 
         if (succes) 
         {
-            LoginSucceeded?.Invoke();
+            _navigation.ShowMainWindow();
+            _navigation.CloseLogin();
         }
         else
         {
