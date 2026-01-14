@@ -5,11 +5,11 @@ using CtrlPay.Avalonia.ViewModels;
 
 namespace CtrlPay.Avalonia;
 
-public partial class DashboardView : UserControl
+public partial class TransactionListPiece : UserControl
 {
-    public DashboardView()
+    public TransactionListPiece()
     {
         InitializeComponent();
-        DataContext = new DashboardViewModel();
+        DataContext = new TransactionListPieceModel();
     }
 }
