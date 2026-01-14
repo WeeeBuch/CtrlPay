@@ -2,7 +2,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+             mc:Ignorable="d" d:DesignWidth="350" d:DesignHeight="500"
              xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
              x:DataType="vm:LoginViewModel"
              x:Class="CtrlPay.Avalonia.LoginView"
@@ -25,9 +25,11 @@
                 <!-- Login Fields -->
                 <StackPanel x:Name="LoginForm" Spacing="10" IsVisible="{Binding IsLoginSelected}">
                     <TextBox Name="UsernameTextBox" 
-                             Watermark="Uživatelské jméno" />
+                             Watermark="Uživatelské jméno" 
+                             Text="{Binding Username}"/>
                     <TextBox Name="PasswordTextBox" 
-                             Watermark="Heslo" PasswordChar="#"/>
+                             Watermark="Heslo" PasswordChar="#"
+                             Text="{Binding Password}"/>
                     <Button Name="LoginButton" Content="Přihlásit se"
                             FontWeight="Bold" Command="{Binding LoginCommand}"/>
                 </StackPanel>
@@ -36,12 +38,18 @@
                 <StackPanel x:Name="RegisterForm" Spacing="10" 
                             IsVisible="{Binding !IsLoginSelected}">
                     <TextBox Name="RegUsernameTextBox" 
-                             Watermark="Uživatelské jméno" />
-                    <TextBox Name="RegEmailTextBox" Watermark="Email" />
+                             Watermark="Uživatelské jméno"
+                             Text="{Binding RegUsername}"/>
+                    <TextBox Name="RegCodeTextBox" 
+                             Watermark="Code" 
+                             Text="{Binding RegCode}"/>
                     <TextBox Name="RegPasswordTextBox" 
-                             Watermark="Heslo" PasswordChar="#"/>
+                             Watermark="Heslo" PasswordChar="#"
+                             Text="{Binding RegPassword}"/>
                     <TextBox Name="RegConfirmPasswordTextBox" 
-                             Watermark="Potvrzení hesla" PasswordChar="#"/>
+                             Watermark="Potvrzení hesla" 
+                             PasswordChar="#"
+                             Text="{Binding RegConfirmPassword}"/>
                     <Button Name="RegisterButton" Content="Registrovat se"
                             FontWeight="Bold" Command="{Binding RegisterCommand}"/>
                 </StackPanel>
