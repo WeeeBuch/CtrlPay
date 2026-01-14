@@ -9,7 +9,16 @@ namespace CtrlPay.Repos
 {
     public static class ToDoRepo
     {
-        //TODO: Metody do repos: 2
+        //TODO: Metody do repos: 3
+
+        public static decimal GetTransactionSums(string type)
+        {
+            /* Udělat metodu co na základě typu vrátí sumu transakcí
+             * nebo jze udělat že to bude jen to co má
+             */
+
+            return 10.0m;
+        }
 
         public static List<TransactionDTO> GetTransactions(string type)
         {

@@ -10,17 +10,9 @@ namespace CtrlPay.Avalonia.ViewModels;
 public partial class DashboardViewModel : ViewModelBase
 {
     // TODO: Zjistit jmeno a upravit popisky
-    public CounterPieceModel TotalCredits { get; } = new()
-    {
-        Title = "Celková suma kreditů",
-        Amount = 20.000000000000m
-    };
+    public CounterPieceModel TotalCredits { get; set; } = new();
 
-    public CounterPieceModel PendingCredits { get; } = new()
-    {
-        Title = "Čekající platby",
-        Amount = 1.520000000000m
-    };
+    public CounterPieceModel PendingCredits { get; set; } = new();
 
     public TransactionListPieceModel CreditTransactionList { get; } = new();
     public TransactionListPieceModel PendingTransactionList { get; } = new();
@@ -31,6 +23,33 @@ public partial class DashboardViewModel : ViewModelBase
     }
 
     private void LoadInitialData()
+    {
+        LoadTransactionLists();
+        LoadTransactionSums();
+    }
+
+    private void LoadTransactionSums()
+    {
+        decimal creditAmount = Repos.ToDoRepo.GetTransactionSums("credits");
+        decimal pendingAmount = Repos.ToDoRepo.GetTransactionSums("pending");
+
+        CounterPieceModel creditCounter = new()
+        {
+            Title = "Celková suma kreditů",
+            Amount = creditAmount
+        };
+
+        CounterPieceModel pendingCounter = new()
+        {
+            Title = "Čekající platby",
+            Amount = pendingAmount
+        };
+
+        TotalCredits = creditCounter;
+        PendingCredits = pendingCounter;
+    }
+
+    private void LoadTransactionLists()
     {
         List<TransactionDTO> creditTransactions = Repos.ToDoRepo.GetTransactions("credits");
         List<TransactionDTO> pendingTransactions = Repos.ToDoRepo.GetTransactions("pending");
