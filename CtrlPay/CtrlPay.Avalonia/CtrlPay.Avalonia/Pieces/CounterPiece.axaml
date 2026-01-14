@@ -30,7 +30,7 @@
                    FontWeight="SemiBold"
                    LetterSpacing="-1"/>
         
-        <TextBlock Text="XMR" 
+        <TextBlock Text="{DynamicResource App.Currency}" 
                    Foreground="{DynamicResource Brush.Text.Disabled}" 
                    FontSize="18" 
                    FontWeight="Light"

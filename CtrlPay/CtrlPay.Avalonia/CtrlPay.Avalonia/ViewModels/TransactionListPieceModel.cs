@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CtrlPay.Avalonia.Translations;
 using CtrlPay.Repos;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,20 @@ public partial class TransactionItemViewModel : DashboardListItem
     public decimal Amount { get; set; }
     public DateTime Date { get; set; }
     public ToDoRepo.TransactionState Status { get; set; }
+
+    public string StatusText
+    {
+        get
+        {
+            return Status switch
+            {
+                ToDoRepo.TransactionState.Completed => TranslationManager.GetString("Transaction.Status.Completed"),
+                ToDoRepo.TransactionState.Pending => TranslationManager.GetString("Transaction.Status.Pending"),
+                ToDoRepo.TransactionState.Failed => TranslationManager.GetString("Transaction.Status.Failed"),
+                _ => "Nah state not implemented WTF"
+            };
+        }
+    }
 
     // Pomocná vlastnost, pokud chceme zobrazit oddělovač nad touto položkou
     [ObservableProperty]

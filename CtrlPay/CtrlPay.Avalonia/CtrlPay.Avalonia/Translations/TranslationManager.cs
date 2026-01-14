@@ -1,4 +1,5 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Markup.Xaml.Styling;
 using System;
 using System.Collections.Generic;
@@ -37,8 +38,20 @@ namespace CtrlPay.Avalonia.Translations
         {
             AppLanguage.English => new Uri("avares://CtrlPay.Avalonia/Translations/English.axaml"),
             AppLanguage.Base => new Uri("avares://CtrlPay.Avalonia/Translations/TranslationBase.axaml"),
-            _ => throw new ArgumentOutOfRangeException()
+            _ => new Uri("avares://CtrlPay.Avalonia/Translations/TranslationBase.axaml")
         };
+
+        public static string GetString(string key)
+        {
+            if (Application.Current!.TryFindResource(key, out var message))
+            {
+                if (message == null)
+                    return "Nah some error happend";
+
+                return message.ToString();
+            }
+            return "Nah some error happend";
+        }
 
     }
 }

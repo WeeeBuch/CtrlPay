@@ -85,7 +85,7 @@
                     
                     <TextBlock Text="•" FontSize="11" Foreground="{DynamicResource Brush.Text.Disabled}"/>
                     
-                    <TextBlock Text="{Binding Status}" 
+                    <TextBlock Text="{Binding StatusText}" 
                                Tag="{Binding Status}"
                                FontSize="11" 
                                FontWeight="SemiBold"
@@ -94,11 +94,11 @@
             </StackPanel>
 
             <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                <TextBlock Text="{Binding Amount, StringFormat=\{0:N8\}}" 
+                <TextBlock Text="{Binding Amount, StringFormat=\{0:N12\}}" 
                            Foreground="{DynamicResource Brush.Text.Primary}"
                            FontWeight="Bold" 
                            FontSize="15"/>
-                <TextBlock Text="XMR" 
+                <TextBlock Text="{DynamicResource App.Currency}" 
                            Foreground="{DynamicResource Brush.Text.Disabled}" 
                            FontSize="10" 
                            HorizontalAlignment="Right"/>

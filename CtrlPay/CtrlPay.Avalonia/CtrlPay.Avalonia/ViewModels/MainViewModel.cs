@@ -3,6 +3,7 @@ using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CtrlPay.Avalonia.Translations;
 using System;
 using System.Collections.ObjectModel;
 
@@ -38,8 +39,8 @@ namespace CtrlPay.Avalonia.ViewModels
         {
             NavigationItems =
             [
-                new NavItem("Dashboard", new DashboardView(), IconData.Dashboard),
-                new NavItem("Nastavení", new SettingsThemeView(), IconData.Cog)
+                new NavItem(TranslationManager.GetString("NavbarView.Dashboard"), new DashboardView(), IconData.Dashboard),
+                new NavItem(TranslationManager.GetString("NavbarView.Settings"), new SettingsThemeView(), IconData.Cog)
             ];
 
             // Výchozí stránka

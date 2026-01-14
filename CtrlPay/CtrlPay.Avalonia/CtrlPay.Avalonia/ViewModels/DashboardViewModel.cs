@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CtrlPay.Avalonia.Translations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -35,13 +36,13 @@ public partial class DashboardViewModel : ViewModelBase
 
         CounterPieceModel creditCounter = new()
         {
-            Title = "Celková suma kreditů",
+            Title = TranslationManager.GetString("CounterPiece.Credits.Title"),
             Amount = creditAmount
         };
 
         CounterPieceModel pendingCounter = new()
         {
-            Title = "Čekající platby",
+            Title = TranslationManager.GetString("CounterPiece.Pending.Title"),
             Amount = pendingAmount
         };
 
