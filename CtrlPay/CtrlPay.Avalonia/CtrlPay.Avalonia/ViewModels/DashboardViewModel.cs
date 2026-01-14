@@ -58,14 +58,16 @@ public partial class DashboardViewModel : ViewModelBase
         {
             Title = t.Title,
             Amount = t.Amount,
-            Date = t.Timestamp
+            Date = t.Timestamp,
+            Status = t.State
         }).ToList();
 
         var pendingData = pendingTransactions.Select(t => new TransactionItemViewModel
         {
             Title = t.Title,
             Amount = t.Amount,
-            Date = t.Timestamp
+            Date = t.Timestamp,
+            Status = t.State
         }).ToList();
 
         CreditTransactionList.RefreshTransactions(creditData);
