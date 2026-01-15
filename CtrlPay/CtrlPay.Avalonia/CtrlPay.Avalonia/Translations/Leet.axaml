@@ -1,0 +1,36 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <x:String x:Key="App.Title">C7rlP4y</x:String>
+    <x:String x:Key="App.Watermark">© 2026 C7rlP4y</x:String>
+    <x:String x:Key="App.Currency">XMR</x:String>
+
+    <x:String x:Key="LoginWindow.Title">L061N</x:String>
+
+    <x:String x:Key="LoginView.Button.Switch.Login">Auth</x:String>
+    <x:String x:Key="LoginView.Button.Switch.Register">Sign_Up</x:String>
+    <x:String x:Key="LoginView.Button.Login">Execute</x:String>
+    <x:String x:Key="LoginView.Button.Register">Create_Node</x:String>
+
+    <x:String x:Key="LoginView.Watermark.Username">U53RN4M3</x:String>
+    <x:String x:Key="LoginView.Watermark.Password">P455W0RD</x:String>
+    <x:String x:Key="LoginView.Watermark.ConfirmPassword">C0NF1RM_P455</x:String>
+    <x:String x:Key="LoginView.Watermark.Email">3M41L</x:String>
+
+    <x:String x:Key="DashboardView.TransactionList">Tr4n54c710n_L06</x:String>
+
+    <x:String x:Key="NavbarView.Menu">R007_M3NU</x:String>
+    <x:String x:Key="NavbarView.Dashboard">D45HB04RD</x:String>
+    <x:String x:Key="NavbarView.Settings">C0NF16</x:String>
+
+    <x:String x:Key="CounterPiece.Credits.Title">455375</x:String>
+    <x:String x:Key="CounterPiece.Pending.Title">Qu3u3d</x:String>
+
+    <x:String x:Key="Transaction.Status.Completed">D0N3</x:String>
+    <x:String x:Key="Transaction.Status.Pending">W417</x:String>
+    <x:String x:Key="Transaction.Status.Failed">3RR0R</x:String>
+
+    <x:String x:Key="SettingsView.Appearance.Title">GU1_57YL3</x:String>
+    <x:String x:Key="SettingsView.Translation.Title">L4N6U463</x:String>
+
+</ResourceDictionary>

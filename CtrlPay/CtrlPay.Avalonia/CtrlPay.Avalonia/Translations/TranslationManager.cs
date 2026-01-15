@@ -13,7 +13,19 @@ namespace CtrlPay.Avalonia.Translations
         public enum AppLanguage
         {
             Base,
-            English
+            English,
+            Czech,
+            German,
+            French,
+            Japanese,
+            Mandarin,
+            Russian,
+            Spanish,
+            Polish,
+            Slovak,
+            Moravian,
+            Pirate,
+            Leetspeak
         }
 
         private static ResourceInclude? _translationResources;
@@ -44,6 +56,18 @@ namespace CtrlPay.Avalonia.Translations
         {
             AppLanguage.English => new Uri("avares://CtrlPay.Avalonia/Translations/English.axaml"),
             AppLanguage.Base => new Uri("avares://CtrlPay.Avalonia/Translations/TranslationBase.axaml"),
+            AppLanguage.Czech => new Uri("avares://CtrlPay.Avalonia/Translations/Czech.axaml"),
+            AppLanguage.German => new Uri("avares://CtrlPay.Avalonia/Translations/German.axaml"),
+            AppLanguage.French => new Uri("avares://CtrlPay.Avalonia/Translations/French.axaml"),
+            AppLanguage.Japanese => new Uri("avares://CtrlPay.Avalonia/Translations/Japanese.axaml"),
+            AppLanguage.Mandarin => new Uri("avares://CtrlPay.Avalonia/Translations/Mandarin.axaml"),
+            AppLanguage.Russian => new Uri("avares://CtrlPay.Avalonia/Translations/Russian.axaml"),
+            AppLanguage.Spanish => new Uri("avares://CtrlPay.Avalonia/Translations/Spanish.axaml"),
+            AppLanguage.Polish => new Uri("avares://CtrlPay.Avalonia/Translations/Polish.axaml"),
+            AppLanguage.Slovak => new Uri("avares://CtrlPay.Avalonia/Translations/Slovak.axaml"),
+            AppLanguage.Moravian => new Uri("avares://CtrlPay.Avalonia/Translations/Moravian.axaml"),
+            AppLanguage.Pirate => new Uri("avares://CtrlPay.Avalonia/Translations/Pirate.axaml"),
+            AppLanguage.Leetspeak => new Uri("avares://CtrlPay.Avalonia/Translations/Leet.axaml"),
             _ => new Uri("avares://CtrlPay.Avalonia/Translations/TranslationBase.axaml")
         };
 
