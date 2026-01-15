@@ -5,10 +5,11 @@
              mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
              xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
              xmlns:styles="using:CtrlPay.Avalonia.Styles"
-             x:Class="CtrlPay.Avalonia.SettingsThemeView"
+             xmlns:translations="using:CtrlPay.Avalonia.Translations"
+             x:Class="CtrlPay.Avalonia.SettingsView"
              xmlns:conv="using:CtrlPay.Avalonia.Converters"
              Background="{DynamicResource Brush.Background}"
-             x:DataType="vm:SettingsThemeViewModel">
+             x:DataType="vm:SettingsViewModel">
 
     <UserControl.Resources>
         <conv:ThemeToColorConverter x:Key="ThemeToColorConverter" />
@@ -42,8 +43,9 @@
         </Style>
     </UserControl.Styles>
 
-  <StackPanel Spacing="20" Margin="20">
-        <TextBlock Text="Nastavení vzhledu" FontSize="20" FontWeight="Bold"/>
+    <ScrollViewer>
+  <StackPanel Spacing="20" Margin="20" >
+        <TextBlock Text="{DynamicResource SettingsView.Appearance.Title}" FontSize="20" FontWeight="Bold"/>
         
         <ListBox ItemsSource="{Binding AvailableThemes}" 
                  SelectedItem="{Binding SelectedTheme}"
@@ -103,5 +105,50 @@
                            Margin="20,0,0,0"/>
             </StackPanel>
         </Border>
+
+      <TextBlock Text="{DynamicResource SettingsView.Translation.Title}" FontSize="20" FontWeight="Bold"/>
+        
+        <ListBox ItemsSource="{Binding AvailableLanguages}" 
+                 SelectedItem="{Binding SelectedLanguage}"
+                 Background="Transparent">
+            
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+
+            <ListBox.ItemTemplate>
+                <DataTemplate x:DataType="translations:TranslationManager+AppLanguage">
+                    <Border Width="140" Height="90" 
+                            Margin="8"
+                            CornerRadius="10" 
+                            Background="#1C242B" 
+                            BorderThickness="2"
+                            ClipToBounds="True">
+            
+                        <Grid RowDefinitions="*, Auto">
+                
+                            <Panel Grid.Row="0" Background="Transparent">
+                                <TextBlock Text="Aa" 
+                                           FontSize="24" 
+                                           FontWeight="Bold"
+                                           Foreground="{DynamicResource Color.Text.Primary}"
+                                           HorizontalAlignment="Center" 
+                                           VerticalAlignment="Center" />
+                            </Panel>
+                
+                            <Border Grid.Row="1" Background="#27313A" Padding="1,4" CornerRadius="10">
+                                <TextBlock Text="{Binding}" 
+                                           FontSize="12"
+                                           HorizontalAlignment="Center"
+                                           Foreground="#E6F1F4"/>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </StackPanel>
+        </ScrollViewer>
 </UserControl>

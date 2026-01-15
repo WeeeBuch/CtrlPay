@@ -40,7 +40,7 @@ namespace CtrlPay.Avalonia.ViewModels
             NavigationItems =
             [
                 new NavItem(TranslationManager.GetString("NavbarView.Dashboard"), new DashboardView(), IconData.Dashboard),
-                new NavItem(TranslationManager.GetString("NavbarView.Settings"), new SettingsThemeView(), IconData.Cog)
+                new NavItem(TranslationManager.GetString("NavbarView.Settings"), new SettingsView(), IconData.Cog)
             ];
 
             // Výchozí stránka

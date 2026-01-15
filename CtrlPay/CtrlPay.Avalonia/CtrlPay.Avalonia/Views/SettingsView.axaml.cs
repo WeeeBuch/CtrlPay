@@ -1,15 +1,15 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using CtrlPay.Avalonia.ViewModels;
 
 namespace CtrlPay.Avalonia;
 
-public partial class SettingsThemeView : UserControl
+public partial class SettingsView : UserControl
 {
-    public SettingsThemeView()
+    public SettingsView()
     {
         InitializeComponent();
-        DataContext = new SettingsThemeViewModel();
+        DataContext = new SettingsViewModel();
     }
 }

@@ -2,9 +2,9 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- Global -->
-    <x:String x:Key="App.Title">App.Title</x:String>
+    <x:String x:Key="App.Title">CtrlPay</x:String>
     <x:String x:Key="App.Watermark">© 2026 CtrlPay</x:String>
-    <x:String x:Key="App.Currency">App.Currency</x:String>
+    <x:String x:Key="App.Currency">XMR</x:String>
 
     <!-- Login Window -->
     <x:String x:Key="LoginWindow.Title">LoginWindow.Title</x:String>
@@ -36,5 +36,9 @@
     <x:String x:Key="Transaction.Status.Completed">Transaction.Status.Completed</x:String>
     <x:String x:Key="Transaction.Status.Pending">Transaction.Status.Pending</x:String>
     <x:String x:Key="Transaction.Status.Failed">Transaction.Status.Failed</x:String>
+
+    <!-- Settings View -->
+    <x:String x:Key="SettingsView.Appearance.Title">SettingsView.Appearance.Title</x:String>
+    <x:String x:Key="SettingsView.Translation.Title">SettingsView.Translation.Title</x:String>
 
 </ResourceDictionary>
