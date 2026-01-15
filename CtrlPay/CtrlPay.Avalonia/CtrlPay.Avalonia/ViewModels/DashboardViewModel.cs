@@ -34,20 +34,11 @@ public partial class DashboardViewModel : ViewModelBase
         decimal creditAmount = Repos.ToDoRepo.GetTransactionSums("credits");
         decimal pendingAmount = Repos.ToDoRepo.GetTransactionSums("pending");
 
-        CounterPieceModel creditCounter = new()
-        {
-            Title = TranslationManager.GetString("CounterPiece.Credits.Title"),
-            Amount = creditAmount
-        };
+        TotalCredits.Amount = creditAmount;
+        PendingCredits.Amount = pendingAmount;
 
-        CounterPieceModel pendingCounter = new()
-        {
-            Title = TranslationManager.GetString("CounterPiece.Pending.Title"),
-            Amount = pendingAmount
-        };
-
-        TotalCredits = creditCounter;
-        PendingCredits = pendingCounter;
+        TotalCredits.GiveTitleKey("CounterPiece.Credits.Title");
+        PendingCredits.GiveTitleKey("CounterPiece.Pending.Title");
     }
 
     private void LoadTransactionLists()

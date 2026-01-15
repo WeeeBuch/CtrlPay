@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml.Styling;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using static CtrlPay.Avalonia.Styles.ThemeManager;
 
 namespace CtrlPay.Avalonia.Translations
@@ -16,6 +17,7 @@ namespace CtrlPay.Avalonia.Translations
         }
 
         private static ResourceInclude? _translationResources;
+        public static List<Action> LanguageChanged = [];
 
         public static void Apply(AppLanguage language)
         {
@@ -32,6 +34,10 @@ namespace CtrlPay.Avalonia.Translations
             };
 
             resources.MergedDictionaries.Add(_translationResources);
+            foreach (var action in LanguageChanged.ToList())
+            {
+                action();
+            }
         }
 
         public static Uri GetUri(AppLanguage language) => language switch

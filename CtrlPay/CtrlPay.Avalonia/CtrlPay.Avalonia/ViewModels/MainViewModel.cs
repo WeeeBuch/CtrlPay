@@ -37,11 +37,12 @@ namespace CtrlPay.Avalonia.ViewModels
 
         public MainViewModel()
         {
-            NavigationItems =
-            [
-                new NavItem(TranslationManager.GetString("NavbarView.Dashboard"), new DashboardView(), IconData.Dashboard),
-                new NavItem(TranslationManager.GetString("NavbarView.Settings"), new SettingsView(), IconData.Cog)
-            ];
+            NavigationItems = new()
+            {
+                // Předáváme klíče, nikoliv výsledek GetString
+                new NavItem("NavbarView.Dashboard", new DashboardView(), IconData.Dashboard),
+                new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog)
+            };
 
             // Výchozí stránka
             CurrentPage = NavigationItems[0].ViewModel;
@@ -55,6 +56,33 @@ namespace CtrlPay.Avalonia.ViewModels
         }
     }
 
-    public record NavItem(string Name, UserControl ViewModel, string Icon);
+    public partial class NavItem : ObservableObject
+    {
+        [ObservableProperty]
+        private string name;
+
+        public string NameKey { get; }
+        public UserControl ViewModel { get; }
+        public string Icon { get; }
+
+        public NavItem(string nameKey, UserControl viewModel, string icon)
+        {
+            NameKey = nameKey;
+            ViewModel = viewModel;
+            Icon = icon;
+
+            // Prvotní překlad
+            UpdateName();
+
+            // Přihlášení k odběru změn jazyka
+            TranslationManager.LanguageChanged.Add(UpdateName);
+        }
+
+        private void UpdateName()
+        {
+            if (!string.IsNullOrEmpty(NameKey))
+                Name = TranslationManager.GetString(NameKey);
+        }
+    }
 
 }
