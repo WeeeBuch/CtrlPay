@@ -18,9 +18,10 @@ namespace CtrlPay.Entities
         private int AddressId { get; set; }
         [Column("transaction_xmr_id")]
         public string TransactionIdXMR { get; set; }
-        //TODO: Change to enum
         [Column("type")]
-        public int Type { get; set; }
+        public TransactionTypeEnum Type { get; set; }
+        [Column("status")]
+        public TransactionStatusEnum Status { get; set; }
         [Column("amount")]
         public decimal Amount { get; set; }
         [Column("fee")]

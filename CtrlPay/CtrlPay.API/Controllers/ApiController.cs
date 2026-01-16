@@ -7,7 +7,7 @@ namespace CtrlPay.API.Controllers
     [ApiController]
     public class ApiController : Controller
     {
-        //TODO: Metody API:
+        //TODO: Metody API: 4
         /*
          * login - jwt věci
          * getaccount

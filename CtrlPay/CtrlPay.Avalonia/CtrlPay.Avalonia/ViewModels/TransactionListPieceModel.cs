@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using CtrlPay.Entities;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -23,7 +24,7 @@ public partial class TransactionItemViewModel : DashboardListItem
     public string Title { get; set; } = "";
     public decimal Amount { get; set; }
     public DateTime Date { get; set; }
-    public ToDoRepo.TransactionState Status { get; set; }
+    public TransactionStatusEnum Status { get; set; }
 
     // Pomocná vlastnost, pokud chceme zobrazit oddělovač nad touto položkou
     [ObservableProperty]
