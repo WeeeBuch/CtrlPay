@@ -1,4 +1,6 @@
-﻿using CtrlPay.Entities;
+﻿using CtrlPay.DB;
+using CtrlPay.Entities;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,16 +39,37 @@ namespace CtrlPay.XMR
             );
 
             string body = await response.Content.ReadAsStringAsync();
-
-            var rpcResponse = JsonSerializer.Deserialize<RpcResponse<GetAccountsResult>>(body,
+            
+            var rpcResponse = JsonSerializer.Deserialize<RpcResponse<RpcAccountsResult>>(body,
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-            if (rpcResponse.Error != null)
+            if (rpcResponse?.Error != null)
             {
                 throw new Exception($"RPC error {rpcResponse.Error.Code}: {rpcResponse.Error.Message}");
             }
 
-            var accounts = rpcResponse.Result;
+            RpcAccountsResult accounts = rpcResponse.Result;
+
+            CtrlPayDbContext dbContext = new CtrlPayDbContext();
+
+            foreach (RpcAccount account in accounts.Subaddress_Accounts)
+            {
+                if (await dbContext.Accounts.FindAsync(account.Account_Index) != null) { continue; }
+                var address = dbContext.Addresses.FirstOrDefault(a => a.AddressXMR == account.Base_Address);
+                if (address == null)
+                {
+                    address = new Address(account.Base_Address, true);
+                    dbContext.Addresses.Add(address);
+                    await dbContext.SaveChangesAsync(cancellationToken);
+                }
+                Account newAccount = new Account
+                {
+                    Index = account.Account_Index,
+                    BaseAddress = address
+                };
+                dbContext.Accounts.Add(newAccount);
+                await dbContext.SaveChangesAsync(cancellationToken);
+            }
         }
     }
 }

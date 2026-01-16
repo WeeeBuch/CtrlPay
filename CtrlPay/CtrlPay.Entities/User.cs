@@ -43,5 +43,9 @@ namespace CtrlPay.Entities
             PasswordSalt = passwordSalt;
             RoleId = role.Id;
         }
+        public User()
+        {
+            
+        }
     }
 }

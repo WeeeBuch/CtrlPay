@@ -19,5 +19,15 @@ namespace CtrlPay.Entities
         [Column("is_primary")]
         public bool IsPrimary { get; set; }
         public virtual Account Account { get; set; }
+
+        public Address(string addressXmr, bool isPrimary)
+        {
+            AddressXMR = addressXmr;
+            IsPrimary = isPrimary;
+        }
+        public Address()
+        {
+            
+        }
     }
 }

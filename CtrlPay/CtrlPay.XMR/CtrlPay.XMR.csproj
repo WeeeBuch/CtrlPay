@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CtrlPay.DB\CtrlPay.DB.csproj" />
     <ProjectReference Include="..\CtrlPay.Entities\CtrlPay.Entities.csproj" />
   </ItemGroup>
 

@@ -1,6 +1,8 @@
 ﻿
-using CtrlPay.XMR;
+using CtrlPay.Core;
+using CtrlPay.Entities;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Net;
 using System.Net.Http;
@@ -12,50 +14,52 @@ namespace CtrlPay.API.BackgroundServices
     public class XmrComsBackgroundService : BackgroundService
     {
         private readonly ILogger<XmrComsBackgroundService> _logger;
+        private readonly MoneroRpcOptions _rpcOptions;
 
-        public XmrComsBackgroundService(ILogger<XmrComsBackgroundService> logger)
+        public XmrComsBackgroundService(ILogger<XmrComsBackgroundService> logger, IOptions<MoneroRpcOptions> rpcOptions)
         {
             _logger = logger;
+            _rpcOptions = rpcOptions.Value;
         }
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _logger.LogInformation("Transaction Processor started.");
-            HttpClient httpClient = new HttpClient();
+            _logger.LogInformation("XMR communication process starting");
 
-            string username = "monero";
-            string password = "+W4Zz9TsoskgFAPDC9/8vw==";
-            string uri = "http://178.213.152.7:28088/json_rpc";
+            string username = _rpcOptions.Username;
+            string password = _rpcOptions.Password;
+            string uri = $"http://{_rpcOptions.Host}:{_rpcOptions.Port}/json_rpc";
 
-            string auth = Convert.ToBase64String(
-                Encoding.ASCII.GetBytes($"{username}:{password}")
-                );
+            var handler = new HttpClientHandler
+            {
+                Credentials = new NetworkCredential(username, password),
+                PreAuthenticate = false, // u Digest MUSÍ být false
+                UseProxy = false
+            };
 
-            httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Basic", auth);
+            using var httpClient = new HttpClient(handler);
 
-            // ⚠️ DŮLEŽITÉ: Monero nemá rádo HTTP/2
-            httpClient.DefaultRequestHeaders.ExpectContinue = false;
+            // Monero / jiné RPC často vyžaduje HTTP/1.1
             httpClient.DefaultRequestVersion = HttpVersion.Version11;
 
             while (!stoppingToken.IsCancellationRequested)
             {
-                _logger.LogInformation("Checking for pending transactions...");
+                _logger.LogInformation("Synchronizing accounts");
 
                 try
                 {
-                    await AccountComs.Synchronize(httpClient,uri, stoppingToken);
+                    await XMRComs.SynchronizeAccounts(httpClient,uri, stoppingToken);
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError(ex, "Monero RPC failed");
+                    _logger.LogError(ex, "Monero RPC accounts sync failed");
                     await Task.Delay(5000, stoppingToken);
                 }
-
+                _logger.LogInformation("Synchronizing accounts done");
                 await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
             }
 
-            _logger.LogInformation("Transaction Processor stopping.");
+            _logger.LogInformation("XMR communication process stopping.");
         }
     }
 }

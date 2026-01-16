@@ -18,18 +18,19 @@ namespace CtrlPay.Entities
         public int Code { get; set; }
         public string Message { get; set; }
     }
-    public class GetAccountsResult
+    public class RpcAccountsResult
     {
-        public List<SubaddressAccount> Subaddress_Accounts { get; set; }
-        public ulong Total_Balance { get; set; }
-        public ulong Total_Unlocked_Balance { get; set; }
+        public List<RpcAccount> Subaddress_Accounts { get; set; }
+        public decimal Total_Balance { get; set; }
+        public decimal Total_Unlocked_Balance { get; set; }
     }
-    public class SubaddressAccount
+    public class RpcAccount
     {
-        public uint Account_Index { get; set; }
-        public ulong Balance { get; set; }
-        public ulong Unlocked_Balance { get; set; }
+        public int Account_Index { get; set; }
+        public decimal Balance { get; set; }
+        public decimal Unlocked_Balance { get; set; }
         public string Label { get; set; }
         public string Tag { get; set; }
+        public string Base_Address { get; set; }
     }
 }
