@@ -1,5 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Markup.Xaml.Styling;
+using CtrlPay.Avalonia.Settings;
 using System;
 using System.Collections.Generic;
 
@@ -41,6 +42,8 @@ namespace CtrlPay.Avalonia.Styles
             };
 
             resources.MergedDictionaries.Add(_themeResources);
+
+            SettingsManager.Current.Theme = theme;
         }
 
         public static Uri GetUri(AppTheme theme) => theme switch

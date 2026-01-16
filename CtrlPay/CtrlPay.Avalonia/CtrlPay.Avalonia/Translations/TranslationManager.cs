@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml.Styling;
+using CtrlPay.Avalonia.Settings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -52,6 +53,8 @@ namespace CtrlPay.Avalonia.Translations
             {
                 action();
             }
+
+            SettingsManager.Current.Language = language;
         }
 
         public static Uri GetUri(AppLanguage language) => language switch
