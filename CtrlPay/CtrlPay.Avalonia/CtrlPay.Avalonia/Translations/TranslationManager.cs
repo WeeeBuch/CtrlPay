@@ -30,9 +30,11 @@ namespace CtrlPay.Avalonia.Translations
 
         private static ResourceInclude? _translationResources;
         public static List<Action> LanguageChanged = [];
+        public static AppLanguage CurrentLanguage { get; private set; }
 
         public static void Apply(AppLanguage language)
         {
+            CurrentLanguage = language;
             var resources = Application.Current!.Resources;
 
             if (_translationResources != null)
@@ -76,11 +78,11 @@ namespace CtrlPay.Avalonia.Translations
             if (Application.Current!.TryFindResource(key, out var message))
             {
                 if (message == null)
-                    return "Nah some error happend";
+                    return "Nah Message is null";
 
                 return message.ToString();
             }
-            return "Nah some error happend";
+            return $"Nah You forgot to implement this in {CurrentLanguage} translation";
         }
 
     }

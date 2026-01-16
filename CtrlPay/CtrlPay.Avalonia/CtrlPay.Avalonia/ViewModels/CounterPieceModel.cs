@@ -39,6 +39,6 @@ public partial class CounterPieceModel : ViewModelBase
     public void GiveTitleKey(string key)
     {
         TitleKey = key;
-        UpdateTitle(); // Aktualizujeme text hned při nastavení klíče
+        UpdateTitle();
     }
 }

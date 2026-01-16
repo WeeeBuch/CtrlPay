@@ -15,9 +15,31 @@ namespace CtrlPay.Avalonia.ViewModels;
 public abstract class DashboardListItem : ObservableObject { }
 
 // Model pro ten tvůj oddělovač
-public class SeparatorItemViewModel : DashboardListItem
+public partial class SeparatorItemViewModel : DashboardListItem
 {
-    public string Label { get; set; } = "";
+    [ObservableProperty]
+    private string label;
+
+    public string LabelKey;
+
+    public SeparatorItemViewModel()
+    {
+        TranslationManager.LanguageChanged.Add(UpdateLabel);
+    }
+
+    private void UpdateLabel()
+    {
+        if (!string.IsNullOrEmpty(LabelKey))
+        {
+            Label = TranslationManager.GetString(LabelKey);
+        }
+    }
+
+    public void GiveLabelKey(string key)
+    {
+        LabelKey = key;
+        UpdateLabel();
+    }
 }
 public partial class TransactionItemViewModel : DashboardListItem
 {
@@ -67,7 +89,9 @@ public partial class TransactionListPieceModel : ViewModelBase
             // Pokud se skupina změnila (např. z Dnes na Včera), vložíme oddělovač
             if (groupName != currentGroup)
             {
-                displayList.Add(new SeparatorItemViewModel { Label = groupName });
+                SeparatorItemViewModel separator = new();
+                separator.GiveLabelKey(groupName);
+                displayList.Add(separator);
                 currentGroup = groupName;
             }
             displayList.Add(tx);
@@ -79,11 +103,11 @@ public partial class TransactionListPieceModel : ViewModelBase
     private string GetGroupName(DateTime date, DateTime now)
     {
         var diff = (now - date.Date).Days;
-        if (diff == 0) return "Dnes";
-        if (diff == 1) return "Včera";
-        if (diff <= 7) return "Před týdnem";
-        if (diff <= 14) return "Před 2 týdny";
-        return "Starší";
+        if (diff == 0) return "Date.Today";
+        if (diff == 1) return "Date.Yesterday";
+        if (diff <= 7) return "Date.LastWeek";
+        if (diff <= 14) return "Date.Last2Weeks";
+        return "Date.Older";
     }
 }
 

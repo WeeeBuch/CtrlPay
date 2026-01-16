@@ -33,4 +33,10 @@
     <x:String x:Key="SettingsView.Appearance.Title">GU1_57YL3</x:String>
     <x:String x:Key="SettingsView.Translation.Title">L4N6U463</x:String>
 
+    <x:String x:Key="Date.Today">70D4Y</x:String>
+    <x:String x:Key="Date.Yesterday">Y3573RD4Y</x:String>
+    <x:String x:Key="Date.LastWeek">L457_W33K</x:String>
+    <x:String x:Key="Date.Last2Weeks">L457_2_W33K5</x:String>
+    <x:String x:Key="Date.Older">0LD3R</x:String>
+
 </ResourceDictionary>

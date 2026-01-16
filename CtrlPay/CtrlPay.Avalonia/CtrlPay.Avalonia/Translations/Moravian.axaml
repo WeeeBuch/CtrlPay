@@ -33,4 +33,10 @@
     <x:String x:Key="SettingsView.Appearance.Title">Tož jak to vypadá</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Nářečí</x:String>
 
+    <x:String x:Key="Date.Today">Dneskaj</x:String>
+    <x:String x:Key="Date.Yesterday">Včéra</x:String>
+    <x:String x:Key="Date.LastWeek">Minulý týdeň</x:String>
+    <x:String x:Key="Date.Last2Weeks">Poslední dva týdny</x:String>
+    <x:String x:Key="Date.Older">Dávno temu</x:String>
+
 </ResourceDictionary>

@@ -33,4 +33,10 @@
     <x:String x:Key="SettingsView.Appearance.Title">外观</x:String>
     <x:String x:Key="SettingsView.Translation.Title">语言</x:String>
 
+    <x:String x:Key="Date.Today">今天</x:String>
+    <x:String x:Key="Date.Yesterday">昨天</x:String>
+    <x:String x:Key="Date.LastWeek">上周</x:String>
+    <x:String x:Key="Date.Last2Weeks">最近两周</x:String>
+    <x:String x:Key="Date.Older">更早以前</x:String>
+
 </ResourceDictionary>

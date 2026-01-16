@@ -33,4 +33,10 @@
     <x:String x:Key="SettingsView.Appearance.Title">Apparence</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Langue</x:String>
 
+    <x:String x:Key="Date.Today">Aujourd'hui</x:String>
+    <x:String x:Key="Date.Yesterday">Hier</x:String>
+    <x:String x:Key="Date.LastWeek">La semaine dernière</x:String>
+    <x:String x:Key="Date.Last2Weeks">Les 2 dernières semaines</x:String>
+    <x:String x:Key="Date.Older">Plus ancien</x:String>
+
 </ResourceDictionary>

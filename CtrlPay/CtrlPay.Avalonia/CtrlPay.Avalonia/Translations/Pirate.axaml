@@ -33,4 +33,10 @@
     <x:String x:Key="SettingsView.Appearance.Title">Paint the Ship</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Tongue</x:String>
 
+    <x:String x:Key="Date.Today">This Very Sun</x:String>
+    <x:String x:Key="Date.Yesterday">The Previous Tide</x:String>
+    <x:String x:Key="Date.LastWeek">A Fortnight's Half</x:String>
+    <x:String x:Key="Date.Last2Weeks">A Full Fortnight</x:String>
+    <x:String x:Key="Date.Older">Ages Ago</x:String>
+
 </ResourceDictionary>
