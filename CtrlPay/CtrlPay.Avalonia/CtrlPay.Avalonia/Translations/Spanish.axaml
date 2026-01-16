@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <x:String x:Key="App.Title">CtrlPay</x:String>
+    <x:String x:Key="App.Watermark">© 2026 CtrlPay</x:String>
+    <x:String x:Key="App.Currency">XMR</x:String>
+
+    <x:String x:Key="LoginWindow.Title">Iniciar sesión</x:String>
+
+    <x:String x:Key="LoginView.Button.Switch.Login">Entrar</x:String>
+    <x:String x:Key="LoginView.Button.Switch.Register">Registrarse</x:String>
+    <x:String x:Key="LoginView.Button.Login">Acceder</x:String>
+    <x:String x:Key="LoginView.Button.Register">Crear cuenta</x:String>
+
+    <x:String x:Key="LoginView.Watermark.Username">Usuario</x:String>
+    <x:String x:Key="LoginView.Watermark.Password">Contraseña</x:String>
+    <x:String x:Key="LoginView.Watermark.ConfirmPassword">Confirmar contraseña</x:String>
+    <x:String x:Key="LoginView.Watermark.Email">Correo electrónico</x:String>
+
+    <x:String x:Key="DashboardView.TransactionList">Lista de transacciones</x:String>
+
+    <x:String x:Key="NavbarView.Menu">Menú</x:String>
+    <x:String x:Key="NavbarView.Dashboard">Panel</x:String>
+    <x:String x:Key="NavbarView.Settings">Ajustes</x:String>
+
+    <x:String x:Key="CounterPiece.Credits.Title">Saldo</x:String>
+    <x:String x:Key="CounterPiece.Pending.Title">Pendiente</x:String>
+
+    <x:String x:Key="Transaction.Status.Completed">Completado</x:String>
+    <x:String x:Key="Transaction.Status.Pending">En proceso</x:String>
+    <x:String x:Key="Transaction.Status.Failed">Fallido</x:String>
+
+    <x:String x:Key="SettingsView.Appearance.Title">Apariencia</x:String>
+    <x:String x:Key="SettingsView.Translation.Title">Idioma</x:String>
+
+    <x:String x:Key="Date.Today">Hoy</x:String>
+    <x:String x:Key="Date.Yesterday">Ayer</x:String>
+    <x:String x:Key="Date.LastWeek">La semana pasada</x:String>
+    <x:String x:Key="Date.Last2Weeks">Las últimas 2 semanas</x:String>
+    <x:String x:Key="Date.Older">Más antiguo</x:String>
+
+</ResourceDictionary>

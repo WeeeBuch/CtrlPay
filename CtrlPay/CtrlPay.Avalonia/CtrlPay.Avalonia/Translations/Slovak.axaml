@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <x:String x:Key="App.Title">CtrlPay</x:String>
+    <x:String x:Key="App.Watermark">© 2026 CtrlPay</x:String>
+    <x:String x:Key="App.Currency">XMR</x:String>
+
+    <x:String x:Key="LoginWindow.Title">Prihlásenie</x:String>
+
+    <x:String x:Key="LoginView.Button.Switch.Login">Prihlásiť sa</x:String>
+    <x:String x:Key="LoginView.Button.Switch.Register">Registrovať sa</x:String>
+    <x:String x:Key="LoginView.Button.Login">Vstúpiť</x:String>
+    <x:String x:Key="LoginView.Button.Register">Vytvoriť účet</x:String>
+
+    <x:String x:Key="LoginView.Watermark.Username">Používateľské meno</x:String>
+    <x:String x:Key="LoginView.Watermark.Password">Heslo</x:String>
+    <x:String x:Key="LoginView.Watermark.ConfirmPassword">Potvrdenie hesla</x:String>
+    <x:String x:Key="LoginView.Watermark.Email">E-mail</x:String>
+
+    <x:String x:Key="DashboardView.TransactionList">Zoznam transakcií</x:String>
+
+    <x:String x:Key="NavbarView.Menu">Menu</x:String>
+    <x:String x:Key="NavbarView.Dashboard">Nástenka</x:String>
+    <x:String x:Key="NavbarView.Settings">Nastavenia</x:String>
+
+    <x:String x:Key="CounterPiece.Credits.Title">Zostatok</x:String>
+    <x:String x:Key="CounterPiece.Pending.Title">Čakajúce</x:String>
+
+    <x:String x:Key="Transaction.Status.Completed">Dokončené</x:String>
+    <x:String x:Key="Transaction.Status.Pending">Spracováva sa</x:String>
+    <x:String x:Key="Transaction.Status.Failed">Chyba</x:String>
+
+    <x:String x:Key="SettingsView.Appearance.Title">Vzhľad</x:String>
+    <x:String x:Key="SettingsView.Translation.Title">Jazyk</x:String>
+
+    <x:String x:Key="Date.Today">Dnes</x:String>
+    <x:String x:Key="Date.Yesterday">Včera</x:String>
+    <x:String x:Key="Date.LastWeek">Minulý týždeň</x:String>
+    <x:String x:Key="Date.Last2Weeks">Posledné 2 týždne</x:String>
+    <x:String x:Key="Date.Older">Staršie</x:String>
+
+</ResourceDictionary>

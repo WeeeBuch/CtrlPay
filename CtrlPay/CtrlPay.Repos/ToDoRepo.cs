@@ -107,7 +107,7 @@ namespace CtrlPay.Repos
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-10),
+                    Timestamp = DateTime.Now.AddDays(-15),
                     State = TransactionState.Pending
                 },
                 new TransactionDTO

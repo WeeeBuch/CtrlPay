@@ -21,7 +21,7 @@
 
       <!-- Popisky Listů -->
       <TextBlock Grid.Column="0" Grid.Row="1"
-                 Text="Seznam treansakcí"
+                 Text="{DynamicResource DashboardView.TransactionList}"
                  HorizontalAlignment="Center"
                  VerticalAlignment="Bottom"
                  FontSize="20"
@@ -34,7 +34,7 @@
                  Margin="0,0,0,5"
                  FontSize="20"
                  FontWeight="Bold"
-                 Text="Seznam treansakcí"/>
+                 Text="{DynamicResource DashboardView.TransactionList}"/>
 
       <!-- Listy -->
       <p:TransactionListPiece Grid.Row="2" Grid.Column="0"
