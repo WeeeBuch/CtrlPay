@@ -48,4 +48,11 @@
     <x:String x:Key="Date.Last2Weeks">Date.Last2Weeks</x:String>
     <x:String x:Key="Date.Older">Date.Older</x:String>
 
+    <!-- Debts View -->
+    <x:String x:Key="DebtsView.Payable">DebtsView.Payable</x:String>
+    <x:String x:Key="DebtsView.Watermark.SearchBar">DebtsView.Watermark.SearchBar</x:String>
+    <x:String x:Key="DebtsView.Sorting">DebtsView.Sorting</x:String>
+
+
+
 </ResourceDictionary>
