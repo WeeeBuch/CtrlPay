@@ -24,9 +24,9 @@
             <StackPanel x:Name="FormPanel" Spacing="15">
                 <!-- Login Fields -->
                 <StackPanel x:Name="LoginForm" Spacing="10" IsVisible="{Binding IsLoginSelected}">
-                    <TextBox Name="UsernameTextBox" 
+                    <TextBox Name="UsernameTextBox" Text="{Binding Username, Mode=TwoWay}"
                              Watermark="{DynamicResource LoginView.Watermark.Username}" />
-                    <TextBox Name="PasswordTextBox" 
+                    <TextBox Name="PasswordTextBox" Text="{Binding Password, Mode=TwoWay}"
                              Watermark="{DynamicResource LoginView.Watermark.Password}" PasswordChar="#"/>
                     <Button Name="LoginButton" Content="{DynamicResource LoginView.Button.Login}"
                             FontWeight="Bold" Command="{Binding LoginCommand}"/>
@@ -35,12 +35,13 @@
                 <!-- Register Fields (skryté) -->
                 <StackPanel x:Name="RegisterForm" Spacing="10" 
                             IsVisible="{Binding !IsLoginSelected}">
-                    <TextBox Name="RegUsernameTextBox" 
+                    <TextBox Name="RegUsernameTextBox" Text="{Binding RegUsername, Mode=TwoWay}"
                              Watermark="{DynamicResource LoginView.Watermark.Username}" />
-                    <TextBox Name="RegCodeTextBox" Watermark="{DynamicResource LoginView.Watermark.Code}" />
-                    <TextBox Name="RegPasswordTextBox" 
+                    <TextBox Name="RegCodeTextBox" Text="{Binding RegCode, Mode=TwoWay}"
+                             Watermark="{DynamicResource LoginView.Watermark.Code}" />
+                    <TextBox Name="RegPasswordTextBox" Text="{Binding RegPassword, Mode=TwoWay}"
                              Watermark="{DynamicResource LoginView.Watermark.Password}" PasswordChar="#"/>
-                    <TextBox Name="RegConfirmPasswordTextBox" 
+                    <TextBox Name="RegConfirmPasswordTextBox" Text="{Binding RegConfirmPassword, Mode=TwoWay}"
                              Watermark="{DynamicResource LoginView.Watermark.ConfirmPassword}" PasswordChar="#"/>
                     <Button Name="RegisterButton" Content="{DynamicResource LoginView.Button.Register}"
                             FontWeight="Bold" Command="{Binding RegisterCommand}"/>
