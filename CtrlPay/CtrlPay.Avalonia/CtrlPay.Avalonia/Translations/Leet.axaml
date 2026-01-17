@@ -15,7 +15,7 @@
     <x:String x:Key="LoginView.Watermark.Username">U53RN4M3</x:String>
     <x:String x:Key="LoginView.Watermark.Password">P455W0RD</x:String>
     <x:String x:Key="LoginView.Watermark.ConfirmPassword">C0NF1RM_P455</x:String>
-    <x:String x:Key="LoginView.Watermark.Email">3M41L</x:String>
+    <x:String x:Key="LoginView.Watermark.Code">V3R1F1C4710N_C0D3</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">Tr4n54c710n_L06</x:String>
 

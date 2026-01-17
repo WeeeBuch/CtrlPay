@@ -15,7 +15,7 @@
     <x:String x:Key="LoginView.Watermark.Username">Nazwa użytkownika</x:String>
     <x:String x:Key="LoginView.Watermark.Password">Hasło</x:String>
     <x:String x:Key="LoginView.Watermark.ConfirmPassword">Potwierdź hasło</x:String>
-    <x:String x:Key="LoginView.Watermark.Email">E-mail</x:String>
+    <x:String x:Key="LoginView.Watermark.Code">Kod weryfikacyjny</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">Lista transakcji</x:String>
 

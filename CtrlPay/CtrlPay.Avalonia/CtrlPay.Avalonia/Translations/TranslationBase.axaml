@@ -18,7 +18,7 @@
     <x:String x:Key="LoginView.Watermark.Username">LoginView.Watermark.Username</x:String>
     <x:String x:Key="LoginView.Watermark.Password">LoginView.Watermark.Password</x:String>
     <x:String x:Key="LoginView.Watermark.ConfirmPassword">LoginView.Watermark.ConfirmPassword</x:String>
-    <x:String x:Key="LoginView.Watermark.Email">LoginView.Watermark.Email</x:String>
+    <x:String x:Key="LoginView.Watermark.Code">LoginView.Watermark.Code</x:String>
 
     <!-- Dashboard View -->
     <x:String x:Key="DashboardView.TransactionList">DashboardView.TransactionList</x:String>

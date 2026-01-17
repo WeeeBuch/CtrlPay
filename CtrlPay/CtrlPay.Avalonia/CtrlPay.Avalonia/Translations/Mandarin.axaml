@@ -15,7 +15,7 @@
     <x:String x:Key="LoginView.Watermark.Username">用户名</x:String>
     <x:String x:Key="LoginView.Watermark.Password">密码</x:String>
     <x:String x:Key="LoginView.Watermark.ConfirmPassword">确认密码</x:String>
-    <x:String x:Key="LoginView.Watermark.Email">电子邮件</x:String>
+    <x:String x:Key="LoginView.Watermark.Code">验证码</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">交易记录</x:String>
 

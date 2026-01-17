@@ -15,7 +15,7 @@
     <x:String x:Key="LoginView.Watermark.Username">Používateľské meno</x:String>
     <x:String x:Key="LoginView.Watermark.Password">Heslo</x:String>
     <x:String x:Key="LoginView.Watermark.ConfirmPassword">Potvrdenie hesla</x:String>
-    <x:String x:Key="LoginView.Watermark.Email">E-mail</x:String>
+    <x:String x:Key="LoginView.Watermark.Code">Overovací kód</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">Zoznam transakcií</x:String>
 
