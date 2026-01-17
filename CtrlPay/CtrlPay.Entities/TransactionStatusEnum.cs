@@ -10,6 +10,7 @@ namespace CtrlPay.Entities
     {
         Pending = 0,
         Completed = 1,
-        Failed = 2
+        Failed = 2,
+        Confirmed = 3
     }
 }

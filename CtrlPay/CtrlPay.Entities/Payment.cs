@@ -16,11 +16,11 @@ namespace CtrlPay.Entities
         [Key]
         public int Id { get; set; }
         [Column("customer_id")]
-        private int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
         [Column("account_id")]
-        private int AccountId { get; set; }
+        public int? AccountId { get; set; }
         [Column("address_id")]
-        private int AddressId { get; set; }
+        public int? AddressId { get; set; }
         [Column("expected_xmr_amount")]
         public decimal ExpectedAmountXMR { get; set; }
         [Column("paid_xmr_amount")]
@@ -32,11 +32,11 @@ namespace CtrlPay.Entities
         [Column("paid_at")]
         public DateTime PaidAt { get; set; }
         [ForeignKey("CustomerId")]
-        public virtual Customer Customer { get; set; }
+        public virtual Customer? Customer { get; set; }
         [ForeignKey("AccountId")]
-        public virtual Account Account { get; set; }
+        public virtual Account? Account { get; set; }
         [ForeignKey("AddressId")]
-        public virtual Address Address { get; set; }
+        public virtual Address? Address { get; set; }
         public virtual List<Transaction> Transactions { get; set; }
 
     }
