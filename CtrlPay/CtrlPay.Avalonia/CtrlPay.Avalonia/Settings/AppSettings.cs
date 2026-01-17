@@ -24,6 +24,25 @@ namespace CtrlPay.Avalonia.Settings
             set { _theme = value; Save(); }
         }
 
+        // Připojení aplikace k API
+        private string _connectionString = string.Empty;
+        public string ConnectionString
+        {
+            get => _connectionString;
+            set { _connectionString = value; Save(); }
+        }
+
+        // Uložená připojení
+        private List<string> _savedConnections = ["127.0.0.1"];
+        public List<string> SavedConnections
+        {
+            get => _savedConnections;
+            set { _savedConnections = value; Save(); }
+        }
+
+
+
+
         // Pomocná metoda pro uložení sebe sama
         private void Save()
         {
