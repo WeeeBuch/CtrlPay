@@ -53,7 +53,7 @@ namespace CtrlPay.DB
             switch (_settings.Type.ToLower())
             {
                 case "mysql":
-                    string connectionString = $"Server={_settings.ProviderIp};Port={_settings.ProviderPort};Database={_settings.DbName};Uid={_settings.DbName};Pwd={_settings.DbPassword};";
+                    string connectionString = $"Server={_settings.ProviderIp};Port={_settings.ProviderPort};Database={_settings.DbName};Uid={_settings.DbLogin};Pwd={_settings.DbPassword};";
                     optionsBuilder.UseMySQL(connectionString);
                     break;
                 default:
