@@ -1,4 +1,4 @@
-﻿using CtrlPay.Entities;
+using CtrlPay.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,210 +31,210 @@ namespace CtrlPay.Repos
                     Title = "Vklad z banky",
                     Amount = 5.0m,
                     Timestamp = DateTime.Now,
-                    State = TransactionState.Completed
+                    State = TransactionStatusEnum.Completed
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Completed
+                    State = TransactionStatusEnum.Completed
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Completed
+                    State = TransactionStatusEnum.Completed
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-2),
-                    State = TransactionState.Failed
+                    State = TransactionStatusEnum.Failed
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-2),
-                    State = TransactionState.Failed
+                    State = TransactionStatusEnum.Failed
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-2),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionState.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-15),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
+                },
+                new TransactionDTO
+                {
+                    Title = "Výplata odměn",
+                    Amount = 1.25m,
+                    Timestamp = DateTime.Now.AddDays(-10),
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 },
                 new TransactionDTO
                 {
                     Title = "Výplata odměn",
                     Amount = 1.25m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionState.Pending
+                    State = TransactionStatusEnum.Pending
                 }
                 ];
         }
@@ -245,14 +245,7 @@ namespace CtrlPay.Repos
             public string Title { get; init; }
             public decimal Amount { get; init; }
             public DateTime Timestamp { get; init; }
-            public TransactionState State { get; init; }
-        }
-
-        public enum TransactionState
-        {
-            Pending,
-            Completed,
-            Failed
+            public TransactionStatusEnum State { get; init; }
         }
     }
 }

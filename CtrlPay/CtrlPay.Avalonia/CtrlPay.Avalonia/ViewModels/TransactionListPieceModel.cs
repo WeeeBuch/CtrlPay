@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Repos;
 using System;
@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
+using CtrlPay.Entities;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -46,7 +47,7 @@ public partial class TransactionItemViewModel : DashboardListItem
     public string Title { get; set; } = "";
     public decimal Amount { get; set; }
     public DateTime Date { get; set; }
-    public ToDoRepo.TransactionState Status { get; set; }
+    public TransactionStatusEnum Status { get; set; }
 
     public string StatusText
     {
@@ -54,9 +55,9 @@ public partial class TransactionItemViewModel : DashboardListItem
         {
             return Status switch
             {
-                ToDoRepo.TransactionState.Completed => TranslationManager.GetString("Transaction.Status.Completed"),
-                ToDoRepo.TransactionState.Pending => TranslationManager.GetString("Transaction.Status.Pending"),
-                ToDoRepo.TransactionState.Failed => TranslationManager.GetString("Transaction.Status.Failed"),
+                TransactionStatusEnum.Completed => TranslationManager.GetString("Transaction.Status.Completed"),
+                TransactionStatusEnum.Pending => TranslationManager.GetString("Transaction.Status.Pending"),
+                TransactionStatusEnum.Failed => TranslationManager.GetString("Transaction.Status.Failed"),
                 _ => "Nah state not implemented WTF"
             };
         }

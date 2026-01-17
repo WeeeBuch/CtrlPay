@@ -1,0 +1,23 @@
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "Database": {
+    "Type": "MySQL",
+    "ProviderIp": "127.0.0.1",
+    "ProviderPort": "3306",
+    "DbName": "ctrlpay",
+    "DbLogin": "",
+    "DbPassword": ""
+  },
+  "MoneroRpc": {
+    "Host": "",
+    "Port": 18088,
+    "Username": "",
+    "Password": ""
+  }
+}

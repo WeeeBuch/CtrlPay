@@ -1,5 +1,7 @@
 ﻿using CtrlPay.Entities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,11 +27,38 @@ namespace CtrlPay.DB
         public DbSet<User> Users { get; set; }
         public DbSet<WorkRecord> WorkRecords { get; set; }
 
+        private static DatabaseSettings? _settings;
+
+        public static void Initialize(DatabaseSettings? settings)
+        {
+            _settings = settings;
+        }
+        // DI konstruktor
+        public CtrlPayDbContext(DbContextOptions<CtrlPayDbContext> options) : base(options) {}
+
+        public CtrlPayDbContext()
+        {
+            
+        }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseLazyLoadingProxies(true);
-            //optionsBuilder.UseMySQL();
-            
+            if (optionsBuilder.IsConfigured)
+                return;
+
+            if (_settings == null)
+                throw new InvalidOperationException("DbContext not initialized");
+
+            switch (_settings.Type.ToLower())
+            {
+                case "mysql":
+                    string connectionString = $"Server={_settings.ProviderIp};Port={_settings.ProviderPort};Database={_settings.DbName};Uid={_settings.DbName};Pwd={_settings.DbPassword};";
+                    optionsBuilder.UseMySQL(connectionString);
+                    break;
+                default:
+                    throw new InvalidOperationException("Unsupported database type");
+            }
         }
 
         override protected void OnModelCreating(ModelBuilder modelBuilder)
