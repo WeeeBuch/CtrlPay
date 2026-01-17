@@ -16,8 +16,6 @@ namespace CtrlPay.Entities
         public int Id { get; set; }
         [Column("customer_id")]
         private int CustomerId { get; set; }
-        [Column("user_id")]
-        private int UserId { get; set; }
         [Column("account_id")]
         private int AccountId { get; set; }
         [Column("our_xmr")]
@@ -25,8 +23,7 @@ namespace CtrlPay.Entities
 
         [ForeignKey("CustomerId")]
         public virtual Customer Customer { get; set; }
-        [ForeignKey("UserId")]
-        public virtual User User { get; set; }
+        public virtual List<User> Users { get; set; }
         [ForeignKey("AccountId")]
         public virtual Account Account { get; set; }
     }

@@ -29,7 +29,7 @@
                     <PathIcon Data="{Binding MenuIcon}" Width="20" Height="20" 
                               Foreground="{DynamicResource Color.Accent}"/>
                 </Button>
-                <TextBlock Text="Menu" IsVisible="{Binding IsPaneOpen}"
+                <TextBlock Text="{DynamicResource NavbarView.Menu}" IsVisible="{Binding IsPaneOpen}"
                            Foreground="{DynamicResource Color.Text.Primary}"
                            VerticalAlignment="Center" Margin="10,0,0,0" FontWeight="Bold"/>
             </StackPanel>

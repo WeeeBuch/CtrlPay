@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CtrlPay.Avalonia.Translations;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -33,20 +34,11 @@ public partial class DashboardViewModel : ViewModelBase
         decimal creditAmount = Repos.ToDoRepo.GetTransactionSums("credits");
         decimal pendingAmount = Repos.ToDoRepo.GetTransactionSums("pending");
 
-        CounterPieceModel creditCounter = new()
-        {
-            Title = "Celková suma kreditů",
-            Amount = creditAmount
-        };
+        TotalCredits.Amount = creditAmount;
+        PendingCredits.Amount = pendingAmount;
 
-        CounterPieceModel pendingCounter = new()
-        {
-            Title = "Čekající platby",
-            Amount = pendingAmount
-        };
-
-        TotalCredits = creditCounter;
-        PendingCredits = pendingCounter;
+        TotalCredits.GiveTitleKey("CounterPiece.Credits.Title");
+        PendingCredits.GiveTitleKey("CounterPiece.Pending.Title");
     }
 
     private void LoadTransactionLists()

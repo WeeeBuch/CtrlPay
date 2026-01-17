@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <x:String x:Key="App.Title">CtrlPay</x:String>
+    <x:String x:Key="App.Watermark">© 2026 CtrlPay</x:String>
+    <x:String x:Key="App.Currency">XMR</x:String>
+
+    <x:String x:Key="LoginWindow.Title">Přihlášení</x:String>
+
+    <x:String x:Key="LoginView.Button.Switch.Login">Chcu sa přihlásit</x:String>
+    <x:String x:Key="LoginView.Button.Switch.Register">Chcu sa registrovat</x:String>
+    <x:String x:Key="LoginView.Button.Login">Hajdy vnitř</x:String>
+    <x:String x:Key="LoginView.Button.Register">Založit si účet</x:String>
+
+    <x:String x:Key="LoginView.Watermark.Username">Meno uživatela</x:String>
+    <x:String x:Key="LoginView.Watermark.Password">Heslo</x:String>
+    <x:String x:Key="LoginView.Watermark.ConfirmPassword">Heslo si potvrdit</x:String>
+    <x:String x:Key="LoginView.Watermark.Email">Mejl</x:String>
+
+    <x:String x:Key="DashboardView.TransactionList">Přehled platení</x:String>
+
+    <x:String x:Key="NavbarView.Menu">Nabídka</x:String>
+    <x:String x:Key="NavbarView.Dashboard">Hlavní rynk</x:String>
+    <x:String x:Key="NavbarView.Settings">Nastavení</x:String>
+
+    <x:String x:Key="CounterPiece.Credits.Title">Mám u sebe</x:String>
+    <x:String x:Key="CounterPiece.Pending.Title">Na cestě</x:String>
+
+    <x:String x:Key="Transaction.Status.Completed">Hotovo</x:String>
+    <x:String x:Key="Transaction.Status.Pending">Eště sa čeká</x:String>
+    <x:String x:Key="Transaction.Status.Failed">Pokazilo sa to</x:String>
+
+    <x:String x:Key="SettingsView.Appearance.Title">Tož jak to vypadá</x:String>
+    <x:String x:Key="SettingsView.Translation.Title">Nářečí</x:String>
+
+    <x:String x:Key="Date.Today">Dneskaj</x:String>
+    <x:String x:Key="Date.Yesterday">Včéra</x:String>
+    <x:String x:Key="Date.LastWeek">Minulý týdeň</x:String>
+    <x:String x:Key="Date.Last2Weeks">Poslední dva týdny</x:String>
+    <x:String x:Key="Date.Older">Dávno temu</x:String>
+
+</ResourceDictionary>

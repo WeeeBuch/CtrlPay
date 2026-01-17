@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <x:String x:Key="App.Title">CtrlPay</x:String>
+    <x:String x:Key="App.Watermark">© 2026 CtrlPay</x:String>
+    <x:String x:Key="App.Currency">XMR</x:String>
+
+    <x:String x:Key="LoginWindow.Title">登录</x:String>
+
+    <x:String x:Key="LoginView.Button.Switch.Login">登录</x:String>
+    <x:String x:Key="LoginView.Button.Switch.Register">注册</x:String>
+    <x:String x:Key="LoginView.Button.Login">进入</x:String>
+    <x:String x:Key="LoginView.Button.Register">创建账户</x:String>
+
+    <x:String x:Key="LoginView.Watermark.Username">用户名</x:String>
+    <x:String x:Key="LoginView.Watermark.Password">密码</x:String>
+    <x:String x:Key="LoginView.Watermark.ConfirmPassword">确认密码</x:String>
+    <x:String x:Key="LoginView.Watermark.Email">电子邮件</x:String>
+
+    <x:String x:Key="DashboardView.TransactionList">交易记录</x:String>
+
+    <x:String x:Key="NavbarView.Menu">菜单</x:String>
+    <x:String x:Key="NavbarView.Dashboard">仪表板</x:String>
+    <x:String x:Key="NavbarView.Settings">设置</x:String>
+
+    <x:String x:Key="CounterPiece.Credits.Title">余额</x:String>
+    <x:String x:Key="CounterPiece.Pending.Title">待处理</x:String>
+
+    <x:String x:Key="Transaction.Status.Completed">已完成</x:String>
+    <x:String x:Key="Transaction.Status.Pending">处理中</x:String>
+    <x:String x:Key="Transaction.Status.Failed">失败</x:String>
+
+    <x:String x:Key="SettingsView.Appearance.Title">外观</x:String>
+    <x:String x:Key="SettingsView.Translation.Title">语言</x:String>
+
+    <x:String x:Key="Date.Today">今天</x:String>
+    <x:String x:Key="Date.Yesterday">昨天</x:String>
+    <x:String x:Key="Date.LastWeek">上周</x:String>
+    <x:String x:Key="Date.Last2Weeks">最近两周</x:String>
+    <x:String x:Key="Date.Older">更早以前</x:String>
+
+</ResourceDictionary>

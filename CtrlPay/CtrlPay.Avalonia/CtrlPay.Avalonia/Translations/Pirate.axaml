@@ -1,0 +1,42 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <x:String x:Key="App.Title">CtrlPay</x:String>
+    <x:String x:Key="App.Watermark">© 2026 CtrlPay</x:String>
+    <x:String x:Key="App.Currency">Doubloons</x:String>
+
+    <x:String x:Key="LoginWindow.Title">Identify Thyself</x:String>
+
+    <x:String x:Key="LoginView.Button.Switch.Login">Board the Ship</x:String>
+    <x:String x:Key="LoginView.Button.Switch.Register">Join the Crew</x:String>
+    <x:String x:Key="LoginView.Button.Login">Ahoy!</x:String>
+    <x:String x:Key="LoginView.Button.Register">Sign the Ledger</x:String>
+
+    <x:String x:Key="LoginView.Watermark.Username">Pirate Name</x:String>
+    <x:String x:Key="LoginView.Watermark.Password">Secret Sign</x:String>
+    <x:String x:Key="LoginView.Watermark.ConfirmPassword">Repeat the Sign</x:String>
+    <x:String x:Key="LoginView.Watermark.Email">Messenger Bird</x:String>
+
+    <x:String x:Key="DashboardView.TransactionList">Bounty Log</x:String>
+
+    <x:String x:Key="NavbarView.Menu">Compass</x:String>
+    <x:String x:Key="NavbarView.Dashboard">Main Deck</x:String>
+    <x:String x:Key="NavbarView.Settings">Ship's Rules</x:String>
+
+    <x:String x:Key="CounterPiece.Credits.Title">Treasure</x:String>
+    <x:String x:Key="CounterPiece.Pending.Title">Buried Gold</x:String>
+
+    <x:String x:Key="Transaction.Status.Completed">Looted</x:String>
+    <x:String x:Key="Transaction.Status.Pending">In the Depths</x:String>
+    <x:String x:Key="Transaction.Status.Failed">Sunk</x:String>
+
+    <x:String x:Key="SettingsView.Appearance.Title">Paint the Ship</x:String>
+    <x:String x:Key="SettingsView.Translation.Title">Tongue</x:String>
+
+    <x:String x:Key="Date.Today">This Very Sun</x:String>
+    <x:String x:Key="Date.Yesterday">The Previous Tide</x:String>
+    <x:String x:Key="Date.LastWeek">A Fortnight's Half</x:String>
+    <x:String x:Key="Date.Last2Weeks">A Full Fortnight</x:String>
+    <x:String x:Key="Date.Older">Ages Ago</x:String>
+
+</ResourceDictionary>
