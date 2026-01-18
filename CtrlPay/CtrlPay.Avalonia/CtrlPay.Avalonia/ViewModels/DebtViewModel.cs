@@ -22,6 +22,7 @@ public partial class DebtItemViewModel : ObservableObject
 
     [ObservableProperty] private string creditPayString;
     [ObservableProperty] private decimal creditAmount;
+    [ObservableProperty] private DateTime timestamp;
 
     [ObservableProperty] private bool isExpanded;
     [RelayCommand] private void ToggleExpand() => IsExpanded = !IsExpanded;
@@ -31,6 +32,7 @@ public partial class DebtItemViewModel : ObservableObject
         _description = transaction.Title;
         _amount = transaction.Amount;
         Status = transaction.State;
+        Timestamp = transaction.Timestamp;
 
         UpdateHandler.CreditAvailableUpdateActions.Add(UpdateCreditAmount);
     }
@@ -62,9 +64,7 @@ public partial class DebtViewModel : ViewModelBase
 
     public DebtViewModel()
     {
-        // Sample data pro testování
-        Debts.Add(new DebtItemViewModel(new() { Amount = 100, Title = "Popisek", State = TransactionStatusEnum.Completed}));
-        Debts.Add(new DebtItemViewModel(new() { Amount = 100, Title = "Popisek02", State = TransactionStatusEnum.Failed }));
+        GetDebtsFromRepo();
 
         SortOptions = new List<SortOption>
         {
@@ -75,6 +75,48 @@ public partial class DebtViewModel : ViewModelBase
         };
 
         SelectedSortOrder = SortOptions[0];
+    }
+
+    public void ApplySorting()
+    {
+        if (Debts == null || !Debts.Any()) return;
+
+        string selectedKey = SelectedSortOrder?.Key ?? "DateAsc";
+
+        // 1. Provedeme seřazení do dočasného listu (v paměti)
+        List<DebtItemViewModel> sortedList = selectedKey switch
+        {
+            "AmountAsc" => [.. Debts.OrderBy(d => d.Amount)],
+            "AmountDesc" => [.. Debts.OrderByDescending(d => d.Amount)],
+            "DateAsc" => [.. Debts.OrderBy(d => d.Timestamp)],
+            "DateDesc" => [.. Debts.OrderByDescending(d => d.Timestamp)],
+            _ => [.. Debts.OrderBy(d => d.Timestamp)]
+        };
+
+        // 2. Aktualizace kolekce
+        // Tip: Pokud používáte DynamicData, použijte .Edit() pro hromadnou změnu
+        Debts.Clear();
+        foreach (var item in sortedList)
+        {
+            Debts.Add(item);
+        }
+    }
+
+    partial void OnSelectedSortOrderChanged(SortOption value)
+    {
+        ApplySorting();
+    }
+
+    public void GetDebtsFromRepo()
+    {
+        List<TransactionDTO> transactions = ToDoRepo.GetTransactions("debt");
+
+        Debts.Clear();
+
+        foreach (var transaction in transactions)
+        {
+            Debts.Add(new DebtItemViewModel(transaction));
+        }
     }
 }
 
