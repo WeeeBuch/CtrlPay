@@ -37,9 +37,16 @@ namespace CtrlPay.Repos
             var response = await httpClient.GetAsync(uri);
 
             response.EnsureSuccessStatusCode();
+            // Definuj si options
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
 
             string json = await response.Content.ReadAsStringAsync();
-            List<TransactionApiDTO> transactions = JsonSerializer.Deserialize<List<TransactionApiDTO>>(json);
+
+            // Přidej options do metody Deserialize
+            List<TransactionApiDTO> transactions = JsonSerializer.Deserialize<List<TransactionApiDTO>>(json, options);
             List<TransactionDTO> dtoList = new List<TransactionDTO>();
 
             foreach(var tx in transactions)
