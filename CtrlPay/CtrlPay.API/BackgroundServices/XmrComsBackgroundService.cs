@@ -57,6 +57,21 @@ namespace CtrlPay.API.BackgroundServices
                 }
                 _logger.LogInformation("Synchronizing accounts done");
                 await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
+
+                _logger.LogInformation("Synchronizing transactions");
+
+                try
+                {
+                    await XMRComs.LookForNewTransactions(httpClient, uri, stoppingToken);
+                    await XMRComs.ConfirmPendingTransactions(httpClient, uri, stoppingToken);
+                }
+                catch (Exception ex)
+                {
+                    _logger.LogError(ex, "Monero RPC transactions sync failed");
+                    await Task.Delay(5000, stoppingToken);
+                }
+                _logger.LogInformation("Synchronizing transactions done");
+                await Task.Delay(TimeSpan.FromSeconds(10), stoppingToken);
             }
 
             _logger.LogInformation("XMR communication process stopping.");
