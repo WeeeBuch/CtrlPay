@@ -40,4 +40,12 @@
     <x:String x:Key="Date.Last2Weeks">過去2週間</x:String>
     <x:String x:Key="Date.Older">過去</x:String>
 
+    <x:String x:Key="DebtView.Payable">支払い可能</x:String>
+    <x:String x:Key="DebtView.Watermark.SearchBar">借金を検索...</x:String>
+    <x:String x:Key="DebtView.Sorting">並べ替え</x:String>
+    <x:String x:Key="DebtView.SortOption.DateAsc">日付 (古い順)</x:String>
+    <x:String x:Key="DebtView.SortOption.DateDesc">日付 (新しい順)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountAsc">金額 (低い順)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountDesc">金額 (高い順)</x:String>
+
 </ResourceDictionary>

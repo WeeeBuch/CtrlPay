@@ -40,4 +40,12 @@
     <x:String x:Key="Date.Last2Weeks">L457_2_W33K5</x:String>
     <x:String x:Key="Date.Older">0LD3R</x:String>
 
+    <x:String x:Key="DebtView.Payable">P4Y4BL3</x:String>
+    <x:String x:Key="DebtView.Watermark.SearchBar">534RCH_D3B75...</x:String>
+    <x:String x:Key="DebtView.Sorting">50R7_BY</x:String>
+    <x:String x:Key="DebtView.SortOption.DateAsc">D473_OLD</x:String>
+    <x:String x:Key="DebtView.SortOption.DateDesc">D473_N3W</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountAsc">4MN7_LOW</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountDesc">4MN7_H16H</x:String>
+
 </ResourceDictionary>

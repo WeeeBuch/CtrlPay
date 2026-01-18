@@ -40,4 +40,12 @@
     <x:String x:Key="Date.Last2Weeks">Последние 2 недели</x:String>
     <x:String x:Key="Date.Older">Ранее</x:String>
 
+    <x:String x:Key="DebtView.Payable">К оплате</x:String>
+    <x:String x:Key="DebtView.Watermark.SearchBar">Поиск долгов...</x:String>
+    <x:String x:Key="DebtView.Sorting">Сортировать по</x:String>
+    <x:String x:Key="DebtView.SortOption.DateAsc">Дата (старые)</x:String>
+    <x:String x:Key="DebtView.SortOption.DateDesc">Дата (новые)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountAsc">Сумма (меньшая)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountDesc">Сумма (большая)</x:String>
+
 </ResourceDictionary>
