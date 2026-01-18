@@ -87,6 +87,7 @@ public partial class DebtViewModel : ViewModelBase
         ApplySorting(SelectedSortOrder.Key);
 
         UpdateHandler.CreditAvailableUpdateActions.Add(OnCreditChanged);
+        UpdateHandler.NewTransactionAddedActions.Add(TransactionsUpdated);
     }
 
     public void ApplySorting(string? sortingMethod)
