@@ -9,39 +9,104 @@
              x:DataType="vm:DashboardViewModel"
              xmlns:p="using:CtrlPay.Avalonia">
 
-  <Grid ColumnDefinitions="*,20,*"
-        RowDefinitions="150,50,*">
 
-      <!-- Horní čítače -->
-      <p:CounterPiece Grid.Row="0" Grid.Column="0" 
-                DataContext="{Binding TotalCredits}"/>
+	<ScrollViewer>
+		<Grid>
 
-      <p:CounterPiece Grid.Row="0" Grid.Column="2" 
-                    DataContext="{Binding PendingCredits}"/>
+			<!-- DESKTOP -->
+			<Grid Name="DesktopLayout">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="20"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="150"/>
+					<RowDefinition Height="50"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
 
-      <!-- Popisky Listů -->
-      <TextBlock Grid.Column="0" Grid.Row="1"
-                 Text="{DynamicResource DashboardView.TransactionList}"
-                 HorizontalAlignment="Center"
-                 VerticalAlignment="Bottom"
-                 FontSize="20"
-                 FontWeight="Bold"
-                 Margin="0,0,0,5"/>
+				<Grid ColumnDefinitions="*,20,*"
+						  RowDefinitions="150,50,*">
 
-      <TextBlock Grid.Column="2" Grid.Row="1"
-                 HorizontalAlignment="Center"
-                 VerticalAlignment="Bottom"
-                 Margin="0,0,0,5"
-                 FontSize="20"
-                 FontWeight="Bold"
-                 Text="{DynamicResource DashboardView.TransactionList}"/>
+					<!-- Horní čítače -->
+					<p:CounterPiece Grid.Row="0" Grid.Column="0"
+							  DataContext="{Binding TotalCredits}"/>
 
-      <!-- Listy -->
-      <p:TransactionListPiece Grid.Row="2" Grid.Column="0"
-                                DataContext="{Binding CreditTransactionList}"/>
+					<p:CounterPiece Grid.Row="0" Grid.Column="2"
+								  DataContext="{Binding PendingCredits}"/>
 
-      <p:TransactionListPiece Grid.Row="2" Grid.Column="2"
-                                DataContext="{Binding PendingTransactionList}"/>
-	  
-  </Grid>
+					<!-- Popisky Listů -->
+					<TextBlock Grid.Column="0" Grid.Row="1"
+							   Text="{DynamicResource DashboardView.TransactionList}"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Bottom"
+							   FontSize="20"
+							   FontWeight="Bold"
+							   Margin="0,0,0,5"/>
+
+					<TextBlock Grid.Column="2" Grid.Row="1"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Bottom"
+							   Margin="0,0,0,5"
+							   FontSize="20"
+							   FontWeight="Bold"
+							   Text="{DynamicResource DashboardView.TransactionList}"/>
+
+					<!-- Listy -->
+					<p:TransactionListPiece Grid.Row="2" Grid.Column="0"
+											  DataContext="{Binding CreditTransactionList}"/>
+
+					<p:TransactionListPiece Grid.Row="2" Grid.Column="2"
+											  DataContext="{Binding PendingTransactionList}"/>
+
+				</Grid>			
+			</Grid>
+
+			<!-- MOBILE -->
+			<Grid Name="MobileLayout">
+
+				<Grid.RowDefinitions>
+					<!-- Horní čítače -->
+					<RowDefinition Height="150"/>
+					<RowDefinition Height="150"/>
+
+					<!-- Nadpis -->
+					<RowDefinition Height="50"/>
+
+					<!-- Listy -->
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+
+				<!-- Horní čítače -->
+				<p:CounterPiece Grid.Row="0"
+								DataContext="{Binding TotalCredits}"/>
+
+				<p:CounterPiece Grid.Row="1"
+								DataContext="{Binding PendingCredits}"/>
+
+				<!-- Popisek listů -->
+				<TextBlock Grid.Row="2"
+						   Text="{DynamicResource DashboardView.TransactionList}"
+						   HorizontalAlignment="Center"
+						   VerticalAlignment="Bottom"
+						   FontSize="20"
+						   FontWeight="Bold"
+						   Margin="0,0,0,5"/>
+
+				<!-- Listy -->
+				<p:TransactionListPiece Grid.Row="3"
+										DataContext="{Binding CreditTransactionList}"/>
+
+				<p:TransactionListPiece Grid.Row="4"
+										DataContext="{Binding PendingTransactionList}"/>
+
+			</Grid>
+
+		</Grid>
+	</ScrollViewer>
+
+	
+	
 </UserControl>
