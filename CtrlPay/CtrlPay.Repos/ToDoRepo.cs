@@ -9,7 +9,7 @@ namespace CtrlPay.Repos
 {
     public static class ToDoRepo
     {
-        //TODO: Metody do repos: 3
+        //TODO: Metody do repos: 4
 
         public static decimal GetTransactionSums(string type)
         {
@@ -34,21 +34,24 @@ namespace CtrlPay.Repos
                     Title = "Vklad z banky",
                     Amount = 5.0m,
                     Timestamp = DateTime.Now,
-                    State = TransactionStatusEnum.Completed
+                    State = TransactionStatusEnum.Completed,
+                    Id = 1
                 },
                 new TransactionDTO
                 {
                     Title = "PC",
                     Amount = 8.0m,
                     Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Completed
+                    State = TransactionStatusEnum.Completed,
+                    Id = 2
                 },
                 new TransactionDTO
                 {
                     Title = "Hry",
                     Amount = 2.0m,
                     Timestamp = DateTime.Now.AddDays(-5),
-                    State = TransactionStatusEnum.Completed
+                    State = TransactionStatusEnum.Completed,
+                    Id = 3
                 },
                 ];
         }
@@ -60,6 +63,15 @@ namespace CtrlPay.Repos
             public decimal Amount { get; init; }
             public DateTime Timestamp { get; init; }
             public TransactionStatusEnum State { get; init; }
+
+            public int Id { get; init; }
+        }
+
+        public static void PayFromCredit(TransactionDTO transakce)
+        {
+            // Implementace platby z kreditu
+
+
         }
     }
 }

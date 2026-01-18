@@ -30,6 +30,8 @@ public partial class DebtItemViewModel : ObservableObject
     [ObservableProperty] private bool isExpanded;
     [RelayCommand] private void ToggleExpand() => IsExpanded = !IsExpanded;
 
+    public TransactionDTO TransactionDTOBase;
+
     public DebtItemViewModel(TransactionDTO transaction)
     {
         _description = transaction.Title;
@@ -37,11 +39,11 @@ public partial class DebtItemViewModel : ObservableObject
         Status = transaction.State;
         Timestamp = transaction.Timestamp;
 
-        //UpdateHandler.CreditAvailableUpdateActions.Add(UpdateCreditAmount);
+        TransactionDTOBase = transaction;
     }
 
     [RelayCommand]
-    private void PayFromCredit() { /* Implementace platby */ }
+    private void PayFromCredit() => ToDoRepo.PayFromCredit(TransactionDTOBase);
 
     [RelayCommand]
     private void GenerateAddress() { /* Implementace generování adresy */ }
@@ -127,7 +129,7 @@ public partial class DebtViewModel : ViewModelBase
         foreach (var dto in sortedDTOs)
         {
             var existingVm = Debts.FirstOrDefault(vm =>
-                vm.Description == dto.Title && vm.Timestamp == dto.Timestamp);
+                vm.TransactionDTOBase == dto);
 
             if (existingVm != null)
             {
