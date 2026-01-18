@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection.Emit;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace CtrlPay.DB
@@ -22,6 +23,7 @@ namespace CtrlPay.DB
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Payroll> Payrolls { get; set; }
         public DbSet<PayrollApproval> PayrollApprovals { get; set; }
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<User> Users { get; set; }

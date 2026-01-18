@@ -5,19 +5,29 @@
       "Microsoft.AspNetCore": "Warning"
     }
   },
-  "AllowedHosts": "*",
   "Database": {
     "Type": "MySQL",
     "ProviderIp": "127.0.0.1",
     "ProviderPort": "3306",
     "DbName": "ctrlpay",
-    "DbLogin": "",
-    "DbPassword": ""
+    "DbLogin": "db-username",
+    "DbPassword": "db-password"
   },
   "MoneroRpc": {
-    "Host": "",
+    "Host": "127.0.0.1",
     "Port": 18088,
-    "Username": "",
-    "Password": ""
+    "Username": "monero",
+    "Password": "your-wallet-rpc-password"
+  },
+  "AllowedHosts": "*",
+  "Kestrel": {
+    "Endpoints": {
+      "Http": {
+        "Url": "http://0.0.0.0:5000"
+      },
+      "Https": {
+        "Url": "https://0.0.0.0:5443"
+      }
+    }
   }
 }

@@ -39,7 +39,11 @@ namespace CtrlPay.XMR
             );
 
             string body = await response.Content.ReadAsStringAsync();
-            
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"HTTP error {response.StatusCode}: {body}");
+            }
+
             var rpcResponse = JsonSerializer.Deserialize<RpcResponse<RpcAccountsResult>>(body,
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
