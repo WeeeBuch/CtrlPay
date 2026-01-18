@@ -22,6 +22,7 @@
     <x:String x:Key="NavbarView.Menu">Compass</x:String>
     <x:String x:Key="NavbarView.Dashboard">Main Deck</x:String>
     <x:String x:Key="NavbarView.Settings">Ship's Rules</x:String>
+    <x:String x:Key="NavbarView.Debts">Debts to the Sea</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Treasure</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Buried Gold</x:String>

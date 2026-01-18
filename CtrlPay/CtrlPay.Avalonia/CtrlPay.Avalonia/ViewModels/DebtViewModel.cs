@@ -68,10 +68,10 @@ public partial class DebtViewModel : ViewModelBase
 
         SortOptions = new List<SortOption>
         {
-            new ("AmountAsc", "DebtView.SortOptions.AmountAsc"),
-            new ("AmountDesc", "DebtView.SortOptions.AmountDesc"),
-            new ("DateAsc", "DebtView.SortOptions.DateAsc"),
-            new ("DateDesc", "DebtView.SortOptions.DateDesc")
+            new ("AmountAsc", "DebtView.SortOption.AmountAsc"),
+            new ("AmountDesc", "DebtView.SortOption.AmountDesc"),
+            new ("DateAsc", "DebtView.SortOption.DateAsc"),
+            new ("DateDesc", "DebtView.SortOption.DateDesc")
         };
 
         SelectedSortOrder = SortOptions[0];

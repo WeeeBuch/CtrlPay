@@ -27,6 +27,7 @@
     <x:String x:Key="NavbarView.Menu">NavbarView.Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">NavbarView.Dashboard</x:String>
     <x:String x:Key="NavbarView.Settings">NavbarView.Settings</x:String>
+    <x:String x:Key="NavbarView.Debts">NavbarView.Debts</x:String>
 
     <!-- Credit Counter Piece -->
     <x:String x:Key="CounterPiece.Credits.Title">CounterPiece.Credits.Title</x:String>
@@ -49,9 +50,13 @@
     <x:String x:Key="Date.Older">Date.Older</x:String>
 
     <!-- Debts View -->
-    <x:String x:Key="DebtsView.Payable">DebtsView.Payable</x:String>
-    <x:String x:Key="DebtsView.Watermark.SearchBar">DebtsView.Watermark.SearchBar</x:String>
-    <x:String x:Key="DebtsView.Sorting">DebtsView.Sorting</x:String>
+    <x:String x:Key="DebtView.Payable">DebtView.Payable</x:String>
+    <x:String x:Key="DebtView.Watermark.SearchBar">DebtView.Watermark.SearchBar</x:String>
+    <x:String x:Key="DebtView.Sorting">DebtView.Sorting</x:String>
+    <x:String x:Key="DebtView.SortOption.DateAsc">DebtView.SortOption.DateAsc</x:String>
+    <x:String x:Key="DebtView.SortOption.DateDesc">DebtView.SortOption.DateDesc</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountAsc">DebtView.SortOption.AmountAsc</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountDesc">DebtView.SortOption.AmountDesc</x:String>
 
 
 

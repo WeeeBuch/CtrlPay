@@ -22,6 +22,7 @@
     <x:String x:Key="NavbarView.Menu">Menü</x:String>
     <x:String x:Key="NavbarView.Dashboard">Dashboard</x:String>
     <x:String x:Key="NavbarView.Settings">Einstellungen</x:String>
+    <x:String x:Key="NavbarView.Debts">Schulden</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Guthaben</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Ausstehend</x:String>

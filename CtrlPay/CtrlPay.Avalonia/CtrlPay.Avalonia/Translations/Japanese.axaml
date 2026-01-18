@@ -22,6 +22,7 @@
     <x:String x:Key="NavbarView.Menu">メニュー</x:String>
     <x:String x:Key="NavbarView.Dashboard">ダッシュボード</x:String>
     <x:String x:Key="NavbarView.Settings">設定</x:String>
+    <x:String x:Key="NavbarView.Debts">借金</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">残高</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">保留中</x:String>

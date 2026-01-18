@@ -22,6 +22,7 @@
     <x:String x:Key="NavbarView.Menu">Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">Nástěnka</x:String>
     <x:String x:Key="NavbarView.Settings">Nastavení</x:String>
+    <x:String x:Key="NavbarView.Debts">Dluhy</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Zůstatek</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Čekající</x:String>

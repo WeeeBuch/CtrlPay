@@ -27,6 +27,7 @@
     <x:String x:Key="NavbarView.Menu">Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">Dashboard</x:String>
     <x:String x:Key="NavbarView.Settings">Settings</x:String>
+    <x:String x:Key="NavbarView.Debts">Debts</x:String>
 
     <!-- Credit Counter Piece -->
     <x:String x:Key="CounterPiece.Credits.Title">Credits</x:String>

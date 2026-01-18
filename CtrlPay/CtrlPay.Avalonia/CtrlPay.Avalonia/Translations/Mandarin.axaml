@@ -22,6 +22,7 @@
     <x:String x:Key="NavbarView.Menu">菜单</x:String>
     <x:String x:Key="NavbarView.Dashboard">仪表板</x:String>
     <x:String x:Key="NavbarView.Settings">设置</x:String>
+    <x:String x:Key="NavbarView.Debts">债务</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">余额</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">待处理</x:String>

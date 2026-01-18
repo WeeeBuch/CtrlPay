@@ -12,13 +12,13 @@
     <Grid ColumnDefinitions="280, *">
         <Border Grid.Column="0" BorderThickness="0,0,1,0" Padding="20">
             <StackPanel Spacing="20">
-                <TextBox Watermark="{DynamicResource DebtsView.Watermark.SearchBar}" Height="35"/>
+                <TextBox Watermark="{DynamicResource DebtView.Watermark.SearchBar}" Height="35"/>
                 
-                <CheckBox Content="{DynamicResource DebtsView.Payable}"/>
+                <CheckBox Content="{DynamicResource DebtView.Payable}"/>
 
                 <Border BorderBrush="{DynamicResource Color.Border}" BorderThickness="1" Padding="10" CornerRadius="4">
     <StackPanel Spacing="10">
-        <TextBlock Text="{DynamicResource DebtsView.Sorting}" FontWeight="Bold" Opacity="0.6" Margin="0,0,0,5"/>
+        <TextBlock Text="{DynamicResource DebtView.Sorting}" FontWeight="Bold" Opacity="0.6" Margin="0,0,0,5"/>
         
         <ListBox Background="Transparent" 
                  BorderThickness="0"
