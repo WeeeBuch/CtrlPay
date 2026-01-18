@@ -40,7 +40,7 @@
     <x:String x:Key="Date.Last2Weeks">最近两周</x:String>
     <x:String x:Key="Date.Older">更早以前</x:String>
 
-    <x:String x:Key="DebtView.Payable">应付</x:String>
+    <x:String x:Key="DebtView.Payable">余额可支付</x:String>
     <x:String x:Key="DebtView.Watermark.SearchBar">搜索债务...</x:String>
     <x:String x:Key="DebtView.Sorting">排序方式</x:String>
     <x:String x:Key="DebtView.SortOption.DateAsc">日期 (最早)</x:String>

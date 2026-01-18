@@ -40,7 +40,7 @@
     <x:String x:Key="Date.Last2Weeks">A Full Fortnight</x:String>
     <x:String x:Key="Date.Older">Ages Ago</x:String>
 
-    <x:String x:Key="DebtView.Payable">Tribute</x:String>
+    <x:String x:Key="DebtView.Payable">Payable from the chest</x:String>
     <x:String x:Key="DebtView.Watermark.SearchBar">Scour the debts...</x:String>
     <x:String x:Key="DebtView.Sorting">Arrange by</x:String>
     <x:String x:Key="DebtView.SortOption.DateAsc">Ancient Logs</x:String>

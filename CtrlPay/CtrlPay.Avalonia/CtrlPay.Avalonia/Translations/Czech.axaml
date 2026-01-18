@@ -40,7 +40,7 @@
     <x:String x:Key="Date.Last2Weeks">Poslední 2 týdny</x:String>
     <x:String x:Key="Date.Older">Starší</x:String>
 
-    <x:String x:Key="DebtView.Payable">K úhradě</x:String>
+    <x:String x:Key="DebtView.Payable">K úhradě (ze zůstatku)</x:String>
     <x:String x:Key="DebtView.Watermark.SearchBar">Hledat dluhy...</x:String>
     <x:String x:Key="DebtView.Sorting">Řadit podle</x:String>
     <x:String x:Key="DebtView.SortOption.DateAsc">Datum (nejstarší)</x:String>

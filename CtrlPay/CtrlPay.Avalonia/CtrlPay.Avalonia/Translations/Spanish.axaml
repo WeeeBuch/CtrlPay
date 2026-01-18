@@ -40,7 +40,7 @@
     <x:String x:Key="Date.Last2Weeks">Las últimas 2 semanas</x:String>
     <x:String x:Key="Date.Older">Más antiguo</x:String>
 
-    <x:String x:Key="DebtView.Payable">Por pagar</x:String>
+    <x:String x:Key="DebtView.Payable">Pagable del saldo</x:String>
     <x:String x:Key="DebtView.Watermark.SearchBar">Buscar deudas...</x:String>
     <x:String x:Key="DebtView.Sorting">Ordenar por</x:String>
     <x:String x:Key="DebtView.SortOption.DateAsc">Fecha (Más antigua)</x:String>
