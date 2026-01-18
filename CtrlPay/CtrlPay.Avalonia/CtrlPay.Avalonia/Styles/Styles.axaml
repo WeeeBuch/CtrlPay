@@ -56,5 +56,20 @@
     </Style>
 
     <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource Color.Surface}" /> </Style>
+        <Setter Property="Background" Value="{DynamicResource Color.Surface}" /> 
+    </Style>
+
+    <Style Selector="CheckBox">
+        <Setter Property="Foreground" Value="{DynamicResource Color.Text.Primary}"/>
+        <Style.Resources>
+            <SolidColorBrush x:Key="CheckBoxForegroundPointerOver" Color="{DynamicResource Color.Text.Primary}"/>
+            <SolidColorBrush x:Key="CheckBoxForegroundPressed" Color="{DynamicResource Color.Text.Primary}"/>
+            <SolidColorBrush x:Key="CheckBoxForegroundChecked" Color="{DynamicResource Color.Text.Primary}"/>
+            <SolidColorBrush x:Key="CheckBoxForegroundCheckedPointerOver" Color="{DynamicResource Color.Text.Primary}"/>
+            <SolidColorBrush x:Key="CheckBoxForegroundCheckedPressed" Color="{DynamicResource Color.Text.Primary}"/>
+        </Style.Resources>
+    </Style>
+
+
+
 </Styles>

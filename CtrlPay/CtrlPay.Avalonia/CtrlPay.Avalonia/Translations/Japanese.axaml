@@ -15,13 +15,14 @@
     <x:String x:Key="LoginView.Watermark.Username">ユーザー名</x:String>
     <x:String x:Key="LoginView.Watermark.Password">パスワード</x:String>
     <x:String x:Key="LoginView.Watermark.ConfirmPassword">パスワードの確認</x:String>
-    <x:String x:Key="LoginView.Watermark.Email">メールアドレス</x:String>
+    <x:String x:Key="LoginView.Watermark.Code">認証コード</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">取引履歴</x:String>
 
     <x:String x:Key="NavbarView.Menu">メニュー</x:String>
     <x:String x:Key="NavbarView.Dashboard">ダッシュボード</x:String>
     <x:String x:Key="NavbarView.Settings">設定</x:String>
+    <x:String x:Key="NavbarView.Debts">借金</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">残高</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">保留中</x:String>
@@ -38,5 +39,13 @@
     <x:String x:Key="Date.LastWeek">先週</x:String>
     <x:String x:Key="Date.Last2Weeks">過去2週間</x:String>
     <x:String x:Key="Date.Older">過去</x:String>
+
+    <x:String x:Key="DebtView.Payable">残高から支払い可能</x:String>
+    <x:String x:Key="DebtView.Watermark.SearchBar">借金を検索...</x:String>
+    <x:String x:Key="DebtView.Sorting">並べ替え</x:String>
+    <x:String x:Key="DebtView.SortOption.DateAsc">日付 (古い順)</x:String>
+    <x:String x:Key="DebtView.SortOption.DateDesc">日付 (新しい順)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountAsc">金額 (低い順)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountDesc">金額 (高い順)</x:String>
 
 </ResourceDictionary>

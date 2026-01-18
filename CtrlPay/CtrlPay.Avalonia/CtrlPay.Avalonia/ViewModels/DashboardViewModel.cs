@@ -39,6 +39,16 @@ public partial class DashboardViewModel : ViewModelBase
 
         TotalCredits.GiveTitleKey("CounterPiece.Credits.Title");
         PendingCredits.GiveTitleKey("CounterPiece.Pending.Title");
+
+        UpdateHandler.CreditAvailableUpdateActions.Add((newAmount) =>
+        {
+            TotalCredits.Amount = newAmount;
+        });
+
+        UpdateHandler.PendingPaymentsUpdateActions.Add((newAmount) =>
+        {
+            PendingCredits.Amount = newAmount;
+        });
     }
 
     private void LoadTransactionLists()

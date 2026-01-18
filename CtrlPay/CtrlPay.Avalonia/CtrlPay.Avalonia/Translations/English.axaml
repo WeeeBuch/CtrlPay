@@ -18,7 +18,7 @@
     <x:String x:Key="LoginView.Watermark.Username">Username</x:String>
     <x:String x:Key="LoginView.Watermark.Password">Password</x:String>
     <x:String x:Key="LoginView.Watermark.ConfirmPassword">ConfirmPassword</x:String>
-    <x:String x:Key="LoginView.Watermark.Email">Email</x:String>
+    <x:String x:Key="LoginView.Watermark.Code">Verification Code</x:String>
 
     <!-- Dashboard View -->
     <x:String x:Key="DashboardView.TransactionList">List of last transactions</x:String>
@@ -27,6 +27,7 @@
     <x:String x:Key="NavbarView.Menu">Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">Dashboard</x:String>
     <x:String x:Key="NavbarView.Settings">Settings</x:String>
+    <x:String x:Key="NavbarView.Debts">Debts</x:String>
 
     <!-- Credit Counter Piece -->
     <x:String x:Key="CounterPiece.Credits.Title">Credits</x:String>
@@ -46,5 +47,13 @@
     <x:String x:Key="Date.LastWeek">Last week</x:String>
     <x:String x:Key="Date.Last2Weeks">Last 2 weeks</x:String>
     <x:String x:Key="Date.Older">Older</x:String>
+
+    <x:String x:Key="DebtView.Payable">Payable from balance</x:String>
+    <x:String x:Key="DebtView.Watermark.SearchBar">Search debts...</x:String>
+    <x:String x:Key="DebtView.Sorting">Sort by</x:String>
+    <x:String x:Key="DebtView.SortOption.DateAsc">Date (Oldest)</x:String>
+    <x:String x:Key="DebtView.SortOption.DateDesc">Date (Newest)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountAsc">Amount (Lowest)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountDesc">Amount (Highest)</x:String>
 
 </ResourceDictionary>

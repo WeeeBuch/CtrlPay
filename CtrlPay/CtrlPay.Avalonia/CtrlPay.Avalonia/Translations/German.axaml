@@ -15,13 +15,14 @@
     <x:String x:Key="LoginView.Watermark.Username">Benutzername</x:String>
     <x:String x:Key="LoginView.Watermark.Password">Passwort</x:String>
     <x:String x:Key="LoginView.Watermark.ConfirmPassword">Passwort bestätigen</x:String>
-    <x:String x:Key="LoginView.Watermark.Email">E-Mail</x:String>
+    <x:String x:Key="LoginView.Watermark.Code">Bestätigungscode</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">Transaktionsliste</x:String>
 
     <x:String x:Key="NavbarView.Menu">Menü</x:String>
     <x:String x:Key="NavbarView.Dashboard">Dashboard</x:String>
     <x:String x:Key="NavbarView.Settings">Einstellungen</x:String>
+    <x:String x:Key="NavbarView.Debts">Schulden</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Guthaben</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Ausstehend</x:String>
@@ -38,5 +39,13 @@
     <x:String x:Key="Date.LastWeek">Letzte Woche</x:String>
     <x:String x:Key="Date.Last2Weeks">Letzte 2 Wochen</x:String>
     <x:String x:Key="Date.Older">Älter</x:String>
+
+    <x:String x:Key="DebtView.Payable">Bezahlbar vom Guthaben</x:String>
+    <x:String x:Key="DebtView.Watermark.SearchBar">Schulden suchen...</x:String>
+    <x:String x:Key="DebtView.Sorting">Sortieren nach</x:String>
+    <x:String x:Key="DebtView.SortOption.DateAsc">Datum (Älteste)</x:String>
+    <x:String x:Key="DebtView.SortOption.DateDesc">Datum (Neueste)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountAsc">Betrag (Niedrigster)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountDesc">Betrag (Höchster)</x:String>
 
 </ResourceDictionary>

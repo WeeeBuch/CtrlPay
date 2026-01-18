@@ -8,6 +8,7 @@ using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Avalonia.Views;
+using System;
 using System.Linq;
 
 namespace CtrlPay.Avalonia
@@ -42,6 +43,8 @@ namespace CtrlPay.Avalonia
                     DataContext = new MainViewModel()
                 };
             }
+
+            _ = ChangeChecker.StartChecking(TimeSpan.FromSeconds(1));
 
             base.OnFrameworkInitializationCompleted();
         }
