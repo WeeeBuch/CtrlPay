@@ -125,13 +125,12 @@ public partial class DebtViewModel : ViewModelBase
 
         foreach (var dto in sortedDTOs)
         {
-            // Najdeme, zda už máme pro toto DTO vytvořený ViewModel (podle unikátního popisu a času)
             var existingVm = Debts.FirstOrDefault(vm =>
                 vm.Description == dto.Title && vm.Timestamp == dto.Timestamp);
 
             if (existingVm != null)
             {
-                existingVm.UpdateCreditAmount(creditAmount); // Jen aktualizujeme data
+                existingVm.UpdateCreditAmount(creditAmount);
                 resultList.Add(existingVm);
             }
             else
@@ -141,9 +140,7 @@ public partial class DebtViewModel : ViewModelBase
                 resultList.Add(newVm);
             }
         }
-
-        // 5. Bezpečný zápis do UI vlákna
-        
+                
         Debts.ReplaceAll(resultList);
         
     }
