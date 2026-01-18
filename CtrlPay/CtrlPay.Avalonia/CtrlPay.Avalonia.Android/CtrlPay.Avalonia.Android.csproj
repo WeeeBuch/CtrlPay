@@ -5,7 +5,6 @@
 
 		<AndroidMinSdkVersion>21</AndroidMinSdkVersion>
 		<AndroidTargetSdkVersion>34</AndroidTargetSdkVersion>
-
 		<AndroidTargetSdkVersion>35</AndroidTargetSdkVersion>
 
 		<SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
