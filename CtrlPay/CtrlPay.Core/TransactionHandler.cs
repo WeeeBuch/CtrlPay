@@ -18,6 +18,10 @@ namespace CtrlPay.Core
             Payment? payment = dbContext.Payments.Where(p => p.Status == PaymentStatusEnum.WaitingForPayment && p.Address == address)
                 .FirstOrDefault();
 
+            if (payment == null)
+            {
+                return;
+            }
             payment.PaidAmountXMR += transaction.Amount;
             if (payment.PaidAmountXMR < payment.ExpectedAmountXMR)
             {
