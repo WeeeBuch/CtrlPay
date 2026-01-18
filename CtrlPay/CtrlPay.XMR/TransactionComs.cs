@@ -1,4 +1,4 @@
-﻿using CtrlPay.DB;
+using CtrlPay.DB;
 using CtrlPay.Entities;
 using Microsoft.EntityFrameworkCore;
 using Mysqlx.Session;
@@ -59,8 +59,7 @@ namespace CtrlPay.XMR
             List<Transaction> transactions = new List<Transaction>();
             CtrlPayDbContext dbContext = new CtrlPayDbContext();
 
-
-            transfers.In.ForEach(async t =>
+            foreach (RpcTransfer t in transfers.In)
             {
                 if (!dbContext.Addresses.Any(a => a.AddressXMR == t.Address))
                 {
@@ -82,7 +81,7 @@ namespace CtrlPay.XMR
                     Timestamp = DateTimeOffset.FromUnixTimeSeconds(t.Timestamp).DateTime,
                     Account = dbContext.Accounts.FirstOrDefault(a => a.Index == t.Subaddr_Index.Major)
                 });
-            });
+            }
 
             foreach (Transaction tx in transactions)
             {
