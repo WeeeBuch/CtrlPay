@@ -1,8 +1,10 @@
 ﻿using CtrlPay.Avalonia.Translations;
+using CtrlPay.Repos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using static CtrlPay.Repos.ToDoRepo;
 
@@ -51,10 +53,11 @@ public partial class DashboardViewModel : ViewModelBase
         });
     }
 
-    private void LoadTransactionLists()
+    private async Task LoadTransactionLists()
     {
-        List<TransactionDTO> creditTransactions = Repos.ToDoRepo.GetTransactions("credits");
-        List<TransactionDTO> pendingTransactions = Repos.ToDoRepo.GetTransactions("pending");
+        CancellationToken cancellationToken = new CancellationToken();
+        List<TransactionDTO> creditTransactions = await TransactionRepo.GetTransactions(cancellationToken);
+        List<TransactionDTO> pendingTransactions = await PaymentRepo.GetPayments(cancellationToken);
 
         var creditData = creditTransactions.Select(t => new TransactionItemViewModel
         {
