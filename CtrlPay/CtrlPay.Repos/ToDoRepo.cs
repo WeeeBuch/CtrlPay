@@ -18,7 +18,7 @@ namespace CtrlPay.Repos
              */
 
             Random rnd = new();
-            decimal sum = rnd.Next(0,200);
+            decimal sum = rnd.Next(0,10);
 
             return sum;
         }
@@ -38,207 +38,18 @@ namespace CtrlPay.Repos
                 },
                 new TransactionDTO
                 {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
+                    Title = "PC",
+                    Amount = 8.0m,
                     Timestamp = DateTime.Now.AddDays(-1),
                     State = TransactionStatusEnum.Completed
                 },
                 new TransactionDTO
                 {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
+                    Title = "Hry",
+                    Amount = 2.0m,
+                    Timestamp = DateTime.Now.AddDays(-5),
                     State = TransactionStatusEnum.Completed
                 },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-2),
-                    State = TransactionStatusEnum.Failed
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-2),
-                    State = TransactionStatusEnum.Failed
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-2),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-10),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                },
-                new TransactionDTO
-                {
-                    Title = "Výplata odměn",
-                    Amount = 1.25m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Pending
-                }
                 ];
         }
 

@@ -14,7 +14,8 @@
             <StackPanel Spacing="20">
                 <TextBox Watermark="{DynamicResource DebtView.Watermark.SearchBar}" Height="35"/>
                 
-                <CheckBox Content="{DynamicResource DebtView.Payable}"/>
+                <CheckBox Content="{DynamicResource DebtView.Payable}"
+                          IsChecked="{Binding PayableChecked}"/>
 
                 <Border BorderBrush="{DynamicResource Color.Border}" BorderThickness="1" Padding="10" CornerRadius="4">
     <StackPanel Spacing="10">
