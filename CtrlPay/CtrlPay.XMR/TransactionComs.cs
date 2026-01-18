@@ -62,7 +62,7 @@ namespace CtrlPay.XMR
 
             transfers.In.ForEach(async t =>
             {
-                if(dbContext.Addresses.Any(a => a.AddressXMR == t.Address) == false)
+                if (!dbContext.Addresses.Any(a => a.AddressXMR == t.Address))
                 {
                     dbContext.Addresses.Add(new Address
                     {
