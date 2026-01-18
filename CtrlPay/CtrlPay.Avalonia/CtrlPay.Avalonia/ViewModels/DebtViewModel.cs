@@ -1,6 +1,9 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Media;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Translations;
+using CtrlPay.Entities;
+using CtrlPay.Repos;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
+using static CtrlPay.Repos.ToDoRepo;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -15,12 +19,20 @@ public partial class DebtItemViewModel : ObservableObject
 {
     [ObservableProperty] private string _description;
     [ObservableProperty] private decimal _amount;
-    [ObservableProperty] private string _currency = "XMR";
 
-    public DebtItemViewModel(string desc, decimal amount)
+    [ObservableProperty] private string creditPayString;
+    [ObservableProperty] private decimal creditAmount;
+
+    [ObservableProperty] private bool isExpanded;
+    [RelayCommand] private void ToggleExpand() => IsExpanded = !IsExpanded;
+
+    public DebtItemViewModel(TransactionDTO transaction)
     {
-        _description = desc;
-        _amount = amount;
+        _description = transaction.Title;
+        _amount = transaction.Amount;
+        Status = transaction.State;
+
+        UpdateHandler.CreditAvailableUpdateActions.Add(UpdateCreditAmount);
     }
 
     [RelayCommand]
@@ -28,6 +40,14 @@ public partial class DebtItemViewModel : ObservableObject
 
     [RelayCommand]
     private void GenerateAddress() { /* Implementace generování adresy */ }
+
+    public TransactionStatusEnum Status { get; set; }
+
+    public void UpdateCreditAmount(decimal amount)
+    {
+        CreditAmount = amount;
+        CreditPayString = $"{CreditAmount} / {_amount}";
+    }
 }
 
 public partial class DebtViewModel : ViewModelBase
@@ -43,8 +63,8 @@ public partial class DebtViewModel : ViewModelBase
     public DebtViewModel()
     {
         // Sample data pro testování
-        Debts.Add(new DebtItemViewModel("Popisek ale ne moc dlouhej", 50.000000000000m));
-        Debts.Add(new DebtItemViewModel("Server hosting - únor", 0.152500000000m));
+        Debts.Add(new DebtItemViewModel(new() { Amount = 100, Title = "Popisek", State = TransactionStatusEnum.Completed}));
+        Debts.Add(new DebtItemViewModel(new() { Amount = 100, Title = "Popisek02", State = TransactionStatusEnum.Failed }));
 
         SortOptions = new List<SortOption>
         {

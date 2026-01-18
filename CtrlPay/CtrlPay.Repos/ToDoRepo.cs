@@ -1,4 +1,4 @@
-using CtrlPay.Entities;
+﻿using CtrlPay.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace CtrlPay.Repos
 {
     public static class ToDoRepo
     {
-        //TODO: Metody do repos: 4
+        //TODO: Metody do repos: 3
 
         public static decimal GetTransactionSums(string type)
         {
@@ -17,7 +17,10 @@ namespace CtrlPay.Repos
              * nebo jze udělat že to bude jen to co má
              */
 
-            return 10.0m;
+            Random rnd = new();
+            decimal sum = rnd.Next(0,200);
+
+            return sum;
         }
 
         public static List<TransactionDTO> GetTransactions(string type)

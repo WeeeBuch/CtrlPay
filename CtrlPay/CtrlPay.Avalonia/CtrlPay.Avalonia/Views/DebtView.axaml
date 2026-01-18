@@ -49,41 +49,96 @@
             <ItemsControl ItemsSource="{Binding Debts}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate x:DataType="vm:DebtItemViewModel">
-                        <Border Background="#1A1A1A" 
-                                CornerRadius="12" 
-                                Margin="0,0,0,12" 
-                                Padding="20"
-                                BorderBrush="#333333"
-                                BorderThickness="1">
-                            <StackPanel Spacing="15">
-                                <Grid ColumnDefinitions="*, Auto">
-                                    <TextBlock Text="{Binding Description}" 
-                                               FontSize="16" 
-                                               VerticalAlignment="Center"/>
-                                    <StackPanel Grid.Column="1" Orientation="Horizontal" VerticalAlignment="Center">
-                                        <TextBlock Text="{Binding Amount}" FontSize="18" FontWeight="SemiBold"/>
-                                        <TextBlock Text="{Binding Currency}" Margin="8,0,0,0" VerticalAlignment="Bottom" Opacity="0.7"/>
-                                    </StackPanel>
-                                </Grid>
+    <Border Background="{DynamicResource Color.Surface}" 
+            CornerRadius="12" 
+            Margin="0,0,0,12" 
+            BorderBrush="{DynamicResource Color.Border}" 
+            BorderThickness="1"
+            ClipToBounds="True"> 
+            <Border.Transitions>
+                <Transitions>
+                    <DoubleTransition Property="Opacity" Duration="0:0:0.2"/>
+                </Transitions>
+            </Border.Transitions>
+            <StackPanel>
+            <Button Command="{Binding ToggleExpandCommand}"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    CornerRadius="12"
+                    HorizontalAlignment="Stretch"
+                    HorizontalContentAlignment="Stretch"
+                    Padding="20">
+                <Button.Styles>
+                    <Style Selector="Button:pointerover /template/ ContentPresenter">
+                        <Setter Property="Background" Value="{DynamicResource Color.Accent}" /> 
+                    </Style>
 
-                                <Grid ColumnDefinitions="Auto, *, Auto">
-                                    <StackPanel Orientation="Horizontal" Spacing="10">
-                                        <Button Content="Zaplatit z kreditu" 
-                                                Command="{Binding PayFromCreditCommand}"
-                                                Padding="15,5"/>
-                                        <TextBlock Text="k dispozici / potřeba" 
-                                                   VerticalAlignment="Center" 
-                                                   FontSize="12" Opacity="0.5"/>
-                                    </StackPanel>
-                                    
-                                    <Button Grid.Column="2" 
-                                            Content="Vygenerovat novou adresu"
-                                            Command="{Binding GenerateAddressCommand}"
-                                            Padding="15,5"/>
-                                </Grid>
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
+                </Button.Styles>
+                
+                <Grid ColumnDefinitions="10,*, Auto">
+                    <Border Grid.Column="0"             
+                                Classes="indicator" 
+                                Tag="{Binding Status}" 
+                                CornerRadius="2"
+                                Width="4" HorizontalAlignment="Center"
+                                VerticalAlignment="Stretch">
+                        <Border.Styles>
+							<Style Selector="Border.indicator">
+                                <Setter Property="Background" Value="{DynamicResource Brush.Text.Disabled}"/>
+                            </Style>
+                            <Style Selector="Border.indicator[Tag=Completed]">
+                                <Setter Property="Background" Value="{DynamicResource Brush.Success}"/>
+                            </Style>
+                            <Style Selector="Border.indicator[Tag=Pending]">
+                                <Setter Property="Background" Value="{DynamicResource Brush.Warning}"/>
+                            </Style>
+                            <Style Selector="Border.indicator[Tag=Failed]">
+                                <Setter Property="Background" Value="{DynamicResource Brush.Error}"/>
+                            </Style>
+                        </Border.Styles>
+                    </Border>
+
+                    <TextBlock Text="{Binding Description}" 
+                               FontSize="16" Grid.Column="1"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource Color.Text.Primary}"/>
+                    
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Amount, StringFormat=\{0:N12\}}" 
+                                   FontSize="18" 
+                                   FontWeight="SemiBold"/>
+                        <TextBlock Text="{DynamicResource App.Currency}" 
+                                   Margin="8,0,0,0" 
+                                   VerticalAlignment="Bottom" 
+                                   Opacity="0.7"/>
+                    </StackPanel>
+                </Grid>
+            </Button>
+
+            <Border IsVisible="{Binding IsExpanded}"
+                    Background="{DynamicResource Color.Surface}" 
+                    Padding="20"
+                    BorderBrush="{DynamicResource Color.Border}"
+                    BorderThickness="0,1,0,0">
+                <Grid ColumnDefinitions="Auto, *, Auto">
+                    <StackPanel Orientation="Horizontal" Spacing="10">
+                        <Button Content="Zaplatit z kreditu" 
+                                Command="{Binding PayFromCreditCommand}"
+                                Padding="15,5"/>
+                        <TextBlock Text="{Binding CreditPayString}" 
+                                   VerticalAlignment="Center" 
+                                   FontSize="12" Opacity="0.5"/>
+                    </StackPanel>
+                    
+                    <Button Grid.Column="2" 
+                            Content="Vygenerovat novou adresu"
+                            Command="{Binding GenerateAddressCommand}"
+                            Padding="15,5"/>
+                </Grid>
+            </Border>
+        </StackPanel>
+    </Border>
+</DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
         </ScrollViewer>
