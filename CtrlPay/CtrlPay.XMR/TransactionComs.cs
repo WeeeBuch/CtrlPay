@@ -116,6 +116,8 @@ namespace CtrlPay.XMR
                     tx.Status = TransactionStatusEnum.Confirmed;
                 }
             }
+
+            await dbContext.SaveChangesAsync(cancellationToken);
         }
         public static async Task<Transaction> GetTransactionByTxId(HttpClient httpClient, string uri, string txId, CancellationToken cancellationToken, CtrlPayDbContext dbContext)
         {
