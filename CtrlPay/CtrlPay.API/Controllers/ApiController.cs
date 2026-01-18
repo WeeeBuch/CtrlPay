@@ -1,15 +1,19 @@
 ﻿using CtrlPay.Core;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Primitives;
+using System.Security.Claims;
 
 namespace CtrlPay.API.Controllers
 {
     [ApiController]
+    [Route("api")]
+    [Authorize]
     public class ApiController : Controller
     {
-        //TODO: Metody API: 4
+        //TODO: Metody API: 3
         /*
-         * login - jwt věci
+         * 
          * getaccount
          * getpayments by loyalcustomer
          * gettransactions by loyalcustomer
@@ -19,14 +23,11 @@ namespace CtrlPay.API.Controllers
         [Route("index")]
         public IActionResult Index(string message)
         {
-            return Json(new { Id = 1, Jmeno = "Petr", Message = message });
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userName = User.FindFirst(ClaimTypes.Name)?.Value;
+            return Ok(new { Id = userId, Jmeno = userName, Message = message });
         }
-        [HttpPost]
-        [Route("login")]
-        public IActionResult Login(string username, string password)
-        {
-            AuthLogic.Login(username, password);
-            return Json(new { Success = true });
-        }
+
+        
     }
 }
