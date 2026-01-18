@@ -122,7 +122,7 @@
                     BorderThickness="0,1,0,0">
                 <Grid ColumnDefinitions="Auto, *, Auto">
                     <StackPanel Orientation="Horizontal" Spacing="10">
-                        <Button Content="Zaplatit z kreditu" 
+                        <Button Content="{DynamicResource DebtView.PayFromCredit}" 
                                 Command="{Binding PayFromCreditCommand}"
                                 Padding="15,5"/>
                         <TextBlock Text="{Binding CreditPayString}" 
@@ -131,7 +131,7 @@
                     </StackPanel>
                     
                     <Button Grid.Column="2" 
-                            Content="Vygenerovat novou adresu"
+                            Content="{DynamicResource DebtView.GenerateAddress}"
                             Command="{Binding GenerateAddressCommand}"
                             Padding="15,5"/>
                 </Grid>

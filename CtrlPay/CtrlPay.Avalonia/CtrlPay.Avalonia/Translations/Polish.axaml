@@ -47,5 +47,7 @@
     <x:String x:Key="DebtView.SortOption.DateDesc">Data (najnowsze)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountAsc">Kwota (najniższa)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountDesc">Kwota (najwyższa)</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">Zapłać z kredytów</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">Generuj adres płatności</x:String>
 
 </ResourceDictionary>

@@ -47,5 +47,7 @@
     <x:String x:Key="DebtView.SortOption.DateDesc">日付 (新しい順)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountAsc">金額 (低い順)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountDesc">金額 (高い順)</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">クレジットで支払う</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">支払いアドレスを生成</x:String>
 
 </ResourceDictionary>

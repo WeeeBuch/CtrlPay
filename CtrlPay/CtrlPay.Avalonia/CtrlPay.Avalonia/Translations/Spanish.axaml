@@ -47,5 +47,7 @@
     <x:String x:Key="DebtView.SortOption.DateDesc">Fecha (Más reciente)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountAsc">Cantidad (Menor)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountDesc">Cantidad (Mayor)</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">Pagar con créditos</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">Generar dirección de pago</x:String>
 
 </ResourceDictionary>
