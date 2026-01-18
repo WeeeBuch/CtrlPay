@@ -32,7 +32,7 @@ namespace CtrlPay.Repos
         public TransactionDTO(TransactionApiDTO transaction)
         {
             Title = transaction.TransactionIdXMR;
-            Amount = decimal.Parse(transaction.Amount);
+            Amount = transaction.Amount;
             Timestamp = transaction.Timestamp;
             State = transaction.Status;
         }

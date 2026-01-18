@@ -17,8 +17,8 @@ namespace CtrlPay.Entities
         public string TransactionIdXMR { get; set; }
         public TransactionTypeEnum Type { get; set; }
         public TransactionStatusEnum Status { get; set; }
-        public string Amount { get; set; }
-        public string Fee { get; set; }
+        public decimal Amount { get; set; }
+        public decimal Fee { get; set; }
         public DateTime Timestamp { get; set; }
         public int? PaymentId { get; set; }
 
@@ -26,7 +26,7 @@ namespace CtrlPay.Entities
         {
             
         }
-        public TransactionApiDTO(int id, int addressId, int accountId, string transactionIdXMR, TransactionTypeEnum type, TransactionStatusEnum status, double amount, double fee, DateTime timestamp, int? paymentId)
+        public TransactionApiDTO(int id, int addressId, int accountId, string transactionIdXMR, TransactionTypeEnum type, TransactionStatusEnum status, decimal amount, decimal fee, DateTime timestamp, int? paymentId)
         {
             Id = id;
             AddressId = addressId;
@@ -34,8 +34,8 @@ namespace CtrlPay.Entities
             TransactionIdXMR = transactionIdXMR;
             Type = type;
             Status = status;
-            Amount = amount.ToString();
-            Fee = fee.ToString();
+            Amount = amount;
+            Fee = fee;
             Timestamp = timestamp;
             PaymentId = paymentId;
         }
@@ -48,8 +48,8 @@ namespace CtrlPay.Entities
             TransactionIdXMR = transaction.TransactionIdXMR;
             Type = transaction.Type;
             Status = transaction.Status;
-            Amount = transaction.Amount.ToString().Replace(',', '.');
-            Fee = transaction.Fee.ToString().Replace(',', '.');
+            Amount = transaction.Amount;
+            Fee = transaction.Fee;
             Timestamp = transaction.Timestamp;
             if (transaction.Payment != null)
             {
