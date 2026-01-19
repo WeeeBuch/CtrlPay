@@ -67,6 +67,7 @@ public partial class TransactionItemViewModel : DashboardListItem
                 StatusEnum.Overpaid => TranslationManager.GetString("Transaction.Status.Overpaid"),
                 StatusEnum.Expired => TranslationManager.GetString("Transaction.Status.Expired"),
                 StatusEnum.Cancelled => TranslationManager.GetString("Transaction.Status.Cancelled"),
+                StatusEnum.Error => TranslationManager.GetString("Transaction.Status.Error"),
                 _ => "Nah state not implemented WTF"
             };
         }
