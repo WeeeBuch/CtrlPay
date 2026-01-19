@@ -169,9 +169,9 @@ public partial class DebtViewModel : ViewModelBase
         ApplySorting(value.Key);
     }
 
-    public void GetDebtsFromRepo()
+    public async Task GetDebtsFromRepo()
     {
-        LoadedTransactions = PaymentRepo.GetPayments(default);
+        LoadedTransactions = await PaymentRepo.GetPayments(default);
 
         Debts.Clear();
 

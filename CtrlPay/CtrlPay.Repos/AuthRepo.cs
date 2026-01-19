@@ -91,7 +91,8 @@ namespace CtrlPay.Repos
             string body = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception($"HTTP error {response.StatusCode}: {body}");
+                ErrorMessage = $"HTTP error {response.StatusCode}: {body}";
+                return false;
             }
 
             var rpcResponse = JsonSerializer.Deserialize<JwtAuthResponse>(body,

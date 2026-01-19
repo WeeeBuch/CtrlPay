@@ -22,15 +22,6 @@ namespace CtrlPay.Repos
 
             return sum;
         }
-        public record TransactionDTO
-        {
-            public string Title { get; init; }
-            public decimal Amount { get; init; }
-            public DateTime Timestamp { get; init; }
-            public TransactionStatusEnum State { get; init; }
-
-            public int Id { get; init; }
-        }
         public static void PayFromCredit(TransactionDTO transakce)
         {
             // Implementace platby z kreditu

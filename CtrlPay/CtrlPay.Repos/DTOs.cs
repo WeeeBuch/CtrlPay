@@ -13,13 +13,15 @@ namespace CtrlPay.Repos
         public decimal Amount { get; init; }
         public DateTime Timestamp { get; init; }
         public TransactionStatusEnum State { get; init; }
+        public int Id { get; init; }
 
-        public TransactionDTO(string title, decimal amount, DateTime timestamp, TransactionStatusEnum state)
+        public TransactionDTO(string title, decimal amount, DateTime timestamp, TransactionStatusEnum state, int id)
         {
             Title = title;
             Amount = amount;
             Timestamp = timestamp;
             State = state;
+            Id = id;
         }
 
         public TransactionDTO(Transaction transaction)
@@ -28,13 +30,15 @@ namespace CtrlPay.Repos
             Amount = transaction.Amount;
             Timestamp = transaction.Timestamp;
             State = transaction.Status;
+            Id = transaction.Id;
         }
         public TransactionDTO(TransactionApiDTO transaction)
         {
-            Title = transaction.TransactionIdXMR;
+            Title = transaction.TransactionIdXMR.Substring(0,25) + "...";
             Amount = transaction.Amount;
             Timestamp = transaction.Timestamp;
             State = transaction.Status;
+            Id = transaction.Id;
         }
         public TransactionDTO() { }
     }
