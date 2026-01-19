@@ -30,6 +30,15 @@
     <x:String x:Key="Transaction.Status.Completed">Hotovo</x:String>
     <x:String x:Key="Transaction.Status.Pending">Eště sa čeká</x:String>
     <x:String x:Key="Transaction.Status.Failed">Pokazilo sa to</x:String>
+    <x:String x:Key="Transaction.Status.Confirmed">Odsouhlaseno</x:String>
+    <x:String x:Key="Transaction.Status.Created">Uděláno</x:String>
+    <x:String x:Key="Transaction.Status.WaitingForPayment">Čeká sa na prachy</x:String>
+    <x:String x:Key="Transaction.Status.PartiallyPaid">Trochu zaplacené</x:String>
+    <x:String x:Key="Transaction.Status.Paid">Zaplaveno</x:String>
+    <x:String x:Key="Transaction.Status.Overpaid">Dali víc, než měli</x:String>
+    <x:String x:Key="Transaction.Status.Expired">Už je pozdě</x:String>
+    <x:String x:Key="Transaction.Status.Cancelled">Utnuto</x:String>
+    <x:String x:Key="Transaction.Status.Error">Zas nejaká chyba</x:String>
 
     <x:String x:Key="SettingsView.Appearance.Title">Tož jak to vypadá</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Nářečí</x:String>

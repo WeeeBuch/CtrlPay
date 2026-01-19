@@ -28,8 +28,17 @@
     <x:String x:Key="CounterPiece.Pending.Title">В ожидании</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">Завершено</x:String>
-    <x:String x:Key="Transaction.Status.Pending">Обрабатывается</x:String>
+    <x:String x:Key="Transaction.Status.Pending">В ожидании</x:String>
     <x:String x:Key="Transaction.Status.Failed">Ошибка</x:String>
+    <x:String x:Key="Transaction.Status.Confirmed">Подтверждено</x:String>
+    <x:String x:Key="Transaction.Status.Created">Создано</x:String>
+    <x:String x:Key="Transaction.Status.WaitingForPayment">Ожидание оплаты</x:String>
+    <x:String x:Key="Transaction.Status.PartiallyPaid">Частично оплачено</x:String>
+    <x:String x:Key="Transaction.Status.Paid">Оплачено</x:String>
+    <x:String x:Key="Transaction.Status.Overpaid">Переплачено</x:String>
+    <x:String x:Key="Transaction.Status.Expired">Истекло</x:String>
+    <x:String x:Key="Transaction.Status.Cancelled">Отменено</x:String>
+    <x:String x:Key="Transaction.Status.Error">Ошибка</x:String>
 
     <x:String x:Key="SettingsView.Appearance.Title">Внешний вид</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Язык</x:String>

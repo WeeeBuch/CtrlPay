@@ -1,4 +1,5 @@
 ﻿using CtrlPay.Entities;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,58 +8,46 @@ using System.Threading.Tasks;
 
 namespace CtrlPay.Repos
 {
-    public class TransactionDTO
+    public class FrontendTransactionDTO
     {
         public string Title { get; init; }
         public decimal Amount { get; init; }
         public DateTime Timestamp { get; init; }
-        public TransactionStatusEnum State { get; init; }
+        public StatusEnum State { get; init; }
         public int Id { get; init; }
 
-        public TransactionDTO(string title, decimal amount, DateTime timestamp, TransactionStatusEnum state, int id)
+        public FrontendTransactionDTO(string title, decimal amount, DateTime timestamp, TransactionStatusEnum state, int id)
         {
             Title = title;
             Amount = amount;
             Timestamp = timestamp;
-            State = state;
+            State = StatusConverter.ConvertTransactionStatusToFrontendStatus(state);
             Id = id;
         }
 
-        public TransactionDTO(Transaction transaction)
+        public FrontendTransactionDTO(Transaction transaction)
         {
             Title = transaction.TransactionIdXMR;
             Amount = transaction.Amount;
             Timestamp = transaction.Timestamp;
-            State = transaction.Status;
+            State = StatusConverter.ConvertTransactionStatusToFrontendStatus(transaction.Status);
             Id = transaction.Id;
         }
-        public TransactionDTO(TransactionApiDTO transaction)
+        public FrontendTransactionDTO(TransactionApiDTO transaction)
         {
-            Title = transaction.TransactionIdXMR.Substring(0,25) + "...";
+            Title = transaction.TransactionIdXMR;
             Amount = transaction.Amount;
             Timestamp = transaction.Timestamp;
-            State = transaction.Status;
+            State = StatusConverter.ConvertTransactionStatusToFrontendStatus(transaction.Status);
             Id = transaction.Id;
         }
-        
-        public TransactionDTO() { }
-    }
-    public class PaymentDTO
-    {
-        public string Title { get; init; }
-        public decimal Amount { get; init; }
-        public DateTime Timestamp { get; init; }
-        public PaymentStatusEnum State { get; init; }
-        public PaymentDTO()
-        {
-            
-        }
-        public PaymentDTO(PaymentApiDTO payment)
+        public FrontendTransactionDTO(PaymentApiDTO payment)
         {
             Title = payment.Id.ToString();
             Amount = payment.PaidAmountXMR;
             Timestamp = payment.CreatedAt;
-            State = payment.Status;
+            State = StatusConverter.ConvertPaymentStatusToFrontendStatus(payment.Status);
         }
+        public FrontendTransactionDTO() { }
     }
 }

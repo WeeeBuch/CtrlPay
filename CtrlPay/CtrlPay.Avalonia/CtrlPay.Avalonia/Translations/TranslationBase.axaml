@@ -37,6 +37,15 @@
     <x:String x:Key="Transaction.Status.Completed">Transaction.Status.Completed</x:String>
     <x:String x:Key="Transaction.Status.Pending">Transaction.Status.Pending</x:String>
     <x:String x:Key="Transaction.Status.Failed">Transaction.Status.Failed</x:String>
+    <x:String x:Key="Transaction.Status.Confirmed">Transaction.Status.Confirmed</x:String>
+    <x:String x:Key="Transaction.Status.Created">Transaction.Status.Created</x:String>
+    <x:String x:Key="Transaction.Status.WaitingForPayment">Transaction.Status.WaitingForPayment</x:String>
+    <x:String x:Key="Transaction.Status.PartiallyPaid">Transaction.Status.PartiallyPaid</x:String>
+    <x:String x:Key="Transaction.Status.Paid">Transaction.Status.Paid</x:String>
+    <x:String x:Key="Transaction.Status.Overpaid">Transaction.Status.Overpaid</x:String>
+    <x:String x:Key="Transaction.Status.Expired">Transaction.Status.Expired</x:String>
+    <x:String x:Key="Transaction.Status.Cancelled">Transaction.Status.Cancelled</x:String>
+    <x:String x:Key="Transaction.Status.Error">Transaction.Status.Error</x:String>
 
     <!-- Settings View -->
     <x:String x:Key="SettingsView.Appearance.Title">SettingsView.Appearance.Title</x:String>

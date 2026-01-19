@@ -1,6 +1,8 @@
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CtrlPay.Avalonia.Translations;
+using CtrlPay.Entities;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -8,7 +10,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
-using CtrlPay.Entities;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -47,7 +48,7 @@ public partial class TransactionItemViewModel : DashboardListItem
     public string Title { get; set; } = "";
     public decimal Amount { get; set; }
     public DateTime Date { get; set; }
-    public TransactionStatusEnum Status { get; set; }
+    public StatusEnum Status { get; set; }
 
     public string StatusText
     {
@@ -55,38 +56,18 @@ public partial class TransactionItemViewModel : DashboardListItem
         {
             return Status switch
             {
-                TransactionStatusEnum.Completed => TranslationManager.GetString("Transaction.Status.Completed"),
-                TransactionStatusEnum.Pending => TranslationManager.GetString("Transaction.Status.Pending"),
-                TransactionStatusEnum.Failed => TranslationManager.GetString("Transaction.Status.Failed"),
-                _ => "Nah state not implemented WTF"
-            };
-        }
-    }
-
-    // Pomocná vlastnost, pokud chceme zobrazit oddělovač nad touto položkou
-    [ObservableProperty]
-    private string? _dateSeparator;
-}
-public partial class PaymentItemViewModel : DashboardListItem
-{
-    public string Title { get; set; } = "";
-    public decimal Amount { get; set; }
-    public DateTime Date { get; set; }
-    public PaymentStatusEnum Status { get; set; }
-
-    public string StatusText
-    {
-        get
-        {
-            return Status switch
-            {
-                PaymentStatusEnum.Created => TranslationManager.GetString("Payment.Status.Created"),
-                PaymentStatusEnum.WaitingForPayment => TranslationManager.GetString("Payment.Status.WaitingForPayment"),
-                PaymentStatusEnum.PartiallyPaid => TranslationManager.GetString("Payment.Status.PartiallyPaid"),
-                PaymentStatusEnum.Paid => TranslationManager.GetString("Payment.Status.Paid"),
-                PaymentStatusEnum.Overpaid => TranslationManager.GetString("Payment.Status.Overpaid"),
-                PaymentStatusEnum.Expired => TranslationManager.GetString("Payment.Status.Expired"),
-                PaymentStatusEnum.Cancelled => TranslationManager.GetString("Payment.Status.Cancelled"),
+                StatusEnum.Completed => TranslationManager.GetString("Transaction.Status.Completed"),
+                StatusEnum.Pending => TranslationManager.GetString("Transaction.Status.Pending"),
+                StatusEnum.Failed => TranslationManager.GetString("Transaction.Status.Failed"),
+                StatusEnum.Confirmed => TranslationManager.GetString("Transaction.Status.Confirmed"),
+                StatusEnum.Created => TranslationManager.GetString("Transaction.Status.Created"),
+                StatusEnum.WaitingForPayment => TranslationManager.GetString("Transaction.Status.WaitingForPayment"),
+                StatusEnum.PartiallyPaid => TranslationManager.GetString("Transaction.Status.PartiallyPaid"),
+                StatusEnum.Paid => TranslationManager.GetString("Transaction.Status.Paid"),
+                StatusEnum.Overpaid => TranslationManager.GetString("Transaction.Status.Overpaid"),
+                StatusEnum.Expired => TranslationManager.GetString("Transaction.Status.Expired"),
+                StatusEnum.Cancelled => TranslationManager.GetString("Transaction.Status.Cancelled"),
+                StatusEnum.Error => TranslationManager.GetString("Transaction.Status.Error"),
                 _ => "Nah state not implemented WTF"
             };
         }
@@ -102,33 +83,6 @@ public partial class TransactionListPieceModel : ViewModelBase
     [ObservableProperty]
     private ObservableCollection<DashboardListItem> _transactions = new();
 
-    public void RefreshTransactions(List<PaymentItemViewModel> rawData)
-    {
-        var displayList = new List<DashboardListItem>();
-        var now = DateTime.Now.Date;
-
-        // Seřadíme od nejnovějších
-        var sorted = rawData.OrderByDescending(x => x.Date).ToList();
-
-        string currentGroup = "";
-
-        foreach (var tx in sorted)
-        {
-            string groupName = GetGroupName(tx.Date, now);
-
-            // Pokud se skupina změnila (např. z Dnes na Včera), vložíme oddělovač
-            if (groupName != currentGroup)
-            {
-                SeparatorItemViewModel separator = new();
-                separator.GiveLabelKey(groupName);
-                displayList.Add(separator);
-                currentGroup = groupName;
-            }
-            displayList.Add(tx);
-        }
-
-        Transactions = new ObservableCollection<DashboardListItem>(displayList);
-    }
     public void RefreshTransactions(List<TransactionItemViewModel> rawData)
     {
         var displayList = new List<DashboardListItem>();

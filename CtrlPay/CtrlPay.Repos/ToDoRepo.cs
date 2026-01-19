@@ -1,4 +1,4 @@
-using CtrlPay.Entities;
+﻿using CtrlPay.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace CtrlPay.Repos
 {
     public static class ToDoRepo
     {
-        //TODO: Metody do repos: 4
+        //TODO: Metody do repos: 2
 
         public static decimal GetTransactionSums(string type)
         {
@@ -22,7 +22,8 @@ namespace CtrlPay.Repos
 
             return sum;
         }
-        public static void PayFromCredit(TransactionDTO transakce)
+
+        public static void PayFromCredit(FrontendTransactionDTO transakce)
         {
             // Implementace platby z kreditu
         }

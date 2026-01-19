@@ -1,4 +1,4 @@
-using Avalonia.Media;
+﻿using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Translations;
@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using Avalonia.Threading;
 using static CtrlPay.Repos.ToDoRepo;
+using CtrlPay.Repos.Frontend;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -30,9 +31,9 @@ public partial class DebtItemViewModel : ObservableObject
     [ObservableProperty] private bool isExpanded;
     [RelayCommand] private void ToggleExpand() => IsExpanded = !IsExpanded;
 
-    public TransactionDTO TransactionDTOBase;
+    public FrontendTransactionDTO TransactionDTOBase;
 
-    public DebtItemViewModel(TransactionDTO transaction)
+    public DebtItemViewModel(FrontendTransactionDTO transaction)
     {
         _description = transaction.Title;
         _amount = transaction.Amount;
@@ -48,7 +49,7 @@ public partial class DebtItemViewModel : ObservableObject
     [RelayCommand]
     private void GenerateAddress() { /* Implementace generování adresy */ }
 
-    public TransactionStatusEnum Status { get; set; }
+    public StatusEnum Status { get; set; }
 
     public void UpdateCreditAmount(decimal amount)
     {
@@ -61,8 +62,8 @@ public partial class DebtViewModel : ViewModelBase
 {
     public RangeObservableCollection<DebtItemViewModel> Debts { get; } = new();
 
-    public List<TransactionDTO> LoadedTransactions { get; set; } = new();
-    public List<PaymentDTO> LoadedPayments { get; set; } = new();
+    // Tohle se pak přesune do repa
+    public List<FrontendTransactionDTO> LoadedTransactions { get; set; } = new();
 
     [ObservableProperty]
     private bool payableChecked;
@@ -100,11 +101,11 @@ public partial class DebtViewModel : ViewModelBase
         string selectedKey = SelectedSortOrder?.Key ?? "DateAsc";
 
         // 2. VŽDY filtrujeme z LoadedTransactions (tam jsou všechny dluhy z repa)
-        List<TransactionDTO> filteredData = LoadedTransactions
+        List<FrontendTransactionDTO> filteredData = LoadedTransactions
             .Where(t => !PayableChecked || t.Amount <= creditAmount)
             .ToList();
 
-        List<TransactionDTO> sortedDTOs;
+        List<FrontendTransactionDTO> sortedDTOs;
         // 3. Seřadíme vyfiltrovaná data
         if (sortingMethod != null)
         {
@@ -170,16 +171,21 @@ public partial class DebtViewModel : ViewModelBase
         ApplySorting(value.Key);
     }
 
+    private void UpdateDebts(List<FrontendTransactionDTO> ltDTO)
+    {
+        LoadedTransactions = ltDTO;
+        Debts.ReplaceAll([.. ltDTO.Select(p => new DebtItemViewModel(p))]);
+    }
+
     public async Task GetDebtsFromRepo()
     {
-        LoadedPayments = await PaymentRepo.GetPayments(default);
+        var loadedPayments = await PaymentRepo.GetPayments(default);
 
-        Debts.Clear();
-
-        foreach (var transaction in LoadedTransactions)
+        // Vynucení aktualizace na UI vlákně
+        await Dispatcher.UIThread.InvokeAsync(() =>
         {
-            Debts.Add(new DebtItemViewModel(transaction));
-        }
+            UpdateDebts(loadedPayments);
+        });
     }
 }
 

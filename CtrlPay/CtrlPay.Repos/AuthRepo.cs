@@ -1,4 +1,5 @@
 ﻿using CtrlPay.Entities;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +19,7 @@ namespace CtrlPay.Repos
 
         public static bool Register(string username, string code, string password, string confirmPassword)
         {
+            if (DebugMode.IsDebugMode) return true;
             /* TODO: Register logic
              * Tu logika pro registraci
              *
@@ -63,6 +65,8 @@ namespace CtrlPay.Repos
 
         public static async Task<bool> Login(string username, string password, CancellationToken cancellationToken)
         {
+            if (DebugMode.IsDebugMode) return true;
+
             HttpClient httpClient = new HttpClient();
             var payload = new
             {

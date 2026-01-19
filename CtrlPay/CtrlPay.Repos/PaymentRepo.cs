@@ -1,5 +1,6 @@
 ﻿using CtrlPay.Entities;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Formats.Asn1;
@@ -14,8 +15,34 @@ namespace CtrlPay.Repos
 {
     public class PaymentRepo
     {
-        public static async Task<List<PaymentDTO>> GetPayments(CancellationToken cancellationToken)
+        public static async Task<List<FrontendTransactionDTO>> GetPayments(CancellationToken cancellationToken)
         {
+            #region Debug
+            if (DebugMode.IsDebugMode)
+            {
+                await Task.Delay(500, cancellationToken); // Simulace zpoždění
+                return new List<FrontendTransactionDTO>
+                {
+                    new FrontendTransactionDTO
+                    {
+                        Title = "Testovací platba 1",
+                        Amount = 0.5m,
+                        Timestamp = DateTime.UtcNow.AddHours(-5),
+                        State = StatusEnum.Paid,
+                        Id = 1
+                    },
+                    new FrontendTransactionDTO
+                    {
+                        Title = "Testovací platba 2 ale moc dlouhá snad se mi zalomí nebo zkrátí.",
+                        Amount = 1.2m,
+                        Timestamp = DateTime.UtcNow.AddHours(-2),
+                        State = StatusEnum.Pending,
+                        Id = 2
+                    }
+                };
+            }
+            #endregion
+
             var handler = new HttpClientHandler
             {
                 UseProxy = false
@@ -43,11 +70,11 @@ namespace CtrlPay.Repos
 
             // Přidej options do metody Deserialize
             List<PaymentApiDTO> payments = JsonSerializer.Deserialize<List<PaymentApiDTO>>(json, options);
-            List<PaymentDTO> dtoList = new List<PaymentDTO>();
+            List<FrontendTransactionDTO> dtoList = new List<FrontendTransactionDTO>();
 
             foreach (var pay in payments)
             {
-                dtoList.Add(new PaymentDTO(pay));
+                dtoList.Add(new FrontendTransactionDTO(pay));
             }
 
             return dtoList;

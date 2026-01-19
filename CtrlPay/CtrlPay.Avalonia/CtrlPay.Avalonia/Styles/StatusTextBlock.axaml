@@ -1,0 +1,37 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style Selector="TextBlock.statusText">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Secondary}"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="FontWeight" Value="Medium"/>
+    </Style>
+
+    <Style Selector="TextBlock.statusText[Tag=Completed], 
+                    TextBlock.statusText[Tag=Confirmed], 
+                    TextBlock.statusText[Tag=Paid],
+                    TextBlock.statusText[Tag=Created]">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Success}"/>
+    </Style>
+
+    <Style Selector="TextBlock.statusText[Tag=Pending], 
+                    TextBlock.statusText[Tag=PartiallyPaid], 
+                    TextBlock.statusText[Tag=WaitingForPayment]">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Warning}"/>
+    </Style>
+
+    <Style Selector="TextBlock.statusText[Tag=Failed], 
+                    TextBlock.statusText[Tag=Error], 
+                    TextBlock.statusText[Tag=Cancelled]">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Error}"/>
+    </Style>
+
+    <Style Selector="TextBlock.indicator[Tag=Expired]">
+        <Setter Property="Foreground" Value="Gray"/>
+    </Style>
+    
+    <Style Selector="TextBlock.indicator[Tag=Overpaid]">
+        <Setter Property="Foreground" Value="Purple"/>
+    </Style>
+
+</Styles>
