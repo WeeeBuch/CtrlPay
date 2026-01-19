@@ -34,35 +34,6 @@
             Padding="16,12"
             BorderBrush="{DynamicResource Brush.Border}"
             BorderThickness="1">
-        
-        <Border.Styles>
-            <Style Selector="Ellipse.indicator">
-                <Setter Property="Fill" Value="{DynamicResource Brush.Text.Disabled}"/>
-            </Style>
-            <Style Selector="Ellipse.indicator[Tag=Completed]">
-                <Setter Property="Fill" Value="{DynamicResource Brush.Success}"/>
-            </Style>
-            <Style Selector="Ellipse.indicator[Tag=Pending]">
-                <Setter Property="Fill" Value="{DynamicResource Brush.Warning}"/>
-            </Style>
-            <Style Selector="Ellipse.indicator[Tag=Failed]">
-                <Setter Property="Fill" Value="{DynamicResource Brush.Error}"/>
-            </Style>
-
-            <Style Selector="TextBlock.statusText">
-                <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Secondary}"/>
-            </Style>
-            <Style Selector="TextBlock.statusText[Tag=Completed]">
-                <Setter Property="Foreground" Value="{DynamicResource Brush.Success}"/>
-            </Style>
-            <Style Selector="TextBlock.statusText[Tag=Pending]">
-                <Setter Property="Foreground" Value="{DynamicResource Brush.Warning}"/>
-            </Style>
-            <Style Selector="TextBlock.statusText[Tag=Failed]">
-                <Setter Property="Foreground" Value="{DynamicResource Brush.Error}"/>
-            </Style>
-        </Border.Styles>
-
         <Grid ColumnDefinitions="Auto, *, Auto">
             
             <Ellipse Grid.Column="0" 

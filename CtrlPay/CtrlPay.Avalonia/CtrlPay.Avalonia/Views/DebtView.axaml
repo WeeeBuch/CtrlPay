@@ -83,20 +83,6 @@
                                 CornerRadius="2"
                                 Width="4" HorizontalAlignment="Center"
                                 VerticalAlignment="Stretch">
-                        <Border.Styles>
-							<Style Selector="Border.indicator">
-                                <Setter Property="Background" Value="{DynamicResource Brush.Text.Disabled}"/>
-                            </Style>
-                            <Style Selector="Border.indicator[Tag=Completed]">
-                                <Setter Property="Background" Value="{DynamicResource Brush.Success}"/>
-                            </Style>
-                            <Style Selector="Border.indicator[Tag=Pending]">
-                                <Setter Property="Background" Value="{DynamicResource Brush.Warning}"/>
-                            </Style>
-                            <Style Selector="Border.indicator[Tag=Failed]">
-                                <Setter Property="Background" Value="{DynamicResource Brush.Error}"/>
-                            </Style>
-                        </Border.Styles>
                     </Border>
 
                     <TextBlock Text="{Binding Description}" 
