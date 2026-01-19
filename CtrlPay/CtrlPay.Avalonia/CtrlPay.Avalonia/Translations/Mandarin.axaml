@@ -47,5 +47,7 @@
     <x:String x:Key="DebtView.SortOption.DateDesc">日期 (最近)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountAsc">金额 (最低)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountDesc">金额 (最高)</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">使用余额支付</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">生成付款地址</x:String>
 
 </ResourceDictionary>

@@ -14,7 +14,8 @@
             <StackPanel Spacing="20">
                 <TextBox Watermark="{DynamicResource DebtView.Watermark.SearchBar}" Height="35"/>
                 
-                <CheckBox Content="{DynamicResource DebtView.Payable}"/>
+                <CheckBox Content="{DynamicResource DebtView.Payable}"
+                          IsChecked="{Binding PayableChecked}"/>
 
                 <Border BorderBrush="{DynamicResource Color.Border}" BorderThickness="1" Padding="10" CornerRadius="4">
     <StackPanel Spacing="10">
@@ -122,7 +123,7 @@
                     BorderThickness="0,1,0,0">
                 <Grid ColumnDefinitions="Auto, *, Auto">
                     <StackPanel Orientation="Horizontal" Spacing="10">
-                        <Button Content="Zaplatit z kreditu" 
+                        <Button Content="{DynamicResource DebtView.PayFromCredit}" 
                                 Command="{Binding PayFromCreditCommand}"
                                 Padding="15,5"/>
                         <TextBlock Text="{Binding CreditPayString}" 
@@ -131,7 +132,7 @@
                     </StackPanel>
                     
                     <Button Grid.Column="2" 
-                            Content="Vygenerovat novou adresu"
+                            Content="{DynamicResource DebtView.GenerateAddress}"
                             Command="{Binding GenerateAddressCommand}"
                             Padding="15,5"/>
                 </Grid>

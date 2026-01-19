@@ -47,5 +47,7 @@
     <x:String x:Key="DebtView.SortOption.DateDesc">Fresh Tidings</x:String>
     <x:String x:Key="DebtView.SortOption.AmountAsc">Pocket Change</x:String>
     <x:String x:Key="DebtView.SortOption.AmountDesc">King's Ransom</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">Pay with yer loot</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">Map out a payment port</x:String>
 
 </ResourceDictionary>

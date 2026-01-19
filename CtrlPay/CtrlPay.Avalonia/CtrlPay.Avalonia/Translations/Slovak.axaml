@@ -47,5 +47,7 @@
     <x:String x:Key="DebtView.SortOption.DateDesc">Dátum (najnovšie)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountAsc">Suma (najnižšia)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountDesc">Suma (najvyššia)</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">Zaplatiť z kreditov</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">Generovať platobnú adresu</x:String>
 
 </ResourceDictionary>
