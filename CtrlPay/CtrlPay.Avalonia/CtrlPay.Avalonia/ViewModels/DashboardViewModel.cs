@@ -57,7 +57,7 @@ public partial class DashboardViewModel : ViewModelBase
     {
         CancellationToken cancellationToken = new CancellationToken();
         List<TransactionDTO> creditTransactions = await TransactionRepo.GetTransactions(cancellationToken);
-        List<TransactionDTO> pendingTransactions = await PaymentRepo.GetPayments(cancellationToken);
+        List<PaymentDTO> pendingTransactions = await PaymentRepo.GetPayments(cancellationToken);
 
         var creditData = creditTransactions.Select(t => new TransactionItemViewModel
         {
@@ -67,7 +67,7 @@ public partial class DashboardViewModel : ViewModelBase
             Status = t.State
         }).ToList();
 
-        var pendingData = pendingTransactions.Select(t => new TransactionItemViewModel
+        var pendingData = pendingTransactions.Select(t => new PaymentItemViewModel
         {
             Title = t.Title,
             Amount = t.Amount,

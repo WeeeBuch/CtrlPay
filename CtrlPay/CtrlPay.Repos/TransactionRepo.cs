@@ -17,9 +17,6 @@ namespace CtrlPay.Repos
 
         public static async Task<List<TransactionDTO>> GetTransactions(CancellationToken cancellationToken)
         {
-            /* Udělat metodu, která vrátí transakce podle typu (kredity, čekající platby)+;
-             */
-
             var handler = new HttpClientHandler
             {
                 UseProxy = false
@@ -32,7 +29,7 @@ namespace CtrlPay.Repos
 
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
-            string uri = $"{Credentials.BaseUri}/api/get_transactions";
+            string uri = $"{Credentials.BaseUri}/api/transactions/my";
             // volání chráněného endpointu
             var response = await httpClient.GetAsync(uri);
 

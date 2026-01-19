@@ -57,4 +57,33 @@ namespace CtrlPay.Entities
             }
         }
     }
+    public class PaymentApiDTO
+    {
+        public int Id { get; set; }
+        public int? CustomerId { get; set; }
+        public int? AccountId { get; set; }
+        public int? AddressId { get; set; }
+        public decimal ExpectedAmountXMR { get; set; }
+        public decimal PaidAmountXMR { get; set; }
+        public PaymentStatusEnum Status { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime PaidAt { get; set; }
+
+        public PaymentApiDTO()
+        {
+            
+        }
+        public PaymentApiDTO(Payment payment)
+        {
+            Id = payment.Id;
+            CustomerId = payment.CustomerId;
+            AccountId = payment.AccountId;
+            AddressId = payment.AddressId;
+            ExpectedAmountXMR = payment.ExpectedAmountXMR;
+            PaidAmountXMR = payment.PaidAmountXMR;
+            Status = payment.Status;
+            CreatedAt = payment.CreatedAt;
+            PaidAt = payment.PaidAt;
+        }
+    }
 }
