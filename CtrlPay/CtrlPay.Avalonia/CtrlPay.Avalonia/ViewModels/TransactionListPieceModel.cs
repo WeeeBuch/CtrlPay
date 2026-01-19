@@ -67,12 +67,68 @@ public partial class TransactionItemViewModel : DashboardListItem
     [ObservableProperty]
     private string? _dateSeparator;
 }
+public partial class PaymentItemViewModel : DashboardListItem
+{
+    public string Title { get; set; } = "";
+    public decimal Amount { get; set; }
+    public DateTime Date { get; set; }
+    public PaymentStatusEnum Status { get; set; }
+
+    public string StatusText
+    {
+        get
+        {
+            return Status switch
+            {
+                PaymentStatusEnum.Created => TranslationManager.GetString("Payment.Status.Created"),
+                PaymentStatusEnum.WaitingForPayment => TranslationManager.GetString("Payment.Status.WaitingForPayment"),
+                PaymentStatusEnum.PartiallyPaid => TranslationManager.GetString("Payment.Status.PartiallyPaid"),
+                PaymentStatusEnum.Paid => TranslationManager.GetString("Payment.Status.Paid"),
+                PaymentStatusEnum.Overpaid => TranslationManager.GetString("Payment.Status.Overpaid"),
+                PaymentStatusEnum.Expired => TranslationManager.GetString("Payment.Status.Expired"),
+                PaymentStatusEnum.Cancelled => TranslationManager.GetString("Payment.Status.Cancelled"),
+                _ => "Nah state not implemented WTF"
+            };
+        }
+    }
+
+    // Pomocná vlastnost, pokud chceme zobrazit oddělovač nad touto položkou
+    [ObservableProperty]
+    private string? _dateSeparator;
+}
 
 public partial class TransactionListPieceModel : ViewModelBase
 {
     [ObservableProperty]
     private ObservableCollection<DashboardListItem> _transactions = new();
 
+    public void RefreshTransactions(List<PaymentItemViewModel> rawData)
+    {
+        var displayList = new List<DashboardListItem>();
+        var now = DateTime.Now.Date;
+
+        // Seřadíme od nejnovějších
+        var sorted = rawData.OrderByDescending(x => x.Date).ToList();
+
+        string currentGroup = "";
+
+        foreach (var tx in sorted)
+        {
+            string groupName = GetGroupName(tx.Date, now);
+
+            // Pokud se skupina změnila (např. z Dnes na Včera), vložíme oddělovač
+            if (groupName != currentGroup)
+            {
+                SeparatorItemViewModel separator = new();
+                separator.GiveLabelKey(groupName);
+                displayList.Add(separator);
+                currentGroup = groupName;
+            }
+            displayList.Add(tx);
+        }
+
+        Transactions = new ObservableCollection<DashboardListItem>(displayList);
+    }
     public void RefreshTransactions(List<TransactionItemViewModel> rawData)
     {
         var displayList = new List<DashboardListItem>();

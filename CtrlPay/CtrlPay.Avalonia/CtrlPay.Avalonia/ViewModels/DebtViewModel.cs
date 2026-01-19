@@ -62,6 +62,7 @@ public partial class DebtViewModel : ViewModelBase
     public RangeObservableCollection<DebtItemViewModel> Debts { get; } = new();
 
     public List<TransactionDTO> LoadedTransactions { get; set; } = new();
+    public List<PaymentDTO> LoadedPayments { get; set; } = new();
 
     [ObservableProperty]
     private bool payableChecked;
@@ -171,7 +172,7 @@ public partial class DebtViewModel : ViewModelBase
 
     public async Task GetDebtsFromRepo()
     {
-        LoadedTransactions = await PaymentRepo.GetPayments(default);
+        LoadedPayments = await PaymentRepo.GetPayments(default);
 
         Debts.Clear();
 
