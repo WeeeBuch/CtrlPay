@@ -30,14 +30,14 @@ namespace CtrlPay.Entities
         [Column("created_at")]
         public DateTime CreatedAt { get; set; }
         [Column("paid_at")]
-        public DateTime PaidAt { get; set; }
+        public DateTime? PaidAt { get; set; }
         [ForeignKey("CustomerId")]
         public virtual Customer? Customer { get; set; }
         [ForeignKey("AccountId")]
         public virtual Account? Account { get; set; }
         [ForeignKey("AddressId")]
         public virtual Address? Address { get; set; }
-        public virtual List<Transaction> Transactions { get; set; }
+        //public virtual List<Transaction> Transactions { get; set; }
 
     }
 }

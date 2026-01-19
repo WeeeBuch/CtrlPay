@@ -12,9 +12,9 @@ namespace CtrlPay.API.Controllers
     public class PaymentController : ControllerBase
     {
         private readonly CtrlPayDbContext _db;
-        public PaymentController(CtrlPayDbContext ctrlPayDbContext)
+        public PaymentController()
         {
-            _db = ctrlPayDbContext;
+            _db = new CtrlPayDbContext();
         }
         [HttpGet]
         [Route("my")]
