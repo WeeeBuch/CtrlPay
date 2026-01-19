@@ -27,7 +27,7 @@ namespace CtrlPay.Repos
 
         public FrontendTransactionDTO(Transaction transaction)
         {
-            Title = transaction.TransactionIdXMR.Substring(0, 25) + "...";
+            Title = transaction.TransactionIdXMR;
             Amount = transaction.Amount;
             Timestamp = transaction.Timestamp;
             State = StatusConverter.ConvertTransactionStatusToFrontendStatus(transaction.Status);
@@ -35,7 +35,7 @@ namespace CtrlPay.Repos
         }
         public FrontendTransactionDTO(TransactionApiDTO transaction)
         {
-            Title = transaction.TransactionIdXMR.Substring(0, 25) + "...";
+            Title = transaction.TransactionIdXMR;
             Amount = transaction.Amount;
             Timestamp = transaction.Timestamp;
             State = StatusConverter.ConvertTransactionStatusToFrontendStatus(transaction.Status);
