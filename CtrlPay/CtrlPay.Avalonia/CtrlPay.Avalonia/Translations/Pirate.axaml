@@ -30,6 +30,15 @@
     <x:String x:Key="Transaction.Status.Completed">Looted</x:String>
     <x:String x:Key="Transaction.Status.Pending">In the Depths</x:String>
     <x:String x:Key="Transaction.Status.Failed">Sunk</x:String>
+    <x:String x:Key="Transaction.Status.Confirmed">Captain's Seal</x:String>
+    <x:String x:Key="Transaction.Status.Created">Drawn on Map</x:String>
+    <x:String x:Key="Transaction.Status.WaitingForPayment">Awaiting Gold</x:String>
+    <x:String x:Key="Transaction.Status.PartiallyPaid">Partial Tribute</x:String>
+    <x:String x:Key="Transaction.Status.Paid">Gold in Hand</x:String>
+    <x:String x:Key="Transaction.Status.Overpaid">Too much Booty</x:String>
+    <x:String x:Key="Transaction.Status.Expired">Lost at Sea</x:String>
+    <x:String x:Key="Transaction.Status.Cancelled">Tossed Overboard</x:String>
+    <x:String x:Key="Transaction.Status.Error">Krakens!</x:String>
 
     <x:String x:Key="SettingsView.Appearance.Title">Paint the Ship</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Tongue</x:String>

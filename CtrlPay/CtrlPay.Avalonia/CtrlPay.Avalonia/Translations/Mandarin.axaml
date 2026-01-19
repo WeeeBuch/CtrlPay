@@ -28,8 +28,17 @@
     <x:String x:Key="CounterPiece.Pending.Title">待处理</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">已完成</x:String>
-    <x:String x:Key="Transaction.Status.Pending">处理中</x:String>
-    <x:String x:Key="Transaction.Status.Failed">失败</x:String>
+    <x:String x:Key="Transaction.Status.Pending">待处理</x:String>
+    <x:String x:Key="Transaction.Status.Failed">已失败</x:String>
+    <x:String x:Key="Transaction.Status.Confirmed">已确认</x:String>
+    <x:String x:Key="Transaction.Status.Created">已创建</x:String>
+    <x:String x:Key="Transaction.Status.WaitingForPayment">等待付款</x:String>
+    <x:String x:Key="Transaction.Status.PartiallyPaid">部分付款</x:String>
+    <x:String x:Key="Transaction.Status.Paid">已付款</x:String>
+    <x:String x:Key="Transaction.Status.Overpaid">多付</x:String>
+    <x:String x:Key="Transaction.Status.Expired">已过期</x:String>
+    <x:String x:Key="Transaction.Status.Cancelled">已取消</x:String>
+    <x:String x:Key="Transaction.Status.Error">错误</x:String>
 
     <x:String x:Key="SettingsView.Appearance.Title">外观</x:String>
     <x:String x:Key="SettingsView.Translation.Title">语言</x:String>

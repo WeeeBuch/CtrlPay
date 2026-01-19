@@ -28,8 +28,17 @@
     <x:String x:Key="CounterPiece.Pending.Title">Čekající</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">Dokončeno</x:String>
-    <x:String x:Key="Transaction.Status.Pending">Zpracovává se</x:String>
-    <x:String x:Key="Transaction.Status.Failed">Chyba</x:String>
+    <x:String x:Key="Transaction.Status.Pending">Čekající</x:String>
+    <x:String x:Key="Transaction.Status.Failed">Selhalo</x:String>
+    <x:String x:Key="Transaction.Status.Confirmed">Potvrzeno</x:String>
+    <x:String x:Key="Transaction.Status.Created">Vytvořeno</x:String>
+    <x:String x:Key="Transaction.Status.WaitingForPayment">Čeká na platbu</x:String>
+    <x:String x:Key="Transaction.Status.PartiallyPaid">Částečně zaplaceno</x:String>
+    <x:String x:Key="Transaction.Status.Paid">Zaplaceno</x:String>
+    <x:String x:Key="Transaction.Status.Overpaid">Přeplaceno</x:String>
+    <x:String x:Key="Transaction.Status.Expired">Vypršelo</x:String>
+    <x:String x:Key="Transaction.Status.Cancelled">Zrušeno</x:String>
+    <x:String x:Key="Transaction.Status.Error">Chyba</x:String>
 
     <x:String x:Key="SettingsView.Appearance.Title">Vzhled</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Jazyk</x:String>

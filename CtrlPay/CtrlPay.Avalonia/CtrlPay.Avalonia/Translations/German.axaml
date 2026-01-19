@@ -28,8 +28,17 @@
     <x:String x:Key="CounterPiece.Pending.Title">Ausstehend</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">Abgeschlossen</x:String>
-    <x:String x:Key="Transaction.Status.Pending">In Bearbeitung</x:String>
+    <x:String x:Key="Transaction.Status.Pending">Ausstehend</x:String>
     <x:String x:Key="Transaction.Status.Failed">Fehlgeschlagen</x:String>
+    <x:String x:Key="Transaction.Status.Confirmed">Bestätigt</x:String>
+    <x:String x:Key="Transaction.Status.Created">Erstellt</x:String>
+    <x:String x:Key="Transaction.Status.WaitingForPayment">Wartet auf Zahlung</x:String>
+    <x:String x:Key="Transaction.Status.PartiallyPaid">Teilweise bezahlt</x:String>
+    <x:String x:Key="Transaction.Status.Paid">Bezahlt</x:String>
+    <x:String x:Key="Transaction.Status.Overpaid">Überbezahlt</x:String>
+    <x:String x:Key="Transaction.Status.Expired">Abgelaufen</x:String>
+    <x:String x:Key="Transaction.Status.Cancelled">Storniert</x:String>
+    <x:String x:Key="Transaction.Status.Error">Fehler</x:String>
 
     <x:String x:Key="SettingsView.Appearance.Title">Erscheinungsbild</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Sprache</x:String>
