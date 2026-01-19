@@ -78,7 +78,7 @@ namespace CtrlPay.Repos
                 "application/json"
             );
             
-            string uri = Credentials.BaseUri + "/api/auth/login";
+            string uri = Credentials.BaseUri + "/auth/login";
 
             
             HttpResponseMessage response = await httpClient.PostAsync(

@@ -9,7 +9,7 @@ using System.Text.Json;
 namespace CtrlPay.API.Controllers
 {
     [ApiController]
-    [Route("api/auth")]
+    [Route("auth")]
     public class AuthController : ControllerBase
     {
         private readonly TokenService _tokenService;
@@ -22,7 +22,7 @@ namespace CtrlPay.API.Controllers
         }
 
         [HttpPost("login")]
-        //POST : api/auth/login
+        //POST : auth/login
         public IActionResult Login([FromBody] LoginRequest request)
         {
             string username = request.Username;
