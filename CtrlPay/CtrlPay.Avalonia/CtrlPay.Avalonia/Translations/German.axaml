@@ -1,0 +1,51 @@
+﻿<ResourceDictionary xmlns="https://github.com/avaloniaui"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <x:String x:Key="App.Title">CtrlPay</x:String>
+    <x:String x:Key="App.Watermark">© 2026 CtrlPay</x:String>
+    <x:String x:Key="App.Currency">XMR</x:String>
+
+    <x:String x:Key="LoginWindow.Title">Anmeldung</x:String>
+
+    <x:String x:Key="LoginView.Button.Switch.Login">Einloggen</x:String>
+    <x:String x:Key="LoginView.Button.Switch.Register">Registrieren</x:String>
+    <x:String x:Key="LoginView.Button.Login">Anmelden</x:String>
+    <x:String x:Key="LoginView.Button.Register">Konto erstellen</x:String>
+
+    <x:String x:Key="LoginView.Watermark.Username">Benutzername</x:String>
+    <x:String x:Key="LoginView.Watermark.Password">Passwort</x:String>
+    <x:String x:Key="LoginView.Watermark.ConfirmPassword">Passwort bestätigen</x:String>
+    <x:String x:Key="LoginView.Watermark.Code">Bestätigungscode</x:String>
+
+    <x:String x:Key="DashboardView.TransactionList">Transaktionsliste</x:String>
+
+    <x:String x:Key="NavbarView.Menu">Menü</x:String>
+    <x:String x:Key="NavbarView.Dashboard">Dashboard</x:String>
+    <x:String x:Key="NavbarView.Settings">Einstellungen</x:String>
+    <x:String x:Key="NavbarView.Debts">Schulden</x:String>
+
+    <x:String x:Key="CounterPiece.Credits.Title">Guthaben</x:String>
+    <x:String x:Key="CounterPiece.Pending.Title">Ausstehend</x:String>
+
+    <x:String x:Key="Transaction.Status.Completed">Abgeschlossen</x:String>
+    <x:String x:Key="Transaction.Status.Pending">In Bearbeitung</x:String>
+    <x:String x:Key="Transaction.Status.Failed">Fehlgeschlagen</x:String>
+
+    <x:String x:Key="SettingsView.Appearance.Title">Erscheinungsbild</x:String>
+    <x:String x:Key="SettingsView.Translation.Title">Sprache</x:String>
+
+    <x:String x:Key="Date.Today">Heute</x:String>
+    <x:String x:Key="Date.Yesterday">Gestern</x:String>
+    <x:String x:Key="Date.LastWeek">Letzte Woche</x:String>
+    <x:String x:Key="Date.Last2Weeks">Letzte 2 Wochen</x:String>
+    <x:String x:Key="Date.Older">Älter</x:String>
+
+    <x:String x:Key="DebtView.Payable">Bezahlbar vom Guthaben</x:String>
+    <x:String x:Key="DebtView.Watermark.SearchBar">Schulden suchen...</x:String>
+    <x:String x:Key="DebtView.Sorting">Sortieren nach</x:String>
+    <x:String x:Key="DebtView.SortOption.DateAsc">Datum (Älteste)</x:String>
+    <x:String x:Key="DebtView.SortOption.DateDesc">Datum (Neueste)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountAsc">Betrag (Niedrigster)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountDesc">Betrag (Höchster)</x:String>
+
+</ResourceDictionary>
