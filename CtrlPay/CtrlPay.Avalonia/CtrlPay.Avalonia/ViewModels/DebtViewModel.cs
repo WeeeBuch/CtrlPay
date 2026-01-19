@@ -64,7 +64,6 @@ public partial class DebtViewModel : ViewModelBase
 
     // Tohle se pak přesune do repa
     public List<FrontendTransactionDTO> LoadedTransactions { get; set; } = new();
-    public List<FrontendTransactionDTO> LoadedPayments { get; set; } = new();
 
     [ObservableProperty]
     private bool payableChecked;
@@ -172,16 +171,20 @@ public partial class DebtViewModel : ViewModelBase
         ApplySorting(value.Key);
     }
 
+    private void UpdateDebts(List<FrontendTransactionDTO> ltDTO)
+    {
+        LoadedTransactions = ltDTO;
+        Debts.ReplaceAll([.. ltDTO.Select(p => new DebtItemViewModel(p))]);
+    }
+
     public async Task GetDebtsFromRepo()
     {
         var loadedPayments = await PaymentRepo.GetPayments(default);
-        var newViewModels = loadedPayments.Select(p => new DebtItemViewModel(p)).ToList();
 
         // Vynucení aktualizace na UI vlákně
         await Dispatcher.UIThread.InvokeAsync(() =>
         {
-            LoadedPayments = loadedPayments;
-            Debts.ReplaceAll(newViewModels);
+            UpdateDebts(loadedPayments);
         });
     }
 }

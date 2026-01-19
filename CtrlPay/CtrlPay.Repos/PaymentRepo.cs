@@ -33,7 +33,7 @@ namespace CtrlPay.Repos
                     },
                     new FrontendTransactionDTO
                     {
-                        Title = "Testovací platba 2",
+                        Title = "Testovací platba 2 ale moc dlouhá snad se mi zalomí nebo zkrátí.",
                         Amount = 1.2m,
                         Timestamp = DateTime.UtcNow.AddHours(-2),
                         State = StatusEnum.Pending,
