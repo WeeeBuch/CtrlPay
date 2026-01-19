@@ -1,4 +1,4 @@
-﻿using Avalonia.Media;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Translations;
@@ -169,9 +169,9 @@ public partial class DebtViewModel : ViewModelBase
         ApplySorting(value.Key);
     }
 
-    public void GetDebtsFromRepo()
+    public async Task GetDebtsFromRepo()
     {
-        LoadedTransactions = ToDoRepo.GetTransactions("debt");
+        LoadedTransactions = await PaymentRepo.GetPayments(default);
 
         Debts.Clear();
 

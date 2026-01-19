@@ -1,4 +1,4 @@
-﻿using CtrlPay.Entities;
+using CtrlPay.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,56 +22,9 @@ namespace CtrlPay.Repos
 
             return sum;
         }
-
-        public static List<TransactionDTO> GetTransactions(string type)
-        {
-            /* Udělat metodu, která vrátí transakce podle typu (kredity, čekající platby)
-             */
-
-            return [
-                new TransactionDTO
-                {
-                    Title = "Vklad z banky",
-                    Amount = 5.0m,
-                    Timestamp = DateTime.Now,
-                    State = TransactionStatusEnum.Completed,
-                    Id = 1
-                },
-                new TransactionDTO
-                {
-                    Title = "PC",
-                    Amount = 8.0m,
-                    Timestamp = DateTime.Now.AddDays(-1),
-                    State = TransactionStatusEnum.Completed,
-                    Id = 2
-                },
-                new TransactionDTO
-                {
-                    Title = "Hry",
-                    Amount = 2.0m,
-                    Timestamp = DateTime.Now.AddDays(-5),
-                    State = TransactionStatusEnum.Completed,
-                    Id = 3
-                },
-                ];
-        }
-
-        // DTO = Data Transfer Object
-        public record TransactionDTO
-        {
-            public string Title { get; init; }
-            public decimal Amount { get; init; }
-            public DateTime Timestamp { get; init; }
-            public TransactionStatusEnum State { get; init; }
-
-            public int Id { get; init; }
-        }
-
         public static void PayFromCredit(TransactionDTO transakce)
         {
             // Implementace platby z kreditu
-
-
         }
     }
 }
