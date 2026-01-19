@@ -1,45 +1,25 @@
-﻿using CtrlPay.Core;
-using CtrlPay.DB;
+﻿using CtrlPay.DB;
 using CtrlPay.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Primitives;
 using System.Security.Claims;
-using System.Transactions;
 
 namespace CtrlPay.API.Controllers
 {
     [ApiController]
-    [Route("api")]
+    [Route("api/transactions")]
     [Authorize]
-    public class ApiController : Controller
+    public class TransactionController : ControllerBase
     {
-        //TODO: Metody API: 3
-        /*
-         * 
-         * getaccount
-         * getpayments by loyalcustomer
-         * gettransactions by loyalcustomer
-        */
-
         private readonly CtrlPayDbContext _db;
-
-        public ApiController()
+        public TransactionController(CtrlPayDbContext ctrlPayDbContext)
         {
-            _db = new CtrlPayDbContext();
-        }
-
-        [HttpPost]
-        [Route("index")]
-        public IActionResult Index(string message)
-        {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var userName = User.FindFirst(ClaimTypes.Name)?.Value;
-            return Ok(new { Id = userId, Jmeno = userName, Message = message });
+            _db = ctrlPayDbContext;
         }
         [HttpGet]
-        [Route("get_transactions")]
-        public IActionResult GetTransactions()
+        [Route("my")]
+        // GET : api/transactions/my
+        public IActionResult My()
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
@@ -48,7 +28,7 @@ namespace CtrlPay.API.Controllers
                 .Where(t => t.Account.Index == accountIndex)
                 .ToList();
             List<TransactionApiDTO> transactionsDTO = new List<TransactionApiDTO>();
-            foreach(var transaction in transactions)
+            foreach (var transaction in transactions)
             {
                 transactionsDTO.Add(new TransactionApiDTO(transaction));
             }

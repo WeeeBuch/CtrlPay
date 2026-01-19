@@ -40,6 +40,25 @@ namespace CtrlPay.Repos
             State = transaction.Status;
             Id = transaction.Id;
         }
+        
         public TransactionDTO() { }
+    }
+    public class PaymentDTO
+    {
+        public string Title { get; init; }
+        public decimal Amount { get; init; }
+        public DateTime Timestamp { get; init; }
+        public PaymentStatusEnum State { get; init; }
+        public PaymentDTO()
+        {
+            
+        }
+        public PaymentDTO(PaymentApiDTO payment)
+        {
+            Title = payment.Id.ToString();
+            Amount = payment.PaidAmountXMR;
+            Timestamp = payment.CreatedAt;
+            State = payment.Status;
+        }
     }
 }

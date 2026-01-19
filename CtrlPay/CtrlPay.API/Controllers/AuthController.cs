@@ -10,7 +10,7 @@ namespace CtrlPay.API.Controllers
 {
     [ApiController]
     [Route("api/auth")]
-    public class AuthController : Controller
+    public class AuthController : ControllerBase
     {
         private readonly TokenService _tokenService;
         private readonly CtrlPayDbContext _db = new CtrlPayDbContext();
@@ -22,6 +22,7 @@ namespace CtrlPay.API.Controllers
         }
 
         [HttpPost("login")]
+        //POST : api/auth/login
         public IActionResult Login([FromBody] LoginRequest request)
         {
             string username = request.Username;
