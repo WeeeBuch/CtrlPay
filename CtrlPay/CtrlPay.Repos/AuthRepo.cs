@@ -1,7 +1,13 @@
-﻿using System;
+﻿using CtrlPay.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Text;
+using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CtrlPay.Repos
@@ -55,30 +61,47 @@ namespace CtrlPay.Repos
             return true;
         }
 
-        public static bool Login(string username, string password)
+        public static async Task<bool> Login(string username, string password, CancellationToken cancellationToken)
         {
-            /* TODO: Loginování logic
-             * Tu logika pro přihlášení
-             *
-             * Vrací true, pokud je přihlášení úspěšné, jinak false
-             */
-
-            #region Validations out of Api
-
-            if (username == null || username.Trim() == "")
+            HttpClient httpClient = new HttpClient();
+            var payload = new
             {
-                ErrorMessage = "Uživatelské jméno nesmí být prázdné.";
+                username,
+                password
+            };
+
+            string payloadJson = JsonSerializer.Serialize(payload);
+
+            var content = new StringContent(
+                payloadJson,
+                Encoding.UTF8,
+                "application/json"
+            );
+            
+            string uri = Credentials.BaseUri + "/api/auth/login";
+
+            
+            HttpResponseMessage response = await httpClient.PostAsync(
+                uri,
+                content,
+                cancellationToken
+            );
+            
+
+            string body = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+            {
+                ErrorMessage = $"HTTP error {response.StatusCode}: {body}";
                 return false;
             }
 
-            if (password == null || password.Trim() == "")
-            {
-                ErrorMessage = "Heslo nesmí být prázdné.";
-                return false;
-            }
+            var rpcResponse = JsonSerializer.Deserialize<JwtAuthResponse>(body,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-            #endregion
-
+            Credentials.JwtAccessToken = rpcResponse.AccessToken;
+            Credentials.AccessTokenExpiresAtUtc = rpcResponse.ExpiresAtUtc;
+            Credentials.RefreshToken = rpcResponse.RefreshToken;
+            Credentials.RefreshTokenExpiresAtUtc = rpcResponse.RefreshTokenExpiresAtUtc;
 
             return true;
         }

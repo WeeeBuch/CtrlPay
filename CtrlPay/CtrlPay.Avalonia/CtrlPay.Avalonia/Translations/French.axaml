@@ -47,5 +47,7 @@
     <x:String x:Key="DebtView.SortOption.DateDesc">Date (Récente)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountAsc">Montant (Croissant)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountDesc">Montant (Décroissant)</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">Payer avec les crédits</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">Générer l'adresse de paiement</x:String>
 
 </ResourceDictionary>

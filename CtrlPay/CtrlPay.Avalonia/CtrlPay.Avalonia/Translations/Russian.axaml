@@ -47,5 +47,7 @@
     <x:String x:Key="DebtView.SortOption.DateDesc">Дата (новые)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountAsc">Сумма (меньшая)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountDesc">Сумма (большая)</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">Оплатить кредитами</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">Создать адрес для оплаты</x:String>
 
 </ResourceDictionary>

@@ -55,5 +55,7 @@
     <x:String x:Key="DebtView.SortOption.DateDesc">Date (Newest)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountAsc">Amount (Lowest)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountDesc">Amount (Highest)</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">Pay from credits</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">Generate payment address</x:String>  
 
 </ResourceDictionary>

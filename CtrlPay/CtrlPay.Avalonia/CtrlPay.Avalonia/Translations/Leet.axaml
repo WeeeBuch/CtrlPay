@@ -47,5 +47,7 @@
     <x:String x:Key="DebtView.SortOption.DateDesc">D473_N3W</x:String>
     <x:String x:Key="DebtView.SortOption.AmountAsc">4MN7_LOW</x:String>
     <x:String x:Key="DebtView.SortOption.AmountDesc">4MN7_H16H</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">P4Y_W17H_CR3D175</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">63N3R473_4DDR355</x:String>
 
 </ResourceDictionary>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CtrlPay.Entities
 {
-    [Table("LoyalCustomer")]
+    [Table("LoyalCustomers")]
     public class LoyalCustomer
     {
         [Column("id")]

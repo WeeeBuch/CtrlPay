@@ -57,7 +57,7 @@
     <x:String x:Key="DebtView.SortOption.DateDesc">DebtView.SortOption.DateDesc</x:String>
     <x:String x:Key="DebtView.SortOption.AmountAsc">DebtView.SortOption.AmountAsc</x:String>
     <x:String x:Key="DebtView.SortOption.AmountDesc">DebtView.SortOption.AmountDesc</x:String>
-
-
+    <x:String x:Key="DebtView.PayFromCredit">DebtView.PayFromCredit</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">DebtView.GenerateAddress</x:String>
 
 </ResourceDictionary>

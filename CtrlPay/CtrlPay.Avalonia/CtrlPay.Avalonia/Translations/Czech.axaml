@@ -47,5 +47,7 @@
     <x:String x:Key="DebtView.SortOption.DateDesc">Datum (nejnovější)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountAsc">Částka (nejnižší)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountDesc">Částka (nejvyšší)</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">Zaplatit z kreditů</x:String>
+<x:String x:Key="DebtView.GenerateAddress">Generovat platební adresu</x:String>
 
 </ResourceDictionary>
