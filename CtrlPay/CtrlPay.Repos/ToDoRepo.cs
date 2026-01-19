@@ -1,4 +1,4 @@
-using CtrlPay.Entities;
+﻿using CtrlPay.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace CtrlPay.Repos
             return sum;
         }
 
-        public static void PayFromCredit(TransactionDTO transakce)
+        public static void PayFromCredit(FrontendTransactionDTO transakce)
         {
             // Implementace platby z kreditu
         }

@@ -1,5 +1,6 @@
 ﻿using CtrlPay.Entities;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Formats.Asn1;
@@ -14,9 +15,33 @@ namespace CtrlPay.Repos
 {
     public class TransactionRepo
     {
-
-        public static async Task<List<TransactionDTO>> GetTransactions(CancellationToken cancellationToken)
+        public static async Task<List<FrontendTransactionDTO>> GetTransactions(CancellationToken cancellationToken)
         {
+            #region Debug
+            if (DebugMode.IsDebugMode)
+            {
+                List<FrontendTransactionDTO> debugList = [
+                    new FrontendTransactionDTO
+                    {
+                        Title = "Debug Transaction 1",
+                        Amount = 123.45m,
+                        Timestamp = DateTime.UtcNow.AddDays(-1),
+                        State = StatusEnum.Completed,
+                        Id = 1
+                    },
+                    new FrontendTransactionDTO
+                    {
+                        Title = "Debug Transaction 2",
+                        Amount = 67.89m,
+                        Timestamp = DateTime.UtcNow.AddDays(-2),
+                        State = StatusEnum.Pending,
+                        Id = 2
+                    }];
+                return debugList;
+            }
+
+
+            #endregion
             var handler = new HttpClientHandler
             {
                 UseProxy = false
@@ -44,11 +69,11 @@ namespace CtrlPay.Repos
 
             // Přidej options do metody Deserialize
             List<TransactionApiDTO> transactions = JsonSerializer.Deserialize<List<TransactionApiDTO>>(json, options);
-            List<TransactionDTO> dtoList = new List<TransactionDTO>();
+            List<FrontendTransactionDTO> dtoList = new List<FrontendTransactionDTO>();
 
             foreach(var tx in transactions)
             {
-                dtoList.Add(new TransactionDTO(tx));
+                dtoList.Add(new FrontendTransactionDTO(tx));
             }
 
             return dtoList;

@@ -1,4 +1,5 @@
-﻿using CtrlPay.Avalonia.Translations;
+﻿using Avalonia.Threading;
+using CtrlPay.Avalonia.Translations;
 using CtrlPay.Repos;
 using System;
 using System.Collections.Generic;
@@ -56,8 +57,8 @@ public partial class DashboardViewModel : ViewModelBase
     private async Task LoadTransactionLists()
     {
         CancellationToken cancellationToken = new CancellationToken();
-        List<TransactionDTO> creditTransactions = await TransactionRepo.GetTransactions(cancellationToken);
-        List<PaymentDTO> pendingTransactions = await PaymentRepo.GetPayments(cancellationToken);
+        List<FrontendTransactionDTO> creditTransactions = await TransactionRepo.GetTransactions(cancellationToken);
+        List<FrontendTransactionDTO> pendingTransactions = await PaymentRepo.GetPayments(cancellationToken);
 
         var creditData = creditTransactions.Select(t => new TransactionItemViewModel
         {
@@ -67,7 +68,7 @@ public partial class DashboardViewModel : ViewModelBase
             Status = t.State
         }).ToList();
 
-        var pendingData = pendingTransactions.Select(t => new PaymentItemViewModel
+        var pendingData = pendingTransactions.Select(t => new TransactionItemViewModel
         {
             Title = t.Title,
             Amount = t.Amount,
@@ -75,7 +76,10 @@ public partial class DashboardViewModel : ViewModelBase
             Status = t.State
         }).ToList();
 
-        CreditTransactionList.RefreshTransactions(creditData);
-        PendingTransactionList.RefreshTransactions(pendingData);
+        await Dispatcher.UIThread.InvokeAsync(() =>
+        {
+            CreditTransactionList.RefreshTransactions(creditData);
+            PendingTransactionList.RefreshTransactions(pendingData);
+        });
     }
 }
