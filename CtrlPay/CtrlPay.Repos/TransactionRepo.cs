@@ -36,7 +36,40 @@ namespace CtrlPay.Repos
                         Timestamp = DateTime.UtcNow.AddDays(-2),
                         State = StatusEnum.Pending,
                         Id = 2
-                    }];
+                    },
+                    new FrontendTransactionDTO
+                    {
+                        Title = "Debug Transaction 3",
+                        Amount = 10.00m,
+                        Timestamp = DateTime.UtcNow.AddDays(-3),
+                        State = StatusEnum.Failed,
+                        Id = 3
+                    },
+                    new FrontendTransactionDTO
+                    {
+                        Title = "Debug Transaction 4",
+                        Amount = 250.00m,
+                        Timestamp = DateTime.UtcNow.AddDays(-4),
+                        State = StatusEnum.Confirmed,
+                        Id = 4
+                    },
+                    new FrontendTransactionDTO
+                    {
+                        Title = "Debug Transaction 5",
+                        Amount = 75.50m,
+                        Timestamp = DateTime.UtcNow.AddDays(-5),
+                        State = StatusEnum.Paid,
+                        Id = 5
+                    },
+                    new FrontendTransactionDTO
+                    {
+                        Title = "Debug Transaction 6",
+                        Amount = 300.00m,
+                        Timestamp = DateTime.UtcNow.AddDays(-6),
+                        State = StatusEnum.Expired,
+                        Id = 6
+                    }
+                ];
                 return debugList;
             }
 
