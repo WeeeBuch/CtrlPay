@@ -1,4 +1,4 @@
-name: CI Check
+name: Checkos
 
 on:
   push:
