@@ -4,6 +4,8 @@ using CtrlPay.Avalonia.Views;
 using CtrlPay.Repos;
 using System;
 using System.ComponentModel;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -38,7 +40,7 @@ public partial class LoginViewModel : ViewModelBase
     private string regUsername;
 
     [ObservableProperty]
-    private string regEmail;
+    private string regCode;
 
     [ObservableProperty]
     private string regPassword;
@@ -49,7 +51,7 @@ public partial class LoginViewModel : ViewModelBase
     [RelayCommand]
     private void Register()
     {
-        bool succes = AuthRepo.Register(RegUsername, RegEmail, RegPassword, RegConfirmPassword);
+        bool succes = AuthRepo.Register(RegUsername, RegCode, RegPassword, RegConfirmPassword);
 
         if (succes) 
         {
@@ -63,11 +65,12 @@ public partial class LoginViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    private void Login()
+    private async Task LoginAsync()
     {
-        bool succes = AuthRepo.Login(Username, Password);
+        CancellationToken cancellationToken = new CancellationToken();
+        bool success = await AuthRepo.Login(Username, Password, cancellationToken);
 
-        if (succes) 
+        if (success) 
         {
             _navigation.ShowMainWindow();
             _navigation.CloseLogin();

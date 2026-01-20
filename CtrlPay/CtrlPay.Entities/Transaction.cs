@@ -16,11 +16,14 @@ namespace CtrlPay.Entities
         public int Id { get; set; }
         [Column("address_id")]
         private int AddressId { get; set; }
+        [Column("account_id")]
+        private int AccountId { get; set; }
         [Column("transaction_xmr_id")]
         public string TransactionIdXMR { get; set; }
-        //TODO: Change to enum
         [Column("type")]
-        public int Type { get; set; }
+        public TransactionTypeEnum Type { get; set; }
+        [Column("status")]
+        public TransactionStatusEnum Status { get; set; }
         [Column("amount")]
         public decimal Amount { get; set; }
         [Column("fee")]
@@ -28,10 +31,17 @@ namespace CtrlPay.Entities
         [Column("timestamp")]
         public DateTime Timestamp { get; set; }
         [Column("payment_id")]
-        private int PaymentId { get; set; }
+        private int? PaymentId { get; set; }
         [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
         [ForeignKey("PaymentId")]
-        public virtual Payment Payment { get; set; }
+        public virtual Payment? Payment { get; set; }
+        [ForeignKey("AccountId")]
+        public virtual Account Account { get; set; }
+
+        public Transaction()
+        {
+            
+        }
     }
 }

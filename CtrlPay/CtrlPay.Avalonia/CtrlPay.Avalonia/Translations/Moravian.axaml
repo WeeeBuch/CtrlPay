@@ -15,13 +15,14 @@
     <x:String x:Key="LoginView.Watermark.Username">Meno uživatela</x:String>
     <x:String x:Key="LoginView.Watermark.Password">Heslo</x:String>
     <x:String x:Key="LoginView.Watermark.ConfirmPassword">Heslo si potvrdit</x:String>
-    <x:String x:Key="LoginView.Watermark.Email">Mejl</x:String>
+    <x:String x:Key="LoginView.Watermark.Code">Ten tajný kód</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">Přehled platení</x:String>
 
     <x:String x:Key="NavbarView.Menu">Nabídka</x:String>
     <x:String x:Key="NavbarView.Dashboard">Hlavní rynk</x:String>
     <x:String x:Key="NavbarView.Settings">Nastavení</x:String>
+    <x:String x:Key="NavbarView.Debts">Sekery</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Mám u sebe</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Na cestě</x:String>
@@ -29,6 +30,15 @@
     <x:String x:Key="Transaction.Status.Completed">Hotovo</x:String>
     <x:String x:Key="Transaction.Status.Pending">Eště sa čeká</x:String>
     <x:String x:Key="Transaction.Status.Failed">Pokazilo sa to</x:String>
+    <x:String x:Key="Transaction.Status.Confirmed">Odsouhlaseno</x:String>
+    <x:String x:Key="Transaction.Status.Created">Uděláno</x:String>
+    <x:String x:Key="Transaction.Status.WaitingForPayment">Čeká sa na prachy</x:String>
+    <x:String x:Key="Transaction.Status.PartiallyPaid">Trochu zaplacené</x:String>
+    <x:String x:Key="Transaction.Status.Paid">Zaplaveno</x:String>
+    <x:String x:Key="Transaction.Status.Overpaid">Dali víc, než měli</x:String>
+    <x:String x:Key="Transaction.Status.Expired">Už je pozdě</x:String>
+    <x:String x:Key="Transaction.Status.Cancelled">Utnuto</x:String>
+    <x:String x:Key="Transaction.Status.Error">Zas nejaká chyba</x:String>
 
     <x:String x:Key="SettingsView.Appearance.Title">Tož jak to vypadá</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Nářečí</x:String>
@@ -38,5 +48,15 @@
     <x:String x:Key="Date.LastWeek">Minulý týdeň</x:String>
     <x:String x:Key="Date.Last2Weeks">Poslední dva týdny</x:String>
     <x:String x:Key="Date.Older">Dávno temu</x:String>
+
+    <x:String x:Key="DebtView.Payable">Tož ide to zaplatit</x:String>
+    <x:String x:Key="DebtView.Watermark.SearchBar">Hledat sekery...</x:String>
+    <x:String x:Key="DebtView.Sorting">Srovnat podle</x:String>
+    <x:String x:Key="DebtView.SortOption.DateAsc">Datum (od nejdávnějšího)</x:String>
+    <x:String x:Key="DebtView.SortOption.DateDesc">Datum (od včilka)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountAsc">Tož za málo</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountDesc">Tož za pálku</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">Máznot to z kreditů</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">Udělat placací adresu</x:String>
 
 </ResourceDictionary>

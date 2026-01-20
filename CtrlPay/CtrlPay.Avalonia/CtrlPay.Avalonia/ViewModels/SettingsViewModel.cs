@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.Translations;
 using System;
@@ -14,13 +15,13 @@ namespace CtrlPay.Avalonia.ViewModels
             Enum.GetValues(typeof(ThemeManager.AppTheme)).Cast<ThemeManager.AppTheme>();
 
         [ObservableProperty]
-        private ThemeManager.AppTheme _selectedTheme;
+        private ThemeManager.AppTheme _selectedTheme = SettingsManager.Current.Theme;
 
         public IEnumerable<TranslationManager.AppLanguage> AvailableLanguages { get; } =
             Enum.GetValues(typeof(TranslationManager.AppLanguage)).Cast<TranslationManager.AppLanguage>();
 
         [ObservableProperty]
-        private TranslationManager.AppLanguage _selectedLanguage;
+        private TranslationManager.AppLanguage _selectedLanguage = SettingsManager.Current.Language;
 
         // Logika se spustí při změně SelectedTheme
         partial void OnSelectedThemeChanged(ThemeManager.AppTheme value)

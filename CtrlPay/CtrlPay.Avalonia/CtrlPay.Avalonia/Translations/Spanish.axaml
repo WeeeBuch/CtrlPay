@@ -15,20 +15,30 @@
     <x:String x:Key="LoginView.Watermark.Username">Usuario</x:String>
     <x:String x:Key="LoginView.Watermark.Password">Contraseña</x:String>
     <x:String x:Key="LoginView.Watermark.ConfirmPassword">Confirmar contraseña</x:String>
-    <x:String x:Key="LoginView.Watermark.Email">Correo electrónico</x:String>
+    <x:String x:Key="LoginView.Watermark.Code">Código de verificación</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">Lista de transacciones</x:String>
 
     <x:String x:Key="NavbarView.Menu">Menú</x:String>
     <x:String x:Key="NavbarView.Dashboard">Panel</x:String>
     <x:String x:Key="NavbarView.Settings">Ajustes</x:String>
+    <x:String x:Key="NavbarView.Debts">Deudas</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Saldo</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Pendiente</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">Completado</x:String>
-    <x:String x:Key="Transaction.Status.Pending">En proceso</x:String>
+    <x:String x:Key="Transaction.Status.Pending">Pendiente</x:String>
     <x:String x:Key="Transaction.Status.Failed">Fallido</x:String>
+    <x:String x:Key="Transaction.Status.Confirmed">Confirmado</x:String>
+    <x:String x:Key="Transaction.Status.Created">Creado</x:String>
+    <x:String x:Key="Transaction.Status.WaitingForPayment">Esperando pago</x:String>
+    <x:String x:Key="Transaction.Status.PartiallyPaid">Parcialmente pagado</x:String>
+    <x:String x:Key="Transaction.Status.Paid">Pagado</x:String>
+    <x:String x:Key="Transaction.Status.Overpaid">Pagado de más</x:String>
+    <x:String x:Key="Transaction.Status.Expired">Expirado</x:String>
+    <x:String x:Key="Transaction.Status.Cancelled">Cancelado</x:String>
+    <x:String x:Key="Transaction.Status.Error">Error</x:String>
 
     <x:String x:Key="SettingsView.Appearance.Title">Apariencia</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Idioma</x:String>
@@ -38,5 +48,15 @@
     <x:String x:Key="Date.LastWeek">La semana pasada</x:String>
     <x:String x:Key="Date.Last2Weeks">Las últimas 2 semanas</x:String>
     <x:String x:Key="Date.Older">Más antiguo</x:String>
+
+    <x:String x:Key="DebtView.Payable">Pagable del saldo</x:String>
+    <x:String x:Key="DebtView.Watermark.SearchBar">Buscar deudas...</x:String>
+    <x:String x:Key="DebtView.Sorting">Ordenar por</x:String>
+    <x:String x:Key="DebtView.SortOption.DateAsc">Fecha (Más antigua)</x:String>
+    <x:String x:Key="DebtView.SortOption.DateDesc">Fecha (Más reciente)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountAsc">Cantidad (Menor)</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountDesc">Cantidad (Mayor)</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">Pagar con créditos</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">Generar dirección de pago</x:String>
 
 </ResourceDictionary>

@@ -15,13 +15,14 @@
     <x:String x:Key="LoginView.Watermark.Username">Pirate Name</x:String>
     <x:String x:Key="LoginView.Watermark.Password">Secret Sign</x:String>
     <x:String x:Key="LoginView.Watermark.ConfirmPassword">Repeat the Sign</x:String>
-    <x:String x:Key="LoginView.Watermark.Email">Messenger Bird</x:String>
+    <x:String x:Key="LoginView.Watermark.Code">Secret Cipher</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">Bounty Log</x:String>
 
     <x:String x:Key="NavbarView.Menu">Compass</x:String>
     <x:String x:Key="NavbarView.Dashboard">Main Deck</x:String>
     <x:String x:Key="NavbarView.Settings">Ship's Rules</x:String>
+    <x:String x:Key="NavbarView.Debts">Debts to the Sea</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Treasure</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Buried Gold</x:String>
@@ -29,6 +30,15 @@
     <x:String x:Key="Transaction.Status.Completed">Looted</x:String>
     <x:String x:Key="Transaction.Status.Pending">In the Depths</x:String>
     <x:String x:Key="Transaction.Status.Failed">Sunk</x:String>
+    <x:String x:Key="Transaction.Status.Confirmed">Captain's Seal</x:String>
+    <x:String x:Key="Transaction.Status.Created">Drawn on Map</x:String>
+    <x:String x:Key="Transaction.Status.WaitingForPayment">Awaiting Gold</x:String>
+    <x:String x:Key="Transaction.Status.PartiallyPaid">Partial Tribute</x:String>
+    <x:String x:Key="Transaction.Status.Paid">Gold in Hand</x:String>
+    <x:String x:Key="Transaction.Status.Overpaid">Too much Booty</x:String>
+    <x:String x:Key="Transaction.Status.Expired">Lost at Sea</x:String>
+    <x:String x:Key="Transaction.Status.Cancelled">Tossed Overboard</x:String>
+    <x:String x:Key="Transaction.Status.Error">Krakens!</x:String>
 
     <x:String x:Key="SettingsView.Appearance.Title">Paint the Ship</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Tongue</x:String>
@@ -38,5 +48,15 @@
     <x:String x:Key="Date.LastWeek">A Fortnight's Half</x:String>
     <x:String x:Key="Date.Last2Weeks">A Full Fortnight</x:String>
     <x:String x:Key="Date.Older">Ages Ago</x:String>
+
+    <x:String x:Key="DebtView.Payable">Payable from the chest</x:String>
+    <x:String x:Key="DebtView.Watermark.SearchBar">Scour the debts...</x:String>
+    <x:String x:Key="DebtView.Sorting">Arrange by</x:String>
+    <x:String x:Key="DebtView.SortOption.DateAsc">Ancient Logs</x:String>
+    <x:String x:Key="DebtView.SortOption.DateDesc">Fresh Tidings</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountAsc">Pocket Change</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountDesc">King's Ransom</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">Pay with yer loot</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">Map out a payment port</x:String>
 
 </ResourceDictionary>

@@ -1,4 +1,4 @@
-<Application xmlns="https://github.com/avaloniaui"
+﻿<Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:CtrlPay.Avalonia"
              x:Class="CtrlPay.Avalonia.App"
@@ -11,6 +11,9 @@
     <Application.Styles>
         <FluentTheme/>
         <StyleInclude Source="avares://CtrlPay.Avalonia/Styles/Styles.axaml"/>
+        <StyleInclude Source="avares://CtrlPay.Avalonia/Styles/StatusEllipse.axaml"/>
+        <StyleInclude Source="avares://CtrlPay.Avalonia/Styles/StatusTextBlock.axaml"/>
+        <StyleInclude Source="avares://CtrlPay.Avalonia/Styles/StatusBorder.axaml"/>
     </Application.Styles>
 
 </Application>

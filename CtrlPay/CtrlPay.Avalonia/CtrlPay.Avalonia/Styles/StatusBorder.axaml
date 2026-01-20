@@ -1,0 +1,37 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style Selector="Border.indicator">
+        <Setter Property="Width" Value="12"/>
+        <Setter Property="Height" Value="12"/>
+        <Setter Property="Background" Value="{DynamicResource Brush.Text.Disabled}"/>
+    </Style>
+
+    <Style Selector="Border.indicator[Tag=Completed], 
+                    Border.indicator[Tag=Confirmed], 
+                    Border.indicator[Tag=Paid],
+                    Border.indicator[Tag=Created]">
+        <Setter Property="Background" Value="{DynamicResource Brush.Success}"/>
+    </Style>
+
+    <Style Selector="Border.indicator[Tag=Pending], 
+                    Border.indicator[Tag=PartiallyPaid], 
+                    Border.indicator[Tag=WaitingForPayment]">
+        <Setter Property="Background" Value="{DynamicResource Brush.Warning}"/>
+    </Style>
+
+    <Style Selector="Border.indicator[Tag=Failed], 
+                    Border.indicator[Tag=Error], 
+                    Border.indicator[Tag=Cancelled]">
+        <Setter Property="Background" Value="{DynamicResource Brush.Error}"/>
+    </Style>
+
+    <Style Selector="Border.indicator[Tag=Expired]">
+        <Setter Property="Background" Value="Gray"/>
+    </Style>
+    
+    <Style Selector="Border.indicator[Tag=Overpaid]">
+        <Setter Property="Background" Value="Purple"/>
+    </Style>
+
+</Styles>

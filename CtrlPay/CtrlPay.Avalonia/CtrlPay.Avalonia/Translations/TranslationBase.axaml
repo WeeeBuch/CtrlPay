@@ -18,7 +18,7 @@
     <x:String x:Key="LoginView.Watermark.Username">LoginView.Watermark.Username</x:String>
     <x:String x:Key="LoginView.Watermark.Password">LoginView.Watermark.Password</x:String>
     <x:String x:Key="LoginView.Watermark.ConfirmPassword">LoginView.Watermark.ConfirmPassword</x:String>
-    <x:String x:Key="LoginView.Watermark.Email">LoginView.Watermark.Email</x:String>
+    <x:String x:Key="LoginView.Watermark.Code">LoginView.Watermark.Code</x:String>
 
     <!-- Dashboard View -->
     <x:String x:Key="DashboardView.TransactionList">DashboardView.TransactionList</x:String>
@@ -27,6 +27,7 @@
     <x:String x:Key="NavbarView.Menu">NavbarView.Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">NavbarView.Dashboard</x:String>
     <x:String x:Key="NavbarView.Settings">NavbarView.Settings</x:String>
+    <x:String x:Key="NavbarView.Debts">NavbarView.Debts</x:String>
 
     <!-- Credit Counter Piece -->
     <x:String x:Key="CounterPiece.Credits.Title">CounterPiece.Credits.Title</x:String>
@@ -36,6 +37,15 @@
     <x:String x:Key="Transaction.Status.Completed">Transaction.Status.Completed</x:String>
     <x:String x:Key="Transaction.Status.Pending">Transaction.Status.Pending</x:String>
     <x:String x:Key="Transaction.Status.Failed">Transaction.Status.Failed</x:String>
+    <x:String x:Key="Transaction.Status.Confirmed">Transaction.Status.Confirmed</x:String>
+    <x:String x:Key="Transaction.Status.Created">Transaction.Status.Created</x:String>
+    <x:String x:Key="Transaction.Status.WaitingForPayment">Transaction.Status.WaitingForPayment</x:String>
+    <x:String x:Key="Transaction.Status.PartiallyPaid">Transaction.Status.PartiallyPaid</x:String>
+    <x:String x:Key="Transaction.Status.Paid">Transaction.Status.Paid</x:String>
+    <x:String x:Key="Transaction.Status.Overpaid">Transaction.Status.Overpaid</x:String>
+    <x:String x:Key="Transaction.Status.Expired">Transaction.Status.Expired</x:String>
+    <x:String x:Key="Transaction.Status.Cancelled">Transaction.Status.Cancelled</x:String>
+    <x:String x:Key="Transaction.Status.Error">Transaction.Status.Error</x:String>
 
     <!-- Settings View -->
     <x:String x:Key="SettingsView.Appearance.Title">SettingsView.Appearance.Title</x:String>
@@ -47,5 +57,16 @@
     <x:String x:Key="Date.LastWeek">Date.LastWeek</x:String>
     <x:String x:Key="Date.Last2Weeks">Date.Last2Weeks</x:String>
     <x:String x:Key="Date.Older">Date.Older</x:String>
+
+    <!-- Debts View -->
+    <x:String x:Key="DebtView.Payable">DebtView.Payable</x:String>
+    <x:String x:Key="DebtView.Watermark.SearchBar">DebtView.Watermark.SearchBar</x:String>
+    <x:String x:Key="DebtView.Sorting">DebtView.Sorting</x:String>
+    <x:String x:Key="DebtView.SortOption.DateAsc">DebtView.SortOption.DateAsc</x:String>
+    <x:String x:Key="DebtView.SortOption.DateDesc">DebtView.SortOption.DateDesc</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountAsc">DebtView.SortOption.AmountAsc</x:String>
+    <x:String x:Key="DebtView.SortOption.AmountDesc">DebtView.SortOption.AmountDesc</x:String>
+    <x:String x:Key="DebtView.PayFromCredit">DebtView.PayFromCredit</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">DebtView.GenerateAddress</x:String>
 
 </ResourceDictionary>

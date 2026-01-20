@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CtrlPay.Avalonia.Translations;
+using CtrlPay.Entities;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,7 +48,7 @@ public partial class TransactionItemViewModel : DashboardListItem
     public string Title { get; set; } = "";
     public decimal Amount { get; set; }
     public DateTime Date { get; set; }
-    public ToDoRepo.TransactionState Status { get; set; }
+    public StatusEnum Status { get; set; }
 
     public string StatusText
     {
@@ -54,9 +56,18 @@ public partial class TransactionItemViewModel : DashboardListItem
         {
             return Status switch
             {
-                ToDoRepo.TransactionState.Completed => TranslationManager.GetString("Transaction.Status.Completed"),
-                ToDoRepo.TransactionState.Pending => TranslationManager.GetString("Transaction.Status.Pending"),
-                ToDoRepo.TransactionState.Failed => TranslationManager.GetString("Transaction.Status.Failed"),
+                StatusEnum.Completed => TranslationManager.GetString("Transaction.Status.Completed"),
+                StatusEnum.Pending => TranslationManager.GetString("Transaction.Status.Pending"),
+                StatusEnum.Failed => TranslationManager.GetString("Transaction.Status.Failed"),
+                StatusEnum.Confirmed => TranslationManager.GetString("Transaction.Status.Confirmed"),
+                StatusEnum.Created => TranslationManager.GetString("Transaction.Status.Created"),
+                StatusEnum.WaitingForPayment => TranslationManager.GetString("Transaction.Status.WaitingForPayment"),
+                StatusEnum.PartiallyPaid => TranslationManager.GetString("Transaction.Status.PartiallyPaid"),
+                StatusEnum.Paid => TranslationManager.GetString("Transaction.Status.Paid"),
+                StatusEnum.Overpaid => TranslationManager.GetString("Transaction.Status.Overpaid"),
+                StatusEnum.Expired => TranslationManager.GetString("Transaction.Status.Expired"),
+                StatusEnum.Cancelled => TranslationManager.GetString("Transaction.Status.Cancelled"),
+                StatusEnum.Error => TranslationManager.GetString("Transaction.Status.Error"),
                 _ => "Nah state not implemented WTF"
             };
         }

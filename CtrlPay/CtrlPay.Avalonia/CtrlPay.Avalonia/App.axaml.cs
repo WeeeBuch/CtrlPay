@@ -3,10 +3,12 @@ using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Avalonia.Views;
+using System;
 using System.Linq;
 
 namespace CtrlPay.Avalonia
@@ -15,8 +17,9 @@ namespace CtrlPay.Avalonia
     {
         public override void Initialize()
         {
-            ThemeManager.Apply(ThemeManager.AppTheme.Lime);
-            TranslationManager.Apply(TranslationManager.AppLanguage.Base);
+            SettingsManager.Init();
+            ThemeManager.Apply(SettingsManager.Current.Theme);
+            TranslationManager.Apply(SettingsManager.Current.Language);
             AvaloniaXamlLoader.Load(this);
         }
 
@@ -28,6 +31,10 @@ namespace CtrlPay.Avalonia
                 // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
                 desktop.MainWindow = new LoginWindow();
+                desktop.ShutdownRequested += (s, e) =>
+                {
+                    SettingsManager.Save(SettingsManager.Current);
+                };
             }
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
             {
@@ -36,6 +43,8 @@ namespace CtrlPay.Avalonia
                     DataContext = new MainViewModel()
                 };
             }
+
+            _ = ChangeChecker.StartChecking(TimeSpan.FromSeconds(5));
 
             base.OnFrameworkInitializationCompleted();
         }
