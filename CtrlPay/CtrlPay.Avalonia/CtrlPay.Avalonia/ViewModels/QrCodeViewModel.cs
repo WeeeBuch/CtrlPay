@@ -52,15 +52,26 @@ public partial class QrCodeViewModel : ViewModelBase
     [RelayCommand]
     private async Task CopyToClipboard()
     {
-        var topLevel = TopLevel.GetTopLevel(Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop ? desktop.MainWindow : null);
-
-        if (topLevel?.Clipboard is { } clipboard)
+        if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            await clipboard.SetTextAsync(Address);
+            var activeWindow = desktop.Windows.FirstOrDefault(w => w.IsActive)
+                               ?? desktop.MainWindow
+                               ?? desktop.Windows.FirstOrDefault();
 
-            ShowCopyMessage = true;
-            await Task.Delay(2000);
-            ShowCopyMessage = false;
+            var clipboard = activeWindow?.Clipboard;
+
+            if (clipboard != null)
+            {
+                await clipboard.SetTextAsync(CopyString);
+
+                ShowCopyMessage = true;
+                await Task.Delay(2000);
+                ShowCopyMessage = false;
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Kritická chyba: Schránka nebyla nalezena v žádném okně.");
+            }
         }
     }
 }

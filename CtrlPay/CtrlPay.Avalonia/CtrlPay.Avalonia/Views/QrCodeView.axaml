@@ -5,11 +5,12 @@
              xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
              mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="450"
              x:Class="CtrlPay.Avalonia.QrCodeView"
-             x:DataType="vm:QrCodeViewModel">
+             x:DataType="vm:QrCodeViewModel"
+             Background="{DynamicResource Color.Background}">
 
 	<StackPanel Margin="20" Spacing="15" HorizontalAlignment="Center">
 		
-		<TextBlock Text="Monero Platba" 
+		<TextBlock Text="{DynamicResource QRCodeWindow.QRPay}" 
                    FontSize="20" 
                    FontWeight="SemiBold" 
                    HorizontalAlignment="Center"
@@ -32,7 +33,7 @@
                     Padding="5"
                     HorizontalAlignment="Center">
 				<StackPanel Spacing="5">
-					<TextBlock Text="Kliknutím zkopírujete adresu:" 
+					<TextBlock Text="{DynamicResource QRCodeWindow.Copy2Clipboard}" 
                                FontSize="11" 
                                Foreground="Gray" 
                                HorizontalAlignment="Center"/>
@@ -55,7 +56,7 @@
 			</Button>
 
 			<Panel Height="20">
-				<TextBlock Text="✓ Zkopírováno do schránky" 
+				<TextBlock Text="{DynamicResource QRCodeWindow.Copied2ClipboardMsg}" 
                            Foreground="Green" 
                            FontSize="12"
                            FontWeight="Medium"

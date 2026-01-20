@@ -9,7 +9,7 @@ namespace CtrlPay.Repos
 {
     public static class ToDoRepo
     {
-        //TODO: Metody do repos: 2
+        //TODO: Metody do repos: 3
 
         public static decimal GetTransactionSums(string type)
         {

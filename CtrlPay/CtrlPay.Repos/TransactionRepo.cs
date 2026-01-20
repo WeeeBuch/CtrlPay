@@ -75,6 +75,7 @@ namespace CtrlPay.Repos
 
 
             #endregion
+
             var handler = new HttpClientHandler
             {
                 UseProxy = false

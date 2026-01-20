@@ -46,6 +46,8 @@ public partial class DebtItemViewModel : ObservableObject
 
         TransactionDTOBase = transaction;
         creditPayString = "";
+
+        UpdateCreditAmount(ToDoRepo.GetTransactionSums("credits"));
     }
 
     [RelayCommand]
@@ -60,10 +62,9 @@ public partial class DebtItemViewModel : ObservableObject
         QrCodeViewModel vm = new(addr, TransactionDTOBase);
         QrCodeView view = new() { DataContext = vm };
 
-        var window = new Window
+        var window = new QrCodeWindow
         {
             Content = view,
-            Title = "QR Kód",
             SizeToContent = SizeToContent.WidthAndHeight,
             CanResize = false,
             WindowStartupLocation = WindowStartupLocation.CenterOwner
@@ -190,6 +191,7 @@ public partial class DebtViewModel : ViewModelBase
     {
         LoadedTransactions = ltDTO;
         Debts.ReplaceAll([.. ltDTO.Select(p => new DebtItemViewModel(p))]);
+        ApplySorting(null);
     }
 
     public async Task GetDebtsFromRepo()

@@ -59,4 +59,9 @@
     <x:String x:Key="DebtView.PayFromCredit">Máznot to z kreditů</x:String>
     <x:String x:Key="DebtView.GenerateAddress">Udělat placací adresu</x:String>
 
+    <x:String x:Key="QRCodeWindow.Title">Kudy na ty prachy</x:String>
+    <x:String x:Key="QRCodeWindow.QRPay">Platba v Moneru</x:String>
+    <x:String x:Key="QRCodeWindow.Copy2Clipboard">Sbalit adresu</x:String>
+    <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Už to máš v kapse (ve schránce)</x:String>
+
 </ResourceDictionary>

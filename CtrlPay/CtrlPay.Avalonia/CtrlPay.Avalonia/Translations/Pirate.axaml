@@ -59,4 +59,9 @@
     <x:String x:Key="DebtView.PayFromCredit">Pay with yer loot</x:String>
     <x:String x:Key="DebtView.GenerateAddress">Map out a payment port</x:String>
 
+    <x:String x:Key="QRCodeWindow.Title">Looting Map</x:String>
+    <x:String x:Key="QRCodeWindow.QRPay">Monero Booty</x:String>
+    <x:String x:Key="QRCodeWindow.Copy2Clipboard">Steal the Code</x:String>
+    <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">The code be hidden in yer pocket now</x:String>
+
 </ResourceDictionary>
