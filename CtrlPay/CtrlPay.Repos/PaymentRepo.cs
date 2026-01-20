@@ -151,7 +151,7 @@ namespace CtrlPay.Repos
 
         public static async Task<decimal> GetPaymentSum(CancellationToken cancellationToken)
         {
-            await GetPaymentsFromApiIfNeeded(cancellationToken);
+            await GetPaymentSumFromApiIfNeeded(cancellationToken);
             return PaymentSumCache;
         }
     }
