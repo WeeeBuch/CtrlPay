@@ -5,6 +5,7 @@ using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Entities;
+using CtrlPay.Repos;
 using QRCoder;
 using System;
 using System.Collections.Generic;
@@ -22,17 +23,21 @@ public partial class QrCodeViewModel : ViewModelBase
     [ObservableProperty] private Bitmap? _qrCodeImage;
     [ObservableProperty] private string _address;
     [ObservableProperty] private bool _showCopyMessage = false;
+    [ObservableProperty] private string _title;
+    [ObservableProperty] private string _copyString;
 
-    public QrCodeViewModel(string address)
+    public QrCodeViewModel(string address, FrontendTransactionDTO transaction)
     {
         Address = address;
-        QrCodeImage = GenQR();
+        Title = transaction.Title;
+        QrCodeImage = GenQR(transaction);
     }
 
-    private Bitmap GenQR()
+    private Bitmap GenQR(FrontendTransactionDTO tx)
     {
-        MoneroTransaction generator = new(Address);
+        MoneroTransaction generator = new(Address, (float)tx.Amount, tx.Id.ToString(), "You", tx.Title);
         string payload = generator.ToString();
+        CopyString = payload;
 
         QRCodeGenerator qrGenerator = new();
         QRCodeData qRCodeData = qrGenerator.CreateQrCode(payload, QRCodeGenerator.ECCLevel.Q);

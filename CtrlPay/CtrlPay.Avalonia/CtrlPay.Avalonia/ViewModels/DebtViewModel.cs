@@ -57,7 +57,7 @@ public partial class DebtItemViewModel : ObservableObject
         /* Implementace generování adresy */ 
         string addr = ToDoRepo.GetOneTimeAddress(TransactionDTOBase);
 
-        QrCodeViewModel vm = new(addr);
+        QrCodeViewModel vm = new(addr, TransactionDTOBase);
         QrCodeView view = new() { DataContext = vm };
 
         var window = new Window
@@ -69,11 +69,6 @@ public partial class DebtItemViewModel : ObservableObject
             WindowStartupLocation = WindowStartupLocation.CenterOwner
         };
         window.Show();
-        /*
-        if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-        {
-            window.ShowDialog(desktop.MainWindow!);
-        }*/
     }
 
     public StatusEnum Status { get; set; }

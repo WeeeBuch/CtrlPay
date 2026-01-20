@@ -37,7 +37,7 @@
                                Foreground="Gray" 
                                HorizontalAlignment="Center"/>
 					
-					<TextBlock Text="{Binding Address}" 
+					<TextBlock Text="{Binding CopyString}" 
                                FontSize="12"
                                TextWrapping="Wrap"
                                TextAlignment="Center"
