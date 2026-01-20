@@ -32,10 +32,10 @@ public partial class DashboardViewModel : ViewModelBase
         LoadTransactionSums();
     }
 
-    private void LoadTransactionSums()
+    private async void LoadTransactionSums()
     {
-        decimal creditAmount = Repos.ToDoRepo.GetTransactionSums("credits");
-        decimal pendingAmount = Repos.ToDoRepo.GetTransactionSums("pending");
+        decimal creditAmount = await TransactionRepo.GetTransactionSum(default);
+        decimal pendingAmount = await PaymentRepo.GetPaymentSum(default);
 
         TotalCredits.Amount = creditAmount;
         PendingCredits.Amount = pendingAmount;

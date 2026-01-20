@@ -94,10 +94,10 @@ public partial class DebtViewModel : ViewModelBase
         UpdateHandler.NewTransactionAddedActions.Add(TransactionsUpdated);
     }
 
-    public void ApplySorting(string? sortingMethod)
+    public async Task ApplySorting(string? sortingMethod)
     {
         // 1. Získáme aktuální sumu kreditů pro porovnání
-        decimal creditAmount = ToDoRepo.GetTransactionSums("credits");
+        decimal creditAmount = await TransactionRepo.GetTransactionSum(default);
         string selectedKey = SelectedSortOrder?.Key ?? "DateAsc";
 
         // 2. VŽDY filtrujeme z LoadedTransactions (tam jsou všechny dluhy z repa)

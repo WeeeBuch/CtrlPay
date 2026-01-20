@@ -15,6 +15,46 @@ namespace CtrlPay.Repos
 {
     public class TransactionRepo
     {
+        private static List<TransactionApiDTO> Transactions { get; set; } = new List<TransactionApiDTO>();
+        private static DateTime LastUpdatedTransactions { get; set; } = DateTime.MinValue;
+        private static decimal TransactionSumCache { get; set; } = 0;
+        private static DateTime LastUpdatedTransactionSum { get; set; } = DateTime.MinValue;
+        private static async Task GetTransactionsFromApiIfNeeded(CancellationToken cancellationToken)
+        {
+            
+
+            if ((DateTime.UtcNow - LastUpdatedTransactions).TotalMinutes < 2) { return; }
+
+            var handler = new HttpClientHandler
+            {
+                UseProxy = false
+            };
+
+            using var httpClient = new HttpClient(handler);
+
+            // Monero / jiné RPC často vyžaduje HTTP/1.1
+            httpClient.DefaultRequestVersion = HttpVersion.Version11;
+
+            httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
+            string uri = $"{Credentials.BaseUri}/api/transactions/my";
+            // volání chráněného endpointu
+            var response = await httpClient.GetAsync(uri);
+
+            response.EnsureSuccessStatusCode();
+            // Definuj si options
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            string json = await response.Content.ReadAsStringAsync();
+
+            // Přidej options do metody Deserialize
+            List<TransactionApiDTO> transactionsDtos = JsonSerializer.Deserialize<List<TransactionApiDTO>>(json, options);
+            Transactions = transactionsDtos;
+            LastUpdatedTransactions = DateTime.UtcNow;
+        }
         public static async Task<List<FrontendTransactionDTO>> GetTransactions(CancellationToken cancellationToken)
         {
             #region Debug
@@ -70,11 +110,17 @@ namespace CtrlPay.Repos
                         Id = 6
                     }
                 ];
-                return debugList;
             }
 
 
             #endregion
+            await GetTransactionsFromApiIfNeeded(cancellationToken);
+            return Transactions.Select(t => new FrontendTransactionDTO(t)).ToList();
+        }
+        private static async Task GetTransactionSumFromApiIfNeeded(CancellationToken cancellationToken)
+        {
+            if ((DateTime.UtcNow - LastUpdatedTransactionSum).TotalMinutes < 2) { return; }
+
             var handler = new HttpClientHandler
             {
                 UseProxy = false
@@ -87,9 +133,9 @@ namespace CtrlPay.Repos
 
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
-            string uri = $"{Credentials.BaseUri}/api/transactions/my";
+            string uri = $"{Credentials.BaseUri}/api/transactions/credit";
             // volání chráněného endpointu
-            var response = await httpClient.GetAsync(uri);
+            var response = await httpClient.GetAsync(uri, cancellationToken);
 
             response.EnsureSuccessStatusCode();
             // Definuj si options
@@ -98,18 +144,15 @@ namespace CtrlPay.Repos
                 PropertyNameCaseInsensitive = true
             };
 
-            string json = await response.Content.ReadAsStringAsync();
+            decimal suma = decimal.Parse(await response.Content.ReadAsStringAsync(), System.Globalization.CultureInfo.InvariantCulture);
 
-            // Přidej options do metody Deserialize
-            List<TransactionApiDTO> transactions = JsonSerializer.Deserialize<List<TransactionApiDTO>>(json, options);
-            List<FrontendTransactionDTO> dtoList = new List<FrontendTransactionDTO>();
-
-            foreach(var tx in transactions)
-            {
-                dtoList.Add(new FrontendTransactionDTO(tx));
-            }
-
-            return dtoList;
+            TransactionSumCache = suma;
+            LastUpdatedTransactionSum = DateTime.UtcNow;
+        }
+        public static async Task<decimal> GetTransactionSum(CancellationToken cancellationToken)
+        {
+            await GetTransactionSumFromApiIfNeeded(cancellationToken);
+            return TransactionSumCache;
         }
     }
 }

@@ -34,5 +34,28 @@ namespace CtrlPay.API.Controllers
             }
             return Ok(transactionsDTO);
         }
+        [HttpGet]
+        [Route("credit")]
+        // GET : api/transactions/credit
+        public IActionResult Credit()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
+            int? accountIndex = user.LoyalCustomer.Account.Index;
+            if (accountIndex is null)
+            {
+                return BadRequest("User has no account.");
+            }
+            decimal credit = _db.Transactions
+                .Where(t => t.Account.Index == accountIndex)
+                .Where(t => t.Status == TransactionStatusEnum.Completed || t.Status == TransactionStatusEnum.Confirmed)
+                .Sum(p => p.Amount);
+            decimal ourXmr = _db.LoyalCustomers
+                .Where(lc => lc.Account.Index == accountIndex)
+                .First()
+                .OurXMR;
+            credit -= ourXmr;
+            return Ok(credit);
+        }
     }
 }

@@ -35,5 +35,21 @@ namespace CtrlPay.API.Controllers
             }
             return Ok(paymentsDTO);
         }
+        [HttpGet]
+        [Route("amount-due")]
+        // GET : api/payments/amount-due
+        public IActionResult AmountDue()
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
+            int accountIndex = user.LoyalCustomer.Account.Index;
+            List<Entities.Payment> debts = _db.Payments
+                .Where(p => p.Account.Index == accountIndex)
+                .Where(p => p.Status == PaymentStatusEnum.PartiallyPaid || p.Status == PaymentStatusEnum.WaitingForPayment)
+                .ToList();
+            decimal sum = debts.Sum(d => d.ExpectedAmountXMR - d.PaidAmountXMR);
+            return Ok(sum);
+        }
+
     }
 }
