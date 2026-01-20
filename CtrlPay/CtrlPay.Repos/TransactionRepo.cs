@@ -135,11 +135,6 @@ namespace CtrlPay.Repos
             var response = await httpClient.GetAsync(uri, cancellationToken);
 
             response.EnsureSuccessStatusCode();
-            // Definuj si options
-            var options = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            };
 
             decimal suma = decimal.Parse(await response.Content.ReadAsStringAsync(), System.Globalization.CultureInfo.InvariantCulture);
 
