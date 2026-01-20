@@ -19,7 +19,6 @@ namespace CtrlPay.Repos
 
             Random rnd = new();
             decimal sum = rnd.Next(0,10);
-
             return sum;
         }
 
