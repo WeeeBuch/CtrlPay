@@ -1,8 +1,74 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-             x:Class="CtrlPay.Avalonia.QrCodeView">
-  Welcome to Avalonia!
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="320" d:DesignHeight="450"
+             x:Class="CtrlPay.Avalonia.QrCodeView"
+             x:DataType="vm:QrCodeViewModel">
+
+	<StackPanel Margin="20" Spacing="15" HorizontalAlignment="Center">
+		
+		<TextBlock Text="Monero Platba" 
+                   FontSize="20" 
+                   FontWeight="SemiBold" 
+                   HorizontalAlignment="Center"
+                   Foreground="{DynamicResource SystemAccentColor}"/>
+
+		<Border Background="White" 
+                Padding="12" 
+                CornerRadius="12" 
+                BoxShadow="0 4 12 0 #30000000">
+			<Image Source="{Binding QrCodeImage}" 
+                   Width="240" 
+                   Height="240"
+                   RenderOptions.BitmapInterpolationMode="None" />
+		</Border>
+
+		<StackPanel Spacing="8">
+			<Button Command="{Binding CopyToClipboardCommand}"
+                    Background="Transparent"
+                    BorderThickness="0"
+                    Padding="5"
+                    HorizontalAlignment="Center">
+				<StackPanel Spacing="5">
+					<TextBlock Text="Kliknutím zkopírujete adresu:" 
+                               FontSize="11" 
+                               Foreground="Gray" 
+                               HorizontalAlignment="Center"/>
+					
+					<TextBlock Text="{Binding Address}" 
+                               FontSize="12"
+                               TextWrapping="Wrap"
+                               TextAlignment="Center"
+                               MaxWidth="280"
+                               FontFamily="Monospace"
+                               Foreground="#0078D4"/>
+				</StackPanel>
+
+				<Button.Styles>
+					<Style Selector="Button:pointerover /template/ ContentPresenter">
+						<Setter Property="Background" Value="#100078D4"/>
+						<Setter Property="CornerRadius" Value="4"/>
+					</Style>
+				</Button.Styles>
+			</Button>
+
+			<Panel Height="20">
+				<TextBlock Text="✓ Zkopírováno do schránky" 
+                           Foreground="Green" 
+                           FontSize="12"
+                           FontWeight="Medium"
+                           HorizontalAlignment="Center"
+                           IsVisible="{Binding ShowCopyMessage}">
+					<TextBlock.Transitions>
+						<Transitions>
+							<DoubleTransition Property="Opacity" Duration="0:0:0.2"/>
+						</Transitions>
+					</TextBlock.Transitions>
+				</TextBlock>
+			</Panel>
+		</StackPanel>
+
+	</StackPanel>
 </UserControl>

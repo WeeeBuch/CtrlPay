@@ -1,21 +1,25 @@
-﻿using Avalonia.Media;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Media;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Avalonia.Threading;
 using static CtrlPay.Repos.ToDoRepo;
-using CtrlPay.Repos.Frontend;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -48,7 +52,29 @@ public partial class DebtItemViewModel : ObservableObject
     private void PayFromCredit() => ToDoRepo.PayFromCredit(TransactionDTOBase);
 
     [RelayCommand]
-    private void GenerateAddress() { /* Implementace generování adresy */ }
+    private void GenerateAddress() 
+    { 
+        /* Implementace generování adresy */ 
+        string addr = ToDoRepo.GetOneTimeAddress(TransactionDTOBase);
+
+        QrCodeViewModel vm = new(addr);
+        QrCodeView view = new() { DataContext = vm };
+
+        var window = new Window
+        {
+            Content = view,
+            Title = "QR Kód",
+            SizeToContent = SizeToContent.WidthAndHeight,
+            CanResize = false,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner
+        };
+        window.Show();
+        /*
+        if (Application.Current?.ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        {
+            window.ShowDialog(desktop.MainWindow!);
+        }*/
+    }
 
     public StatusEnum Status { get; set; }
 

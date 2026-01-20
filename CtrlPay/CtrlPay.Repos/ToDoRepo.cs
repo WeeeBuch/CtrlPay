@@ -27,5 +27,12 @@ namespace CtrlPay.Repos
         {
             // Implementace platby z kreditu
         }
+
+        public static string GetOneTimeAddress(FrontendTransactionDTO transaction)
+        {
+            // Implementace generování jednorázové adresy
+            // transakce pro pozdější automatické napojení
+            return "generated_one_time_address";
+        }
     }
 }
