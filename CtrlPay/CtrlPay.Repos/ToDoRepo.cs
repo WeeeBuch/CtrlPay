@@ -1,4 +1,4 @@
-﻿using CtrlPay.Entities;
+using CtrlPay.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
