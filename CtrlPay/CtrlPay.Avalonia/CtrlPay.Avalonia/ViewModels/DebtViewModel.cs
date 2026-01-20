@@ -1,21 +1,25 @@
-﻿using Avalonia.Media;
+using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Media;
+using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
-using Avalonia.Threading;
 using static CtrlPay.Repos.ToDoRepo;
-using CtrlPay.Repos.Frontend;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -35,26 +39,45 @@ public partial class DebtItemViewModel : ObservableObject
 
     public DebtItemViewModel(FrontendTransactionDTO transaction)
     {
-        _description = transaction.Title;
-        _amount = transaction.Amount;
+        Description = transaction.Title;
+        Amount = transaction.Amount;
         Status = transaction.State;
         Timestamp = transaction.Timestamp;
 
         TransactionDTOBase = transaction;
+        creditPayString = "";
+
+        UpdateCreditAmount(ToDoRepo.GetTransactionSums("credits"));
     }
 
     [RelayCommand]
     private void PayFromCredit() => ToDoRepo.PayFromCredit(TransactionDTOBase);
 
     [RelayCommand]
-    private void GenerateAddress() { /* Implementace generování adresy */ }
+    private void GenerateAddress() 
+    { 
+        /* Implementace generování adresy */ 
+        string addr = ToDoRepo.GetOneTimeAddress(TransactionDTOBase);
+
+        QrCodeViewModel vm = new(addr, TransactionDTOBase);
+        QrCodeView view = new() { DataContext = vm };
+
+        var window = new QrCodeWindow
+        {
+            Content = view,
+            SizeToContent = SizeToContent.WidthAndHeight,
+            CanResize = false,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner
+        };
+        window.Show();
+    }
 
     public StatusEnum Status { get; set; }
 
     public void UpdateCreditAmount(decimal amount)
     {
         CreditAmount = amount;
-        CreditPayString = $"{CreditAmount} / {_amount}";
+        CreditPayString = $"{CreditAmount} / {Amount}";
     }
 }
 
@@ -76,7 +99,7 @@ public partial class DebtViewModel : ViewModelBase
 
     public DebtViewModel()
     {
-        GetDebtsFromRepo();
+        _ = GetDebtsFromRepo();
 
         SortOptions = new List<SortOption>
         {
@@ -98,30 +121,23 @@ public partial class DebtViewModel : ViewModelBase
     {
         // 1. Získáme aktuální sumu kreditů pro porovnání
         decimal creditAmount = await TransactionRepo.GetTransactionSum(default);
-        string selectedKey = SelectedSortOrder?.Key ?? "DateAsc";
+        string selectedKey = sortingMethod ?? SelectedSortOrder.Key;
 
         // 2. VŽDY filtrujeme z LoadedTransactions (tam jsou všechny dluhy z repa)
-        List<FrontendTransactionDTO> filteredData = LoadedTransactions
-            .Where(t => !PayableChecked || t.Amount <= creditAmount)
-            .ToList();
+        List<FrontendTransactionDTO> filteredData = [.. 
+            LoadedTransactions.Where(t => !PayableChecked || t.Amount <= creditAmount)];
 
         List<FrontendTransactionDTO> sortedDTOs;
-        // 3. Seřadíme vyfiltrovaná data
-        if (sortingMethod != null)
+        
+        sortedDTOs = selectedKey switch
         {
-            sortedDTOs = selectedKey switch
-            {
-                "AmountAsc" => filteredData.OrderBy(d => d.Amount).ToList(),
-                "AmountDesc" => filteredData.OrderByDescending(d => d.Amount).ToList(),
-                "DateAsc" => filteredData.OrderBy(d => d.Timestamp).ToList(),
-                "DateDesc" => filteredData.OrderByDescending(d => d.Timestamp).ToList(),
-               _ => filteredData.OrderBy(d => d.Timestamp).ToList()
-            };
-        }  
-        else
-        {
-            sortedDTOs = filteredData;
-        }
+            "AmountAsc" => [.. filteredData.OrderBy(d => d.Amount)],
+            "AmountDesc" => [.. filteredData.OrderByDescending(d => d.Amount)],
+            "DateAsc" => [.. filteredData.OrderBy(d => d.Timestamp)],
+            "DateDesc" => [.. filteredData.OrderByDescending(d => d.Timestamp)],
+            _ => [.. filteredData.OrderBy(d => d.Timestamp)]
+        };
+        
 
         // 4. Synchronizace s UI - Reuse existujících ViewModelů
         // Tady je ten trik: Hledáme v Debts, jestli už tam VM je, 
@@ -162,7 +178,7 @@ public partial class DebtViewModel : ViewModelBase
 
     public void TransactionsUpdated()
     {
-        GetDebtsFromRepo();
+        _ = GetDebtsFromRepo();
         ApplySorting(null);
     }
 
@@ -175,6 +191,7 @@ public partial class DebtViewModel : ViewModelBase
     {
         LoadedTransactions = ltDTO;
         Debts.ReplaceAll([.. ltDTO.Select(p => new DebtItemViewModel(p))]);
+        ApplySorting(null);
     }
 
     public async Task GetDebtsFromRepo()
@@ -194,7 +211,7 @@ public partial class SortOption : ObservableObject
     public string Key { get; set; }
 
     [ObservableProperty]
-    private string displayName;
+    private string? displayName;
 
     public string DisplayNameKay;
 

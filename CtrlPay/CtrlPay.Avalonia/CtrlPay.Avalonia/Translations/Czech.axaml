@@ -57,6 +57,11 @@
     <x:String x:Key="DebtView.SortOption.AmountAsc">Částka (nejnižší)</x:String>
     <x:String x:Key="DebtView.SortOption.AmountDesc">Částka (nejvyšší)</x:String>
     <x:String x:Key="DebtView.PayFromCredit">Zaplatit z kreditů</x:String>
-<x:String x:Key="DebtView.GenerateAddress">Generovat platební adresu</x:String>
+    <x:String x:Key="DebtView.GenerateAddress">Generovat platební adresu</x:String>
+
+    <x:String x:Key="QRCodeWindow.Title">Detaily platby</x:String>
+    <x:String x:Key="QRCodeWindow.QRPay">Monero platba</x:String>
+    <x:String x:Key="QRCodeWindow.Copy2Clipboard">Kopírovat adresu</x:String>
+    <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Adresa byla zkopírována do schránky</x:String>
 
 </ResourceDictionary>

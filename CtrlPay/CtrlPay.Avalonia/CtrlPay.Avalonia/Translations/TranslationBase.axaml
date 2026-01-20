@@ -69,4 +69,10 @@
     <x:String x:Key="DebtView.PayFromCredit">DebtView.PayFromCredit</x:String>
     <x:String x:Key="DebtView.GenerateAddress">DebtView.GenerateAddress</x:String>
 
+    <!-- QR Code Window -->
+    <x:String x:Key="QRCodeWindow.Title">QRCodeWindow.Title</x:String>
+    <x:String x:Key="QRCodeWindow.QRPay">QRCodeWindow.QRPay</x:String>
+    <x:String x:Key="QRCodeWindow.Copy2Clipboard">QRCodeWindow.Copy2Clipboard</x:String>
+    <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">QRCodeWindow.Copied2ClipboardMsg</x:String>
+
 </ResourceDictionary>

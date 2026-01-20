@@ -20,9 +20,9 @@ public abstract class DashboardListItem : ObservableObject { }
 public partial class SeparatorItemViewModel : DashboardListItem
 {
     [ObservableProperty]
-    private string label;
+    private string? label;
 
-    public string LabelKey;
+    public string? LabelKey;
 
     public SeparatorItemViewModel()
     {

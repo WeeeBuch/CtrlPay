@@ -1,4 +1,4 @@
-﻿using CtrlPay.Entities;
+using CtrlPay.Entities;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System;
@@ -59,25 +59,57 @@ namespace CtrlPay.Repos
             if (DebugMode.IsDebugMode)
             {
                 await Task.Delay(500, cancellationToken); // Simulace zpoždění
-                return new List<FrontendTransactionDTO>
-                {
+                List<FrontendTransactionDTO> debugList = [
                     new FrontendTransactionDTO
                     {
-                        Title = "Testovací platba 1",
-                        Amount = 0.5m,
-                        Timestamp = DateTime.UtcNow.AddHours(-5),
-                        State = StatusEnum.Paid,
+                        Title = "Debug Debt 1",
+                        Amount = 123.45m,
+                        Timestamp = DateTime.UtcNow.AddDays(-1),
+                        State = StatusEnum.Completed,
                         Id = 1
                     },
                     new FrontendTransactionDTO
                     {
-                        Title = "Testovací platba 2 ale moc dlouhá snad se mi zalomí nebo zkrátí.",
-                        Amount = 1.2m,
-                        Timestamp = DateTime.UtcNow.AddHours(-2),
+                        Title = "Debug Debt 2",
+                        Amount = 67.89m,
+                        Timestamp = DateTime.UtcNow.AddDays(-2),
                         State = StatusEnum.Pending,
                         Id = 2
+                    },
+                    new FrontendTransactionDTO
+                    {
+                        Title = "Debug Debt 3",
+                        Amount = 10.00m,
+                        Timestamp = DateTime.UtcNow.AddDays(-3),
+                        State = StatusEnum.Failed,
+                        Id = 3
+                    },
+                    new FrontendTransactionDTO
+                    {
+                        Title = "Debug Debt 4",
+                        Amount = 250.00m,
+                        Timestamp = DateTime.UtcNow.AddDays(-4),
+                        State = StatusEnum.Confirmed,
+                        Id = 4
+                    },
+                    new FrontendTransactionDTO
+                    {
+                        Title = "Debug Debt 5",
+                        Amount = 75.50m,
+                        Timestamp = DateTime.UtcNow.AddDays(-5),
+                        State = StatusEnum.Paid,
+                        Id = 5
+                    },
+                    new FrontendTransactionDTO
+                    {
+                        Title = "Debug Debt 6",
+                        Amount = 300.00m,
+                        Timestamp = DateTime.UtcNow.AddDays(-6),
+                        State = StatusEnum.Expired,
+                        Id = 6
                     }
-                };
+                ];
+                return debugList;
             }
             #endregion
             await GetPaymentsFromApiIfNeeded(cancellationToken);

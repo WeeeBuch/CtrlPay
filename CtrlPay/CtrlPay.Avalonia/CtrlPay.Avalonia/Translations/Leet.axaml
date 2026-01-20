@@ -59,4 +59,9 @@
     <x:String x:Key="DebtView.PayFromCredit">P4Y_W17H_CR3D175</x:String>
     <x:String x:Key="DebtView.GenerateAddress">63N3R473_4DDR355</x:String>
 
+    <x:String x:Key="QRCodeWindow.Title">P4YM3N7_D3741L5</x:String>
+    <x:String x:Key="QRCodeWindow.QRPay">XMR_P4Y</x:String>
+    <x:String x:Key="QRCodeWindow.Copy2Clipboard">CPY_4DDR</x:String>
+    <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">4DDR355_54V3D_70_CL1P804RD</x:String>
+
 </ResourceDictionary>

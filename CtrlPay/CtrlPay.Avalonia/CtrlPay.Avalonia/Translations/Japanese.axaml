@@ -59,4 +59,9 @@
     <x:String x:Key="DebtView.PayFromCredit">クレジットで支払う</x:String>
     <x:String x:Key="DebtView.GenerateAddress">支払いアドレスを生成</x:String>
 
+    <x:String x:Key="QRCodeWindow.Title">支払いの詳細</x:String>
+    <x:String x:Key="QRCodeWindow.QRPay">Monero 決済</x:String>
+    <x:String x:Key="QRCodeWindow.Copy2Clipboard">アドレスをコピー</x:String>
+    <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">アドレスをクリップボードにコピーしました</x:String>
+
 </ResourceDictionary>

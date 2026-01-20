@@ -59,4 +59,9 @@
     <x:String x:Key="DebtView.PayFromCredit">使用余额支付</x:String>
     <x:String x:Key="DebtView.GenerateAddress">生成付款地址</x:String>
 
+    <x:String x:Key="QRCodeWindow.Title">付款详情</x:String>
+    <x:String x:Key="QRCodeWindow.QRPay">门罗币支付</x:String>
+    <x:String x:Key="QRCodeWindow.Copy2Clipboard">复制地址</x:String>
+    <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">地址已复制到剪贴板</x:String>
+
 </ResourceDictionary>
