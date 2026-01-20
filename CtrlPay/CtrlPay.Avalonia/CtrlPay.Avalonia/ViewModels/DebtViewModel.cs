@@ -47,7 +47,7 @@ public partial class DebtItemViewModel : ObservableObject
         TransactionDTOBase = transaction;
         creditPayString = "";
 
-        UpdateCreditAmount(ToDoRepo.GetTransactionSums("credits"));
+        UpdateCreditAmount(TransactionRepo.GetTransactionSum(default).Result);
     }
 
     [RelayCommand]
