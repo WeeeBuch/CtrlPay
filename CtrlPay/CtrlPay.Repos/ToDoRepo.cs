@@ -1,4 +1,4 @@
-﻿using CtrlPay.Entities;
+using CtrlPay.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +12,13 @@ namespace CtrlPay.Repos
         public static void PayFromCredit(FrontendTransactionDTO transakce)
         {
             // Implementace platby z kreditu
+        }
+
+        public static string GetOneTimeAddress(FrontendTransactionDTO transaction)
+        {
+            // Implementace generování jednorázové adresy
+            // transakce pro pozdější automatické napojení
+            return "generated_one_time_address";
         }
     }
 }
