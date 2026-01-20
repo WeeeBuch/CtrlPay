@@ -128,9 +128,6 @@ namespace CtrlPay.Repos
 
             using var httpClient = new HttpClient(handler);
 
-            // Monero / jiné RPC často vyžaduje HTTP/1.1
-            httpClient.DefaultRequestVersion = HttpVersion.Version11;
-
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
             string uri = $"{Credentials.BaseUri}/api/transactions/credit";

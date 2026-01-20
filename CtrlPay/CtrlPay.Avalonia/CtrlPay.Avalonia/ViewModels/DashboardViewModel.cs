@@ -28,6 +28,7 @@ public partial class DashboardViewModel : ViewModelBase
 
     private void LoadInitialData()
     {
+        //TODO: Rozhodit tyhle věci do vlastních threadů, ps: všechny s errorem CS4014
         LoadTransactionLists();
         LoadTransactionSums();
     }
