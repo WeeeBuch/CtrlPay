@@ -1,4 +1,4 @@
-﻿using CtrlPay.Entities;
+using CtrlPay.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +9,7 @@ namespace CtrlPay.Repos
 {
     public static class ToDoRepo
     {
-        //TODO: Metody do repos: 2
+        //TODO: Metody do repos: 3
 
         public static decimal GetTransactionSums(string type)
         {
@@ -18,13 +18,21 @@ namespace CtrlPay.Repos
              */
 
             Random rnd = new();
-            decimal sum = rnd.Next(0,10);
+            decimal sum = rnd.Next(0,400);
+
             return sum;
         }
 
         public static void PayFromCredit(FrontendTransactionDTO transakce)
         {
             // Implementace platby z kreditu
+        }
+
+        public static string GetOneTimeAddress(FrontendTransactionDTO transaction)
+        {
+            // Implementace generování jednorázové adresy
+            // transakce pro pozdější automatické napojení
+            return "generated_one_time_address";
         }
     }
 }
