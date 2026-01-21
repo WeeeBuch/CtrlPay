@@ -19,13 +19,13 @@ namespace CtrlPay.Core
         const int KeySize = 32;             // 256 bit
         const int Iterations = 100_000;
 
-        public static AuthLogicReturnModel Login(string username, string password)
+        public static ReturnModel Login(string username, string password)
         {
             CtrlPayDbContext db = new CtrlPayDbContext();
             User? user = db.Users.FirstOrDefault(u => u.Username == username);
             if(user == null)
             {
-                return new AuthLogicReturnModel(3, ReturnCodeConverter.GetMessage(3));
+                return new ReturnModel("A3", ReturnModelSeverityEnum.Error);
             }
 
             byte[] salt = user.PasswordSalt;
@@ -46,16 +46,16 @@ namespace CtrlPay.Core
 
             if( !valid )
             {
-                return new AuthLogicReturnModel(2, ReturnCodeConverter.GetMessage(2));
+                return new ReturnModel("A2", ReturnModelSeverityEnum.Error);
             }
 
             if (user.TwoFactorEnabled)
             {
-                return new AuthLogicReturnModel(5, ReturnCodeConverter.GetMessage(5));
+                new ReturnModel("A5", ReturnModelSeverityEnum.Ok);
             } 
-            return new AuthLogicReturnModel(0, ReturnCodeConverter.GetMessage(0));            
+            return new ReturnModel("A0", ReturnModelSeverityEnum.Ok);            
         }
-        public static AuthLogicReturnModel AddUser(string username, string password, Role role)
+        public static ReturnModel AddUser(string username, string password, Role role)
         {
             byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
 
@@ -72,18 +72,18 @@ namespace CtrlPay.Core
             User newUser = new User(username, hash, salt, role);
             db.Users.Add(newUser);
             db.SaveChanges();
-            return new AuthLogicReturnModel(0, ReturnCodeConverter.GetMessage(0));
+            return new ReturnModel("A0", ReturnModelSeverityEnum.Ok);
         }
-        public static AuthLogicReturnModel TotpLogin(byte[] secret, string code)
+        public static ReturnModel TotpLogin(byte[] secret, string code)
         {
             bool valid = VerifyTotp(secret, code);
             if( valid )
             {
-                return new AuthLogicReturnModel(0, ReturnCodeConverter.GetMessage(0));
+                return new ReturnModel("A0", ReturnModelSeverityEnum.Ok);
             }
             else
             {
-                return new AuthLogicReturnModel(4, ReturnCodeConverter.GetMessage(4));
+                return new ReturnModel("A4", ReturnModelSeverityEnum.Error);
             }
         }
         private static bool VerifyTotp(byte[] secret, string code)

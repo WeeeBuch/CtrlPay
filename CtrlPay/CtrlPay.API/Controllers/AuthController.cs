@@ -28,9 +28,9 @@ namespace CtrlPay.API.Controllers
             string username = request.Username;
             string password = request.Password;
             var result = AuthLogic.Login(username, password);
-            if (result.ReturnCode != 0 && result.ReturnCode != 5)
+            if (result.Severity != ReturnModelSeverityEnum.Ok)
             {
-                return Unauthorized(result.Message);
+                return Unauthorized(result);
             }
 
             // najdeme userId a roli pro token
@@ -39,13 +39,13 @@ namespace CtrlPay.API.Controllers
             if (user.TwoFactorEnabled)
             {
                 // vrátíme demo JWT pro TOTP
-                var demoToken = _tokenService.GenerateAccessToken(user, isTotp: true);
-                return Ok(demoToken);
+                JwtAuthResponse demoToken = _tokenService.GenerateAccessToken(user, isTotp: true);
+                return Ok(new ReturnModel<JwtAuthResponse>("A5", ReturnModelSeverityEnum.Ok, demoToken));
             }
 
             // normální full JWT
-            var token = _tokenService.GenerateAccessToken(user, isTotp: false);
-            return Ok(token);
+            JwtAuthResponse fullToken = _tokenService.GenerateAccessToken(user, isTotp: false);
+            return Ok(new ReturnModel<JwtAuthResponse>("A0", ReturnModelSeverityEnum.Ok, fullToken));
         }
 
         [HttpPost("verify-totp")]
@@ -54,27 +54,27 @@ namespace CtrlPay.API.Controllers
             // nejdřív extrahujeme principal z totp tokenu
             var principal = _tokenService.GetPrincipalFromToken(totpToken, ignoreExpiration: true);
             if (principal == null)
-                return Unauthorized("Invalid or expired totp token.");
+                return Unauthorized(new ReturnModel("A7", ReturnModelSeverityEnum.Error));
 
             // kontrola zda je to opravdu TOTP token
             var isTotpClaim = principal.FindFirst("IsTotp")?.Value;
             if (isTotpClaim != "true")
-                return BadRequest("Token is not a TOTP token.");
+                return BadRequest(new ReturnModel("A8", ReturnModelSeverityEnum.Error));
 
             int userId = int.Parse(principal.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0");
             CtrlPayDbContext db = new CtrlPayDbContext();
             var user = db.Users.FirstOrDefault(u => u.Id == userId);
             if (user == null)
-                return Unauthorized("User not found.");
+                return Unauthorized(new ReturnModel("A3", ReturnModelSeverityEnum.Error));
 
-            AuthLogicReturnModel authResponse = AuthLogic.TotpLogin(user.TwoFactorSecret, totpCode);
-            bool validTotp = authResponse.ReturnCode == 0;
+            ReturnModel authResponse = AuthLogic.TotpLogin(user.TwoFactorSecret, totpCode);
+            bool validTotp = authResponse.Severity == ReturnModelSeverityEnum.Ok;
             if (!validTotp)
-                return Unauthorized(authResponse.Message);
+                return Unauthorized(authResponse);
 
             // vydáme plný access token
             var token = _tokenService.GenerateAccessToken(user, isTotp: false);
-            return Ok(token);
+            return Ok(new ReturnModel<JwtAuthResponse>("A0", ReturnModelSeverityEnum.Ok, token));
         }
 
         [HttpPost("refresh")]
@@ -112,9 +112,9 @@ namespace CtrlPay.API.Controllers
             if (role == null)
                 return BadRequest("Invalid role.");
             var result = AuthLogic.AddUser(username, password, role);
-            if (result.ReturnCode != 0)
-                return BadRequest(result.Message);
-            return Ok(result.Message);
+            if (result.Severity != ReturnModelSeverityEnum.Ok)
+                return BadRequest(result);
+            return Ok(result);
         }
 
         public class LoginRequest
