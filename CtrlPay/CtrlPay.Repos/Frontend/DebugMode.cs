@@ -8,6 +8,6 @@ namespace CtrlPay.Repos.Frontend
 {
     public static class DebugMode
     {
-        public static bool IsDebugMode { get; set; } = false;
+        public static bool IsDebugMode { get; set; } = true;
     }
 }

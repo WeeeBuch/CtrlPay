@@ -32,7 +32,7 @@ public static class ChangeChecker
                 await Task.Delay(interval, ct);
             }
             catch (TaskCanceledException) { break; } // Normální ukončení
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Tady můžeš zalogovat chybu, aby ti nespadla celá smyčka
             }

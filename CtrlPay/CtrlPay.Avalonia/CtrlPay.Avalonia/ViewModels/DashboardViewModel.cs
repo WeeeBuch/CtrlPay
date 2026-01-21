@@ -28,18 +28,14 @@ public partial class DashboardViewModel : ViewModelBase
 
     private void LoadInitialData()
     {
-        //TODO: Rozhodit tyhle věci do vlastních threadů, ps: všechny s errorem CS4014
         LoadTransactionLists();
         LoadTransactionSums();
     }
 
-    private async void LoadTransactionSums()
+    private void LoadTransactionSums()
     {
-        decimal creditAmount = TransactionRepo.GetTransactionSum();
-        decimal pendingAmount = PaymentRepo.GetPaymentSum();
-
-        TotalCredits.Amount = creditAmount;
-        PendingCredits.Amount = pendingAmount;
+        TotalCredits.Amount = TransactionRepo.GetTransactionSum();
+        PendingCredits.Amount = PaymentRepo.GetPaymentSum();
 
         TotalCredits.GiveTitleKey("CounterPiece.Credits.Title");
         PendingCredits.GiveTitleKey("CounterPiece.Pending.Title");
@@ -55,9 +51,8 @@ public partial class DashboardViewModel : ViewModelBase
         });
     }
 
-    private async Task LoadTransactionLists()
+    private void LoadTransactionLists()
     {
-        CancellationToken cancellationToken = new CancellationToken();
         List<FrontendTransactionDTO> creditTransactions = TransactionRepo.GetTransactions();
         List<FrontendTransactionDTO> pendingTransactions = PaymentRepo.GetPayments();
 
@@ -77,10 +72,7 @@ public partial class DashboardViewModel : ViewModelBase
             Status = t.State
         }).ToList();
 
-        await Dispatcher.UIThread.InvokeAsync(() =>
-        {
-            CreditTransactionList.RefreshTransactions(creditData);
-            PendingTransactionList.RefreshTransactions(pendingData);
-        });
+        CreditTransactionList.RefreshTransactions(creditData);
+        PendingTransactionList.RefreshTransactions(pendingData);
     }
 }

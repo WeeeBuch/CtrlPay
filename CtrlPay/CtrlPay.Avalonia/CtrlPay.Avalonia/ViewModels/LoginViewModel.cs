@@ -29,24 +29,24 @@ public partial class LoginViewModel : ViewModelBase
 
     // --- Přihlašovací pole ---
     [ObservableProperty]
-    private string username;
+    private string? username;
 
     [ObservableProperty]
-    private string password;
+    private string? password;
 
 
     // --- Registrační pole ---
     [ObservableProperty]
-    private string regUsername;
+    private string? regUsername;
 
     [ObservableProperty]
-    private string regCode;
+    private string? regCode;
 
     [ObservableProperty]
-    private string regPassword;
+    private string? regPassword;
 
     [ObservableProperty]
-    private string regConfirmPassword;
+    private string? regConfirmPassword;
 
     [RelayCommand]
     private void Register()

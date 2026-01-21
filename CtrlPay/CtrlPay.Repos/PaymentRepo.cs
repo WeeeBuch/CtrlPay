@@ -1,4 +1,4 @@
-using CtrlPay.Entities;
+﻿using CtrlPay.Entities;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System;
@@ -15,12 +15,20 @@ namespace CtrlPay.Repos
 {
     public static class PaymentRepo
     {
-        private static List<PaymentApiDTO> PaymentsCache = new List<PaymentApiDTO>();
+        private static List<FrontendTransactionDTO> PaymentsCache = [];
         private static DateTime LastPaymentsCacheUpdate = DateTime.MinValue;
         private static decimal PaymentSumCache = 0;
         private static DateTime LastPaymentSumCacheUpdate = DateTime.MinValue;
+        private static string SortMethod = "DateDesc";
         public static async Task UpdatePaymetsCacheFromApi(CancellationToken cancellationToken)
         {
+            #region Debug
+            if (DebugMode.IsDebugMode)
+            {
+                PaymentsCache = GetPayments();
+                return;
+            }
+            #endregion
 
             var handler = new HttpClientHandler
             {
@@ -40,7 +48,7 @@ namespace CtrlPay.Repos
 
             response.EnsureSuccessStatusCode();
             // Definuj si options
-            var options = new JsonSerializerOptions
+            JsonSerializerOptions options = new()
             {
                 PropertyNameCaseInsensitive = true
             };
@@ -48,8 +56,9 @@ namespace CtrlPay.Repos
             string json = await response.Content.ReadAsStringAsync();
 
             // Přidej options do metody Deserialize
-            List<PaymentApiDTO> payments = JsonSerializer.Deserialize<List<PaymentApiDTO>>(json, options);
-            PaymentsCache = payments;
+            PaymentsCache = [];
+            JsonSerializer.Deserialize<List<PaymentApiDTO>>(json, options).ForEach(p => PaymentsCache.Add(new(p)));
+            
             LastPaymentsCacheUpdate = DateTime.UtcNow;
         }
         public static List<FrontendTransactionDTO> GetPayments()
@@ -110,11 +119,16 @@ namespace CtrlPay.Repos
                 return debugList;
             }
             #endregion
-            return PaymentsCache.Select(p => new FrontendTransactionDTO(p)).ToList();
-
+            return PaymentsCache;
         }
         public static async Task UpdatePaymentSumCacheFromApi(CancellationToken cancellationToken)
         {
+            if (DebugMode.IsDebugMode)
+            {
+                Random rnd = new();
+                PaymentSumCache = rnd.Next(0,500);
+                return;
+            }
 
             var handler = new HttpClientHandler
             {
@@ -142,9 +156,27 @@ namespace CtrlPay.Repos
             LastPaymentSumCacheUpdate = DateTime.UtcNow;
         }
 
-        public static decimal GetPaymentSum()
+        public static decimal GetPaymentSum() => PaymentSumCache;
+
+        public static List<FrontendTransactionDTO> GetSortedDebts(string? sortingMethod, bool payable)
         {
-            return PaymentSumCache;
+            if (sortingMethod != null) SortMethod = sortingMethod;
+
+            string sortMethod = sortingMethod ?? SortMethod;
+
+            List<FrontendTransactionDTO> filteredData = 
+            [..
+                PaymentsCache.Where(t => !payable || t.Amount <= TransactionRepo.GetTransactionSum())
+            ];
+
+            return sortMethod switch
+            {
+                "AmountAsc" => [.. filteredData.OrderBy(d => d.Amount)],
+                "AmountDesc" => [.. filteredData.OrderByDescending(d => d.Amount)],
+                "DateAsc" => [.. filteredData.OrderBy(d => d.Timestamp)],
+                "DateDesc" => [.. filteredData.OrderByDescending(d => d.Timestamp)],
+                _ => [.. filteredData.OrderBy(d => d.Timestamp)]
+            }; ;
         }
     }
 }
