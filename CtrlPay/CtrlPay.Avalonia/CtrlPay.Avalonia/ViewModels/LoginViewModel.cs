@@ -51,6 +51,7 @@ public partial class LoginViewModel : ViewModelBase
     [RelayCommand]
     private void Register()
     {
+        // Předělat chybovou hlášku
         bool succes = AuthRepo.Register(RegUsername, RegCode, RegPassword, RegConfirmPassword);
 
         if (succes) 
@@ -59,7 +60,7 @@ public partial class LoginViewModel : ViewModelBase
             _navigation.CloseLogin();
         }
         else
-        {
+        {// Předělat chybovou hlášku
             Message = AuthRepo.RegisterFailedMessage();
         }
     }
@@ -67,6 +68,7 @@ public partial class LoginViewModel : ViewModelBase
     [RelayCommand]
     private async Task LoginAsync()
     {
+        // Předělat chybovou hlášku
         CancellationToken cancellationToken = new CancellationToken();
         bool success = await AuthRepo.Login(Username, Password, cancellationToken);
 
@@ -77,6 +79,7 @@ public partial class LoginViewModel : ViewModelBase
         }
         else
         {
+            // Předělat chybovou hlášku
             Message = AuthRepo.LoginFailedMessage();
         }
     }
