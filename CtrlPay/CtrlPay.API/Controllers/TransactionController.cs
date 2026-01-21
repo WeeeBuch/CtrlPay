@@ -11,6 +11,7 @@ namespace CtrlPay.API.Controllers
     [Authorize]
     public class TransactionController : ControllerBase
     {
+        //TODO: Předělat na ReturnModel vracení
         private readonly CtrlPayDbContext _db;
         public TransactionController(CtrlPayDbContext ctrlPayDbContext)
         {

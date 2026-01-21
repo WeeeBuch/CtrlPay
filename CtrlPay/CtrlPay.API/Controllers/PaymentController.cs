@@ -11,6 +11,7 @@ namespace CtrlPay.API.Controllers
     [Authorize]
     public class PaymentController : ControllerBase
     {
+        //TODO: Předělat na ReturnModel vracení
         private readonly CtrlPayDbContext _db;
         public PaymentController()
         {
@@ -23,7 +24,11 @@ namespace CtrlPay.API.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
-            int accountIndex = user.LoyalCustomer.Account.Index;
+            int? accountIndex = user.LoyalCustomer.Account.Index;
+            if(accountIndex == null)
+            {
+                return Forbid();
+            }
             List<Entities.Payment> payments = _db.Payments
                 .Where(p => p.Account.Index == accountIndex)
                 .ToList();
