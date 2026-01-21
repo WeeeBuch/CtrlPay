@@ -3,6 +3,7 @@ using CtrlPay.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace CtrlPay.API.Controllers
 {
@@ -33,7 +34,7 @@ namespace CtrlPay.API.Controllers
             {
                 transactionsDTO.Add(new TransactionApiDTO(transaction));
             }
-            return Ok(transactionsDTO);
+            return Ok(new ReturnModel<List<TransactionApiDTO>>("T0", ReturnModelSeverityEnum.Ok, transactionsDTO));
         }
         [HttpGet]
         [Route("credit")]
@@ -45,7 +46,7 @@ namespace CtrlPay.API.Controllers
             int? accountIndex = user.LoyalCustomer.Account.Index;
             if (accountIndex is null)
             {
-                return BadRequest("User has no account.");
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("T1", ReturnModelSeverityEnum.Error)));
             }
             decimal credit = _db.Transactions
                 .Where(t => t.Account.Index == accountIndex)
@@ -56,7 +57,7 @@ namespace CtrlPay.API.Controllers
                 .First()
                 .OurXMR;
             credit -= ourXmr;
-            return Ok(credit);
+            return Ok(new ReturnModel<decimal>("T0", ReturnModelSeverityEnum.Ok, credit));
         }
     }
 }

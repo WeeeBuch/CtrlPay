@@ -3,6 +3,7 @@ using CtrlPay.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using System.Text.Json;
 
 namespace CtrlPay.API.Controllers
 {
@@ -27,7 +28,7 @@ namespace CtrlPay.API.Controllers
             int? accountIndex = user.LoyalCustomer.Account.Index;
             if(accountIndex == null)
             {
-                return Forbid();
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("P1", ReturnModelSeverityEnum.Error)));
             }
             List<Entities.Payment> payments = _db.Payments
                 .Where(p => p.Account.Index == accountIndex)
@@ -38,7 +39,7 @@ namespace CtrlPay.API.Controllers
             {
                 paymentsDTO.Add(new PaymentApiDTO(payment));
             }
-            return Ok(paymentsDTO);
+            return Ok(new ReturnModel<List<PaymentApiDTO>>("P0", ReturnModelSeverityEnum.Ok, paymentsDTO));
         }
         [HttpGet]
         [Route("amount-due")]
@@ -53,7 +54,7 @@ namespace CtrlPay.API.Controllers
                 .Where(p => p.Status == PaymentStatusEnum.PartiallyPaid || p.Status == PaymentStatusEnum.WaitingForPayment)
                 .ToList();
             decimal sum = debts.Sum(d => d.ExpectedAmountXMR - d.PaidAmountXMR);
-            return Ok(sum);
+            return Ok(new ReturnModel<decimal>("P0", ReturnModelSeverityEnum.Ok, sum));
         }
 
     }
