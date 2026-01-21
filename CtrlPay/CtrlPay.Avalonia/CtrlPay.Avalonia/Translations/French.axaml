@@ -42,6 +42,14 @@
 
     <x:String x:Key="SettingsView.Appearance.Title">Apparence</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Langue</x:String>
+    <x:String x:Key="SettingsView.Title">Paramètres</x:String>
+    <x:String x:Key="SettingsView.Description">Paramètres et configuration de l'application</x:String>
+    <x:String x:Key="SettingsView.API.Title">Réseau &amp; API</x:String>
+    <x:String x:Key="SettingsView.API.Url">URL de l'API</x:String>
+    <x:String x:Key="SettingsView.API.UpdateFreq">Fréquence de mise à jour</x:String>
+    <x:String x:Key="SettingsView.API.Test">Tester la connexion</x:String>
+    <x:String x:Key="SettingsView.API.Save">Enregistrer les paramètres</x:String>
+    <x:String x:Key="SettingsView.API.RecentConnections">Connexions récentes</x:String>
 
     <x:String x:Key="Date.Today">Aujourd'hui</x:String>
     <x:String x:Key="Date.Yesterday">Hier</x:String>

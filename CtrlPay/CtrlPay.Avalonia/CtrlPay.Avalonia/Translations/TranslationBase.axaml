@@ -50,6 +50,14 @@
     <!-- Settings View -->
     <x:String x:Key="SettingsView.Appearance.Title">SettingsView.Appearance.Title</x:String>
     <x:String x:Key="SettingsView.Translation.Title">SettingsView.Translation.Title</x:String>
+    <x:String x:Key="SettingsView.Title">SettingsView.Title</x:String>
+    <x:String x:Key="SettingsView.Description">SettingsView.Description</x:String>
+    <x:String x:Key="SettingsView.API.Title">SettingsView.API.Title</x:String>
+    <x:String x:Key="SettingsView.API.Url">SettingsView.API.Url</x:String>
+    <x:String x:Key="SettingsView.API.UpdateFreq">SettingsView.API.UpdateFreq</x:String>
+    <x:String x:Key="SettingsView.API.Test">SettingsView.API.Test</x:String>
+    <x:String x:Key="SettingsView.API.Save">SettingsView.API.Save</x:String>
+    <x:String x:Key="SettingsView.API.RecentConnections">SettingsView.API.RecentConnections</x:String>
 
     <!-- Dates -->
     <x:String x:Key="Date.Today">Date.Today</x:String>

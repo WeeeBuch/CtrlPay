@@ -42,6 +42,14 @@
 
     <x:String x:Key="SettingsView.Appearance.Title">Vzhled</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Jazyk</x:String>
+    <x:String x:Key="SettingsView.Title">Nastavení</x:String>
+    <x:String x:Key="SettingsView.Description">Nastavení a konfigurace aplikace</x:String>
+    <x:String x:Key="SettingsView.API.Title">Síť a API</x:String>
+    <x:String x:Key="SettingsView.API.Url">URL adresa API</x:String>
+    <x:String x:Key="SettingsView.API.UpdateFreq">Frekvence aktualizace</x:String>
+    <x:String x:Key="SettingsView.API.Test">Testovat připojení</x:String>
+    <x:String x:Key="SettingsView.API.Save">Uložit nastavení</x:String>
+    <x:String x:Key="SettingsView.API.RecentConnections">Nedávná připojení</x:String>
 
     <x:String x:Key="Date.Today">Dnes</x:String>
     <x:String x:Key="Date.Yesterday">Včera</x:String>
