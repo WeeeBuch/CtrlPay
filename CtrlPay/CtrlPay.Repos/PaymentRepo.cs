@@ -57,7 +57,7 @@ namespace CtrlPay.Repos
 
             // Přidej options do metody Deserialize
             PaymentsCache = [];
-            JsonSerializer.Deserialize<List<PaymentApiDTO>>(json, options).ForEach(p => PaymentsCache.Add(new(p)));
+            JsonSerializer.Deserialize<ReturnModel<List<PaymentApiDTO>>>(json, options).Body.ForEach(p => PaymentsCache.Add(new(p)));
             
             LastPaymentsCacheUpdate = DateTime.UtcNow;
         }
@@ -150,7 +150,7 @@ namespace CtrlPay.Repos
                 PropertyNameCaseInsensitive = true
             };
 
-            decimal suma = decimal.Parse(await response.Content.ReadAsStringAsync(), System.Globalization.CultureInfo.InvariantCulture);
+            decimal suma = JsonSerializer.Deserialize<ReturnModel<decimal>>(await response.Content.ReadAsStringAsync(), options).Body;
 
             PaymentSumCache = suma;
             LastPaymentSumCacheUpdate = DateTime.UtcNow;
