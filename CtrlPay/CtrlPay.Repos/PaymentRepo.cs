@@ -19,9 +19,8 @@ namespace CtrlPay.Repos
         private static DateTime LastPaymentsCacheUpdate = DateTime.MinValue;
         private static decimal PaymentSumCache = 0;
         private static DateTime LastPaymentSumCacheUpdate = DateTime.MinValue;
-        private static async Task GetPaymentsFromApiIfNeeded(CancellationToken cancellationToken)
+        public static async Task UpdatePaymetsCacheFromApi(CancellationToken cancellationToken)
         {
-            if ((DateTime.UtcNow - LastPaymentSumCacheUpdate).TotalMinutes < 2) { return; }
 
             var handler = new HttpClientHandler
             {
@@ -53,12 +52,11 @@ namespace CtrlPay.Repos
             PaymentsCache = payments;
             LastPaymentsCacheUpdate = DateTime.UtcNow;
         }
-        public static async Task<List<FrontendTransactionDTO>> GetPayments(CancellationToken cancellationToken)
+        public static List<FrontendTransactionDTO> GetPayments()
         {
             #region Debug
             if (DebugMode.IsDebugMode)
             {
-                await Task.Delay(500, cancellationToken); // Simulace zpoždění
                 List<FrontendTransactionDTO> debugList = [
                     new FrontendTransactionDTO
                     {
@@ -112,13 +110,11 @@ namespace CtrlPay.Repos
                 return debugList;
             }
             #endregion
-            await GetPaymentsFromApiIfNeeded(cancellationToken);
             return PaymentsCache.Select(p => new FrontendTransactionDTO(p)).ToList();
 
         }
-        private static async Task GetPaymentSumFromApiIfNeeded(CancellationToken cancellationToken)
+        public static async Task UpdatePaymentSumCacheFromApi(CancellationToken cancellationToken)
         {
-            if ((DateTime.UtcNow - LastPaymentSumCacheUpdate).TotalMinutes < 2) { return; }
 
             var handler = new HttpClientHandler
             {
@@ -146,9 +142,8 @@ namespace CtrlPay.Repos
             LastPaymentSumCacheUpdate = DateTime.UtcNow;
         }
 
-        public static async Task<decimal> GetPaymentSum(CancellationToken cancellationToken)
+        public static decimal GetPaymentSum()
         {
-            await GetPaymentSumFromApiIfNeeded(cancellationToken);
             return PaymentSumCache;
         }
     }

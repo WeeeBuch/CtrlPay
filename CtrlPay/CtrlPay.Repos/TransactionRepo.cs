@@ -15,15 +15,12 @@ namespace CtrlPay.Repos
 {
     public class TransactionRepo
     {
-        private static List<TransactionApiDTO> Transactions { get; set; } = new List<TransactionApiDTO>();
+        private static List<TransactionApiDTO> TransactionsCache { get; set; } = new List<TransactionApiDTO>();
         private static DateTime LastUpdatedTransactions { get; set; } = DateTime.MinValue;
         private static decimal TransactionSumCache { get; set; } = 0;
         private static DateTime LastUpdatedTransactionSum { get; set; } = DateTime.MinValue;
-        private static async Task GetTransactionsFromApiIfNeeded(CancellationToken cancellationToken)
+        public static async Task UpdateTransactionsCacheFromApi(CancellationToken cancellationToken)
         {
-            
-
-            if ((DateTime.UtcNow - LastUpdatedTransactions).TotalMinutes < 2) { return; }
 
             var handler = new HttpClientHandler
             {
@@ -52,10 +49,10 @@ namespace CtrlPay.Repos
 
             // Přidej options do metody Deserialize
             List<TransactionApiDTO> transactionsDtos = JsonSerializer.Deserialize<List<TransactionApiDTO>>(json, options);
-            Transactions = transactionsDtos;
+            TransactionsCache = transactionsDtos;
             LastUpdatedTransactions = DateTime.UtcNow;
         }
-        public static async Task<List<FrontendTransactionDTO>> GetTransactions(CancellationToken cancellationToken)
+        public static List<FrontendTransactionDTO> GetTransactions()
         {
             #region Debug
             if (DebugMode.IsDebugMode)
@@ -114,13 +111,10 @@ namespace CtrlPay.Repos
 
 
             #endregion
-            await GetTransactionsFromApiIfNeeded(cancellationToken);
-            return Transactions.Select(t => new FrontendTransactionDTO(t)).ToList();
+            return TransactionsCache.Select(t => new FrontendTransactionDTO(t)).ToList();
         }
-        private static async Task GetTransactionSumFromApiIfNeeded(CancellationToken cancellationToken)
+        public static async Task UpdateTransactionSumCacheFromApi(CancellationToken cancellationToken)
         {
-            if ((DateTime.UtcNow - LastUpdatedTransactionSum).TotalMinutes < 2) { return; }
-
             var handler = new HttpClientHandler
             {
                 UseProxy = false
@@ -141,9 +135,8 @@ namespace CtrlPay.Repos
             TransactionSumCache = suma;
             LastUpdatedTransactionSum = DateTime.UtcNow;
         }
-        public static async Task<decimal> GetTransactionSum(CancellationToken cancellationToken)
+        public static decimal GetTransactionSum()
         {
-            await GetTransactionSumFromApiIfNeeded(cancellationToken);
             return TransactionSumCache;
         }
     }

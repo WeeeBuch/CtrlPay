@@ -35,8 +35,8 @@ public partial class DashboardViewModel : ViewModelBase
 
     private async void LoadTransactionSums()
     {
-        decimal creditAmount = await TransactionRepo.GetTransactionSum(default);
-        decimal pendingAmount = await PaymentRepo.GetPaymentSum(default);
+        decimal creditAmount = TransactionRepo.GetTransactionSum();
+        decimal pendingAmount = PaymentRepo.GetPaymentSum();
 
         TotalCredits.Amount = creditAmount;
         PendingCredits.Amount = pendingAmount;
@@ -58,8 +58,8 @@ public partial class DashboardViewModel : ViewModelBase
     private async Task LoadTransactionLists()
     {
         CancellationToken cancellationToken = new CancellationToken();
-        List<FrontendTransactionDTO> creditTransactions = await TransactionRepo.GetTransactions(cancellationToken);
-        List<FrontendTransactionDTO> pendingTransactions = await PaymentRepo.GetPayments(cancellationToken);
+        List<FrontendTransactionDTO> creditTransactions = TransactionRepo.GetTransactions();
+        List<FrontendTransactionDTO> pendingTransactions = PaymentRepo.GetPayments();
 
         var creditData = creditTransactions.Select(t => new TransactionItemViewModel
         {

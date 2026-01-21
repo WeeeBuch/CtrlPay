@@ -47,7 +47,7 @@ public partial class DebtItemViewModel : ObservableObject
         TransactionDTOBase = transaction;
         creditPayString = "";
 
-        UpdateCreditAmount(TransactionRepo.GetTransactionSum(default).Result);
+        UpdateCreditAmount(TransactionRepo.GetTransactionSum());
     }
 
     [RelayCommand]
@@ -117,10 +117,10 @@ public partial class DebtViewModel : ViewModelBase
         UpdateHandler.NewTransactionAddedActions.Add(TransactionsUpdated);
     }
 
-    public async Task ApplySorting(string? sortingMethod)
+    public void ApplySorting(string? sortingMethod)
     {
         // 1. Získáme aktuální sumu kreditů pro porovnání
-        decimal creditAmount = await TransactionRepo.GetTransactionSum(default);
+        decimal creditAmount = TransactionRepo.GetTransactionSum();
         string selectedKey = sortingMethod ?? SelectedSortOrder.Key;
 
         // 2. VŽDY filtrujeme z LoadedTransactions (tam jsou všechny dluhy z repa)
@@ -196,7 +196,7 @@ public partial class DebtViewModel : ViewModelBase
 
     public async Task GetDebtsFromRepo()
     {
-        var loadedPayments = await PaymentRepo.GetPayments(default);
+        var loadedPayments = PaymentRepo.GetPayments();
 
         // Vynucení aktualizace na UI vlákně
         await Dispatcher.UIThread.InvokeAsync(() =>

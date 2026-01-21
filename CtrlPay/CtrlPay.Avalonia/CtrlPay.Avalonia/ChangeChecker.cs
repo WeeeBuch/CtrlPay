@@ -12,9 +12,13 @@ public static class ChangeChecker
 {
     public static async void ToCheck() 
     {
+        await TransactionRepo.UpdateTransactionsCacheFromApi(default);
+        await TransactionRepo.UpdateTransactionSumCacheFromApi(default);
+        await PaymentRepo.UpdatePaymentSumCacheFromApi(default);
+        await PaymentRepo.UpdatePaymetsCacheFromApi(default);
         // Sem se píšou všechny kontroly změn, které chceme provádět
-        UpdateHandler.HandleCreditAvailableUpdate(await TransactionRepo.GetTransactionSum(default));
-        UpdateHandler.HandlePendingPaymentsUpdate(await PaymentRepo.GetPaymentSum(default));
+        UpdateHandler.HandleCreditAvailableUpdate(TransactionRepo.GetTransactionSum());
+        UpdateHandler.HandlePendingPaymentsUpdate(PaymentRepo.GetPaymentSum());
     }
 
     public async static Task StartChecking(TimeSpan interval, CancellationToken ct = default)
