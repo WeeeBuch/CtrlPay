@@ -58,6 +58,19 @@
                 </Transitions>
             </Setter>
         </Style>
+
+        <Style Selector="TextBlock.StatusTextBox[Tag=Success]">
+            <Setter Property="Foreground" Value="{DynamicResource Brush.Success}"/>
+        </Style>
+        <Style Selector="TextBlock.StatusTextBox[Tag=Error]">
+            <Setter Property="Foreground" Value="{DynamicResource Brush.Error}"/>
+        </Style>
+        <Style Selector="TextBlock.StatusTextBox[Tag=Testing]">
+            <Setter Property="Foreground" Value="{DynamicResource Brush.Warning}"/>
+        </Style>
+        <Style Selector="TextBlock.StatusTextBox[Tag=None]">
+            <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}"/>
+        </Style>
     </UserControl.Styles>
 
     <ScrollViewer>
@@ -105,33 +118,37 @@
                         <StackPanel Spacing="8">
                             <TextBlock Text="{DynamicResource SettingsView.API.Url}" FontSize="12" Opacity="0.6" Margin="5,0"/>
                             <Grid ColumnDefinitions="*, Auto, Auto">
-                                <TextBox Grid.Column="0" 
-                                         Text="{Binding ApiUrl}" 
-                                         Watermark="https://..."
-                                         Height="42"
-                                         VerticalContentAlignment="Center"
-                                         CornerRadius="10 0 0 10"/> 
+                                <StackPanel Grid.Column="0">
+                                    <TextBox Text="{Binding ApiUrl}" 
+                                             CornerRadius="10 0 0 10"
+                                             VerticalContentAlignment="Center"
+                                             Watermark="https://..."
+                                             Height="42"/>
+    
+                                    <ProgressBar IsIndeterminate="True" 
+                                                 IsVisible="{Binding IsTestingConnection}"
+                                                 Height="2"
+                                                 Background="Transparent"
+                                                 Foreground="{DynamicResource Brush.Accent}"
+                                                 VerticalAlignment="Bottom"
+                                                 Margin="2,-2,0,0"/>
+                                    <TextBlock Text="{Binding StatusBoxText}"
+                                               Classes="StatusTextBox"
+                                               Tag="{Binding TestStatusText}"
+                                               Foreground="{DynamicResource Color.Error}"
+                                               Margin="2" IsVisible="{Binding IsErrorVisible}"/>
+                                </StackPanel>
                                 <Button Grid.Column="1" 
                                         Content="{DynamicResource SettingsView.API.Test}" 
                                         Command="{Binding TestConnectionCommand}"
                                         Padding="15,0"
                                         Height="42"
-                                        CornerRadius="0"
+                                        CornerRadius="0 10 10 0"
                                         HorizontalContentAlignment="Center"
                                         VerticalContentAlignment="Center"
+                                        VerticalAlignment="Top"
                                         BorderThickness="1"
                                         BorderBrush="{DynamicResource Brush.Background}"/>
-                    
-                                <Button Grid.Column="2" 
-                                        Content="{DynamicResource SettingsView.API.Save}" 
-                                        Command="{Binding SaveConnectionCommand}"
-                                        Padding="15,0"
-                                        Height="42"
-                                        HorizontalContentAlignment="Center"
-                                        VerticalContentAlignment="Center"
-                                        Background="{DynamicResource Brush.Accent}"
-                                        Foreground="White"
-                                        CornerRadius="0 10 10 0"/>
                             </Grid>
 
                             <StackPanel Spacing="8" Margin="0,10,0,0">
@@ -167,6 +184,7 @@
                             <NumericUpDown Value="{Binding RefreshIntervalSeconds}"
                                            Width="180"
                                            HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center"
                                            Minimum="5" 
                                            Maximum="3600"/>
                         </StackPanel>

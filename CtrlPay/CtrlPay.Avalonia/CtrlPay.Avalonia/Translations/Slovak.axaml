@@ -48,8 +48,9 @@
     <x:String x:Key="SettingsView.API.Url">URL adresa API</x:String>
     <x:String x:Key="SettingsView.API.UpdateFreq">Frekvencia aktualizácie</x:String>
     <x:String x:Key="SettingsView.API.Test">Testovať pripojenie</x:String>
-    <x:String x:Key="SettingsView.API.Save">Uložiť nastavenia</x:String>
     <x:String x:Key="SettingsView.API.RecentConnections">Nedávne pripojenia</x:String>
+    <x:String x:Key="SettingsView.Status.Succes">Spojenie nadviazané. Nastavenia boli uložené.</x:String>
+    <x:String x:Key="SettingsView.Status.Error">Spojenie zlyhalo. Skontrolujte prosím URL adresu.</x:String>
 
     <x:String x:Key="Date.Today">Dnes</x:String>
     <x:String x:Key="Date.Yesterday">Včera</x:String>

@@ -48,8 +48,9 @@
     <x:String x:Key="SettingsView.API.Url">URL API</x:String>
     <x:String x:Key="SettingsView.API.UpdateFreq">Частота обновления</x:String>
     <x:String x:Key="SettingsView.API.Test">Проверить соединение</x:String>
-    <x:String x:Key="SettingsView.API.Save">Сохранить настройки</x:String>
     <x:String x:Key="SettingsView.API.RecentConnections">Последние подключения</x:String>
+    <x:String x:Key="SettingsView.Status.Succes">Соединение установлено. Настройки сохранены.</x:String>
+    <x:String x:Key="SettingsView.Status.Error">Ошибка соединения. Проверьте URL-адрес.</x:String>
 
     <x:String x:Key="Date.Today">Сегодня</x:String>
     <x:String x:Key="Date.Yesterday">Вчера</x:String>

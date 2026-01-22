@@ -48,8 +48,9 @@
     <x:String x:Key="SettingsView.API.Url">API URL</x:String>
     <x:String x:Key="SettingsView.API.UpdateFreq">更新頻度</x:String>
     <x:String x:Key="SettingsView.API.Test">接続テスト</x:String>
-    <x:String x:Key="SettingsView.API.Save">設定を保存</x:String>
     <x:String x:Key="SettingsView.API.RecentConnections">最近の接続</x:String>
+    <x:String x:Key="SettingsView.Status.Succes">接続が確立されました。設定を保存しました。</x:String>
+    <x:String x:Key="SettingsView.Status.Error">接続に失敗しました。URLを確認してください。</x:String>
 
     <x:String x:Key="Date.Today">今日</x:String>
     <x:String x:Key="Date.Yesterday">昨日</x:String>

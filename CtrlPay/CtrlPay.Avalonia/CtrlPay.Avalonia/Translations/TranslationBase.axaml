@@ -56,8 +56,9 @@
     <x:String x:Key="SettingsView.API.Url">SettingsView.API.Url</x:String>
     <x:String x:Key="SettingsView.API.UpdateFreq">SettingsView.API.UpdateFreq</x:String>
     <x:String x:Key="SettingsView.API.Test">SettingsView.API.Test</x:String>
-    <x:String x:Key="SettingsView.API.Save">SettingsView.API.Save</x:String>
     <x:String x:Key="SettingsView.API.RecentConnections">SettingsView.API.RecentConnections</x:String>
+    <x:String x:Key="SettingsView.Status.Succes">SettingsView.Status.Succes</x:String>
+    <x:String x:Key="SettingsView.Status.Error">SettingsView.Status.Error</x:String>
 
     <!-- Dates -->
     <x:String x:Key="Date.Today">Date.Today</x:String>

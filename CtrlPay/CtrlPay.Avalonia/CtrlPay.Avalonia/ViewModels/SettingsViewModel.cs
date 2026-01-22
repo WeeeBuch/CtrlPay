@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.Translations;
+using CtrlPay.Repos;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -13,6 +14,7 @@ namespace CtrlPay.Avalonia.ViewModels
 {
     internal partial class SettingsViewModel : ViewModelBase
     {
+        #region Theme and Translation
         // Seznam všech hodnot z vašeho Enumu
         public IEnumerable<ThemeManager.AppTheme> AvailableThemes { get; } =
             Enum.GetValues(typeof(ThemeManager.AppTheme)).Cast<ThemeManager.AppTheme>();
@@ -26,43 +28,28 @@ namespace CtrlPay.Avalonia.ViewModels
         [ObservableProperty]
         private TranslationManager.AppLanguage _selectedLanguage = SettingsManager.Current.Language;
 
-        // Logika se spustí při změně SelectedTheme
-        partial void OnSelectedThemeChanged(ThemeManager.AppTheme value)
-        {
-            ThemeManager.Apply(value);
-        }
+        partial void OnSelectedThemeChanged(ThemeManager.AppTheme value) => ThemeManager.Apply(value);
 
-        // Logika se spustí při změně SelectedLanguage
-        partial void OnSelectedLanguageChanged(TranslationManager.AppLanguage value)
-        {
-            TranslationManager.Apply(value);
-        }
+        partial void OnSelectedLanguageChanged(TranslationManager.AppLanguage value) => TranslationManager.Apply(value);
+        #endregion
 
+        #region Api
+        public enum ConnectionStatus { None, Testing, Success, Error }
+        [ObservableProperty] private string _apiUrl = SettingsManager.Current.ConnectionString;
+        [ObservableProperty] private int _refreshIntervalSeconds = 30; // Výchozí hodnota v sekundách
+        [ObservableProperty] private ObservableCollection<string> _recentApiUrls = [.. SettingsManager.Current.SavedConnections];
+        [ObservableProperty] private bool _isTestingConnection;
+        [ObservableProperty] private bool _isErrorVisible = false;
+        [ObservableProperty] private string _statusBoxText = "Untested";
         [ObservableProperty]
-        private string _apiUrl = SettingsManager.Current.ConnectionString; 
+        [NotifyPropertyChangedFor(nameof(TestStatusText))]
+        private ConnectionStatus _testStatus = ConnectionStatus.None;
+        public string TestStatusText => _testStatus.ToString();
 
-        [ObservableProperty]
-        private int _refreshIntervalSeconds = 30; // Výchozí hodnota v sekundách
+        partial void OnApiUrlChanged(string value) { ApiUrl = value; SetMassageBoxVisibility(false);}
+        partial void OnRefreshIntervalSecondsChanged(int value) => RefreshIntervalSeconds = value;
+        private void SetMassageBoxVisibility(bool s) => IsErrorVisible = s;
 
-        [ObservableProperty]
-        private ObservableCollection<string> _recentApiUrls = new()
-        {
-            "https://api.ctrlpay.cz/v1",
-            "https://dev.ctrlpay.cz/api"
-        };
-
-        partial void OnApiUrlChanged(string value)
-        {
-            ApiUrl = value;
-            //SettingsManager.Current.ConnectionString = value;
-        }
-
-        partial void OnRefreshIntervalSecondsChanged(int value)
-        {
-            RefreshIntervalSeconds = value;
-        }
-
-        [RelayCommand]
         private void SaveConnection()
         {
             if (!RecentApiUrls.Contains(ApiUrl))
@@ -70,17 +57,44 @@ namespace CtrlPay.Avalonia.ViewModels
                 if (string.IsNullOrWhiteSpace(ApiUrl)) return;
 
                 RecentApiUrls.Insert(0, ApiUrl);
-                // Omezíme historii např. na 3 položky
-                if (RecentApiUrls.Count > 3) RecentApiUrls.RemoveAt(3);
+                if (RecentApiUrls.Count > 5) RecentApiUrls.RemoveAt(5);
+
+                SettingsManager.Current.SavedConnections = [.. RecentApiUrls];
             }
-            // Logika pro trvalé uložení do SettingsManager
         }
 
         [RelayCommand]
         private async Task TestConnection()
         {
-            // Zde bude logika pro testování (např. HTTP GET na /health)
-            // Můžete nastavit nějakou property "IsConnecting" pro zobrazení loaderu
+            TestStatus = ConnectionStatus.Testing; // Spustí loader
+            IsTestingConnection = true;
+            bool result = false;
+
+            try
+            {
+                result = await ToDoRepo.TestConnectionToAPI(ApiUrl);
+            }
+            finally
+            {
+                IsTestingConnection = false;
+                SetMassageBoxVisibility(true);
+
+                if (result)
+                {
+                    TestStatus = ConnectionStatus.Success; // Zelená
+                    SaveConnection();
+                    StatusBoxText = TranslationManager.GetString("SettingsView.Status.Succes");
+                    await Task.Delay(5000);
+                    SetMassageBoxVisibility(false);
+                    TestStatus = ConnectionStatus.None; // Reset barvy
+                }
+                else
+                {
+                    TestStatus = ConnectionStatus.Error; // Červená
+                    StatusBoxText = TranslationManager.GetString("SettingsView.Status.Error");
+                }
+            }
         }
+        #endregion
     }
 }

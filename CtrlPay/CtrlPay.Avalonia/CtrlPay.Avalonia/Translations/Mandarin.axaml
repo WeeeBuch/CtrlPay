@@ -48,8 +48,9 @@
     <x:String x:Key="SettingsView.API.Url">API 地址</x:String>
     <x:String x:Key="SettingsView.API.UpdateFreq">更新频率</x:String>
     <x:String x:Key="SettingsView.API.Test">测试连接</x:String>
-    <x:String x:Key="SettingsView.API.Save">保存设置</x:String>
     <x:String x:Key="SettingsView.API.RecentConnections">最近的连接</x:String>
+    <x:String x:Key="SettingsView.Status.Succes">连接已建立。设置已保存。</x:String>
+    <x:String x:Key="SettingsView.Status.Error">连接失败。请检查 URL 地址。</x:String>
 
     <x:String x:Key="Date.Today">今天</x:String>
     <x:String x:Key="Date.Yesterday">昨天</x:String>

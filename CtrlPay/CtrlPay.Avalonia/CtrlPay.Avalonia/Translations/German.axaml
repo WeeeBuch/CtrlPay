@@ -48,8 +48,9 @@
     <x:String x:Key="SettingsView.API.Url">API-URL</x:String>
     <x:String x:Key="SettingsView.API.UpdateFreq">Aktualisierungsintervall</x:String>
     <x:String x:Key="SettingsView.API.Test">Verbindung testen</x:String>
-    <x:String x:Key="SettingsView.API.Save">Einstellungen speichern</x:String>
     <x:String x:Key="SettingsView.API.RecentConnections">Letzte Verbindungen</x:String>
+    <x:String x:Key="SettingsView.Status.Succes">Verbindung hergestellt. Einstellungen gespeichert.</x:String>
+    <x:String x:Key="SettingsView.Status.Error">Verbindung fehlgeschlagen. Bitte prüfen Sie die URL.</x:String>
 
     <x:String x:Key="Date.Today">Heute</x:String>
     <x:String x:Key="Date.Yesterday">Gestern</x:String>

@@ -48,8 +48,9 @@
     <x:String x:Key="SettingsView.API.Url">4P1_URL</x:String>
     <x:String x:Key="SettingsView.API.UpdateFreq">UPX_FR3QU3NCY</x:String>
     <x:String x:Key="SettingsView.API.Test">7357_C0NN</x:String>
-    <x:String x:Key="SettingsView.API.Save">WRI73_C0NF16</x:String>
     <x:String x:Key="SettingsView.API.RecentConnections">PR10R_L1NK5</x:String>
+    <x:String x:Key="SettingsView.Status.Succes">C0NN3C710N_0K. 53771N65_WR1773N.</x:String>
+    <x:String x:Key="SettingsView.Status.Error">C0NN_F41L. CH3CK_URL_N0D3.</x:String>
 
     <x:String x:Key="Date.Today">70D4Y</x:String>
     <x:String x:Key="Date.Yesterday">Y3573RD4Y</x:String>

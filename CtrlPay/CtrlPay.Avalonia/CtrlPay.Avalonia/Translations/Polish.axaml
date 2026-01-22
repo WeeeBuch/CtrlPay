@@ -48,8 +48,9 @@
     <x:String x:Key="SettingsView.API.Url">Adres URL API</x:String>
     <x:String x:Key="SettingsView.API.UpdateFreq">Częstotliwość aktualizacji</x:String>
     <x:String x:Key="SettingsView.API.Test">Testuj połączenie</x:String>
-    <x:String x:Key="SettingsView.API.Save">Zapisz ustawienia</x:String>
     <x:String x:Key="SettingsView.API.RecentConnections">Ostatnie połączenia</x:String>
+    <x:String x:Key="SettingsView.Status.Succes">Połączenie nawiązane. Ustawienia zapisane.</x:String>
+    <x:String x:Key="SettingsView.Status.Error">Błąd połączenia. Proszę sprawdzić adres URL.</x:String>
 
     <x:String x:Key="Date.Today">Dzisiaj</x:String>
     <x:String x:Key="Date.Yesterday">Wczoraj</x:String>
