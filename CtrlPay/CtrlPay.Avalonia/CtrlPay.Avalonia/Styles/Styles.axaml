@@ -70,6 +70,30 @@
         </Style.Resources>
     </Style>
 
+    <Style Selector="NumericUpDown">
+        <Setter Property="Background" Value="{DynamicResource Brush.Surface}" />
+        <Setter Property="BorderThickness" Value="2" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Color.Border}" />
+        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Padding" Value="10,5" />
+        <Setter Property="ClipToBounds" Value="True" />
+    </Style>
 
+    <Style Selector="NumericUpDown /template/ TextBox#PART_TextBox">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="5,8" />
+    </Style>
+
+    <Style Selector="NumericUpDown /template/ RepeatButton">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Width" Value="35" />
+    </Style>
+
+    <Style Selector="NumericUpDown /template/ RepeatButton:pointerover /template/ ContentPresenter">
+        <Setter Property="Background" Value="#2A343F" />
+    </Style>
 
 </Styles>
