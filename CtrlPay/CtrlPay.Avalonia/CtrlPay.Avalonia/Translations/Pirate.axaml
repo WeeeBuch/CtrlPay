@@ -42,6 +42,15 @@
 
     <x:String x:Key="SettingsView.Appearance.Title">Paint the Ship</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Tongue</x:String>
+    <x:String x:Key="SettingsView.Title">Ship's Rules</x:String>
+    <x:String x:Key="SettingsView.Description">Configure yer vessel</x:String>
+    <x:String x:Key="SettingsView.API.Title">Sea Charts &amp; Signals</x:String>
+    <x:String x:Key="SettingsView.API.Url">Secret Port URL</x:String>
+    <x:String x:Key="SettingsView.API.UpdateFreq">Spyglass Frequency</x:String>
+    <x:String x:Key="SettingsView.API.Test">Check the Lines</x:String>
+    <x:String x:Key="SettingsView.API.RecentConnections">Old Ports</x:String>
+    <x:String x:Key="SettingsView.Status.Succes">The line is clear! The log be updated.</x:String>
+    <x:String x:Key="SettingsView.Status.Error">Dead calm. The port be unreachable.</x:String>
 
     <x:String x:Key="Date.Today">This Very Sun</x:String>
     <x:String x:Key="Date.Yesterday">The Previous Tide</x:String>

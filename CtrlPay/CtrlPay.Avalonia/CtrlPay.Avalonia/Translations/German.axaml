@@ -42,6 +42,15 @@
 
     <x:String x:Key="SettingsView.Appearance.Title">Erscheinungsbild</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Sprache</x:String>
+    <x:String x:Key="SettingsView.Title">Einstellungen</x:String>
+    <x:String x:Key="SettingsView.Description">Anwendungseinstellungen und Konfiguration</x:String>
+    <x:String x:Key="SettingsView.API.Title">Netzwerk &amp; API</x:String>
+    <x:String x:Key="SettingsView.API.Url">API-URL</x:String>
+    <x:String x:Key="SettingsView.API.UpdateFreq">Aktualisierungsintervall</x:String>
+    <x:String x:Key="SettingsView.API.Test">Verbindung testen</x:String>
+    <x:String x:Key="SettingsView.API.RecentConnections">Letzte Verbindungen</x:String>
+    <x:String x:Key="SettingsView.Status.Succes">Verbindung hergestellt. Einstellungen gespeichert.</x:String>
+    <x:String x:Key="SettingsView.Status.Error">Verbindung fehlgeschlagen. Bitte prüfen Sie die URL.</x:String>
 
     <x:String x:Key="Date.Today">Heute</x:String>
     <x:String x:Key="Date.Yesterday">Gestern</x:String>

@@ -42,6 +42,15 @@
 
     <x:String x:Key="SettingsView.Appearance.Title">Vzhľad</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Jazyk</x:String>
+    <x:String x:Key="SettingsView.Title">Nastavenia</x:String>
+    <x:String x:Key="SettingsView.Description">Nastavenia a konfigurácia aplikácie</x:String>
+    <x:String x:Key="SettingsView.API.Title">Sieť a API</x:String>
+    <x:String x:Key="SettingsView.API.Url">URL adresa API</x:String>
+    <x:String x:Key="SettingsView.API.UpdateFreq">Frekvencia aktualizácie</x:String>
+    <x:String x:Key="SettingsView.API.Test">Testovať pripojenie</x:String>
+    <x:String x:Key="SettingsView.API.RecentConnections">Nedávne pripojenia</x:String>
+    <x:String x:Key="SettingsView.Status.Succes">Spojenie nadviazané. Nastavenia boli uložené.</x:String>
+    <x:String x:Key="SettingsView.Status.Error">Spojenie zlyhalo. Skontrolujte prosím URL adresu.</x:String>
 
     <x:String x:Key="Date.Today">Dnes</x:String>
     <x:String x:Key="Date.Yesterday">Včera</x:String>

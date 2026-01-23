@@ -42,6 +42,15 @@
 
     <x:String x:Key="SettingsView.Appearance.Title">Tož jak to vypadá</x:String>
     <x:String x:Key="SettingsView.Translation.Title">Nářečí</x:String>
+    <x:String x:Key="SettingsView.Title">Nastaveníčko</x:String>
+    <x:String x:Key="SettingsView.Description">Tož jak si to tu poštolujete</x:String>
+    <x:String x:Key="SettingsView.API.Title">Dráty a API</x:String>
+    <x:String x:Key="SettingsView.API.Url">Kudy to teče (URL)</x:String>
+    <x:String x:Key="SettingsView.API.UpdateFreq"> Jak často sa dívat na novoty</x:String>
+    <x:String x:Key="SettingsView.API.Test">Zkusit, esi to de</x:String>
+    <x:String x:Key="SettingsView.API.RecentConnections">Kde sme byli prve</x:String>
+    <x:String x:Key="SettingsView.Status.Succes">Tož už to frčí a je to upečené.</x:String>
+    <x:String x:Key="SettingsView.Status.Error">Nekde sa stala chyba, ty dráty nefungujó.</x:String>
 
     <x:String x:Key="Date.Today">Dneskaj</x:String>
     <x:String x:Key="Date.Yesterday">Včéra</x:String>

@@ -40,7 +40,13 @@ namespace CtrlPay.Avalonia.Settings
             set { _savedConnections = value; Save(); }
         }
 
-
+        // Frekvence kontroly nových dat
+        private int _refreshRate = 30;
+        public int RefreshRate
+        {
+            get => _refreshRate;
+            set { _refreshRate = value; Save(); }
+        }
 
 
         // Pomocná metoda pro uložení sebe sama

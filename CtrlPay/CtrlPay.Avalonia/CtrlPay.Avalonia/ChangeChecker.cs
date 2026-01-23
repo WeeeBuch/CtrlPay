@@ -1,4 +1,5 @@
-﻿using CtrlPay.Repos;
+﻿using CtrlPay.Avalonia.Settings;
+using CtrlPay.Repos;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ public static class ChangeChecker
         UpdateHandler.HandlePendingPaymentsUpdate(ToDoRepo.GetTransactionSums("pendings"));
     }
 
-    public async static Task StartChecking(TimeSpan interval, CancellationToken ct = default)
+    public async static Task StartChecking(CancellationToken ct = default)
     {
         while (!ct.IsCancellationRequested)
         {
@@ -25,10 +26,10 @@ public static class ChangeChecker
             {
                 ToCheck();
                 // Počkáme zvolený interval před dalším spuštěním
-                await Task.Delay(interval, ct);
+                await Task.Delay(TimeSpan.FromSeconds(SettingsManager.Current.RefreshRate), ct);
             }
             catch (TaskCanceledException) { break; } // Normální ukončení
-            catch (Exception ex)
+            catch (Exception)
             {
                 // Tady můžeš zalogovat chybu, aby ti nespadla celá smyčka
             }
