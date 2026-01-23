@@ -57,7 +57,7 @@ namespace CtrlPay.Repos
             string json = await response.Content.ReadAsStringAsync();
 
             // Přidej options do metody Deserialize
-            JsonSerializer.Deserialize<List<TransactionApiDTO>>(json, options).ForEach(t => TransactionsCache.Add(new(t)));
+            JsonSerializer.Deserialize<ReturnModel<List<TransactionApiDTO>>>(json, options).Body.ForEach(t => TransactionsCache.Add(new(t)));
             LastUpdatedTransactions = DateTime.UtcNow;
         }
         public static List<FrontendTransactionDTO> GetTransactions()
@@ -147,7 +147,7 @@ namespace CtrlPay.Repos
             var response = await httpClient.GetAsync(uri, cancellationToken);
 
             response.EnsureSuccessStatusCode();
-
+            //TODO: Změnit na deserializaci ReturnModelu
             decimal suma = decimal.Parse(await response.Content.ReadAsStringAsync(), System.Globalization.CultureInfo.InvariantCulture);
 
             TransactionSumCache = suma;

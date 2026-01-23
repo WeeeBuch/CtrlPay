@@ -24,7 +24,9 @@ namespace CtrlPay.Entities
             { "A6", "user does not have account"   },
             { "A7", "invalid or expired token"   },
             { "A8", "token is not a TOTP token"   },
-            { "A9", "HTTP error code received" }
+            { "A9", "HTTP error code received" },
+            { "T0", "operation successful" },
+            { "P0", "operation successful" }
         };
 
         public ReturnModel()

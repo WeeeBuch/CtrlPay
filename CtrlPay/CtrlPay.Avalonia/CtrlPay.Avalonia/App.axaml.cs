@@ -44,8 +44,6 @@ namespace CtrlPay.Avalonia
                 };
             }
 
-            _ = ChangeChecker.StartChecking();
-
             base.OnFrameworkInitializationCompleted();
         }
 

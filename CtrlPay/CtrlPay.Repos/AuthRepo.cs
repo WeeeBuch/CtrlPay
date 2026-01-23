@@ -16,9 +16,9 @@ namespace CtrlPay.Repos
     public static class AuthRepo
     {
 
-        public static bool Register(string username, string code, string password, string confirmPassword)
+        public static async Task<ReturnModel<bool>> Register(string username, string code, string password, string confirmPassword)
         {
-            if (DebugMode.IsDebugMode) return true;
+            if (DebugMode.IsDebugMode) return new ReturnModel<bool>("R0", ReturnModelSeverityEnum.Ok, true);
             /* TODO: Register logic
              * Tu logika pro registraci
              *
@@ -61,12 +61,12 @@ namespace CtrlPay.Repos
             */
             #endregion
 
-            return true;
+            return new ReturnModel<bool>("R0", ReturnModelSeverityEnum.Ok, true);
         }
 
         public static async Task<ReturnModel<bool>> Login(string username, string password, CancellationToken cancellationToken)
         {
-            if (DebugMode.IsDebugMode) return new ReturnModel<bool>("A0", ReturnModelSeverityEnum.Ok, false);
+            if (DebugMode.IsDebugMode) return new ReturnModel<bool>("A0", ReturnModelSeverityEnum.Ok, true);
 
             HttpClient httpClient = new HttpClient();
             var payload = new

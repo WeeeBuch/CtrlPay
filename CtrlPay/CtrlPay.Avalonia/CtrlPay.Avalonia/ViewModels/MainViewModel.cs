@@ -38,7 +38,7 @@ namespace CtrlPay.Avalonia.ViewModels
         public MainViewModel()
         {
             // Spuštění kontrol změn na pozadí
-            _ = ChangeChecker.StartChecking(TimeSpan.FromSeconds(5));
+            _ = ChangeChecker.StartChecking();
 
             NavigationItems = new()
             {

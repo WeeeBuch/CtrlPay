@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Views;
+using CtrlPay.Entities;
 using CtrlPay.Repos;
 using System;
 using System.ComponentModel;
@@ -49,28 +50,30 @@ public partial class LoginViewModel : ViewModelBase
     private string? regConfirmPassword;
 
     [RelayCommand]
-    private void Register()
+    private async Task Register()
     {
-        // Předělat chybovou hlášku
-        bool succes = AuthRepo.Register(RegUsername, RegCode, RegPassword, RegConfirmPassword);
+        //TODO: Předělat chybovou hlášku
+        ReturnModel<bool> returnModel = await AuthRepo.Register(RegUsername, RegCode, RegPassword, RegConfirmPassword);
+        bool success = returnModel.Body;
 
-        if (succes) 
+        if (success) 
         {
             _navigation.ShowMainWindow();
             _navigation.CloseLogin();
         }
         else
-        {// Předělat chybovou hlášku
-            Message = AuthRepo.RegisterFailedMessage();
+        {//TODO: Předělat chybovou hlášku
+            Message = returnModel.BaseMessage;
         }
     }
 
     [RelayCommand]
     private async Task LoginAsync()
     {
-        // Předělat chybovou hlášku
+        //TODO: Předělat chybovou hlášku
         CancellationToken cancellationToken = new CancellationToken();
-        bool success = await AuthRepo.Login(Username, Password, cancellationToken);
+        ReturnModel<bool> returnModel = await AuthRepo.Login(Username, Password, cancellationToken);
+        bool success = returnModel.Body;
 
         if (success) 
         {
@@ -79,8 +82,8 @@ public partial class LoginViewModel : ViewModelBase
         }
         else
         {
-            // Předělat chybovou hlášku
-            Message = AuthRepo.LoginFailedMessage();
+            //TODO: Předělat chybovou hlášku
+            Message = returnModel.BaseMessage;
         }
     }
 
