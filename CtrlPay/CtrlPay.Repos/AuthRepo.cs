@@ -64,7 +64,7 @@ namespace CtrlPay.Repos
             return new ("R0", ReturnModelSeverityEnum.Ok, true);
         }
 
-        public static async Task<ReturnModel<bool>> Login(string username, string password, CancellationToken cancellationToken)
+        public static async Task<ReturnModel<bool>> Login(string? username, string? password, CancellationToken cancellationToken)
         {
             if (DebugMode.IsDebugMode) return new ("A0", ReturnModelSeverityEnum.Ok, true);
 
