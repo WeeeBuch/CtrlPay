@@ -5,6 +5,7 @@ using Avalonia.Media;
 using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CtrlPay.Avalonia.HelperClasses;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
@@ -135,40 +136,5 @@ public partial class DebtViewModel : ViewModelBase
     partial void OnSelectedSortOrderChanged(SortOption value) => ApplySorting(value.Key);
 }
 
-public partial class SortOption : ObservableObject
-{
-    public string Key { get; set; }
 
-    [ObservableProperty]
-    private string? displayName;
 
-    public string DisplayNameKay;
-
-    public SortOption(string key, string displayNameKey)
-    {
-        Key = key;
-        DisplayNameKay = displayNameKey;
-
-        UpdateDisplayName();
-
-        TranslationManager.LanguageChanged.Add(UpdateDisplayName);
-    }
-
-    private void UpdateDisplayName()
-    {
-        if (!string.IsNullOrEmpty(DisplayNameKay))
-            DisplayName = TranslationManager.GetString(DisplayNameKay);
-    }
-}
-
-public class RangeObservableCollection<T> : ObservableCollection<T>
-{
-    public void ReplaceAll(IEnumerable<T> items)
-    {
-        Items.Clear(); // Interní seznam vymažeme bez notifikace
-        foreach (var item in items) Items.Add(item);
-
-        // Vyvoláme notifikaci pro UI jen JEDNOU (Reset)
-        OnCollectionChanged(new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
-    }
-}

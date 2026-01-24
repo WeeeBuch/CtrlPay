@@ -45,6 +45,7 @@ namespace CtrlPay.Avalonia.ViewModels
                 // Předáváme klíče, nikoliv výsledek GetString
                 new NavItem("NavbarView.Dashboard", new DashboardView(), IconData.Dashboard),
                 new NavItem("NavbarView.Debts", new DebtView(), IconData.Debt),
+                new NavItem("NavbarView.Transactions", new TransactionView(), IconData.Cash),
                 new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog)
             };
 
