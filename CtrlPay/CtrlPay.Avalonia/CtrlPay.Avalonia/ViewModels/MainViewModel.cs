@@ -37,6 +37,9 @@ namespace CtrlPay.Avalonia.ViewModels
 
         public MainViewModel()
         {
+            // Spuštění kontrol změn na pozadí
+            _ = ChangeChecker.StartChecking();
+
             NavigationItems = new()
             {
                 // Předáváme klíče, nikoliv výsledek GetString
@@ -50,7 +53,7 @@ namespace CtrlPay.Avalonia.ViewModels
             SelectedNavigationItem = NavigationItems[0];
         }
 
-        partial void OnSelectedNavigationItemChanged(NavItem? value)
+        partial void OnSelectedNavigationItemChanged(NavItem value)
         {
             if (value != null)
                 CurrentPage = value.ViewModel;
@@ -73,7 +76,7 @@ namespace CtrlPay.Avalonia.ViewModels
             Icon = icon;
 
             // Prvotní překlad
-            UpdateName();
+            Name = TranslationManager.GetString(NameKey);
 
             // Přihlášení k odběru změn jazyka
             TranslationManager.LanguageChanged.Add(UpdateName);

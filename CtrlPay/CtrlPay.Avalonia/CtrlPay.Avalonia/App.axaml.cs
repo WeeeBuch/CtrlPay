@@ -1,4 +1,4 @@
-﻿using Avalonia;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
@@ -43,8 +43,6 @@ namespace CtrlPay.Avalonia
                     DataContext = new MainViewModel()
                 };
             }
-
-            _ = ChangeChecker.StartChecking();
 
             base.OnFrameworkInitializationCompleted();
         }

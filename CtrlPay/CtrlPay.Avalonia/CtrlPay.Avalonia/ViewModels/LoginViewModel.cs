@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Views;
+using CtrlPay.Entities;
 using CtrlPay.Repos;
 using System;
 using System.ComponentModel;
@@ -29,46 +30,50 @@ public partial class LoginViewModel : ViewModelBase
 
     // --- Přihlašovací pole ---
     [ObservableProperty]
-    private string username;
+    private string? username;
 
     [ObservableProperty]
-    private string password;
+    private string? password;
 
 
     // --- Registrační pole ---
     [ObservableProperty]
-    private string regUsername;
+    private string? regUsername;
 
     [ObservableProperty]
-    private string regCode;
+    private string? regCode;
 
     [ObservableProperty]
-    private string regPassword;
+    private string? regPassword;
 
     [ObservableProperty]
-    private string regConfirmPassword;
+    private string? regConfirmPassword;
 
     [RelayCommand]
-    private void Register()
+    private async Task Register()
     {
-        bool succes = AuthRepo.Register(RegUsername, RegCode, RegPassword, RegConfirmPassword);
+        //TODO: Předělat chybovou hlášku
+        ReturnModel<bool> returnModel = await AuthRepo.Register(RegUsername, RegCode, RegPassword, RegConfirmPassword);
+        bool success = returnModel.Body;
 
-        if (succes) 
+        if (success) 
         {
             _navigation.ShowMainWindow();
             _navigation.CloseLogin();
         }
         else
-        {
-            Message = AuthRepo.RegisterFailedMessage();
+        {//TODO: Předělat chybovou hlášku
+            Message = returnModel.BaseMessage;
         }
     }
 
     [RelayCommand]
     private async Task LoginAsync()
     {
+        //TODO: Předělat chybovou hlášku
         CancellationToken cancellationToken = new CancellationToken();
-        bool success = await AuthRepo.Login(Username, Password, cancellationToken);
+        ReturnModel<bool> returnModel = await AuthRepo.Login(Username, Password, cancellationToken);
+        bool success = returnModel.Body;
 
         if (success) 
         {
@@ -77,7 +82,8 @@ public partial class LoginViewModel : ViewModelBase
         }
         else
         {
-            Message = AuthRepo.LoginFailedMessage();
+            //TODO: Předělat chybovou hlášku
+            Message = returnModel.BaseMessage;
         }
     }
 

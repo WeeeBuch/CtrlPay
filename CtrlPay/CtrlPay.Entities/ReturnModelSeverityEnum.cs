@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CtrlPay.Repos.Frontend
+namespace CtrlPay.Entities
 {
-    public static class DebugMode
+    public enum ReturnModelSeverityEnum
     {
-        public static bool IsDebugMode { get; set; } = false;
+        Ok = 0,
+        Warning = 1,
+        Error = 2
     }
 }

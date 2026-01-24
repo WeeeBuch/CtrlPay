@@ -83,7 +83,7 @@ namespace CtrlPay.Entities
             PaidAmountXMR = payment.PaidAmountXMR;
             Status = payment.Status;
             CreatedAt = payment.CreatedAt;
-            PaidAt = payment.PaidAt;
+            PaidAt = payment.PaidAt ?? default;
         }
     }
 }
