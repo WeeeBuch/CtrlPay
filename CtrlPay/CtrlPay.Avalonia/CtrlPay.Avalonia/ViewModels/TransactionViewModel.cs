@@ -11,7 +11,7 @@ namespace CtrlPay.Avalonia.ViewModels;
 
 public partial class TransactionViewModel : ViewModelBase
 {
-    public RangeObservableCollection<DebtItemViewModel> Debts { get; } = [];
+    public RangeObservableCollection<TransactionItem> Debts { get; } = [];
 
     [ObservableProperty] private SortOption selectedSortOrder;
     [ObservableProperty] private List<SortOption> sortOptions;
@@ -37,7 +37,7 @@ public partial class TransactionViewModel : ViewModelBase
 
     public void ApplySorting(string? sortingMethod)
     {
-        var resultList = new List<DebtItemViewModel>();
+        var resultList = new List<TransactionItem>();
 
         foreach (var dto in TransactionRepo.GetSortedTransactions(sortingMethod))
         {

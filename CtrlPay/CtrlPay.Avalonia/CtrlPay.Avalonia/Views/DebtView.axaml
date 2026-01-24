@@ -13,7 +13,7 @@
     <Grid ColumnDefinitions="280, *">
         <Border Grid.Column="0" BorderThickness="0,0,1,0" Padding="20">
             <StackPanel Spacing="20">
-                <TextBox Watermark="{DynamicResource DebtView.Watermark.SearchBar}" Height="35"/>
+                <TextBox Watermark="{DynamicResource DebtView.Watermark.SearchBar}" Height="35" Text="{Binding SearchTerm}"/>
                 
                 <CheckBox Content="{DynamicResource DebtView.Payable}"
                           IsChecked="{Binding PayableChecked}"/>
@@ -50,7 +50,7 @@
         <ScrollViewer Grid.Column="1" Padding="0">
             <ItemsControl ItemsSource="{Binding Debts}">
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="vm:DebtItemViewModel">
+                    <DataTemplate x:DataType="hc:TransactionItem">
                         <Border Background="{DynamicResource Color.Surface}" 
                                 CornerRadius="12" 
                                 Margin="0,0,10,10" 

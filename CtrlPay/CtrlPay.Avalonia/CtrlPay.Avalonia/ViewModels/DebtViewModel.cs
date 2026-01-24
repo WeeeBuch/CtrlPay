@@ -23,72 +23,14 @@ using System.Xml.Linq;
 using static CtrlPay.Repos.ToDoRepo;
 
 namespace CtrlPay.Avalonia.ViewModels;
-
-public partial class DebtItemViewModel : ObservableObject
-{
-    [ObservableProperty] private string _description;
-    [ObservableProperty] private decimal _amount;
-
-    [ObservableProperty] private string creditPayString;
-    [ObservableProperty] private decimal creditAmount;
-    [ObservableProperty] private DateTime timestamp;
-
-    [ObservableProperty] private bool isExpanded;
-    [RelayCommand] private void ToggleExpand() => IsExpanded = !IsExpanded;
-
-    public FrontendTransactionDTO TransactionDTOBase;
-
-    public DebtItemViewModel(FrontendTransactionDTO transaction)
-    {
-        Description = transaction.Title;
-        Amount = transaction.Amount;
-        Status = transaction.State;
-        Timestamp = transaction.Timestamp;
-
-        TransactionDTOBase = transaction;
-        creditPayString = "";
-
-        UpdateCreditAmount(TransactionRepo.GetTransactionSum());
-    }
-
-    [RelayCommand]
-    private void PayFromCredit() => ToDoRepo.PayFromCredit(TransactionDTOBase);
-
-    [RelayCommand]
-    private void GenerateAddress() 
-    { 
-        /* Implementace generování adresy */ 
-        string addr = ToDoRepo.GetOneTimeAddress(TransactionDTOBase);
-
-        QrCodeViewModel vm = new(addr, TransactionDTOBase);
-        QrCodeView view = new() { DataContext = vm };
-
-        var window = new QrCodeWindow
-        {
-            Content = view,
-            SizeToContent = SizeToContent.WidthAndHeight,
-            CanResize = false,
-            WindowStartupLocation = WindowStartupLocation.CenterOwner
-        };
-        window.Show();
-    }
-
-    public StatusEnum Status { get; set; }
-
-    public void UpdateCreditAmount(decimal amount)
-    {
-        CreditAmount = amount;
-        CreditPayString = $"{CreditAmount} / {Amount}";
-    }
-}
-
 public partial class DebtViewModel : ViewModelBase
 {
-    public RangeObservableCollection<DebtItemViewModel> Debts { get; } = [];
+    public RangeObservableCollection<TransactionItem> Debts { get; } = [];
 
     [ObservableProperty] private bool payableChecked;
     [ObservableProperty] private SortOption selectedSortOrder;
     [ObservableProperty] private List<SortOption> sortOptions;
+    [ObservableProperty] private string searchTerm;
 
     public DebtViewModel()
     {
@@ -110,7 +52,7 @@ public partial class DebtViewModel : ViewModelBase
 
     public void ApplySorting(string? sortingMethod)
     {
-        var resultList = new List<DebtItemViewModel>();
+        var resultList = new List<TransactionItem>();
 
         foreach (var dto in PaymentRepo.GetSortedDebts(sortingMethod, PayableChecked))
         {
@@ -134,6 +76,20 @@ public partial class DebtViewModel : ViewModelBase
     partial void OnPayableCheckedChanged(bool value) => ApplySorting(null);
     public void TransactionsUpdated() => ApplySorting(null);
     partial void OnSelectedSortOrderChanged(SortOption value) => ApplySorting(value.Key);
+
+    partial void OnSearchTermChanged(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            ApplySorting(null);
+        }
+        else
+        {
+            ApplySorting(null);
+            var resultList = Debts.Where(vm => vm.Description.ToLower().Contains(value.ToLower())).ToList();
+            Debts.ReplaceAll(resultList);
+        }
+    }
 }
 
 

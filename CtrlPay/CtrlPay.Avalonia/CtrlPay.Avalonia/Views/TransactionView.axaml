@@ -46,7 +46,7 @@
         <ScrollViewer Grid.Column="1" Padding="0">
             <ItemsControl ItemsSource="{Binding Debts}">
                 <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="vm:DebtItemViewModel">
+                    <DataTemplate x:DataType="hc:TransactionItem">
                         <Border Background="{DynamicResource Color.Surface}" 
                                 CornerRadius="12" 
                                 Margin="0,0,10,10" 
