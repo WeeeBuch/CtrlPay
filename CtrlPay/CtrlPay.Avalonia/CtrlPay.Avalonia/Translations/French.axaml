@@ -73,4 +73,24 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">Copier l'adresse</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Adresse copiée dans le presse-papiers</x:String>
 
+    <x:String x:Key="ErrorCode.A0">Connexion réussie</x:String>
+    <x:String x:Key="ErrorCode.A1">Un utilisateur avec le même nom existe déjà</x:String>
+    <x:String x:Key="ErrorCode.A2">Mot de passe incorrect</x:String>
+    <x:String x:Key="ErrorCode.A3">L'utilisateur n'existe pas</x:String>
+    <x:String x:Key="ErrorCode.A4">TOTP non valide</x:String>
+    <x:String x:Key="ErrorCode.A5">Connexion valide, en attente d'authentification TOTP</x:String>
+    <x:String x:Key="ErrorCode.A6">L'utilisateur n'a pas de compte</x:String>
+    <x:String x:Key="ErrorCode.A7">Jeton TOTP invalide ou expiré</x:String>
+    <x:String x:Key="ErrorCode.A8">Le jeton n'est pas un jeton TOTP</x:String>
+    <x:String x:Key="ErrorCode.A9">Code d'erreur HTTP reçu</x:String>
+    <x:String x:Key="ErrorCode.A10">Le nom d'utilisateur ne peut pas être vide</x:String>
+    <x:String x:Key="ErrorCode.A11">Le mot de passe ne peut pas être vide</x:String>
+
+    <x:String x:Key="ErrorCode.P0">Opération réussie</x:String>
+    <x:String x:Key="ErrorCode.P1">L'utilisateur n'a pas de compte</x:String>
+
+    <x:String x:Key="ErrorCode.R0">Inscription réussie</x:String>
+
+    <x:String x:Key="ErrorCode.T0">Opération réussie</x:String>
+    <x:String x:Key="ErrorCode.T1">L'utilisateur n'a pas de compte</x:String>
 </ResourceDictionary>

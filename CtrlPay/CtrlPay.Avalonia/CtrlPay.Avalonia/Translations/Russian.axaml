@@ -73,4 +73,24 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">Копировать адрес</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Адрес скопирован в буфер обмена</x:String>
 
+    <x:String x:Key="ErrorCode.A0">Успешный вход в систему</x:String>
+    <x:String x:Key="ErrorCode.A1">Пользователь с таким именем уже существует</x:String>
+    <x:String x:Key="ErrorCode.A2">Неверный пароль</x:String>
+    <x:String x:Key="ErrorCode.A3">Пользователя не существует</x:String>
+    <x:String x:Key="ErrorCode.A4">Неверный код TOTP</x:String>
+    <x:String x:Key="ErrorCode.A5">Вход подтвержден, ожидание TOTP аутентификации</x:String>
+    <x:String x:Key="ErrorCode.A6">У пользователя нет аккаунта</x:String>
+    <x:String x:Key="ErrorCode.A7">Неверный или истекший TOTP токен</x:String>
+    <x:String x:Key="ErrorCode.A8">Токен не является TOTP токеном</x:String>
+    <x:String x:Key="ErrorCode.A9">Получен код ошибки HTTP</x:String>
+    <x:String x:Key="ErrorCode.A10">Имя пользователя не может быть пустым</x:String>
+    <x:String x:Key="ErrorCode.A11">Пароль не может быть пустым</x:String>
+
+    <x:String x:Key="ErrorCode.P0">Операция успешно завершена</x:String>
+    <x:String x:Key="ErrorCode.P1">У пользователя нет аккаунта</x:String>
+
+    <x:String x:Key="ErrorCode.R0">Регистрация прошла успешно</x:String>
+
+    <x:String x:Key="ErrorCode.T0">Операция успешно завершена</x:String>
+    <x:String x:Key="ErrorCode.T1">У пользователя нет аккаунта</x:String>
 </ResourceDictionary>

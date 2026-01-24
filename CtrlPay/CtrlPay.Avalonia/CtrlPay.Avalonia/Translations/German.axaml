@@ -73,4 +73,24 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">Adresse kopieren</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Adresse in Zwischenablage kopiert</x:String>
 
+    <x:String x:Key="ErrorCode.A0">Erfolgreich eingeloggt</x:String>
+    <x:String x:Key="ErrorCode.A1">Benutzer mit diesem Namen existiert bereits</x:String>
+    <x:String x:Key="ErrorCode.A2">Falsches Passwort</x:String>
+    <x:String x:Key="ErrorCode.A3">Benutzer existiert nicht</x:String>
+    <x:String x:Key="ErrorCode.A4">TOTP ungültig</x:String>
+    <x:String x:Key="ErrorCode.A5">Login gültig, erwarte TOTP-Authentifizierung</x:String>
+    <x:String x:Key="ErrorCode.A6">Benutzer hat kein Konto</x:String>
+    <x:String x:Key="ErrorCode.A7">Ungültiger oder abgelaufener TOTP-Token</x:String>
+    <x:String x:Key="ErrorCode.A8">Token ist kein TOTP-Token</x:String>
+    <x:String x:Key="ErrorCode.A9">HTTP-Fehlercode empfangen</x:String>
+    <x:String x:Key="ErrorCode.A10">Benutzername darf nicht leer sein</x:String>
+    <x:String x:Key="ErrorCode.A11">Passwort darf nicht leer sein</x:String>
+
+    <x:String x:Key="ErrorCode.P0">Vorgang erfolgreich</x:String>
+    <x:String x:Key="ErrorCode.P1">Benutzer hat kein Konto</x:String>
+
+    <x:String x:Key="ErrorCode.R0">Erfolgreich registriert</x:String>
+
+    <x:String x:Key="ErrorCode.T0">Vorgang erfolgreich</x:String>
+    <x:String x:Key="ErrorCode.T1">Benutzer hat kein Konto</x:String>
 </ResourceDictionary>

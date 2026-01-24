@@ -73,4 +73,24 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">Kopiuj adres</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Adres skopiowany do schowka</x:String>
 
+    <x:String x:Key="ErrorCode.A0">Pomyślnie zalogowano</x:String>
+    <x:String x:Key="ErrorCode.A1">Użytkownik o tej samej nazwie już istnieje</x:String>
+    <x:String x:Key="ErrorCode.A2">Błędne hasło</x:String>
+    <x:String x:Key="ErrorCode.A3">Użytkownik nie istnieje</x:String>
+    <x:String x:Key="ErrorCode.A4">Niepoprawny kod TOTP</x:String>
+    <x:String x:Key="ErrorCode.A5">Logowanie poprawne, oczekiwanie na autoryzację TOTP</x:String>
+    <x:String x:Key="ErrorCode.A6">Użytkownik nie posiada konta</x:String>
+    <x:String x:Key="ErrorCode.A7">Nieprawidłowy lub wygasły token TOTP</x:String>
+    <x:String x:Key="ErrorCode.A8">Token nie jest tokenem TOTP</x:String>
+    <x:String x:Key="ErrorCode.A9">Otrzymano kod błędu HTTP</x:String>
+    <x:String x:Key="ErrorCode.A10">Nazwa użytkownika nie może být pusta</x:String>
+    <x:String x:Key="ErrorCode.A11">Hasło nie może być puste</x:String>
+
+    <x:String x:Key="ErrorCode.P0">Operacja powiodła się</x:String>
+    <x:String x:Key="ErrorCode.P1">Użytkownik nie posiada konta</x:String>
+
+    <x:String x:Key="ErrorCode.R0">Pomyślnie zarejestrowano</x:String>
+
+    <x:String x:Key="ErrorCode.T0">Operacja powiodła się</x:String>
+    <x:String x:Key="ErrorCode.T1">Użytkownik nie posiada konta</x:String>
 </ResourceDictionary>
