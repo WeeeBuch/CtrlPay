@@ -15,6 +15,7 @@ public partial class TransactionViewModel : ViewModelBase
 
     [ObservableProperty] private SortOption selectedSortOrder;
     [ObservableProperty] private List<SortOption> sortOptions;
+    [ObservableProperty] private string searchTerm;
 
     public TransactionViewModel()
     {
@@ -59,4 +60,18 @@ public partial class TransactionViewModel : ViewModelBase
     public void OnCreditChanged(decimal amount) => ApplySorting(null);
     public void TransactionsUpdated() => ApplySorting(null);
     partial void OnSelectedSortOrderChanged(SortOption value) => ApplySorting(value.Key);
+
+    partial void OnSearchTermChanged(string value)
+    {
+        if (string.IsNullOrWhiteSpace(value))
+        {
+            ApplySorting(null);
+        }
+        else
+        {
+            ApplySorting(null);
+            var resultList = Debts.Where(vm => vm.Description.ToLower().Contains(value.ToLower())).ToList();
+            Debts.ReplaceAll(resultList);
+        }
+    }
 }
