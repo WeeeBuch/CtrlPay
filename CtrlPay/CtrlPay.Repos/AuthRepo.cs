@@ -61,12 +61,18 @@ namespace CtrlPay.Repos
             */
             #endregion
 
-            return new ReturnModel<bool>("R0", ReturnModelSeverityEnum.Ok, true);
+            return new ("R0", ReturnModelSeverityEnum.Ok, true);
         }
 
         public static async Task<ReturnModel<bool>> Login(string username, string password, CancellationToken cancellationToken)
         {
-            if (DebugMode.IsDebugMode) return new ReturnModel<bool>("A0", ReturnModelSeverityEnum.Ok, true);
+            if (DebugMode.IsDebugMode) return new ("A0", ReturnModelSeverityEnum.Ok, true);
+
+            #region Validations out of Api
+            if (string.IsNullOrWhiteSpace(username)) return new("A10", ReturnModelSeverityEnum.Error, false);
+
+            if (string.IsNullOrWhiteSpace(password)) return new("A11", ReturnModelSeverityEnum.Error, false);
+            #endregion
 
             HttpClient httpClient = new HttpClient();
             var payload = new

@@ -25,6 +25,8 @@ namespace CtrlPay.Entities
             { "A7", "invalid or expired token"   },
             { "A8", "token is not a TOTP token"   },
             { "A9", "HTTP error code received" },
+            { "A10", "username can not be blank" },
+            { "A11", "password can not be blank" },
             { "T0", "operation successful" },
             { "P0", "operation successful" }
         };
