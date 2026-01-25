@@ -63,12 +63,20 @@ namespace CtrlPay.Repos
             
             string uri = Credentials.BaseUri + "/auth/login";
 
+            HttpResponseMessage response;
+            try
+            {
+                response = await httpClient.PostAsync(
+                    uri,
+                    content,
+                    cancellationToken
+                );
+            }
+            catch (Exception)
+            {
+                return new("A0", ReturnModelSeverityEnum.Error, false);
+            }
             
-            HttpResponseMessage response = await httpClient.PostAsync(
-                uri,
-                content,
-                cancellationToken
-            );
             
 
             string body = await response.Content.ReadAsStringAsync();
