@@ -90,6 +90,11 @@
     <x:String x:Key="ErrorCode.P1">ユーザーはアカウントを持っていません</x:String>
 
     <x:String x:Key="ErrorCode.R0">登録が完了しました</x:String>
+    <x:String x:Key="ErrorCode.R1">ユーザー名は空欄にできません</x:String>
+    <x:String x:Key="ErrorCode.R2">パスワードは空欄にできません</x:String>
+    <x:String x:Key="ErrorCode.R3">確認用パスワードは空欄にできません</x:String>
+    <x:String x:Key="ErrorCode.R4">パスワードが一致しません</x:String>
+    <x:String x:Key="ErrorCode.R5">コードは空欄にできません</x:String>
 
     <x:String x:Key="ErrorCode.T0">操作が正常に完了しました</x:String>
     <x:String x:Key="ErrorCode.T1">ユーザーはアカウントを持っていません</x:String>

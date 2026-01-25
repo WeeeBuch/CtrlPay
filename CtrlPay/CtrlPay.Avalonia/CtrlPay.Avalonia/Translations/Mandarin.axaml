@@ -90,6 +90,11 @@
     <x:String x:Key="ErrorCode.P1">用户没有账户</x:String>
 
     <x:String x:Key="ErrorCode.R0">注册成功</x:String>
+    <x:String x:Key="ErrorCode.R1">用户名不能为空</x:String>
+    <x:String x:Key="ErrorCode.R2">密码不能为空</x:String>
+    <x:String x:Key="ErrorCode.R3">确认密码不能为空</x:String>
+    <x:String x:Key="ErrorCode.R4">密码不匹配</x:String>
+    <x:String x:Key="ErrorCode.R5">代码不能为空</x:String>
 
     <x:String x:Key="ErrorCode.T0">操作成功</x:String>
     <x:String x:Key="ErrorCode.T1">用户没有账户</x:String>

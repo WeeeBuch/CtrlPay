@@ -90,6 +90,11 @@
     <x:String x:Key="ErrorCode.P1">Benutzer hat kein Konto</x:String>
 
     <x:String x:Key="ErrorCode.R0">Erfolgreich registriert</x:String>
+    <x:String x:Key="ErrorCode.R1">Benutzername darf nicht leer sein</x:String>
+    <x:String x:Key="ErrorCode.R2">Passwort darf nicht leer sein</x:String>
+    <x:String x:Key="ErrorCode.R3">Passwortbestätigung darf nicht leer sein</x:String>
+    <x:String x:Key="ErrorCode.R4">Passwörter stimmen nicht überein</x:String>
+    <x:String x:Key="ErrorCode.R5">Code darf nicht leer sein</x:String>
 
     <x:String x:Key="ErrorCode.T0">Vorgang erfolgreich</x:String>
     <x:String x:Key="ErrorCode.T1">Benutzer hat kein Konto</x:String>

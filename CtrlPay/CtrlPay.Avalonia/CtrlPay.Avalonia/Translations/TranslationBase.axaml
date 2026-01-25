@@ -102,6 +102,11 @@
     <x:String x:Key="ErrorCode.P1">ErrorCode.P1</x:String>
 
     <x:String x:Key="ErrorCode.R0">ErrorCode.R0</x:String>
+    <x:String x:Key="ErrorCode.R1">ErrorCode.R1</x:String>
+    <x:String x:Key="ErrorCode.R2">ErrorCode.R2</x:String>
+    <x:String x:Key="ErrorCode.R3">ErrorCode.R3</x:String>
+    <x:String x:Key="ErrorCode.R4">ErrorCode.R4</x:String>
+    <x:String x:Key="ErrorCode.R5">ErrorCode.R5</x:String>
 
     <x:String x:Key="ErrorCode.T0">ErrorCode.T0</x:String>
     <x:String x:Key="ErrorCode.T1">ErrorCode.T1</x:String>

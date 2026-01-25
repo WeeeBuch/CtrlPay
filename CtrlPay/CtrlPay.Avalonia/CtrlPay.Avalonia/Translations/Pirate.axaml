@@ -90,6 +90,11 @@
     <x:String x:Key="ErrorCode.P1">This sailor has no berth here</x:String>
 
     <x:String x:Key="ErrorCode.R0">Signed the articles! Welcome to the crew</x:String>
+    <x:String x:Key="ErrorCode.R1">Ye must have a name, sailor</x:String>
+    <x:String x:Key="ErrorCode.R2">The secret word cannot be empty</x:String>
+    <x:String x:Key="ErrorCode.R3">Confirm yer secret word, matey</x:String>
+    <x:String x:Key="ErrorCode.R4">The two secrets don't match</x:String>
+    <x:String x:Key="ErrorCode.R5">The mark cannot be empty</x:String>
 
     <x:String x:Key="ErrorCode.T0">Great success on the high seas!</x:String>
     <x:String x:Key="ErrorCode.T1">This sailor has no berth here</x:String>

@@ -90,6 +90,11 @@
     <x:String x:Key="ErrorCode.P1">L'utilisateur n'a pas de compte</x:String>
 
     <x:String x:Key="ErrorCode.R0">Inscription réussie</x:String>
+    <x:String x:Key="ErrorCode.R1">Le nom d'utilisateur ne peut pas être vide</x:String>
+    <x:String x:Key="ErrorCode.R2">Le mot de passe ne peut pas être vide</x:String>
+    <x:String x:Key="ErrorCode.R3">La confirmation du mot de passe ne peut pas être vide</x:String>
+    <x:String x:Key="ErrorCode.R4">Les mots de passe ne correspondent pas</x:String>
+    <x:String x:Key="ErrorCode.R5">Le code ne peut pas être vide</x:String>
 
     <x:String x:Key="ErrorCode.T0">Opération réussie</x:String>
     <x:String x:Key="ErrorCode.T1">L'utilisateur n'a pas de compte</x:String>

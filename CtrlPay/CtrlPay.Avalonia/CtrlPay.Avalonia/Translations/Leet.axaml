@@ -90,6 +90,11 @@
     <x:String x:Key="ErrorCode.P1">N0_4CC0UN7_F0UND</x:String>
 
     <x:String x:Key="ErrorCode.R0">R361573R_5UCC355FUL</x:String>
+    <x:String x:Key="ErrorCode.R1">U53RN4M3_N07_FOUND</x:String>
+    <x:String x:Key="ErrorCode.R2">P455W0RD_3MP7Y</x:String>
+    <x:String x:Key="ErrorCode.R3">C0NF1RM_P455_3MP7Y</x:String>
+    <x:String x:Key="ErrorCode.R4">M15M47CH_P455</x:String>
+    <x:String x:Key="ErrorCode.R5">C0D3_15_BL4NK</x:String>
 
     <x:String x:Key="ErrorCode.T0">0P3R4710N_OK</x:String>
     <x:String x:Key="ErrorCode.T1">N0_4CC0UN7_F0UND</x:String>

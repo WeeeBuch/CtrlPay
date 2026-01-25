@@ -90,6 +90,11 @@
     <x:String x:Key="ErrorCode.P1">Používateľ nemá vytvorený účet</x:String>
 
     <x:String x:Key="ErrorCode.R0">Registrácia prebehla úspešne</x:String>
+    <x:String x:Key="ErrorCode.R1">Používateľské meno nesmie byť prázdne</x:String>
+    <x:String x:Key="ErrorCode.R2">Heslo nesmie byť prázdne</x:String>
+    <x:String x:Key="ErrorCode.R3">Potvrdenie hesla nesmie byť prázdne</x:String>
+    <x:String x:Key="ErrorCode.R4">Heslá sa nezhodujú</x:String>
+    <x:String x:Key="ErrorCode.R5">Kód nesmie byť prázdny</x:String>
 
     <x:String x:Key="ErrorCode.T0">Operácia bola úspešná</x:String>
     <x:String x:Key="ErrorCode.T1">Používateľ nemá vytvorený účet</x:String>

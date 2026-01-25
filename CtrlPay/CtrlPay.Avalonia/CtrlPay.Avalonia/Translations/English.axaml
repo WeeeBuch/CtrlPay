@@ -98,6 +98,11 @@
     <x:String x:Key="ErrorCode.P1">User does not have account</x:String>
 
     <x:String x:Key="ErrorCode.R0">Successfully registered</x:String>
+    <x:String x:Key="ErrorCode.R1">Username can not be empty</x:String>
+    <x:String x:Key="ErrorCode.R2">Password can not be empty</x:String>
+    <x:String x:Key="ErrorCode.R3">Confirm password can not be empty</x:String>
+    <x:String x:Key="ErrorCode.R4">Passwords do not match</x:String>
+    <x:String x:Key="ErrorCode.R5">Code can not be empty</x:String>
 
     <x:String x:Key="ErrorCode.T0">Operation successful</x:String>
     <x:String x:Key="ErrorCode.T1">User does not have account</x:String>

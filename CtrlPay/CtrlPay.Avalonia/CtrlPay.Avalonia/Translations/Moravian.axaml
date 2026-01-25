@@ -90,6 +90,11 @@
     <x:String x:Key="ErrorCode.P1">Tento čuník tu nemá žádný účet</x:String>
 
     <x:String x:Key="ErrorCode.R0">Tož vitaj, už tě tu máme!</x:String>
+    <x:String x:Key="ErrorCode.R1">Meno nesmí byt prázdné</x:String>
+    <x:String x:Key="ErrorCode.R2">Heslo tam mosíš vytesat</x:String>
+    <x:String x:Key="ErrorCode.R3">To druhé heslo tam mosí byt taky</x:String>
+    <x:String x:Key="ErrorCode.R4">Ty hesla k sobě nepasujó</x:String>
+    <x:String x:Key="ErrorCode.R5">Ten kód tam mosíš napsat</x:String>
 
     <x:String x:Key="ErrorCode.T0">Hajda, povedlo se!</x:String>
     <x:String x:Key="ErrorCode.T1">Tento čuník tu nemá žádný účet</x:String>

@@ -90,6 +90,11 @@
     <x:String x:Key="ErrorCode.P1">У пользователя нет аккаунта</x:String>
 
     <x:String x:Key="ErrorCode.R0">Регистрация прошла успешно</x:String>
+    <x:String x:Key="ErrorCode.R1">Имя пользователя не может быть пустым</x:String>
+    <x:String x:Key="ErrorCode.R2">Пароль не может быть пустым</x:String>
+    <x:String x:Key="ErrorCode.R3">Подтверждение пароля не может быть пустым</x:String>
+    <x:String x:Key="ErrorCode.R4">Пароли не совпадают</x:String>
+    <x:String x:Key="ErrorCode.R5">Код не может быть пустым</x:String>
 
     <x:String x:Key="ErrorCode.T0">Операция успешно завершена</x:String>
     <x:String x:Key="ErrorCode.T1">У пользователя нет аккаунта</x:String>

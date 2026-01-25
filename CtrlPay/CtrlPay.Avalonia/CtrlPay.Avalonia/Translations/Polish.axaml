@@ -90,6 +90,11 @@
     <x:String x:Key="ErrorCode.P1">Użytkownik nie posiada konta</x:String>
 
     <x:String x:Key="ErrorCode.R0">Pomyślnie zarejestrowano</x:String>
+    <x:String x:Key="ErrorCode.R1">Nazwa użytkownika nie może być pusta</x:String>
+    <x:String x:Key="ErrorCode.R2">Hasło nie może być puste</x:String>
+    <x:String x:Key="ErrorCode.R3">Potwierdzenie hasła nie może być puste</x:String>
+    <x:String x:Key="ErrorCode.R4">Hasła nie są identyczne</x:String>
+    <x:String x:Key="ErrorCode.R5">Kod nie může być pusty</x:String>
 
     <x:String x:Key="ErrorCode.T0">Operacja powiodła się</x:String>
     <x:String x:Key="ErrorCode.T1">Użytkownik nie posiada konta</x:String>
