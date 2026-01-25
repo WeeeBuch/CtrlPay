@@ -149,7 +149,6 @@ namespace CtrlPay.Repos
             response.EnsureSuccessStatusCode();
             //TODO: Změnit na deserializaci ReturnModelu
             decimal suma = decimal.Parse(await response.Content.ReadAsStringAsync(), System.Globalization.CultureInfo.InvariantCulture);
-
             TransactionSumCache = suma;
             LastUpdatedTransactionSum = DateTime.UtcNow;
         }
