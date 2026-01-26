@@ -81,4 +81,29 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">Copy Address</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Address copied to clipboard</x:String>
 
+    <x:String x:Key="ErrorCode.A0">Successfully logged in</x:String>
+    <x:String x:Key="ErrorCode.A1">User with the same username already exists</x:String>
+    <x:String x:Key="ErrorCode.A2">Wrong password</x:String>
+    <x:String x:Key="ErrorCode.A3">User does not exist</x:String>
+    <x:String x:Key="ErrorCode.A4">TOTP not valid</x:String>
+    <x:String x:Key="ErrorCode.A5">Login valid, awaiting TOTP auth</x:String>
+    <x:String x:Key="ErrorCode.A6">User does not have account</x:String>
+    <x:String x:Key="ErrorCode.A7">Invalid or expired TOTP token</x:String>
+    <x:String x:Key="ErrorCode.A8">Token is not TOTP token</x:String>
+    <x:String x:Key="ErrorCode.A9">HTTP error code received</x:String>
+    <x:String x:Key="ErrorCode.A10">Username can not be blank</x:String>
+    <x:String x:Key="ErrorCode.A11">Password can not be blank</x:String>
+
+    <x:String x:Key="ErrorCode.P0">Operation successful</x:String>
+    <x:String x:Key="ErrorCode.P1">User does not have account</x:String>
+
+    <x:String x:Key="ErrorCode.R0">Successfully registered</x:String>
+    <x:String x:Key="ErrorCode.R1">Username can not be empty</x:String>
+    <x:String x:Key="ErrorCode.R2">Password can not be empty</x:String>
+    <x:String x:Key="ErrorCode.R3">Confirm password can not be empty</x:String>
+    <x:String x:Key="ErrorCode.R4">Passwords do not match</x:String>
+    <x:String x:Key="ErrorCode.R5">Code can not be empty</x:String>
+
+    <x:String x:Key="ErrorCode.T0">Operation successful</x:String>
+    <x:String x:Key="ErrorCode.T1">User does not have account</x:String>
 </ResourceDictionary>

@@ -73,4 +73,29 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">复制地址</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">地址已复制到剪贴板</x:String>
 
+    <x:String x:Key="ErrorCode.A0">成功登录</x:String>
+    <x:String x:Key="ErrorCode.A1">相同用户名的用户已存在</x:String>
+    <x:String x:Key="ErrorCode.A2">密码错误</x:String>
+    <x:String x:Key="ErrorCode.A3">用户不存在</x:String>
+    <x:String x:Key="ErrorCode.A4">TOTP无效</x:String>
+    <x:String x:Key="ErrorCode.A5">登录有效，等待TOTP身份验证</x:String>
+    <x:String x:Key="ErrorCode.A6">用户没有账户</x:String>
+    <x:String x:Key="ErrorCode.A7">无效或已过期的TOTP令牌</x:String>
+    <x:String x:Key="ErrorCode.A8">令牌不是TOTP令牌</x:String>
+    <x:String x:Key="ErrorCode.A9">收到HTTP错误码</x:String>
+    <x:String x:Key="ErrorCode.A10">用户名不能为空</x:String>
+    <x:String x:Key="ErrorCode.A11">密码不能为空</x:String>
+
+    <x:String x:Key="ErrorCode.P0">操作成功</x:String>
+    <x:String x:Key="ErrorCode.P1">用户没有账户</x:String>
+
+    <x:String x:Key="ErrorCode.R0">注册成功</x:String>
+    <x:String x:Key="ErrorCode.R1">用户名不能为空</x:String>
+    <x:String x:Key="ErrorCode.R2">密码不能为空</x:String>
+    <x:String x:Key="ErrorCode.R3">确认密码不能为空</x:String>
+    <x:String x:Key="ErrorCode.R4">密码不匹配</x:String>
+    <x:String x:Key="ErrorCode.R5">代码不能为空</x:String>
+
+    <x:String x:Key="ErrorCode.T0">操作成功</x:String>
+    <x:String x:Key="ErrorCode.T1">用户没有账户</x:String>
 </ResourceDictionary>

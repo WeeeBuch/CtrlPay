@@ -3,21 +3,17 @@
              xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
              xmlns:hc="using:CtrlPay.Avalonia.HelperClasses"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             x:DataType="vm:DebtViewModel"
+             x:DataType="vm:TransactionViewModel"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             x:Class="CtrlPay.Avalonia.DebtView"
              mc:Ignorable="d"
              d:DesignHeight="720" d:DesignWidth="1200"
-             Background="{DynamicResource Color.Background}">
-
-    <Grid ColumnDefinitions="280, *">
+             Background="{DynamicResource Color.Background}"
+             x:Class="CtrlPay.Avalonia.TransactionView">
+  <Grid ColumnDefinitions="280, *">
         <Border Grid.Column="0" BorderThickness="0,0,1,0" Padding="20">
             <StackPanel Spacing="20">
                 <TextBox Watermark="{DynamicResource DebtView.Watermark.SearchBar}" Height="35" Text="{Binding SearchTerm}"/>
                 
-                <CheckBox Content="{DynamicResource DebtView.Payable}"
-                          IsChecked="{Binding PayableChecked}"/>
-
                 <Border BorderBrush="{DynamicResource Color.Border}" BorderThickness="1" Padding="10" CornerRadius="4">
                     <StackPanel Spacing="10">
                         <TextBlock Text="{DynamicResource DebtView.Sorting}" FontWeight="Bold" Opacity="0.6" Margin="0,0,0,5"/>
@@ -63,19 +59,11 @@
                                     </Transitions>
                                 </Border.Transitions>
                                 <StackPanel>
-                                <Button Command="{Binding ToggleExpandCommand}"
-                                        Background="Transparent"
+                                <Border Background="Transparent"
                                         BorderThickness="0"
                                         CornerRadius="12"
                                         HorizontalAlignment="Stretch"
-                                        HorizontalContentAlignment="Stretch"
                                         Padding="20">
-                                    <Button.Styles>
-                                        <Style Selector="Button:pointerover /template/ ContentPresenter">
-                                            <Setter Property="Background" Value="{DynamicResource Color.Accent}" /> 
-                                        </Style>
-
-                                    </Button.Styles>
                 
                                     <Grid ColumnDefinitions="10,*, 10, Auto" Margin="5">
                                         <Border Grid.Column="0"             
@@ -103,28 +91,6 @@
                                                        VerticalAlignment="Bottom" 
                                                        Opacity="0.7"/>
                                         </StackPanel>
-                                    </Grid>
-                                </Button>
-
-                                <Border IsVisible="{Binding IsExpanded}"
-                                        Background="{DynamicResource Color.Surface}" 
-                                        Padding="20"
-                                        BorderBrush="{DynamicResource Color.Border}"
-                                        BorderThickness="0,1,0,0">
-                                    <Grid ColumnDefinitions="Auto, *, Auto">
-                                        <StackPanel Orientation="Horizontal" Spacing="10">
-                                            <Button Content="{DynamicResource DebtView.PayFromCredit}" 
-                                                    Command="{Binding PayFromCreditCommand}"
-                                                    Padding="15,5"/>
-                                            <TextBlock Text="{Binding CreditPayString}" 
-                                                       VerticalAlignment="Center" 
-                                                       FontSize="12" Opacity="0.5"/>
-                                        </StackPanel>
-                    
-                                        <Button Grid.Column="2" 
-                                                Content="{DynamicResource DebtView.GenerateAddress}"
-                                                Command="{Binding GenerateAddressCommand}"
-                                                Padding="15,5"/>
                                     </Grid>
                                 </Border>
                             </StackPanel>

@@ -73,4 +73,29 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">Sbalit adresu</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Už to máš v kapse (ve schránce)</x:String>
 
+    <x:String x:Key="ErrorCode.A0">Už seš tam, ogare!</x:String>
+    <x:String x:Key="ErrorCode.A1">Takový tu už jeden straší</x:String>
+    <x:String x:Key="ErrorCode.A2">Trefils blbé heslo</x:String>
+    <x:String x:Key="ErrorCode.A3">Nikoho takého neznáme</x:String>
+    <x:String x:Key="ErrorCode.A4">TOTP kód je nejaký pokazený</x:String>
+    <x:String x:Key="ErrorCode.A5">Heslo dobré, včil eště ten TOTP kód</x:String>
+    <x:String x:Key="ErrorCode.A6">Tento čuník tu nemá žádný účet</x:String>
+    <x:String x:Key="ErrorCode.A7">Ten TOTP lístek už oschl nebo je falešný</x:String>
+    <x:String x:Key="ErrorCode.A8">Tento lístek k TOTP nepasuje</x:String>
+    <x:String x:Key="ErrorCode.A9">Dráty hlásijó HTTP chybu</x:String>
+    <x:String x:Key="ErrorCode.A10">Nemůžeš byt bezejmenný</x:String>
+    <x:String x:Key="ErrorCode.A11">Heslo tam musíš vytesat, ne ho nechat prázdné</x:String>
+
+    <x:String x:Key="ErrorCode.P0">Hajda, povedlo se!</x:String>
+    <x:String x:Key="ErrorCode.P1">Tento čuník tu nemá žádný účet</x:String>
+
+    <x:String x:Key="ErrorCode.R0">Tož vitaj, už tě tu máme!</x:String>
+    <x:String x:Key="ErrorCode.R1">Meno nesmí byt prázdné</x:String>
+    <x:String x:Key="ErrorCode.R2">Heslo tam mosíš vytesat</x:String>
+    <x:String x:Key="ErrorCode.R3">To druhé heslo tam mosí byt taky</x:String>
+    <x:String x:Key="ErrorCode.R4">Ty hesla k sobě nepasujó</x:String>
+    <x:String x:Key="ErrorCode.R5">Ten kód tam mosíš napsat</x:String>
+
+    <x:String x:Key="ErrorCode.T0">Hajda, povedlo se!</x:String>
+    <x:String x:Key="ErrorCode.T1">Tento čuník tu nemá žádný účet</x:String>
 </ResourceDictionary>

@@ -73,4 +73,29 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">アドレスをコピー</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">アドレスをクリップボードにコピーしました</x:String>
 
+    <x:String x:Key="ErrorCode.A0">ログインに成功しました</x:String>
+    <x:String x:Key="ErrorCode.A1">同じユーザー名が既に存在します</x:String>
+    <x:String x:Key="ErrorCode.A2">パスワードが間違っています</x:String>
+    <x:String x:Key="ErrorCode.A3">ユーザーが存在しません</x:String>
+    <x:String x:Key="ErrorCode.A4">TOTPが無効です</x:String>
+    <x:String x:Key="ErrorCode.A5">ログイン有効、TOTP認証待ち</x:String>
+    <x:String x:Key="ErrorCode.A6">ユーザーはアカウントを持っていません</x:String>
+    <x:String x:Key="ErrorCode.A7">無効または期限切れのTOTPトークン</x:String>
+    <x:String x:Key="ErrorCode.A8">トークンがTOTPトークンではありません</x:String>
+    <x:String x:Key="ErrorCode.A9">HTTPエラーコードを受信しました</x:String>
+    <x:String x:Key="ErrorCode.A10">ユーザー名は空欄にできません</x:String>
+    <x:String x:Key="ErrorCode.A11">パスワードは空欄にできません</x:String>
+
+    <x:String x:Key="ErrorCode.P0">操作が正常に完了しました</x:String>
+    <x:String x:Key="ErrorCode.P1">ユーザーはアカウントを持っていません</x:String>
+
+    <x:String x:Key="ErrorCode.R0">登録が完了しました</x:String>
+    <x:String x:Key="ErrorCode.R1">ユーザー名は空欄にできません</x:String>
+    <x:String x:Key="ErrorCode.R2">パスワードは空欄にできません</x:String>
+    <x:String x:Key="ErrorCode.R3">確認用パスワードは空欄にできません</x:String>
+    <x:String x:Key="ErrorCode.R4">パスワードが一致しません</x:String>
+    <x:String x:Key="ErrorCode.R5">コードは空欄にできません</x:String>
+
+    <x:String x:Key="ErrorCode.T0">操作が正常に完了しました</x:String>
+    <x:String x:Key="ErrorCode.T1">ユーザーはアカウントを持っていません</x:String>
 </ResourceDictionary>

@@ -1,4 +1,4 @@
-using CtrlPay.Entities;
+﻿using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
@@ -49,7 +49,21 @@ public static class ToDoRepo
         }
         #endregion
 
+        var handler = new HttpClientHandler
+        {
+            UseProxy = false
+        };
 
-        return false;
+        using HttpClient client = new(handler);
+        string uri = $"{connString}/health/api";
+
+        var response = await client.GetAsync(uri);
+
+        if (response == null)
+        {
+            return false;
+        }
+
+        return true;
     }
 }

@@ -73,4 +73,29 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">CPY_4DDR</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">4DDR355_54V3D_70_CL1P804RD</x:String>
 
+    <x:String x:Key="ErrorCode.A0">L0G1N_5UCC355FUL</x:String>
+    <x:String x:Key="ErrorCode.A1">U53R_4LR34DY_3X1575</x:String>
+    <x:String x:Key="ErrorCode.A2">WR0N6_P455W0RD</x:String>
+    <x:String x:Key="ErrorCode.A3">U53R_N07_F0UND</x:String>
+    <x:String x:Key="ErrorCode.A4">707P_1NV4L1D</x:String>
+    <x:String x:Key="ErrorCode.A5">L061N_V4L1D_W417_F0R_707P</x:String>
+    <x:String x:Key="ErrorCode.A6">N0_4CC0UN7_F0UND</x:String>
+    <x:String x:Key="ErrorCode.A7">707P_70K3N_3XP1R3D</x:String>
+    <x:String x:Key="ErrorCode.A8">N07_4_707P_70K3N</x:String>
+    <x:String x:Key="ErrorCode.A9">H77P_3RR0R_C0D3</x:String>
+    <x:String x:Key="ErrorCode.A10">U53RN4M3_C4N_N07_B3_BL4NK</x:String>
+    <x:String x:Key="ErrorCode.A11">P455W0RD_C4N_N07_B3_BL4NK</x:String>
+
+    <x:String x:Key="ErrorCode.P0">0P3R4710N_OK</x:String>
+    <x:String x:Key="ErrorCode.P1">N0_4CC0UN7_F0UND</x:String>
+
+    <x:String x:Key="ErrorCode.R0">R361573R_5UCC355FUL</x:String>
+    <x:String x:Key="ErrorCode.R1">U53RN4M3_N07_FOUND</x:String>
+    <x:String x:Key="ErrorCode.R2">P455W0RD_3MP7Y</x:String>
+    <x:String x:Key="ErrorCode.R3">C0NF1RM_P455_3MP7Y</x:String>
+    <x:String x:Key="ErrorCode.R4">M15M47CH_P455</x:String>
+    <x:String x:Key="ErrorCode.R5">C0D3_15_BL4NK</x:String>
+
+    <x:String x:Key="ErrorCode.T0">0P3R4710N_OK</x:String>
+    <x:String x:Key="ErrorCode.T1">N0_4CC0UN7_F0UND</x:String>
 </ResourceDictionary>

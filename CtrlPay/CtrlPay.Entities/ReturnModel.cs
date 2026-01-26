@@ -25,6 +25,8 @@ namespace CtrlPay.Entities
             { "A7", "invalid or expired token"   },
             { "A8", "token is not a TOTP token"   },
             { "A9", "HTTP error code received" },
+            { "A10", "username can not be blank" },
+            { "A11", "password can not be blank" },
             { "T0", "operation successful" },
             { "P0", "operation successful" }
         };
@@ -47,28 +49,11 @@ namespace CtrlPay.Entities
     }
     public class ReturnModel<T> : ReturnModel
     {
-        public string ReturnCode { get; set; }
-        public ReturnModelSeverityEnum Severity { get; set; }
-        public string BaseMessage { get; set; }
         public T Body { get; set; }
-        public string DetailMessage { get; set; }
-        private static Dictionary<string, string> keyValuePairs = ReturnModel.keyValuePairs;
 
-        public ReturnModel()
+        public ReturnModel(string returnCode, ReturnModelSeverityEnum severity, T body) : base(returnCode, severity)
         {
-            
-        }
-        public ReturnModel(string returnCode, ReturnModelSeverityEnum severity, T body)
-        {
-            ReturnCode = returnCode;
-            Severity = severity;
             Body = body;
-            SetMessage();
-        }
-
-        private void SetMessage()
-        {
-            BaseMessage = keyValuePairs[ReturnCode];
         }
     }
     

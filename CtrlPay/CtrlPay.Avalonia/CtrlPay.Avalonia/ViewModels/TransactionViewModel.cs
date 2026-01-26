@@ -1,38 +1,23 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Media;
-using Avalonia.Threading;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CtrlPay.Avalonia.HelperClasses;
-using CtrlPay.Avalonia.Translations;
-using CtrlPay.Entities;
 using CtrlPay.Repos;
-using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.Globalization;
 using System.Linq;
-using System.Net;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
-using static CtrlPay.Repos.ToDoRepo;
 
 namespace CtrlPay.Avalonia.ViewModels;
-public partial class DebtViewModel : ViewModelBase
+
+public partial class TransactionViewModel : ViewModelBase
 {
     public RangeObservableCollection<TransactionItem> Debts { get; } = [];
 
-    [ObservableProperty] private bool payableChecked;
     [ObservableProperty] private SortOption selectedSortOrder;
     [ObservableProperty] private List<SortOption> sortOptions;
     [ObservableProperty] private string searchTerm;
 
-    public DebtViewModel()
+    public TransactionViewModel()
     {
         SortOptions =
         [
@@ -54,7 +39,7 @@ public partial class DebtViewModel : ViewModelBase
     {
         var resultList = new List<TransactionItem>();
 
-        foreach (var dto in PaymentRepo.GetSortedDebts(sortingMethod, PayableChecked))
+        foreach (var dto in TransactionRepo.GetSortedTransactions(sortingMethod))
         {
             var existingVm = Debts.FirstOrDefault(vm =>
                 vm.TransactionDTOBase == dto);
@@ -68,12 +53,11 @@ public partial class DebtViewModel : ViewModelBase
                 resultList.Add(new(dto));
             }
         }
-                
+
         Debts.ReplaceAll(resultList);
     }
 
     public void OnCreditChanged(decimal amount) => ApplySorting(null);
-    partial void OnPayableCheckedChanged(bool value) => ApplySorting(null);
     public void TransactionsUpdated() => ApplySorting(null);
     partial void OnSelectedSortOrderChanged(SortOption value) => ApplySorting(value.Key);
 
@@ -91,6 +75,3 @@ public partial class DebtViewModel : ViewModelBase
         }
     }
 }
-
-
-

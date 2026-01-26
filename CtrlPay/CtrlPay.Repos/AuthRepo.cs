@@ -16,9 +16,9 @@ namespace CtrlPay.Repos
     public static class AuthRepo
     {
 
-        public static async Task<ReturnModel<bool>> Register(string username, string code, string password, string confirmPassword)
+        public static async Task<ReturnModel<bool>> Register(string? username, string? code, string? password, string? confirmPassword)
         {
-            if (DebugMode.IsDebugMode) return new ReturnModel<bool>("R0", ReturnModelSeverityEnum.Ok, true);
+            if (DebugMode.IsDebugMode) return new("R0", ReturnModelSeverityEnum.Ok, true);
             /* TODO: Register logic
              * Tu logika pro registraci
              *
@@ -27,48 +27,26 @@ namespace CtrlPay.Repos
              */
 
             #region Validations out of Api
-            //TODO: Zprovoznit s registrací
-            /*
-            if (username == null || username.Trim() == "")
-            {
-                ErrorMessage = "Uživatelské jméno nesmí být prázdné.";
-                return false;
-            }
-
-            if (password == null || password.Trim() == "")
-            {
-                ErrorMessage = "Heslo nesmí být prázdné.";
-                return false;
-            }
-
-            if (confirmPassword == null || confirmPassword.Trim() == "")
-            {
-                ErrorMessage = "Potvrzení hesla nesmí být prázdné.";
-                return false;
-            }
-
-            if (password != confirmPassword)
-            {
-                ErrorMessage = "Hesla se neshodují.";
-                return false;
-            }
-
-            if (code == null || code.Trim() == "")
-            {
-                ErrorMessage = "Registrační kód nesmí být prázdný.";
-                return false;
-            }
-            */
+            if (string.IsNullOrWhiteSpace(username)) return new("R1", ReturnModelSeverityEnum.Error, false);
+            if (string.IsNullOrWhiteSpace(password)) return new("R2", ReturnModelSeverityEnum.Error, false);
+            if (string.IsNullOrWhiteSpace(confirmPassword)) return new("R3", ReturnModelSeverityEnum.Error, false);
+            if (password != confirmPassword) return new("R4", ReturnModelSeverityEnum.Error, false);
+            if (string.IsNullOrWhiteSpace(code)) return new("R5", ReturnModelSeverityEnum.Error, false);
             #endregion
 
-            return new ReturnModel<bool>("R0", ReturnModelSeverityEnum.Ok, true);
+            return new ("R0", ReturnModelSeverityEnum.Ok, true);
         }
 
-        public static async Task<ReturnModel<bool>> Login(string username, string password, CancellationToken cancellationToken)
+        public static async Task<ReturnModel<bool>> Login(string? username, string? password, CancellationToken cancellationToken)
         {
-            if (DebugMode.IsDebugMode) return new ReturnModel<bool>("A0", ReturnModelSeverityEnum.Ok, true);
+            if (DebugMode.IsDebugMode) return new ("A0", ReturnModelSeverityEnum.Ok, true);
 
-            HttpClient httpClient = new HttpClient();
+            #region Validations out of Api
+            if (string.IsNullOrWhiteSpace(username)) return new("A10", ReturnModelSeverityEnum.Error, false);
+            if (string.IsNullOrWhiteSpace(password)) return new("A11", ReturnModelSeverityEnum.Error, false);
+            #endregion
+
+            HttpClient httpClient = new();
             var payload = new
             {
                 username,
@@ -85,12 +63,20 @@ namespace CtrlPay.Repos
             
             string uri = Credentials.BaseUri + "/auth/login";
 
+            HttpResponseMessage response;
+            try
+            {
+                response = await httpClient.PostAsync(
+                    uri,
+                    content,
+                    cancellationToken
+                );
+            }
+            catch (Exception)
+            {
+                return new("A0", ReturnModelSeverityEnum.Error, false);
+            }
             
-            HttpResponseMessage response = await httpClient.PostAsync(
-                uri,
-                content,
-                cancellationToken
-            );
             
 
             string body = await response.Content.ReadAsStringAsync();
