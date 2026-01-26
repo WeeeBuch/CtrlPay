@@ -10,7 +10,7 @@ namespace CtrlPay.Repos
 {
     public class FrontendTransactionDTO
     {
-        public string Title { get; init; }
+        public string? Title { get; init; }
         public decimal Amount { get; init; }
         public DateTime Timestamp { get; init; }
         public StatusEnum State { get; init; }

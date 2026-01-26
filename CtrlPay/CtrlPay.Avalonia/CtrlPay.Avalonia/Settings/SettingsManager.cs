@@ -51,6 +51,9 @@ namespace CtrlPay.Avalonia.Settings
             if (!File.Exists(_filePath)) return new AppSettings(); // Vratí default
 
             string json = File.ReadAllText(_filePath);
+
+            if (string.IsNullOrWhiteSpace(json)) return new AppSettings();
+
             return JsonSerializer.Deserialize<AppSettings>(json) ?? new AppSettings();
         }
     }

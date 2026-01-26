@@ -73,4 +73,29 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">Kopírovat adresu</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Adresa byla zkopírována do schránky</x:String>
 
+    <x:String x:Key="ErrorCode.A0">Přihlášení proběhlo úspěšně</x:String>
+    <x:String x:Key="ErrorCode.A1">Uživatel se stejným jménem již existuje</x:String>
+    <x:String x:Key="ErrorCode.A2">Nesprávné heslo</x:String>
+    <x:String x:Key="ErrorCode.A3">Uživatel neexistuje</x:String>
+    <x:String x:Key="ErrorCode.A4">Neplatný TOTP kód</x:String>
+    <x:String x:Key="ErrorCode.A5">Přihlášení platné, čeká se na TOTP ověření</x:String>
+    <x:String x:Key="ErrorCode.A6">Uživatel nemá vytvořený účet</x:String>
+    <x:String x:Key="ErrorCode.A7">Neplatný nebo expirovaný TOTP token</x:String>
+    <x:String x:Key="ErrorCode.A8">Token není typu TOTP</x:String>
+    <x:String x:Key="ErrorCode.A9">Byl přijat chybový kód HTTP</x:String>
+    <x:String x:Key="ErrorCode.A10">Uživatelské jméno nesmí být prázdné</x:String>
+    <x:String x:Key="ErrorCode.A11">Heslo nesmí být prázdné</x:String>
+
+    <x:String x:Key="ErrorCode.P0">Operace byla úspěšná</x:String>
+    <x:String x:Key="ErrorCode.P1">Uživatel nemá vytvořený účet</x:String>
+
+    <x:String x:Key="ErrorCode.R0">Registrace proběhla úspěšně</x:String>
+    <x:String x:Key="ErrorCode.R1">Uživatelské jméno nesmí být prázdné</x:String>
+    <x:String x:Key="ErrorCode.R2">Heslo nesmí být prázdné</x:String>
+    <x:String x:Key="ErrorCode.R3">Potvrzení hesla nesmí být prázdné</x:String>
+    <x:String x:Key="ErrorCode.R4">Hesla se neshodují</x:String>
+    <x:String x:Key="ErrorCode.R5">Kód nesmí být prázdný</x:String>
+
+    <x:String x:Key="ErrorCode.T0">Operace byla úspěšná</x:String>
+    <x:String x:Key="ErrorCode.T1">Uživatel nemá vytvořený účet</x:String>
 </ResourceDictionary>

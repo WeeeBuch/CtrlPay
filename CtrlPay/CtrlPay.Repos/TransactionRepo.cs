@@ -15,7 +15,52 @@ namespace CtrlPay.Repos
 {
     public class TransactionRepo
     {
-        public static async Task<List<FrontendTransactionDTO>> GetTransactions(CancellationToken cancellationToken)
+        private static List<FrontendTransactionDTO> TransactionsCache { get; set; } = [];
+        private static DateTime LastUpdatedTransactions { get; set; } = DateTime.MinValue;
+        private static decimal TransactionSumCache { get; set; } = 0;
+        private static DateTime LastUpdatedTransactionSum { get; set; } = DateTime.MinValue;
+        private static string SortMethod = "DateDesc";
+
+        public static async Task UpdateTransactionsCacheFromApi(CancellationToken cancellationToken)
+        {
+            #region Debug
+            if (DebugMode.IsDebugMode)
+            {
+                TransactionsCache = GetTransactions();
+                return;
+            }
+            #endregion
+
+            var handler = new HttpClientHandler
+            {
+                UseProxy = false
+            };
+
+            using var httpClient = new HttpClient(handler);
+
+            // Monero / jiné RPC často vyžaduje HTTP/1.1
+            httpClient.DefaultRequestVersion = HttpVersion.Version11;
+
+            httpClient.DefaultRequestHeaders.Authorization =
+                new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
+            string uri = $"{Credentials.BaseUri}/api/transactions/my";
+            // volání chráněného endpointu
+            var response = await httpClient.GetAsync(uri);
+
+            response.EnsureSuccessStatusCode();
+            // Definuj si options
+            JsonSerializerOptions options = new()
+            {
+                PropertyNameCaseInsensitive = true
+            };
+
+            string json = await response.Content.ReadAsStringAsync();
+
+            // Přidej options do metody Deserialize
+            JsonSerializer.Deserialize<ReturnModel<List<TransactionApiDTO>>>(json, options).Body.ForEach(t => TransactionsCache.Add(new(t)));
+            LastUpdatedTransactions = DateTime.UtcNow;
+        }
+        public static List<FrontendTransactionDTO> GetTransactions()
         {
             #region Debug
             if (DebugMode.IsDebugMode)
@@ -75,6 +120,18 @@ namespace CtrlPay.Repos
 
 
             #endregion
+            return TransactionsCache;
+        }
+        public static async Task UpdateTransactionSumCacheFromApi(CancellationToken cancellationToken)
+        {
+            #region Debug
+            if (DebugMode.IsDebugMode)
+            {
+                Random rnd = new();
+                TransactionSumCache = rnd.Next(0, 500);
+                return;
+            }
+            #endregion
 
             var handler = new HttpClientHandler
             {
@@ -83,34 +140,33 @@ namespace CtrlPay.Repos
 
             using var httpClient = new HttpClient(handler);
 
-            // Monero / jiné RPC často vyžaduje HTTP/1.1
-            httpClient.DefaultRequestVersion = HttpVersion.Version11;
-
             httpClient.DefaultRequestHeaders.Authorization =
                 new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
-            string uri = $"{Credentials.BaseUri}/api/transactions/my";
+            string uri = $"{Credentials.BaseUri}/api/transactions/credit";
             // volání chráněného endpointu
-            var response = await httpClient.GetAsync(uri);
+            var response = await httpClient.GetAsync(uri, cancellationToken);
 
             response.EnsureSuccessStatusCode();
-            // Definuj si options
-            var options = new JsonSerializerOptions
+            //TODO: Změnit na deserializaci ReturnModelu
+            decimal suma = decimal.Parse(await response.Content.ReadAsStringAsync(), System.Globalization.CultureInfo.InvariantCulture);
+            TransactionSumCache = suma;
+            LastUpdatedTransactionSum = DateTime.UtcNow;
+        }
+        public static decimal GetTransactionSum() => TransactionSumCache;
+        public static List<FrontendTransactionDTO> GetSortedTransactions(string? sortingMethod)
+        {
+            if (sortingMethod != null) SortMethod = sortingMethod;
+
+            string sortMethod = sortingMethod ?? SortMethod;
+
+            return sortMethod switch
             {
-                PropertyNameCaseInsensitive = true
-            };
-
-            string json = await response.Content.ReadAsStringAsync();
-
-            // Přidej options do metody Deserialize
-            List<TransactionApiDTO> transactions = JsonSerializer.Deserialize<List<TransactionApiDTO>>(json, options);
-            List<FrontendTransactionDTO> dtoList = new List<FrontendTransactionDTO>();
-
-            foreach(var tx in transactions)
-            {
-                dtoList.Add(new FrontendTransactionDTO(tx));
-            }
-
-            return dtoList;
+                "AmountAsc" => [.. TransactionsCache.OrderBy(d => d.Amount)],
+                "AmountDesc" => [.. TransactionsCache.OrderByDescending(d => d.Amount)],
+                "DateAsc" => [.. TransactionsCache.OrderBy(d => d.Timestamp)],
+                "DateDesc" => [.. TransactionsCache.OrderByDescending(d => d.Timestamp)],
+                _ => [.. TransactionsCache.OrderBy(d => d.Timestamp)]
+            }; ;
         }
     }
 }

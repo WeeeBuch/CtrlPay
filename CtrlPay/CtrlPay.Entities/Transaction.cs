@@ -43,5 +43,19 @@ namespace CtrlPay.Entities
         {
             
         }
+
+        public Transaction(TransactionApiDTO dto)
+        {
+            Id = dto.Id;
+            AddressId = dto.AddressId;
+            AccountId = dto.AccountId;
+            TransactionIdXMR = dto.TransactionIdXMR;
+            Type = dto.Type;
+            Status = dto.Status;
+            Amount = dto.Amount;
+            Fee = dto.Fee;
+            Timestamp = dto.Timestamp;
+            PaymentId = dto.PaymentId;
+        }
     }
 }

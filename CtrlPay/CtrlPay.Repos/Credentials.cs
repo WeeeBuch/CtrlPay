@@ -9,7 +9,7 @@ namespace CtrlPay.Repos
     internal static class Credentials
     {
         public static string JwtAccessToken { get; set; }
-        public static string BaseUri { get; set; } = "https://www.action-games.cz";
+        public static string BaseUri { get; set; } = "http://localhost:5000";
         public static DateTime AccessTokenExpiresAtUtc { get; set; }
         public static string RefreshToken { get; set; }
         public static DateTime RefreshTokenExpiresAtUtc { get; set; }

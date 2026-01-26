@@ -133,10 +133,11 @@
                                                  VerticalAlignment="Bottom"
                                                  Margin="2,-2,0,0"/>
                                     <TextBlock Text="{Binding StatusBoxText}"
-                                               Classes="StatusTextBox"
-                                               Tag="{Binding TestStatusText}"
                                                Foreground="{DynamicResource Color.Error}"
                                                Margin="2" IsVisible="{Binding IsErrorVisible}"/>
+                                    <TextBlock Text="{Binding StatusBoxText}"
+                                               Foreground="{DynamicResource Color.Success}"
+                                               Margin="2" IsVisible="{Binding IsSuccessVisible}"/>
                                 </StackPanel>
                                 <Button Grid.Column="1" 
                                         Content="{DynamicResource SettingsView.API.Test}" 

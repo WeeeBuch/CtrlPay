@@ -12,5 +12,6 @@ namespace CtrlPay.Avalonia
         public static string Dashboard = "M13,3V9H21V3M13,21H21V11H13M3,21H11V15H3M3,13H11V3H3V13Z";
         public static string Menu = "M3,6H21V8H3V6M3,11H21V13H3V11M3,16H21V18H3V16Z";
         public static string Debt = "M6,2V8H6V8L10,12L6,16V16H6V22H18V16H18V16L14,12L18,8V8H18V2H6Z";
+        public static string Cash = "M3,6H21V18H3V6M12,9A3,3 0 0,1 15,12A3,3 0 0,1 12,15A3,3 0 0,1 9,12A3,3 0 0,1 12,9M7,8A2,2 0 0,1 5,10V14A2,2 0 0,1 7,16H17A2,2 0 0,1 19,14V10A2,2 0 0,1 17,8H7Z";
     }
 }
