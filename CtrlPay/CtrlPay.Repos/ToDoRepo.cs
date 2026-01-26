@@ -57,7 +57,15 @@ public static class ToDoRepo
         using HttpClient client = new(handler);
         string uri = $"{connString}/health/api";
 
-        var response = await client.GetAsync(uri);
+        HttpResponseMessage response;
+        try
+        {
+            response = await client.GetAsync(uri);
+        }
+        catch (Exception)
+        {
+            return false;
+        }
 
         if (response == null)
         {
