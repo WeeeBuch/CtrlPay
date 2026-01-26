@@ -15,9 +15,11 @@ namespace CtrlPay.Avalonia
 {
     public partial class App : Application
     {
+        private bool IsConfigured = false;
+
         public override void Initialize()
         {
-            SettingsManager.Init();
+            IsConfigured = !SettingsManager.Init();
             ThemeManager.Apply(SettingsManager.Current.Theme);
             TranslationManager.Apply(SettingsManager.Current.Language);
             AvaloniaXamlLoader.Load(this);
