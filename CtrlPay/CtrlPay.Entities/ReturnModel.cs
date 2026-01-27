@@ -28,7 +28,13 @@ namespace CtrlPay.Entities
             { "A10", "username can not be blank" },
             { "A11", "password can not be blank" },
             { "T0", "operation successful" },
-            { "P0", "operation successful" }
+            { "P0", "operation successful" },
+            { "R0", "successfully registered" },
+            { "R1", "username can not be empty" },
+            { "R2", "password can not be empty" },
+            { "R3", "confirm password can not be empty" },
+            { "R4", "passwords do not match" },
+            { "R5", "code can not be empty" },
         };
 
         public ReturnModel()

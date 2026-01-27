@@ -9,6 +9,7 @@ using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CtrlPay.Repos
@@ -30,30 +31,12 @@ namespace CtrlPay.Repos
             }
             #endregion
 
-            var handler = new HttpClientHandler
-            {
-                UseProxy = false
-            };
-
-            using var httpClient = new HttpClient(handler);
-
-            // Monero / jiné RPC často vyžaduje HTTP/1.1
-            httpClient.DefaultRequestVersion = HttpVersion.Version11;
-
-            httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
-            string uri = $"{Credentials.BaseUri}/api/payments/my";
-            // volání chráněného endpointu
-            var response = await httpClient.GetAsync(uri);
-
-            response.EnsureSuccessStatusCode();
-            // Definuj si options
-            JsonSerializerOptions options = new()
+            var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
 
-            string json = await response.Content.ReadAsStringAsync();
+            string json = await HttpGetter.HttpGet("/api/payments/my");
 
             // Přidej options do metody Deserialize
             PaymentsCache = [];
@@ -130,31 +113,21 @@ namespace CtrlPay.Repos
                 return;
             }
 
-            var handler = new HttpClientHandler
-            {
-                UseProxy = false
-            };
-
-            using var httpClient = new HttpClient(handler);
-
-            httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
-            string uri = $"{Credentials.BaseUri}/api/payments/amount-due";
-            // volání chráněného endpointu
-            var response = await httpClient.GetAsync(uri, cancellationToken);
-
-            response.EnsureSuccessStatusCode();
             // Definuj si options
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             };
 
-            decimal suma = JsonSerializer.Deserialize<ReturnModel<decimal>>(await response.Content.ReadAsStringAsync(), options).Body;
+            string json = await HttpGetter.HttpGet("/api/payments/amount-due");
+
+            decimal suma = JsonSerializer.Deserialize<ReturnModel<decimal>>(json, options).Body;
 
             PaymentSumCache = suma;
             LastPaymentSumCacheUpdate = DateTime.UtcNow;
         }
+
+        
 
         public static decimal GetPaymentSum() => PaymentSumCache;
 
