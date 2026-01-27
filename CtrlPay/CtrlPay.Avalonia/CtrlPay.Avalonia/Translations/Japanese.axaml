@@ -73,6 +73,10 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">アドレスをコピー</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">アドレスをクリップボードにコピーしました</x:String>
 
+    <x:String x:Key="OnboardingView.Button.Next">次へ</x:String>
+    <x:String x:Key="OnboardingView.Button.Previous">前へ</x:String>
+    <x:String x:Key="OnboardingView.Button.Finish">完了</x:String>
+
     <x:String x:Key="ErrorCode.A0">ログインに成功しました</x:String>
     <x:String x:Key="ErrorCode.A1">同じユーザー名が既に存在します</x:String>
     <x:String x:Key="ErrorCode.A2">パスワードが間違っています</x:String>

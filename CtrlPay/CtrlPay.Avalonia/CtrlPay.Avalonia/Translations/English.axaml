@@ -81,6 +81,10 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">Copy Address</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Address copied to clipboard</x:String>
 
+    <x:String x:Key="OnboardingView.Button.Next">Next</x:String>
+    <x:String x:Key="OnboardingView.Button.Previous">Previous</x:String>
+    <x:String x:Key="OnboardingView.Button.Finish">Finish</x:String>
+
     <x:String x:Key="ErrorCode.A0">Successfully logged in</x:String>
     <x:String x:Key="ErrorCode.A1">User with the same username already exists</x:String>
     <x:String x:Key="ErrorCode.A2">Wrong password</x:String>

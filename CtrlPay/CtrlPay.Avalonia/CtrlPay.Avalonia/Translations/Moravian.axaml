@@ -73,6 +73,10 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">Sbalit adresu</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Už to máš v kapse (ve schránce)</x:String>
 
+    <x:String x:Key="OnboardingView.Button.Next">Valíme dál</x:String>
+    <x:String x:Key="OnboardingView.Button.Previous">Návrat o kusanec</x:String>
+    <x:String x:Key="OnboardingView.Button.Finish">A je to v cajku</x:String>
+
     <x:String x:Key="ErrorCode.A0">Už seš tam, ogare!</x:String>
     <x:String x:Key="ErrorCode.A1">Takový tu už jeden straší</x:String>
     <x:String x:Key="ErrorCode.A2">Trefils blbé heslo</x:String>
