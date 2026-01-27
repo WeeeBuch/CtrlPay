@@ -24,7 +24,7 @@ namespace CtrlPay.Repos
         public static async Task UpdateTransactionsCacheFromApi(CancellationToken cancellationToken)
         {
             #region Debug
-            if (DebugMode.IsDebugMode)
+            if (DebugMode.MockTransactions)
             {
                 TransactionsCache = GetTransactions();
                 return;
@@ -45,7 +45,18 @@ namespace CtrlPay.Repos
                 new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
             string uri = $"{Credentials.BaseUri}/api/transactions/my";
             // volání chráněného endpointu
-            var response = await httpClient.GetAsync(uri);
+
+            HttpResponseMessage response;
+
+            try
+            {
+                response = await httpClient.GetAsync(uri);
+            }
+            catch (Exception ex)
+            {
+                return;
+            }
+            
 
             response.EnsureSuccessStatusCode();
             // Definuj si options
@@ -63,7 +74,7 @@ namespace CtrlPay.Repos
         public static List<FrontendTransactionDTO> GetTransactions()
         {
             #region Debug
-            if (DebugMode.IsDebugMode)
+            if (DebugMode.MockTransactions)
             {
                 List<FrontendTransactionDTO> debugList = [
                     new FrontendTransactionDTO
@@ -117,15 +128,13 @@ namespace CtrlPay.Repos
                 ];
                 return debugList;
             }
-
-
             #endregion
             return TransactionsCache;
         }
         public static async Task UpdateTransactionSumCacheFromApi(CancellationToken cancellationToken)
         {
             #region Debug
-            if (DebugMode.IsDebugMode)
+            if (DebugMode.MockTransactionSum)
             {
                 Random rnd = new();
                 TransactionSumCache = rnd.Next(0, 500);

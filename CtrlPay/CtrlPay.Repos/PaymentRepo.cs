@@ -23,7 +23,7 @@ namespace CtrlPay.Repos
         public static async Task UpdatePaymetsCacheFromApi(CancellationToken cancellationToken)
         {
             #region Debug
-            if (DebugMode.IsDebugMode)
+            if (DebugMode.MockPayments)
             {
                 PaymentsCache = GetPayments();
                 return;
@@ -64,7 +64,7 @@ namespace CtrlPay.Repos
         public static List<FrontendTransactionDTO> GetPayments()
         {
             #region Debug
-            if (DebugMode.IsDebugMode)
+            if (DebugMode.MockPayments)
             {
                 List<FrontendTransactionDTO> debugList = [
                     new FrontendTransactionDTO
@@ -123,7 +123,7 @@ namespace CtrlPay.Repos
         }
         public static async Task UpdatePaymentSumCacheFromApi(CancellationToken cancellationToken)
         {
-            if (DebugMode.IsDebugMode)
+            if (DebugMode.MockPaymentSum)
             {
                 Random rnd = new();
                 PaymentSumCache = rnd.Next(0,500);

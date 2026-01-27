@@ -10,6 +10,7 @@ using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Avalonia.Views;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Linq;
 
@@ -32,6 +33,17 @@ namespace CtrlPay.Avalonia
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
                 DisableAvaloniaDataAnnotationValidation();
+
+                #region Debug
+                if (DebugMode.StartDebug)
+                {
+                    var debugWin = new DebugWindow
+                    {
+                        DataContext = new DebugWindowViewModel()
+                    };
+                    debugWin.Show();
+                }
+                #endregion
 
                 if (IsConfigured)
                 {
