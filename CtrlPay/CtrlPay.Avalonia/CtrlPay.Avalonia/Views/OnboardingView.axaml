@@ -1,0 +1,102 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:translations="using:CtrlPay.Avalonia.Translations"
+             xmlns:styles="using:CtrlPay.Avalonia.Styles"
+             xmlns:conv="using:CtrlPay.Avalonia.Converters"
+             x:Class="CtrlPay.Avalonia.OnboardingView"
+             x:DataType="vm:OnboardingViewModel"
+             Background="{DynamicResource Brush.Background}">
+
+    <UserControl.Resources>
+        <conv:ThemeToColorConverter x:Key="ThemeToColorConverter" />
+    </UserControl.Resources>
+
+    <Grid RowDefinitions="*, Auto" Margin="40">
+        
+        <Carousel SelectedIndex="{Binding CurrentStep}">
+            <Carousel.PageTransition>
+                <PageSlide Duration="0:0:0.4" Orientation="Horizontal" />
+            </Carousel.PageTransition>
+
+            <StackPanel Spacing="15">
+                <TextBlock Text="{DynamicResource SettingsView.Appearance.Title}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                <ListBox ItemsSource="{Binding AvailableThemes}" 
+                         SelectedItem="{Binding SelectedTheme}"
+                         Classes="PillList" Padding="5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="styles:ThemeManager+AppTheme">
+                            <StackPanel Orientation="Horizontal" Spacing="10">
+                                <Ellipse Width="12" Height="12" Fill="{Binding Converter={StaticResource ThemeToColorConverter}}"/>
+                                <TextBlock Text="{Binding}" FontWeight="Medium"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+
+            <StackPanel Spacing="15">
+                <TextBlock Text="{DynamicResource SettingsView.Translation.Title}" FontSize="18" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+                <ListBox ItemsSource="{Binding AvailableLanguages}" 
+                         SelectedItem="{Binding SelectedLanguage}"
+                         Classes="PillList" Padding="5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="translations:TranslationManager+AppLanguage">
+                            <TextBlock Text="{Binding}" FontWeight="Medium"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </StackPanel>
+
+            <StackPanel Spacing="20" VerticalAlignment="Center" MaxWidth="400">
+                <TextBlock Text="🔌" FontSize="48" HorizontalAlignment="Center"/>
+                <TextBlock Text="{DynamicResource SettingsView.API.Title}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                
+                <Border Background="{DynamicResource Brush.Surface}" Padding="20" CornerRadius="15">
+                    <StackPanel Spacing="10">
+                        <TextBox Text="{Binding ApiUrl}" Watermark="https://api.ctrlpay.cz" />
+                        
+                        <Button Content="{DynamicResource SettingsView.API.Test}" 
+                                Command="{Binding TestConnectionCommand}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                        
+                        <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsTestingConnection}" Height="2" Foreground="{DynamicResource Brush.Accent}"/>
+                        
+                        <TextBlock Text="{Binding StatusBoxText}" IsVisible="{Binding IsErrorVisible}" Foreground="{DynamicResource Color.Error}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding StatusBoxText}" IsVisible="{Binding IsSuccessVisible}" Foreground="{DynamicResource Color.Success}" HorizontalAlignment="Center"/>
+                    </StackPanel>
+                </Border>
+            </StackPanel>
+        </Carousel>
+
+        <Border Grid.Row="1" Padding="0,20,0,0">
+            <Grid ColumnDefinitions="Auto, *">
+                <Button Grid.Column="0"
+                        Content="{DynamicResource OnboardingView.Button.Previous}" 
+                        Command="{Binding BackCommand}" 
+                        IsVisible="{Binding CanGoBack}"
+                        Width="120" Height="40" 
+                        HorizontalContentAlignment="Center" 
+                        VerticalContentAlignment="Center"/>
+
+                <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="15">
+                    <Button Content="{DynamicResource OnboardingView.Button.Next}" 
+                            Classes="Primary"
+                            Command="{Binding NextCommand}" 
+                            IsVisible="{Binding IsNotLastStep}"
+                            Width="120" Height="40" 
+                            HorizontalContentAlignment="Center" 
+                            VerticalContentAlignment="Center"/>
+            
+                    <Button Content="{DynamicResource OnboardingView.Button.Finish}" 
+                            Classes="Primary"
+                            Command="{Binding FinishCommand}" 
+                            IsVisible="{Binding IsLastStep}"
+                            Width="120" Height="40" 
+                            HorizontalContentAlignment="Center" 
+                            VerticalContentAlignment="Center"/>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>

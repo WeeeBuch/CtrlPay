@@ -73,6 +73,10 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">复制地址</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">地址已复制到剪贴板</x:String>
 
+    <x:String x:Key="OnboardingView.Button.Next">下一步</x:String>
+    <x:String x:Key="OnboardingView.Button.Previous">上一步</x:String>
+    <x:String x:Key="OnboardingView.Button.Finish">完成</x:String>
+
     <x:String x:Key="ErrorCode.A0">成功登录</x:String>
     <x:String x:Key="ErrorCode.A1">相同用户名的用户已存在</x:String>
     <x:String x:Key="ErrorCode.A2">密码错误</x:String>

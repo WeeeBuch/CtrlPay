@@ -14,12 +14,14 @@ namespace CtrlPay.Avalonia.Settings
         private static readonly string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
         private static readonly string folder = Path.Combine(appData, "CtrlPay");
         private static string _filePath = Path.Combine(folder, fileName);
+        private static bool NeedsOnBoarding = true;
 
         public static AppSettings Current { get; set; }
 
-        public static void Init()
+        public static bool Init()
         {
             Current = Load(); // Načte se automaticky při prvním přístupu
+            return NeedsOnBoarding;
         }
 
         public static void Save(AppSettings settings)
@@ -54,7 +56,12 @@ namespace CtrlPay.Avalonia.Settings
 
             if (string.IsNullOrWhiteSpace(json)) return new AppSettings();
 
-            return JsonSerializer.Deserialize<AppSettings>(json) ?? new AppSettings();
+            AppSettings? settings = JsonSerializer.Deserialize<AppSettings>(json);
+
+            if (settings == null) return new AppSettings();
+
+            NeedsOnBoarding = false;
+            return settings;
         }
     }
 }

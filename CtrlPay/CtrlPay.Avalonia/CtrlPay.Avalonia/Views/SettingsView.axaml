@@ -13,52 +13,6 @@
     </UserControl.Resources>
 
     <UserControl.Styles>
-        <Style Selector="ListBox.PillList">
-            <Setter Property="Background" Value="Transparent" />
-            <Setter Property="ItemsPanel">
-                <ItemsPanelTemplate>
-                    <WrapPanel Orientation="Horizontal" />
-                </ItemsPanelTemplate>
-            </Setter>
-        </Style>
-
-        <Style Selector="ListBox.PillList ListBoxItem">
-            <Setter Property="Padding" Value="0" />
-            <Setter Property="Margin" Value="0,0,10,10" />
-            <Setter Property="Template">
-                <ControlTemplate>
-                    <Border Name="PillBorder" 
-                            Background="{DynamicResource Brush.Surface}"
-                            BorderBrush="Transparent"
-                            BorderThickness="2"
-                            CornerRadius="20"
-                            Padding="16,8">
-                        <ContentPresenter Content="{TemplateBinding Content}"
-                                          HorizontalAlignment="Center"
-                                          VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Setter>
-        </Style>
-
-        <Style Selector="ListBox.PillList ListBoxItem:selected /template/ Border#PillBorder">
-            <Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" />
-            <Setter Property="Background" Value="{DynamicResource Brush.Surface}" />
-        </Style>
-
-        <Style Selector="ListBox.PillList ListBoxItem:pointerover /template/ Border#PillBorder">
-            <Setter Property="Background" Value="#2A343F" /> <Setter Property="Cursor" Value="Hand" />
-        </Style>
-
-        <Style Selector="ListBox.PillList ListBoxItem:selected">
-            <Setter Property="RenderTransform" Value="scale(1.05)" />
-            <Setter Property="Transitions">
-                <Transitions>
-                    <TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1" />
-                </Transitions>
-            </Setter>
-        </Style>
-
         <Style Selector="TextBlock.StatusTextBox[Tag=Success]">
             <Setter Property="Foreground" Value="{DynamicResource Brush.Success}"/>
         </Style>

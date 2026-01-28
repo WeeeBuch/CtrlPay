@@ -24,7 +24,7 @@ namespace CtrlPay.Repos
         public static async Task UpdateTransactionsCacheFromApi(CancellationToken cancellationToken)
         {
             #region Debug
-            if (DebugMode.IsDebugMode)
+            if (DebugMode.MockTransactions)
             {
                 TransactionsCache = GetTransactions();
                 return;
@@ -36,25 +36,13 @@ namespace CtrlPay.Repos
                 UseProxy = false
             };
 
-            using var httpClient = new HttpClient(handler);
-
-            // Monero / jiné RPC často vyžaduje HTTP/1.1
-            httpClient.DefaultRequestVersion = HttpVersion.Version11;
-
-            httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
-            string uri = $"{Credentials.BaseUri}/api/transactions/my";
-            // volání chráněného endpointu
-            var response = await httpClient.GetAsync(uri);
-
-            response.EnsureSuccessStatusCode();
             // Definuj si options
             JsonSerializerOptions options = new()
             {
                 PropertyNameCaseInsensitive = true
             };
 
-            string json = await response.Content.ReadAsStringAsync();
+            string json = await HttpGetter.HttpGet("/api/transactions/my");
 
             // Přidej options do metody Deserialize
             JsonSerializer.Deserialize<ReturnModel<List<TransactionApiDTO>>>(json, options).Body.ForEach(t => TransactionsCache.Add(new(t)));
@@ -63,7 +51,7 @@ namespace CtrlPay.Repos
         public static List<FrontendTransactionDTO> GetTransactions()
         {
             #region Debug
-            if (DebugMode.IsDebugMode)
+            if (DebugMode.MockTransactions)
             {
                 List<FrontendTransactionDTO> debugList = [
                     new FrontendTransactionDTO
@@ -117,15 +105,14 @@ namespace CtrlPay.Repos
                 ];
                 return debugList;
             }
-
-
             #endregion
             return TransactionsCache;
         }
+
         public static async Task UpdateTransactionSumCacheFromApi(CancellationToken cancellationToken)
         {
             #region Debug
-            if (DebugMode.IsDebugMode)
+            if (DebugMode.MockTransactionSum)
             {
                 Random rnd = new();
                 TransactionSumCache = rnd.Next(0, 500);
@@ -133,26 +120,16 @@ namespace CtrlPay.Repos
             }
             #endregion
 
-            var handler = new HttpClientHandler
-            {
-                UseProxy = false
-            };
+            string json = await HttpGetter.HttpGet("/api/transactions/credit");
 
-            using var httpClient = new HttpClient(handler);
-
-            httpClient.DefaultRequestHeaders.Authorization =
-                new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
-            string uri = $"{Credentials.BaseUri}/api/transactions/credit";
-            // volání chráněného endpointu
-            var response = await httpClient.GetAsync(uri, cancellationToken);
-
-            response.EnsureSuccessStatusCode();
             //TODO: Změnit na deserializaci ReturnModelu
-            decimal suma = decimal.Parse(await response.Content.ReadAsStringAsync(), System.Globalization.CultureInfo.InvariantCulture);
+            decimal suma = decimal.Parse(json, System.Globalization.CultureInfo.InvariantCulture);
             TransactionSumCache = suma;
             LastUpdatedTransactionSum = DateTime.UtcNow;
         }
+
         public static decimal GetTransactionSum() => TransactionSumCache;
+
         public static List<FrontendTransactionDTO> GetSortedTransactions(string? sortingMethod)
         {
             if (sortingMethod != null) SortMethod = sortingMethod;

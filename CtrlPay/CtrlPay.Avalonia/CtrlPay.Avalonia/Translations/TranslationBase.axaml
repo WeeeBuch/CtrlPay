@@ -84,6 +84,11 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">QRCodeWindow.Copy2Clipboard</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">QRCodeWindow.Copied2ClipboardMsg</x:String>
 
+    <!-- Onboarding View -->
+    <x:String x:Key="OnboardingView.Button.Next">OnboardingView.Button.Next</x:String>
+    <x:String x:Key="OnboardingView.Button.Previous">OnboardingView.Button.Previous</x:String>
+    <x:String x:Key="OnboardingView.Button.Finish">OnboardingView.Button.Finish</x:String>
+
     <!-- Error Codes -->
     <x:String x:Key="ErrorCode.A0">ErrorCode.A0</x:String>
     <x:String x:Key="ErrorCode.A1">ErrorCode.A1</x:String>

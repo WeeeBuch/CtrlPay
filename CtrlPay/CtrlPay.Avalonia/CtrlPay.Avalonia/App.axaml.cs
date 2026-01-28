@@ -1,13 +1,16 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using CommunityToolkit.Mvvm.Messaging;
+using CtrlPay.Avalonia.HelperClasses;
 using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Avalonia.Views;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Linq;
 
@@ -15,9 +18,11 @@ namespace CtrlPay.Avalonia
 {
     public partial class App : Application
     {
+        private bool IsConfigured = false;
+
         public override void Initialize()
         {
-            SettingsManager.Init();
+            IsConfigured = !SettingsManager.Init();
             ThemeManager.Apply(SettingsManager.Current.Theme);
             TranslationManager.Apply(SettingsManager.Current.Language);
             AvaloniaXamlLoader.Load(this);
@@ -27,23 +32,63 @@ namespace CtrlPay.Avalonia
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
-                // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
                 DisableAvaloniaDataAnnotationValidation();
-                desktop.MainWindow = new LoginWindow();
+
+                #region Debug
+                if (DebugMode.StartDebug)
+                {
+                    var debugWin = new DebugWindow
+                    {
+                        DataContext = new DebugWindowViewModel()
+                    };
+                    debugWin.Show();
+                }
+                #endregion
+
+                if (IsConfigured)
+                {
+                    desktop.MainWindow = new LoginWindow();
+                }
+                else
+                {
+                    desktop.MainWindow = new OnboardingWindow
+                    {
+                        DataContext = new OnboardingViewModel()
+                    };
+                }
+
+                WeakReferenceMessenger.Default.Register<OnboardingFinishedMessage>(this, (r, m) =>
+                {
+                    var oldWindow = desktop.MainWindow;
+
+                    var loginWindow = new LoginWindow();
+                    desktop.MainWindow = loginWindow;
+                    loginWindow.Show();
+
+                    oldWindow?.Close();
+                });
+
                 desktop.ShutdownRequested += (s, e) =>
                 {
                     SettingsManager.Save(SettingsManager.Current);
                 };
             }
-            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleView)
             {
-                singleViewPlatform.MainView = new MainView()
+                if (IsConfigured)
                 {
-                    DataContext = new MainViewModel()
-                };
-            }
+                    singleView.MainView = new MainView { DataContext = new MainViewModel() };
+                }
+                else
+                {
+                    singleView.MainView = new OnboardingView { DataContext = new OnboardingViewModel() };
+                }
 
+                WeakReferenceMessenger.Default.Register<OnboardingFinishedMessage>(this, (r, m) =>
+                {
+                    singleView.MainView = new MainView { DataContext = new MainViewModel() };
+                });
+            }
             base.OnFrameworkInitializationCompleted();
         }
 
