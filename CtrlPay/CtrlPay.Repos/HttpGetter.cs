@@ -1,40 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Net.Http.Headers;
 
 namespace CtrlPay.Repos;
 
 public class HttpGetter
 {
-    public static async Task<string> HttpGet(string url)
+    // Statická instance, aby nedocházelo k vyčerpání socketů
+    private static readonly HttpClient _httpClient = new(new HttpClientHandler { UseProxy = false });
+
+    public static async Task<string?> HttpGet(string url, CancellationToken cancellationToken = default)
     {
-        var handler = new HttpClientHandler
-        {
-            UseProxy = false
-        };
-
-        using var httpClient = new HttpClient(handler);
-
-        httpClient.DefaultRequestHeaders.Authorization =
-            new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
-        string uri = $"{Credentials.BaseUri}{url}";
-        // volání chráněného endpointu
-        HttpResponseMessage response;
-
         try
         {
-            response = await httpClient.GetAsync(uri);
+            using var request = new HttpRequestMessage(HttpMethod.Get, $"{Credentials.BaseUri}{url}");
+            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
+
+            using var response = await _httpClient.SendAsync(request, cancellationToken);
+            response.EnsureSuccessStatusCode();
+
+            return await response.Content.ReadAsStringAsync(cancellationToken);
         }
         catch (Exception ex)
         {
-            // TODO: Karele tohle dodelej
-            return "NaN";
+            // Tady můžeš logovat chyby, pokud máš logger
+            Console.WriteLine($"[HttpGetter] Chyba při volání {url}: {ex.Message}");
+            return null;
         }
-        response.EnsureSuccessStatusCode();
-
-        return await response.Content.ReadAsStringAsync();
     }
 }
