@@ -15,59 +15,38 @@ namespace CtrlPay.Repos
 {
     public static class AuthRepo
     {
-        public static string ErrorMessage = "";
 
-        public static bool Register(string username, string code, string password, string confirmPassword)
+        public static async Task<ReturnModel<bool>> Register(string? username, string? code, string? password, string? confirmPassword)
         {
-            if (DebugMode.IsDebugMode) return true;
+            if (DebugMode.IsDebugMode) return new("R0", ReturnModelSeverityEnum.Ok, true);
             /* TODO: Register logic
              * Tu logika pro registraci
              *
-             * Vrací true, pokud je registrace úspěšná, jinak false
+             * Vrací standardní ReturnModel<bool> s kódem R0 při úspěchu, jinak s příslušným chybovým kódem a zprávou.
+             * To be done
              */
 
             #region Validations out of Api
-
-            if (username == null || username.Trim() == "")
-            {
-                ErrorMessage = "Uživatelské jméno nesmí být prázdné.";
-                return false;
-            }
-
-            if (password == null || password.Trim() == "")
-            {
-                ErrorMessage = "Heslo nesmí být prázdné.";
-                return false;
-            }
-
-            if (confirmPassword == null || confirmPassword.Trim() == "")
-            {
-                ErrorMessage = "Potvrzení hesla nesmí být prázdné.";
-                return false;
-            }
-
-            if (password != confirmPassword)
-            {
-                ErrorMessage = "Hesla se neshodují.";
-                return false;
-            }
-
-            if (code == null || code.Trim() == "")
-            {
-                ErrorMessage = "Registrační kód nesmí být prázdný.";
-                return false;
-            }
-
+            if (string.IsNullOrWhiteSpace(username)) return new("R1", ReturnModelSeverityEnum.Error, false);
+            if (string.IsNullOrWhiteSpace(password)) return new("R2", ReturnModelSeverityEnum.Error, false);
+            if (string.IsNullOrWhiteSpace(confirmPassword)) return new("R3", ReturnModelSeverityEnum.Error, false);
+            if (password != confirmPassword) return new("R4", ReturnModelSeverityEnum.Error, false);
+            if (string.IsNullOrWhiteSpace(code)) return new("R5", ReturnModelSeverityEnum.Error, false);
             #endregion
 
-            return true;
+            return new ("R0", ReturnModelSeverityEnum.Ok, true);
         }
 
-        public static async Task<bool> Login(string username, string password, CancellationToken cancellationToken)
+        public static async Task<ReturnModel<bool>> Login(string? username, string? password, CancellationToken cancellationToken)
         {
-            if (DebugMode.IsDebugMode) return true;
+            if (DebugMode.IsDebugMode) return new ("A0", ReturnModelSeverityEnum.Ok, true);
 
-            HttpClient httpClient = new HttpClient();
+            #region Validations out of Api
+            if (string.IsNullOrWhiteSpace(username)) return new("A10", ReturnModelSeverityEnum.Error, false);
+            if (string.IsNullOrWhiteSpace(password)) return new("A11", ReturnModelSeverityEnum.Error, false);
+            #endregion
+
+            HttpClient httpClient = new();
             var payload = new
             {
                 username,
@@ -82,35 +61,39 @@ namespace CtrlPay.Repos
                 "application/json"
             );
             
-            string uri = Credentials.BaseUri + "/api/auth/login";
+            string uri = Credentials.BaseUri + "/auth/login";
 
+            HttpResponseMessage response;
+            try
+            {
+                response = await httpClient.PostAsync(
+                    uri,
+                    content,
+                    cancellationToken
+                );
+            }
+            catch (Exception)
+            {
+                return new("A0", ReturnModelSeverityEnum.Error, false);
+            }
             
-            HttpResponseMessage response = await httpClient.PostAsync(
-                uri,
-                content,
-                cancellationToken
-            );
             
 
             string body = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
-                ErrorMessage = $"HTTP error {response.StatusCode}: {body}";
-                return false;
+                return new ReturnModel<bool>("A9", ReturnModelSeverityEnum.Error, false) { DetailMessage = $"HTTP error {response.StatusCode}: {body}" };
             }
 
-            var rpcResponse = JsonSerializer.Deserialize<JwtAuthResponse>(body,
+            var rpcResponse = JsonSerializer.Deserialize<ReturnModel<JwtAuthResponse>>(body,
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-            Credentials.JwtAccessToken = rpcResponse.AccessToken;
-            Credentials.AccessTokenExpiresAtUtc = rpcResponse.ExpiresAtUtc;
-            Credentials.RefreshToken = rpcResponse.RefreshToken;
-            Credentials.RefreshTokenExpiresAtUtc = rpcResponse.RefreshTokenExpiresAtUtc;
+            Credentials.JwtAccessToken = rpcResponse.Body.AccessToken;
+            Credentials.AccessTokenExpiresAtUtc = rpcResponse.Body.ExpiresAtUtc;
+            Credentials.RefreshToken = rpcResponse.Body.RefreshToken;
+            Credentials.RefreshTokenExpiresAtUtc = rpcResponse.Body.RefreshTokenExpiresAtUtc;
 
-            return true;
+            return new ReturnModel<bool>("A0", ReturnModelSeverityEnum.Ok, true);
         }
-
-        public static string RegisterFailedMessage() => ErrorMessage == "" ? "Něco je špatně. :)" : ErrorMessage;
-        public static string LoginFailedMessage() => ErrorMessage == "" ? "Něco je špatně. :)" : ErrorMessage;
     }
 }

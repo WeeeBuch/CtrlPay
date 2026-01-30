@@ -84,4 +84,31 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">QRCodeWindow.Copy2Clipboard</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">QRCodeWindow.Copied2ClipboardMsg</x:String>
 
+    <!-- Error Codes -->
+    <x:String x:Key="ErrorCode.A0">ErrorCode.A0</x:String>
+    <x:String x:Key="ErrorCode.A1">ErrorCode.A1</x:String>
+    <x:String x:Key="ErrorCode.A2">ErrorCode.A2</x:String>
+    <x:String x:Key="ErrorCode.A3">ErrorCode.A3</x:String>
+    <x:String x:Key="ErrorCode.A4">ErrorCode.A4</x:String>
+    <x:String x:Key="ErrorCode.A5">ErrorCode.A5</x:String>
+    <x:String x:Key="ErrorCode.A6">ErrorCode.A6</x:String>
+    <x:String x:Key="ErrorCode.A7">ErrorCode.A7</x:String>
+    <x:String x:Key="ErrorCode.A8">ErrorCode.A8</x:String>
+    <x:String x:Key="ErrorCode.A9">ErrorCode.A9</x:String>
+    <x:String x:Key="ErrorCode.A10">ErrorCode.A10</x:String>
+    <x:String x:Key="ErrorCode.A11">ErrorCode.A11</x:String>
+
+    <x:String x:Key="ErrorCode.P0">ErrorCode.P0</x:String>
+    <x:String x:Key="ErrorCode.P1">ErrorCode.P1</x:String>
+
+    <x:String x:Key="ErrorCode.R0">ErrorCode.R0</x:String>
+    <x:String x:Key="ErrorCode.R1">ErrorCode.R1</x:String>
+    <x:String x:Key="ErrorCode.R2">ErrorCode.R2</x:String>
+    <x:String x:Key="ErrorCode.R3">ErrorCode.R3</x:String>
+    <x:String x:Key="ErrorCode.R4">ErrorCode.R4</x:String>
+    <x:String x:Key="ErrorCode.R5">ErrorCode.R5</x:String>
+
+    <x:String x:Key="ErrorCode.T0">ErrorCode.T0</x:String>
+    <x:String x:Key="ErrorCode.T1">ErrorCode.T1</x:String>
+
 </ResourceDictionary>

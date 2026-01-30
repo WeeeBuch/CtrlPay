@@ -2,6 +2,7 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml.Styling;
 using CtrlPay.Avalonia.Settings;
+using CtrlPay.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -86,6 +87,20 @@ namespace CtrlPay.Avalonia.Translations
                 return message.ToString();
             }
             return $"Nah You forgot to implement this in {CurrentLanguage} translation";
+        }
+
+        public static string GetErrorCode(ReturnModel returnModel)
+        {
+            string s = $"ErrorCode.{returnModel.ReturnCode}";
+            if (Application.Current!.TryFindResource(s, out var message))
+            {
+                if (message == null)
+                    return "Nah Message is null";
+
+                return message.ToString();
+            }
+
+            return $"Not implemented showing base message: {returnModel.BaseMessage}";
         }
 
     }

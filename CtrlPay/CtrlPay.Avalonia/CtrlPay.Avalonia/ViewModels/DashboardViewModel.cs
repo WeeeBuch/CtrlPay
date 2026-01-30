@@ -34,11 +34,8 @@ public partial class DashboardViewModel : ViewModelBase
 
     private void LoadTransactionSums()
     {
-        decimal creditAmount = Repos.ToDoRepo.GetTransactionSums("credits");
-        decimal pendingAmount = Repos.ToDoRepo.GetTransactionSums("pending");
-
-        TotalCredits.Amount = creditAmount;
-        PendingCredits.Amount = pendingAmount;
+        TotalCredits.Amount = TransactionRepo.GetTransactionSum();
+        PendingCredits.Amount = PaymentRepo.GetPaymentSum();
 
         TotalCredits.GiveTitleKey("CounterPiece.Credits.Title");
         PendingCredits.GiveTitleKey("CounterPiece.Pending.Title");
@@ -54,11 +51,10 @@ public partial class DashboardViewModel : ViewModelBase
         });
     }
 
-    private async Task LoadTransactionLists()
+    private void LoadTransactionLists()
     {
-        CancellationToken cancellationToken = new CancellationToken();
-        List<FrontendTransactionDTO> creditTransactions = await TransactionRepo.GetTransactions(cancellationToken);
-        List<FrontendTransactionDTO> pendingTransactions = await PaymentRepo.GetPayments(cancellationToken);
+        List<FrontendTransactionDTO> creditTransactions = TransactionRepo.GetTransactions();
+        List<FrontendTransactionDTO> pendingTransactions = PaymentRepo.GetPayments();
 
         var creditData = creditTransactions.Select(t => new TransactionItemViewModel
         {
@@ -76,10 +72,7 @@ public partial class DashboardViewModel : ViewModelBase
             Status = t.State
         }).ToList();
 
-        await Dispatcher.UIThread.InvokeAsync(() =>
-        {
-            CreditTransactionList.RefreshTransactions(creditData);
-            PendingTransactionList.RefreshTransactions(pendingData);
-        });
+        CreditTransactionList.RefreshTransactions(creditData);
+        PendingTransactionList.RefreshTransactions(pendingData);
     }
 }

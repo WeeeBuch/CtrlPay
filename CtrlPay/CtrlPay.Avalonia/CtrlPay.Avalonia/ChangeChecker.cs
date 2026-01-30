@@ -11,11 +11,15 @@ namespace CtrlPay.Avalonia;
 
 public static class ChangeChecker
 {
-    public static void ToCheck() 
+    public static async void ToCheck() 
     {
+        await TransactionRepo.UpdateTransactionsCacheFromApi(default);
+        await TransactionRepo.UpdateTransactionSumCacheFromApi(default);
+        await PaymentRepo.UpdatePaymentSumCacheFromApi(default);
+        await PaymentRepo.UpdatePaymetsCacheFromApi(default);
         // Sem se píšou všechny kontroly změn, které chceme provádět
-        UpdateHandler.HandleCreditAvailableUpdate(ToDoRepo.GetTransactionSums("credits"));
-        UpdateHandler.HandlePendingPaymentsUpdate(ToDoRepo.GetTransactionSums("pendings"));
+        UpdateHandler.HandleCreditAvailableUpdate(TransactionRepo.GetTransactionSum());
+        UpdateHandler.HandlePendingPaymentsUpdate(PaymentRepo.GetPaymentSum());
     }
 
     public async static Task StartChecking(CancellationToken ct = default)
