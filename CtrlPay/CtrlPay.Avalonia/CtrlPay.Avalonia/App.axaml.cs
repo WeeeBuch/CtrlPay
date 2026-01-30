@@ -13,6 +13,7 @@ using CtrlPay.Avalonia.Views;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace CtrlPay.Avalonia
 {
@@ -22,6 +23,9 @@ namespace CtrlPay.Avalonia
 
         public override void Initialize()
         {
+            AppLogger.Info("===============================================================");
+            AppLogger.Info($"Starting app. Version: {Assembly.GetExecutingAssembly().GetName().Version}");
+
             IsConfigured = !SettingsManager.Init();
             ThemeManager.Apply(SettingsManager.Current.Theme);
             TranslationManager.Apply(SettingsManager.Current.Language);
