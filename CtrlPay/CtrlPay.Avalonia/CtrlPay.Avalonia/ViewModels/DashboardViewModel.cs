@@ -53,8 +53,8 @@ public partial class DashboardViewModel : ViewModelBase
 
     private void LoadTransactionLists()
     {
-        List<FrontendTransactionDTO> creditTransactions = TransactionRepo.GetTransactions();
-        List<FrontendTransactionDTO> pendingTransactions = PaymentRepo.GetPayments();
+        List<FrontendTransactionDTO> creditTransactions = TransactionRepo.GetSortedTransactions(null);
+        List<FrontendTransactionDTO> pendingTransactions = PaymentRepo.GetSortedDebts(null, false);
 
         var creditData = creditTransactions.Select(t => new TransactionItemViewModel
         {
