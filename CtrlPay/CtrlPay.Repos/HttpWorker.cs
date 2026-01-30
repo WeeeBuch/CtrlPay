@@ -1,4 +1,5 @@
-﻿using System.Net.Http.Headers;
+﻿using CtrlPay.Repos.Frontend;
+using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
 
@@ -13,18 +14,20 @@ public class HttpWorker
     {
         try
         {
+            AppLogger.Info($"Praparing http GET...");
             using var request = new HttpRequestMessage(HttpMethod.Get, $"{Credentials.BaseUri}{url}");
             request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
 
+            AppLogger.Info($"Calling API...");
             using var response = await _httpClient.SendAsync(request, cancellationToken);
             response.EnsureSuccessStatusCode();
 
+            AppLogger.Info($"Returning API response...");
             return await response.Content.ReadAsStringAsync(cancellationToken);
         }
         catch (Exception ex)
         {
-            // Tady můžeš logovat chyby, pokud máš logger
-            Console.WriteLine($"[HttpGetter] Chyba při volání {url}: {ex.Message}");
+            AppLogger.Error($"API Get failed.", ex);
             return null;
         }
     }
@@ -33,30 +36,34 @@ public class HttpWorker
     {
         try
         {
+            AppLogger.Info($"Praparing http POST...");
             using var request = new HttpRequestMessage(HttpMethod.Post, $"{Credentials.BaseUri}{url}");
 
             // 1. Přidání hlavičky pouze pokud je vyžadována (Login ji nepotřebuje)
             if (requireAuth)
             {
+                AppLogger.Info($"Adding authorization...");
                 request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
             }
 
             // 2. Serializace dat do JSONu
+            AppLogger.Info($"Serializing payload...");
             string jsonPayload = JsonSerializer.Serialize(payload);
             request.Content = new StringContent(jsonPayload, Encoding.UTF8, "application/json");
 
             // 3. Odeslání
+            AppLogger.Info($"Calling API...");
             using var response = await _httpClient.SendAsync(request, cancellationToken);
 
             // Pokud server vrátí chybu, vyhodí výjimku, kterou chytíme níže
             response.EnsureSuccessStatusCode();
 
+            AppLogger.Info($"Returning API response...");
             return await response.Content.ReadAsStringAsync(cancellationToken);
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"[HttpPost] Chyba při volání {url}: {ex.Message}");
-            // Můžeš sem přidat logování konkrétní chyby serveru, pokud je to třeba
+            AppLogger.Error($"API Post failed.", ex);
             return null;
         }
     }

@@ -1,6 +1,7 @@
 ﻿using Avalonia.Threading;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +29,7 @@ public partial class DashboardViewModel : ViewModelBase
 
     private void LoadInitialData()
     {
+        AppLogger.Info($"Started loading data into dashboard...");
         LoadTransactionLists();
         LoadTransactionSums();
     }
@@ -53,6 +55,7 @@ public partial class DashboardViewModel : ViewModelBase
 
     private void LoadTransactionLists()
     {
+        AppLogger.Info($"Loading Transactions...");
         List<FrontendTransactionDTO> creditTransactions = TransactionRepo.GetSortedTransactions(null);
         List<FrontendTransactionDTO> pendingTransactions = PaymentRepo.GetSortedDebts(null, false);
 

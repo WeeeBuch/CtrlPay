@@ -7,9 +7,11 @@ public class PaymentRepo : BaseRepo<PaymentApiDTO>
 {
     public static async Task UpdatePaymetsCacheFromApi(CancellationToken ct)
     {
+        AppLogger.Info($"Updating Cached Payments...");
         #region Debug
         if (DebugMode.MockPayments)
         {
+            AppLogger.Info($"Returning Mock payments...");
             Cache = GetMockPayments();
             return;
         }
@@ -20,7 +22,7 @@ public class PaymentRepo : BaseRepo<PaymentApiDTO>
 
     public static async Task UpdatePaymentSumCacheFromApi(CancellationToken ct)
     {
-        if (DebugMode.MockPaymentSum) { SumCache = 500; return; }
+        if (DebugMode.MockPaymentSum) { SumCache = 500; AppLogger.Info($"Using Mock sums."); return; }
         await LoadSumFromApi("/api/payments/amount-due", ct);
     }
 
