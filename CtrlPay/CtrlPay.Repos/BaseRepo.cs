@@ -19,7 +19,7 @@ public abstract class BaseRepo<TApiDto>
         Func<TApiDto, FrontendTransactionDTO> mapper, // Funkce pro převod DTO
         CancellationToken ct)
     {
-        string? json = await HttpGetter.HttpGet(url, ct);
+        string? json = await HttpWorker.HttpGet(url, ct);
         if (string.IsNullOrWhiteSpace(json)) return;
         try
         {
@@ -42,7 +42,7 @@ public abstract class BaseRepo<TApiDto>
     // Společná metoda pro načtení sumy
     protected static async Task LoadSumFromApi(string url, CancellationToken ct)
     {
-        string? json = await HttpGetter.HttpGet(url, ct);
+        string? json = await HttpWorker.HttpGet(url, ct);
         if (string.IsNullOrWhiteSpace(json)) return;
 
         try

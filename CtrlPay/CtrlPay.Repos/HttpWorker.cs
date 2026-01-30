@@ -2,7 +2,7 @@
 
 namespace CtrlPay.Repos;
 
-public class HttpGetter
+public class HttpWorker
 {
     // Statická instance, aby nedocházelo k vyčerpání socketů
     private static readonly HttpClient _httpClient = new(new HttpClientHandler { UseProxy = false });
@@ -23,6 +23,20 @@ public class HttpGetter
         {
             // Tady můžeš logovat chyby, pokud máš logger
             Console.WriteLine($"[HttpGetter] Chyba při volání {url}: {ex.Message}");
+            return null;
+        }
+    }
+
+    public static async Task<string?> HttpPost(string url, CancellationToken cancellationToken = default)
+    {
+        try
+        {
+
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"[HttpPostter] Chyba při volání {url}: {ex.Message}");
             return null;
         }
     }
