@@ -32,10 +32,12 @@ public partial class DashboardViewModel : ViewModelBase
         AppLogger.Info($"Started loading data into dashboard...");
         LoadTransactionLists();
         LoadTransactionSums();
+        AppLogger.Info($"Data laoded into dashboard.");
     }
 
     private void LoadTransactionSums()
     {
+        AppLogger.Info($"Loading sums...");
         TotalCredits.Amount = TransactionRepo.GetTransactionSum();
         PendingCredits.Amount = PaymentRepo.GetPaymentSum();
 
@@ -51,6 +53,8 @@ public partial class DashboardViewModel : ViewModelBase
         {
             PendingCredits.Amount = newAmount;
         });
+
+        AppLogger.Info($"Sums loaded.");
     }
 
     private void LoadTransactionLists()
@@ -77,5 +81,7 @@ public partial class DashboardViewModel : ViewModelBase
 
         CreditTransactionList.RefreshTransactions(creditData);
         PendingTransactionList.RefreshTransactions(pendingData);
+
+        AppLogger.Info($"Transactions loaded.");
     }
 }

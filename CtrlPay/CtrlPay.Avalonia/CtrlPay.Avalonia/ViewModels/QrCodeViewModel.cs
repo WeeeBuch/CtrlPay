@@ -6,6 +6,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using QRCoder;
 using System;
 using System.Collections.Generic;
@@ -35,6 +36,7 @@ public partial class QrCodeViewModel : ViewModelBase
 
     private Bitmap GenQR(FrontendTransactionDTO tx)
     {
+        AppLogger.Info($"Generating QR for payment...");
         MoneroTransaction generator = new(Address, (float)tx.Amount, tx.Id.ToString(), "You", tx.Title);
         string payload = generator.ToString();
         CopyString = payload;
