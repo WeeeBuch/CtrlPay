@@ -36,29 +36,36 @@ namespace CtrlPay.Avalonia
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
+                AppLogger.Info($"Starting Desktop version...");
                 DisableAvaloniaDataAnnotationValidation();
 
                 #region Debug
                 if (DebugMode.StartDebug)
                 {
+                    AppLogger.Info($"Starting Debug Window...");
                     var debugWin = new DebugWindow
                     {
                         DataContext = new DebugWindowViewModel()
                     };
                     debugWin.Show();
+                    AppLogger.Info($"Debug window started.");
                 }
                 #endregion
 
                 if (IsConfigured)
                 {
+                    AppLogger.Info($"Starting Login Window...");
                     desktop.MainWindow = new LoginWindow();
+                    AppLogger.Info($"Logn window started.");
                 }
                 else
                 {
+                    AppLogger.Info($"App is not configured, starting onboarding...");
                     desktop.MainWindow = new OnboardingWindow
                     {
                         DataContext = new OnboardingViewModel()
                     };
+                    AppLogger.Info($"Onbording started.");
                 }
 
                 WeakReferenceMessenger.Default.Register<OnboardingFinishedMessage>(this, (r, m) =>
@@ -79,6 +86,8 @@ namespace CtrlPay.Avalonia
             }
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleView)
             {
+                AppLogger.Info($"Starting Mobile or Web version...");
+
                 if (IsConfigured)
                 {
                     singleView.MainView = new MainView { DataContext = new MainViewModel() };

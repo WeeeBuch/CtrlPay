@@ -4,6 +4,7 @@ using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.Views;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.ComponentModel;
 using System.Threading;
@@ -36,16 +37,19 @@ public partial class LoginViewModel : ViewModelBase
     [RelayCommand]
     private async Task Register()
     {
+        AppLogger.Info($"Registering...");
         ReturnModel<bool> returnModel = await AuthRepo.Register(RegUsername, RegCode, RegPassword, RegConfirmPassword);
         bool success = returnModel.Body;
 
         if (success) 
         {
+            AppLogger.Info($"Register succesfull, closing Login window and starting Main window...");
             _navigation.ShowMainWindow();
             _navigation.CloseLogin();
         }
         else
         {
+            AppLogger.Error("Failed to Register", returnModel);
             Message = TranslationManager.GetErrorCode(returnModel);
         }
     }
@@ -53,16 +57,19 @@ public partial class LoginViewModel : ViewModelBase
     [RelayCommand]
     private async Task LoginAsync()
     {
+        AppLogger.Info($"Logining....");
         ReturnModel<bool> returnModel = await AuthRepo.Login(Username, Password, default);
         bool success = returnModel.Body;
 
         if (success)
         {
+            AppLogger.Info($"Loged in succesfully, closing Login window and starting Main window...");
             _navigation.ShowMainWindow();
             _navigation.CloseLogin();
         }
         else
         {
+            AppLogger.Error("Failed to Login", returnModel);
             Message = TranslationManager.GetErrorCode(returnModel);
         }
     }

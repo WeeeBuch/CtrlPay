@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CtrlPay.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -37,9 +38,14 @@ public static class AppLogger
         _logChannel.Writer.TryWrite(new LogEntry(level, message, detail));
     }
 
-    public static void Error(string message, Exception? ex = null) => Log(message, "ERROR", ex?.ToString());
-    public static void Info(string message) => Log(message, "INFO");
-    public static void Warning(string message) => Log(message, "WARNING");
+    public static void Error(string message, Exception? ex = null) 
+        => Log(message, "ERROR", ex?.ToString());
+    public static void Error(string message, ReturnModel? model) 
+        => Log(message, model?.Severity.ToString().ToUpper() ?? "ReturnModel", $"[{model?.ReturnCode}] {model?.BaseMessage}");
+    public static void Info(string message) 
+        => Log(message, "INFO");
+    public static void Warning(string message) 
+        => Log(message, "WARNING");
 
     private static async Task ProcessLogQueue()
     {
@@ -89,7 +95,7 @@ public static class AppLogger
     private static string FormatLogMessage(LogEntry entry)
     {
         var sb = new StringBuilder();
-        sb.Append($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}]");
+        sb.Append($"[{DateTime.Now:yyyy-MM-dd HH:mm:ss}] [PID:{Environment.ProcessId}]");
         sb.Append($" [{entry.Level}] ");
         sb.Append(entry.Message);
 

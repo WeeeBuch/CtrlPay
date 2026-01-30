@@ -1,5 +1,7 @@
 ﻿using Avalonia.Controls;
 using CtrlPay.Avalonia.Views;
+using CtrlPay.Entities;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,11 +29,13 @@ namespace CtrlPay.Avalonia
         {
             var main = new MainWindow();
             main.Show();
+            AppLogger.Info($"Main window started.");
         }
 
         public void CloseLogin()
         {
             _loginWindow?.Close();
+            AppLogger.Info($"Login window closed.");
         }
     }
 }
