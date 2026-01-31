@@ -73,6 +73,10 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">Copiar dirección</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Dirección copiada al portapapeles</x:String>
 
+    <x:String x:Key="OnboardingView.Button.Next">Siguiente</x:String>
+    <x:String x:Key="OnboardingView.Button.Previous">Anterior</x:String>
+    <x:String x:Key="OnboardingView.Button.Finish">Finalizar</x:String>
+
     <x:String x:Key="ErrorCode.A0">Sesión iniciada correctamente</x:String>
     <x:String x:Key="ErrorCode.A1">Ya existe un usuario con el mismo nombre</x:String>
     <x:String x:Key="ErrorCode.A2">Contraseña incorrecta</x:String>
