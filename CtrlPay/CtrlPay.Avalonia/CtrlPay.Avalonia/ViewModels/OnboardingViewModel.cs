@@ -6,6 +6,7 @@ using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -101,6 +102,7 @@ public partial class OnboardingViewModel : ViewModelBase
     [RelayCommand(CanExecute = nameof(IsSuccessVisible))]
     private void Finish()
     {
+        AppLogger.Info($"Finishing onboarding...");
         // Uložit finální stav
         SettingsManager.Current.Language = SelectedLanguage;
         SettingsManager.Current.Theme = SelectedTheme;
@@ -108,5 +110,6 @@ public partial class OnboardingViewModel : ViewModelBase
         SettingsManager.Save(SettingsManager.Current);
 
         WeakReferenceMessenger.Default.Send(new OnboardingFinishedMessage());
+        AppLogger.Info($"Onboarding finished.");
     }
 }

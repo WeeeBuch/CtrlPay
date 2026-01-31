@@ -1,4 +1,4 @@
-﻿using CtrlPay.Entities;
+using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
@@ -15,12 +15,14 @@ public static class ToDoRepo
     public static void PayFromCredit(FrontendTransactionDTO transakce)
     {
         // Implementace platby z kreditu
+        AppLogger.Info($"Paying from credit...");
     }
 
     public static string GetOneTimeAddress(FrontendTransactionDTO transaction)
     {
         // Implementace generování jednorázové adresy
         // transakce pro pozdější automatické napojení
+        AppLogger.Info($"Getting onetime address...");
         return "generated_one_time_address";
     }
 }

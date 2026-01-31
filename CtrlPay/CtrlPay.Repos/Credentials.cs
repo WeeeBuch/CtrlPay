@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CtrlPay.Repos.Frontend;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,6 +18,7 @@ namespace CtrlPay.Repos
 
         public static void Clear()
         {
+            AppLogger.Info($"Clearing credentials...");
             JwtAccessToken = string.Empty;
             AccessTokenExpiresAtUtc = DateTime.MinValue;
             RefreshToken = string.Empty;

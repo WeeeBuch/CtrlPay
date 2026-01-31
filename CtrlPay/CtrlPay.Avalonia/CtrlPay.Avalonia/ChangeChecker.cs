@@ -1,5 +1,6 @@
 ﻿using CtrlPay.Avalonia.Settings;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,6 +14,7 @@ public static class ChangeChecker
 {
     public static async void ToCheck() 
     {
+        AppLogger.Info($"Checking....");
         await TransactionRepo.UpdateTransactionsCacheFromApi(default);
         await TransactionRepo.UpdateTransactionSumCacheFromApi(default);
         await PaymentRepo.UpdatePaymentSumCacheFromApi(default);
@@ -20,6 +22,7 @@ public static class ChangeChecker
         // Sem se píšou všechny kontroly změn, které chceme provádět
         UpdateHandler.HandleCreditAvailableUpdate(TransactionRepo.GetTransactionSum());
         UpdateHandler.HandlePendingPaymentsUpdate(PaymentRepo.GetPaymentSum());
+        AppLogger.Info($"Checking completed.");
     }
 
     public async static Task StartChecking(CancellationToken ct = default)
@@ -33,9 +36,10 @@ public static class ChangeChecker
                 await Task.Delay(TimeSpan.FromSeconds(SettingsManager.Current.RefreshRate), ct);
             }
             catch (TaskCanceledException) { break; } // Normální ukončení
-            catch (Exception)
+            catch (Exception ex)
             {
                 // Tady můžeš zalogovat chybu, aby ti nespadla celá smyčka
+                AppLogger.Error($"Checker failed.", ex);
             }
         }
     }

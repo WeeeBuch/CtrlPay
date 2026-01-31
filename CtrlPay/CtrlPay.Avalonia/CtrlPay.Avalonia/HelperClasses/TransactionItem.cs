@@ -48,8 +48,11 @@ public partial class TransactionItem : ObservableObject
     private void GenerateAddress()
     {
         /* Implementace generování adresy */
+
+        AppLogger.Info($"Asking for new onetime address...");
         string addr = ToDoRepo.GetOneTimeAddress(TransactionDTOBase);
 
+        AppLogger.Info($"Preparing QR and QR window...");
         QrCodeViewModel vm = new(addr, TransactionDTOBase);
         QrCodeView view = new() { DataContext = vm };
 
@@ -60,6 +63,8 @@ public partial class TransactionItem : ObservableObject
             CanResize = false,
             WindowStartupLocation = WindowStartupLocation.CenterOwner
         };
+
+        AppLogger.Info($"Showing QR window...");
         window.Show();
     }
 

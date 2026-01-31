@@ -7,10 +7,12 @@ public class TransactionRepo : BaseRepo<TransactionApiDTO>
 {
     public static async Task UpdateTransactionsCacheFromApi(CancellationToken ct)
     {
+        AppLogger.Info($"Updating cached Transactions from API...");
         #region Debug
         if (DebugMode.MockTransactions)
         {
             Cache = GetMockTransactions();
+            AppLogger.Info($"Using Mock transactions.");
             return;
         }
         #endregion
@@ -21,12 +23,14 @@ public class TransactionRepo : BaseRepo<TransactionApiDTO>
 
     public static async Task UpdateTransactionSumCacheFromApi(CancellationToken ct)
     {
-        if (DebugMode.MockTransactionSum) { SumCache = 1234; return; }
+        AppLogger.Info($"Updating cached Transactions Sum from API...");
+        if (DebugMode.MockTransactionSum) { SumCache = 1234; AppLogger.Info($"Using Mock sum."); return; }
         await LoadSumFromApi("/api/transactions/credit", ct);
     }
 
     public static List<FrontendTransactionDTO> GetSortedTransactions(string? sortingMethod)
     {
+        AppLogger.Info($"Returning sorted.");
         return SortData(Cache, sortingMethod);
     }
 

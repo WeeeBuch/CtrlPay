@@ -1,4 +1,5 @@
 ﻿using CtrlPay.Entities;
+using CtrlPay.Repos.Frontend;
 using System.Text.Json;
 
 namespace CtrlPay.Repos;
@@ -19,10 +20,17 @@ public abstract class BaseRepo<TApiDto>
         Func<TApiDto, FrontendTransactionDTO> mapper, // Funkce pro převod DTO
         CancellationToken ct)
     {
+        AppLogger.Info($"Getting json from API...");
         string? json = await HttpWorker.HttpGet(url, ct);
-        if (string.IsNullOrWhiteSpace(json)) return;
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            AppLogger.Warning($"Get response was NULL.");
+            return;
+        }
+
         try
         {
+            AppLogger.Info($"Deserializing response...");
             var result = JsonSerializer.Deserialize<ReturnModel<List<TApiDto>>>(json, SerializerOptions);
 
             // Pokud je Body null, použijeme prázdný list, aby to nespadlo
@@ -32,32 +40,35 @@ public abstract class BaseRepo<TApiDto>
             // Kdyby někdo zrovna četl Cache, aplikace nespadne
             Cache = [.. apiList.Select(mapper)];
             LastUpdated = DateTime.UtcNow;
+            AppLogger.Info($"Cached Transactions updated at {LastUpdated}.");
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Chyba při parsování listu z {url}: {ex.Message}");
+            AppLogger.Error($"Transaction list parsing failed.", ex);
         }
     }
 
     // Společná metoda pro načtení sumy
     protected static async Task LoadSumFromApi(string url, CancellationToken ct)
     {
+        AppLogger.Info($"Getting Sums from API...");
         string? json = await HttpWorker.HttpGet(url, ct);
-        if (string.IsNullOrWhiteSpace(json)) return;
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            AppLogger.Warning($"Get response was NULL.");
+            return;
+        }
 
         try
         {
+            AppLogger.Info($"Deserializing...");
             // Tady sjednocujeme parsování přes ReturnModel
             var result = JsonSerializer.Deserialize<ReturnModel<decimal>>(json, SerializerOptions);
             SumCache = result?.Body ?? 0;
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            // Fallback pro případ, že API vrací jen holé číslo (staré API?)
-            if (decimal.TryParse(json, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.InvariantCulture, out decimal val))
-            {
-                SumCache = val;
-            }
+            AppLogger.Error($"Sums load failed.", ex);
         }
     }
 
@@ -66,6 +77,8 @@ public abstract class BaseRepo<TApiDto>
     {
         if (sortingMethod != null) SortMethod = sortingMethod;
         string method = sortingMethod ?? SortMethod;
+
+        AppLogger.Info($"Sorting data by: {method}");
 
         return method switch
         {
