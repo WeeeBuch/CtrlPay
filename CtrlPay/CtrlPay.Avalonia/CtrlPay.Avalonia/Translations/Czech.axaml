@@ -73,6 +73,10 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">Kopírovat adresu</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Adresa byla zkopírována do schránky</x:String>
 
+    <x:String x:Key="OnboardingView.Button.Next">Další</x:String>
+    <x:String x:Key="OnboardingView.Button.Previous">Předchozí</x:String>
+    <x:String x:Key="OnboardingView.Button.Finish">Dokončit</x:String>
+
     <x:String x:Key="ErrorCode.A0">Přihlášení proběhlo úspěšně</x:String>
     <x:String x:Key="ErrorCode.A1">Uživatel se stejným jménem již existuje</x:String>
     <x:String x:Key="ErrorCode.A2">Nesprávné heslo</x:String>

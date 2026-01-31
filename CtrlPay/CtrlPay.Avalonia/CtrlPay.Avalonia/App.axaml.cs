@@ -1,23 +1,32 @@
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
 using Avalonia.Markup.Xaml;
+using CommunityToolkit.Mvvm.Messaging;
+using CtrlPay.Avalonia.HelperClasses;
 using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Avalonia.Views;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace CtrlPay.Avalonia
 {
     public partial class App : Application
     {
+        private bool IsConfigured = false;
+
         public override void Initialize()
         {
-            SettingsManager.Init();
+            AppLogger.Info("===============================================================");
+            AppLogger.Info($"Starting app. Version: {Assembly.GetExecutingAssembly().GetName().Version}");
+
+            IsConfigured = !SettingsManager.Init();
             ThemeManager.Apply(SettingsManager.Current.Theme);
             TranslationManager.Apply(SettingsManager.Current.Language);
             AvaloniaXamlLoader.Load(this);
@@ -27,23 +36,72 @@ namespace CtrlPay.Avalonia
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                // Avoid duplicate validations from both Avalonia and the CommunityToolkit. 
-                // More info: https://docs.avaloniaui.net/docs/guides/development-guides/data-validation#manage-validationplugins
+                AppLogger.Info($"Starting Desktop version...");
                 DisableAvaloniaDataAnnotationValidation();
-                desktop.MainWindow = new LoginWindow();
+
+                #region Debug
+                if (DebugMode.StartDebug)
+                {
+                    AppLogger.Info($"Starting Debug Window...");
+                    var debugWin = new DebugWindow
+                    {
+                        DataContext = new DebugWindowViewModel()
+                    };
+                    debugWin.Show();
+                    AppLogger.Info($"Debug window started.");
+                }
+                #endregion
+
+                if (IsConfigured)
+                {
+                    AppLogger.Info($"Starting Login Window...");
+                    desktop.MainWindow = new LoginWindow();
+                    AppLogger.Info($"Logn window started.");
+                }
+                else
+                {
+                    AppLogger.Info($"App is not configured, starting onboarding...");
+                    desktop.MainWindow = new OnboardingWindow
+                    {
+                        DataContext = new OnboardingViewModel()
+                    };
+                    AppLogger.Info($"Onbording started.");
+                }
+
+                WeakReferenceMessenger.Default.Register<OnboardingFinishedMessage>(this, (r, m) =>
+                {
+                    var oldWindow = desktop.MainWindow;
+
+                    var loginWindow = new LoginWindow();
+                    desktop.MainWindow = loginWindow;
+                    loginWindow.Show();
+
+                    oldWindow?.Close();
+                });
+
                 desktop.ShutdownRequested += (s, e) =>
                 {
                     SettingsManager.Save(SettingsManager.Current);
                 };
             }
-            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
+            else if (ApplicationLifetime is ISingleViewApplicationLifetime singleView)
             {
-                singleViewPlatform.MainView = new MainView()
-                {
-                    DataContext = new MainViewModel()
-                };
-            }
+                AppLogger.Info($"Starting Mobile or Web version...");
 
+                if (IsConfigured)
+                {
+                    singleView.MainView = new MainView { DataContext = new MainViewModel() };
+                }
+                else
+                {
+                    singleView.MainView = new OnboardingView { DataContext = new OnboardingViewModel() };
+                }
+
+                WeakReferenceMessenger.Default.Register<OnboardingFinishedMessage>(this, (r, m) =>
+                {
+                    singleView.MainView = new MainView { DataContext = new MainViewModel() };
+                });
+            }
             base.OnFrameworkInitializationCompleted();
         }
 

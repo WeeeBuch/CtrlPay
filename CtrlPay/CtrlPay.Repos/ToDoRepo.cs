@@ -12,36 +12,27 @@ public static class ToDoRepo
 {
     //TODO: Metody do repos: 3
 
-    public static decimal GetTransactionSums(string type)
-    {
-        /* Udělat metodu co na základě typu vrátí sumu transakcí
-         * nebo jze udělat že to bude jen to co má
-         */
-
-        Random rnd = new();
-        decimal sum = rnd.Next(0,400);
-
-        return sum;
-    }
-
     public static void PayFromCredit(FrontendTransactionDTO transakce)
     {
         // Implementace platby z kreditu
+        AppLogger.Info($"Paying from credit...");
     }
 
     public static string GetOneTimeAddress(FrontendTransactionDTO transaction)
     {
         // Implementace generování jednorázové adresy
         // transakce pro pozdější automatické napojení
+        AppLogger.Info($"Getting onetime address...");
         return "generated_one_time_address";
     }
 
     public static async Task<bool> TestConnectionToAPI(string connString)
     {
+        AppLogger.Info($"Testing connection to: {connString}");
         // Tady se testne konekce a pokud je úspěšná tak se vrátí true jinak false
 
         #region Debug
-        if (DebugMode.IsDebugMode)
+        if (DebugMode.SkipApiConnectionTest)
         {
             await Task.Delay(5000);
 
@@ -57,13 +48,25 @@ public static class ToDoRepo
         using HttpClient client = new(handler);
         string uri = $"{connString}/health/api";
 
-        var response = await client.GetAsync(uri);
-
-        if (response == null)
+        HttpResponseMessage response;
+        try
         {
+            AppLogger.Info($"Getting health response from API...");
+            response = await client.GetAsync(uri);
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Error($"Failed to test connection.", ex);
             return false;
         }
 
+        if (response == null)
+        {
+            AppLogger.Error($"Returned response was NULL.");
+            return false;
+        }
+
+        AppLogger.Info($"Succesfully tested connection to: {connString}");
         return true;
     }
 }

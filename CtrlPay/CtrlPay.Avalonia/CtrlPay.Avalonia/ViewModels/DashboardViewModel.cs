@@ -1,6 +1,7 @@
 ﻿using Avalonia.Threading;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,12 +29,15 @@ public partial class DashboardViewModel : ViewModelBase
 
     private void LoadInitialData()
     {
+        AppLogger.Info($"Started loading data into dashboard...");
         LoadTransactionLists();
         LoadTransactionSums();
+        AppLogger.Info($"Data laoded into dashboard.");
     }
 
     private void LoadTransactionSums()
     {
+        AppLogger.Info($"Loading sums...");
         TotalCredits.Amount = TransactionRepo.GetTransactionSum();
         PendingCredits.Amount = PaymentRepo.GetPaymentSum();
 
@@ -49,12 +53,15 @@ public partial class DashboardViewModel : ViewModelBase
         {
             PendingCredits.Amount = newAmount;
         });
+
+        AppLogger.Info($"Sums loaded.");
     }
 
     private void LoadTransactionLists()
     {
-        List<FrontendTransactionDTO> creditTransactions = TransactionRepo.GetTransactions();
-        List<FrontendTransactionDTO> pendingTransactions = PaymentRepo.GetPayments();
+        AppLogger.Info($"Loading Transactions...");
+        List<FrontendTransactionDTO> creditTransactions = TransactionRepo.GetSortedTransactions(null);
+        List<FrontendTransactionDTO> pendingTransactions = PaymentRepo.GetSortedDebts(null, false);
 
         var creditData = creditTransactions.Select(t => new TransactionItemViewModel
         {
@@ -74,5 +81,7 @@ public partial class DashboardViewModel : ViewModelBase
 
         CreditTransactionList.RefreshTransactions(creditData);
         PendingTransactionList.RefreshTransactions(pendingData);
+
+        AppLogger.Info($"Transactions loaded.");
     }
 }
