@@ -1,0 +1,36 @@
+﻿<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+        x:Class="CtrlPay.Avalonia.DebugWindow"
+        x:DataType="vm:DebugWindowViewModel"
+        Title="Debug Mode"
+        Width="400" Height="500"
+        Background="{DynamicResource Color.Background}"
+        Icon="{DynamicResource Path.AppIcon.ico}"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid RowDefinitions="Auto, *, Auto" Margin="20">
+        <TextBlock Grid.Row="0" Text="Debug Mode Config" 
+                   FontSize="20" FontWeight="Bold" Margin="0,0,0,20"/>
+
+        <ScrollViewer Grid.Row="1">
+            <ItemsControl ItemsSource="{Binding DebugItems}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate x:DataType="vm:DebugPropertyViewModel">
+                        <Border BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" 
+                                BorderThickness="0,0,0,1" Padding="8">
+                            <DockPanel>
+                                <TextBlock Text="{Binding Name}" 
+                                           VerticalAlignment="Center" 
+                                           FontSize="14"/>
+                                <ToggleSwitch IsChecked="{Binding Value}" 
+                                              OnContent="ZAP" OffContent="VYP" 
+                                              HorizontalAlignment="Right"/>
+                            </DockPanel>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+    </Grid>
+</Window>

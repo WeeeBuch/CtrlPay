@@ -73,6 +73,10 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">Копировать адрес</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">Адрес скопирован в буфер обмена</x:String>
 
+    <x:String x:Key="OnboardingView.Button.Next">Далее</x:String>
+    <x:String x:Key="OnboardingView.Button.Previous">Назад</x:String>
+    <x:String x:Key="OnboardingView.Button.Finish">Завершить</x:String>
+
     <x:String x:Key="ErrorCode.A0">Успешный вход в систему</x:String>
     <x:String x:Key="ErrorCode.A1">Пользователь с таким именем уже существует</x:String>
     <x:String x:Key="ErrorCode.A2">Неверный пароль</x:String>

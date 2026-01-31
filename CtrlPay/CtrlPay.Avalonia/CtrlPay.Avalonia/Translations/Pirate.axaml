@@ -73,6 +73,10 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">Steal the Code</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">The code be hidden in yer pocket now</x:String>
 
+    <x:String x:Key="OnboardingView.Button.Next">Sail On</x:String>
+    <x:String x:Key="OnboardingView.Button.Previous">Turn the Tides</x:String>
+    <x:String x:Key="OnboardingView.Button.Finish">Drop Anchor</x:String>
+
     <x:String x:Key="ErrorCode.A0">Welcome aboard, matey!</x:String>
     <x:String x:Key="ErrorCode.A1">Another scallywag already claims that name</x:String>
     <x:String x:Key="ErrorCode.A2">Wrong secret word, landlubber</x:String>

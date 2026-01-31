@@ -73,6 +73,10 @@
     <x:String x:Key="QRCodeWindow.Copy2Clipboard">CPY_4DDR</x:String>
     <x:String x:Key="QRCodeWindow.Copied2ClipboardMsg">4DDR355_54V3D_70_CL1P804RD</x:String>
 
+    <x:String x:Key="OnboardingView.Button.Next">N3X7_573P</x:String>
+    <x:String x:Key="OnboardingView.Button.Previous">PR3V10U5</x:String>
+    <x:String x:Key="OnboardingView.Button.Finish">F1N15H_L1N3</x:String>
+
     <x:String x:Key="ErrorCode.A0">L0G1N_5UCC355FUL</x:String>
     <x:String x:Key="ErrorCode.A1">U53R_4LR34DY_3X1575</x:String>
     <x:String x:Key="ErrorCode.A2">WR0N6_P455W0RD</x:String>
