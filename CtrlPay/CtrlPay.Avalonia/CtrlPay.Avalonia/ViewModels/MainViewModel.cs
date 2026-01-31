@@ -6,11 +6,13 @@ using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Translations;
 using System;
 using System.Collections.ObjectModel;
+using CtrlPay.Avalonia.Views.Mobile;
 
 namespace CtrlPay.Avalonia.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
+       
         [ObservableProperty]
         private object _currentPage;
 
@@ -40,14 +42,20 @@ namespace CtrlPay.Avalonia.ViewModels
             NavigationItems = new()
             {
                 // Předáváme klíče, nikoliv výsledek GetString
-                new NavItem("NavbarView.Dashboard", new DashboardView(), IconData.Dashboard),
-                new NavItem("NavbarView.Debts", new DebtView(), IconData.Debt),
-                new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog)
+                new NavItem("NavbarView.Dashboard",OperatingSystem.IsAndroid() ? new DashboardViewMobile(): new DashboardView(), IconData.Dashboard),
+                new NavItem("NavbarView.Debts",OperatingSystem.IsAndroid() ? new DebtViewMobile(): new DebtView(), IconData.Debt),
+                new NavItem("NavbarView.Settings",OperatingSystem.IsAndroid() ? new SettingsViewMobile(): new SettingsView(), IconData.Cog)
+
+
             };
 
             // Výchozí stránka
             CurrentPage = NavigationItems[0].ViewModel;
             SelectedNavigationItem = NavigationItems[0];
+
+
+           
+
         }
 
         partial void OnSelectedNavigationItemChanged(NavItem? value)
@@ -55,6 +63,9 @@ namespace CtrlPay.Avalonia.ViewModels
             if (value != null)
                 CurrentPage = value.ViewModel;
         }
+
+
+
     }
 
     public partial class NavItem : ObservableObject
@@ -84,6 +95,9 @@ namespace CtrlPay.Avalonia.ViewModels
             if (!string.IsNullOrEmpty(NameKey))
                 Name = TranslationManager.GetString(NameKey);
         }
+
+
+
     }
 
 }
