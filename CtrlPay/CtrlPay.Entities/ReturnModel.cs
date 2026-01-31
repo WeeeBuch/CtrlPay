@@ -29,8 +29,7 @@ namespace CtrlPay.Entities
             { "A11", "password can not be blank" },
             { "A12", "http return is null" },
             { "A13", "failed to parse http response" },
-            { "T0", "operation successful" },
-            { "T1", "user does not have account" },
+            { "H0", "i'm alive" },
             { "P0", "operation successful" },
             { "P1", "user does not have account" },
             { "R0", "successfully registered" },
@@ -39,6 +38,8 @@ namespace CtrlPay.Entities
             { "R3", "confirm password can not be empty" },
             { "R4", "passwords do not match" },
             { "R5", "code can not be empty" },
+            { "T0", "operation successful" },
+            { "T1", "user does not have account" },
         };
 
         public ReturnModel(string returnCode, ReturnModelSeverityEnum severity)

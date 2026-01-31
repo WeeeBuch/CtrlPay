@@ -83,7 +83,7 @@ public partial class OnboardingViewModel : ViewModelBase
 
         try
         {
-            var result = await ToDoRepo.TestConnectionToAPI(ApiUrl);
+            var result = await HealthRepo.TestConnectionToAPI(ApiUrl);
             if (result)
             {
                 IsSuccessVisible = true;

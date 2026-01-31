@@ -9,6 +9,11 @@ public class HttpWorker
 
     public static async Task<string?> HttpGet(string url, CancellationToken cancellationToken = default)
     {
+        if (url[0] != '/')
+        {
+            url = "/" + url;
+        }
+
         try
         {
             using var request = new HttpRequestMessage(HttpMethod.Get, $"{Credentials.BaseUri}{url}");
@@ -29,6 +34,11 @@ public class HttpWorker
 
     public static async Task<string?> HttpPost(string url, CancellationToken cancellationToken = default)
     {
+        if (url[0] != '/')
+        {
+            url = "/" + url;
+        }
+
         try
         {
 
