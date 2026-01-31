@@ -1,67 +1,93 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CtrlPay.Repos.Frontend;
+using System;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
-namespace CtrlPay.Avalonia.Settings
+namespace CtrlPay.Avalonia.Settings;
+
+internal class SettingsManager
 {
-    internal class SettingsManager
+    private static readonly string fileName = "settings.json";
+    private static readonly string folder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "CtrlPay");
+    private static readonly string _filePath = Path.Combine(folder, fileName);
+
+    private static bool NeedsOnBoarding = true;
+    public static AppSettings Current { get; set; } = new(); // Defaultní inicializace
+
+    public static bool Init()
     {
-        private static readonly string fileName = "settings.json";
-        private static readonly string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
-        private static readonly string folder = Path.Combine(appData, "CtrlPay");
-        private static string _filePath = Path.Combine(folder, fileName);
-        private static bool NeedsOnBoarding = true;
+        AppLogger.Info("Settings Init started.");
+        Current = Load();
+        return NeedsOnBoarding;
+    }
 
-        public static AppSettings Current { get; set; }
-
-        public static bool Init()
+    public static void Save(AppSettings settings)
+    {
+        try
         {
-            Current = Load(); // Načte se automaticky při prvním přístupu
-            return NeedsOnBoarding;
+            // 1. Validace složky (zkráceno)
+            if (!Directory.Exists(folder))
+            {
+                Directory.CreateDirectory(folder);
+            }
+
+            // 2. Serializace (Objekt -> String)
+            string json = JsonSerializer.Serialize(settings, new JsonSerializerOptions { WriteIndented = true });
+
+            // 3. Kontrola, jestli se data vůbec změnila (optimization)
+            // Pokud soubor existuje a obsah je stejný, nic neukládáme a nelogujeme spam
+            if (File.Exists(_filePath) && File.ReadAllText(_filePath) == json)
+            {
+                return;
+            }
+
+            AppLogger.Info("Settings change detected, saving to disk.");
+            File.WriteAllText(_filePath, json);
+            AppLogger.Info("Settings successfully serialized and saved.");
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Error("Settings saving failed.", ex);
+        }
+    }
+
+    public static AppSettings Load()
+    {
+        AppLogger.Info("Loading settings from file...");
+
+        if (!File.Exists(_filePath))
+        {
+            AppLogger.Warning("Settings file not found. User is new.");
+            return new AppSettings();
         }
 
-        public static void Save(AppSettings settings)
+        try
         {
-            try
-            {
-                // 1. Zjistíme, v jaké složce má soubor být
-                string? directory = Path.GetDirectoryName(_filePath);
-
-                // 2. Pokud cesta ke složce není prázdná a složka neexistuje, vytvoříme ji
-                if (!string.IsNullOrEmpty(directory) && !Directory.Exists(directory))
-                {
-                    Directory.CreateDirectory(directory);
-                }
-
-                // 3. Teď už můžeme bezpečně ukládat
-                string json = JsonSerializer.Serialize(settings, new JsonSerializerOptions { WriteIndented = true });
-                File.WriteAllText(_filePath, json);
-            }
-            catch (Exception ex)
-            {
-                // Tady je dobré mít aspoň výpis do konzole, abys věděl, co se děje
-                System.Diagnostics.Debug.WriteLine($"Chyba při ukládání nastavení: {ex.Message}");
-            }
-        }
-
-        public static AppSettings Load()
-        {
-            if (!File.Exists(_filePath)) return new AppSettings(); // Vratí default
-
             string json = File.ReadAllText(_filePath);
 
-            if (string.IsNullOrWhiteSpace(json)) return new AppSettings();
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                AppLogger.Warning("Settings file is empty.");
+                return new AppSettings();
+            }
 
+            // Deserializace (String -> Objekt)
             AppSettings? settings = JsonSerializer.Deserialize<AppSettings>(json);
 
-            if (settings == null) return new AppSettings();
+            if (settings == null)
+            {
+                AppLogger.Error("Settings deserialization returned NULL.");
+                return new AppSettings();
+            }
 
+            AppLogger.Info("Settings loaded successfully.");
             NeedsOnBoarding = false;
             return settings;
+        }
+        catch (Exception ex)
+        {
+            AppLogger.Error("Error while loading settings.", ex);
+            return new AppSettings();
         }
     }
 }

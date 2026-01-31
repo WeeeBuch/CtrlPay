@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Markup.Xaml.Styling;
 using CtrlPay.Avalonia.Settings;
 using CtrlPay.Entities;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -36,6 +37,7 @@ public static class TranslationManager
 
     public static void Apply(AppLanguage language)
     {
+        AppLogger.Info($"Changing language to {language}.");
         CurrentLanguage = language;
         var resources = Application.Current!.Resources;
 
@@ -56,6 +58,7 @@ public static class TranslationManager
         }
 
         SettingsManager.Current.Language = language;
+        AppLogger.Info($"Language changed succesfully.");
     }
 
     public static Uri GetUri(AppLanguage language) => language switch

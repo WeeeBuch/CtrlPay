@@ -85,6 +85,7 @@ public partial class TransactionListPieceModel : ViewModelBase
 
     public void RefreshTransactions(List<TransactionItemViewModel> rawData)
     {
+        AppLogger.Info($"Refreshing transactions...");
         var displayList = new List<DashboardListItem>();
         var now = DateTime.Now.Date;
 
@@ -109,6 +110,7 @@ public partial class TransactionListPieceModel : ViewModelBase
         }
 
         Transactions = new ObservableCollection<DashboardListItem>(displayList);
+        AppLogger.Info($"Transactions refreshed succesfully.");
     }
 
     private string GetGroupName(DateTime date, DateTime now)

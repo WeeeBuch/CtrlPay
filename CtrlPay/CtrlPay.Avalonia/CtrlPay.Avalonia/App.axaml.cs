@@ -13,6 +13,7 @@ using CtrlPay.Avalonia.Views;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Linq;
+using System.Reflection;
 
 namespace CtrlPay.Avalonia
 {
@@ -22,6 +23,9 @@ namespace CtrlPay.Avalonia
 
         public override void Initialize()
         {
+            AppLogger.Info("===============================================================");
+            AppLogger.Info($"Starting app. Version: {Assembly.GetExecutingAssembly().GetName().Version}");
+
             IsConfigured = !SettingsManager.Init();
             ThemeManager.Apply(SettingsManager.Current.Theme);
             TranslationManager.Apply(SettingsManager.Current.Language);
@@ -32,29 +36,36 @@ namespace CtrlPay.Avalonia
         {
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
+                AppLogger.Info($"Starting Desktop version...");
                 DisableAvaloniaDataAnnotationValidation();
 
                 #region Debug
                 if (DebugMode.StartDebug)
                 {
+                    AppLogger.Info($"Starting Debug Window...");
                     var debugWin = new DebugWindow
                     {
                         DataContext = new DebugWindowViewModel()
                     };
                     debugWin.Show();
+                    AppLogger.Info($"Debug window started.");
                 }
                 #endregion
 
                 if (IsConfigured)
                 {
+                    AppLogger.Info($"Starting Login Window...");
                     desktop.MainWindow = new LoginWindow();
+                    AppLogger.Info($"Logn window started.");
                 }
                 else
                 {
+                    AppLogger.Info($"App is not configured, starting onboarding...");
                     desktop.MainWindow = new OnboardingWindow
                     {
                         DataContext = new OnboardingViewModel()
                     };
+                    AppLogger.Info($"Onbording started.");
                 }
 
                 WeakReferenceMessenger.Default.Register<OnboardingFinishedMessage>(this, (r, m) =>
@@ -75,6 +86,8 @@ namespace CtrlPay.Avalonia
             }
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleView)
             {
+                AppLogger.Info($"Starting Mobile or Web version...");
+
                 if (IsConfigured)
                 {
                     singleView.MainView = new MainView { DataContext = new MainViewModel() };

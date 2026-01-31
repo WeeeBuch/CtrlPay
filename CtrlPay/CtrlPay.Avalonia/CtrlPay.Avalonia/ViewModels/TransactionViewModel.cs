@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CtrlPay.Avalonia.HelperClasses;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,7 @@ public partial class TransactionViewModel : ViewModelBase
 
     public void ApplySorting(string? sortingMethod)
     {
+        AppLogger.Info($"Sorting transactions by: {sortingMethod}");
         var resultList = new List<TransactionItem>();
 
         foreach (var dto in TransactionRepo.GetSortedTransactions(sortingMethod))
@@ -55,6 +57,7 @@ public partial class TransactionViewModel : ViewModelBase
         }
 
         Debts.ReplaceAll(resultList);
+        AppLogger.Info($"Sorting finished.");
     }
 
     public void OnCreditChanged(decimal amount) => ApplySorting(null);
