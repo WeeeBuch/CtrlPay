@@ -1,0 +1,204 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:styles="using:CtrlPay.Avalonia.Styles"
+             xmlns:translations="using:CtrlPay.Avalonia.Translations"
+             xmlns:conv="using:CtrlPay.Avalonia.Converters"
+             x:Class="CtrlPay.Avalonia.Views.Mobile.SettingsViewMobile"
+             Background="{DynamicResource Brush.Background}"
+             x:DataType="vm:SettingsViewModel"
+             d:DesignWidth="390"
+             d:DesignHeight="800"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d">
+
+	<UserControl.Resources>
+		<conv:ThemeToColorConverter x:Key="ThemeToColorConverter" />
+	</UserControl.Resources>
+
+	<UserControl.Styles>
+		<Style Selector="ListBox.PillList">
+			<Setter Property="Background" Value="Transparent" />
+			<Setter Property="ItemsPanel">
+				<ItemsPanelTemplate>
+					<WrapPanel Orientation="Horizontal" />
+				</ItemsPanelTemplate>
+			</Setter>
+		</Style>
+
+		<Style Selector="ListBox.PillList ListBoxItem">
+			<Setter Property="Padding" Value="0" />
+			<Setter Property="Margin" Value="0,0,10,10" />
+			<Setter Property="Template">
+				<ControlTemplate>
+					<Border Name="PillBorder"
+                            Background="{DynamicResource Brush.Surface}"
+                            BorderBrush="Transparent"
+                            BorderThickness="2"
+                            CornerRadius="20"
+                            Padding="16,8">
+						<ContentPresenter Content="{TemplateBinding Content}"
+                                          HorizontalAlignment="Center"
+                                          VerticalAlignment="Center"/>
+					</Border>
+				</ControlTemplate>
+			</Setter>
+		</Style>
+
+		<Style Selector="ListBox.PillList ListBoxItem:selected /template/ Border#PillBorder">
+			<Setter Property="BorderBrush" Value="{DynamicResource Brush.Accent}" />
+			<Setter Property="Background" Value="{DynamicResource Brush.Surface}" />
+		</Style>
+
+		<Style Selector="ListBox.PillList ListBoxItem:pointerover /template/ Border#PillBorder">
+			<Setter Property="Background" Value="#2A343F" />
+			<Setter Property="Cursor" Value="Hand" />
+		</Style>
+
+		<Style Selector="ListBox.PillList ListBoxItem:selected">
+			<Setter Property="RenderTransform" Value="scale(1.05)" />
+			<Setter Property="Transitions">
+				<Transitions>
+					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.1" />
+				</Transitions>
+			</Setter>
+		</Style>
+
+		<Style Selector="TextBlock.StatusTextBox[Tag=Success]">
+			<Setter Property="Foreground" Value="{DynamicResource Brush.Success}"/>
+		</Style>
+		<Style Selector="TextBlock.StatusTextBox[Tag=Error]">
+			<Setter Property="Foreground" Value="{DynamicResource Brush.Error}"/>
+		</Style>
+		<Style Selector="TextBlock.StatusTextBox[Tag=Testing]">
+			<Setter Property="Foreground" Value="{DynamicResource Brush.Warning}"/>
+		</Style>
+		<Style Selector="TextBlock.StatusTextBox[Tag=None]">
+			<Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}"/>
+		</Style>
+	</UserControl.Styles>
+
+	<ScrollViewer>
+		<StackPanel Spacing="35" Margin="40">
+
+			<StackPanel Spacing="5">
+				<TextBlock Text="{DynamicResource SettingsView.Title}" FontSize="32" FontWeight="Bold" Foreground="{DynamicResource Color.Accent}"/>
+				<TextBlock Text="{DynamicResource SettingsView.Description}" FontSize="14" Opacity="0.5"/>
+			</StackPanel>
+
+			<StackPanel Spacing="15">
+				<TextBlock Text="{DynamicResource SettingsView.Appearance.Title}" FontSize="18" FontWeight="SemiBold"/>
+				<ListBox ItemsSource="{Binding AvailableThemes}"
+                         SelectedItem="{Binding SelectedTheme}"
+                         Classes="PillList" Padding="5">
+					<ListBox.ItemTemplate>
+						<DataTemplate x:DataType="styles:ThemeManager+AppTheme">
+							<StackPanel Orientation="Horizontal" Spacing="10">
+								<Ellipse Width="12" Height="12" Fill="{Binding Converter={StaticResource ThemeToColorConverter}}"/>
+								<TextBlock Text="{Binding}" FontWeight="Medium"/>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</StackPanel>
+
+			<StackPanel Spacing="15">
+				<TextBlock Text="{DynamicResource SettingsView.Translation.Title}" FontSize="18" FontWeight="SemiBold"/>
+				<ListBox ItemsSource="{Binding AvailableLanguages}"
+                         SelectedItem="{Binding SelectedLanguage}"
+                         Classes="PillList" Padding="5">
+					<ListBox.ItemTemplate>
+						<DataTemplate x:DataType="translations:TranslationManager+AppLanguage">
+							<TextBlock Text="{Binding}" FontWeight="Medium"/>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</StackPanel>
+
+			<StackPanel Spacing="15">
+				<TextBlock Text="{DynamicResource SettingsView.API.Title}" FontSize="18" FontWeight="SemiBold"/>
+				<Border Background="{DynamicResource Brush.Surface}" Padding="25" CornerRadius="15">
+					<StackPanel Spacing="25">
+
+						<StackPanel Spacing="8">
+							<TextBlock Text="{DynamicResource SettingsView.API.Url}" FontSize="12" Opacity="0.6" Margin="5,0"/>
+							<Grid ColumnDefinitions="*, Auto, Auto">
+								<StackPanel Grid.Column="0">
+									<TextBox Text="{Binding ApiUrl}"
+                                             CornerRadius="10 0 0 10"
+                                             VerticalContentAlignment="Center"
+                                             Watermark="https://..."
+                                             Height="42"/>
+
+									<ProgressBar IsIndeterminate="True"
+                                                 IsVisible="{Binding IsTestingConnection}"
+                                                 Height="2"
+                                                 Background="Transparent"
+                                                 Foreground="{DynamicResource Brush.Accent}"
+                                                 VerticalAlignment="Bottom"
+                                                 Margin="2,-2,0,0"/>
+									<TextBlock Text="{Binding StatusBoxText}"
+                                               Classes="StatusTextBox"
+                                               Tag="{Binding TestStatusText}"
+                                               Foreground="{DynamicResource Color.Error}"
+                                               Margin="2" IsVisible="{Binding IsErrorVisible}"/>
+								</StackPanel>
+								<Button Grid.Column="1"
+                                        Content="{DynamicResource SettingsView.API.Test}"
+                                        Command="{Binding TestConnectionCommand}"
+                                        Padding="15,0"
+                                        Height="42"
+                                        CornerRadius="0 10 10 0"
+                                        HorizontalContentAlignment="Center"
+                                        VerticalContentAlignment="Center"
+                                        VerticalAlignment="Top"
+                                        BorderThickness="1"
+                                        BorderBrush="{DynamicResource Brush.Background}"/>
+							</Grid>
+
+							<StackPanel Spacing="8" Margin="0,10,0,0">
+								<TextBlock Text="{DynamicResource SettingsView.API.RecentConnections}" FontSize="11" Opacity="0.4" Margin="5,0"/>
+								<ListBox ItemsSource="{Binding RecentApiUrls}"
+                                         SelectedItem="{Binding ApiUrl}"
+                                         Background="Transparent"
+                                         BorderThickness="0"
+                                         Classes="PillList" Padding="5">
+									<ListBox.ItemsPanel>
+										<ItemsPanelTemplate>
+											<WrapPanel Orientation="Horizontal" />
+										</ItemsPanelTemplate>
+									</ListBox.ItemsPanel>
+									<ListBox.ItemTemplate>
+										<DataTemplate>
+											<Border Background="#1A2128"
+                                                    CornerRadius="15"
+                                                    Padding="10,4"
+                                                    Margin="0,0,8,0"
+                                                    BorderThickness="1"
+                                                    BorderBrush="{DynamicResource Brush.Outline}">
+												<TextBlock Text="{Binding}" FontSize="11" Opacity="0.8"/>
+											</Border>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</StackPanel>
+						</StackPanel>
+
+						<StackPanel Spacing="8">
+							<TextBlock Text="{DynamicResource SettingsView.API.UpdateFreq}" FontSize="12" Opacity="0.6" Margin="5,0"/>
+							<NumericUpDown Value="{Binding RefreshIntervalSeconds}"
+                                           Width="180"
+                                           HorizontalAlignment="Left"
+                                           VerticalContentAlignment="Center"
+                                           Minimum="5"
+                                           Maximum="3600"/>
+						</StackPanel>
+
+					</StackPanel>
+				</Border>
+			</StackPanel>
+		</StackPanel>
+	</ScrollViewer>
+
+</UserControl>

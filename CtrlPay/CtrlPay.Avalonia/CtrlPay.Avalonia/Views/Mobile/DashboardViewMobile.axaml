@@ -1,0 +1,62 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignWidth="390"
+             d:DesignHeight="800"
+             Background="{DynamicResource Color.Background}"
+             x:Class="CtrlPay.Avalonia.Views.Mobile.DashboardViewMobile"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             x:DataType="vm:DashboardViewModel"
+             xmlns:p="using:CtrlPay.Avalonia">
+
+	<ScrollViewer>
+		<Grid Margin="16">
+
+			<Grid.RowDefinitions>
+				<!-- Counter 1 -->
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="12"/>
+
+				<!-- Counter 2 -->
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="16"/>
+
+				<!-- Nadpis -->
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="12"/>
+
+				<!-- List 1 -->
+				<RowDefinition Height="Auto"/>
+				<RowDefinition Height="16"/>
+
+				<!-- List 2 -->
+				<RowDefinition Height="Auto"/>
+			</Grid.RowDefinitions>
+
+			<!-- Horní čítače -->
+			<p:CounterPiece Grid.Row="0"
+                            DataContext="{Binding TotalCredits}"/>
+
+			<p:CounterPiece Grid.Row="2"
+                            DataContext="{Binding PendingCredits}"/>
+
+			<!-- Popisek listů -->
+			<TextBlock Grid.Row="4"
+                       Text="{DynamicResource DashboardView.TransactionList}"
+                       HorizontalAlignment="Center"
+                       FontSize="20"
+                       FontWeight="Bold"/>
+
+			<!-- Listy -->
+			<p:TransactionListPiece Grid.Row="6"
+                                    DataContext="{Binding CreditTransactionList}"/>
+
+			<p:TransactionListPiece Grid.Row="8"
+                                    DataContext="{Binding PendingTransactionList}"/>
+
+		</Grid>
+	</ScrollViewer>
+
+</UserControl>

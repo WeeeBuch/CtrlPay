@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -9,11 +9,13 @@ using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.ObjectModel;
+using CtrlPay.Avalonia.Views.Mobile;
 
 namespace CtrlPay.Avalonia.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
+       
         [ObservableProperty]
         private object _currentPage;
 
@@ -48,6 +50,10 @@ namespace CtrlPay.Avalonia.ViewModels
 
             CurrentPage = NavigationItems[0].ViewModel;
             SelectedNavigationItem = NavigationItems[0];
+
+
+           
+
         }
 
         private void GenerateNavItems()
@@ -94,6 +100,9 @@ namespace CtrlPay.Avalonia.ViewModels
             if (value != null)
                 CurrentPage = value.ViewModel;
         }
+
+
+
     }
 
     public partial class NavItem : ObservableObject
@@ -123,6 +132,9 @@ namespace CtrlPay.Avalonia.ViewModels
             if (!string.IsNullOrEmpty(NameKey))
                 Name = TranslationManager.GetString(NameKey);
         }
+
+
+
     }
 
 }
