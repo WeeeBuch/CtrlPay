@@ -15,7 +15,7 @@ namespace CtrlPay.XMR
 {
     public class AccountComs
     {
-        public static async Task Synchronize(HttpClient httpClient,string uri, CancellationToken cancellationToken)
+        public static async Task Synchronize(HttpClient httpClient, string uri, CancellationToken cancellationToken)
         {
             var payload = new
             {
@@ -74,6 +74,53 @@ namespace CtrlPay.XMR
                 dbContext.Accounts.Add(newAccount);
                 await dbContext.SaveChangesAsync(cancellationToken);
             }
+        }
+        public static async Task<string> GenerateOneTimeAddressForLoyalCustomer(LoyalCustomer customer, HttpClient httpClient, string uri, CancellationToken cancellationToken)
+        {
+            var payload = new
+            {
+                jsonrpc = "2.0",
+                id = "0",
+                method = "create_address",
+                @params = new
+                {
+                    account_index = customer.Account.Index,
+                    count = 1
+                }
+            };
+
+            string json = JsonSerializer.Serialize(payload);
+
+            var content = new StringContent(
+                json,
+                Encoding.UTF8,
+                "application/json"
+            );
+
+            HttpResponseMessage response = await httpClient.PostAsync(
+                uri,
+                content,
+                cancellationToken
+            );
+
+            string body = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"HTTP error {response.StatusCode}: {body}");
+            }
+
+            var rpcResponse = JsonSerializer.Deserialize<RpcResponse<RpcSubaddr>>(body,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+
+            if (rpcResponse?.Error != null)
+            {
+                throw new Exception($"RPC error {rpcResponse.Error.Code}: {rpcResponse.Error.Message}");
+            }
+
+            RpcSubaddr rpcSubaddr = rpcResponse.Result;
+            string oneTimeAddress = rpcSubaddr.Address;
+            
+            return oneTimeAddress;
         }
     }
 }

@@ -10,19 +10,11 @@ namespace CtrlPay.Repos;
 
 public static class ToDoRepo
 {
-    //TODO: Metody do repos: 3
+    //TODO: Metody do repos: 2
 
-    public static void PayFromCredit(FrontendTransactionDTO transakce)
+    public static void PayFromCredit(FrontendTransactionDTO payment)
     {
         // Implementace platby z kreditu
         AppLogger.Info($"Paying from credit...");
-    }
-
-    public static string GetOneTimeAddress(FrontendTransactionDTO transaction)
-    {
-        // Implementace generování jednorázové adresy
-        // transakce pro pozdější automatické napojení
-        AppLogger.Info($"Getting onetime address...");
-        return "generated_one_time_address";
     }
 }

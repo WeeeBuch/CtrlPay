@@ -45,12 +45,12 @@ public partial class TransactionItem : ObservableObject
     private void PayFromCredit() => ToDoRepo.PayFromCredit(TransactionDTOBase);
 
     [RelayCommand]
-    private void GenerateAddress()
+    private async Task GenerateAddress()
     {
         /* Implementace generování adresy */
 
         AppLogger.Info($"Asking for new onetime address...");
-        string addr = ToDoRepo.GetOneTimeAddress(TransactionDTOBase);
+        string addr = await AccountRepo.GetOneTimeAddressForLoyalCustomer(TransactionDTOBase);
 
         AppLogger.Info($"Preparing QR and QR window...");
         QrCodeViewModel vm = new(addr, TransactionDTOBase);

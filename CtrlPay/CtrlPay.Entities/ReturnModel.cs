@@ -29,6 +29,7 @@ namespace CtrlPay.Entities
             { "A11", "password can not be blank" },
             { "A12", "http return is null" },
             { "A13", "failed to parse http response" },
+            { "C0", "One time address created successfully" },
             { "H0", "i'm alive" },
             { "P0", "operation successful" },
             { "P1", "user does not have account" },

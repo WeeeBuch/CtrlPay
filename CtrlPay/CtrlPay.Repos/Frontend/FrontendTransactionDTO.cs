@@ -47,6 +47,7 @@ namespace CtrlPay.Repos
             Amount = payment.PaidAmountXMR;
             Timestamp = payment.CreatedAt;
             State = StatusConverter.ConvertPaymentStatusToFrontendStatus(payment.Status);
+            Id = payment.Id;
         }
         public FrontendTransactionDTO() { }
     }
