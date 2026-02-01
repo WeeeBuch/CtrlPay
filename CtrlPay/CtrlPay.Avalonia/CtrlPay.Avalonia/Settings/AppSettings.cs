@@ -1,10 +1,7 @@
 ﻿using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.Translations;
-using System;
+using CtrlPay.Repos;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CtrlPay.Avalonia.Settings
 {
@@ -29,7 +26,11 @@ namespace CtrlPay.Avalonia.Settings
         public string ConnectionString
         {
             get => _connectionString;
-            set { _connectionString = value; Save(); }
+            set { 
+                _connectionString = value;
+                Credentials.BaseUri = value;
+                Save(); 
+            }
         }
 
         // Uložená připojení

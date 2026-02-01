@@ -22,6 +22,10 @@ public static class ChangeChecker
         // Sem se píšou všechny kontroly změn, které chceme provádět
         UpdateHandler.HandleCreditAvailableUpdate(TransactionRepo.GetTransactionSum());
         UpdateHandler.HandlePendingPaymentsUpdate(PaymentRepo.GetPaymentSum());
+        UpdateHandler.HandleNewDebtsAdded();
+        UpdateHandler.HandleNewPaymentsAdded();
+
+        Credentials.BaseUri = SettingsManager.Current.ConnectionString;
         AppLogger.Info($"Checking completed.");
     }
 

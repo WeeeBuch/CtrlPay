@@ -29,44 +29,46 @@ public static class ToDoRepo
     public static async Task<bool> TestConnectionToAPI(string connString)
     {
         AppLogger.Info($"Testing connection to: {connString}");
-        // Tady se testne konekce a pokud je úspěšná tak se vrátí true jinak false
 
         #region Debug
         if (DebugMode.SkipApiConnectionTest)
         {
-            await Task.Delay(5000);
-
-            return string.IsNullOrWhiteSpace(connString);
+            await Task.Delay(2000); // Zkrátil jsem na 2s, ať nečekáš věčnost
+            return !string.IsNullOrWhiteSpace(connString);
         }
         #endregion
 
-        var handler = new HttpClientHandler
-        {
-            UseProxy = false
-        };
+        // Dočasně nastavíme BaseUri pro worker, aby věděl, kam volat
+        // Pokud tvůj HttpWorker používá statické Credentials.BaseUri, musíme ho pro test nastavit
+        string originalBaseUri = Credentials.BaseUri;
+        Credentials.BaseUri = connString;
 
-        using HttpClient client = new(handler);
-        string uri = $"{connString}/health/api";
-
-        HttpResponseMessage response;
         try
         {
-            AppLogger.Info($"Getting health response from API...");
-            response = await client.GetAsync(uri);
+            // Použijeme tvůj HttpGet z workeru. 
+            // Cesta je "/health/api" (worker si ji sám spojí s BaseUri)
+            var result = await HttpWorker.HttpGet("/health/api");
+
+            // Pokud worker vrátil null, spojení selhalo (catch block v HttpWorkeru)
+            if (result == null)
+            {
+                AppLogger.Error($"Connection test failed for: {connString}");
+                return false;
+            }
+
+            AppLogger.Info($"Successfully tested connection to: {connString}");
+            return true;
         }
         catch (Exception ex)
         {
-            AppLogger.Error($"Failed to test connection.", ex);
+            AppLogger.Error($"Failed to test connection to {connString}", ex);
             return false;
         }
-
-        if (response == null)
+        finally
         {
-            AppLogger.Error($"Returned response was NULL.");
-            return false;
+            // Vrátíme původní BaseUri zpět, aby se nic nerozbilo ve zbytku appky
+            // (V onboardingu to sice asi nevadí, ale je to slušnost)
+            Credentials.BaseUri = originalBaseUri;
         }
-
-        AppLogger.Info($"Succesfully tested connection to: {connString}");
-        return true;
     }
 }

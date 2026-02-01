@@ -18,10 +18,15 @@ public static class UpdateHandler
     public static void HandlePendingPaymentsUpdate(decimal newAmount)
         => PendingPaymentsUpdateActions.ForEach(action => action.Invoke(newAmount));
 
-    // New transaction added
-    public static List<Action> NewTransactionAddedActions = [];
-    public static void HandleNewTransactionAdded()
-        => NewTransactionAddedActions.ForEach(action => action.Invoke());
+    // New payments added
+    public static List<Action> NewPaymentsAddedActions = [];
+    public static void HandleNewPaymentsAdded()
+        => NewPaymentsAddedActions.ForEach(action => action.Invoke());
+
+    // New debts added
+    public static List<Action> NewDebtsAddedActions = [];
+    public static void HandleNewDebtsAdded()
+        => NewDebtsAddedActions.ForEach(action => action.Invoke());
 
 }
 

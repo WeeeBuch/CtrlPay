@@ -82,6 +82,8 @@ public partial class OnboardingViewModel : ViewModelBase
         IsErrorVisible = false;
         IsSuccessVisible = false;
 
+        FinishCommand.NotifyCanExecuteChanged();
+
         try
         {
             var result = await ToDoRepo.TestConnectionToAPI(ApiUrl);
@@ -96,17 +98,24 @@ public partial class OnboardingViewModel : ViewModelBase
                 StatusBoxText = TranslationManager.GetString("SettingsView.Status.Error");
             }
         }
-        finally { IsTestingConnection = false; }
+        finally 
+        { 
+            IsTestingConnection = false;
+            FinishCommand.NotifyCanExecuteChanged();
+        }
     }
 
     [RelayCommand(CanExecute = nameof(IsSuccessVisible))]
     private void Finish()
     {
         AppLogger.Info($"Finishing onboarding...");
-        // Uložit finální stav
+
+        // 1. Uložíme hodnoty do settings (ConnectionString setter se postará o Credentials.BaseUri)
         SettingsManager.Current.Language = SelectedLanguage;
         SettingsManager.Current.Theme = SelectedTheme;
         SettingsManager.Current.ConnectionString = ApiUrl;
+
+        // 2. Uložíme soubor nastavení
         SettingsManager.Save(SettingsManager.Current);
 
         WeakReferenceMessenger.Default.Send(new OnboardingFinishedMessage());

@@ -82,6 +82,30 @@ public partial class DashboardViewModel : ViewModelBase
         CreditTransactionList.RefreshTransactions(creditData);
         PendingTransactionList.RefreshTransactions(pendingData);
 
+        UpdateHandler.NewDebtsAddedActions.Add(() =>
+        {
+            CreditTransactionList.RefreshTransactions([.. TransactionRepo.GetSortedTransactions(null)
+                .Select(t => new TransactionItemViewModel {
+                    Title = t.Title,
+                    Amount = t.Amount,
+                    Date = t.Timestamp,
+                    Status = t.State
+                    })
+                ]);
+        });
+
+        UpdateHandler.NewPaymentsAddedActions.Add(() =>
+        {
+            PendingTransactionList.RefreshTransactions([.. PaymentRepo.GetSortedDebts(null, false)
+                .Select(t => new TransactionItemViewModel {
+                    Title = t.Title,
+                    Amount = t.Amount,
+                    Date = t.Timestamp,
+                    Status = t.State
+                    })
+                ]);
+        });
+
         AppLogger.Info($"Transactions loaded.");
     }
 }
