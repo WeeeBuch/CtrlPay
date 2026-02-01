@@ -67,7 +67,7 @@ namespace CtrlPay.Entities
         public decimal PaidAmountXMR { get; set; }
         public PaymentStatusEnum Status { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime PaidAt { get; set; }
+        public DateTime? PaidAt { get; set; }
 
         public PaymentApiDTO()
         {

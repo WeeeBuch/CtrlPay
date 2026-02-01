@@ -39,5 +39,23 @@ namespace CtrlPay.Entities
         public virtual Address? Address { get; set; }
         //public virtual List<Transaction> Transactions { get; set; }
 
+        public Payment()
+        {
+            
+        }
+
+        public Payment(PaymentApiDTO dto)
+        {
+            Id = dto.Id;
+            CustomerId = dto.CustomerId;
+            AccountId = dto.AccountId;
+            AddressId = dto.AddressId;
+            ExpectedAmountXMR = dto.ExpectedAmountXMR;
+            PaidAmountXMR = dto.PaidAmountXMR;
+            Status = dto.Status;
+            CreatedAt = dto.CreatedAt;
+            PaidAt = dto.PaidAt ?? default;
+        }
+
     }
 }

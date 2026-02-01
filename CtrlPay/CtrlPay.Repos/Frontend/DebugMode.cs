@@ -26,6 +26,9 @@ public static class DebugMode
     // Connection test
     public static bool SkipApiConnectionTest { get; set; } = false;
 
+    // One time address generation skip
+    public static bool SkipOneTimeAddressGeneration { get; set; } = false;
+
     public static List<DebugProperty> GetDebugProperties()
     {
         return typeof(DebugMode)

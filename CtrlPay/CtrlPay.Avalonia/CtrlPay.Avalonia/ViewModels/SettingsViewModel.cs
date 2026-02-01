@@ -71,7 +71,7 @@ namespace CtrlPay.Avalonia.ViewModels
 
             try
             {
-                result = await ToDoRepo.TestConnectionToAPI(ApiUrl);
+                result = await HealthRepo.TestConnectionToAPI(ApiUrl);
             }
             finally
             {
