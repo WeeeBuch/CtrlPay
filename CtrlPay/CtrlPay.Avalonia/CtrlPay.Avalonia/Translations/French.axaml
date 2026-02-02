@@ -23,6 +23,7 @@
     <x:String x:Key="NavbarView.Dashboard">Tableau de bord</x:String>
     <x:String x:Key="NavbarView.Settings">Paramètres</x:String>
     <x:String x:Key="NavbarView.Debts">Dettes</x:String>
+    <x:String x:Key="NavbarView.Transactions">Paiements entrants</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Solde</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">En attente</x:String>

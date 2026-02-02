@@ -23,6 +23,7 @@
     <x:String x:Key="NavbarView.Dashboard">Nástenka</x:String>
     <x:String x:Key="NavbarView.Settings">Nastavenia</x:String>
     <x:String x:Key="NavbarView.Debts">Dlhy</x:String>
+    <x:String x:Key="NavbarView.Transactions">Prichádzajúce platby</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Zostatok</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Čakajúce</x:String>
