@@ -35,7 +35,7 @@ namespace CtrlPay.Avalonia.ViewModels
 
         #region Api
         [ObservableProperty] private string _apiUrl = SettingsManager.Current.ConnectionString;
-        [ObservableProperty] private int _refreshIntervalSeconds = 30; // Výchozí hodnota v sekundách
+        [ObservableProperty] private int _refreshIntervalSeconds = SettingsManager.Current.RefreshRate; // Výchozí hodnota v sekundách
         [ObservableProperty] private ObservableCollection<string> _recentApiUrls = [.. SettingsManager.Current.SavedConnections];
         [ObservableProperty] private bool _isTestingConnection;
         [ObservableProperty] private bool _isErrorVisible = false;
@@ -43,7 +43,11 @@ namespace CtrlPay.Avalonia.ViewModels
         [ObservableProperty] private bool _isSuccessVisible = false;
 
         partial void OnApiUrlChanged(string value) { ApiUrl = value; SetMassageBoxVisibility(false, false);}
-        partial void OnRefreshIntervalSecondsChanged(int value) => RefreshIntervalSeconds = value;
+        partial void OnRefreshIntervalSecondsChanged(int value)
+        {
+            RefreshIntervalSeconds = value;
+            SettingsManager.Current.RefreshRate = RefreshIntervalSeconds;
+        }
         private void SetMassageBoxVisibility(bool s, bool e) 
         { 
             IsErrorVisible = e;

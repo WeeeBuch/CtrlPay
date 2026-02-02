@@ -9,11 +9,10 @@ using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.ViewModels;
-using CtrlPay.Avalonia.Views;
 using CtrlPay.Repos.Frontend;
-using System;
 using System.Linq;
 using System.Reflection;
+using CtrlPay.Repos;
 
 namespace CtrlPay.Avalonia
 {
@@ -29,6 +28,7 @@ namespace CtrlPay.Avalonia
             IsConfigured = !SettingsManager.Init();
             ThemeManager.Apply(SettingsManager.Current.Theme);
             TranslationManager.Apply(SettingsManager.Current.Language);
+            Credentials.BaseUri = SettingsManager.Current.ConnectionString;
             AvaloniaXamlLoader.Load(this);
         }
 

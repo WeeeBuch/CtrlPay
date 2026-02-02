@@ -23,6 +23,7 @@
     <x:String x:Key="NavbarView.Dashboard">Панель управления</x:String>
     <x:String x:Key="NavbarView.Settings">Настройки</x:String>
     <x:String x:Key="NavbarView.Debts">Долги</x:String>
+    <x:String x:Key="NavbarView.Transactions">Входящие платежи</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Баланс</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">В ожидании</x:String>

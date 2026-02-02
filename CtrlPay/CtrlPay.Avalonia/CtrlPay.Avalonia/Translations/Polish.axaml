@@ -23,6 +23,7 @@
     <x:String x:Key="NavbarView.Dashboard">Panel główny</x:String>
     <x:String x:Key="NavbarView.Settings">Ustawienia</x:String>
     <x:String x:Key="NavbarView.Debts">Długi</x:String>
+    <x:String x:Key="NavbarView.Transactions">Płatności przychodzące</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Saldo</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Oczekujące</x:String>

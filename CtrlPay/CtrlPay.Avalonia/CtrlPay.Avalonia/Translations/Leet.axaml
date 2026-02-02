@@ -23,6 +23,7 @@
     <x:String x:Key="NavbarView.Dashboard">D45HB04RD</x:String>
     <x:String x:Key="NavbarView.Settings">C0NF16</x:String>
     <x:String x:Key="NavbarView.Debts">D3B75</x:String>
+    <x:String x:Key="NavbarView.Transactions">1NC0M1N6_P4YM3N75</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">455375</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Qu3u3d</x:String>

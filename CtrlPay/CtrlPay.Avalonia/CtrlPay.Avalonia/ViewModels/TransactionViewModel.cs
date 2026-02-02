@@ -33,7 +33,7 @@ public partial class TransactionViewModel : ViewModelBase
         ApplySorting(SelectedSortOrder.Key);
 
         UpdateHandler.CreditAvailableUpdateActions.Add(OnCreditChanged);
-        UpdateHandler.NewTransactionAddedActions.Add(TransactionsUpdated);
+        UpdateHandler.NewPaymentsAddedActions.Add(TransactionsUpdated);
     }
 
     public void ApplySorting(string? sortingMethod)
