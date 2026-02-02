@@ -1,7 +1,9 @@
-﻿using CtrlPay.DB;
+﻿using CtrlPay.API.BackgroundServices;
+using CtrlPay.DB;
 using CtrlPay.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -14,9 +16,11 @@ namespace CtrlPay.API.Controllers
     {
         //TODO: Předělat na ReturnModel vracení
         private readonly CtrlPayDbContext _db;
-        public PaymentController()
+        private readonly MoneroRpcOptions _rpcOptions;
+        public PaymentController(IOptions<MoneroRpcOptions> rpcOptions)
         {
             _db = new CtrlPayDbContext();
+            _rpcOptions = rpcOptions.Value;
         }
         [HttpGet]
         [Route("my")]

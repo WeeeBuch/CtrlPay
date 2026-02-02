@@ -12,6 +12,11 @@ public class HttpWorker
 
     public static async Task<string?> HttpGet(string url, CancellationToken cancellationToken = default)
     {
+        if (url[0] != '/')
+        {
+            url = "/" + url;
+        }
+
         try
         {
             AppLogger.Info($"Praparing http GET...");
@@ -34,6 +39,11 @@ public class HttpWorker
 
     public static async Task<string?> HttpPost(string url, object payload, bool requireAuth = true, CancellationToken cancellationToken = default)
     {
+        if (url[0] != '/')
+        {
+            url = "/" + url;
+        }
+
         try
         {
             AppLogger.Info($"Praparing http POST...");

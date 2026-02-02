@@ -55,4 +55,10 @@ namespace CtrlPay.Entities
         public int Major { get; set; }
         public int Minor { get; set; }
     }
+
+    public class RpcSubaddr
+    {
+        public string Address { get; set; }
+        public int Address_Index { get; set; }
+    }
 }
