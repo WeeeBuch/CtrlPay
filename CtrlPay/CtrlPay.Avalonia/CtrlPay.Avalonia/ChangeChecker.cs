@@ -38,6 +38,7 @@ public static class ChangeChecker
                 ToCheck();
                 // Počkáme zvolený interval před dalším spuštěním
                 await Task.Delay(TimeSpan.FromSeconds(SettingsManager.Current.RefreshRate), ct);
+                AppLogger.Warning($"Checking in: {SettingsManager.Current.RefreshRate}");
             }
             catch (TaskCanceledException) { break; } // Normální ukončení
             catch (Exception ex)

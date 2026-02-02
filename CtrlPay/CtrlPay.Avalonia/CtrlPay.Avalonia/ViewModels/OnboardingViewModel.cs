@@ -114,6 +114,7 @@ public partial class OnboardingViewModel : ViewModelBase
         SettingsManager.Current.Language = SelectedLanguage;
         SettingsManager.Current.Theme = SelectedTheme;
         SettingsManager.Current.ConnectionString = ApiUrl;
+        SettingsManager.Current.SavedConnections = [ApiUrl];
 
         // 2. Uložíme soubor nastavení
         SettingsManager.Save(SettingsManager.Current);
