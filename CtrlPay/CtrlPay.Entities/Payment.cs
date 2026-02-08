@@ -31,6 +31,8 @@ namespace CtrlPay.Entities
         public DateTime CreatedAt { get; set; }
         [Column("paid_at")]
         public DateTime? PaidAt { get; set; }
+        [Column("due_date")]
+        public DateTime? DueDate { get; set; }
         [ForeignKey("CustomerId")]
         public virtual Customer? Customer { get; set; }
         [ForeignKey("AccountId")]
@@ -55,6 +57,7 @@ namespace CtrlPay.Entities
             Status = dto.Status;
             CreatedAt = dto.CreatedAt;
             PaidAt = dto.PaidAt ?? default;
+            DueDate = dto.DueDate ?? default;
         }
 
     }
