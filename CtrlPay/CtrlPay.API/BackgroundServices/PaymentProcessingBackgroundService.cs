@@ -1,33 +1,31 @@
-﻿
-using CtrlPay.Core;
+﻿using CtrlPay.Core;
 
-namespace CtrlPay.API.BackgroundServices
+public class PaymentProcessingBackgroundService : BackgroundService
 {
-    public class PaymentProcessingBackgroundService : BackgroundService
-    {
-        private readonly ILogger<XmrComsBackgroundService> _logger;
+    private readonly ILogger<PaymentProcessingBackgroundService> _logger;
 
-        public PaymentProcessingBackgroundService(ILogger<XmrComsBackgroundService> logger)
+    public PaymentProcessingBackgroundService(ILogger<PaymentProcessingBackgroundService> logger)
+    {
+        _logger = logger;
+    }
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        while (!stoppingToken.IsCancellationRequested)
         {
-            _logger = logger;
-        }
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            while (!stoppingToken.IsCancellationRequested)
+            _logger.LogInformation("Payment processing starting");
+            try
             {
-                _logger.LogInformation("Payment processing starting");
-                try
-                {
-                    await PaymentProcessing.PairOneTimePayment(stoppingToken);
-                }
-                catch (Exception ex)
-                {
-                    _logger.LogError(ex, "Payment processing failed");
-                    Task.Delay(5000, stoppingToken).Wait(stoppingToken);
-                }
-                _logger.LogInformation("Payment processing done");
-                Task.Delay(TimeSpan.FromSeconds(30), stoppingToken).Wait(stoppingToken);
+                await PaymentProcessing.PairOneTimePayment(stoppingToken);
             }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Payment processing failed");
+                await Task.Delay(5000, stoppingToken);
+            }
+
+            _logger.LogInformation("Payment processing done");
+            await Task.Delay(TimeSpan.FromSeconds(30), stoppingToken);
         }
     }
 }

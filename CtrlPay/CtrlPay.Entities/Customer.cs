@@ -19,17 +19,17 @@ namespace CtrlPay.Entities
         [Column("last_name")]
         public string LastName { get; set; }
         [Column("title")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
         [Column("address")]
-        public string Address { get; set; }
+        public string? Address { get; set; }
         [Column("postal_code")]
-        public string PostalCode { get; set; }
+        public string? PostalCode { get; set; }
         [Column("city")]
-        public string City { get; set; }
+        public string? City { get; set; }
         [Column("email")]
-        public string Email { get; set; }
+        public string? Email { get; set; }
         [Column("telephone")]
-        public string Phone { get; set; }
+        public string? Phone { get; set; }
 
     }
 }

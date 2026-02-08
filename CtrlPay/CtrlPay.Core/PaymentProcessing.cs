@@ -51,8 +51,9 @@ namespace CtrlPay.Core
             await dbContext.SaveChangesAsync(cancellationToken);
             return;
         }
-        public static async Task PayFromCredit(LoyalCustomer customer, Payment payment, CancellationToken cancellationToken)
+        public static async Task PayFromCredit(LoyalCustomer customer, Payment pment, CancellationToken cancellationToken)
         {
+            Payment payment = _db.Payments.Where(p => p.Id == pment.Id).First();
             decimal amountToPay = payment.ExpectedAmountXMR - payment.PaidAmountXMR;
             decimal credit = _db.Transactions
                 .Where(t => t.Account.Index == customer.Account.Index)
