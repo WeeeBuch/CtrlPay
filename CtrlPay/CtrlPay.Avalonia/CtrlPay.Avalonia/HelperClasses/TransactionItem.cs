@@ -42,7 +42,7 @@ public partial class TransactionItem : ObservableObject
     }
 
     [RelayCommand]
-    private void PayFromCredit() => ToDoRepo.PayFromCredit(TransactionDTOBase);
+    private void PayFromCredit() => PaymentRepo.PayFromCredit(TransactionDTOBase);
 
     [RelayCommand]
     private async Task GenerateAddress()

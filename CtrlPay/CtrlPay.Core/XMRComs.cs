@@ -40,7 +40,8 @@ namespace CtrlPay.Core
                 addressString = paymentFromDb.Address.AddressXMR;
                 address = new Address(addressString, false);
                 return address;
-            } else
+            }
+            else
             {
                 addressString = await AccountComs.GenerateOneTimeAddressForLoyalCustomer(customer, httpClient, uri, cancellationToken);
                 address = new Address(addressString, false);
@@ -51,11 +52,11 @@ namespace CtrlPay.Core
                 {
                     dbPayment.Address = address;
                 }
+                dbPayment.Status = PaymentStatusEnum.WaitingForPayment;
                 await dbContext.SaveChangesAsync(cancellationToken);
                 return address;
             }
-
-            
         }
+
     }
 }

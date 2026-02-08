@@ -46,6 +46,11 @@ namespace CtrlPay.Repos
                 return false;
             }
 
+            if (!response.IsSuccessStatusCode)
+            {
+                return false;
+            }
+
             return true;
         }
     }
