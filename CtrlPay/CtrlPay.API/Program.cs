@@ -31,6 +31,7 @@ namespace CtrlPay.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddHostedService<XmrComsBackgroundService>();
+            builder.Services.AddHostedService<PaymentProcessingBackgroundService>();
 
 
             // Načtení JWT sekce z configu
