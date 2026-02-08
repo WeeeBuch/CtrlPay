@@ -10,6 +10,5 @@ public partial class APIConnectView : UserControl
     public APIConnectView()
     {
         InitializeComponent();
-        DataContext = new APIConnectViewModel();
     }
 }
