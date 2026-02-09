@@ -11,11 +11,16 @@
   </ItemGroup>
   
   <ItemGroup>
+    <AvaloniaXaml Remove="Styles\Green.axaml" />
+  </ItemGroup>
+  
+  <ItemGroup>
     <Compile Remove="Assets\Icons\Icons.cs" />
   </ItemGroup>
   
   <ItemGroup>
     <AvaloniaResource Include="Icons.cs" />
+    <AvaloniaResource Include="Styles\Green.axaml" />
   </ItemGroup>
 
   <ItemGroup>

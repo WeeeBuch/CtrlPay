@@ -10,24 +10,25 @@ using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.ObjectModel;
 using CtrlPay.Avalonia.Views.Mobile;
+using System.Xml.Linq;
 
 namespace CtrlPay.Avalonia.ViewModels
 {
     public partial class MainViewModel : ViewModelBase
     {
-       
+        // D�LE�IT�: CurrentPage m� b�t Control (view), ne object
         [ObservableProperty]
-        private object _currentPage;
+        private Control? currentPage;
+
+        // D�LE�IT�: je nullable, proto�e p�i loginu nem� vybranou polo�ku
+        [ObservableProperty]
+        private NavItem? selectedNavigationItem;
 
         [ObservableProperty]
-        private NavItem _selectedNavigationItem;
-
-        [ObservableProperty]
-        private bool _isPaneOpen = true;
+        private bool isPaneOpen = true;
 
         public double PaneWidth => IsPaneOpen ? 200 : 65;
 
-        // A uprav TogglePane, aby o tom dal vědět
         [RelayCommand]
         private void TogglePane()
         {
@@ -38,92 +39,72 @@ namespace CtrlPay.Avalonia.ViewModels
         [ObservableProperty]
         private string menuIcon = IconData.Menu;
 
-        public ObservableCollection<NavItem> NavigationItems { get; private set; }
+        private readonly CtrlPay.Avalonia.INavigationService _navigation;
+
+        public ObservableCollection<NavItem> NavigationItems { get; }
 
         public MainViewModel()
         {
-            // Spuštění kontrol změn na pozadí
-            AppLogger.Info($"Starting Checker...");
-            _ = ChangeChecker.StartChecking();
+            _navigation = new CtrlPay.Avalonia.NavigationService(this);
 
-            GenerateNavItems();
-
-            CurrentPage = NavigationItems[0].ViewModel;
-            SelectedNavigationItem = NavigationItems[0];
-
-
-           
-
-        }
-
-        private void GenerateNavItems()
-        {
-            Role role;
-            if (DebugMode.OverrideRole)
+            if (OperatingSystem.IsAndroid())
             {
-                role = DebugMode.DebugRole;
+                NavigationItems = new()
+                {
+                    new NavItem("NavbarView.Dashboard", new DashboardViewMobile(), IconData.Dashboard),
+                    new NavItem("NavbarView.Debts", new DebtViewMobile(), IconData.Debt),
+                    new NavItem("NavbarView.Settings", new SettingsViewMobile(), IconData.Cog),
+                };
+
+                CurrentPage = new LoginViewMobile
+                {
+                    DataContext = new LoginViewModel(_navigation)
+                };
+
+                SelectedNavigationItem = null;
             }
             else
             {
-                role = Credentials.Role;
+                NavigationItems = new()
+                {
+                    new NavItem("NavbarView.Dashboard", new DashboardView(), IconData.Dashboard),
+                    new NavItem("NavbarView.Debts", new DebtView(), IconData.Debt),
+                    new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog),
+                };
+
+                CurrentPage = new LoginView
+                {
+                    DataContext = new LoginViewModel(_navigation)
+                };
+
+                SelectedNavigationItem = null;
             }
-
-            NavigationItems = [];
-
-            if (role == Role.Customer)
-            {
-                NavigationItems.Add(new NavItem("NavbarView.Dashboard", new DashboardView(), IconData.Dashboard));
-                NavigationItems.Add(new NavItem("NavbarView.Debts", new DebtView(), IconData.Debt));
-                NavigationItems.Add(new NavItem("NavbarView.Transactions", new TransactionView(), IconData.Cash));
-            }
-
-            if (role == Role.Accountant)
-            {
-                NavigationItems.Add(new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers));
-            }
-
-            if (role == Role.Admin)
-            {
-
-            }
-
-            if (role == Role.Employee)
-            {
-
-            }
-
-            NavigationItems.Add(new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog));
         }
 
-        partial void OnSelectedNavigationItemChanged(NavItem value)
+        // D�LE�IT�: nullable parametr
+        partial void OnSelectedNavigationItemChanged(NavItem? value)
         {
             if (value != null)
-                CurrentPage = value.ViewModel;
+                CurrentPage = value.View; // viz n�e v NavItem
         }
-
-
-
     }
 
     public partial class NavItem : ObservableObject
     {
         [ObservableProperty]
-        private string name;
+        private string name = "";
 
         public string NameKey { get; }
-        public UserControl ViewModel { get; }
+        public UserControl View { get; }   // p�ejmenov�no z ViewModel (proto�e je to View)
         public string Icon { get; }
 
-        public NavItem(string nameKey, UserControl viewModel, string icon)
+        public NavItem(string nameKey, UserControl view, string icon)
         {
             NameKey = nameKey;
-            ViewModel = viewModel;
+            View = view;
             Icon = icon;
 
-            // Prvotní překlad
-            Name = TranslationManager.GetString(NameKey);
-
-            // Přihlášení k odběru změn jazyka
+            UpdateName();
             TranslationManager.LanguageChanged.Add(UpdateName);
         }
 
@@ -132,9 +113,5 @@ namespace CtrlPay.Avalonia.ViewModels
             if (!string.IsNullOrEmpty(NameKey))
                 Name = TranslationManager.GetString(NameKey);
         }
-
-
-
     }
-
 }

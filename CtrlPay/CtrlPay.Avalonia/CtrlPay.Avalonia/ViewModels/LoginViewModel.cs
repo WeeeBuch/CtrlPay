@@ -1,4 +1,4 @@
-﻿using Avalonia;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -48,51 +48,29 @@ public partial class LoginViewModel : ViewModelBase
         if (success) 
         {
             AppLogger.Info($"Register succesfull, closing Login window and starting Main window...");
-            _navigation.ShowMainWindow();
-            _navigation.CloseLogin();
+            _navigation.NavigateToMain();
         }
         else
         {
             AppLogger.Error("Failed to Register", returnModel);
-            Message = TranslationManager.GetErrorCode(returnModel);
         }
     }
 
     [RelayCommand]
     private async Task LoginAsync()
     {
-        AppLogger.Info($"Logining....");
-
-        if (!hasAPI)
-        {
-            AppLogger.Warning("Settings does not have API connection. Summoning API connect window...");
-            var vm = new APIConnectViewModel();
-            var window = new ConnectAPIWindow { DataContext = vm };
-            // TADY CHYBĚLO:
-            vm.CloseAction = () => window.Close();
-
-            var desktop = Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
-            var owner = desktop?.MainWindow;
-
-            if (owner != null)
-            {
-                await window.ShowDialog(owner);
-            }
-        }
+        Credentials.BaseUri = "https://www.action-games.cz/";
 
         ReturnModel<bool> returnModel = await AuthRepo.Login(Username, Password, default);
         bool success = returnModel.Body;
+        Message = $"Body={returnModel.Body} Code={returnModel.ReturnCode}";
 
         if (success)
         {
-            AppLogger.Info($"Loged in succesfully, closing Login window and starting Main window...");
-            _navigation.ShowMainWindow();
-            _navigation.CloseLogin();
+            _navigation.NavigateToMain();
         }
         else
         {
-            AppLogger.Error("Failed to Login", returnModel);
-            Message = TranslationManager.GetErrorCode(returnModel);
         }
     }
 

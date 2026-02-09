@@ -1,5 +1,7 @@
 ﻿using Avalonia.Controls;
+using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Avalonia.Views;
+using CtrlPay.Avalonia.Views.Mobile;
 using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
 using System;
@@ -12,30 +14,44 @@ namespace CtrlPay.Avalonia
 {
     public interface INavigationService
     {
-        void ShowMainWindow();
-        void CloseLogin();
+        void NavigateToMain();
+        void NavigateToLogin();
     }
 
-    public class NavigationService : INavigationService
+    public sealed class NavigationService : INavigationService
     {
-        private Window? _loginWindow;
+        private readonly MainViewModel _main;
 
-        public void RegisterLogin(Window loginWindow)
+        public NavigationService(MainViewModel main)
         {
-            _loginWindow = loginWindow;
+            _main = main;
         }
 
-        public void ShowMainWindow()
+        public void NavigateToMain()
         {
-            var main = new MainWindow();
-            main.Show();
-            AppLogger.Info($"Main window started.");
+            var first = _main.NavigationItems[0];
+            _main.SelectedNavigationItem = first;
+            _main.CurrentPage = first.View; // tady dáváš UserControl (View)
         }
 
-        public void CloseLogin()
+        public void NavigateToLogin()
         {
-            _loginWindow?.Close();
-            AppLogger.Info($"Login window closed.");
+            _main.SelectedNavigationItem = null;
+
+            if (OperatingSystem.IsAndroid())
+            {
+                _main.CurrentPage = new LoginViewMobile
+                {
+                    DataContext = new LoginViewModel(this)
+                };
+            }
+            else
+            {
+                _main.CurrentPage = new LoginView
+                {
+                    DataContext = new LoginViewModel(this)
+                };
+            }
         }
     }
 }

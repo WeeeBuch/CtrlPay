@@ -9,10 +9,10 @@ public partial class LoginWindow : Window
     public LoginWindow()
     {
         InitializeComponent();
-
+        /*
         var navigation = new NavigationService();
         navigation.RegisterLogin(this);
 
-        DataContext = new LoginViewModel(navigation);
+        DataContext = new LoginViewModel(navigation);*/
     }
 }
