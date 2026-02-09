@@ -1,0 +1,35 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="450" d:DesignHeight="300"
+             Width="450" Height="300"
+             x:DataType="local:APIConnectViewModel"
+             Background="{DynamicResource Brush.Background}"
+             x:Class="CtrlPay.Avalonia.APIConnectView">
+  <StackPanel Spacing="20" VerticalAlignment="Center" MaxWidth="400">
+                <TextBlock Text="{DynamicResource SettingsView.API.Title}" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center"/>
+                
+                <Border Background="{DynamicResource Brush.Surface}" Padding="20" CornerRadius="15">
+                    <StackPanel Spacing="10">
+                        <TextBox Text="{Binding ApiUrl}" Watermark="https://api.ctrlpay.cz" />
+                        
+                        <Button Content="{DynamicResource SettingsView.API.Test}" 
+                                Command="{Binding TestConnectionCommand}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                        
+                        <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsTestingConnection}" Height="2" Foreground="{DynamicResource Brush.Accent}"/>
+                        
+                        <TextBlock Text="{Binding StatusBoxText}" IsVisible="{Binding IsErrorVisible}" Foreground="{DynamicResource Color.Error}" HorizontalAlignment="Center"/>
+                        <TextBlock Text="{Binding StatusBoxText}" IsVisible="{Binding IsSuccessVisible}" Foreground="{DynamicResource Color.Success}" HorizontalAlignment="Center"/>
+                        
+                        <Button Content="{DynamicResource OnboardingView.Button.Finish}" 
+                                Command="{Binding FinishCommand}" IsVisible="{Binding IsSuccessVisible}"
+                                HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    </StackPanel>
+
+                    
+                </Border>
+            </StackPanel>
+</UserControl>

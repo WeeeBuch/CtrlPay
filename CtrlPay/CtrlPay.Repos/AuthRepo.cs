@@ -58,7 +58,7 @@ namespace CtrlPay.Repos
             // Pokud worker vrátí null, znamená to, že v catch bloku došlo k chybě (výjimka, špatné URL apod.)
             if (body == null)
             {
-                return new ReturnModel<bool>("A0", ReturnModelSeverityEnum.Error, false)
+                return new ReturnModel<bool>("A9", ReturnModelSeverityEnum.Error, false)
                 {
                     DetailMessage = "API request failed or returned null."
                 };

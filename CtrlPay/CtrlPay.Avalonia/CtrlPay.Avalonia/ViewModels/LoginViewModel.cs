@@ -1,4 +1,6 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.Views;
@@ -32,7 +34,9 @@ public partial class LoginViewModel : ViewModelBase
     [ObservableProperty] private string? regCode;
     [ObservableProperty] private string? regPassword;
     [ObservableProperty] private string? regConfirmPassword;
-   
+
+    // --- API adresa ---
+    private bool hasAPI;
 
     [RelayCommand]
     private async Task Register()
@@ -58,6 +62,24 @@ public partial class LoginViewModel : ViewModelBase
     private async Task LoginAsync()
     {
         AppLogger.Info($"Logining....");
+
+        if (!hasAPI)
+        {
+            AppLogger.Warning("Settings does not have API connection. Summoning API connect window...");
+            var vm = new APIConnectViewModel();
+            var window = new ConnectAPIWindow { DataContext = vm };
+            // TADY CHYBĚLO:
+            vm.CloseAction = () => window.Close();
+
+            var desktop = Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
+            var owner = desktop?.MainWindow;
+
+            if (owner != null)
+            {
+                await window.ShowDialog(owner);
+            }
+        }
+
         ReturnModel<bool> returnModel = await AuthRepo.Login(Username, Password, default);
         bool success = returnModel.Body;
 
@@ -80,5 +102,6 @@ public partial class LoginViewModel : ViewModelBase
     public LoginViewModel(INavigationService navigation)
     {
         _navigation = navigation;
+        hasAPI = Credentials.BaseUri != "";
     }
 }
