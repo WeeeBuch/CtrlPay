@@ -1,5 +1,12 @@
 ﻿using CtrlPay.Entities;
+using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace CtrlPay.Repos;
 
@@ -51,4 +58,22 @@ public class PaymentRepo : BaseRepo<PaymentApiDTO>
         new() { Title = "Debug Debt 8", Amount = 735, Timestamp = DateTime.UtcNow.AddDays(-14), State = StatusEnum.Paid, Id = 8 },
         new() { Title = "Debug Debt 9", Amount = 486, Timestamp = DateTime.UtcNow.AddDays(-15), State = StatusEnum.Cancelled, Id = 9 }
     ];
+
+    public static async Task<ReturnModel?> PayFromCredit(FrontendTransactionDTO payment)
+    {
+        AppLogger.Info($"Paying from credit..., Payment id = {payment.Id}");
+        string response = await HttpWorker.HttpPost("/api/payments/pay-from-credit", new { paymentId = payment.Id });
+        if (response == null)
+        {
+            AppLogger.Error($"Failed to pay from credit for payment id = {payment.Id}. No response from API.");
+            throw new Exception("No response from API.");
+        }
+        var result = JsonSerializer.Deserialize<ReturnModel>(response);
+        if(result.Severity != ReturnModelSeverityEnum.Ok)
+        {
+            AppLogger.Error($"Failed to pay from credit for payment id = {payment.Id}. API returned error: {result.BaseMessage} - {result.DetailMessage}");
+            throw new Exception($"API error: {result.BaseMessage} - {result.DetailMessage}");
+        }
+        return result;
+    }
 }

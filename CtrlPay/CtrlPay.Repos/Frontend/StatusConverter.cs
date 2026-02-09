@@ -13,7 +13,7 @@ namespace CtrlPay.Repos.Frontend
         {
             return paymentStatus switch
             {
-                PaymentStatusEnum.Created => StatusEnum.Pending,
+                PaymentStatusEnum.Unpaid => StatusEnum.Pending,
                 PaymentStatusEnum.WaitingForPayment => StatusEnum.Pending,
                 PaymentStatusEnum.PartiallyPaid => StatusEnum.PartiallyPaid,
                 PaymentStatusEnum.Paid => StatusEnum.Completed,
@@ -40,14 +40,14 @@ namespace CtrlPay.Repos.Frontend
         {
             return status switch
             {
-                StatusEnum.Created => PaymentStatusEnum.Created,
+                StatusEnum.Created => PaymentStatusEnum.Unpaid,
                 StatusEnum.WaitingForPayment => PaymentStatusEnum.WaitingForPayment,
                 StatusEnum.PartiallyPaid => PaymentStatusEnum.PartiallyPaid,
                 StatusEnum.Paid => PaymentStatusEnum.Paid,
                 StatusEnum.Overpaid => PaymentStatusEnum.Overpaid,
                 StatusEnum.Expired => PaymentStatusEnum.Expired,
                 StatusEnum.Cancelled => PaymentStatusEnum.Cancelled,
-                _ => PaymentStatusEnum.Created,
+                _ => PaymentStatusEnum.Unpaid,
             };
         }
 

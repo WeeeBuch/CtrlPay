@@ -8,7 +8,7 @@ namespace CtrlPay.Entities
 {
     public enum PaymentStatusEnum
     {
-        Created = 0,
+        Unpaid = 0,
         WaitingForPayment = 1,
         PartiallyPaid = 2,
         Paid = 3,

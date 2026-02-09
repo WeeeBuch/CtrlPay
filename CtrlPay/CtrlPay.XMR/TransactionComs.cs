@@ -126,7 +126,8 @@ namespace CtrlPay.XMR
                 method = "get_transfers",
                 @params = new
                 {
-                    txId = txId
+                    @in = true,
+                    all_accounts = true
                 }
             };
 
@@ -150,7 +151,7 @@ namespace CtrlPay.XMR
                 throw new Exception($"HTTP error {response.StatusCode}: {body}");
             }
 
-            var rpcResponse = JsonSerializer.Deserialize<RpcResponse<RpcTransfer>>(body,
+            var rpcResponse = JsonSerializer.Deserialize<RpcResponse<RpcTransfersResult>>(body,
                 new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             if (rpcResponse?.Error != null)
@@ -158,19 +159,25 @@ namespace CtrlPay.XMR
                 throw new Exception($"RPC error {rpcResponse.Error.Code}: {rpcResponse.Error.Message}");
             }
 
-            RpcTransfer transfer = rpcResponse.Result;
+            RpcTransfersResult transfers = rpcResponse.Result;
+            List<Transaction> transactions = new List<Transaction>();
 
-            return new Transaction
+            foreach (RpcTransfer t in transfers.In)
             {
-                Address = dbContext.Addresses.FirstOrDefault(a => a.AddressXMR == transfer.Address),
-                TransactionIdXMR = transfer.Txid,
-                Type = TransactionTypeEnum.In,
-                Status = transfer.Locked ? TransactionStatusEnum.Pending : TransactionStatusEnum.Confirmed,
-                Amount = transfer.Amount / 1_000_000_000_000m,
-                Fee = transfer.Fee,
-                Timestamp = DateTimeOffset.FromUnixTimeSeconds(transfer.Timestamp).DateTime,
-                Account = dbContext.Accounts.FirstOrDefault(a => a.Index == transfer.Subaddr_Index.Major)
-            };
+                transactions.Add(new Transaction
+                {
+                    Address = dbContext.Addresses.FirstOrDefault(a => a.AddressXMR == t.Address),
+                    TransactionIdXMR = t.Txid,
+                    Type = TransactionTypeEnum.In,
+                    Status = t.Locked ? TransactionStatusEnum.Pending : TransactionStatusEnum.Confirmed,
+                    Amount = t.Amount / 1_000_000_000_000m,
+                    Fee = t.Fee,
+                    Timestamp = DateTimeOffset.FromUnixTimeSeconds(t.Timestamp).DateTime,
+                    Account = dbContext.Accounts.FirstOrDefault(a => a.Index == t.Subaddr_Index.Major)
+                });
+            }
+
+            return transactions.FirstOrDefault(t => t.TransactionIdXMR == txId);
         }   
     }
 }

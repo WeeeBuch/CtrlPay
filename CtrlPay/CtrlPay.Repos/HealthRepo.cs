@@ -1,4 +1,4 @@
-﻿using CtrlPay.Entities;
+using CtrlPay.Entities;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System;

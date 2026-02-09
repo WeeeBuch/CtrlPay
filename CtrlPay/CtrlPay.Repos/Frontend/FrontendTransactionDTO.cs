@@ -44,7 +44,7 @@ namespace CtrlPay.Repos
         public FrontendTransactionDTO(PaymentApiDTO payment)
         {
             Title = payment.Id.ToString();
-            Amount = payment.PaidAmountXMR;
+            Amount = payment.ExpectedAmountXMR - payment.PaidAmountXMR;
             Timestamp = payment.CreatedAt;
             State = StatusConverter.ConvertPaymentStatusToFrontendStatus(payment.Status);
             Id = payment.Id;

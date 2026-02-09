@@ -68,6 +68,7 @@ namespace CtrlPay.Entities
         public PaymentStatusEnum Status { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime? PaidAt { get; set; }
+        public DateTime? DueDate { get; set; }
 
         public PaymentApiDTO()
         {
@@ -84,6 +85,7 @@ namespace CtrlPay.Entities
             Status = payment.Status;
             CreatedAt = payment.CreatedAt;
             PaidAt = payment.PaidAt ?? default;
+            DueDate = payment.DueDate ?? default;
         }
     }
 }

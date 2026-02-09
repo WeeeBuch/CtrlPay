@@ -1,4 +1,5 @@
 ﻿using CtrlPay.API.BackgroundServices;
+using CtrlPay.Core;
 using CtrlPay.DB;
 using CtrlPay.Entities;
 using Microsoft.AspNetCore.Authorization;
@@ -60,6 +61,43 @@ namespace CtrlPay.API.Controllers
             decimal sum = debts.Sum(d => d.ExpectedAmountXMR - d.PaidAmountXMR);
             return Ok(new ReturnModel<decimal>("P0", ReturnModelSeverityEnum.Ok, sum));
         }
+        [HttpPost]
+        [Route("pay-from-credit")]
+        // POST : api/payments/pay-from-credit
+        public async Task<IActionResult> PayFromCredit([FromBody] PayFromCreditRequest request)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
+            Payment payment = _db.Payments.Where(p => p.Id == request.PaymentId).First();
+            if(user == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+            }
+            if(user.LoyalCustomer == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A6", ReturnModelSeverityEnum.Error)));
+            }
+            if(payment == null)
+            {
+                return NotFound(new ReturnModel("P2", ReturnModelSeverityEnum.Error));
+            }
+            if (payment.Customer != user.LoyalCustomer.Customer)
+            {
+                //neni jeho
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("P3", ReturnModelSeverityEnum.Error)));
+            }
+            if(payment.Status == PaymentStatusEnum.Paid)
+            {
+                return BadRequest(new ReturnModel("P4", ReturnModelSeverityEnum.Warning));
+            }
 
+            await PaymentProcessing.PayFromCredit(user.LoyalCustomer, payment, new CancellationToken());
+            return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));
+        }
+    }
+
+    public class PayFromCreditRequest
+    {
+        public int PaymentId { get; set; }
     }
 }
