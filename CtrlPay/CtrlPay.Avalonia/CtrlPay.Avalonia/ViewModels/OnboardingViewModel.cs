@@ -23,7 +23,7 @@ public partial class OnboardingViewModel : ViewModelBase
     public IEnumerable<TranslationManager.AppLanguage> AvailableLanguages { get; } =
         Enum.GetValues(typeof(TranslationManager.AppLanguage)).Cast<TranslationManager.AppLanguage>();
 
-    [ObservableProperty] private TranslationManager.AppLanguage _selectedLanguage = SettingsManager.Current.Language;
+    [ObservableProperty] private TranslationManager.AppLanguage _selectedLanguage = TranslationManager.GetCurrentSystemLanguage();
 
     partial void OnSelectedLanguageChanged(TranslationManager.AppLanguage value) => TranslationManager.Apply(value);
 
