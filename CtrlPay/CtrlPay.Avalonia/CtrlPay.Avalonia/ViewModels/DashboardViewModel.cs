@@ -25,6 +25,8 @@ public partial class DashboardViewModel : ViewModelBase
     public DashboardViewModel()
     {
         LoadInitialData();
+
+        TotalCredits.HasButton = true;
     }
 
     private void LoadInitialData()

@@ -11,20 +11,16 @@ namespace CtrlPay.Avalonia.ViewModels;
 
 public partial class CounterPieceModel : ViewModelBase
 {
-    [ObservableProperty]
-    private decimal amount;
-
-    [ObservableProperty]
-    private string? titleKey;
-
-    // Tato vlastnost se automaticky aktualizuje, když se změní TitleKey
-    [ObservableProperty]
-    private string? title;
+    [ObservableProperty] private decimal amount;
+    [ObservableProperty] private string? titleKey;
+    [ObservableProperty] private string? title;
+    [ObservableProperty] private bool hasButton;
+    [ObservableProperty] private string? buttonKey;
+    [ObservableProperty] private string? buttonText;
 
     public CounterPieceModel()
     {
-        // Pozor: V produkční aplikaci by bylo lepší použít WeakReference 
-        // nebo zajistit IDisposable pro odhlášení z akce.
+        HasButton = false;
         TranslationManager.LanguageChanged.Add(UpdateTitle);
     }
 
@@ -33,6 +29,11 @@ public partial class CounterPieceModel : ViewModelBase
         if (!string.IsNullOrEmpty(TitleKey))
         {
             Title = TranslationManager.GetString(TitleKey);
+        }
+
+        if (HasButton && !string.IsNullOrEmpty(ButtonKey))
+        {
+            ButtonText = TranslationManager.GetString(ButtonKey);
         }
     }
 
