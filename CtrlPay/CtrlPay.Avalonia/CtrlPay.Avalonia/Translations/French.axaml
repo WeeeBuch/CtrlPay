@@ -27,6 +27,7 @@
 
     <x:String x:Key="CounterPiece.Credits.Title">Solde</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">En attente</x:String>
+    <x:String x:Key="CounterPiece.Button.AddCredits.Title">Ajouter des crédits</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">Terminé</x:String>
     <x:String x:Key="Transaction.Status.Pending">En attente</x:String>
