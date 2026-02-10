@@ -27,6 +27,7 @@
 
     <x:String x:Key="CounterPiece.Credits.Title">Saldo</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Pendiente</x:String>
+    <x:String x:Key="CounterPiece.Button.AddCredits.Title">Recargar créditos</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">Completado</x:String>
     <x:String x:Key="Transaction.Status.Pending">Pendiente</x:String>

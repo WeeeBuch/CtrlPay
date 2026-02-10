@@ -27,6 +27,7 @@
 
     <x:String x:Key="CounterPiece.Credits.Title">Treasure</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Buried Gold</x:String>
+    <x:String x:Key="CounterPiece.Button.AddCredits.Title">Fill the Chest</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">Looted</x:String>
     <x:String x:Key="Transaction.Status.Pending">In the Depths</x:String>
