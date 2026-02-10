@@ -27,6 +27,12 @@ public partial class QrCodeViewModel : ViewModelBase
     [ObservableProperty] private string _title;
     [ObservableProperty] private string _copyString;
 
+    public QrCodeViewModel(string address)
+    {
+        Address = address;
+        QrCodeImage = GenQR();
+    }
+
     public QrCodeViewModel(string address, FrontendTransactionDTO transaction)
     {
         Address = address;
@@ -38,6 +44,18 @@ public partial class QrCodeViewModel : ViewModelBase
     {
         AppLogger.Info($"Generating QR for payment...");
         MoneroTransaction generator = new(Address, (float)tx.Amount, tx.Id.ToString(), "You", tx.Title);
+        return GenQRImage(generator);
+    }
+
+    private Bitmap GenQR()
+    {
+        AppLogger.Info("Generating Blank QR for adding credits...");
+        MoneroTransaction generator = new(Address);
+        return GenQRImage(generator);
+    }
+
+    private Bitmap GenQRImage(MoneroTransaction generator)
+    {
         string payload = generator.ToString();
         CopyString = payload;
 
