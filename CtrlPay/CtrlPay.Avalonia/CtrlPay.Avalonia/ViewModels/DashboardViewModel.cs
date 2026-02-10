@@ -1,4 +1,5 @@
 ﻿using Avalonia.Threading;
+using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
@@ -27,6 +28,7 @@ public partial class DashboardViewModel : ViewModelBase
         LoadInitialData();
 
         TotalCredits.HasButton = true;
+        TotalCredits.ButtonPress = new RelayCommand(() => AddCredits());
     }
 
     private void LoadInitialData()
@@ -109,5 +111,10 @@ public partial class DashboardViewModel : ViewModelBase
         });
 
         AppLogger.Info($"Transactions loaded.");
+    }
+
+    private void AddCredits()
+    {
+        
     }
 }
