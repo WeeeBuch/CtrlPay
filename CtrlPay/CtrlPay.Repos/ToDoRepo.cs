@@ -1,4 +1,4 @@
-using CtrlPay.Entities;
+﻿using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
@@ -10,5 +10,12 @@ namespace CtrlPay.Repos;
 
 public static class ToDoRepo
 {
-    //TODO: Metody do repos: 2
+    public static string GetCreditAddress()
+    {
+        if (DebugMode.SkipCreditAddressLogic) return "DEBUG_address_for_credits";
+
+        // sem dodat kód co vezme nejlépe uloženou adresu a pošlejí
+
+        return "Testing";
+    }
 }

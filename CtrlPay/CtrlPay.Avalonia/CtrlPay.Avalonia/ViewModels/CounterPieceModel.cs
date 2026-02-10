@@ -1,5 +1,6 @@
 ﻿using Avalonia.Threading;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Translations;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,7 @@ public partial class CounterPieceModel : ViewModelBase
     [ObservableProperty] private bool hasButton;
     [ObservableProperty] private string? buttonKey;
     [ObservableProperty] private string? buttonText;
+    [ObservableProperty] public IRelayCommand? buttonPress;
 
     public CounterPieceModel()
     {
