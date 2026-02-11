@@ -73,7 +73,7 @@
                                 Orientation="Horizontal" 
                                 VerticalAlignment="Center" 
                                 HorizontalAlignment="Right">
-                        <TextBlock Text="{Binding Amount, StringFormat=\{0:N2\}}" 
+                        <TextBlock Text="{Binding Amount, StringFormat=\{0:N12\}}" 
                                    FontSize="18" 
                                    FontWeight="Bold"
                                    Foreground="{DynamicResource Brush.Text.Primary}"/>
