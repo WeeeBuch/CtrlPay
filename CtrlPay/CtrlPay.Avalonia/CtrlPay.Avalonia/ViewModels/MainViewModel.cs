@@ -48,7 +48,10 @@ namespace CtrlPay.Avalonia.ViewModels
                 new NavItem("NavbarView.Dashboard", new DashboardView(), IconData.Dashboard),
                 new NavItem("NavbarView.Debts", new DebtView(), IconData.Debt),
                 new NavItem("NavbarView.Transactions", new TransactionView(), IconData.Cash),
-                new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog)
+                new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog),
+
+
+                new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers)
             ];
 
             // Výchozí stránka
