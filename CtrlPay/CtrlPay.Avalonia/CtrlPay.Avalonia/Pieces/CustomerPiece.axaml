@@ -2,11 +2,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewmodel="using:CtrlPay.Avalonia.ViewModel"
+             xmlns:viewmodels="using:CtrlPay.Avalonia.ViewModels"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="200"
              Background="{DynamicResource Color.Background}"
-             x:Class="CtrlPay.Avalonia.CustomerPiece">
-  <StackPanel>
-	  <TextBlock Text="Ahoj"/>
-  </StackPanel>
+             x:Class="CtrlPay.Avalonia.CustomerPiece"
+             x:DataType="viewmodels:CustomerPieceViewModel">
+    <Border Classes="customerCard">
+        <Expander Classes="customerExpander">
+            <Expander.Header>
+                <Grid ColumnDefinitions="Auto, *, Auto">
+                    <Border Grid.Column="0" 
+                            Width="4" 
+                            Height="18" 
+                            Background="{DynamicResource Brush.Accent}" 
+                            CornerRadius="8" 
+                            Margin="0,0,12,0"/>
+                    
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding FullName}" 
+                                   FontWeight="SemiBold" 
+                                   FontSize="15"/>
+                        <TextBlock Text="{Binding Model.Email}" 
+                                   Classes="label" 
+                                   FontSize="11"/>
+                    </StackPanel>
+
+                    <TextBlock Grid.Column="2" 
+                               Text="{Binding Model.Id, StringFormat='#{0}'}" 
+                               Classes="label" 
+                               Margin="10,0,0,0"/>
+                </Grid>
+            </Expander.Header>
+
+            <StackPanel Margin="16,0,16,16" Spacing="8">
+                <Rectangle Height="1" Fill="{DynamicResource Brush.Border}" Margin="0,0,0,8"/>
+                
+                <Grid ColumnDefinitions="80, *">
+                    <TextBlock Grid.Column="0" Text="Město:" Classes="label"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Model.City}" Classes="value"/>
+                </Grid>
+
+                <Grid ColumnDefinitions="80, *">
+                    <TextBlock Grid.Column="0" Text="Telefon:" Classes="label"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Model.Phone}" Classes="value"/>
+                </Grid>
+
+                <Grid ColumnDefinitions="80, *">
+                    <TextBlock Grid.Column="0" Text="Adresa:" Classes="label"/>
+                    <TextBlock Grid.Column="1" Text="{Binding Model.Address}" Classes="value"/>
+                </Grid>
+            </StackPanel>
+        </Expander>
+    </Border>
 </UserControl>
