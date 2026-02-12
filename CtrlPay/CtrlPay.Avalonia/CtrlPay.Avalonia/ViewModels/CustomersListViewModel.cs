@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
+using CtrlPay.Repos.Frontend;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
@@ -17,7 +18,7 @@ public partial class CustomersListViewModel : ViewModelBase
 
     private void LoadCustomers()
     {
-        List<Customer> data = ToDoRepo.GetCustomers();
+        List<FrontendCustomerDTO> data = ToDoRepo.GetCustomers();
 
         Customers.Clear();
 

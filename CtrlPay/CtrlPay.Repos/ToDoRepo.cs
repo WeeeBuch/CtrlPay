@@ -10,7 +10,7 @@ namespace CtrlPay.Repos;
 
 public static class ToDoRepo
 {
-    public static List<Customer> GetCustomers()
+    public static List<FrontendCustomerDTO> GetCustomers()
     {
 
         return [

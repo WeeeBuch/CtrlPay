@@ -1,14 +1,14 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CtrlPay.Entities;
+using CtrlPay.Repos.Frontend;
 using System.Reflection;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
 public partial class CustomerPieceViewModel : ViewModelBase
 {
-    [ObservableProperty] private Customer _model;
+    [ObservableProperty] private FrontendCustomerDTO _model;
 
-    public CustomerPieceViewModel(Customer customer)
+    public CustomerPieceViewModel(FrontendCustomerDTO customer)
     {
         _model = customer;
     }
