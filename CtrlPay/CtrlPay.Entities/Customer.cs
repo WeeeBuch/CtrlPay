@@ -30,6 +30,16 @@ namespace CtrlPay.Entities
         public string? Email { get; set; }
         [Column("telephone")]
         public string? Phone { get; set; }
+        [Column("is_real")]
+        public bool Physical { get; set; }
+        [Column("company")]
+        public string? Company { get; set; }
 
+        public virtual LoyalCustomer? LoyalCustomer { get; set; }
+
+        public Customer()
+        {
+            
+        }
     }
 }

@@ -8,13 +8,12 @@ using System.Threading.Tasks;
 
 namespace CtrlPay.Entities
 {
-    [Table("Roles")]
-    public class Role
+    public enum Role
     {
-        [Column("id")]
-        [Key]
-        public int Id { get; set; }
-        [Column("name")]
-        public string Name { get; set; }
+        Customer = 0,
+        Admin = 1,
+        Accountant = 2,
+        PayrollAcountant = 3,
+        Employee = 4
     }
 }

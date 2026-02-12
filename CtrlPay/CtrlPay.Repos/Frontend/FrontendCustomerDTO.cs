@@ -28,24 +28,7 @@ public class FrontendCustomerDTO
 
     public FrontendCustomerDTO() { }
 
-    public FrontendCustomerDTO(int id, string firstName, string lastName, string title, string address, string city, string postalCode, string email, string phone, bool isLoyal, string username, string accountId, string baseAddress)
-    {
-        Id = id;
-        FirstName = firstName;
-        LastName = lastName;
-        Title = title;
-        Address = address;
-        City = city;
-        PostalCode = postalCode;
-        Email = email;
-        Phone = phone;
-        IsLoyal = isLoyal;
-        Username = username;
-        AccountId = accountId;
-        BaseAddress = baseAddress;
-    }
-
-    public FrontendCustomerDTO(Customer customer, bool isLoyal, string username, string accountId, string baseAddress)
+    public FrontendCustomerDTO(CustomerApiDTO customer)
     {
         Id = customer.Id;
         FirstName = customer.FirstName;
@@ -56,9 +39,29 @@ public class FrontendCustomerDTO
         PostalCode = customer.PostalCode;
         Email = customer.Email;
         Phone = customer.Phone;
-        IsLoyal = isLoyal;
-        Username = username;
-        AccountId = accountId;
-        BaseAddress = baseAddress;
+        IsLoyal = customer.IsLoyal ?? false;
+        Username = customer.Username ?? string.Empty;
+        AccountId = customer.AccountID?.ToString() ?? string.Empty;
+        BaseAddress = customer.BaseAddress ?? string.Empty;
+        City = customer.City;
+        PostalCode = customer.PostalCode;
+        Email = customer.Email;
+        Phone = customer.Phone;
+    }
+
+    public CustomerApiDTO ToApiDTO()
+    {
+        return new CustomerApiDTO
+        {
+            Id = Id,
+            FirstName = FirstName ?? string.Empty,
+            LastName = LastName ?? string.Empty,
+            Title = Title ?? string.Empty,
+            Address = Address ?? string.Empty,
+            City = City ?? string.Empty,
+            PostalCode = PostalCode ?? string.Empty,
+            Email = Email ?? string.Empty,
+            Phone = Phone ?? string.Empty
+        };
     }
 }

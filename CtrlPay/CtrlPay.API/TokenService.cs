@@ -31,7 +31,7 @@ namespace CtrlPay.API
         {
             var userId = user.Id;
             var username = user.Username;
-            var role = user.Role.Name;
+            var role = user.Role.ToString();
             var now = DateTime.UtcNow;
             var expires = now.AddMinutes(_options.Value.AccessTokenMinutes);
 
@@ -76,7 +76,7 @@ namespace CtrlPay.API
         {
             var userId = user.Id;
             var username = user.Username;
-            var role = user.Role.Name;
+            var role = user.Role.ToString();
             var now = DateTime.UtcNow;
             var expires = now.AddMinutes(_options.Value.AccessTokenMinutes);
 
