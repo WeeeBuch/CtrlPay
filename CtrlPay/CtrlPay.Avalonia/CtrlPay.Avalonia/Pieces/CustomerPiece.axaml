@@ -47,6 +47,14 @@
             <StackPanel Margin="16,0,16,16" Spacing="8">
                 <Rectangle Height="1" Fill="{DynamicResource Brush.Border}" Margin="0,0,0,8"/>
                 
+                <Grid ColumnDefinitions="80, *">
+                    <TextBlock Grid.Column="0" Text="Title:" Classes="label"/>
+                    <Panel Grid.Column="1">
+                        <TextBlock Text="{Binding Model.Title}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Model.Title}" IsVisible="{Binding Editing}"/>
+                    </Panel>
+                </Grid>
+
                 <Grid ColumnDefinitions="80, *" IsVisible="{Binding Editing}">
                     <TextBlock Grid.Column="0" Text="Jméno:" Classes="label"/>
                     <Panel Grid.Column="1">
@@ -86,6 +94,16 @@
                         <TextBox Text="{Binding Model.Address}" IsVisible="{Binding Editing}"/>
                     </Panel>
                 </Grid>
+
+                <Grid ColumnDefinitions="80, *">
+                    <TextBlock Grid.Column="0" Text="PSC:" Classes="label"/>
+                    <Panel Grid.Column="1">
+                        <TextBlock Text="{Binding Model.PostalCode}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Model.PostalCode}" IsVisible="{Binding Editing}"/>
+                    </Panel>
+                </Grid>
+
+                
             </StackPanel>
         </Expander>
     </Border>
