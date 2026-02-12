@@ -7,7 +7,7 @@
     </Border>
   </Design.PreviewWith>
 
-    <Style Selector="Border.customerCard">
+ <Style Selector="Border.customerCard">
     <Setter Property="Background" Value="{DynamicResource Brush.Surface}"/>
     <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}"/>
     <Setter Property="BorderThickness" Value="1"/>

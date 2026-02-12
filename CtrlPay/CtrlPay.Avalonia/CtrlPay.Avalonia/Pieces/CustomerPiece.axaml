@@ -3,34 +3,43 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewmodels="using:CtrlPay.Avalonia.ViewModels"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="200"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="500"
              Background="{DynamicResource Color.Background}"
              x:Class="CtrlPay.Avalonia.CustomerPiece"
              x:DataType="viewmodels:CustomerPieceViewModel">
     <Border Classes="customerCard">
         <Expander Classes="customerExpander">
             <Expander.Header>
-                <Grid ColumnDefinitions="Auto, *, Auto">
+                <Grid ColumnDefinitions="Auto, Auto, *, Auto">
                     <Border Grid.Column="0" 
                             Width="4" 
                             Height="18" 
                             Background="{DynamicResource Brush.Accent}" 
-                            CornerRadius="8" 
-                            Margin="0,0,12,0"/>
+                            CornerRadius="8"/>
 
                     <TextBlock Grid.Column="1" 
                                 Text="{Binding Model.Id, StringFormat='#{0}'}" 
                                 Classes="label" 
-                                Margin="10,0,0,0"/>
+                                Margin="10,0,10,0"/>
 
-                    
-                    <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Right">
+                    <StackPanel Grid.Column="2" VerticalAlignment="Center" HorizontalAlignment="Left">
                         <TextBlock Text="{Binding FullName}" 
                                    FontWeight="SemiBold" 
                                    FontSize="15"/>
-                        <TextBlock Text="{Binding Model.Email}" 
-                                   Classes="label" 
-                                   FontSize="11"/>
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="5">
+                        <Button Content="Editovat" 
+                                Command="{Binding StartEditCommand}" 
+                                IsVisible="{Binding !Editing}"/>
+    
+                        <Button Content="Zrušit" 
+                                Command="{Binding CancelEditCommand}" 
+                                IsVisible="{Binding Editing}"/>
+
+                        <Button Content="Uložit" 
+                                Command="{Binding EndEditCommand}" 
+                                IsVisible="{Binding Editing}"/>
                     </StackPanel>
                 </Grid>
             </Expander.Header>
@@ -38,19 +47,44 @@
             <StackPanel Margin="16,0,16,16" Spacing="8">
                 <Rectangle Height="1" Fill="{DynamicResource Brush.Border}" Margin="0,0,0,8"/>
                 
-                <Grid ColumnDefinitions="80, *">
-                    <TextBlock Grid.Column="0" Text="Město:" Classes="label"/>
-                    <TextBlock Grid.Column="1" Text="{Binding Model.City}" Classes="value"/>
+                <Grid ColumnDefinitions="80, *" IsVisible="{Binding Editing}">
+                    <TextBlock Grid.Column="0" Text="Jméno:" Classes="label"/>
+                    <Panel Grid.Column="1">
+                        <TextBlock Text="{Binding Model.FirstName}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Model.FirstName}" IsVisible="{Binding Editing}"/>
+                    </Panel>
+                </Grid>
+
+                <Grid ColumnDefinitions="80, *" IsVisible="{Binding Editing}">
+                    <TextBlock Grid.Column="0" Text="Přijmení:" Classes="label"/>
+                    <Panel Grid.Column="1">
+                        <TextBlock Text="{Binding Model.LastName}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Model.LastName}" IsVisible="{Binding Editing}"/>
+                    </Panel>
                 </Grid>
 
                 <Grid ColumnDefinitions="80, *">
-                    <TextBlock Grid.Column="0" Text="Telefon:" Classes="label"/>
-                    <TextBlock Grid.Column="1" Text="{Binding Model.Phone}" Classes="value"/>
+                    <TextBlock Grid.Column="0" Text="Město:" Classes="label"/>
+                    <Panel Grid.Column="1">
+                        <TextBlock Text="{Binding Model.City}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Model.City}" IsVisible="{Binding Editing}"/>
+                    </Panel>
+                </Grid>
+
+                <Grid ColumnDefinitions="80, *">
+                    <TextBlock Grid.Column="0" Text="Telefon:" Classes="label" VerticalAlignment="Center"/>
+                    <Panel Grid.Column="1">
+                        <TextBlock Text="{Binding Model.Phone}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Model.Phone}" IsVisible="{Binding Editing}"/>
+                    </Panel>
                 </Grid>
 
                 <Grid ColumnDefinitions="80, *">
                     <TextBlock Grid.Column="0" Text="Adresa:" Classes="label"/>
-                    <TextBlock Grid.Column="1" Text="{Binding Model.Address}" Classes="value"/>
+                    <Panel Grid.Column="1">
+                        <TextBlock Text="{Binding Model.Address}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
+                        <TextBox Text="{Binding Model.Address}" IsVisible="{Binding Editing}"/>
+                    </Panel>
                 </Grid>
             </StackPanel>
         </Expander>
