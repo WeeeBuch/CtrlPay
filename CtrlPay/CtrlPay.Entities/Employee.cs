@@ -30,7 +30,7 @@ namespace CtrlPay.Entities
         [Column("phone_number")]
         public string PhoneNumber { get; set; }
         [Column("reports_to")]
-        private int ReportsToId { get; set; }
+        private int? ReportsToId { get; set; }
         [Column("address")]
         public string Address { get; set; }
         [Column("postal_code")]
@@ -44,9 +44,10 @@ namespace CtrlPay.Entities
 
         [ForeignKey(nameof(UserId))]
         public virtual User User { get; set; }
+
         [ForeignKey(nameof(ReportsToId))]
-        public virtual Employee Supervisor { get; set; }
-        public virtual List<Employee> Subordinates { get; set; }
-        public virtual List<WorkRecord> WorkRecords { get; set; }
+        public virtual Employee? Supervisor { get; set; }
+        public virtual List<Employee>? Subordinates { get; set; }
+        public virtual List<WorkRecord>? WorkRecords { get; set; }
     }
 }
