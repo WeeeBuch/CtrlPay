@@ -25,9 +25,19 @@
                 <!-- Login Fields -->
                 <StackPanel x:Name="LoginForm" Spacing="10" IsVisible="{Binding IsLoginSelected}">
                     <TextBox Name="UsernameTextBox" Text="{Binding Username, Mode=TwoWay}"
-                             Watermark="{DynamicResource LoginView.Watermark.Username}" />
+                             Watermark="{DynamicResource LoginView.Watermark.Username}">
+                        <TextBox.KeyBindings>
+                            <KeyBinding Gesture="Enter" 
+                                        Command="{Binding LoginCommand}" />
+                        </TextBox.KeyBindings>                    
+                    </TextBox>
                     <TextBox Name="PasswordTextBox" Text="{Binding Password, Mode=TwoWay}"
-                             Watermark="{DynamicResource LoginView.Watermark.Password}" PasswordChar="#"/>
+                             Watermark="{DynamicResource LoginView.Watermark.Password}" PasswordChar="#">
+                        <TextBox.KeyBindings>
+                            <KeyBinding Gesture="Enter" 
+                                        Command="{Binding LoginCommand}" />
+                        </TextBox.KeyBindings>                    
+                    </TextBox>
                     <Button Name="LoginButton" Content="{DynamicResource LoginView.Button.Login}"
                             FontWeight="Bold" Command="{Binding LoginCommand}"/>
                 </StackPanel>
@@ -36,13 +46,33 @@
                 <StackPanel x:Name="RegisterForm" Spacing="10" 
                             IsVisible="{Binding !IsLoginSelected}">
                     <TextBox Name="RegUsernameTextBox" Text="{Binding RegUsername, Mode=TwoWay}"
-                             Watermark="{DynamicResource LoginView.Watermark.Username}" />
+                             Watermark="{DynamicResource LoginView.Watermark.Username}" >
+                        <TextBox.KeyBindings>
+                            <KeyBinding Gesture="Enter" 
+                                        Command="{Binding RegisterCommand}" />
+                        </TextBox.KeyBindings>                    
+                    </TextBox>
                     <TextBox Name="RegCodeTextBox" Text="{Binding RegCode, Mode=TwoWay}"
-                             Watermark="{DynamicResource LoginView.Watermark.Code}" />
+                             Watermark="{DynamicResource LoginView.Watermark.Code}" >
+                        <TextBox.KeyBindings>
+                            <KeyBinding Gesture="Enter" 
+                                        Command="{Binding RegisterCommand}" />
+                        </TextBox.KeyBindings>                    
+                    </TextBox>
                     <TextBox Name="RegPasswordTextBox" Text="{Binding RegPassword, Mode=TwoWay}"
-                             Watermark="{DynamicResource LoginView.Watermark.Password}" PasswordChar="#"/>
+                             Watermark="{DynamicResource LoginView.Watermark.Password}" PasswordChar="#">
+                        <TextBox.KeyBindings>
+                            <KeyBinding Gesture="Enter" 
+                                        Command="{Binding RegisterCommand}" />
+                        </TextBox.KeyBindings>                    
+                    </TextBox>
                     <TextBox Name="RegConfirmPasswordTextBox" Text="{Binding RegConfirmPassword, Mode=TwoWay}"
-                             Watermark="{DynamicResource LoginView.Watermark.ConfirmPassword}" PasswordChar="#"/>
+                             Watermark="{DynamicResource LoginView.Watermark.ConfirmPassword}" PasswordChar="#">
+                        <TextBox.KeyBindings>
+                            <KeyBinding Gesture="Enter" 
+                                        Command="{Binding RegisterCommand}" />
+                        </TextBox.KeyBindings>                    
+                    </TextBox>
                     <Button Name="RegisterButton" Content="{DynamicResource LoginView.Button.Register}"
                             FontWeight="Bold" Command="{Binding RegisterCommand}"/>
                 </StackPanel>
