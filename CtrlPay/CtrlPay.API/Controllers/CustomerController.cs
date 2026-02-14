@@ -24,7 +24,7 @@ namespace CtrlPay.API.Controllers
         // POST : api/customers/create
         public IActionResult CreateCustomer([FromBody] CustomerApiDTO request)
         {
-            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
+            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
             if (role != Role.Accountant || role != Role.Admin)
             {
                 return Forbid();
@@ -50,7 +50,7 @@ namespace CtrlPay.API.Controllers
         // GET : api/customers/all
         public IActionResult GetCustomers()
         {
-            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
+            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
             if (role != Role.Accountant || role != Role.Admin)
             {
                 return Forbid();
@@ -60,14 +60,14 @@ namespace CtrlPay.API.Controllers
             {
                 customers.Add(c.LoyalCustomer == null ? new CustomerApiDTO(c) : new CustomerApiDTO(c, c.LoyalCustomer, c.LoyalCustomer.Users.First()));
             });
-            return Ok(customers);
+            return Ok(new ReturnModel<List<CustomerApiDTO>>("Z0", ReturnModelSeverityEnum.Ok, customers));
         }
 
         [HttpPost("api/customers/edit")]
         // POST : api/customers/edit
         public IActionResult EditCustomer([FromBody] CustomerApiDTO request)
         {
-            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
+            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
             if (role != Role.Accountant || role != Role.Admin)
             {
                 return Forbid();
@@ -98,7 +98,7 @@ namespace CtrlPay.API.Controllers
         // DELETE : api/customers/delete/{id}
         public IActionResult DeleteCustomer(int id)
         {
-            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
+            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
             if (role != Role.Accountant || role != Role.Admin)
             {
                 return Forbid();
@@ -117,7 +117,7 @@ namespace CtrlPay.API.Controllers
         // POST : api/customers/promote/{id}
         public IActionResult PromoteToLoyalCustomer(int id)
         {
-            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
+            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
             if (role != Role.Accountant || role != Role.Admin)
             {
                 return Forbid();

@@ -29,6 +29,8 @@ public static class DebugMode
     // One time address generation skip
     public static bool SkipOneTimeAddressGeneration { get; set; } = false;
 
+    public static bool MockCustomers { get; set; } = false;
+
     public static List<DebugProperty> GetDebugProperties()
     {
         return typeof(DebugMode)

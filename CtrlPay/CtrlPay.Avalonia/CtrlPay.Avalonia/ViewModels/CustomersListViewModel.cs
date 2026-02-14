@@ -18,7 +18,7 @@ public partial class CustomersListViewModel : ViewModelBase
 
     private void LoadCustomers()
     {
-        List<FrontendCustomerDTO> data = ToDoRepo.GetCustomers();
+        List<FrontendCustomerDTO> data = Repos.CustomerRepo.GetCustomers();
 
         Customers.Clear();
 
