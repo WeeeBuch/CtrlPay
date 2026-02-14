@@ -27,6 +27,7 @@
 
     <x:String x:Key="CounterPiece.Credits.Title">余额</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">待处理</x:String>
+    <x:String x:Key="CounterPiece.Button.AddCredits.Title">充值积分</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">已完成</x:String>
     <x:String x:Key="Transaction.Status.Pending">待处理</x:String>

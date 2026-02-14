@@ -33,6 +33,7 @@
     <!-- Credit Counter Piece -->
     <x:String x:Key="CounterPiece.Credits.Title">CounterPiece.Credits.Title</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">CounterPiece.Pending.Title</x:String>
+    <x:String x:Key="CounterPiece.Button.AddCredits.Title">CounterPiece.Button.AddCredits.Title</x:String>
 
     <!-- Transaction Statuses -->
     <x:String x:Key="Transaction.Status.Completed">Transaction.Status.Completed</x:String>

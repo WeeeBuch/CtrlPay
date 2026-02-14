@@ -1,4 +1,4 @@
-﻿using CtrlPay.Repos.Frontend;
+using CtrlPay.Repos.Frontend;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;

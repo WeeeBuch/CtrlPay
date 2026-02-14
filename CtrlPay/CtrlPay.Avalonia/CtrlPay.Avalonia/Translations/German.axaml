@@ -27,6 +27,7 @@
 
     <x:String x:Key="CounterPiece.Credits.Title">Guthaben</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Ausstehend</x:String>
+    <x:String x:Key="CounterPiece.Button.AddCredits.Title">Guthaben aufladen</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">Abgeschlossen</x:String>
     <x:String x:Key="Transaction.Status.Pending">Ausstehend</x:String>
