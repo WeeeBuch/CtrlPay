@@ -27,6 +27,7 @@
 
     <x:String x:Key="CounterPiece.Credits.Title">残高</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">保留中</x:String>
+    <x:String x:Key="CounterPiece.Button.AddCredits.Title">クレジットをチャージ</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">完了</x:String>
     <x:String x:Key="Transaction.Status.Pending">保留中</x:String>

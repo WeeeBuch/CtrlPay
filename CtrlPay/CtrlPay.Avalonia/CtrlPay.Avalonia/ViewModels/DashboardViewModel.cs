@@ -1,4 +1,6 @@
-﻿using Avalonia.Threading;
+﻿using Avalonia.Controls;
+using Avalonia.Threading;
+using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
@@ -25,6 +27,9 @@ public partial class DashboardViewModel : ViewModelBase
     public DashboardViewModel()
     {
         LoadInitialData();
+
+        TotalCredits.HasButton = true;
+        TotalCredits.ButtonPress = new RelayCommand(() => AddCredits());
     }
 
     private void LoadInitialData()
@@ -107,5 +112,22 @@ public partial class DashboardViewModel : ViewModelBase
         });
 
         AppLogger.Info($"Transactions loaded.");
+    }
+
+    private async Task AddCredits()
+    {
+        string addr = await AccountRepo.GetCreditAddress();
+
+        AppLogger.Info($"Preparing QR and QR window for credits...");
+        var window = new QrCodeWindow
+        {
+            Content = new QrCodeView() { DataContext = new QrCodeViewModel(addr) },
+            SizeToContent = SizeToContent.WidthAndHeight,
+            CanResize = false,
+            WindowStartupLocation = WindowStartupLocation.CenterOwner
+        };
+
+        AppLogger.Info($"Showing QR window...");
+        window.Show();
     }
 }

@@ -1,4 +1,4 @@
-﻿using CtrlPay.Entities;
+using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
 using System.Text.Json;
 
@@ -52,7 +52,7 @@ public abstract class BaseRepo<TApiDto>
     protected static async Task LoadSumFromApi(string url, CancellationToken ct)
     {
         AppLogger.Info($"Getting Sums from API...");
-        string? json = await HttpWorker.HttpGet(url, true, ct);
+        string? json = await HttpWorker.HttpGet(url, ct);
         if (string.IsNullOrWhiteSpace(json))
         {
             AppLogger.Warning($"Get response was NULL.");

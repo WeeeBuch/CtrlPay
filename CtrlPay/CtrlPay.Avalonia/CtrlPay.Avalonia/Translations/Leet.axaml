@@ -27,6 +27,7 @@
 
     <x:String x:Key="CounterPiece.Credits.Title">455375</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Qu3u3d</x:String>
+    <x:String x:Key="CounterPiece.Button.AddCredits.Title">4DD_CR3D175</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">D0N3</x:String>
     <x:String x:Key="Transaction.Status.Pending">W417</x:String>

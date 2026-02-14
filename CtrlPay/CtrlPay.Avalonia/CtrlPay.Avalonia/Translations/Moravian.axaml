@@ -27,6 +27,7 @@
 
     <x:String x:Key="CounterPiece.Credits.Title">Mám u sebe</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Na cestě</x:String>
+    <x:String x:Key="CounterPiece.Button.AddCredits.Title">Přisypat kredity</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">Hotovo</x:String>
     <x:String x:Key="Transaction.Status.Pending">Eště sa čeká</x:String>
