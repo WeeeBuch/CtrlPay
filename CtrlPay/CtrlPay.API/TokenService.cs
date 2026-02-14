@@ -31,7 +31,7 @@ namespace CtrlPay.API
         {
             var userId = user.Id;
             var username = user.Username;
-            var role = user.Role.Name;
+            var role = user.Role;
             var now = DateTime.UtcNow;
             var expires = now.AddMinutes(_options.Value.AccessTokenMinutes);
 
@@ -39,7 +39,7 @@ namespace CtrlPay.API
         {
             new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
             new Claim(JwtRegisteredClaimNames.UniqueName, username),
-            new Claim(ClaimTypes.Role, role),
+            new Claim(ClaimTypes.Role, role.ToString()),
             new Claim("IsTotp", isTotp ? "true" : "false")
         };
 
@@ -64,7 +64,7 @@ namespace CtrlPay.API
                 ExpiresAtUtc = expires,
                 UserId = userId,
                 Username = username,
-                Role = role,
+                Role = role.ToString(),
                 Issuer = _options.Value.Issuer,
                 Audience = _options.Value.Audience,
                 RefreshToken = refreshToken.Token,
@@ -76,7 +76,7 @@ namespace CtrlPay.API
         {
             var userId = user.Id;
             var username = user.Username;
-            var role = user.Role.Name;
+            var role = user.Role;
             var now = DateTime.UtcNow;
             var expires = now.AddMinutes(_options.Value.AccessTokenMinutes);
 
@@ -84,7 +84,7 @@ namespace CtrlPay.API
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
                 new Claim(JwtRegisteredClaimNames.UniqueName, username),
-                new Claim(ClaimTypes.Role, role),
+                new Claim(ClaimTypes.Role, role.ToString()),
                 new Claim("IsTotp", isTotp ? "true" : "false")
             };
 
@@ -107,7 +107,7 @@ namespace CtrlPay.API
                 ExpiresAtUtc = expires,
                 UserId = userId,
                 Username = username,
-                Role = role,
+                Role = role.ToString(),
                 Issuer = _options.Value.Issuer,
                 Audience = _options.Value.Audience,
                 RefreshToken = refreshToken,

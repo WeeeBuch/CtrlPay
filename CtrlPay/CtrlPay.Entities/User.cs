@@ -16,8 +16,8 @@ namespace CtrlPay.Entities
         [Column("id")]
         [Key]
         public int Id { get; set; }
-        [Column("role_id")]
-        private int RoleId { get; set; }
+        [Column("role")]
+        public Role Role { get; set; }
         [Column("loyal_customer_id")]
         private int? LoyalCustomerId { get; set; }
         [Column("username")]
@@ -41,8 +41,6 @@ namespace CtrlPay.Entities
                    : JsonSerializer.Deserialize<string[]>(TwoFactorRecoveryCodesJson)!;
             set => TwoFactorRecoveryCodesJson = JsonSerializer.Serialize(value);
         }
-        [ForeignKey("RoleId")]
-        public virtual Role Role { get; set; }
         [ForeignKey("LoyalCustomerId")]
         public virtual LoyalCustomer? LoyalCustomer { get; set; }
 
@@ -51,7 +49,7 @@ namespace CtrlPay.Entities
             Username = username;
             PasswordHash = passwordHash;
             PasswordSalt = passwordSalt;
-            RoleId = role.Id;
+            Role = role;
         }
         public User()
         {
