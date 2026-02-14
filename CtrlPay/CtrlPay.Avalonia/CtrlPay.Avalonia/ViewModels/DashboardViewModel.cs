@@ -114,9 +114,9 @@ public partial class DashboardViewModel : ViewModelBase
         AppLogger.Info($"Transactions loaded.");
     }
 
-    private void AddCredits()
+    private async Task AddCredits()
     {
-        string addr = AccountRepo.GetCreditAddress();
+        string addr = await AccountRepo.GetCreditAddress();
 
         AppLogger.Info($"Preparing QR and QR window for credits...");
         var window = new QrCodeWindow

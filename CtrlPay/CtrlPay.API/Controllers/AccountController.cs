@@ -69,7 +69,7 @@ namespace CtrlPay.API.Controllers
                 return BadRequest(new ReturnModel("C1", ReturnModelSeverityEnum.Error));
             }
             string creditAddress = loyalCustomer.Account.BaseAddress.AddressXMR;
-            return Ok(new ReturnModel<string>("C1", ReturnModelSeverityEnum.Ok, creditAddress));
+            return Ok(new ReturnModel<string>("C0", ReturnModelSeverityEnum.Ok, creditAddress));
         }
     }
 
