@@ -51,6 +51,23 @@ namespace CtrlPay.Core
             await dbContext.SaveChangesAsync(cancellationToken);
             return;
         }
+        public static async Task CompleteTransactionsToPrimaryAddress(CancellationToken cancellationToken)
+        {
+            CtrlPayDbContext dbContext = new CtrlPayDbContext();
+
+            List<Transaction> transactionsUnpaired = dbContext.Transactions.Where(t => t.Status == TransactionStatusEnum.Confirmed).ToList();
+
+            foreach (var transaction in transactionsUnpaired)
+            {
+                if (transaction.Address.IsPrimary)
+                {
+                    transaction.Status = TransactionStatusEnum.Completed;
+                }
+            }
+            await dbContext.SaveChangesAsync(cancellationToken);
+            return;
+
+        }
         public static async Task PayFromCredit(LoyalCustomer customer, Payment pment, CancellationToken cancellationToken)
         {
             Payment payment = _db.Payments.Where(p => p.Id == pment.Id).First();
