@@ -53,7 +53,7 @@ namespace CtrlPay.API.Controllers
         public IActionResult GetCustomers()
         {
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
-            if (role != Role.Accountant || role != Role.Admin)
+            if (role != Role.Accountant && role != Role.Admin)
             {
                 return Forbid();
             }
