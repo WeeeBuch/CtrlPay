@@ -100,8 +100,19 @@ public class CustomerRepo
 
     public static async Task UpdateCustomer(FrontendCustomerDTO cust)
     {
-        AppLogger.Info($"Deleting customer from API...");
+        AppLogger.Info($"Updating customer in API...");
         string? json = await HttpWorker.HttpPost($"api/customers/edit", cust.ToApiDTO(), true, default);
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            AppLogger.Warning($"Get response was NULL.");
+            return;
+        }
+    }
+
+    public static async Task AddCustomer(FrontendCustomerDTO cust)
+    {
+        AppLogger.Info($"Adding customer to API...");
+        string? json = await HttpWorker.HttpPost($"api/customers/create", cust.ToApiDTO(), true, default);
         if (string.IsNullOrWhiteSpace(json))
         {
             AppLogger.Warning($"Get response was NULL.");

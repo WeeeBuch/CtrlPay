@@ -35,7 +35,7 @@ public partial class CustomerPieceViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public void EndEdit()
+    public async Task EndEdit()
     {
         Editing = false;
         Model.EndEdit();
@@ -44,7 +44,7 @@ public partial class CustomerPieceViewModel : ViewModelBase
         Model = null!;
         Model = temp;
 
-        CustomerRepo.UpdateCustomer(Model);
+        await CustomerRepo.UpdateCustomer(Model);
         OnPropertyChanged(nameof(FullName));
     }
 

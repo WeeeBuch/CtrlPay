@@ -27,7 +27,7 @@ namespace CtrlPay.API.Controllers
         public IActionResult CreateCustomer([FromBody] CustomerApiDTO request)
         {
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
-            if (role != Role.Accountant || role != Role.Admin)
+            if (role != Role.Accountant && role != Role.Admin)
             {
                 return Forbid();
             }
@@ -70,7 +70,7 @@ namespace CtrlPay.API.Controllers
         public IActionResult EditCustomer([FromBody] CustomerApiDTO request)
         {
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
-            if (role != Role.Accountant || role != Role.Admin)
+            if (role != Role.Accountant && role != Role.Admin)
             {
                 return Forbid();
             }
@@ -101,7 +101,7 @@ namespace CtrlPay.API.Controllers
         public IActionResult DeleteCustomer(int id)
         {
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
-            if (role != Role.Accountant || role != Role.Admin)
+            if (role != Role.Accountant && role != Role.Admin)
             {
                 return Forbid();
             }
@@ -120,7 +120,7 @@ namespace CtrlPay.API.Controllers
         public IActionResult PromoteToLoyalCustomer(int id)
         {
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
-            if (role != Role.Accountant || role != Role.Admin)
+            if (role != Role.Accountant && role != Role.Admin)
             {
                 return Forbid();
             }
