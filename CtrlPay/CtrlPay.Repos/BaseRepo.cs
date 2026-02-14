@@ -64,7 +64,7 @@ public abstract class BaseRepo<TApiDto>
             AppLogger.Info($"Deserializing...");
             // Tady sjednocujeme parsování přes ReturnModel
             var result = JsonSerializer.Deserialize<ReturnModel<decimal>>(json, SerializerOptions);
-            SumCache = result?.Body ?? 0;
+            SumCache = result?.Body ?? -1;
         }
         catch (Exception ex)
         {

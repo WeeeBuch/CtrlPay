@@ -6,6 +6,7 @@ using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using static CtrlPay.Avalonia.Styles.ThemeManager;
 
@@ -104,5 +105,26 @@ public static class TranslationManager
         }
 
         return $"Not implemented showing base message: {returnModel.BaseMessage}";
+    }
+
+    public static AppLanguage GetCurrentSystemLanguage()
+    {
+        // Získá ISO kód jazyka (např. "en", "cs", "sk")
+        string isoCode = CultureInfo.CurrentUICulture.TwoLetterISOLanguageName.ToLower();
+
+        return isoCode switch
+        {
+            "en" => AppLanguage.English,
+            "cs" => AppLanguage.Czech,
+            "de" => AppLanguage.German,
+            "fr" => AppLanguage.French,
+            "ja" => AppLanguage.Japanese,
+            "zh" => AppLanguage.Mandarin,
+            "ru" => AppLanguage.Russian,
+            "es" => AppLanguage.Spanish,
+            "pl" => AppLanguage.Polish,
+            "sk" => AppLanguage.Slovak,
+            _ => AppLanguage.English
+        };
     }
 }

@@ -26,9 +26,7 @@ namespace CtrlPay.Avalonia
             AppLogger.Info($"Starting app. Version: {Assembly.GetExecutingAssembly().GetName().Version}");
 
             IsConfigured = !SettingsManager.Init();
-            ThemeManager.Apply(SettingsManager.Current.Theme);
-            TranslationManager.Apply(SettingsManager.Current.Language);
-            Credentials.BaseUri = SettingsManager.Current.ConnectionString;
+            TranslationManager.Apply(TranslationManager.GetCurrentSystemLanguage());
             AvaloniaXamlLoader.Load(this);
         }
 
@@ -102,6 +100,11 @@ namespace CtrlPay.Avalonia
                     singleView.MainView = new MainView { DataContext = new MainViewModel() };
                 });
             }
+
+            ThemeManager.Apply(SettingsManager.Current.Theme);
+            TranslationManager.Apply(SettingsManager.Current.Language);
+            Credentials.BaseUri = SettingsManager.Current.ConnectionString;
+
             base.OnFrameworkInitializationCompleted();
         }
 
