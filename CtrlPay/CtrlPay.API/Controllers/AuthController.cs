@@ -105,13 +105,9 @@ namespace CtrlPay.API.Controllers
             return Ok(newJwt);
         }
         [HttpPost("register")]
-        public IActionResult Register(string username, string password, string roleName)
+        public IActionResult Register(string username, string password, string role)
         {
-            // najdeme roli
-            var role = _db.Roles.FirstOrDefault(r => r.Name == roleName);
-            if (role == null)
-                return BadRequest("Invalid role.");
-            var result = AuthLogic.AddUser(username, password, role);
+            var result = AuthLogic.AddUser(username, password, (Role)int.Parse(role));
             if (result.Severity != ReturnModelSeverityEnum.Ok)
                 return BadRequest(result);
             return Ok(result);
