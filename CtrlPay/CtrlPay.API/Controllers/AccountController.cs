@@ -9,7 +9,7 @@ using System.Net;
 namespace CtrlPay.API.Controllers
 {
     [ApiController]
-    [Route("account")]
+    [Route("api/account")]
     [Authorize]
     public class AccountController : ControllerBase
     {
@@ -23,7 +23,7 @@ namespace CtrlPay.API.Controllers
 
         [HttpPost]
         [Route("one-time-address")]
-        // POST : account/one-time-address
+        // POST : api/account/one-time-address
         public IActionResult OneTimeAddress([FromBody] OneTimeAddressRequest request)
         {
             var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
@@ -52,6 +52,25 @@ namespace CtrlPay.API.Controllers
             return Created("", new ReturnModel<string>("C0", ReturnModelSeverityEnum.Ok, oneTimeAddress.AddressXMR));
         }
 
+        [HttpGet]
+        [Route("credit-address")]
+        // GET : api/account/credit-address
+        public IActionResult CreditAddress()
+        {
+            var userId = User.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+            var user = _db.Users.Where(u => u.Id.ToString() == userId).First();
+            if (user == null)
+            {
+                return Unauthorized(new ReturnModel("A3", ReturnModelSeverityEnum.Error));
+            }
+            var loyalCustomer = user.LoyalCustomer;
+            if (loyalCustomer == null)
+            {
+                return BadRequest(new ReturnModel("C1", ReturnModelSeverityEnum.Error));
+            }
+            string creditAddress = loyalCustomer.Account.BaseAddress.AddressXMR;
+            return Ok(new ReturnModel<string>("C1", ReturnModelSeverityEnum.Ok, creditAddress));
+        }
     }
 
     public class OneTimeAddressRequest

@@ -10,7 +10,7 @@ public class HttpWorker
     // Statická instance, aby nedocházelo k vyčerpání socketů
     private static readonly HttpClient _httpClient = new(new HttpClientHandler { UseProxy = false });
 
-    public static async Task<string?> HttpGet(string url, CancellationToken cancellationToken = default)
+    public static async Task<string?> HttpGet(string url, bool requireAuth = true, CancellationToken cancellationToken = default)
     {
         if (url[0] != '/')
         {
@@ -21,7 +21,11 @@ public class HttpWorker
         {
             AppLogger.Info($"Praparing http GET...");
             using var request = new HttpRequestMessage(HttpMethod.Get, $"{Credentials.BaseUri}{url}");
-            request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
+            if (requireAuth)
+            {
+                AppLogger.Info($"Adding authorization...");
+                request.Headers.Authorization = new AuthenticationHeaderValue("Bearer", Credentials.JwtAccessToken);
+            }
 
             AppLogger.Info($"Calling API...");
             using var response = await _httpClient.SendAsync(request, cancellationToken);

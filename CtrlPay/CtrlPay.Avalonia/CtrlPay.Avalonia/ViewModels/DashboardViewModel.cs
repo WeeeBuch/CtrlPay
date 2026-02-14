@@ -116,7 +116,7 @@ public partial class DashboardViewModel : ViewModelBase
 
     private void AddCredits()
     {
-        string addr = ToDoRepo.GetCreditAddress();
+        string addr = AccountRepo.GetCreditAddress();
 
         AppLogger.Info($"Preparing QR and QR window for credits...");
         var window = new QrCodeWindow
