@@ -1,6 +1,7 @@
 ﻿using CtrlPay.Entities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Numerics;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace CtrlPay.Repos.Frontend;
 
-public class FrontendCustomerDTO
+public class FrontendCustomerDTO : IEditableObject
 {
     public int Id {  get; set; }
     public string? FirstName { get; set; }
@@ -63,5 +64,22 @@ public class FrontendCustomerDTO
             Email = Email ?? string.Empty,
             Phone = Phone ?? string.Empty
         };
+    }
+
+    private FrontendCustomerDTO oldVersion;
+
+    public void BeginEdit()
+    {
+        oldVersion = this;
+    }
+
+    public void CancelEdit()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void EndEdit()
+    {
+        oldVersion = null!;
     }
 }
