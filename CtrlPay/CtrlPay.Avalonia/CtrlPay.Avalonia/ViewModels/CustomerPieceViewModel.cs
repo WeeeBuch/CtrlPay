@@ -23,11 +23,13 @@ public partial class CustomerPieceViewModel : ViewModelBase
     public void StartEdit()
     {
         Editing = true;
+        Model.BeginEdit();
     }
     [RelayCommand]
     public async Task DeleteEditCommand()
     {
         Editing = false;
+        Model.EndEdit();
         await CustomerRepo.DeleteCustomer(Model);
         UpdateHandler.HandleUpdatedCustomers();
     }
@@ -36,10 +38,13 @@ public partial class CustomerPieceViewModel : ViewModelBase
     public void EndEdit()
     {
         Editing = false;
+        Model.EndEdit();
+
         var temp = Model;
         Model = null!;
         Model = temp;
 
+        CustomerRepo.UpdateCustomer(Model);
         OnPropertyChanged(nameof(FullName));
     }
 
@@ -47,6 +52,7 @@ public partial class CustomerPieceViewModel : ViewModelBase
     public void CancelEdit()
     {
         Editing = false;
+        Model.CancelEdit();
         OnPropertyChanged(nameof(FullName));
     }
 }
