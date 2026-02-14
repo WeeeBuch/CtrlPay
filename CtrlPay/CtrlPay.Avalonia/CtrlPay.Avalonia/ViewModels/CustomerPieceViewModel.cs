@@ -27,6 +27,10 @@ public partial class CustomerPieceViewModel : ViewModelBase
     public void EndEdit()
     {
         Editing = false;
+        var temp = Model;
+        Model = null!;
+        Model = temp;
+
         OnPropertyChanged(nameof(FullName));
     }
 

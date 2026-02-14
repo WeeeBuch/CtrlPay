@@ -51,7 +51,7 @@
                     <TextBlock Grid.Column="0" Text="Title:" Classes="label"/>
                     <Panel Grid.Column="1">
                         <TextBlock Text="{Binding Model.Title}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Model.Title}" IsVisible="{Binding Editing}"/>
+                        <TextBox Text="{Binding Model.Title, UpdateSourceTrigger=PropertyChanged}" IsVisible="{Binding Editing}"/>
                     </Panel>
                 </Grid>
 
@@ -59,7 +59,7 @@
                     <TextBlock Grid.Column="0" Text="Jméno:" Classes="label"/>
                     <Panel Grid.Column="1">
                         <TextBlock Text="{Binding Model.FirstName}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Model.FirstName}" IsVisible="{Binding Editing}"/>
+                        <TextBox Text="{Binding Model.FirstName, UpdateSourceTrigger=PropertyChanged}" IsVisible="{Binding Editing}"/>
                     </Panel>
                 </Grid>
 
@@ -67,7 +67,7 @@
                     <TextBlock Grid.Column="0" Text="Přijmení:" Classes="label"/>
                     <Panel Grid.Column="1">
                         <TextBlock Text="{Binding Model.LastName}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Model.LastName}" IsVisible="{Binding Editing}"/>
+                        <TextBox Text="{Binding Model.LastName, UpdateSourceTrigger=PropertyChanged}" IsVisible="{Binding Editing}"/>
                     </Panel>
                 </Grid>
 
@@ -75,7 +75,7 @@
                     <TextBlock Grid.Column="0" Text="Město:" Classes="label"/>
                     <Panel Grid.Column="1">
                         <TextBlock Text="{Binding Model.City}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Model.City}" IsVisible="{Binding Editing}"/>
+                        <TextBox Text="{Binding Model.City, UpdateSourceTrigger=PropertyChanged}" IsVisible="{Binding Editing}"/>
                     </Panel>
                 </Grid>
 
@@ -83,7 +83,7 @@
                     <TextBlock Grid.Column="0" Text="Telefon:" Classes="label" VerticalAlignment="Center"/>
                     <Panel Grid.Column="1">
                         <TextBlock Text="{Binding Model.Phone}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Model.Phone}" IsVisible="{Binding Editing}"/>
+                        <TextBox Text="{Binding Model.Phone, UpdateSourceTrigger=PropertyChanged}" IsVisible="{Binding Editing}"/>
                     </Panel>
                 </Grid>
 
@@ -91,7 +91,7 @@
                     <TextBlock Grid.Column="0" Text="Adresa:" Classes="label"/>
                     <Panel Grid.Column="1">
                         <TextBlock Text="{Binding Model.Address}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Model.Address}" IsVisible="{Binding Editing}"/>
+                        <TextBox Text="{Binding Model.Address, UpdateSourceTrigger=PropertyChanged}" IsVisible="{Binding Editing}"/>
                     </Panel>
                 </Grid>
 
@@ -99,7 +99,7 @@
                     <TextBlock Grid.Column="0" Text="PSC:" Classes="label"/>
                     <Panel Grid.Column="1">
                         <TextBlock Text="{Binding Model.PostalCode}" IsVisible="{Binding !Editing}" Classes="value" VerticalAlignment="Center"/>
-                        <TextBox Text="{Binding Model.PostalCode}" IsVisible="{Binding Editing}"/>
+                        <TextBox Text="{Binding Model.PostalCode, UpdateSourceTrigger=PropertyChanged}" IsVisible="{Binding Editing}"/>
                     </Panel>
                 </Grid>
 
