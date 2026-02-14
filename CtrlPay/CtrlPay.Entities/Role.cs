@@ -13,7 +13,6 @@ namespace CtrlPay.Entities
         Customer = 0,
         Admin = 1,
         Accountant = 2,
-        PayrollAcountant = 3,
-        Employee = 4
+        Employee = 3
     }
 }
