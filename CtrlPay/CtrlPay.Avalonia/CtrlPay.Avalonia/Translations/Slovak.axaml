@@ -27,6 +27,7 @@
 
     <x:String x:Key="CounterPiece.Credits.Title">Zostatok</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Čakajúce</x:String>
+    <x:String x:Key="CounterPiece.Button.AddCredits.Title">Dobiť kredity</x:String>
 
     <x:String x:Key="Transaction.Status.Completed">Dokončené</x:String>
     <x:String x:Key="Transaction.Status.Pending">Čakajúce</x:String>

@@ -1,4 +1,4 @@
-using CtrlPay.Entities;
+﻿using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
@@ -10,5 +10,4 @@ namespace CtrlPay.Repos;
 
 public static class ToDoRepo
 {
-    //TODO: Metody do repos: 2
 }
