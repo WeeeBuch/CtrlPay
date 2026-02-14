@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
@@ -35,7 +35,7 @@ public partial class CustomerPieceViewModel : ViewModelBase
     }
 
     [RelayCommand]
-    public async Task EndEdit()
+    public async Task EndEditAsync()
     {
         Editing = false;
         Model.EndEdit();
