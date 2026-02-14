@@ -59,7 +59,7 @@ namespace CtrlPay.API.Controllers
             int accountIndex = user.LoyalCustomer.Account.Index;
             List<Entities.Payment> debts = _db.Payments
                 .Where(p => p.Account.Index == accountIndex)
-                .Where(p => p.Status == PaymentStatusEnum.PartiallyPaid || p.Status == PaymentStatusEnum.WaitingForPayment)
+                .Where(p => p.Status == PaymentStatusEnum.PartiallyPaid || p.Status == PaymentStatusEnum.WaitingForPayment || p.Status == PaymentStatusEnum.Unpaid)
                 .ToList();
             decimal sum = debts.Sum(d => d.ExpectedAmountXMR - d.PaidAmountXMR);
             return Ok(new ReturnModel<decimal>("P0", ReturnModelSeverityEnum.Ok, sum));
