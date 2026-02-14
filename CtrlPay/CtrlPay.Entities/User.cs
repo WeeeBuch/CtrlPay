@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -41,7 +41,6 @@ namespace CtrlPay.Entities
                    : JsonSerializer.Deserialize<string[]>(TwoFactorRecoveryCodesJson)!;
             set => TwoFactorRecoveryCodesJson = JsonSerializer.Serialize(value);
         }
-
         [ForeignKey("LoyalCustomerId")]
         public virtual LoyalCustomer? LoyalCustomer { get; set; }
 

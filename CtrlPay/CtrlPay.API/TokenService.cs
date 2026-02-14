@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -39,7 +39,7 @@ namespace CtrlPay.API
         {
             new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
             new Claim(JwtRegisteredClaimNames.UniqueName, username),
-            new Claim(ClaimTypes.Role, role),
+            new Claim(ClaimTypes.Role, role.ToString()),
             new Claim("IsTotp", isTotp ? "true" : "false")
         };
 
@@ -64,7 +64,7 @@ namespace CtrlPay.API
                 ExpiresAtUtc = expires,
                 UserId = userId,
                 Username = username,
-                Role = role,
+                Role = role.ToString(),
                 Issuer = _options.Value.Issuer,
                 Audience = _options.Value.Audience,
                 RefreshToken = refreshToken.Token,
@@ -84,7 +84,7 @@ namespace CtrlPay.API
             {
                 new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
                 new Claim(JwtRegisteredClaimNames.UniqueName, username),
-                new Claim(ClaimTypes.Role, role),
+                new Claim(ClaimTypes.Role, role.ToString()),
                 new Claim("IsTotp", isTotp ? "true" : "false")
             };
 
@@ -107,7 +107,7 @@ namespace CtrlPay.API
                 ExpiresAtUtc = expires,
                 UserId = userId,
                 Username = username,
-                Role = role,
+                Role = role.ToString(),
                 Issuer = _options.Value.Issuer,
                 Audience = _options.Value.Audience,
                 RefreshToken = refreshToken,

@@ -1,4 +1,4 @@
-﻿using CtrlPay.Core;
+using CtrlPay.Core;
 using CtrlPay.DB;
 using CtrlPay.Entities;
 using Microsoft.AspNetCore.Identity.Data;
@@ -105,12 +105,9 @@ namespace CtrlPay.API.Controllers
             return Ok(newJwt);
         }
         [HttpPost("register")]
-        public IActionResult Register(string username, string password, Role role)
+        public IActionResult Register(string username, string password, string role)
         {
-            // najdeme roli
-            if (role == null)
-                return BadRequest("Invalid role.");
-            var result = AuthLogic.AddUser(username, password, role);
+            var result = AuthLogic.AddUser(username, password, (Role)int.Parse(role));
             if (result.Severity != ReturnModelSeverityEnum.Ok)
                 return BadRequest(result);
             return Ok(result);
