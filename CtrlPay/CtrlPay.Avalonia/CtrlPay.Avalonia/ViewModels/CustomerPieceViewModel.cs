@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System.Reflection;
+using System.Threading.Tasks;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -24,10 +25,11 @@ public partial class CustomerPieceViewModel : ViewModelBase
         Editing = true;
     }
     [RelayCommand]
-    public void DeleteEditCommand()
+    public async Task DeleteEditCommand()
     {
         Editing = false;
-        CustomerRepo.DeleteCustomer(Model);
+        await CustomerRepo.DeleteCustomer(Model);
+        UpdateHandler.HandleUpdatedCustomers();
     }
 
     [RelayCommand]

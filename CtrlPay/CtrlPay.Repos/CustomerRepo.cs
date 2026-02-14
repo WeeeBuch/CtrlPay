@@ -1,6 +1,7 @@
 ﻿using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace CtrlPay.Repos;
 
@@ -56,7 +57,7 @@ public class CustomerRepo
         #endregion
 
         AppLogger.Info($"Getting json from API...");
-        string? json = await HttpWorker.HttpGet("api/customers/all", ct);
+        string? json = await HttpWorker.HttpGet("api/customers/all", true, ct);
         if (string.IsNullOrWhiteSpace(json))
         {
             AppLogger.Warning($"Get response was NULL.");
@@ -84,8 +85,15 @@ public class CustomerRepo
     }
     public static List<FrontendCustomerDTO> GetCustomers() => Cache;
 
-    public static void DeleteCustomer(FrontendCustomerDTO cust)
+    public static async Task DeleteCustomer(FrontendCustomerDTO cust)
     {
-        // tu delet
+        Cache.Remove(cust);
+        AppLogger.Info($"Deleting customer from API...");
+        string? json = await HttpWorker.HttpDelete($"api/customers/{cust.Id}", "", true, default);
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            AppLogger.Warning($"Get response was NULL.");
+            return;
+        }
     }
 }

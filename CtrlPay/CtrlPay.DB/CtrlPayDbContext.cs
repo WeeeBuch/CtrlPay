@@ -24,7 +24,6 @@ namespace CtrlPay.DB
         public DbSet<Payroll> Payrolls { get; set; }
         public DbSet<PayrollApproval> PayrollApprovals { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
-        public DbSet<Role> Roles { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<WorkRecord> WorkRecords { get; set; }
