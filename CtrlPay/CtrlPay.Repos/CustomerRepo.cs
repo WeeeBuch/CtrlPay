@@ -96,4 +96,9 @@ public class CustomerRepo
             return;
         }
     }
+
+    public static async Task UpdateCustomer(FrontendCustomerDTO cust)
+    {
+        
+    }
 }
