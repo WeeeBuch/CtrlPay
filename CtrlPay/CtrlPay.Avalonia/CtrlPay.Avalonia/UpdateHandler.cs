@@ -28,5 +28,9 @@ public static class UpdateHandler
     public static void HandleNewDebtsAdded()
         => NewDebtsAddedActions.ForEach(action => action.Invoke());
 
+    // Changed Customers
+    public static List<Action> UpdatedCustomers = [];
+    public static void HandleUpdatedCustomers()
+        => UpdatedCustomers.ForEach(action => action.Invoke());
 }
 

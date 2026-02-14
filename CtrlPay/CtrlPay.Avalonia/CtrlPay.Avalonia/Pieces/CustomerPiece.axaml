@@ -33,6 +33,10 @@
                                 Command="{Binding StartEditCommand}" 
                                 IsVisible="{Binding !Editing}"/>
     
+                        <Button Content="Smazat" 
+                                Command="{Binding DeleteEditCommand}" 
+                                IsVisible="{Binding Editing}"/>
+
                         <Button Content="Zrušit" 
                                 Command="{Binding CancelEditCommand}" 
                                 IsVisible="{Binding Editing}"/>

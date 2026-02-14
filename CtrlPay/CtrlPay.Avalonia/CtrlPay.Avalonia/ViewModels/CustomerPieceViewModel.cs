@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System.Reflection;
 
@@ -21,6 +22,12 @@ public partial class CustomerPieceViewModel : ViewModelBase
     public void StartEdit()
     {
         Editing = true;
+    }
+    [RelayCommand]
+    public void DeleteEditCommand()
+    {
+        Editing = false;
+        CustomerRepo.DeleteCustomer(Model);
     }
 
     [RelayCommand]

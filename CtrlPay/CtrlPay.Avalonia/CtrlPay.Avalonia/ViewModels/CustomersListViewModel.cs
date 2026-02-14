@@ -14,6 +14,10 @@ public partial class CustomersListViewModel : ViewModelBase
     public CustomersListViewModel()
     {
         LoadCustomers();
+        UpdateHandler.UpdatedCustomers.Add(() =>
+        {
+            LoadCustomers();
+        });
     }
 
     private void LoadCustomers()

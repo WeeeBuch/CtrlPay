@@ -25,6 +25,7 @@ public static class ChangeChecker
         UpdateHandler.HandlePendingPaymentsUpdate(PaymentRepo.GetPaymentSum());
         UpdateHandler.HandleNewDebtsAdded();
         UpdateHandler.HandleNewPaymentsAdded();
+        UpdateHandler.HandleUpdatedCustomers();
 
         Credentials.BaseUri = SettingsManager.Current.ConnectionString;
         AppLogger.Info($"Checking completed.");
