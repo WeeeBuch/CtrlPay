@@ -1,5 +1,6 @@
 ﻿using CtrlPay.DB;
 using CtrlPay.Entities;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -9,6 +10,7 @@ using System.Security.Claims;
 namespace CtrlPay.API.Controllers
 {
     [ApiController]
+    [Authorize]
     public class CustomerController : ControllerBase
     {
         private readonly CtrlPayDbContext _db;
