@@ -94,6 +94,57 @@ namespace CtrlPay.API.Controllers
             await PaymentProcessing.PayFromCredit(user.LoyalCustomer, payment, new CancellationToken());
             return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));
         }
+        [HttpGet]
+        [Route("all")]
+        // GET : api/payments/all
+        public IActionResult All()
+        {
+            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
+            if (role != Role.Accountant && role != Role.Admin)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+            }
+            List<Entities.Payment> payments = _db.Payments.ToList();
+            List<PaymentApiDTO> paymentsDTO = new List<PaymentApiDTO>();
+            foreach (var payment in payments)
+            {
+                paymentsDTO.Add(new PaymentApiDTO(payment));
+            }
+            return Ok(new ReturnModel<List<PaymentApiDTO>>("P0", ReturnModelSeverityEnum.Ok, paymentsDTO));
+        }
+        [HttpPost]
+        [Route("create")]
+        // POST : api/payments/create
+        public IActionResult Create([FromBody] CreatePaymentRequest request)
+        {
+            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
+            if (role != Role.Accountant && role != Role.Admin)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+            }
+            Customer customer = _db.Customers.Where(c => c.Id == request.CustomerId).First();
+            if (customer == null)
+            {
+                return NotFound(new ReturnModel("C2", ReturnModelSeverityEnum.Error));
+            }
+            Payment payment = new Payment()
+            {
+                Customer = customer,
+                ExpectedAmountXMR = request.ExpectedAmountXMR,
+                DueDate = request.DueDate,
+                Status = PaymentStatusEnum.WaitingForPayment
+            };
+            _db.Payments.Add(payment);
+            _db.SaveChanges();
+            return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));
+        }
+    }
+
+    public class CreatePaymentRequest
+    {
+        public int CustomerId { get; set; }
+        public decimal ExpectedAmountXMR { get; set; }
+        public DateTime DueDate { get; set; }
     }
 
     public class PayFromCreditRequest
