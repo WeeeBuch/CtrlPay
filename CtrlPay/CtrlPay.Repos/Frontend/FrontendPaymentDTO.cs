@@ -18,6 +18,7 @@ public class FrontendPaymentDTO
     public DateTime CreatedAt { get; set; }
     public DateTime? PaidAt { get; set; }
     public DateTime? DueDate { get; set; }
+    public string? Title { get; set; }
 
     public FrontendPaymentDTO()
     {
@@ -33,6 +34,7 @@ public class FrontendPaymentDTO
         CreatedAt = dto.CreatedAt;
         PaidAt = dto.PaidAt ?? default;
         DueDate = dto.DueDate ?? default;
+        Title = dto.Title;
     }
 
     public PaymentApiDTO ToApiDto()
@@ -46,7 +48,8 @@ public class FrontendPaymentDTO
             Status = Status,
             CreatedAt = CreatedAt,
             PaidAt = PaidAt,
-            DueDate = DueDate
+            DueDate = DueDate,
+            Title = Title
         };
     }
 }

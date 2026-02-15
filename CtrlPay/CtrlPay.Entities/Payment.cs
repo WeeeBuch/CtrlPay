@@ -33,6 +33,8 @@ namespace CtrlPay.Entities
         public DateTime? PaidAt { get; set; }
         [Column("due_date")]
         public DateTime? DueDate { get; set; }
+        [Column("title")]
+        public string? Title { get; set; }
         [ForeignKey("CustomerId")]
         public virtual Customer? Customer { get; set; }
         [ForeignKey("AccountId")]

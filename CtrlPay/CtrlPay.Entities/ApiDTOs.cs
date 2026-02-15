@@ -69,6 +69,7 @@ namespace CtrlPay.Entities
         public DateTime CreatedAt { get; set; }
         public DateTime? PaidAt { get; set; }
         public DateTime? DueDate { get; set; }
+        public string? Title { get; set; }
 
         public PaymentApiDTO()
         {
@@ -86,6 +87,7 @@ namespace CtrlPay.Entities
             CreatedAt = payment.CreatedAt;
             PaidAt = payment.PaidAt ?? default;
             DueDate = payment.DueDate ?? default;
+            Title = payment.Title;
         }
     }
 
