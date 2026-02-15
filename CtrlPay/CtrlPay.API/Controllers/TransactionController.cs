@@ -12,7 +12,6 @@ namespace CtrlPay.API.Controllers
     [Authorize]
     public class TransactionController : ControllerBase
     {
-        //TODO: Předělat na ReturnModel vracení
         private readonly CtrlPayDbContext _db;
         public TransactionController(CtrlPayDbContext ctrlPayDbContext)
         {
@@ -25,6 +24,14 @@ namespace CtrlPay.API.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
+            if (user == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+            }
+            if (user.LoyalCustomer == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A6", ReturnModelSeverityEnum.Error)));
+            }
             int accountIndex = user.LoyalCustomer.Account.Index;
             List<Entities.Transaction> transactions = _db.Transactions
                 .Where(t => t.Account.Index == accountIndex)
@@ -43,6 +50,14 @@ namespace CtrlPay.API.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
+            if (user == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+            }
+            if (user.LoyalCustomer == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A6", ReturnModelSeverityEnum.Error)));
+            }
             int? accountIndex = user.LoyalCustomer.Account.Index;
             if (accountIndex is null)
             {

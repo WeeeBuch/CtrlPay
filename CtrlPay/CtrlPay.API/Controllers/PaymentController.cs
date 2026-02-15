@@ -15,7 +15,6 @@ namespace CtrlPay.API.Controllers
     [Authorize]
     public class PaymentController : ControllerBase
     {
-        //TODO: Předělat na ReturnModel vracení
         private readonly CtrlPayDbContext _db;
         private readonly MoneroRpcOptions _rpcOptions;
         public PaymentController(IOptions<MoneroRpcOptions> rpcOptions)
@@ -30,6 +29,14 @@ namespace CtrlPay.API.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
+            if (user == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+            }
+            if (user.LoyalCustomer == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A6", ReturnModelSeverityEnum.Error)));
+            }
             int? accountIndex = user.LoyalCustomer.Account.Index;
             if(accountIndex == null)
             {
@@ -53,6 +60,14 @@ namespace CtrlPay.API.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
+            if (user == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+            }
+            if (user.LoyalCustomer == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A6", ReturnModelSeverityEnum.Error)));
+            }
             int accountIndex = user.LoyalCustomer.Account.Index;
             List<Entities.Payment> debts = _db.Payments
                 .Where(p => p.Account.Index == accountIndex)
