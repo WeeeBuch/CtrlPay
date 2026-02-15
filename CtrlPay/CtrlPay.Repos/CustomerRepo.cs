@@ -23,39 +23,19 @@ public class CustomerRepo
             AppLogger.Info($"Returning Mock customers...");
             Cache = [
             new() {
-            Id = 1,
-            Address = "Test",
-            City = "Testov",
-            Email = "aa@bb.cz",
-            FirstName = "Karel",
-            LastName = "Lerak",
-            Phone = "+420123456789",
-            PostalCode = "12345",
-            Title = "Mister"
-        },
-        new() {
-            Id = 2,
-            Address = "Test02",
-            City = "Testov",
-            Email = "aa@bb.cz",
-            FirstName = "Karel",
-            LastName = "Lerak",
-            Phone = "+420123456789",
-            PostalCode = "12345",
-            Title = "Mister"
-        },
-        new() {
-            Id = 3,
-            Address = "Test03",
-            City = "Testov",
-            Email = "aa@bb.cz",
-            FirstName = "Karel",
-            LastName = "Lerak",
-            Phone = "+420123456789",
-            PostalCode = "12345",
-            Title = "Mister"
-        }
-        ];
+                Id = 1,
+                Address = "Test",
+                City = "Testov",
+                Email = "aa@bb.cz",
+                FirstName = "Karel",
+                LastName = "Lerak",
+                Phone = "+420123456789",
+                PostalCode = "12345",
+                Title = "Mister",
+                Physical = true,
+                Company = "Test"
+            }];
+
             return;
         }
         #endregion

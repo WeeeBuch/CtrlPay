@@ -72,12 +72,28 @@ public class FrontendCustomerDTO : IEditableObject
 
     public void BeginEdit()
     {
-        oldVersion = this;
+        oldVersion = (FrontendCustomerDTO)this.MemberwiseClone();
     }
 
     public void CancelEdit()
     {
-        throw new NotImplementedException();
+        if (oldVersion == null) return;
+
+        this.Id = oldVersion.Id;
+        this.FirstName = oldVersion.FirstName;
+        this.LastName = oldVersion.LastName;
+        this.Title = oldVersion.Title;
+        this.Address = oldVersion.Address;
+        this.City = oldVersion.City;
+        this.PostalCode = oldVersion.PostalCode;
+        this.Email = oldVersion.Email;
+        this.Phone = oldVersion.Phone;
+        this.Physical = oldVersion.Physical;
+        this.Company = oldVersion.Company;
+        this.IsLoyal = oldVersion.IsLoyal;
+        this.BaseAddress = oldVersion.BaseAddress;
+        this.AccountId = oldVersion.AccountId;
+        this.Username = oldVersion.Username;
     }
 
     public void EndEdit()
