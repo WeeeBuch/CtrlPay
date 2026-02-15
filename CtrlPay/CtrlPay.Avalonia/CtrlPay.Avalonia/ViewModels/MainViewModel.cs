@@ -87,6 +87,9 @@ namespace CtrlPay.Avalonia.ViewModels
             if (value != null)
                 CurrentPage = value.View; // viz n�e v NavItem
         }
+
+
+
     }
 
     public partial class NavItem : ObservableObject
@@ -113,5 +116,8 @@ namespace CtrlPay.Avalonia.ViewModels
             if (!string.IsNullOrEmpty(NameKey))
                 Name = TranslationManager.GetString(NameKey);
         }
+
+
+
     }
 }
