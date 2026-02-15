@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
@@ -20,6 +21,26 @@ public partial class CustomersListViewModel : ViewModelBase
         {
             LoadCustomers();
         });
+    }
+
+    [RelayCommand]
+    public void AddCustomer()
+    {
+        var newDto = new FrontendCustomerDTO
+        {
+            FirstName = "",
+            LastName = "",
+            Physical = true, 
+            Company = ""
+        };
+
+        CustomerPieceViewModel newVm = new(newDto)
+        {
+            Editing = true
+        };
+        newVm.Model.BeginEdit();
+
+        Customers.Insert(0, newVm);
     }
 
     partial void OnSearchTextInputChanged(string? value)
