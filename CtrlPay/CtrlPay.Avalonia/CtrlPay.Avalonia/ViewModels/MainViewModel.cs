@@ -73,7 +73,7 @@ namespace CtrlPay.Avalonia.ViewModels
 
             }
 
-            if (role == Role.Customer)
+            if (role == Role.Employee)
             {
 
             }

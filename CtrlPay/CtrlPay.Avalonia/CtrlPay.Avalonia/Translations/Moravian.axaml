@@ -7,6 +7,24 @@
 
     <x:String x:Key="LoginWindow.Title">Přihlášení</x:String>
 
+    <x:String x:Key="NavbarView.Customers">Klienti</x:String>
+    <x:String x:Key="Customers.Title">Naši lidi</x:String>
+    <x:String x:Key="Customers.SearchWatermark">Hledej macka...</x:String>
+    <x:String x:Key="Customers.NewCustomerButton">Nový člen</x:String>
+    <x:String x:Key="Customers.Button.Edit">Poladit</x:String>
+    <x:String x:Key="Customers.Button.Delete">Vymazat</x:String>
+    <x:String x:Key="Customers.Button.Cancel">Prdět na to</x:String>
+    <x:String x:Key="Customers.Button.Save">Vytesat</x:String>
+    <x:String x:Key="Customers.Toggle.Physical">Slušný člověk</x:String>
+    <x:String x:Key="Customers.Toggle.Company">Nějaká firma</x:String>
+    <x:String x:Key="Customers.Label.Company">Jméno firmy</x:String>
+    <x:String x:Key="Customers.Label.Title">Titul</x:String>
+    <x:String x:Key="Customers.Label.FirstName">Jméno</x:String>
+    <x:String x:Key="Customers.Label.LastName">Příjmení</x:String>
+    <x:String x:Key="Customers.Label.Phone">Cislo</x:String>
+    <x:String x:Key="Customers.Label.Email">Mejl</x:String>
+    <x:String x:Key="Customers.Label.Address">Kde bydlí</x:String>
+
     <x:String x:Key="LoginView.Button.Switch.Login">Chcu sa přihlásit</x:String>
     <x:String x:Key="LoginView.Button.Switch.Register">Chcu sa registrovat</x:String>
     <x:String x:Key="LoginView.Button.Login">Hajdy vnitř</x:String>
