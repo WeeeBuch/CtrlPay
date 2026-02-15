@@ -6,6 +6,7 @@
              x:DataType="vm:PaymentManagementViewModel"
              xmlns:hc="using:CtrlPay.Avalonia.HelperClasses"
              xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:repos="using:CtrlPay.Repos"
              Background="{DynamicResource Color.Background}"
              x:Class="CtrlPay.Avalonia.PaymentManagementView">
     <Grid RowDefinitions="Auto, 10, *" Margin="10">
@@ -58,17 +59,20 @@
                              Background="Transparent"
                              BorderThickness="0">
                         <ListBox.ItemTemplate>
-                            <DataTemplate x:DataType="hc:TransactionItem">
-                                <Border Classes="customerCard" Margin="0,0,5,8" Padding="15,0" Height="60">
-                                     <Grid ColumnDefinitions="Auto, *, Auto">
-                                         <Border Grid.Column="0" Classes="indicator" Tag="{Binding Status}" Width="4" Height="24" VerticalAlignment="Center" Margin="0,0,15,0"/>
-                                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                             <TextBlock Text="{Binding Description}" FontSize="15" FontWeight="Medium" TextTrimming="CharacterEllipsis"/>
-                                         </StackPanel>
-                                         <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
-                                             <TextBlock Text="{Binding Amount, StringFormat=\{0:N2\}}" FontSize="18" FontWeight="Bold"/>
-                                         </StackPanel>
-                                     </Grid>
+                            <DataTemplate x:DataType="repos:FrontendPaymentDTO"> <Border Classes="customerCard" Margin="0,0:5,8" Padding="15,0" Height="60">
+                                    <Grid ColumnDefinitions="Auto, *, Auto">
+                                        <Border Grid.Column="0" Classes="indicator" Tag="{Binding Status}" Width="4" Height="24" VerticalAlignment="Center" Margin="0,0,15,0"/>
+                    
+                                        <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding CreatedAt, StringFormat='Platba #{0}'}" 
+                                                       FontSize="15" FontWeight="Medium"/>
+                                        </StackPanel>
+                    
+                                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                                            <TextBlock Text="{Binding ExpectedAmountXMR, StringFormat=\{0:N4\}}" 
+                                                       FontSize="18" FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </Grid>
                                 </Border>
                             </DataTemplate>
                         </ListBox.ItemTemplate>
@@ -76,36 +80,41 @@
                 </ScrollViewer>
             </Border>
 
-            <Border Grid.Column="1" 
-                    BorderThickness="2" 
-                    BorderBrush="{DynamicResource Brush.Border}" 
-                    CornerRadius="5" 
-                    Margin="5,0,0,0"
-                    Padding="20">
-        
-                <ContentControl Content="{Binding SelectedPayment}">
-                    <ContentControl.ContentTemplate>
-                        <DataTemplate x:DataType="hc:TransactionItem">
-                            <StackPanel Spacing="15">
-                                <TextBlock Text="Detail platby" FontSize="20" FontWeight="Bold"/>
-                                <Separator Height="1" Background="{DynamicResource Brush.Border}"/>
+            <Border Grid.Column="1" Margin="5,0,0,0" Padding="20" 
+        BorderThickness="2" BorderBrush="{DynamicResource Brush.Border}" CornerRadius="5">
+    
+    <ContentControl Content="{Binding SelectedPayment}">
+        <ContentControl.ContentTemplate>
+            <DataTemplate x:DataType="repos:FrontendPaymentDTO">
+                <ScrollViewer>
+                    <StackPanel Spacing="15">
+                        <TextBlock Text="Editace transakce" FontSize="20" FontWeight="Bold"/>
                         
-                                <TextBlock Text="Popis:" Opacity="0.6"/>
-                                <TextBlock Text="{Binding Description}" FontSize="16"/>
-                        
-                                <TextBlock Text="Částka:" Opacity="0.6" Margin="0,10,0,0"/>
-                                <StackPanel Orientation="Horizontal">
-                                     <TextBlock Text="{Binding Amount}" FontSize="24" FontWeight="Bold"/>
-                                     <TextBlock Text="{DynamicResource App.Currency}" Margin="5,0,0,0" VerticalAlignment="Bottom"/>
-                                </StackPanel>
+                        <StackPanel Spacing="5">
+                            <TextBlock Text="Očekávaná částka (XMR)" Opacity="0.6"/>
+                            <NumericUpDown Value="{Binding ExpectedAmountXMR}" Increment="0.001" FormatString="N8"/>
+                        </StackPanel>
 
-                                <TextBlock Text="Status:" Opacity="0.6" Margin="0,10,0,0"/>
-                                <TextBlock Text="{Binding Status}" FontWeight="SemiBold"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ContentControl.ContentTemplate>
-                </ContentControl>
-            </Border>
+                        <StackPanel Spacing="5">
+                            <TextBlock Text="Zaplacená částka (XMR)" Opacity="0.6"/>
+                            <NumericUpDown Value="{Binding PaidAmountXMR}" Increment="0.001" FormatString="N8"/>
+                        </StackPanel>
+
+                        <StackPanel Spacing="5">
+                            <TextBlock Text="Status" Opacity="0.6"/>
+                            <TextBox Text="{Binding Status}"/> 
+                        </StackPanel>
+
+                        <StackPanel Spacing="5">
+                            <TextBlock Text="Datum splatnosti" Opacity="0.6"/>
+                            <DatePicker SelectedDate="{Binding DueDate}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </DataTemplate>
+        </ContentControl.ContentTemplate>
+    </ContentControl>
+</Border>
         </Grid>
     </Grid>
 </UserControl>

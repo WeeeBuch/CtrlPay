@@ -18,8 +18,8 @@ public partial class PaymentManagementViewModel : ViewModelBase
     [ObservableProperty] private List<SortOption> sortOptions;
     [ObservableProperty] private string searchTerm;
 
-    [ObservableProperty] private RangeObservableCollection<TransactionItem> payments = [];
-    [ObservableProperty] private TransactionItem? _selectedPayment;
+    [ObservableProperty] private RangeObservableCollection<FrontendPaymentDTO> payments = [];
+    [ObservableProperty] private FrontendPaymentDTO? selectedPayment;
 
     public PaymentManagementViewModel() 
     {
