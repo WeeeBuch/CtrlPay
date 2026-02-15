@@ -53,7 +53,10 @@ public partial class CustomersListViewModel : ViewModelBase
             var existingVm = Customers.FirstOrDefault(vm => vm.Model.Id == dto.Id);
             if (existingVm != null)
             {
-                existingVm.Model = dto;
+                if (!existingVm.Editing)
+                {
+                    existingVm.Model = dto;
+                }
                 resultList.Add(existingVm);
             }
             else
