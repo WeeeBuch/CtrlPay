@@ -101,25 +101,30 @@ public class CustomerRepo
             AppLogger.Warning($"Customer data is invalid. Update aborted.");
             return;
         }
-        Cache[Cache.FindIndex(c => c.Id == cust.Id)] = cust;
-        AppLogger.Info($"Updating customer in API...");
-        string? json = await HttpWorker.HttpPost($"api/customers/edit", cust.ToApiDTO(), true, default);
-        if (string.IsNullOrWhiteSpace(json))
+        int id = Cache.FindIndex(c => c.Id == cust.Id);
+        if (id == -1)
         {
-            AppLogger.Warning($"Get response was NULL.");
-            return;
+            AppLogger.Info($"Adding customer to API...");
+            string? json = await HttpWorker.HttpPost($"api/customers/create", cust.ToApiDTO(), true, default);
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                AppLogger.Warning($"Get response was NULL.");
+                return;
+            }
+            Cache.Add(cust);
         }
-    }
-
-    public static async Task AddCustomer(FrontendCustomerDTO cust)
-    {
-        AppLogger.Info($"Adding customer to API...");
-        string? json = await HttpWorker.HttpPost($"api/customers/create", cust.ToApiDTO(), true, default);
-        if (string.IsNullOrWhiteSpace(json))
+        else
         {
-            AppLogger.Warning($"Get response was NULL.");
-            return;
+            Cache[id] = cust;
+            AppLogger.Info($"Updating customer in API...");
+            string? json = await HttpWorker.HttpPost($"api/customers/edit", cust.ToApiDTO(), true, default);
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                AppLogger.Warning($"Get response was NULL.");
+                return;
+            }
         }
+        
     }
 
     private static bool ValidateCustomer(FrontendCustomerDTO cust)
