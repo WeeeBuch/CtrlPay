@@ -7,6 +7,24 @@
 
     <x:String x:Key="LoginWindow.Title">Вход</x:String>
 
+    <x:String x:Key="NavbarView.Customers">Клиенты</x:String>
+    <x:String x:Key="Customers.Title">Управление клиентами</x:String>
+    <x:String x:Key="Customers.SearchWatermark">Поиск клиентов...</x:String>
+    <x:String x:Key="Customers.NewCustomerButton">Новый клиент</x:String>
+    <x:String x:Key="Customers.Button.Edit">Изменить</x:String>
+    <x:String x:Key="Customers.Button.Delete">Удалить</x:String>
+    <x:String x:Key="Customers.Button.Cancel">Отмена</x:String>
+    <x:String x:Key="Customers.Button.Save">Сохранить</x:String>
+    <x:String x:Key="Customers.Toggle.Physical">Физ. лицо</x:String>
+    <x:String x:Key="Customers.Toggle.Company">Юр. лицо</x:String>
+    <x:String x:Key="Customers.Label.Company">Название компании</x:String>
+    <x:String x:Key="Customers.Label.Title">Титул</x:String>
+    <x:String x:Key="Customers.Label.FirstName">Имя</x:String>
+    <x:String x:Key="Customers.Label.LastName">Фамилия</x:String>
+    <x:String x:Key="Customers.Label.Phone">Телефон</x:String>
+    <x:String x:Key="Customers.Label.Email">E-mail</x:String>
+    <x:String x:Key="Customers.Label.Address">Адрес</x:String>
+
     <x:String x:Key="LoginView.Button.Switch.Login">Войти</x:String>
     <x:String x:Key="LoginView.Button.Switch.Register">Регистрация</x:String>
     <x:String x:Key="LoginView.Button.Login">Войти</x:String>

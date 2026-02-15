@@ -9,6 +9,25 @@
     <!-- Login Window -->
     <x:String x:Key="LoginWindow.Title">LoginWindow.Title</x:String>
 
+    <!-- Customers work -->
+    <x:String x:Key="NavbarView.Customers">NavbarView.Customers</x:String>
+    <x:String x:Key="Customers.Title">Customers.Title</x:String>
+    <x:String x:Key="Customers.SearchWatermark">Customers.SearchWatermark</x:String>
+    <x:String x:Key="Customers.NewCustomerButton">Customers.NewCustomerButton</x:String>
+    <x:String x:Key="Customers.Button.Edit">Customers.Button.Edit</x:String>
+    <x:String x:Key="Customers.Button.Delete">Customers.Button.Delete</x:String>
+    <x:String x:Key="Customers.Button.Cancel">Customers.Button.Cancel</x:String>
+    <x:String x:Key="Customers.Button.Save">Customers.Button.Save</x:String>
+    <x:String x:Key="Customers.Toggle.Physical">Customers.Toggle.Physical</x:String>
+    <x:String x:Key="Customers.Toggle.Company">Customers.Toggle.Company</x:String>
+    <x:String x:Key="Customers.Label.Company">Customers.Label.Company</x:String>
+    <x:String x:Key="Customers.Label.Title">Customers.Label.Title</x:String>
+    <x:String x:Key="Customers.Label.FirstName">Customers.Label.FirstName</x:String>
+    <x:String x:Key="Customers.Label.LastName">Customers.Label.LastName</x:String>
+    <x:String x:Key="Customers.Label.Phone">Customers.Label.Phone</x:String>
+    <x:String x:Key="Customers.Label.Email">Customers.Label.Email</x:String>
+    <x:String x:Key="Customers.Label.Address">Customers.Label.Address</x:String>
+
     <!-- Login View -->
     <x:String x:Key="LoginView.Button.Switch.Login">LoginView.Button.Switch.Login</x:String>
     <x:String x:Key="LoginView.Button.Switch.Register">LoginView.Button.Switch.Register</x:String>

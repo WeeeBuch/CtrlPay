@@ -1,4 +1,5 @@
-﻿using CtrlPay.Repos.Frontend;
+﻿using CtrlPay.Entities;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +15,7 @@ namespace CtrlPay.Repos
         public static DateTime AccessTokenExpiresAtUtc { get; set; }
         public static string RefreshToken { get; set; }
         public static DateTime RefreshTokenExpiresAtUtc { get; set; }
+        public static Role Role { get; set; }
 
 
         public static void Clear()

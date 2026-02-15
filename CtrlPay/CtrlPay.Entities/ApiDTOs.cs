@@ -88,4 +88,60 @@ namespace CtrlPay.Entities
             DueDate = payment.DueDate ?? default;
         }
     }
+
+    public class CustomerApiDTO
+    {
+        public int Id { get; set; }
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
+        public string Title { get; set; }
+        public string Address { get; set; }
+        public string City { get; set; }
+        public string PostalCode { get; set; }
+        public string Email { get; set; }
+        public string Phone { get; set; }
+        public bool Physical { get; set; }
+        public string? Company { get; set; }
+        public bool? IsLoyal { get; set; }
+        public string? Username { get; set; }
+        public int? AccountID { get; set; }
+        public string? BaseAddress { get; set; }
+        public CustomerApiDTO()
+        {
+            
+        }
+        public CustomerApiDTO(Customer customer)
+        {
+            Id = customer.Id;
+            FirstName = customer.FirstName;
+            LastName = customer.LastName;
+            Title = customer.Title;
+            Address = customer.Address;
+            City = customer.City;
+            PostalCode = customer.PostalCode;
+            Email = customer.Email;
+            Phone = customer.Phone;
+            Physical = customer.Physical;
+            Company = customer.Company;
+            IsLoyal = false;
+        }
+        public CustomerApiDTO(Customer customer, LoyalCustomer loyalCustomer, User user)
+        {
+            Id = customer.Id;
+            FirstName = customer.FirstName;
+            LastName = customer.LastName;
+            Title = customer.Title;
+            Address = customer.Address;
+            City = customer.City;
+            PostalCode = customer.PostalCode;
+            Email = customer.Email;
+            Phone = customer.Phone;
+            Physical = customer.Physical;
+            Company = customer.Company;
+            IsLoyal = true;
+            Username = user.Username;
+            AccountID = loyalCustomer.Account.Index;
+            BaseAddress = loyalCustomer.Account.BaseAddress.AddressXMR;
+        }
+    }
 }

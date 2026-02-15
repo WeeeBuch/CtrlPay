@@ -7,6 +7,24 @@
 
     <x:String x:Key="LoginWindow.Title">ログイン</x:String>
 
+    <x:String x:Key="NavbarView.Customers">顧客</x:String>
+    <x:String x:Key="Customers.Title">顧客管理</x:String>
+    <x:String x:Key="Customers.SearchWatermark">顧客を検索...</x:String>
+    <x:String x:Key="Customers.NewCustomerButton">新規顧客</x:String>
+    <x:String x:Key="Customers.Button.Edit">編集</x:String>
+    <x:String x:Key="Customers.Button.Delete">削除</x:String>
+    <x:String x:Key="Customers.Button.Cancel">キャンセル</x:String>
+    <x:String x:Key="Customers.Button.Save">保存</x:String>
+    <x:String x:Key="Customers.Toggle.Physical">個人</x:String>
+    <x:String x:Key="Customers.Toggle.Company">法人</x:String>
+    <x:String x:Key="Customers.Label.Company">会社名</x:String>
+    <x:String x:Key="Customers.Label.Title">役職/敬称</x:String>
+    <x:String x:Key="Customers.Label.FirstName">名</x:String>
+    <x:String x:Key="Customers.Label.LastName">姓</x:String>
+    <x:String x:Key="Customers.Label.Phone">電話番号</x:String>
+    <x:String x:Key="Customers.Label.Email">メールアドレス</x:String>
+    <x:String x:Key="Customers.Label.Address">住所</x:String>
+
     <x:String x:Key="LoginView.Button.Switch.Login">ログイン</x:String>
     <x:String x:Key="LoginView.Button.Switch.Register">新規登録</x:String>
     <x:String x:Key="LoginView.Button.Login">ログイン</x:String>

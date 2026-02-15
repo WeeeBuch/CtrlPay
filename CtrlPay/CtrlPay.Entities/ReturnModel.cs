@@ -45,6 +45,8 @@ namespace CtrlPay.Entities
             { "R5", "code can not be empty" },
             { "T0", "operation successful" },
             { "T1", "user does not have account" },
+            { "Z0", "operation successful" },
+            { "Z1", "customer not found"   }
         };
 
         public ReturnModel(string returnCode, ReturnModelSeverityEnum severity)

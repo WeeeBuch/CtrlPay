@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +31,7 @@ namespace CtrlPay.API
         {
             var userId = user.Id;
             var username = user.Username;
-            var role = user.Role;
+            int role = (int)user.Role;
             var now = DateTime.UtcNow;
             var expires = now.AddMinutes(_options.Value.AccessTokenMinutes);
 
@@ -76,7 +76,7 @@ namespace CtrlPay.API
         {
             var userId = user.Id;
             var username = user.Username;
-            var role = user.Role;
+            var role = user.Role.ToString();
             var now = DateTime.UtcNow;
             var expires = now.AddMinutes(_options.Value.AccessTokenMinutes);
 
