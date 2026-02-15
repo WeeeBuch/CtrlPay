@@ -138,7 +138,53 @@ namespace CtrlPay.API.Controllers
             _db.SaveChanges();
             return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));
         }
-    }
+        [HttpPost]
+        [Route("update")]
+        // POST : api/payments/update
+        public IActionResult Update([FromBody] PaymentApiDTO request)
+        {
+            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
+            if (role != Role.Accountant && role != Role.Admin)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+            }
+            Payment payment = _db.Payments.Where(p => p.Id == request.Id).First();
+            if (payment == null)
+            {
+                return NotFound(new ReturnModel("P2", ReturnModelSeverityEnum.Error));
+            }
+            payment.Id = request.Id;
+            payment.CustomerId = request.CustomerId;
+            payment.AccountId = request.AccountId;
+            payment.AddressId = request.AddressId;
+            payment.ExpectedAmountXMR = request.ExpectedAmountXMR;
+            payment.PaidAmountXMR = request.PaidAmountXMR;
+            payment.Status = request.Status;
+            payment.CreatedAt = request.CreatedAt;
+            payment.PaidAt = request.PaidAt;
+            payment.DueDate = request.DueDate;
+            _db.SaveChanges();
+            return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));
+        }
+        [HttpDelete]
+        [Route("delete/{id}")]
+        // DELETE : api/payments/delete/{id}
+        public IActionResult Delete(int id)
+        {
+            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
+            if (role != Role.Accountant && role != Role.Admin)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+            }
+            Payment payment = _db.Payments.Where(p => p.Id == id).First();
+            if (payment == null)
+            {
+                return NotFound(new ReturnModel("P2", ReturnModelSeverityEnum.Error));
+            }
+            _db.Payments.Remove(payment);
+            _db.SaveChanges();
+            return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));
+        }
 
     public class CreatePaymentRequest
     {
