@@ -4,6 +4,8 @@ using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Translations;
+using CtrlPay.Entities;
+using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.ObjectModel;
@@ -34,7 +36,7 @@ namespace CtrlPay.Avalonia.ViewModels
         [ObservableProperty]
         private string menuIcon = IconData.Menu;
 
-        public ObservableCollection<NavItem> NavigationItems { get; }
+        public ObservableCollection<NavItem> NavigationItems { get; private set; }
 
         public MainViewModel()
         {
@@ -42,21 +44,41 @@ namespace CtrlPay.Avalonia.ViewModels
             AppLogger.Info($"Starting Checker...");
             _ = ChangeChecker.StartChecking();
 
-            NavigationItems =
-            [
-                // Předáváme klíče, nikoliv výsledek GetString
-                new NavItem("NavbarView.Dashboard", new DashboardView(), IconData.Dashboard),
-                new NavItem("NavbarView.Debts", new DebtView(), IconData.Debt),
-                new NavItem("NavbarView.Transactions", new TransactionView(), IconData.Cash),
-                new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog),
+            GenerateNavItems();
 
-
-                new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers)
-            ];
-
-            // Výchozí stránka
             CurrentPage = NavigationItems[0].ViewModel;
             SelectedNavigationItem = NavigationItems[0];
+        }
+
+        private void GenerateNavItems()
+        {
+            Role role = Credentials.Role;
+
+            NavigationItems = [];
+
+            if (role == Role.Customer)
+            {
+                NavigationItems.Add(new NavItem("NavbarView.Dashboard", new DashboardView(), IconData.Dashboard));
+                NavigationItems.Add(new NavItem("NavbarView.Debts", new DebtView(), IconData.Debt));
+                NavigationItems.Add(new NavItem("NavbarView.Transactions", new TransactionView(), IconData.Cash));
+            }
+
+            if (role == Role.Accountant)
+            {
+                NavigationItems.Add(new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers));
+            }
+
+            if (role == Role.Admin)
+            {
+
+            }
+
+            if (role == Role.Customer)
+            {
+
+            }
+
+            NavigationItems.Add(new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog));
         }
 
         partial void OnSelectedNavigationItemChanged(NavItem value)
