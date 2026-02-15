@@ -1,4 +1,4 @@
-﻿using CtrlPay.Core;
+using CtrlPay.Core;
 using CtrlPay.DB;
 using CtrlPay.Entities;
 using Microsoft.AspNetCore.Identity.Data;

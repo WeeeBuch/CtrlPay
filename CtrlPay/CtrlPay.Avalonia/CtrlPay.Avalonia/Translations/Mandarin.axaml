@@ -12,6 +12,24 @@
     <x:String x:Key="LoginView.Button.Login">进入</x:String>
     <x:String x:Key="LoginView.Button.Register">创建账户</x:String>
 
+    <x:String x:Key="NavbarView.Customers">客户</x:String>
+    <x:String x:Key="Customers.Title">客户管理</x:String>
+    <x:String x:Key="Customers.SearchWatermark">搜索客户...</x:String>
+    <x:String x:Key="Customers.NewCustomerButton">新客户</x:String>
+    <x:String x:Key="Customers.Button.Edit">编辑</x:String>
+    <x:String x:Key="Customers.Button.Delete">删除</x:String>
+    <x:String x:Key="Customers.Button.Cancel">取消</x:String>
+    <x:String x:Key="Customers.Button.Save">保存</x:String>
+    <x:String x:Key="Customers.Toggle.Physical">个人</x:String>
+    <x:String x:Key="Customers.Toggle.Company">公司</x:String>
+    <x:String x:Key="Customers.Label.Company">公司名称</x:String>
+    <x:String x:Key="Customers.Label.Title">称呼</x:String>
+    <x:String x:Key="Customers.Label.FirstName">名字</x:String>
+    <x:String x:Key="Customers.Label.LastName">姓氏</x:String>
+    <x:String x:Key="Customers.Label.Phone">电话</x:String>
+    <x:String x:Key="Customers.Label.Email">电子邮件</x:String>
+    <x:String x:Key="Customers.Label.Address">地址</x:String>
+
     <x:String x:Key="LoginView.Watermark.Username">用户名</x:String>
     <x:String x:Key="LoginView.Watermark.Password">密码</x:String>
     <x:String x:Key="LoginView.Watermark.ConfirmPassword">确认密码</x:String>

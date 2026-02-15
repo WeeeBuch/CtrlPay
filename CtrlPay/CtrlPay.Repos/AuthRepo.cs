@@ -79,6 +79,7 @@ namespace CtrlPay.Repos
                 Credentials.AccessTokenExpiresAtUtc = rpcResponse.Body.ExpiresAtUtc;
                 Credentials.RefreshToken = rpcResponse.Body.RefreshToken;
                 Credentials.RefreshTokenExpiresAtUtc = rpcResponse.Body.RefreshTokenExpiresAtUtc;
+                Credentials.Role = (Role)int.Parse(rpcResponse.Body.Role);
 
                 return new ReturnModel<bool>("A0", ReturnModelSeverityEnum.Ok, true);
             }

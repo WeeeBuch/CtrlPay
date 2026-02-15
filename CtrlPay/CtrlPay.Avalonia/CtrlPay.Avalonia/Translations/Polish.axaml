@@ -7,6 +7,24 @@
 
     <x:String x:Key="LoginWindow.Title">Logowanie</x:String>
 
+    <x:String x:Key="NavbarView.Customers">Klienci</x:String>
+    <x:String x:Key="Customers.Title">Zarządzanie klientami</x:String>
+    <x:String x:Key="Customers.SearchWatermark">Szukaj klientów...</x:String>
+    <x:String x:Key="Customers.NewCustomerButton">Nowy klient</x:String>
+    <x:String x:Key="Customers.Button.Edit">Edytuj</x:String>
+    <x:String x:Key="Customers.Button.Delete">Usuń</x:String>
+    <x:String x:Key="Customers.Button.Cancel">Anuluj</x:String>
+    <x:String x:Key="Customers.Button.Save">Zapisz</x:String>
+    <x:String x:Key="Customers.Toggle.Physical">Osoba fizyczna</x:String>
+    <x:String x:Key="Customers.Toggle.Company">Firma</x:String>
+    <x:String x:Key="Customers.Label.Company">Nazwa firmy</x:String>
+    <x:String x:Key="Customers.Label.Title">Tytuł</x:String>
+    <x:String x:Key="Customers.Label.FirstName">Imię</x:String>
+    <x:String x:Key="Customers.Label.LastName">Nazwisko</x:String>
+    <x:String x:Key="Customers.Label.Phone">Telefon</x:String>
+    <x:String x:Key="Customers.Label.Email">E-mail</x:String>
+    <x:String x:Key="Customers.Label.Address">Adres</x:String>
+
     <x:String x:Key="LoginView.Button.Switch.Login">Zaloguj się</x:String>
     <x:String x:Key="LoginView.Button.Switch.Register">Zarejestruj się</x:String>
     <x:String x:Key="LoginView.Button.Login">Zaloguj</x:String>

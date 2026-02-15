@@ -19,13 +19,24 @@
                     <DataTemplate x:DataType="vm:DebugPropertyViewModel">
                         <Border BorderBrush="{DynamicResource SystemControlForegroundBaseLowBrush}" 
                                 BorderThickness="0,0,0,1" Padding="8">
-                            <DockPanel>
+                            <DockPanel LastChildFill="False">
                                 <TextBlock Text="{Binding Name}" 
                                            VerticalAlignment="Center" 
-                                           FontSize="14"/>
-                                <ToggleSwitch IsChecked="{Binding Value}" 
+                                           FontSize="14"
+                                           DockPanel.Dock="Left"/>
+
+                                <ComboBox IsVisible="{Binding IsEnum}"
+                                          ItemsSource="{Binding EnumValues}"
+                                          SelectedItem="{Binding Value}"
+                                          HorizontalAlignment="Right"
+                                          MinWidth="120"
+                                          DockPanel.Dock="Right"/>
+
+                                <ToggleSwitch IsVisible="{Binding IsBool}"
+                                              IsChecked="{Binding Value}" 
                                               OnContent="ZAP" OffContent="VYP" 
-                                              HorizontalAlignment="Right"/>
+                                              HorizontalAlignment="Right"
+                                              DockPanel.Dock="Right"/>
                             </DockPanel>
                         </Border>
                     </DataTemplate>

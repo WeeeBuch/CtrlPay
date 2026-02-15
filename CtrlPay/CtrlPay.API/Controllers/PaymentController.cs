@@ -5,6 +5,7 @@ using CtrlPay.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using System.Configuration;
 using System.Security.Claims;
 using System.Text.Json;
 
@@ -15,13 +16,14 @@ namespace CtrlPay.API.Controllers
     [Authorize]
     public class PaymentController : ControllerBase
     {
-        //TODO: Předělat na ReturnModel vracení
         private readonly CtrlPayDbContext _db;
         private readonly MoneroRpcOptions _rpcOptions;
-        public PaymentController(IOptions<MoneroRpcOptions> rpcOptions)
+        private readonly bool _mergedAccountants;
+        public PaymentController(IOptions<MoneroRpcOptions> rpcOptions, IConfiguration configuration)
         {
             _db = new CtrlPayDbContext();
             _rpcOptions = rpcOptions.Value;
+            _mergedAccountants = configuration.GetValue<bool>("MergeAccountantAndPayrollAccountant");
         }
         [HttpGet]
         [Route("my")]
@@ -30,6 +32,14 @@ namespace CtrlPay.API.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
+            if (user == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+            }
+            if (user.LoyalCustomer == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A6", ReturnModelSeverityEnum.Error)));
+            }
             int? accountIndex = user.LoyalCustomer.Account.Index;
             if (accountIndex == null)
             {
@@ -53,6 +63,14 @@ namespace CtrlPay.API.Controllers
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
+            if (user == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+            }
+            if (user.LoyalCustomer == null)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A6", ReturnModelSeverityEnum.Error)));
+            }
             int accountIndex = user.LoyalCustomer.Account.Index;
             List<Entities.Payment> debts = _db.Payments
                 .Where(p => p.Account.Index == accountIndex)
@@ -191,6 +209,10 @@ namespace CtrlPay.API.Controllers
         public int CustomerId { get; set; }
         public decimal ExpectedAmountXMR { get; set; }
         public DateTime DueDate { get; set; }
+    }
+
+    public class CreatePaymentRequest
+    {
     }
 
     public class PayFromCreditRequest

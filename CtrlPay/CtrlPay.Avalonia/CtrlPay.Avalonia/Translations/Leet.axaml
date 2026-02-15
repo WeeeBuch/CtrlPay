@@ -7,6 +7,24 @@
 
     <x:String x:Key="LoginWindow.Title">L061N</x:String>
 
+    <x:String x:Key="NavbarView.Customers">CU570M3R5</x:String>
+    <x:String x:Key="Customers.Title">M4N4G3_U53R5</x:String>
+    <x:String x:Key="Customers.SearchWatermark">534RCH_DB...</x:String>
+    <x:String x:Key="Customers.NewCustomerButton">4DD_N3W</x:String>
+    <x:String x:Key="Customers.Button.Edit">3D17</x:String>
+    <x:String x:Key="Customers.Button.Delete">D3L373</x:String>
+    <x:String x:Key="Customers.Button.Cancel">4B0R7</x:String>
+    <x:String x:Key="Customers.Button.Save">WR173</x:String>
+    <x:String x:Key="Customers.Toggle.Physical">P3R50N</x:String>
+    <x:String x:Key="Customers.Toggle.Company">C0RP</x:String>
+    <x:String x:Key="Customers.Label.Company">C0RP_N4M3</x:String>
+    <x:String x:Key="Customers.Label.Title">717L3</x:String>
+    <x:String x:Key="Customers.Label.FirstName">F1R57_N4M3</x:String>
+    <x:String x:Key="Customers.Label.LastName">L457_N4M3</x:String>
+    <x:String x:Key="Customers.Label.Phone">PH0N3</x:String>
+    <x:String x:Key="Customers.Label.Email">3M41L</x:String>
+    <x:String x:Key="Customers.Label.Address">L0C4710N</x:String>
+
     <x:String x:Key="LoginView.Button.Switch.Login">Auth</x:String>
     <x:String x:Key="LoginView.Button.Switch.Register">Sign_Up</x:String>
     <x:String x:Key="LoginView.Button.Login">Execute</x:String>

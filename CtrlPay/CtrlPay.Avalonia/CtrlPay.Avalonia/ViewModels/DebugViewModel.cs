@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using CtrlPay.Repos.Frontend;
+using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Reflection;
@@ -15,24 +16,35 @@ public partial class DebugPropertyViewModel : ObservableObject
 
     public string Name { get; }
 
-    public bool Value
+    // Pomocné vlastnosti pro XAML, aby věděl, co zobrazit
+    public bool IsBool => _info.PropertyType == typeof(bool);
+    public bool IsEnum => _info.PropertyType.IsEnum;
+
+    // Seznam hodnot pro Dropdown (pokud je to Enum)
+    public System.Collections.IEnumerable? EnumValues =>
+        IsEnum ? Enum.GetValues(_info.PropertyType) : null;
+
+    // Hodnota musí být 'object', aby zvládla bool i Role
+    public object Value
     {
-        get => (bool)_info.GetValue(null)!;
+        get => _info.GetValue(null)!;
         set
         {
-            if ((bool)_info.GetValue(null)! != value)
+            var current = _info.GetValue(null);
+            if (value != null && !Equals(current, value))
             {
-                _info.SetValue(null, value);
-                OnPropertyChanged();
-
-                // Pošleme globální zprávu, že se změnil Debug mód
-                WeakReferenceMessenger.Default.Send(new DebugModeChangedMessage(Name, value));
+                if (_info.PropertyType.IsInstanceOfType(value) ||
+                    (_info.PropertyType == typeof(bool) && value is bool))
+                {
+                    _info.SetValue(null, value);
+                    OnPropertyChanged();
+                    WeakReferenceMessenger.Default.Send(new DebugModeChangedMessage(Name, value));
+                }
             }
         }
     }
 
-    // Jednoduchý záznam pro zprávu
-    public record DebugModeChangedMessage(string PropertyName, bool NewValue);
+    public record DebugModeChangedMessage(string PropertyName, object NewValue);
 
     public DebugPropertyViewModel(PropertyInfo info)
     {
@@ -50,7 +62,8 @@ public partial class DebugWindowViewModel : ObservableObject
     {
         var props = typeof(DebugMode)
             .GetProperties(BindingFlags.Public | BindingFlags.Static)
-            .Where(p => p.PropertyType == typeof(bool) && p.Name != "StartDebug")
+            .Where(p => (p.PropertyType == typeof(bool) || p.PropertyType.IsEnum)
+                        && p.Name != "StartDebug")
             .Select(p => new DebugPropertyViewModel(p));
 
         DebugItems = new ObservableCollection<DebugPropertyViewModel>(props);

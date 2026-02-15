@@ -45,59 +45,50 @@
 
         <ScrollViewer Grid.Column="1" Padding="0">
             <ItemsControl ItemsSource="{Binding Debts}">
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate x:DataType="hc:TransactionItem">
-                        <Border Background="{DynamicResource Color.Surface}" 
-                                CornerRadius="12" 
-                                Margin="0,0,10,10" 
-                                BorderBrush="{DynamicResource Color.Border}" 
-                                BorderThickness="1"
-                                ClipToBounds="True"> 
-                                <Border.Transitions>
-                                    <Transitions>
-                                        <DoubleTransition Property="Opacity" Duration="0:0:0.2"/>
-                                    </Transitions>
-                                </Border.Transitions>
-                                <StackPanel>
-                                <Border Background="Transparent"
-                                        BorderThickness="0"
-                                        CornerRadius="12"
-                                        HorizontalAlignment="Stretch"
-                                        Padding="20">
-                
-                                    <Grid ColumnDefinitions="10,*, 10, Auto" Margin="5">
-                                        <Border Grid.Column="0"             
-                                                    Classes="indicator" 
-                                                    Tag="{Binding Status}" 
-                                                    CornerRadius="2" Height="20"
-                                                    Width="4" HorizontalAlignment="Center"
-                                                    VerticalAlignment="Stretch"
-                                                    Margin="0,0,10,0">
-                                        </Border>
+    <ItemsControl.ItemTemplate>
+        <DataTemplate x:DataType="hc:TransactionItem">
+            <Border Classes="customerCard" 
+                    Margin="0,0,10,8" 
+                    Padding="15,0"
+                    Height="60"> <Grid ColumnDefinitions="Auto, *, Auto">
+                    
+                    <Border Grid.Column="0"             
+                            Classes="indicator" 
+                            Tag="{Binding Status}" 
+                            CornerRadius="2" 
+                            Height="24"
+                            Width="4" 
+                            VerticalAlignment="Center"
+                            Margin="0,0,15,0"/>
 
-                                        <TextBlock Text="{Binding Description}" 
-                                                   FontSize="16" 
-                                                   Grid.Column="1"
-                                                   VerticalAlignment="Center"
-                                                   Foreground="{DynamicResource Color.Text.Primary}"
-                                                   TextTrimming="CharacterEllipsis"
-                                                   MaxLines="1" />
-                                        <StackPanel Grid.Column="3" Orientation="Horizontal" VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding Amount, StringFormat=\{0:N12\}}" 
-                                                       FontSize="18" 
-                                                       FontWeight="SemiBold"/>
-                                            <TextBlock Text="{DynamicResource App.Currency}" 
-                                                       Margin="8,0,0,0" 
-                                                       VerticalAlignment="Bottom" 
-                                                       Opacity="0.7"/>
-                                        </StackPanel>
-                                    </Grid>
-                                </Border>
-                            </StackPanel>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <TextBlock Text="{Binding Description}" 
+                                   FontSize="15" 
+                                   FontWeight="Medium"
+                                   Foreground="{DynamicResource Brush.Text.Primary}"
+                                   TextTrimming="CharacterEllipsis"/>
+                        </StackPanel>
+
+                    <StackPanel Grid.Column="2" 
+                                Orientation="Horizontal" 
+                                VerticalAlignment="Center" 
+                                HorizontalAlignment="Right">
+                        <TextBlock Text="{Binding Amount, StringFormat=\{0:N12\}}" 
+                                   FontSize="18" 
+                                   FontWeight="Bold"
+                                   Foreground="{DynamicResource Brush.Text.Primary}"/>
+                        <TextBlock Text="{DynamicResource App.Currency}" 
+                                   Margin="6,0,0,2" 
+                                   VerticalAlignment="Bottom" 
+                                   FontSize="12"
+                                   Foreground="{DynamicResource Brush.Text.Secondary}"/>
+                    </StackPanel>
+                    
+                </Grid>
+            </Border>
+        </DataTemplate>
+    </ItemsControl.ItemTemplate>
+</ItemsControl>
         </ScrollViewer>
     </Grid>
 </UserControl>
