@@ -101,6 +101,7 @@ public class CustomerRepo
             AppLogger.Warning($"Customer data is invalid. Update aborted.");
             return;
         }
+        Cache[Cache.FindIndex(c => c.Id == cust.Id)] = cust;
         AppLogger.Info($"Updating customer in API...");
         string? json = await HttpWorker.HttpPost($"api/customers/edit", cust.ToApiDTO(), true, default);
         if (string.IsNullOrWhiteSpace(json))
