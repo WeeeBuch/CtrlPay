@@ -31,7 +31,7 @@ namespace CtrlPay.API.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
             int? accountIndex = user.LoyalCustomer.Account.Index;
-            if(accountIndex == null)
+            if (accountIndex == null)
             {
                 return Forbid(JsonSerializer.Serialize(new ReturnModel("P1", ReturnModelSeverityEnum.Error)));
             }
@@ -69,15 +69,15 @@ namespace CtrlPay.API.Controllers
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
             Payment payment = _db.Payments.Where(p => p.Id == request.PaymentId).First();
-            if(user == null)
+            if (user == null)
             {
                 return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
             }
-            if(user.LoyalCustomer == null)
+            if (user.LoyalCustomer == null)
             {
                 return Forbid(JsonSerializer.Serialize(new ReturnModel("A6", ReturnModelSeverityEnum.Error)));
             }
-            if(payment == null)
+            if (payment == null)
             {
                 return NotFound(new ReturnModel("P2", ReturnModelSeverityEnum.Error));
             }
@@ -86,7 +86,7 @@ namespace CtrlPay.API.Controllers
                 //neni jeho
                 return Forbid(JsonSerializer.Serialize(new ReturnModel("P3", ReturnModelSeverityEnum.Error)));
             }
-            if(payment.Status == PaymentStatusEnum.Paid)
+            if (payment.Status == PaymentStatusEnum.Paid)
             {
                 return BadRequest(new ReturnModel("P4", ReturnModelSeverityEnum.Warning));
             }
@@ -185,7 +185,7 @@ namespace CtrlPay.API.Controllers
             _db.SaveChanges();
             return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));
         }
-
+    }
     public class CreatePaymentRequest
     {
         public int CustomerId { get; set; }
