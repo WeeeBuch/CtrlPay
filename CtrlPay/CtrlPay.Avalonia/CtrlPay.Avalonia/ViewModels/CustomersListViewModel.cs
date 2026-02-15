@@ -26,18 +26,12 @@ public partial class CustomersListViewModel : ViewModelBase
     [RelayCommand]
     public void AddCustomer()
     {
-        var newDto = new FrontendCustomerDTO
-        {
-            FirstName = "",
-            LastName = "",
-            Physical = true, 
-            Company = ""
-        };
+        // Pokud už nahoře jeden rozdělaný (nový) je, nepouštěj další
+        if (Customers.Any(c => c.Editing && c.Model.Id == 0))
+            return;
 
-        CustomerPieceViewModel newVm = new(newDto)
-        {
-            Editing = true
-        };
+        var newDto = new FrontendCustomerDTO { Physical = true, FirstName = "", LastName = "", Company = "" };
+        var newVm = new CustomerPieceViewModel(newDto) { Editing = true };
         newVm.Model.BeginEdit();
 
         Customers.Insert(0, newVm);
@@ -69,28 +63,43 @@ public partial class CustomersListViewModel : ViewModelBase
     {
         var resultList = new List<CustomerPieceViewModel>();
 
+        // 1. Nejdřív si do výsledků přidáme všechny, co právě editujeme 
+        // (včetně těch nových s ID 0)
+        var editingNow = Customers.Where(c => c.Editing).ToList();
+        resultList.AddRange(editingNow);
+
+        // 2. Projdeme data z databáze
         foreach (var dto in data)
         {
+            // Pokud už v seznamu je (a není to ten, co právě editujeme - ten už tam je z bodu 1)
             var existingVm = Customers.FirstOrDefault(vm => vm.Model.Id == dto.Id);
+
             if (existingVm != null)
             {
                 if (!existingVm.Editing)
                 {
                     existingVm.Model = dto;
                 }
-                resultList.Add(existingVm);
+
+                // Přidáme ho do resultListu, pokud tam ještě není (nebyl v editingNow)
+                if (!resultList.Contains(existingVm))
+                {
+                    resultList.Add(existingVm);
+                }
             }
             else
             {
+                // Je to nový zákazník z DB, kterého ještě v UI nemáme
                 resultList.Add(new CustomerPieceViewModel(dto));
             }
         }
 
-        // Odstranění přebytečných
+        // 3. Smazání těch, co nejsou v resultListu 
+        // (Teď už to nesmaže ty s Editing = true, protože jsou v resultListu)
         var toRemove = Customers.Where(c => !resultList.Contains(c)).ToList();
         foreach (var item in toRemove) Customers.Remove(item);
 
-        // Uspořádání podle výsledků filtru
+        // 4. Seřazení (ponecháme tvou logiku Move/Insert)
         for (int i = 0; i < resultList.Count; i++)
         {
             var targetVm = resultList[i];
