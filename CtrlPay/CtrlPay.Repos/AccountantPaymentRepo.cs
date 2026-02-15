@@ -89,7 +89,7 @@ namespace CtrlPay.Repos
                 CustomerId = 1,
                 ExpectedAmountXMR = 1.50m,
                 PaidAmountXMR = 0m,
-                Status = PaymentStatusEnum.Unpaid,
+                Status = StatusEnum.Pending,
                 CreatedAt = DateTime.UtcNow.AddDays(-2),
                 DueDate = DateTime.UtcNow.AddDays(5)
             },
@@ -99,7 +99,7 @@ namespace CtrlPay.Repos
                 CustomerId = 1,
                 ExpectedAmountXMR = 0.75m,
                 PaidAmountXMR = 0.30m,
-                Status = PaymentStatusEnum.PartiallyPaid,
+                Status = StatusEnum.PartiallyPaid,
                 CreatedAt = DateTime.UtcNow.AddDays(-1),
                 DueDate = DateTime.UtcNow.AddDays(6)
             },
@@ -109,7 +109,7 @@ namespace CtrlPay.Repos
                 CustomerId = 1,
                 ExpectedAmountXMR = 2.00m,
                 PaidAmountXMR = 2.00m,
-                Status = PaymentStatusEnum.Paid,
+                Status = StatusEnum.Paid,
                 CreatedAt = DateTime.UtcNow.AddDays(-5),
                 PaidAt = DateTime.UtcNow.AddDays(-4),
                 DueDate = DateTime.UtcNow.AddDays(2)
@@ -120,7 +120,7 @@ namespace CtrlPay.Repos
                 CustomerId = 1,
                 ExpectedAmountXMR = 1.20m,
                 PaidAmountXMR = 1.50m,
-                Status = PaymentStatusEnum.Overpaid,
+                Status = StatusEnum.Overpaid,
                 CreatedAt = DateTime.UtcNow.AddDays(-3),
                 PaidAt = DateTime.UtcNow.AddDays(-2),
                 DueDate = DateTime.UtcNow.AddDays(4)
@@ -131,7 +131,7 @@ namespace CtrlPay.Repos
                 CustomerId = 1,
                 ExpectedAmountXMR = 3.00m,
                 PaidAmountXMR = 0m,
-                Status = PaymentStatusEnum.Expired,
+                Status = StatusEnum.Expired,
                 CreatedAt = DateTime.UtcNow.AddDays(-10),
                 DueDate = DateTime.UtcNow.AddDays(-2)
             },
@@ -141,7 +141,7 @@ namespace CtrlPay.Repos
                 CustomerId = 1,
                 ExpectedAmountXMR = 0.90m,
                 PaidAmountXMR = 0m,
-                Status = PaymentStatusEnum.Cancelled,
+                Status = StatusEnum.Cancelled,
                 CreatedAt = DateTime.UtcNow.AddDays(-4),
                 DueDate = DateTime.UtcNow.AddDays(3)
             },
@@ -151,7 +151,7 @@ namespace CtrlPay.Repos
                 CustomerId = 1,
                 ExpectedAmountXMR = 1.10m,
                 PaidAmountXMR = 0m,
-                Status = PaymentStatusEnum.WaitingForPayment,
+                Status = StatusEnum.WaitingForPayment,
                 CreatedAt = DateTime.UtcNow,
                 DueDate = DateTime.UtcNow.AddDays(7)
             }

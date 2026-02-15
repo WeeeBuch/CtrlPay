@@ -1,4 +1,5 @@
 ﻿using CtrlPay.Entities;
+using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -14,7 +15,7 @@ public class FrontendPaymentDTO
     public int? CustomerId { get; set; }
     public decimal ExpectedAmountXMR { get; set; }
     public decimal PaidAmountXMR { get; set; }
-    public PaymentStatusEnum Status { get; set; }
+    public StatusEnum Status { get; set; }
     public DateTime CreatedAt { get; set; }
     public DateTime? PaidAt { get; set; }
     public DateTime? DueDate { get; set; }
@@ -30,7 +31,7 @@ public class FrontendPaymentDTO
         CustomerId = dto.CustomerId;
         ExpectedAmountXMR = dto.ExpectedAmountXMR;
         PaidAmountXMR = dto.PaidAmountXMR;
-        Status = dto.Status;
+        Status = StatusConverter.ConvertPaymentStatusToFrontendStatus(dto.Status);
         CreatedAt = dto.CreatedAt;
         PaidAt = dto.PaidAt ?? default;
         DueDate = dto.DueDate ?? default;
@@ -45,7 +46,7 @@ public class FrontendPaymentDTO
             CustomerId = CustomerId,
             ExpectedAmountXMR = ExpectedAmountXMR,
             PaidAmountXMR = PaidAmountXMR,
-            Status = Status,
+            Status = StatusConverter.ConvertFrontendStatusToPaymentStatus(Status),
             CreatedAt = CreatedAt,
             PaidAt = PaidAt,
             DueDate = DueDate,
