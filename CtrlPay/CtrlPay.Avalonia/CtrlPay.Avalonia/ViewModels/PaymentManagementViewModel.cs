@@ -39,24 +39,8 @@ public partial class PaymentManagementViewModel : ViewModelBase
     public void ApplySorting(string? sortingMethod)
     {
         AppLogger.Info($"Sorting Payments by: {sortingMethod}");
-        var resultList = new List<TransactionItem>();
 
-        foreach (var dto in TransactionRepo.GetSortedTransactions(sortingMethod))
-        {
-            var existingVm = Payments.FirstOrDefault(vm =>
-                vm.TransactionDTOBase == dto);
-
-            if (existingVm != null)
-            {
-                resultList.Add(existingVm);
-            }
-            else
-            {
-                resultList.Add(new(dto));
-            }
-        }
-
-        Payments.ReplaceAll(resultList);
+        Payments.ReplaceAll(AccountantPaymentRepo.GetSortedPayments(sortingMethod));
         AppLogger.Info($"Sorting finished.");
     }
 
@@ -65,15 +49,14 @@ public partial class PaymentManagementViewModel : ViewModelBase
 
     partial void OnSearchTermChanged(string value)
     {
+        ApplySorting(null);
+
         if (string.IsNullOrWhiteSpace(value))
         {
-            ApplySorting(null);
+            return;
         }
-        else
-        {
-            ApplySorting(null);
-            var resultList = Payments.Where(vm => vm.Description.ToLower().Contains(value.ToLower())).ToList();
-            Payments.ReplaceAll(resultList);
-        }
+
+        var resultList = Payments.Where(vm => vm.Title.ToLower().Contains(value.ToLower())).ToList();
+        Payments.ReplaceAll(resultList);
     }
 }

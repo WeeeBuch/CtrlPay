@@ -52,7 +52,7 @@ namespace CtrlPay.Repos
         }
 
         // Společné řazení
-        protected static List<FrontendTransactionDTO> SortData(List<FrontendTransactionDTO> data, string? sortingMethod)
+        protected static List<FrontendPaymentDTO> SortData(List<FrontendPaymentDTO> data, string? sortingMethod)
         {
             if (sortingMethod != null) SortMethod = sortingMethod;
             string method = sortingMethod ?? SortMethod;
@@ -61,17 +61,17 @@ namespace CtrlPay.Repos
 
             return method switch
             {
-                "AmountAsc" => [.. data.OrderBy(d => d.Amount)],
-                "AmountDesc" => [.. data.OrderByDescending(d => d.Amount)],
-                "DateAsc" => [.. data.OrderBy(d => d.Timestamp)],
-                _ => [.. data.OrderByDescending(d => d.Timestamp)] // Default DateDesc
+                "AmountAsc" => [.. data.OrderBy(d => d.PaidAmountXMR)],
+                "AmountDesc" => [.. data.OrderByDescending(d => d.PaidAmountXMR)],
+                "DateAsc" => [.. data.OrderBy(d => d.CreatedAt)],
+                _ => [.. data.OrderByDescending(d => d.CreatedAt)] // Default DateDesc
             };
         }
         public static async Task UpdatePaymetsCacheFromApi(CancellationToken ct)
         {
             AppLogger.Info($"Updating Cached Payments...");
             #region Debug
-            if (DebugMode.MockPayments)
+            if (DebugMode.MockPaymentManager)
             {
                 AppLogger.Info($"Returning Mock payments...");
                 Cache = GetMockPayments();
@@ -156,6 +156,11 @@ namespace CtrlPay.Repos
                 DueDate = DateTime.UtcNow.AddDays(7)
             }
         ];
+
+        public static List<FrontendPaymentDTO> GetSortedPayments(string? sortingMethod)
+        {
+            return Cache;
+        }
 
     }
 }

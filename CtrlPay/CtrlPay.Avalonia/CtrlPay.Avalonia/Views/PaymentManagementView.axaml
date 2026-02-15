@@ -59,7 +59,8 @@
                              Background="Transparent"
                              BorderThickness="0">
                         <ListBox.ItemTemplate>
-                            <DataTemplate x:DataType="repos:FrontendPaymentDTO"> <Border Classes="customerCard" Margin="0,0:5,8" Padding="15,0" Height="60">
+                            <DataTemplate x:DataType="repos:FrontendPaymentDTO"> 
+                                <Border Classes="customerCard" Margin="1" Padding="15,0" Height="60">
                                     <Grid ColumnDefinitions="Auto, *, Auto">
                                         <Border Grid.Column="0" Classes="indicator" Tag="{Binding Status}" Width="4" Height="24" VerticalAlignment="Center" Margin="0,0,15,0"/>
                     
@@ -69,7 +70,7 @@
                                         </StackPanel>
                     
                                         <StackPanel Grid.Column="2" VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding ExpectedAmountXMR, StringFormat=\{0:N4\}}" 
+                                            <TextBlock Text="{Binding ExpectedAmountXMR, StringFormat=\{0:N12\}}" 
                                                        FontSize="18" FontWeight="Bold"/>
                                         </StackPanel>
                                     </Grid>
