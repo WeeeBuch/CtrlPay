@@ -1,71 +1,45 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Upomínka k platbě</title>
-</head>
-<body style="margin:0;padding:0;background-color:#f4f6f8;font-family:Arial,Helvetica,sans-serif;">
+@model PaymentReminderEmailModel
+@{
+    Layout = "_EmailLayout";
+    ViewData["Title"] = "Upomínka k platbě";
+}
 
-<table width="100%" cellpadding="0" cellspacing="0" style="background-color:#f4f6f8;padding:30px 0;">
-<tr>
-<td align="center">
+<p>Dobrý den @Model.CustomerName,</p>
 
-<table width="600" cellpadding="0" cellspacing="0" style="background:#ffffff;border-radius:8px;padding:40px;">
-    
-    <!-- Header -->
+<p>
+    evidujeme neuhrazenou platbu vytvořenou prostřednictvím platformy <strong>CtrlPay</strong>.
+</p>
+
+<table width="100%" cellpadding="0" cellspacing="0" 
+       style="background:#f9fafb;border-radius:6px;padding:20px;margin:25px 0;">
     <tr>
-        <td style="text-align:center;padding-bottom:30px;">
-            <h1 style="margin:0;color:#111827;">CtrlPay</h1>
-            <p style="margin:5px 0 0 0;color:#6b7280;font-size:14px;">
-                Kryptoměnové platby pro firmy
-            </p>
+        <td style="font-size:14px;color:#374151;">
+            <strong>ID platby:</strong> @Model.PaymentId<br>
+            <strong>Vytvořeno:</strong> @Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")<br>
+
+            @if (Model.DueDate.HasValue)
+            {
+                <text>
+                <strong>Datum splatnosti:</strong> @Model.DueDate.Value.ToString("dd.MM.yyyy")<br><br>
+                </text>
+            }
+
+            <strong>Požadovaná částka:</strong> @Model.ExpectedAmountXMR.ToString("0.000000000000") XMR<br>
+            <strong>Již uhrazeno:</strong> @Model.PaidAmountXMR.ToString("0.000000000000") XMR<br>
+            <strong>Zbývá uhradit:</strong> @Model.RemainingAmountXMR.ToString("0.000000000000") XMR
         </td>
     </tr>
-
-    <!-- Content -->
-    <tr>
-        <td style="color:#111827;font-size:16px;line-height:1.6;">
-            <p>Dobrý den {{CustomerName}},</p>
-
-            <p>
-                evidujeme neuhrazenou platbu vytvořenou prostřednictvím platformy <strong>CtrlPay</strong>.
-            </p>
-
-            <table width="100%" cellpadding="0" cellspacing="0" 
-                   style="background:#f9fafb;border-radius:6px;padding:20px;margin:25px 0;">
-                <tr>
-                    <td style="font-size:14px;color:#374151;">
-                        <strong>ID platby:</strong> {{PaymentId}}<br>
-                        <strong>Vytvořeno:</strong> {{CreatedAt}}<br>
-                        <strong>Datum splatnosti:</strong> {{DueDate}}<br><br>
-                        
-                        <strong>Požadovaná částka:</strong> {{ExpectedAmountXMR}} XMR<br>
-                        <strong>Již uhrazeno:</strong> {{PaidAmountXMR}} XMR<br>
-                        <strong>Zbývá uhradit:</strong> {{RemainingAmountXMR}} XMR
-                    </td>
-                </tr>
-            </table>
-
-            <p>
-                Prosíme o úhradu zbývající částky co nejdříve.
-            </p>
-
-            <p style="font-size:14px;color:#6b7280;">
-                Pokud již byla platba odeslána, tento e-mail můžete ignorovat.
-            </p>
-
-            <p>
-                Děkujeme,<br>
-                <strong>Tým CtrlPay</strong>
-            </p>
-        </td>
-    </tr>
-
 </table>
 
-</td>
-</tr>
-</table>
+<p>
+    Prosíme o úhradu zbývající částky co nejdříve.
+</p>
 
-</body>
-</html>
+<p style="font-size:14px;color:#6b7280;">
+    Pokud již byla platba odeslána, tento e-mail můžete ignorovat.
+</p>
+
+<p>
+    Děkujeme,<br>
+    <strong>Tým CtrlPay</strong>
+</p>

@@ -35,6 +35,7 @@
     "FromAddress": "upominky@firma.cz",
     "FromName": "CtrlPay"
   },
+  "SupportEmail": "",
   "AllowedHosts": "*",
   "Kestrel": {
     "Endpoints": {

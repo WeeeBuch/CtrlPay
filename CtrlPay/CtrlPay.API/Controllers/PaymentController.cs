@@ -203,16 +203,32 @@ namespace CtrlPay.API.Controllers
             _db.SaveChanges();
             return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));
         }
+        [HttpGet]
+        [Route("overpaid")]
+        // GET : api/payments/overpaid
+        public IActionResult Overpaid()
+        {
+            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
+            if (role != Role.Accountant && role != Role.Admin)
+            {
+                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+            }
+            List<Entities.Payment> payments = _db.Payments
+                .Where(p => p.Status == PaymentStatusEnum.Overpaid)
+                .ToList();
+            List<PaymentApiDTO> paymentsDTO = new List<PaymentApiDTO>();
+            foreach (var payment in payments)
+            {
+                paymentsDTO.Add(new PaymentApiDTO(payment));
+            }
+            return Ok(new ReturnModel<List<PaymentApiDTO>>("P0", ReturnModelSeverityEnum.Ok, paymentsDTO));
+        }
     }
     public class CreatePaymentRequest
     {
         public int CustomerId { get; set; }
         public decimal ExpectedAmountXMR { get; set; }
         public DateTime DueDate { get; set; }
-    }
-
-    public class CreatePaymentRequest
-    {
     }
 
     public class PayFromCreditRequest
