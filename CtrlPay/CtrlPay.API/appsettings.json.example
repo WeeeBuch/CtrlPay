@@ -19,6 +19,15 @@
     "Username": "monero",
     "Password": "your-wallet-rpc-password"
   },
+  "Smtp": {
+    "Host": "mail.firma.cz",
+    "Port": 587,
+    "UseStartTls": true,
+    "Username": "upominky@firma.cz",
+    "Password": "tajneheslo",
+    "FromAddress": "upominky@firma.cz",
+    "FromName": "CtrlPay"
+  },
   "AllowedHosts": "*",
   "Kestrel": {
     "Endpoints": {
