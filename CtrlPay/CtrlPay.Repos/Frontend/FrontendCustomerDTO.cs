@@ -21,6 +21,8 @@ public class FrontendCustomerDTO : IEditableObject
     public string? PostalCode { get; set; }
     public string? Email { get; set; }
     public string? Phone { get; set; }
+    public bool Physical { get; set; }
+    public string? Company { get; set; }
 
     public bool IsLoyal { get; set; }
     public string Username { get; set; }

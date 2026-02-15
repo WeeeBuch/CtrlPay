@@ -1,7 +1,10 @@
 ﻿using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Numerics;
 using System.Text.Json;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace CtrlPay.Repos;
@@ -15,7 +18,7 @@ public class CustomerRepo
     {
         AppLogger.Info($"Updating Cached Customers...");
         #region Debug
-        if (DebugMode.MockPayments)
+        if (DebugMode.MockCustomers)
         {
             AppLogger.Info($"Returning Mock customers...");
             Cache = [
@@ -86,6 +89,17 @@ public class CustomerRepo
     }
     public static List<FrontendCustomerDTO> GetCustomers() => Cache;
 
+    public static List<FrontendCustomerDTO> Filter(string input)
+    {
+        return Cache.Where(c =>
+            (c.FirstName.Contains(input, StringComparison.OrdinalIgnoreCase)) ||
+            (c.LastName.Contains(input, StringComparison.OrdinalIgnoreCase)) ||
+            (c.Email.Contains(input, StringComparison.OrdinalIgnoreCase)) ||
+            (c.Phone.Contains(input, StringComparison.OrdinalIgnoreCase)) ||
+            (c.Company.Contains(input, StringComparison.OrdinalIgnoreCase))
+        ).ToList();
+    }
+
     public static async Task DeleteCustomer(FrontendCustomerDTO cust)
     {
         Cache.Remove(cust);
@@ -100,6 +114,13 @@ public class CustomerRepo
 
     public static async Task UpdateCustomer(FrontendCustomerDTO cust)
     {
+        bool valid = ValidateCustomer(cust);
+        if(!valid)
+        {
+            //TODO: vyhodit něco uživateli, že data jsou nevalidní
+            AppLogger.Warning($"Customer data is invalid. Update aborted.");
+            return;
+        }
         AppLogger.Info($"Updating customer in API...");
         string? json = await HttpWorker.HttpPost($"api/customers/edit", cust.ToApiDTO(), true, default);
         if (string.IsNullOrWhiteSpace(json))
@@ -118,5 +139,65 @@ public class CustomerRepo
             AppLogger.Warning($"Get response was NULL.");
             return;
         }
+    }
+
+    private static bool ValidateCustomer(FrontendCustomerDTO cust)
+    {
+        bool isValid = true;
+        // ===== POVINNÁ POLE =====
+        if (string.IsNullOrWhiteSpace(cust.FirstName))
+            isValid = false;
+
+        if (string.IsNullOrWhiteSpace(cust.LastName))
+            isValid = false;
+
+        // ===== MAXIMÁLNÍ DÉLKY =====
+        if (!string.IsNullOrEmpty(cust.FirstName) && cust.FirstName.Length > 255)
+            isValid = false;
+
+        if (!string.IsNullOrEmpty(cust.LastName) && cust.LastName.Length > 255)
+            isValid = false;
+
+        if (!string.IsNullOrEmpty(cust.Title) && cust.Title.Length > 10)
+            isValid = false;
+
+        if (!string.IsNullOrEmpty(cust.Address) && cust.Address.Length > 255)
+            isValid = false;
+
+        if (!string.IsNullOrEmpty(cust.PostalCode) && cust.PostalCode.Length > 255)
+            isValid = false;
+
+        if (!string.IsNullOrEmpty(cust.City) && cust.City.Length > 255)
+            isValid = false;
+
+        if (!string.IsNullOrEmpty(cust.Email) && cust.Email.Length > 255)
+            isValid = false;
+
+        if (!string.IsNullOrEmpty(cust.Phone) && cust.Phone.Length > 255)
+            isValid = false;
+
+        if (!string.IsNullOrEmpty(cust.Company) && cust.Company.Length > 255)
+            isValid = false;
+
+        // ===== FORMÁT =====
+        if (!string.IsNullOrEmpty(cust.Email) &&
+            !new EmailAddressAttribute().IsValid(cust.Email))
+            isValid = false;
+
+        if (!string.IsNullOrEmpty(cust.PostalCode) &&
+            !Regex.IsMatch(cust.PostalCode, @"^\d{5}$"))
+            isValid = false;
+
+        if (!string.IsNullOrEmpty(cust.Phone) &&
+            !Regex.IsMatch(cust.Phone, @"^[0-9+\s]+$"))
+            isValid = false;
+
+        // ===== BUSINESS LOGIKA =====
+        if (cust.Physical && !string.IsNullOrEmpty(cust.Company))
+            isValid = false;
+
+        if (!cust.Physical && string.IsNullOrWhiteSpace(cust.Company))
+            isValid = false;
+        return isValid;
     }
 }
