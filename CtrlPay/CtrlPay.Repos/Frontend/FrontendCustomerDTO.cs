@@ -50,6 +50,8 @@ public class FrontendCustomerDTO : IEditableObject
         PostalCode = customer.PostalCode;
         Email = customer.Email;
         Phone = customer.Phone;
+        Physical = customer.Physical;
+        Company = customer.Company;
     }
 
     public CustomerApiDTO ToApiDTO()
@@ -64,7 +66,9 @@ public class FrontendCustomerDTO : IEditableObject
             City = City ?? string.Empty,
             PostalCode = PostalCode ?? string.Empty,
             Email = Email ?? string.Empty,
-            Phone = Phone ?? string.Empty
+            Phone = Phone ?? string.Empty,
+            Physical = Physical,
+            Company = Company ?? string.Empty
         };
     }
 
