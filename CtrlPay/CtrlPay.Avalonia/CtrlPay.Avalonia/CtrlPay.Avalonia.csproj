@@ -47,6 +47,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\PaymentManagementView.axaml.cs">
+      <DependentUpon>PaymentManagementView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SettingsView.axaml.cs">
       <DependentUpon>SettingsView.axaml</DependentUpon>
     </Compile>

@@ -74,6 +74,7 @@ namespace CtrlPay.Avalonia.ViewModels
             if (role == Role.Accountant)
             {
                 NavigationItems.Add(new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers));
+                NavigationItems.Add(new NavItem("NavbarView.PaymentManagement", new PaymentManagementView(), IconData.Cash));
             }
 
             if (role == Role.Admin)
