@@ -92,11 +92,11 @@ public class CustomerRepo
     public static List<FrontendCustomerDTO> Filter(string input)
     {
         return Cache.Where(c =>
-            (c.FirstName.Contains(input, StringComparison.OrdinalIgnoreCase)) ||
-            (c.LastName.Contains(input, StringComparison.OrdinalIgnoreCase)) ||
-            (c.Email.Contains(input, StringComparison.OrdinalIgnoreCase)) ||
-            (c.Phone.Contains(input, StringComparison.OrdinalIgnoreCase)) ||
-            (c.Company.Contains(input, StringComparison.OrdinalIgnoreCase))
+            (c.FirstName != null && c.FirstName.Contains(input, StringComparison.OrdinalIgnoreCase)) ||
+            (c.LastName != null && c.LastName.Contains(input, StringComparison.OrdinalIgnoreCase)) ||
+            (c.Email != null && c.Email.Contains(input, StringComparison.OrdinalIgnoreCase)) ||
+            (c.Phone != null && c.Phone.Contains(input, StringComparison.OrdinalIgnoreCase)) ||
+            (c.Company != null && c.Company.Contains(input, StringComparison.OrdinalIgnoreCase))
         ).ToList();
     }
 
