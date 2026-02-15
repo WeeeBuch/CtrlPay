@@ -1,3 +1,4 @@
+﻿using CtrlPay.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,11 +34,15 @@ public static class DebugMode
 
     public static bool MockCustomers { get; set; } = false;
 
+    public static bool OverrideRole { get; set; } = false;
+    public static Role DebugRole { get; set; } = Role.Customer;
+
     public static List<DebugProperty> GetDebugProperties()
     {
         return typeof(DebugMode)
             .GetProperties(BindingFlags.Public | BindingFlags.Static)
-            .Where(p => p.PropertyType == typeof(bool) && p.Name != nameof(StartDebug))
+            .Where(p => (p.PropertyType == typeof(bool) || p.PropertyType.IsEnum)
+                        && p.Name != nameof(StartDebug))
             .Select(p => new DebugProperty(p))
             .ToList();
     }

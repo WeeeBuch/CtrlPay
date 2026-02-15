@@ -52,7 +52,15 @@ namespace CtrlPay.Avalonia.ViewModels
 
         private void GenerateNavItems()
         {
-            Role role = Credentials.Role;
+            Role role;
+            if (DebugMode.OverrideRole)
+            {
+                role = DebugMode.DebugRole;
+            }
+            else
+            {
+                role = Credentials.Role;
+            }
 
             NavigationItems = [];
 
