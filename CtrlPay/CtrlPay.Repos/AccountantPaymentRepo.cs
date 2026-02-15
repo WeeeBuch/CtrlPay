@@ -4,12 +4,69 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace CtrlPay.Repos
 {
-    public class AccountantPaymentRepo : BaseRepo<PaymentApiDTO>
+    public class AccountantPaymentRepo
     {
+        // Data jsou statická, ale unikátní pro každý typ TApiDto (takže se nemíchají)
+        protected static List<FrontendPaymentDTO> Cache { get; set; } = [];
+        protected static DateTime LastUpdated { get; set; } = DateTime.MinValue;
+        protected static string SortMethod = "DateDesc";
+        protected static JsonSerializerOptions SerializerOptions = new() { PropertyNameCaseInsensitive = true };
+
+        // Společná metoda pro načtení seznamu
+        protected static async Task LoadListFromApi(
+            string url,
+            Func<PaymentApiDTO, FrontendPaymentDTO> mapper, // Funkce pro převod DTO
+            CancellationToken ct)
+        {
+            AppLogger.Info($"Getting json from API...");
+            string? json = await HttpWorker.HttpGet(url, true, ct);
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                AppLogger.Warning($"Get response was NULL.");
+                return;
+            }
+
+            try
+            {
+                AppLogger.Info($"Deserializing response...");
+                var result = JsonSerializer.Deserialize<ReturnModel<List<PaymentApiDTO>>>(json, SerializerOptions);
+
+                // Pokud je Body null, použijeme prázdný list, aby to nespadlo
+                var apiList = result?.Body ?? [];
+
+                // Atomická aktualizace - vytvoříme nový list a pak ho přiřadíme
+                // Kdyby někdo zrovna četl Cache, aplikace nespadne
+                Cache = [.. apiList.Select(mapper)];
+                LastUpdated = DateTime.UtcNow;
+                AppLogger.Info($"Cached Transactions updated at {LastUpdated}.");
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Error($"Transaction list parsing failed.", ex);
+            }
+        }
+
+        // Společné řazení
+        protected static List<FrontendTransactionDTO> SortData(List<FrontendTransactionDTO> data, string? sortingMethod)
+        {
+            if (sortingMethod != null) SortMethod = sortingMethod;
+            string method = sortingMethod ?? SortMethod;
+
+            AppLogger.Info($"Sorting data by: {method}");
+
+            return method switch
+            {
+                "AmountAsc" => [.. data.OrderBy(d => d.Amount)],
+                "AmountDesc" => [.. data.OrderByDescending(d => d.Amount)],
+                "DateAsc" => [.. data.OrderBy(d => d.Timestamp)],
+                _ => [.. data.OrderByDescending(d => d.Timestamp)] // Default DateDesc
+            };
+        }
         public static async Task UpdatePaymetsCacheFromApi(CancellationToken ct)
         {
             AppLogger.Info($"Updating Cached Payments...");
@@ -24,17 +81,81 @@ namespace CtrlPay.Repos
 
             await LoadListFromApi("/api/payments/all", p => new FrontendPaymentDTO(p), ct);
         }
-        private static List<FrontendTransactionDTO> GetMockPayments() =>
+        private static List<FrontendPaymentDTO> GetMockPayments() =>
         [
-            new() { Title = "Debug Debt 1", Amount = 52, Timestamp = DateTime.UtcNow, State = StatusEnum.Pending, Id = 1 },
-            new() { Title = "Debug Debt 2", Amount = 21, Timestamp = DateTime.UtcNow.AddDays(-1), State = StatusEnum.PartiallyPaid, Id = 2 },
-            new() { Title = "Debug Debt 3", Amount = 123.45m, Timestamp = DateTime.UtcNow.AddDays(-2), State = StatusEnum.Completed, Id = 3 },
-            new() { Title = "Debug Debt 4", Amount = 45, Timestamp = DateTime.UtcNow.AddDays(-3), State = StatusEnum.Confirmed, Id = 4 },
-            new() { Title = "Debug Debt 5", Amount = 75, Timestamp = DateTime.UtcNow.AddDays(-7), State = StatusEnum.Expired, Id = 5 },
-            new() { Title = "Debug Debt 6", Amount = 133, Timestamp = DateTime.UtcNow.AddDays(-8), State = StatusEnum.Overpaid, Id = 6 },
-            new() { Title = "Debug Debt 7", Amount = 454, Timestamp = DateTime.UtcNow.AddDays(-9), State = StatusEnum.WaitingForPayment, Id = 7 },
-            new() { Title = "Debug Debt 8", Amount = 735, Timestamp = DateTime.UtcNow.AddDays(-14), State = StatusEnum.Paid, Id = 8 },
-            new() { Title = "Debug Debt 9", Amount = 486, Timestamp = DateTime.UtcNow.AddDays(-15), State = StatusEnum.Cancelled, Id = 9 }
+            new FrontendPaymentDTO
+            {
+                Id = 1,
+                CustomerId = 1,
+                ExpectedAmountXMR = 1.50m,
+                PaidAmountXMR = 0m,
+                Status = PaymentStatusEnum.Unpaid,
+                CreatedAt = DateTime.UtcNow.AddDays(-2),
+                DueDate = DateTime.UtcNow.AddDays(5)
+            },
+            new FrontendPaymentDTO
+            {
+                Id = 2,
+                CustomerId = 1,
+                ExpectedAmountXMR = 0.75m,
+                PaidAmountXMR = 0.30m,
+                Status = PaymentStatusEnum.PartiallyPaid,
+                CreatedAt = DateTime.UtcNow.AddDays(-1),
+                DueDate = DateTime.UtcNow.AddDays(6)
+            },
+            new FrontendPaymentDTO
+            {
+                Id = 3,
+                CustomerId = 1,
+                ExpectedAmountXMR = 2.00m,
+                PaidAmountXMR = 2.00m,
+                Status = PaymentStatusEnum.Paid,
+                CreatedAt = DateTime.UtcNow.AddDays(-5),
+                PaidAt = DateTime.UtcNow.AddDays(-4),
+                DueDate = DateTime.UtcNow.AddDays(2)
+            },
+            new FrontendPaymentDTO  
+            {
+                Id = 4,
+                CustomerId = 1,
+                ExpectedAmountXMR = 1.20m,
+                PaidAmountXMR = 1.50m,
+                Status = PaymentStatusEnum.Overpaid,
+                CreatedAt = DateTime.UtcNow.AddDays(-3),
+                PaidAt = DateTime.UtcNow.AddDays(-2),
+                DueDate = DateTime.UtcNow.AddDays(4)
+            },
+            new FrontendPaymentDTO
+            {
+                Id = 5,
+                CustomerId = 1,
+                ExpectedAmountXMR = 3.00m,
+                PaidAmountXMR = 0m,
+                Status = PaymentStatusEnum.Expired,
+                CreatedAt = DateTime.UtcNow.AddDays(-10),
+                DueDate = DateTime.UtcNow.AddDays(-2)
+            },
+            new FrontendPaymentDTO
+            {
+                Id = 6,
+                CustomerId = 1,
+                ExpectedAmountXMR = 0.90m,
+                PaidAmountXMR = 0m,
+                Status = PaymentStatusEnum.Cancelled,
+                CreatedAt = DateTime.UtcNow.AddDays(-4),
+                DueDate = DateTime.UtcNow.AddDays(3)
+            },
+            new FrontendPaymentDTO
+            {
+                Id = 7,
+                CustomerId = 1,
+                ExpectedAmountXMR = 1.10m,
+                PaidAmountXMR = 0m,
+                Status = PaymentStatusEnum.WaitingForPayment,
+                CreatedAt = DateTime.UtcNow,
+                DueDate = DateTime.UtcNow.AddDays(7)
+            }
         ];
+
     }
 }

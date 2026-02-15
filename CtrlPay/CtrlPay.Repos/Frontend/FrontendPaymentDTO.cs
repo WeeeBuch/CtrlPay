@@ -18,4 +18,35 @@ public class FrontendPaymentDTO
     public DateTime CreatedAt { get; set; }
     public DateTime? PaidAt { get; set; }
     public DateTime? DueDate { get; set; }
+
+    public FrontendPaymentDTO()
+    {
+        
+    }
+    public FrontendPaymentDTO(PaymentApiDTO dto)
+    {
+        Id = dto.Id;
+        CustomerId = dto.CustomerId;
+        ExpectedAmountXMR = dto.ExpectedAmountXMR;
+        PaidAmountXMR = dto.PaidAmountXMR;
+        Status = dto.Status;
+        CreatedAt = dto.CreatedAt;
+        PaidAt = dto.PaidAt ?? default;
+        DueDate = dto.DueDate ?? default;
+    }
+
+    public PaymentApiDTO ToApiDto()
+    {
+        return new PaymentApiDTO
+        {
+            Id = Id,
+            CustomerId = CustomerId,
+            ExpectedAmountXMR = ExpectedAmountXMR,
+            PaidAmountXMR = PaidAmountXMR,
+            Status = Status,
+            CreatedAt = CreatedAt,
+            PaidAt = PaidAt,
+            DueDate = DueDate
+        };
+    }
 }
