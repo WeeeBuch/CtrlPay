@@ -7,6 +7,24 @@
 
     <x:String x:Key="LoginWindow.Title">Identify Thyself</x:String>
 
+    <x:String x:Key="NavbarView.Customers">Ports</x:String>
+    <x:String x:Key="Customers.Title">Trade Partners</x:String>
+    <x:String x:Key="Customers.SearchWatermark">Spyglass for merchants...</x:String>
+    <x:String x:Key="Customers.NewCustomerButton">New Contract</x:String>
+    <x:String x:Key="Customers.Button.Edit">Amend terms</x:String>
+    <x:String x:Key="Customers.Button.Delete">Toss overboard</x:String>
+    <x:String x:Key="Customers.Button.Cancel">Belay</x:String>
+    <x:String x:Key="Customers.Button.Save">Seal with wax</x:String>
+    <x:String x:Key="Customers.Toggle.Physical">Loner</x:String>
+    <x:String x:Key="Customers.Toggle.Company">Trading Fleet</x:String>
+    <x:String x:Key="Customers.Label.Company">Fleet Name</x:String>
+    <x:String x:Key="Customers.Label.Title">Honour</x:String>
+    <x:String x:Key="Customers.Label.FirstName">First name</x:String>
+    <x:String x:Key="Customers.Label.LastName">Family name</x:String>
+    <x:String x:Key="Customers.Label.Phone">Parley line</x:String>
+    <x:String x:Key="Customers.Label.Email">Carrier gull</x:String>
+    <x:String x:Key="Customers.Label.Address">Secret cove</x:String>
+
     <x:String x:Key="LoginView.Button.Switch.Login">Board the Ship</x:String>
     <x:String x:Key="LoginView.Button.Switch.Register">Join the Crew</x:String>
     <x:String x:Key="LoginView.Button.Login">Ahoy!</x:String>

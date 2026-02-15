@@ -1,0 +1,47 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="using:CtrlPay.Avalonia"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="1250" d:DesignHeight="720"
+             Background="{DynamicResource Color.Background}"
+             x:Class="CtrlPay.Avalonia.CustomersListView"
+             x:DataType="vm:CustomersListViewModel">
+  <Design.DataContext>
+    <vm:CustomersListViewModel/>
+  </Design.DataContext>
+
+  <Grid RowDefinitions="Auto, Auto, *">
+    <TextBlock Grid.Row="0" 
+               Text="{DynamicResource Customers.Title}" 
+               Classes="h1" 
+               Margin="20,20,20,10"/>
+
+    <Grid Grid.Row="1" ColumnDefinitions="*, Auto" Margin="20,0,20,15">
+        
+        <TextBox Grid.Column="0" 
+                 Text="{Binding SearchTextInput}" 
+                 Watermark="{DynamicResource Customers.SearchWatermark}"
+                 Margin="0,0,10,0"/>
+
+        <Button Grid.Column="1" 
+                Command="{Binding AddCustomerCommand}"
+                Padding="15,5">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+                <TextBlock Text="+" FontSize="18" FontWeight="Bold" VerticalAlignment="Center"/>
+                <TextBlock Text="{DynamicResource Customers.NewCustomerButton}" VerticalAlignment="Center"/>
+            </StackPanel>
+        </Button>
+    </Grid> 
+    <ScrollViewer Grid.Row="2">
+        <ItemsControl ItemsSource="{Binding Customers}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:CustomerPieceViewModel">
+                    <local:CustomerPiece/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ScrollViewer>
+</Grid>
+</UserControl>

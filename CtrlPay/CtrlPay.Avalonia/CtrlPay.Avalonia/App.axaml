@@ -15,6 +15,7 @@
         <StyleInclude Source="avares://CtrlPay.Avalonia/Styles/StatusTextBlock.axaml"/>
         <StyleInclude Source="avares://CtrlPay.Avalonia/Styles/StatusBorder.axaml"/>
         <StyleInclude Source="avares://CtrlPay.Avalonia/Styles/StylePillList.axaml"/>
+        <StyleInclude Source="avares://CtrlPay.Avalonia/Styles/StylesCustomer.axaml"/>
     </Application.Styles>
 
 </Application>

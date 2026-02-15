@@ -19,6 +19,13 @@
     "Username": "monero",
     "Password": "your-wallet-rpc-password"
   },
+  "Jwt": {
+    "Issuer": "CtrlPay.API",
+    "Audience": "CtrlPay.Clients",
+    "AccessTokenMinutes": 15,
+    "RefreshTokenDays": 7,
+    "PrivateKeyPem": ""
+  },
   "Smtp": {
     "Host": "mail.firma.cz",
     "Port": 587,
