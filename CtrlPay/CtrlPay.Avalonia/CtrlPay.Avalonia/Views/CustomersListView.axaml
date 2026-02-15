@@ -12,19 +12,24 @@
     <vm:CustomersListViewModel/>
   </Design.DataContext>
 
-  <Grid RowDefinitions="Auto, *">
-    <TextBlock Text="Seznam zákazníků" 
+  <Grid RowDefinitions="Auto, Auto, *">
+    <TextBlock Grid.Row="0" 
+               Text="Seznam zákazníků" 
                Classes="h1" 
-               Margin="20"/>
+               Margin="20,20,20,10"/>
 
-    <ScrollViewer Grid.Row="1">
-      <ItemsControl ItemsSource="{Binding Customers}">
-        <ItemsControl.ItemTemplate>
-          <DataTemplate x:DataType="vm:CustomerPieceViewModel">
-            <local:CustomerPiece/>
-          </DataTemplate>
-        </ItemsControl.ItemTemplate>
-      </ItemsControl>
+    <TextBox Grid.Row="1" 
+             Text="{Binding SearchTextInput}" 
+             Watermark="Hledat zákazníka (jméno, email, telefon...)"
+             Margin="20,0,20,15"
+             Classes="searchBox"/> <ScrollViewer Grid.Row="2">
+        <ItemsControl ItemsSource="{Binding Customers}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate x:DataType="vm:CustomerPieceViewModel">
+                    <local:CustomerPiece/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </ScrollViewer>
-  </Grid>
+</Grid>
 </UserControl>
