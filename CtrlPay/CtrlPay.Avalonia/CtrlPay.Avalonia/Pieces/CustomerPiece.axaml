@@ -8,7 +8,7 @@
              x:Class="CtrlPay.Avalonia.CustomerPiece"
              x:DataType="viewmodels:CustomerPieceViewModel">
     <Border Classes="customerCard">
-    <Expander Classes="customerExpander" IsExpanded="{Binding Editing}">
+    <Expander Classes="customerExpander" IsExpanded="{Binding IsExpanded}">
         <Expander.Header>
             <Grid ColumnDefinitions="Auto, Auto, *, Auto">
                 <Border Grid.Column="0" Width="4" Height="18" Background="{DynamicResource Brush.Accent}" CornerRadius="8"/>

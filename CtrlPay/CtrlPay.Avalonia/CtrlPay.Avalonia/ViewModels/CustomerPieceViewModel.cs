@@ -14,6 +14,7 @@ public partial class CustomerPieceViewModel : ViewModelBase
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(DisplayName))] // Automaticky aktualizuje jméno v hlavičce
     public FrontendCustomerDTO _model;
+    [ObservableProperty] private bool _isExpanded = false;
 
     [ObservableProperty] private bool _editing = false;
 
@@ -54,6 +55,7 @@ public partial class CustomerPieceViewModel : ViewModelBase
     {
         Model.BeginEdit();
         Editing = true;
+        IsExpanded = true;
     }
 
     [RelayCommand]

@@ -31,7 +31,7 @@ public partial class CustomersListViewModel : ViewModelBase
             return;
 
         var newDto = new FrontendCustomerDTO { Physical = true, FirstName = "", LastName = "", Company = "" };
-        var newVm = new CustomerPieceViewModel(newDto) { Editing = true };
+        var newVm = new CustomerPieceViewModel(newDto) { Editing = true, IsExpanded = true };
         newVm.Model.BeginEdit();
 
         Customers.Insert(0, newVm);
