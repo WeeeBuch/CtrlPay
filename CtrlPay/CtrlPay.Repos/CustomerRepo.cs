@@ -131,10 +131,7 @@ public class CustomerRepo
     {
         bool isValid = true;
         // ===== POVINNÁ POLE =====
-        if (string.IsNullOrWhiteSpace(cust.FirstName))
-            isValid = false;
-
-        if (string.IsNullOrWhiteSpace(cust.LastName))
+        if (string.IsNullOrWhiteSpace(cust.Company) || (!string.IsNullOrWhiteSpace(cust.FirstName) && !string.IsNullOrWhiteSpace(cust.LastName)))
             isValid = false;
 
         // ===== MAXIMÁLNÍ DÉLKY =====
