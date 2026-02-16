@@ -35,7 +35,10 @@ public partial class TransactionViewModel : ViewModelBase
         UpdateHandler.CreditAvailableUpdateActions.Add(OnCreditChanged);
         UpdateHandler.NewPaymentsAddedActions.Add(TransactionsUpdated);
     }
-
+    public void Load()
+    {
+        ApplySorting(SelectedSortOrder.Key);
+    }
     public void ApplySorting(string? sortingMethod)
     {
         AppLogger.Info($"Sorting transactions by: {sortingMethod}");

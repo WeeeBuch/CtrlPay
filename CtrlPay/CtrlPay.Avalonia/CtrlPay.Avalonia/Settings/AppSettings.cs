@@ -2,6 +2,7 @@
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Repos;
 using System.Collections.Generic;
+using static System.Net.WebRequestMethods;
 
 namespace CtrlPay.Avalonia.Settings
 {
@@ -22,7 +23,7 @@ namespace CtrlPay.Avalonia.Settings
         }
 
         // Připojení aplikace k API
-        private string _connectionString = string.Empty;
+        private string _connectionString = "https://www.action-games.cz/";
         public string ConnectionString
         {
             get => _connectionString;

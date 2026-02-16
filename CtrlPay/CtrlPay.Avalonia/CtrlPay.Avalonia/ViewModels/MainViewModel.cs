@@ -54,6 +54,8 @@ namespace CtrlPay.Avalonia.ViewModels
                     new NavItem("NavbarView.Dashboard", new DashboardViewMobile(), IconData.Dashboard),
                     new NavItem("NavbarView.Debts", new DebtViewMobile(), IconData.Debt),
                     new NavItem("NavbarView.Settings", new SettingsViewMobile(), IconData.Cog),
+                    new NavItem("NavbarView.Transactions", new TransactionViewMobile(), IconData.Cash)
+
                 };
 
                 CurrentPage = new LoginViewMobile
@@ -70,6 +72,8 @@ namespace CtrlPay.Avalonia.ViewModels
                     new NavItem("NavbarView.Dashboard", new DashboardView(), IconData.Dashboard),
                     new NavItem("NavbarView.Debts", new DebtView(), IconData.Debt),
                     new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog),
+                    new NavItem("NavbarView.Transaction", new TransactionViewMobile(), IconData.Customers)
+
                 };
 
                 CurrentPage = new LoginView

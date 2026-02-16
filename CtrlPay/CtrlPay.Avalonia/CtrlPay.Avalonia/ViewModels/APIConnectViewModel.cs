@@ -14,7 +14,7 @@ namespace CtrlPay.Avalonia.ViewModels;
 
 public partial class APIConnectViewModel : ViewModelBase
 {
-    [ObservableProperty] private string _apiUrl = "http://";
+    [ObservableProperty] private string _apiUrl = "https://www.action-games.cz/";
     [ObservableProperty] private bool _isTestingConnection = false;
     [ObservableProperty] private bool _isSuccessVisible = false;
     [ObservableProperty] private bool _isErrorVisible = false;

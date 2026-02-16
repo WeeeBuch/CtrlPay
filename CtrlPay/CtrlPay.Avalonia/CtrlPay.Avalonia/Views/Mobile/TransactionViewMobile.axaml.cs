@@ -2,14 +2,16 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using CtrlPay.Avalonia.ViewModels;
+using CtrlPay.Avalonia.Views.Mobile;
 
 namespace CtrlPay.Avalonia.Views.Mobile;
 
-public partial class LoginViewMobile : UserControl
+public partial class TransactionViewMobile : UserControl
 {
-    public LoginViewMobile()
+    public TransactionViewMobile()
     {
         AvaloniaXamlLoader.Load(this);
+        DataContext = new TransactionViewModel();
 
     }
 }

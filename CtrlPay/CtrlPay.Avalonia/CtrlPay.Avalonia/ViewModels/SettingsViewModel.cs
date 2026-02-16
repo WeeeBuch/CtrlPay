@@ -34,7 +34,7 @@ namespace CtrlPay.Avalonia.ViewModels
         #endregion
 
         #region Api
-        [ObservableProperty] private string _apiUrl = SettingsManager.Current.ConnectionString;
+        [ObservableProperty] private string _apiUrl = "https://www.action-games.cz/";
         [ObservableProperty] private int _refreshIntervalSeconds = SettingsManager.Current.RefreshRate; // Výchozí hodnota v sekundách
         [ObservableProperty] private ObservableCollection<string> _recentApiUrls = [.. SettingsManager.Current.SavedConnections];
         [ObservableProperty] private bool _isTestingConnection;

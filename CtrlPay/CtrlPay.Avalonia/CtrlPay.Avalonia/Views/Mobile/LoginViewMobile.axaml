@@ -38,13 +38,18 @@
 				<!-- Login Fields -->
 				<StackPanel x:Name="LoginForm"
                             Spacing="10"
-                            IsVisible="{Binding IsLoginSelected}">
+                            IsVisible="{Binding IsLoginSelected}"
+							>
 
 					<TextBox x:Name="UsernameTextBox"
+    				          CaretBrush="White"
+							 Foreground="White"
                              Text="{Binding Username, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Watermark="{DynamicResource LoginView.Watermark.Username}" />
 
 					<TextBox x:Name="PasswordTextBox"
+							 Foreground="White"
+                            CaretBrush="White"
                              Text="{Binding Password, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                              Watermark="{DynamicResource LoginView.Watermark.Password}"
                              PasswordChar="#" />

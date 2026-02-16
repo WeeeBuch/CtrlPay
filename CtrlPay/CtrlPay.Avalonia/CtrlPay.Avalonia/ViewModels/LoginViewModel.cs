@@ -2,6 +2,7 @@ using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.Views;
 using CtrlPay.Entities;
@@ -11,6 +12,7 @@ using System;
 using System.ComponentModel;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -60,6 +62,7 @@ public partial class LoginViewModel : ViewModelBase
     private async Task LoginAsync()
     {
         Credentials.BaseUri = "https://www.action-games.cz/";
+
 
         ReturnModel<bool> returnModel = await AuthRepo.Login(Username, Password, default);
         bool success = returnModel.Body;

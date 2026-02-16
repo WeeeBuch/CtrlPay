@@ -1,0 +1,190 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:hc="using:CtrlPay.Avalonia.HelperClasses"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:DataType="vm:TransactionViewModel"
+             x:Class="CtrlPay.Avalonia.Views.Mobile.TransactionViewMobile"
+             mc:Ignorable="d"
+             d:DesignWidth="390"
+             d:DesignHeight="800"
+             Background="{DynamicResource Color.Background}">
+
+	<UserControl.Styles>
+
+		<!-- Dark caret (cursor) fix -->
+		<Style Selector="TextBox">
+			<Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+			<Setter Property="CaretBrush" Value="{DynamicResource Brush.Text.Primary}" />
+		</Style>
+
+		<!-- Dropdown button (our own expander header) -->
+		<Style Selector="ToggleButton.DropdownButton">
+			<Setter Property="Background" Value="{DynamicResource Color.Surface}" />
+			<Setter Property="BorderBrush" Value="{DynamicResource Color.Border}" />
+			<Setter Property="BorderThickness" Value="1" />
+			<Setter Property="CornerRadius" Value="10" />
+			<Setter Property="Padding" Value="12" />
+			<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+		</Style>
+
+		<Style Selector="ToggleButton.DropdownButton:pointerover">
+			<Setter Property="Background" Value="{DynamicResource Color.Accent}" />
+		</Style>
+
+		<!-- Chevron rotate when opened -->
+		<Style Selector="ToggleButton.DropdownButton:checked Path#Chevron">
+			<Setter Property="RenderTransform" Value="rotate(180deg)" />
+			<Setter Property="RenderTransformOrigin" Value="0.5,0.5" />
+		</Style>
+
+		<Style Selector="Path#Chevron">
+			<Setter Property="Transitions">
+				<Transitions>
+					<TransformOperationsTransition Property="RenderTransform" Duration="0:0:0.12" />
+				</Transitions>
+			</Setter>
+		</Style>
+
+		<!-- ListBox items nicer touch targets -->
+		<Style Selector="ListBoxItem">
+			<Setter Property="Padding" Value="10,8"/>
+			<Setter Property="Margin" Value="0,2"/>
+			<Setter Property="CornerRadius" Value="8"/>
+		</Style>
+
+	</UserControl.Styles>
+
+	<ScrollViewer>
+		<StackPanel Margin="16" Spacing="12">
+
+			<!-- SEARCH -->
+			<TextBox Watermark="{DynamicResource TransactionView.Watermark.SearchBar}"
+					 Height="40"
+					 Text="{Binding SearchTerm}" />
+
+
+
+
+			<TextBlock Text="Žádné transakce"
+				   IsVisible="{Binding Debts.Count}"
+				   Opacity="0.6"
+				   HorizontalAlignment="Center"
+				   Margin="0,20,0,0"/>
+			<!-- SORT DROPDOWN -->
+			<StackPanel Spacing="10">
+
+				<ToggleButton x:Name="SortDrop"
+							  Classes="DropdownButton"
+							  IsChecked="False">
+					<Grid ColumnDefinitions="*,Auto" VerticalAlignment="Center">
+						<TextBlock Text="{DynamicResource DebtView.Sorting}"
+								   FontWeight="Bold"
+								   Opacity="0.85"/>
+
+					</Grid>
+				</ToggleButton>
+
+				<Border IsVisible="{Binding IsChecked, ElementName=SortDrop}"
+						Background="{DynamicResource Color.Surface}"
+						BorderBrush="{DynamicResource Color.Border}"
+						BorderThickness="1"
+						CornerRadius="10"
+						Padding="12">
+
+					<StackPanel Spacing="10">
+						<TextBlock Text="{DynamicResource DebtView.Sorting}"
+								   FontWeight="Bold"
+								   Opacity="0.6"
+								   Margin="0,0,0,4"/>
+
+						<ScrollViewer MaxHeight="220">
+							<ListBox Background="Transparent"
+									 BorderThickness="0"
+									 SelectedItem="{Binding SelectedSortOrder}"
+									 ItemsSource="{Binding SortOptions}">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<TextBlock Text="{Binding DisplayName}"
+												   FontSize="14"
+												   Foreground="{DynamicResource Brush.Text.Primary}"/>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+						</ScrollViewer>
+					</StackPanel>
+
+				</Border>
+
+			</StackPanel>
+
+			<!-- LIST -->
+			<ItemsControl ItemsSource="{Binding Debts}">
+				<ItemsControl.ItemTemplate>
+
+					<!-- Pokud by x:DataType dělal problémy, smaž x:DataType a nech DataTemplate bez něj -->
+					<DataTemplate x:DataType="hc:TransactionItem">
+
+						<Border Background="{DynamicResource Color.Surface}"
+								BorderBrush="{DynamicResource Color.Border}"
+								BorderThickness="1"
+								CornerRadius="12"
+								Margin="0,0,0,12"
+								Padding="14"
+								ClipToBounds="True">
+
+							<!-- Mobile-friendly: indicator + text + amount under -->
+							<Grid ColumnDefinitions="10,*"
+								  RowDefinitions="Auto,Auto"
+								  ColumnSpacing="12">
+
+								<Border Grid.Column="0"
+										Grid.RowSpan="2"
+										Classes="indicator"
+										Tag="{Binding Status}"
+										CornerRadius="2"
+										Width="4"
+										HorizontalAlignment="Center"
+										VerticalAlignment="Stretch"
+										Margin="0,2,0,2"/>
+
+								<TextBlock Grid.Column="1"
+										   Grid.Row="0"
+										   Text="{Binding Description}"
+										   FontSize="16"
+										   FontWeight="Medium"
+										   Foreground="{DynamicResource Brush.Text.Primary}"
+										   TextTrimming="CharacterEllipsis"
+										   MaxLines="2"/>
+
+								<StackPanel Grid.Column="1"
+											Grid.Row="1"
+											Orientation="Horizontal"
+											VerticalAlignment="Center"
+											Margin="0,8,0,0"
+											Spacing="8">
+									<TextBlock Text="{Binding Amount, StringFormat=\{0:N12\}}"
+											   FontSize="18"
+											   FontWeight="Bold"
+											   Foreground="{DynamicResource Brush.Text.Primary}"/>
+									<TextBlock Text="{DynamicResource App.Currency}"
+											   FontSize="12"
+											   VerticalAlignment="Bottom"
+											   Opacity="0.7"
+											   Foreground="{DynamicResource Brush.Text.Secondary}"/>
+								</StackPanel>
+
+							</Grid>
+
+						</Border>
+
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+
+		</StackPanel>
+
+	</ScrollViewer>
+
+</UserControl>

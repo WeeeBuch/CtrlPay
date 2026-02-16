@@ -1,8 +1,10 @@
 ﻿using Avalonia.Controls;
+using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Avalonia.Views;
 using CtrlPay.Avalonia.Views.Mobile;
 using CtrlPay.Entities;
+using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
