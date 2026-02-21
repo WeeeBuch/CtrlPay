@@ -21,7 +21,7 @@ public partial class TransactionItem : ObservableObject
 
     [ObservableProperty] private string creditPayString;
     [ObservableProperty] private decimal creditAmount;
-    [ObservableProperty] private DateTime timestamp;
+    [ObservableProperty] private DateTimeOffset timestamp;
 
     [ObservableProperty] private bool isExpanded;
     [RelayCommand] private void ToggleExpand() => IsExpanded = !IsExpanded;

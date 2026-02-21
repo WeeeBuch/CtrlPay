@@ -21,6 +21,8 @@ public partial class PaymentManagementViewModel : ViewModelBase
     [ObservableProperty] private RangeObservableCollection<FrontendPaymentDTO> payments = [];
     [ObservableProperty] private FrontendPaymentDTO? selectedPayment;
 
+    [ObservableProperty] private ObservableCollection<FrontendCustomerDTO> customers = [];
+
     public PaymentManagementViewModel() 
     {
         SortOptions =
@@ -34,7 +36,25 @@ public partial class PaymentManagementViewModel : ViewModelBase
         SelectedSortOrder = SortOptions[0];
 
         ApplySorting(null);
+        LoadCustomers();
     }
+
+    private void LoadCustomers()
+    {
+        var loadedCustomers = CustomerRepo.GetCustomers();
+        Customers = new ObservableCollection<FrontendCustomerDTO>(loadedCustomers);
+    }
+
+    public async Task SaveCurrentPayment()
+    {
+        if (SelectedPayment != null)
+        {
+            // Volání tvého API/Repo pro update
+            // await AccountantPaymentRepo.UpdatePayment(SelectedPayment.ToApiDto());
+        }
+    }
+
+    public string GetCustomerName(int? id) => Customers.FirstOrDefault(c => c.Id == id)?.FullName ?? "Neznámý";
 
     public void ApplySorting(string? sortingMethod)
     {

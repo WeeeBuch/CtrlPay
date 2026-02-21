@@ -16,9 +16,9 @@ public class FrontendPaymentDTO
     public decimal ExpectedAmountXMR { get; set; }
     public decimal PaidAmountXMR { get; set; }
     public StatusEnum Status { get; set; }
-    public DateTime CreatedAt { get; set; }
-    public DateTime? PaidAt { get; set; }
-    public DateTime? DueDate { get; set; }
+    public DateTimeOffset CreatedAt { get; set; }
+    public DateTimeOffset? PaidAt { get; set; }
+    public DateTimeOffset? DueDate { get; set; }
     public string? Title { get; set; }
 
     public FrontendPaymentDTO()

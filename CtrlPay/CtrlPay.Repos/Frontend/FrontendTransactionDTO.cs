@@ -12,11 +12,11 @@ namespace CtrlPay.Repos
     {
         public string? Title { get; init; }
         public decimal Amount { get; init; }
-        public DateTime Timestamp { get; init; }
+        public DateTimeOffset Timestamp { get; init; }
         public StatusEnum State { get; init; }
         public int Id { get; init; }
 
-        public FrontendTransactionDTO(string title, decimal amount, DateTime timestamp, TransactionStatusEnum state, int id)
+        public FrontendTransactionDTO(string title, decimal amount, DateTimeOffset timestamp, TransactionStatusEnum state, int id)
         {
             Title = title;
             Amount = amount;

@@ -1,6 +1,7 @@
 ﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:frontend="using:CtrlPay.Repos.Frontend"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignHeight="720" d:DesignWidth="1200"
              x:DataType="vm:PaymentManagementViewModel"
@@ -83,32 +84,74 @@
 
             <Border Grid.Column="1" Margin="5,0,0,0" Padding="20" 
         BorderThickness="2" BorderBrush="{DynamicResource Brush.Border}" CornerRadius="5">
-    
     <ContentControl Content="{Binding SelectedPayment}">
         <ContentControl.ContentTemplate>
             <DataTemplate x:DataType="repos:FrontendPaymentDTO">
                 <ScrollViewer>
                     <StackPanel Spacing="15">
                         <TextBlock Text="Editace transakce" FontSize="20" FontWeight="Bold"/>
-                        
-                        <StackPanel Spacing="5">
-                            <TextBlock Text="Očekávaná částka (XMR)" Opacity="0.6"/>
-                            <NumericUpDown Value="{Binding ExpectedAmountXMR}" Increment="0.001" FormatString="N8"/>
-                        </StackPanel>
 
-                        <StackPanel Spacing="5">
-                            <TextBlock Text="Zaplacená částka (XMR)" Opacity="0.6"/>
-                            <NumericUpDown Value="{Binding PaidAmountXMR}" Increment="0.001" FormatString="N8"/>
-                        </StackPanel>
+                        <UniformGrid Columns="2">
+                            <StackPanel Margin="0,0,10,10">
+                                <TextBlock Text="ID Platby" Opacity="0.6" FontSize="12"/>
+                                <TextBox Text="{Binding Id}" IsReadOnly="True" />
+                            </StackPanel>
+                            <StackPanel Margin="0,0,0,10">
+                                <TextBlock Text="Status" Opacity="0.6" FontSize="12"/>
+                                <TextBox Text="{Binding Status}" IsReadOnly="True" />
+                            </StackPanel>
+                            <StackPanel Margin="0,0,10,10">
+                                <TextBlock Text="Vytvořeno" Opacity="0.6" FontSize="12"/>
+                                <TextBox Text="{Binding CreatedAt}" IsReadOnly="True" />
+                            </StackPanel>
+                            <StackPanel Margin="0,0,0,10">
+                                <TextBlock Text="Zaplaceno (XMR)" Opacity="0.6" FontSize="12"/>
+                                <TextBox Text="{Binding PaidAmountXMR, StringFormat=\{0:N12\}}" IsReadOnly="True" />
+                            </StackPanel>
+                        </UniformGrid>
 
-                        <StackPanel Spacing="5">
-                            <TextBlock Text="Status" Opacity="0.6"/>
-                            <TextBox Text="{Binding Status}"/> 
-                        </StackPanel>
+                        <Separator Height="1" Background="{DynamicResource Color.Border}"/>
 
-                        <StackPanel Spacing="5">
-                            <TextBlock Text="Datum splatnosti" Opacity="0.6"/>
-                            <DatePicker SelectedDate="{Binding DueDate}"/>
+                        <StackPanel Spacing="10">
+                            <StackPanel Spacing="5">
+                                <TextBlock Text="Název (Title)" Opacity="0.6"/>
+                                <TextBox Text="{Binding Title}" Watermark="Např. Faktura za únor"/>
+                            </StackPanel>
+
+                            <StackPanel Spacing="5">
+                                <TextBlock Text="Zákazník" Opacity="0.6"/>
+                                <ComboBox HorizontalAlignment="Stretch"
+                                          ItemsSource="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).Customers}"
+                                          SelectedValue="{Binding CustomerId}"
+                                          >
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate x:DataType="frontend:FrontendCustomerDTO">
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <MultiBinding StringFormat="{}{0} {1} {2}">
+                                                        <Binding Path="FirstName"/>
+                                                        <Binding Path="LastName"/>
+                                                        <Binding Path="Company"/>
+                                                    </MultiBinding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </StackPanel>
+
+                            <StackPanel Spacing="5">
+                                <TextBlock Text="Očekávaná částka (XMR)" Opacity="0.6"/>
+                                <NumericUpDown Value="{Binding ExpectedAmountXMR}" 
+                                               Increment="0.000000000001" 
+                                               FormatString="N12" 
+                                               Minimum="0"/>
+                            </StackPanel>
+
+                            <StackPanel Spacing="5">
+                                <TextBlock Text="Datum splatnosti" Opacity="0.6"/>
+                                <DatePicker SelectedDate="{Binding DueDate}" HorizontalAlignment="Stretch"/>
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>

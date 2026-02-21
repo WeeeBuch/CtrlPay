@@ -47,7 +47,7 @@ public partial class TransactionItemViewModel : DashboardListItem
 {
     public string Title { get; set; } = "";
     public decimal Amount { get; set; }
-    public DateTime Date { get; set; }
+    public DateTimeOffset Date { get; set; }
     public StatusEnum Status { get; set; }
 
     public string StatusText
@@ -113,7 +113,7 @@ public partial class TransactionListPieceModel : ViewModelBase
         AppLogger.Info($"Transactions refreshed succesfully.");
     }
 
-    private string GetGroupName(DateTime date, DateTime now)
+    private string GetGroupName(DateTimeOffset date, DateTime now)
     {
         var diff = (now - date.Date).Days;
         if (diff == 0) return "Date.Today";

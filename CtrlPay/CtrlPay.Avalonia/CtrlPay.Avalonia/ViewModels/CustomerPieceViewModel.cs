@@ -24,11 +24,7 @@ public partial class CustomerPieceViewModel : ViewModelBase
     }
 
     // Bezpečná vlastnost pro zobrazení jména
-    public string DisplayName => Model == null
-        ? "Načítám..."
-        : (Model.Physical
-            ? $"{Model.Title} {Model.FirstName} {Model.LastName}".Trim()
-            : (string.IsNullOrWhiteSpace(Model.Company) ? "Neznámá firma" : Model.Company));
+    public string DisplayName => Model.FullName;
 
     // Přidej tyto vlastnosti do CustomerPieceViewModel
     public bool IsPhysical => Model?.Physical ?? false;

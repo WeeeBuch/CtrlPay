@@ -28,11 +28,11 @@ namespace CtrlPay.Entities
         [Column("status")]
         public PaymentStatusEnum Status { get; set; }
         [Column("created_at")]
-        public DateTime CreatedAt { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
         [Column("paid_at")]
-        public DateTime? PaidAt { get; set; }
+        public DateTimeOffset? PaidAt { get; set; }
         [Column("due_date")]
-        public DateTime? DueDate { get; set; }
+        public DateTimeOffset? DueDate { get; set; }
         [Column("title")]
         public string? Title { get; set; }
         [ForeignKey("CustomerId")]
