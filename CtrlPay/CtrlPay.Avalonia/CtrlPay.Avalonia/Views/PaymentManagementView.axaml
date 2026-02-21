@@ -66,7 +66,7 @@
                                         <Border Grid.Column="0" Classes="indicator" Tag="{Binding Status}" Width="4" Height="24" VerticalAlignment="Center" Margin="0,0,15,0"/>
                     
                                         <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                            <TextBlock Text="{Binding CreatedAt, StringFormat='Platba #{0}'}" 
+                                            <TextBlock Text="{Binding Title}" 
                                                        FontSize="15" FontWeight="Medium"/>
                                         </StackPanel>
                     
@@ -120,10 +120,10 @@
 
                             <StackPanel Spacing="5">
                                 <TextBlock Text="Zákazník" Opacity="0.6"/>
-                                <ComboBox HorizontalAlignment="Stretch"
-                                          ItemsSource="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).Customers}"
-                                          SelectedValue="{Binding CustomerId}"
-                                          >
+                                <ComboBox ItemsSource="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).Customers}"
+                                          SelectedValue="{Binding CustomerId, Mode=TwoWay}"
+                                          SelectedValueBinding="{Binding Id}"
+                                          HorizontalAlignment="Stretch">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate x:DataType="frontend:FrontendCustomerDTO">
                                             <TextBlock>
@@ -152,6 +152,12 @@
                                 <TextBlock Text="Datum splatnosti" Opacity="0.6"/>
                                 <DatePicker SelectedDate="{Binding DueDate}" HorizontalAlignment="Stretch"/>
                             </StackPanel>
+
+                            <Button Content="Uložit změny" 
+                                    Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).SavePaymentAsync}"
+                                    HorizontalAlignment="Right"
+                                    Classes="accent" 
+                                    Margin="0,15,0,0"/>
                         </StackPanel>
                     </StackPanel>
                 </ScrollViewer>

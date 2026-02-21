@@ -87,7 +87,7 @@ public partial class TransactionListPieceModel : ViewModelBase
     {
         AppLogger.Info($"Refreshing transactions...");
         var displayList = new List<DashboardListItem>();
-        var now = DateTime.Now.Date;
+        var now = DateTimeOffset.Now.Date;
 
         // Seřadíme od nejnovějších
         var sorted = rawData.OrderByDescending(x => x.Date).ToList();
@@ -113,7 +113,7 @@ public partial class TransactionListPieceModel : ViewModelBase
         AppLogger.Info($"Transactions refreshed succesfully.");
     }
 
-    private string GetGroupName(DateTimeOffset date, DateTime now)
+    private string GetGroupName(DateTimeOffset date, DateTimeOffset now)
     {
         var diff = (now - date.Date).Days;
         if (diff == 0) return "Date.Today";
