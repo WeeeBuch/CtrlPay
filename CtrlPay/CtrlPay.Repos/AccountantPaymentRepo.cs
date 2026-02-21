@@ -191,7 +191,7 @@ namespace CtrlPay.Repos
         {
             Cache.Remove(toDelete);
             AppLogger.Info($"Deleting payment in API...");
-            string? json = await HttpWorker.HttpDelete($"/api/payments/{toDelete.Id}", true);
+            string? json = await HttpWorker.HttpDelete($"/api/payments/delete/{toDelete.Id}", true);
             if (string.IsNullOrWhiteSpace(json))
             {
                 AppLogger.Warning($"Delete payment response was NULL.");
