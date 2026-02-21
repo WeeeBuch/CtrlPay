@@ -114,7 +114,7 @@ namespace CtrlPay.Repos
                 PaidAt = DateTime.UtcNow.AddDays(-4),
                 DueDate = DateTime.UtcNow.AddDays(2)
             },
-            new FrontendPaymentDTO  
+            new FrontendPaymentDTO
             {
                 Id = 4,
                 CustomerId = 1,
@@ -161,6 +161,42 @@ namespace CtrlPay.Repos
         {
             return Cache;
         }
+        public static async Task EditPayment(FrontendPaymentDTO dto)
+        {
+            int id = Cache.FindIndex(c => c.Id == dto.Id);
+            if (id == -1)
+            {
+                AppLogger.Info($"Adding customer to API...");
+                string? json = await HttpWorker.HttpPost($"api/payments/create", dto.ToApiDto(), true, default);
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    AppLogger.Warning($"Create payment response was NULL.");
+                    return;
+                }
+                Cache.Add(dto);
+            }
+            else
+            {
+                Cache[id] = dto;
+                AppLogger.Info($"Updating customer in API...");
+                string? json = await HttpWorker.HttpPost($"api/customers/edit", dto.ToApiDto(), true, default);
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    AppLogger.Warning($"Update payment response was NULL.");
+                    return;
+                }
+            }
+        }
+        public static async Task DeletePayment(FrontendPaymentDTO toDelete)
+        {
+            Cache.Remove(toDelete);
 
+            string? json = await HttpWorker.HttpDelete($"/api/payments/{toDelete.Id}", true);
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                AppLogger.Warning($"Delete payment response was NULL.");
+                return;
+            }
+        }
     }
 }

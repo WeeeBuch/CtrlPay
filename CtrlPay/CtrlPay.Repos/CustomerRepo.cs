@@ -131,7 +131,11 @@ public class CustomerRepo
     {
         bool isValid = true;
         // ===== POVINNÁ POLE =====
-        if (string.IsNullOrWhiteSpace(cust.Company) || (!string.IsNullOrWhiteSpace(cust.FirstName) && !string.IsNullOrWhiteSpace(cust.LastName)))
+        if (string.IsNullOrWhiteSpace(cust.Company) && cust.Physical == false)
+            isValid = false;
+        if (string.IsNullOrWhiteSpace(cust.FirstName) && cust.Physical == true)
+            isValid = false;
+        if (string.IsNullOrWhiteSpace(cust.LastName) && cust.Physical == true)
             isValid = false;
 
         // ===== MAXIMÁLNÍ DÉLKY =====
@@ -168,7 +172,7 @@ public class CustomerRepo
             isValid = false;
 
         if (!string.IsNullOrEmpty(cust.PostalCode) &&
-            !Regex.IsMatch(cust.PostalCode, @"^\d{5}$"))
+            !Regex.IsMatch(cust.PostalCode, @"^(\d{5}|\d{3} \d{2})$"))
             isValid = false;
 
         if (!string.IsNullOrEmpty(cust.Phone) &&

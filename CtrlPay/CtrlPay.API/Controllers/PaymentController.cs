@@ -17,13 +17,9 @@ namespace CtrlPay.API.Controllers
     public class PaymentController : ControllerBase
     {
         private readonly CtrlPayDbContext _db;
-        private readonly MoneroRpcOptions _rpcOptions;
-        private readonly bool _mergedAccountants;
-        public PaymentController(IOptions<MoneroRpcOptions> rpcOptions, IConfiguration configuration)
+        public PaymentController()
         {
             _db = new CtrlPayDbContext();
-            _rpcOptions = rpcOptions.Value;
-            _mergedAccountants = configuration.GetValue<bool>("MergeAccountantAndPayrollAccountant");
         }
         [HttpGet]
         [Route("my")]
@@ -34,16 +30,16 @@ namespace CtrlPay.API.Controllers
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
             if (user == null)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             if (user.LoyalCustomer == null)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A6", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             int? accountIndex = user.LoyalCustomer.Account.Index;
             if (accountIndex == null)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("P1", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             List<Entities.Payment> payments = _db.Payments
                 .Where(p => p.Account.Index == accountIndex)
@@ -65,11 +61,11 @@ namespace CtrlPay.API.Controllers
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
             if (user == null)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             if (user.LoyalCustomer == null)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A6", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             int accountIndex = user.LoyalCustomer.Account.Index;
             List<Entities.Payment> debts = _db.Payments
@@ -89,11 +85,11 @@ namespace CtrlPay.API.Controllers
             Payment payment = _db.Payments.Where(p => p.Id == request.PaymentId).First();
             if (user == null)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             if (user.LoyalCustomer == null)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A6", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             if (payment == null)
             {
@@ -102,7 +98,7 @@ namespace CtrlPay.API.Controllers
             if (payment.Customer != user.LoyalCustomer.Customer)
             {
                 //neni jeho
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("P3", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             if (payment.Status == PaymentStatusEnum.Paid)
             {
@@ -120,7 +116,7 @@ namespace CtrlPay.API.Controllers
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
             if (role != Role.Accountant && role != Role.Admin)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             List<Entities.Payment> payments = _db.Payments.ToList();
             List<PaymentApiDTO> paymentsDTO = new List<PaymentApiDTO>();
@@ -138,7 +134,7 @@ namespace CtrlPay.API.Controllers
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
             if (role != Role.Accountant && role != Role.Admin)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             Customer customer = _db.Customers.Where(c => c.Id == request.CustomerId).First();
             if (customer == null)
@@ -148,9 +144,11 @@ namespace CtrlPay.API.Controllers
             Payment payment = new Payment()
             {
                 Customer = customer,
+                Account = customer.LoyalCustomer.Account,
                 ExpectedAmountXMR = request.ExpectedAmountXMR,
                 DueDate = request.DueDate,
-                Status = PaymentStatusEnum.WaitingForPayment
+                Status = PaymentStatusEnum.Unpaid,
+                CreatedAt = DateTime.UtcNow
             };
             _db.Payments.Add(payment);
             _db.SaveChanges();
@@ -164,7 +162,7 @@ namespace CtrlPay.API.Controllers
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
             if (role != Role.Accountant && role != Role.Admin)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             Payment payment = _db.Payments.Where(p => p.Id == request.Id).First();
             if (payment == null)
@@ -192,7 +190,7 @@ namespace CtrlPay.API.Controllers
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
             if (role != Role.Accountant && role != Role.Admin)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             Payment payment = _db.Payments.Where(p => p.Id == id).First();
             if (payment == null)
@@ -211,7 +209,7 @@ namespace CtrlPay.API.Controllers
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
             if (role != Role.Accountant && role != Role.Admin)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             List<Entities.Payment> payments = _db.Payments
                 .Where(p => p.Status == PaymentStatusEnum.Overpaid)
@@ -222,6 +220,13 @@ namespace CtrlPay.API.Controllers
                 paymentsDTO.Add(new PaymentApiDTO(payment));
             }
             return Ok(new ReturnModel<List<PaymentApiDTO>>("P0", ReturnModelSeverityEnum.Ok, paymentsDTO));
+        }
+        [HttpPost]
+        [Route("overpay-to-credit/{id}")]
+        // POST : api/payments/overpay-to-credit/{id}
+        public IActionResult OverpaidToCredit(int id)
+        {
+            return Ok();
         }
     }
     public class CreatePaymentRequest
