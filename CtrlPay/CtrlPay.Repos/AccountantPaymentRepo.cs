@@ -161,7 +161,7 @@ namespace CtrlPay.Repos
         {
             return Cache;
         }
-        public static async Task EditPayment(FrontendPaymentDTO dto)
+        public static async Task UpdatePayment(FrontendPaymentDTO dto)
         {
             int id = Cache.FindIndex(c => c.Id == dto.Id);
             if (id == -1)
@@ -179,7 +179,7 @@ namespace CtrlPay.Repos
             {
                 Cache[id] = dto;
                 AppLogger.Info($"Updating payment in API...");
-                string? json = await HttpWorker.HttpPost($"api/payments/edit", dto.ToApiDto(), true, default);
+                string? json = await HttpWorker.HttpPost($"api/payments/update", dto.ToApiDto(), true, default);
                 if (string.IsNullOrWhiteSpace(json))
                 {
                     AppLogger.Warning($"Update payment response was NULL.");
