@@ -12,4 +12,8 @@ public partial class PaymentManagementView : UserControl
         InitializeComponent();
         DataContext = new PaymentManagementViewModel();
     }
+
+    private void ListBox_SelectionChanged(object? sender, SelectionChangedEventArgs e)
+    {
+    }
 }

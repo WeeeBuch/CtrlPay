@@ -10,14 +10,19 @@
              xmlns:repos="using:CtrlPay.Repos"
              Background="{DynamicResource Color.Background}"
              x:Class="CtrlPay.Avalonia.PaymentManagementView">
+    <UserControl.Resources>
+        <hc:IsOverpaidConverter x:Key="IsOverpaidConverter"/>
+    </UserControl.Resources>
+
     <Grid RowDefinitions="Auto, 10, *" Margin="10">
         <Border Grid.Row="0" BorderThickness="0,0,1,0">
             <StackPanel Spacing="10">
                 <TextBox Watermark="hledat........." Height="35" Text="{Binding SearchTerm}"/>
                 
                 <Border BorderBrush="{DynamicResource Color.Border}" BorderThickness="1" Padding="10" CornerRadius="4">
-                    <StackPanel Spacing="10">
-                        <TextBlock Text="Řadit podle" FontWeight="Bold" Opacity="0.6" Margin="0,0,0,5"/>
+                    <StackPanel Spacing="10" Orientation="Horizontal">
+                        <TextBlock Text="Řadit podle" FontWeight="Bold" Opacity="0.6" Margin="0,0,0,5"
+                                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
         
                         <ListBox Background="Transparent" 
                                  BorderThickness="0"
@@ -47,6 +52,9 @@
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
+
+                        <CheckBox Content="Pouze přeplatky (Overpaid)" 
+                                  IsChecked="{Binding ShowOnlyOverpaid}"/>
                     </StackPanel>
                 </Border>
             </StackPanel>
@@ -84,84 +92,113 @@
 
             <Border Grid.Column="1" Margin="5,0,0,0" Padding="20" 
         BorderThickness="2" BorderBrush="{DynamicResource Brush.Border}" CornerRadius="5">
-    <ContentControl Content="{Binding SelectedPayment}">
-        <ContentControl.ContentTemplate>
-            <DataTemplate x:DataType="repos:FrontendPaymentDTO">
-    <ScrollViewer>
-        <StackPanel Spacing="15">
-            <Grid ColumnDefinitions="*, Auto">
-                <TextBlock Text="Detail transakce" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+                <ContentControl Content="{Binding SelectedPayment}">
+                    <ContentControl.ContentTemplate>
+                        <DataTemplate x:DataType="repos:FrontendPaymentDTO">
+                            <ScrollViewer>
+                                <StackPanel Spacing="15">
+                                    <Grid ColumnDefinitions="*, Auto">
+                                        <TextBlock Text="Detail transakce" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
                 
-                <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10">
-                    <Button Content="Editovat" 
-                            IsVisible="{Binding !$parent[UserControl].((vm:PaymentManagementViewModel)DataContext).IsEditing}"
-                            Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).StartEditCommand}"
-                            CommandParameter="{Binding}"/>
+                                        <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="10">
+                                            <Button Content="Editovat" 
+                                                    IsVisible="{Binding !$parent[UserControl].((vm:PaymentManagementViewModel)DataContext).IsEditing}"
+                                                    Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).StartEditCommand}"
+                                                    CommandParameter="{Binding}"/>
                     
-                    <Button Content="Zrušit" 
-                            Classes="secondary"
-                            IsVisible="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).IsEditing}"
-                            Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).CancelEditCommand}"
-                            CommandParameter="{Binding}"/>
-                    <Button Content="Uložit" 
-                            Classes="accent"
-                            IsVisible="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).IsEditing}"
-                            Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).SavePaymentAsync}"/>
-                </StackPanel>
-            </Grid>
+                                            <Button Content="Zrušit" 
+                                                    Classes="secondary"
+                                                    IsVisible="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).IsEditing}"
+                                                    Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).CancelEditCommand}"
+                                                    CommandParameter="{Binding}"/>
+                                            <Button Content="Uložit" 
+                                                    Classes="accent"
+                                                    IsVisible="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).IsEditing}"
+                                                    Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).SavePaymentAsync}"/>
 
-            <Separator Height="1" Background="{DynamicResource Color.Border}"/>
+                                            <Button Content="Převést přebytek do kreditů"
+                                                    Classes="accent"
+                                                    IsVisible="{Binding Status, Converter={StaticResource IsOverpaidConverter}}"
+                                                    Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).ConvertOverpaymentToCreditCommand}"/>
+                                        </StackPanel>
+                                    </Grid>
 
-            <StackPanel Spacing="10" IsEnabled="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).IsEditing}">
-                <StackPanel Spacing="5">
-                    <TextBlock Text="Název (Title)" Opacity="0.6"/>
-                    <TextBox Text="{Binding Title}" Watermark="Např. Faktura za únor"/>
-                </StackPanel>
+                                    <Separator Height="1" Background="{DynamicResource Color.Border}"/>
 
-                <StackPanel Spacing="5">
-                    <TextBlock Text="Zákazník" Opacity="0.6"/>
-                    <ComboBox ItemsSource="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).Customers}"
-                              SelectedValue="{Binding CustomerId, Mode=TwoWay}"
-                              SelectedValueBinding="{Binding Id}"
-                              HorizontalAlignment="Stretch">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate x:DataType="frontend:FrontendCustomerDTO">
-                                <TextBlock Text="{Binding FullName}"/>
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                </StackPanel>
+                                    <StackPanel Spacing="10" IsEnabled="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).IsEditing}">
+                                        <StackPanel Spacing="5">
+                                            <TextBlock Text="Název (Title)" Opacity="0.6"/>
+                                            <TextBox Text="{Binding Title}" Watermark="Např. Faktura za únor"/>
+                                        </StackPanel>
 
-                <StackPanel Spacing="5">
-                    <TextBlock Text="Očekávaná částka (XMR)" Opacity="0.6"/>
-                    <NumericUpDown Value="{Binding ExpectedAmountXMR}" 
-                                   Increment="0.000000000001" 
-                                   FormatString="N12" 
-                                   Minimum="0"/>
-                </StackPanel>
+                                        <StackPanel Spacing="5">
+                                            <TextBlock Text="Zákazník" Opacity="0.6"/>
+                                            <ComboBox ItemsSource="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).Customers}"
+                                                      SelectedValue="{Binding CustomerId, Mode=TwoWay}"
+                                                      SelectedValueBinding="{Binding Id}"
+                                                      HorizontalAlignment="Stretch">
+                                                <ComboBox.ItemTemplate>
+                                                    <DataTemplate x:DataType="frontend:FrontendCustomerDTO">
+                                                        <TextBlock Text="{Binding FullName}"/>
+                                                    </DataTemplate>
+                                                </ComboBox.ItemTemplate>
+                                            </ComboBox>
+                                        </StackPanel>
 
-                <StackPanel Spacing="5">
-                    <TextBlock Text="Datum splatnosti" Opacity="0.6"/>
-                    <DatePicker SelectedDate="{Binding DueDate}" HorizontalAlignment="Stretch"/>
-                </StackPanel>
-            </StackPanel>
+                                        <StackPanel Spacing="5">
+                                            <TextBlock Text="Očekávaná částka (XMR)" Opacity="0.6"/>
+                                            <NumericUpDown Value="{Binding ExpectedAmountXMR}" 
+                                                           Increment="0.000000000001" 
+                                                           FormatString="N12" 
+                                                           Minimum="0"/>
+                                        </StackPanel>
 
-            <UniformGrid Columns="2" Opacity="0.6">
-                <StackPanel Margin="0,10,10,0">
-                    <TextBlock Text="ID Platby" FontSize="12"/>
-                    <TextBlock Text="{Binding Id}" FontWeight="Bold"/>
-                </StackPanel>
-                <StackPanel Margin="0,10,0,0">
-                    <TextBlock Text="Status" FontSize="12"/>
-                    <TextBlock Text="{Binding Status}" FontWeight="Bold"/>
-                </StackPanel>
-            </UniformGrid>
-        </StackPanel>
-    </ScrollViewer>
-</DataTemplate>
-        </ContentControl.ContentTemplate>
-    </ContentControl>
-</Border>
+                                        <StackPanel Spacing="5">
+                                            <TextBlock Text="Datum splatnosti" Opacity="0.6"/>
+                                            <DatePicker SelectedDate="{Binding DueDate}" HorizontalAlignment="Stretch"/>
+                                        </StackPanel>
+                                    </StackPanel>
+
+                                    <UniformGrid Columns="2">
+                                        <StackPanel Margin="0,10,10,0">
+                                            <TextBlock Text="ID Platby" FontSize="12"/>
+                                            <TextBlock Text="{Binding Id}" FontWeight="Bold"/>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,10,0,0">
+                                            <TextBlock Text="Status" FontSize="12"/>
+                                            <TextBlock Text="{Binding Status}" FontWeight="Bold"/>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,10,10,0">
+                                            <TextBlock Text="Očekávaná částka" FontSize="12"/>
+                                            <TextBlock Text="{Binding ExpectedAmountXMR, StringFormat={}{0:N12} XMR}" 
+                                                       FontWeight="Bold"/>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,10,0,0">
+                                            <TextBlock Text="Zaplaceno" FontSize="12"/>
+                                            <TextBlock Text="{Binding PaidAmountXMR, StringFormat={}{0:N12} XMR}" 
+                                                       FontWeight="Bold"/>
+                                        </StackPanel>
+
+                                        <StackPanel Margin="0,10,10,0">
+                                            <TextBlock Text="Přebytek" FontSize="12"/>
+                                            <TextBlock Text="{Binding SurplusAmountXMR, StringFormat={}{0:N12} XMR}" 
+                                                       FontWeight="Bold"
+                                                       IsVisible="{Binding Status, Converter={StaticResource IsOverpaidConverter}}"/>
+                                            <TextBlock Text="—" FontWeight="Bold"
+                                                       IsVisible="{Binding !Status, Converter={StaticResource IsOverpaidConverter}}"/>
+                                        </StackPanel>
+                                        <StackPanel Margin="0,10,0,0">
+                                            <TextBlock Text="Datum vytvoření" FontSize="12"/>
+                                            <TextBlock Text="{Binding CreatedAt, StringFormat={}{0:dd.MM.yyyy}}" 
+                                                       FontWeight="Bold"/>
+                                        </StackPanel>
+                                    </UniformGrid>
+                                </StackPanel>
+                            </ScrollViewer>
+                        </DataTemplate>
+                    </ContentControl.ContentTemplate>
+                </ContentControl>
+            </Border>
         </Grid>
     </Grid>
 </UserControl>

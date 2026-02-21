@@ -198,5 +198,41 @@ namespace CtrlPay.Repos
                 return;
             }
         }
+        public static async Task<bool> ConvertOverpaymentToCredit(FrontendPaymentDTO payment)
+        {
+            decimal surplus = payment.PaidAmountXMR - payment.ExpectedAmountXMR;
+            if (surplus <= 0)
+            {
+                AppLogger.Warning($"Payment {payment.Id} nemá žádný přebytek.");
+                return false;
+            }
+
+            AppLogger.Info($"Převod přebytku {surplus} XMR do kreditů pro zákazníka {payment.CustomerId}...");
+
+            var payload = new
+            {
+                PaymentId = payment.Id,
+                CustomerId = payment.CustomerId,
+                SurplusAmountXMR = surplus
+            };
+
+            // TODO: Karele toto
+            string? json = await HttpWorker.HttpPost("api/payments/convert-to-credit", payload, true, default);
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                AppLogger.Warning($"Convert-to-credit response byl NULL.");
+                return false;
+            }
+
+            // Lokálně aktualizujeme cache – přebytek se "vyčerpá", status se změní
+            int idx = Cache.FindIndex(c => c.Id == payment.Id);
+            if (idx != -1)
+            {
+                Cache[idx].PaidAmountXMR = Cache[idx].ExpectedAmountXMR; // přebytek pryč
+                Cache[idx].Status = StatusEnum.Paid;
+            }
+
+            return true;
+        }
     }
 }

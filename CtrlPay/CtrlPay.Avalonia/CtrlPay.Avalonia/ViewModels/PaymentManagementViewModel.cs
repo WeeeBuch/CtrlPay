@@ -25,6 +25,10 @@ public partial class PaymentManagementViewModel : ViewModelBase
 
     [ObservableProperty] private ObservableCollection<FrontendCustomerDTO> customers = [];
 
+    [ObservableProperty] private bool showOnlyOverpaid;
+
+    partial void OnShowOnlyOverpaidChanged(bool value) => ApplySorting(SelectedSortOrder?.Key);
+
     public PaymentManagementViewModel() 
     {
         SortOptions =
@@ -115,6 +119,9 @@ public partial class PaymentManagementViewModel : ViewModelBase
         // 1. Získáme nová data z repozitáře
         var newData = AccountantPaymentRepo.GetSortedPayments(sortingMethod);
 
+        if (ShowOnlyOverpaid)
+            newData = newData.Where(p => p.Status == StatusEnum.Overpaid).ToList();
+
         // 2. Synchronizace kolekcí (podobně jako u Customers)
         // Uložíme si ID aktuálně vybrané platby
         var selectedId = SelectedPayment?.Id;
@@ -174,6 +181,28 @@ public partial class PaymentManagementViewModel : ViewModelBase
         }
 
         var resultList = Payments.Where(vm => vm.Title.ToLower().Contains(value.ToLower())).ToList();
+
+        if (ShowOnlyOverpaid)
+            resultList = resultList.Where(p => p.Status == StatusEnum.Overpaid).ToList();
+
         Payments.ReplaceAll(resultList);
+    }
+
+    [RelayCommand]
+    public async Task ConvertOverpaymentToCredit()
+    {
+        if (SelectedPayment == null) return;
+        if (SelectedPayment.Status != StatusEnum.Overpaid) return;
+
+        bool success = await AccountantPaymentRepo.ConvertOverpaymentToCredit(SelectedPayment);
+        if (success)
+        {
+            AppLogger.Info($"Přebytek platby {SelectedPayment.Id} úspěšně převeden do kreditů.");
+            RefreshAllData();
+        }
+        else
+        {
+            AppLogger.Warning($"Převod přebytku selhal.");
+        }
     }
 }

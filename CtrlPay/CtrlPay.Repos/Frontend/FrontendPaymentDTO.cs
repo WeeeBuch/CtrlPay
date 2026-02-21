@@ -1,4 +1,4 @@
-using CtrlPay.Entities;
+﻿using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
@@ -21,6 +21,9 @@ public class FrontendPaymentDTO : IEditableObject
     public DateTimeOffset? PaidAt { get; set; }
     public DateTimeOffset? DueDate { get; set; }
     public string? Title { get; set; }
+
+    public decimal SurplusAmountXMR =>
+    Status == StatusEnum.Overpaid ? PaidAmountXMR - ExpectedAmountXMR : 0m;
 
     public FrontendPaymentDTO()
     {
