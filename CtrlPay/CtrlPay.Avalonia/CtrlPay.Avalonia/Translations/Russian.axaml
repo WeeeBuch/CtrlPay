@@ -7,6 +7,30 @@
 
     <x:String x:Key="LoginWindow.Title">Вход</x:String>
 
+    <x:String x:Key="NavbarView.PaymentManagement">Управление платежами</x:String>
+    <x:String x:Key="PaymentManagerView.SearchWaterMark">Поиск платежей...</x:String>
+    <x:String x:Key="PaymentManagerView.SortBy">Сортировать по</x:String>
+    <x:String x:Key="PaymentManagerView.OnlyOverpaid">Только переплаты</x:String>
+
+    <x:String x:Key="PaymentManagerView.Detail.Title">Детали платежа</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Edit">Редактировать</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Cancel">Отмена</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Save">Сохранить</x:String>
+    <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">В кредит</x:String>
+
+    <x:String x:Key="PaymentManagerView.Label.Title">Заголовок</x:String>
+    <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Введите заголовок...</x:String>
+    <x:String x:Key="PaymentManagerView.Label.Customer">Клиент</x:String>
+    <x:String x:Key="PaymentManagerView.Label.ExpectedAmount">Ожидаемая сумма</x:String>
+    <x:String x:Key="PaymentManagerView.Label.DueDate">Срок оплаты</x:String>
+
+    <x:String x:Key="PaymentManagerView.Info.PaymentId">ID платежа</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Status">Статус</x:String>
+    <x:String x:Key="PaymentManagerView.Info.ExpectedAmount">Ожидаемая сумма</x:String>
+    <x:String x:Key="PaymentManagerView.Info.PaidAmount">Оплаченная сумма</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Surplus">Переплата</x:String>
+    <x:String x:Key="PaymentManagerView.Info.CreatedAt">Создано</x:String>
+
     <x:String x:Key="NavbarView.Customers">Клиенты</x:String>
     <x:String x:Key="Customers.Title">Управление клиентами</x:String>
     <x:String x:Key="Customers.SearchWatermark">Поиск клиентов...</x:String>

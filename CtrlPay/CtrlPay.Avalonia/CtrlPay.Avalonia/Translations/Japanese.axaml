@@ -7,6 +7,30 @@
 
     <x:String x:Key="LoginWindow.Title">ログイン</x:String>
 
+    <x:String x:Key="NavbarView.PaymentManagement">支払い管理</x:String>
+    <x:String x:Key="PaymentManagerView.SearchWaterMark">支払いを検索...</x:String>
+    <x:String x:Key="PaymentManagerView.SortBy">並べ替え</x:String>
+    <x:String x:Key="PaymentManagerView.OnlyOverpaid">過払いのみ</x:String>
+
+    <x:String x:Key="PaymentManagerView.Detail.Title">支払い詳細</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Edit">編集</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Cancel">キャンセル</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Save">保存</x:String>
+    <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">クレジットに変換</x:String>
+
+    <x:String x:Key="PaymentManagerView.Label.Title">タイトル</x:String>
+    <x:String x:Key="PaymentManagerView.Label.TitleWatermark">タイトルを入力...</x:String>
+    <x:String x:Key="PaymentManagerView.Label.Customer">顧客</x:String>
+    <x:String x:Key="PaymentManagerView.Label.ExpectedAmount">期待金額</x:String>
+    <x:String x:Key="PaymentManagerView.Label.DueDate">期日</x:String>
+
+    <x:String x:Key="PaymentManagerView.Info.PaymentId">支払いID</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Status">ステータス</x:String>
+    <x:String x:Key="PaymentManagerView.Info.ExpectedAmount">期待金額</x:String>
+    <x:String x:Key="PaymentManagerView.Info.PaidAmount">支払済金額</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Surplus">剰余金</x:String>
+    <x:String x:Key="PaymentManagerView.Info.CreatedAt">作成日</x:String>
+
     <x:String x:Key="NavbarView.Customers">顧客</x:String>
     <x:String x:Key="Customers.Title">顧客管理</x:String>
     <x:String x:Key="Customers.SearchWatermark">顧客を検索...</x:String>

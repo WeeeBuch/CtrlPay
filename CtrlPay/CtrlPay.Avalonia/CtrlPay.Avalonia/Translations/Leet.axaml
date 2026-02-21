@@ -7,6 +7,30 @@
 
     <x:String x:Key="LoginWindow.Title">L061N</x:String>
 
+    <x:String x:Key="NavbarView.PaymentManagement">P4ym3nt M4n4g3m3nt</x:String>
+    <x:String x:Key="PaymentManagerView.SearchWaterMark">534rch p4ym3nt5...</x:String>
+    <x:String x:Key="PaymentManagerView.SortBy">50rt by</x:String>
+    <x:String x:Key="PaymentManagerView.OnlyOverpaid">0nly 0v3rp41d</x:String>
+
+    <x:String x:Key="PaymentManagerView.Detail.Title">P4ym3nt D3t41l</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Edit">3d1t</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Cancel">C4nc3l</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Save">54v3</x:String>
+    <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">C0nv3rt t0 Cr3d1t</x:String>
+
+    <x:String x:Key="PaymentManagerView.Label.Title">T1tl3</x:String>
+    <x:String x:Key="PaymentManagerView.Label.TitleWatermark">3nt3r t1tl3...</x:String>
+    <x:String x:Key="PaymentManagerView.Label.Customer">Cu5t0m3r</x:String>
+    <x:String x:Key="PaymentManagerView.Label.ExpectedAmount">3xp3ct3d Am0unt</x:String>
+    <x:String x:Key="PaymentManagerView.Label.DueDate">Du3 D4t3</x:String>
+
+    <x:String x:Key="PaymentManagerView.Info.PaymentId">P4ym3nt 1D</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Status">5t4tu5</x:String>
+    <x:String x:Key="PaymentManagerView.Info.ExpectedAmount">3xp3ct3d Am0unt</x:String>
+    <x:String x:Key="PaymentManagerView.Info.PaidAmount">P41d Am0unt</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Surplus">5urplu5</x:String>
+    <x:String x:Key="PaymentManagerView.Info.CreatedAt">Cr34t3d 4t</x:String>
+
     <x:String x:Key="NavbarView.Customers">CU570M3R5</x:String>
     <x:String x:Key="Customers.Title">M4N4G3_U53R5</x:String>
     <x:String x:Key="Customers.SearchWatermark">534RCH_DB...</x:String>

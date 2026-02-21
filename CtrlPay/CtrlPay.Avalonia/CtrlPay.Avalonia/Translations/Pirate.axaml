@@ -7,6 +7,30 @@
 
     <x:String x:Key="LoginWindow.Title">Identify Thyself</x:String>
 
+    <x:String x:Key="NavbarView.PaymentManagement">Treasury Logs</x:String>
+    <x:String x:Key="PaymentManagerView.SearchWaterMark">Spyglass for gold...</x:String>
+    <x:String x:Key="PaymentManagerView.SortBy">Arrange by</x:String>
+    <x:String x:Key="PaymentManagerView.OnlyOverpaid">Too much booty</x:String>
+
+    <x:String x:Key="PaymentManagerView.Detail.Title">Map o' the Coin</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Edit">Patch up</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Cancel">Belay that</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Save">Lock in chest</x:String>
+    <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Trade for chits</x:String>
+
+    <x:String x:Key="PaymentManagerView.Label.Title">Name</x:String>
+    <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Mark the scroll...</x:String>
+    <x:String x:Key="PaymentManagerView.Label.Customer">Matey</x:String>
+    <x:String x:Key="PaymentManagerView.Label.ExpectedAmount">Golden promise</x:String>
+    <x:String x:Key="PaymentManagerView.Label.DueDate">Hour o' reckoning</x:String>
+
+    <x:String x:Key="PaymentManagerView.Info.PaymentId">Bounty Mark</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Status">Wind direction</x:String>
+    <x:String x:Key="PaymentManagerView.Info.ExpectedAmount">Plunder expected</x:String>
+    <x:String x:Key="PaymentManagerView.Info.PaidAmount">Gold in hand</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Surplus">Extra booty</x:String>
+    <x:String x:Key="PaymentManagerView.Info.CreatedAt">First logged</x:String>
+
     <x:String x:Key="NavbarView.Customers">Ports</x:String>
     <x:String x:Key="Customers.Title">Trade Partners</x:String>
     <x:String x:Key="Customers.SearchWatermark">Spyglass for merchants...</x:String>

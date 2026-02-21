@@ -7,6 +7,30 @@
 
     <x:String x:Key="LoginWindow.Title">Přihlášení</x:String>
 
+    <x:String x:Key="NavbarView.PaymentManagement">Správa platbeňo</x:String>
+    <x:String x:Key="PaymentManagerView.SearchWaterMark">Hledat platby...</x:String>
+    <x:String x:Key="PaymentManagerView.SortBy">Seřadiť podľá</x:String>
+    <x:String x:Key="PaymentManagerView.OnlyOverpaid">Inu přeplatky</x:String>
+
+    <x:String x:Key="PaymentManagerView.Detail.Title">Detail platby</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Edit">Upraviť</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Cancel">Zrušiť</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Save">Uložiť</x:String>
+    <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Vyměniť za kredit</x:String>
+
+    <x:String x:Key="PaymentManagerView.Label.Title">Název</x:String>
+    <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Napište název...</x:String>
+    <x:String x:Key="PaymentManagerView.Label.Customer">Zákazník</x:String>
+    <x:String x:Key="PaymentManagerView.Label.ExpectedAmount">Čakaná suma</x:String>
+    <x:String x:Key="PaymentManagerView.Label.DueDate">Splatnosť</x:String>
+
+    <x:String x:Key="PaymentManagerView.Info.PaymentId">Číslo platby</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Status">Stav</x:String>
+    <x:String x:Key="PaymentManagerView.Info.ExpectedAmount">Čakaná suma</x:String>
+    <x:String x:Key="PaymentManagerView.Info.PaidAmount">Zaplatená suma</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Surplus">Přeplatek</x:String>
+    <x:String x:Key="PaymentManagerView.Info.CreatedAt">Vytvořené</x:String>
+
     <x:String x:Key="NavbarView.Customers">Klienti</x:String>
     <x:String x:Key="Customers.Title">Naši lidi</x:String>
     <x:String x:Key="Customers.SearchWatermark">Hledej macka...</x:String>

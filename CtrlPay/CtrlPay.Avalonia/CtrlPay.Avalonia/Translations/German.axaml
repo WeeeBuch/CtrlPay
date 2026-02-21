@@ -7,6 +7,30 @@
 
     <x:String x:Key="LoginWindow.Title">Anmeldung</x:String>
 
+    <x:String x:Key="NavbarView.PaymentManagement">Zahlungsverwaltung</x:String>
+    <x:String x:Key="PaymentManagerView.SearchWaterMark">Zahlungen suchen...</x:String>
+    <x:String x:Key="PaymentManagerView.SortBy">Sortieren nach</x:String>
+    <x:String x:Key="PaymentManagerView.OnlyOverpaid">Nur Überzahlungen</x:String>
+
+    <x:String x:Key="PaymentManagerView.Detail.Title">Zahlungsdetails</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Edit">Bearbeiten</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Cancel">Abbrechen</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Save">Speichern</x:String>
+    <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">In Guthaben umwandeln</x:String>
+
+    <x:String x:Key="PaymentManagerView.Label.Title">Titel</x:String>
+    <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Titel eingeben...</x:String>
+    <x:String x:Key="PaymentManagerView.Label.Customer">Kunde</x:String>
+    <x:String x:Key="PaymentManagerView.Label.ExpectedAmount">Erwarteter Betrag</x:String>
+    <x:String x:Key="PaymentManagerView.Label.DueDate">Fälligkeitsdatum</x:String>
+
+    <x:String x:Key="PaymentManagerView.Info.PaymentId">Zahlungs-ID</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Status">Status</x:String>
+    <x:String x:Key="PaymentManagerView.Info.ExpectedAmount">Erwarteter Betrag</x:String>
+    <x:String x:Key="PaymentManagerView.Info.PaidAmount">Gezahlter Betrag</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Surplus">Überschuss</x:String>
+    <x:String x:Key="PaymentManagerView.Info.CreatedAt">Erstellt am</x:String>
+
     <x:String x:Key="NavbarView.Customers">Kunden</x:String>
     <x:String x:Key="Customers.Title">Kundenverwaltung</x:String>
     <x:String x:Key="Customers.SearchWatermark">Kunden suchen...</x:String>
