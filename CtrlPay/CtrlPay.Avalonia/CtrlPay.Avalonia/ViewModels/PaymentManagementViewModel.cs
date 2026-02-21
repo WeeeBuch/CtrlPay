@@ -82,7 +82,7 @@ public partial class PaymentManagementViewModel : ViewModelBase
 
         try
         {
-            await AccountantPaymentRepo.EditPayment(SelectedPayment);
+            await AccountantPaymentRepo.UpdatePayment(SelectedPayment);
 
             RefreshAllData();
         }
