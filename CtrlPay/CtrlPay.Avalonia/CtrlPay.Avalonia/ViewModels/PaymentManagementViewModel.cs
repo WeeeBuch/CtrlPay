@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.HelperClasses;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
@@ -17,6 +18,7 @@ public partial class PaymentManagementViewModel : ViewModelBase
     [ObservableProperty] private SortOption selectedSortOrder;
     [ObservableProperty] private List<SortOption> sortOptions;
     [ObservableProperty] private string searchTerm;
+    [ObservableProperty] private bool _isEditing;
 
     [ObservableProperty] private RangeObservableCollection<FrontendPaymentDTO> payments = [];
     [ObservableProperty] private FrontendPaymentDTO? selectedPayment;
@@ -36,42 +38,72 @@ public partial class PaymentManagementViewModel : ViewModelBase
         SelectedSortOrder = SortOptions[0];
 
         ApplySorting(null);
-        LoadCustomers();
 
-        UpdateHandler.UpdatedCustomers.Add(LoadCustomers);
+        RefreshAllData();
+
+        UpdateHandler.UpdatedCustomers.Add(() => SyncCustomers(CustomerRepo.GetCustomers()));
         UpdateHandler.NewPaymentsAddedActions.Add(() => ApplySorting(null));
     }
 
-    private void LoadCustomers()
+    private void RefreshAllData()
     {
-        var loadedCustomers = CustomerRepo.GetCustomers();
-        Customers = new ObservableCollection<FrontendCustomerDTO>(loadedCustomers);
+        SyncCustomers(CustomerRepo.GetCustomers());
+        ApplySorting(SelectedSortOrder?.Key);
+    }
+
+    private void SyncCustomers(List<FrontendCustomerDTO> freshData)
+    {
+        // Odstraníme ty, co už neexistují
+        var toRemove = Customers.Where(c => !freshData.Any(n => n.Id == c.Id)).ToList();
+        foreach (var item in toRemove) Customers.Remove(item);
+
+        foreach (var dto in freshData)
+        {
+            var existing = Customers.FirstOrDefault(c => c.Id == dto.Id);
+            if (existing != null)
+            {
+                // Aktualizujeme data v existujícím objektu (pokud jsi i u Customera implementoval ObservableObject)
+                existing.FirstName = dto.FirstName;
+                existing.LastName = dto.LastName;
+                existing.Company = dto.Company;
+                existing.Physical = dto.Physical;
+            }
+            else
+            {
+                Customers.Add(dto);
+            }
+        }
     }
 
     public async Task SavePaymentAsync()
     {
+        IsEditing = false;
         if (SelectedPayment == null) return;
 
         try
         {
-            // 1. Převedeme frontendové DTO zpět na API DTO (to už máš připravené)
-            var apiDto = SelectedPayment.ToApiDto();
+            await AccountantPaymentRepo.EditPayment(SelectedPayment);
 
-            // 2. Pošleme to do repozitáře (tady si doplň svůj název metody)
-            // Předpokládám, že AccountantPaymentRepo má metodu Update
-            bool success = true;
-
-            if (success)
-            {
-                AppLogger.Info("Platba byla úspěšně uložena.");
-                // Volitelně: Refresh seznamu, aby se změny projevily všude
-                ApplySorting(SelectedSortOrder?.Key);
-            }
+            RefreshAllData();
         }
         catch (Exception ex)
         {
             AppLogger.Error($"Chyba při ukládání platby: {ex.Message}");
         }
+    }
+
+    [RelayCommand]
+    public void StartEdit(FrontendPaymentDTO payment)
+    {
+        payment.BeginEdit();
+        IsEditing = true;
+    }
+
+    [RelayCommand]
+    public void CancelEdit(FrontendPaymentDTO payment)
+    {
+        payment.CancelEdit();
+        IsEditing = false;
     }
 
     public string GetCustomerName(int? id) => Customers.FirstOrDefault(c => c.Id == id)?.FullName ?? "Neznámý";
