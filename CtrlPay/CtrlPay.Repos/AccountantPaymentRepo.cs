@@ -166,7 +166,7 @@ namespace CtrlPay.Repos
             int id = Cache.FindIndex(c => c.Id == dto.Id);
             if (id == -1)
             {
-                AppLogger.Info($"Adding customer to API...");
+                AppLogger.Info($"Adding payment to API...");
                 string? json = await HttpWorker.HttpPost($"api/payments/create", dto.ToApiDto(), true, default);
                 if (string.IsNullOrWhiteSpace(json))
                 {
@@ -178,8 +178,8 @@ namespace CtrlPay.Repos
             else
             {
                 Cache[id] = dto;
-                AppLogger.Info($"Updating customer in API...");
-                string? json = await HttpWorker.HttpPost($"api/customers/edit", dto.ToApiDto(), true, default);
+                AppLogger.Info($"Updating payment in API...");
+                string? json = await HttpWorker.HttpPost($"api/payments/edit", dto.ToApiDto(), true, default);
                 if (string.IsNullOrWhiteSpace(json))
                 {
                     AppLogger.Warning($"Update payment response was NULL.");
@@ -190,7 +190,7 @@ namespace CtrlPay.Repos
         public static async Task DeletePayment(FrontendPaymentDTO toDelete)
         {
             Cache.Remove(toDelete);
-
+            AppLogger.Info($"Deleting payment in API...");
             string? json = await HttpWorker.HttpDelete($"/api/payments/{toDelete.Id}", true);
             if (string.IsNullOrWhiteSpace(json))
             {
