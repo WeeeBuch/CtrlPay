@@ -6,6 +6,31 @@
     <x:String x:Key="App.Watermark">© 2026 CtrlPay</x:String>
     <x:String x:Key="App.Currency">XMR</x:String>
 
+    <!-- Payment Manager -->
+    <x:String x:Key="NavbarView.PaymentManagement">NavbarView.PaymentManagement</x:String>
+    <x:String x:Key="PaymentManagerView.SearchWaterMark">PaymentManagerView.SearchWaterMark</x:String>
+    <x:String x:Key="PaymentManagerView.SortBy">PaymentManagerView.SortBy</x:String>
+    <x:String x:Key="PaymentManagerView.OnlyOverpaid">PaymentManagerView.OnlyOverpaid</x:String>
+
+    <x:String x:Key="PaymentManagerView.Detail.Title">PaymentManagerView.Detail.Title</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Edit">PaymentManagerView.Button.Edit</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Cancel">PaymentManagerView.Button.Cancel</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Save">PaymentManagerView.Button.Save</x:String>
+    <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">PaymentManagerView.Button.ConvertToCredit</x:String>
+
+    <x:String x:Key="PaymentManagerView.Label.Title">PaymentManagerView.Label.Title</x:String>
+    <x:String x:Key="PaymentManagerView.Label.TitleWatermark">PaymentManagerView.Label.TitleWatermark</x:String>
+    <x:String x:Key="PaymentManagerView.Label.Customer">PaymentManagerView.Label.Customer</x:String>
+    <x:String x:Key="PaymentManagerView.Label.ExpectedAmount">PaymentManagerView.Label.ExpectedAmount</x:String>
+    <x:String x:Key="PaymentManagerView.Label.DueDate">PaymentManagerView.Label.DueDate</x:String>
+
+    <x:String x:Key="PaymentManagerView.Info.PaymentId">PaymentManagerView.Info.PaymentId</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Status">PaymentManagerView.Info.Status</x:String>
+    <x:String x:Key="PaymentManagerView.Info.ExpectedAmount">PaymentManagerView.Info.ExpectedAmount</x:String>
+    <x:String x:Key="PaymentManagerView.Info.PaidAmount">PaymentManagerView.Info.PaidAmount</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Surplus">PaymentManagerView.Info.Surplus</x:String>
+    <x:String x:Key="PaymentManagerView.Info.CreatedAt">PaymentManagerView.Info.CreatedAt</x:String>
+
     <!-- Login Window -->
     <x:String x:Key="LoginWindow.Title">LoginWindow.Title</x:String>
 
