@@ -131,7 +131,7 @@ namespace CtrlPay.API.Controllers
         [HttpPost]
         [Route("create")]
         // POST : api/payments/create
-        public IActionResult Create([FromBody] CreatePaymentRequest request)
+        public IActionResult Create([FromBody] PaymentApiDTO request)
         {
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
             if (role != Role.Accountant && role != Role.Admin)
@@ -145,12 +145,14 @@ namespace CtrlPay.API.Controllers
             }
             Payment payment = new Payment()
             {
-                Customer = customer,
+                Customer = _db.Customers.Where(c => c.Id == request.CustomerId).First(),
                 Account = customer.LoyalCustomer.Account,
                 ExpectedAmountXMR = request.ExpectedAmountXMR,
+                PaidAmountXMR = request.PaidAmountXMR,
+                Status = request.Status,
+                CreatedAt = request.CreatedAt,
                 DueDate = request.DueDate,
-                Status = PaymentStatusEnum.Unpaid,
-                CreatedAt = DateTime.UtcNow
+                Title = request.Title
             };
             _db.Payments.Add(payment);
             _db.SaveChanges();
@@ -178,7 +180,8 @@ namespace CtrlPay.API.Controllers
             payment.PaidAmountXMR = request.PaidAmountXMR;
             payment.Status = request.Status;
             payment.CreatedAt = request.CreatedAt;
-            if(request.PaidAt != DateTimeOffset.MinValue)
+            payment.Title = request.Title;
+            if (request.PaidAt != DateTimeOffset.MinValue)
             {
                 payment.PaidAt = request.PaidAt;
             }  
