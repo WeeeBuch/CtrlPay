@@ -101,7 +101,7 @@ namespace CtrlPay.Core
         public static async Task MarkExpiredPayments(CancellationToken cancellationToken)
         {
             List<Payment> paymentsToExpire = _db.Payments.Where(p => p.Status == PaymentStatusEnum.WaitingForPayment ||p.Status == PaymentStatusEnum.Unpaid ||p.Status == PaymentStatusEnum.PartiallyPaid)
-                                                                .Where(p => p.DueDate == DateTimeOffset.Now).ToList();
+                                                                .Where(p => p.DueDate <= DateTimeOffset.Now).ToList();
             foreach (var payment in paymentsToExpire)
             {
                 payment.Status = PaymentStatusEnum.Expired;
