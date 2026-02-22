@@ -18,6 +18,7 @@ public class PaymentProcessingBackgroundService : BackgroundService
             {
                 await PaymentProcessing.PairOneTimePayment(stoppingToken);
                 await PaymentProcessing.CompleteTransactionsToPrimaryAddress(stoppingToken);
+                await PaymentProcessing.MarkExpiredPayments(stoppingToken);
             }
             catch (Exception ex)
             {
