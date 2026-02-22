@@ -273,7 +273,7 @@ namespace CtrlPay.API.Controllers
             payment.PaidAmountXMR -= surplus;
             payment.Status = PaymentStatusEnum.Paid;
             _db.SaveChanges();
-            return Ok();
+            return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));
         }
     }
     public class CreatePaymentRequest
