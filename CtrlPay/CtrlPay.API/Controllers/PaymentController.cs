@@ -201,6 +201,11 @@ namespace CtrlPay.API.Controllers
             {
                 return NotFound(new ReturnModel("P2", ReturnModelSeverityEnum.Error));
             }
+            if (payment.Status == PaymentStatusEnum.PartiallyPaid ||payment.Status == PaymentStatusEnum.Paid ||payment.Status == PaymentStatusEnum.Overpaid)
+            {
+                return BadRequest(new ReturnModel("P6", ReturnModelSeverityEnum.Warning));
+            }
+            
             _db.Payments.Remove(payment);
             _db.SaveChanges();
             return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));

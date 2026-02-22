@@ -38,6 +38,7 @@ namespace CtrlPay.Entities
             { "P3", "user does not have permission to pay payment" },
             { "P4", "payment is already paid" },
             { "P5", "payment is not overpaid" },
+            { "P6", "payment is already paid or partially paid and cannot be deleted" },
             { "R0", "successfully registered" },
             { "R1", "username can not be empty" },
             { "R2", "password can not be empty" },
