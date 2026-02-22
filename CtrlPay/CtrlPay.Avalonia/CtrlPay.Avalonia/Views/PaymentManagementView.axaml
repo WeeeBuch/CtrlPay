@@ -202,6 +202,8 @@
                                                        FontWeight="Bold"/>
                                         </StackPanel>
                                     </UniformGrid>
+
+                                    <Button Content="Delete" IsVisible="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).CanBeDeleted }" Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).DeletePaymentCommand}"/>
                                 </StackPanel>
                             </ScrollViewer>
                         </DataTemplate>

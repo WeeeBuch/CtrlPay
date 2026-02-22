@@ -22,6 +22,7 @@ public partial class PaymentManagementViewModel : ViewModelBase
 
     [ObservableProperty] private RangeObservableCollection<FrontendPaymentDTO> payments = [];
     [ObservableProperty] private FrontendPaymentDTO? selectedPayment;
+    [ObservableProperty] private bool canBeDeleted = false;
 
     [ObservableProperty] private ObservableCollection<FrontendCustomerDTO> customers = [];
 
@@ -120,6 +121,7 @@ public partial class PaymentManagementViewModel : ViewModelBase
     {
         payment.BeginEdit();
         IsEditing = true;
+        CanBeDeleted = payment.Status == StatusEnum.WaitingForPayment || payment.Status == StatusEnum.Pending;
     }
 
     [RelayCommand]
@@ -127,6 +129,13 @@ public partial class PaymentManagementViewModel : ViewModelBase
     {
         payment.CancelEdit();
         IsEditing = false;
+        CanBeDeleted = false;
+    }
+
+    [RelayCommand]
+    public async Task DeletePayment()
+    {
+        await AccountantPaymentRepo.DeletePayment(SelectedPayment);
     }
 
     public string GetCustomerName(int? id) => Customers.FirstOrDefault(c => c.Id == id)?.FullName ?? "Neznámý";
