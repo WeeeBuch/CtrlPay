@@ -26,7 +26,7 @@ namespace CtrlPay.Avalonia
             AppLogger.Info($"Starting app. Version: {Assembly.GetExecutingAssembly().GetName().Version}");
 
             IsConfigured = !SettingsManager.Init();
-            TranslationManager.Apply(TranslationManager.GetCurrentSystemLanguage());
+            TranslationManager.Apply(IsConfigured ? SettingsManager.Current.Language : TranslationManager.GetCurrentSystemLanguage());
             AvaloniaXamlLoader.Load(this);
         }
 

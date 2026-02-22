@@ -66,9 +66,10 @@ namespace CtrlPay.Entities
         public decimal ExpectedAmountXMR { get; set; }
         public decimal PaidAmountXMR { get; set; }
         public PaymentStatusEnum Status { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime? PaidAt { get; set; }
-        public DateTime? DueDate { get; set; }
+        public DateTimeOffset CreatedAt { get; set; }
+        public DateTimeOffset? PaidAt { get; set; }
+        public DateTimeOffset? DueDate { get; set; }
+        public string? Title { get; set; }
 
         public PaymentApiDTO()
         {
@@ -86,6 +87,7 @@ namespace CtrlPay.Entities
             CreatedAt = payment.CreatedAt;
             PaidAt = payment.PaidAt ?? default;
             DueDate = payment.DueDate ?? default;
+            Title = payment.Title;
         }
     }
 

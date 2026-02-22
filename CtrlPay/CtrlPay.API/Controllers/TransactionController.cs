@@ -26,11 +26,11 @@ namespace CtrlPay.API.Controllers
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
             if (user == null)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             if (user.LoyalCustomer == null)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A6", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             int accountIndex = user.LoyalCustomer.Account.Index;
             List<Entities.Transaction> transactions = _db.Transactions
@@ -52,16 +52,16 @@ namespace CtrlPay.API.Controllers
             User user = _db.Users.Where(u => u.Id.ToString() == userId).First();
             if (user == null)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A3", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             if (user.LoyalCustomer == null)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("A6", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             int? accountIndex = user.LoyalCustomer.Account.Index;
             if (accountIndex is null)
             {
-                return Forbid(JsonSerializer.Serialize(new ReturnModel("T1", ReturnModelSeverityEnum.Error)));
+                return Forbid();
             }
             decimal credit = _db.Transactions
                 .Where(t => t.Account.Index == accountIndex)

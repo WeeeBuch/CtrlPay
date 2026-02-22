@@ -14,6 +14,7 @@ public partial class CustomerPieceViewModel : ViewModelBase
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(DisplayName))] // Automaticky aktualizuje jméno v hlavičce
     public FrontendCustomerDTO _model;
+    [ObservableProperty] private bool _isExpanded = false;
 
     [ObservableProperty] private bool _editing = false;
 
@@ -23,11 +24,7 @@ public partial class CustomerPieceViewModel : ViewModelBase
     }
 
     // Bezpečná vlastnost pro zobrazení jména
-    public string DisplayName => Model == null
-        ? "Načítám..."
-        : (Model.Physical
-            ? $"{Model.Title} {Model.FirstName} {Model.LastName}".Trim()
-            : (string.IsNullOrWhiteSpace(Model.Company) ? "Neznámá firma" : Model.Company));
+    public string DisplayName => Model.FullName;
 
     // Přidej tyto vlastnosti do CustomerPieceViewModel
     public bool IsPhysical => Model?.Physical ?? false;
@@ -54,6 +51,7 @@ public partial class CustomerPieceViewModel : ViewModelBase
     {
         Model.BeginEdit();
         Editing = true;
+        IsExpanded = true;
     }
 
     [RelayCommand]

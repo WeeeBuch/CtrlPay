@@ -6,6 +6,30 @@
     <x:String x:Key="App.Watermark">© 2026 CtrlPay</x:String>
     <x:String x:Key="App.Currency">XMR</x:String>
 
+    <x:String x:Key="NavbarView.PaymentManagement">Payment Management</x:String>
+    <x:String x:Key="PaymentManagerView.SearchWaterMark">Search payments...</x:String>
+    <x:String x:Key="PaymentManagerView.SortBy">Sort by</x:String>
+    <x:String x:Key="PaymentManagerView.OnlyOverpaid">Only overpaid</x:String>
+
+    <x:String x:Key="PaymentManagerView.Detail.Title">Payment Detail</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Edit">Edit</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Cancel">Cancel</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Save">Save</x:String>
+    <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Convert to Credit</x:String>
+
+    <x:String x:Key="PaymentManagerView.Label.Title">Title</x:String>
+    <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Enter title...</x:String>
+    <x:String x:Key="PaymentManagerView.Label.Customer">Customer</x:String>
+    <x:String x:Key="PaymentManagerView.Label.ExpectedAmount">Expected Amount</x:String>
+    <x:String x:Key="PaymentManagerView.Label.DueDate">Due Date</x:String>
+
+    <x:String x:Key="PaymentManagerView.Info.PaymentId">Payment ID</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Status">Status</x:String>
+    <x:String x:Key="PaymentManagerView.Info.ExpectedAmount">Expected Amount</x:String>
+    <x:String x:Key="PaymentManagerView.Info.PaidAmount">Paid Amount</x:String>
+    <x:String x:Key="PaymentManagerView.Info.Surplus">Surplus</x:String>
+    <x:String x:Key="PaymentManagerView.Info.CreatedAt">Created At</x:String>
+
     <!-- Login Window -->
     <x:String x:Key="LoginWindow.Title">Login</x:String>
 

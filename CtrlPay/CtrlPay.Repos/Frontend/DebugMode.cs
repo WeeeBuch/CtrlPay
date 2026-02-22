@@ -37,15 +37,7 @@ public static class DebugMode
     public static bool OverrideRole { get; set; } = false;
     public static Role DebugRole { get; set; } = Role.Customer;
 
-    public static List<DebugProperty> GetDebugProperties()
-    {
-        return typeof(DebugMode)
-            .GetProperties(BindingFlags.Public | BindingFlags.Static)
-            .Where(p => (p.PropertyType == typeof(bool) || p.PropertyType.IsEnum)
-                        && p.Name != nameof(StartDebug))
-            .Select(p => new DebugProperty(p))
-            .ToList();
-    }
+    public static bool MockPaymentManager { get; set; } = false;
 }
 
 public class DebugProperty

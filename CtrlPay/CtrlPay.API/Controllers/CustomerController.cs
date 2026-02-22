@@ -60,7 +60,7 @@ namespace CtrlPay.API.Controllers
             List<CustomerApiDTO> customers = new();
             _db.Customers.ToList().ForEach(c =>
             {
-                customers.Add(c.LoyalCustomer == null ? new CustomerApiDTO(c) : new CustomerApiDTO(c, c.LoyalCustomer, c.LoyalCustomer.Users.First()));
+                customers.Add(c.LoyalCustomer == null ? new CustomerApiDTO(c) : new CustomerApiDTO(c, c.LoyalCustomer, c.LoyalCustomer.Users.FirstOrDefault()));
             });
             return Ok(new ReturnModel<List<CustomerApiDTO>>("Z0", ReturnModelSeverityEnum.Ok, customers));
         }
