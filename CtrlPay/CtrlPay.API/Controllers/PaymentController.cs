@@ -5,8 +5,10 @@ using CtrlPay.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Org.BouncyCastle.Crypto.Prng;
 using System.Configuration;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text.Json;
 
 namespace CtrlPay.API.Controllers
@@ -171,13 +173,15 @@ namespace CtrlPay.API.Controllers
             }
             payment.Id = request.Id;
             payment.CustomerId = request.CustomerId;
-            payment.AccountId = request.AccountId;
-            payment.AddressId = request.AddressId;
+            payment.AccountId = payment.Customer.LoyalCustomer.Account.Index;
             payment.ExpectedAmountXMR = request.ExpectedAmountXMR;
             payment.PaidAmountXMR = request.PaidAmountXMR;
             payment.Status = request.Status;
             payment.CreatedAt = request.CreatedAt;
-            payment.PaidAt = request.PaidAt;
+            if(request.PaidAt != DateTimeOffset.MinValue)
+            {
+                payment.PaidAt = request.PaidAt;
+            }  
             payment.DueDate = request.DueDate;
             _db.SaveChanges();
             return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));
@@ -197,6 +201,11 @@ namespace CtrlPay.API.Controllers
             {
                 return NotFound(new ReturnModel("P2", ReturnModelSeverityEnum.Error));
             }
+            if (payment.Status == PaymentStatusEnum.PartiallyPaid ||payment.Status == PaymentStatusEnum.Paid ||payment.Status == PaymentStatusEnum.Overpaid)
+            {
+                return BadRequest(new ReturnModel("P6", ReturnModelSeverityEnum.Warning));
+            }
+            
             _db.Payments.Remove(payment);
             _db.SaveChanges();
             return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));
@@ -222,10 +231,45 @@ namespace CtrlPay.API.Controllers
             return Ok(new ReturnModel<List<PaymentApiDTO>>("P0", ReturnModelSeverityEnum.Ok, paymentsDTO));
         }
         [HttpPost]
-        [Route("overpay-to-credit/{id}")]
-        // POST : api/payments/overpay-to-credit/{id}
-        public IActionResult OverpaidToCredit(int id)
+        [Route("overpay-to-credit")]
+        // POST : api/payments/overpay-to-credit
+        public IActionResult OverpaidToCredit([FromBody] PaymentApiDTO request)
         {
+            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
+            if (role != Role.Accountant && role != Role.Admin)
+            {
+                return Forbid();
+            }
+             Payment payment = _db.Payments.Where(p => p.Id == request.Id).First();
+            if (payment == null)
+            {
+                return NotFound(new ReturnModel("P2", ReturnModelSeverityEnum.Error));
+            }
+            if (payment.Status != PaymentStatusEnum.Overpaid)
+            {
+                return BadRequest(new ReturnModel("P5", ReturnModelSeverityEnum.Error));
+            }
+            decimal surplus = payment.PaidAmountXMR - payment.ExpectedAmountXMR;
+            if (surplus <= 0)
+            {
+                return BadRequest(new ReturnModel("P5", ReturnModelSeverityEnum.Error));
+            }
+            LoyalCustomer loyalCustomer = _db.LoyalCustomers.Where(lc => lc.CustomerId == payment.CustomerId).First();
+            Transaction newInternalTransaction = new Transaction()
+            {
+                Account = loyalCustomer.Account,
+                Address = loyalCustomer.Account.BaseAddress,
+                TransactionIdXMR = $"internal-{Convert.ToBase64String(RandomNumberGenerator.GetBytes(4))}",
+                Amount = surplus,
+                Fee = 0,
+                Status = TransactionStatusEnum.Completed,
+                Type = TransactionTypeEnum.Internal,
+                Timestamp = DateTime.UtcNow
+            };
+            _db.Transactions.Add(newInternalTransaction);
+            payment.PaidAmountXMR -= surplus;
+            payment.Status = PaymentStatusEnum.Paid;
+            _db.SaveChanges();
             return Ok();
         }
     }
