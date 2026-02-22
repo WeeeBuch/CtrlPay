@@ -10,5 +10,6 @@ namespace CtrlPay.Entities
     {
         In = 0,
         Out = 1,
+        Internal = 2
     }
 }

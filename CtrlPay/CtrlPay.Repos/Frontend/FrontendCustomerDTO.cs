@@ -29,6 +29,10 @@ public class FrontendCustomerDTO : IEditableObject
     public string AccountId { get; set; }
     public string BaseAddress { get; set; }
 
+    public string FullName => Physical
+        ? $"{FirstName} {LastName}".Trim()
+        : (string.IsNullOrWhiteSpace(Company) ? $"{FirstName} {LastName}".Trim() : Company);
+
     public FrontendCustomerDTO() { }
 
     public FrontendCustomerDTO(CustomerApiDTO customer)

@@ -1,0 +1,47 @@
+@model OverpaidEmailModel
+@{
+    Layout = "_EmailLayout";
+    ViewData["Title"] = "Informace o přeplatku";
+}
+
+<p>Dobrý den @Model.CustomerName,</p>
+
+<p>
+    u platby <strong>ID @Model.PaymentId</strong> jsme zaznamenali přeplatek.
+</p>
+
+<table width="100%" cellpadding="0" cellspacing="0" 
+       style="background:#f9fafb;border-radius:6px;padding:20px;margin:25px 0;">
+    <tr>
+        <td style="font-size:14px;color:#374151;">
+            <strong>Požadovaná částka:</strong> @Model.ExpectedAmountXMR.ToString("0.000000000000") XMR<br>
+            <strong>Uhrazená částka:</strong> @Model.PaidAmountXMR.ToString("0.000000000000") XMR<br><br>
+            <strong style="font-size:15px;color:#111827;">
+                Přeplatek: @Model.OverpaidAmountXMR.ToString("0.000000000000") XMR
+            </strong>
+        </td>
+    </tr>
+</table>
+
+<p>
+    Navrhujeme převést tento přeplatek na <strong>kredit ve vašem účtu CtrlPay</strong>, 
+    který můžete využít pro budoucí platby.
+</p>
+
+<p>
+    Pokud s převodem na kredit souhlasíte, pošlete prosím email na adresu @Model.SupportEmail 
+    s jednoduchým potvrzením (např. „Souhlasím s převodem na kredit“).
+</p>
+
+<p>
+    V případě, že preferujete vrácení přeplatku zpět na odesílací adresu, 
+    informujte nás emailem na adresu @Model.SupportEmail.
+</p>
+
+<p style="margin-top:30px;">
+    Děkujeme za spolupráci,<br>
+    <strong>Tým CtrlPay</strong><br>
+    <span style="font-size:14px;color:#6b7280;">
+        @Model.SupportEmail
+    </span>
+</p>

@@ -20,6 +20,8 @@ public static class ChangeChecker
         await PaymentRepo.UpdatePaymentSumCacheFromApi(default);
         await PaymentRepo.UpdatePaymetsCacheFromApi(default);
         await CustomerRepo.UpdateCustomersFromApi(default);
+        await AccountantPaymentRepo.UpdatePaymetsCacheFromApi(default);
+
         // Sem se píšou všechny kontroly změn, které chceme provádět
         UpdateHandler.HandleCreditAvailableUpdate(TransactionRepo.GetTransactionSum());
         UpdateHandler.HandlePendingPaymentsUpdate(PaymentRepo.GetPaymentSum());
