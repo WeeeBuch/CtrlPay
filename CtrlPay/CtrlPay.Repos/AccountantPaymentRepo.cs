@@ -217,7 +217,7 @@ namespace CtrlPay.Repos
             };
 
             // TODO: Karele toto
-            string? json = await HttpWorker.HttpPost("api/payments/convert-to-credit", payload, true, default);
+            string? json = await HttpWorker.HttpPost("api/payments/overpay-to-credit", payment.ToApiDto(), true, default);
             if (string.IsNullOrWhiteSpace(json))
             {
                 AppLogger.Warning($"Convert-to-credit response byl NULL.");
