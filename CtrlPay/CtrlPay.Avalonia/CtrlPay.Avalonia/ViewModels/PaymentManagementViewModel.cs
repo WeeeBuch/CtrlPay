@@ -49,6 +49,25 @@ public partial class PaymentManagementViewModel : ViewModelBase
         UpdateHandler.NewPaymentsAddedActions.Add(() => ApplySorting(null));
     }
 
+    [RelayCommand]
+    public void AddNewPayment()
+    {
+        FrontendPaymentDTO paymentDTO = new() 
+        {  
+            CreatedAt = DateTime.Now,
+            Id = 0,
+            Status = StatusEnum.Created,
+            Title = string.Empty
+        };
+
+        paymentDTO.BeginEdit();
+        IsEditing = true;
+
+        Payments.Insert(0, paymentDTO);
+
+        SelectedPayment = paymentDTO;
+    }
+
     private void RefreshAllData()
     {
         SyncCustomers(CustomerRepo.GetCustomers());
@@ -116,21 +135,17 @@ public partial class PaymentManagementViewModel : ViewModelBase
     {
         AppLogger.Info($"Sorting Payments by: {sortingMethod}");
 
-        // 1. Získáme nová data z repozitáře
         var newData = AccountantPaymentRepo.GetSortedPayments(sortingMethod);
 
         if (ShowOnlyOverpaid)
             newData = newData.Where(p => p.Status == StatusEnum.Overpaid).ToList();
 
-        // 2. Synchronizace kolekcí (podobně jako u Customers)
-        // Uložíme si ID aktuálně vybrané platby
         var selectedId = SelectedPayment?.Id;
 
-        // Odstraníme ty, co už v nových datech nejsou
-        var toRemove = Payments.Where(p => !newData.Any(n => n.Id == p.Id)).ToList();
+        var toRemove = Payments.Where(p => !newData.Any(n => n.Id == p.Id))
+                               .Where(p => !(IsEditing && p.Id == 0)).ToList();
         foreach (var item in toRemove) Payments.Remove(item);
 
-        // Aktualizujeme stávající a přidáme nové
         for (int i = 0; i < newData.Count; i++)
         {
             var dto = newData[i];
@@ -138,9 +153,6 @@ public partial class PaymentManagementViewModel : ViewModelBase
 
             if (existing != null)
             {
-                // Aktualizujeme data v existujícím objektu bez ztráty reference
-                // POZOR: Pokud FrontendPaymentDTO neimplementuje INotifyPropertyChanged, 
-                // změny se v UI neprojeví hned. Ale reference zůstane.
                 existing.CustomerId = dto.CustomerId;
                 existing.ExpectedAmountXMR = dto.ExpectedAmountXMR;
                 existing.PaidAmountXMR = dto.PaidAmountXMR;
@@ -148,18 +160,15 @@ public partial class PaymentManagementViewModel : ViewModelBase
                 existing.Title = dto.Title;
                 existing.DueDate = dto.DueDate;
 
-                // Posuneme na správnou pozici podle řazení
                 int oldIndex = Payments.IndexOf(existing);
                 if (oldIndex != i) Payments.Move(oldIndex, i);
             }
             else
             {
-                // Nová platba
                 Payments.Insert(i, dto);
             }
         }
 
-        // 3. Obnova výběru
         if (selectedId.HasValue)
         {
             SelectedPayment = Payments.FirstOrDefault(p => p.Id == selectedId.Value);
