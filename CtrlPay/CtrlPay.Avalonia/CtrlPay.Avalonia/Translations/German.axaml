@@ -31,6 +31,22 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">Überschuss</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">Erstellt am</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">Transaktionsübersicht</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">Tabellenansicht</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">Flussansicht</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">Eingehend</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">Ausgehend</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">Kunde</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">Transaktionen suchen...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">Alle Kunden</x:String>
+
+    <x:String x:Key="Common.ID">ID</x:String>
+    <x:String x:Key="Common.Date">Datum</x:String>
+    <x:String x:Key="Common.Type">Typ</x:String>
+    <x:String x:Key="Common.Amount">Betrag</x:String>
+    <x:String x:Key="Common.Status">Status</x:String>
+    <x:String x:Key="Common.Hash">Hash</x:String>
+
     <x:String x:Key="NavbarView.Customers">Kunden</x:String>
     <x:String x:Key="Customers.Title">Kundenverwaltung</x:String>
     <x:String x:Key="Customers.SearchWatermark">Kunden suchen...</x:String>

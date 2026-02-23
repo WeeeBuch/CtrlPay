@@ -31,6 +31,22 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">Extra booty</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">First logged</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">Ledger o' the Sea</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">Chart View</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">Current View</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">Loot Comin' In</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">Gold Goin' Out</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">Matey</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">Spyglass for coin...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">Whole Crew</x:String>
+
+    <x:String x:Key="Common.ID">Mark</x:String>
+    <x:String x:Key="Common.Date">Moon</x:String>
+    <x:String x:Key="Common.Type">Sort</x:String>
+    <x:String x:Key="Common.Amount">Booty</x:String>
+    <x:String x:Key="Common.Status">Wind</x:String>
+    <x:String x:Key="Common.Hash">Seal</x:String>
+
     <x:String x:Key="NavbarView.Customers">Ports</x:String>
     <x:String x:Key="Customers.Title">Trade Partners</x:String>
     <x:String x:Key="Customers.SearchWatermark">Spyglass for merchants...</x:String>

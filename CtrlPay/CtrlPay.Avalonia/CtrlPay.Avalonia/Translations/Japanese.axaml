@@ -31,6 +31,22 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">剰余金</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">作成日</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">取引概要</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">テーブル表示</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">フロー表示</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">入金</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">出金</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">顧客</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">取引を検索...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">すべての顧客</x:String>
+
+    <x:String x:Key="Common.ID">ID</x:String>
+    <x:String x:Key="Common.Date">日付</x:String>
+    <x:String x:Key="Common.Type">タイプ</x:String>
+    <x:String x:Key="Common.Amount">金額</x:String>
+    <x:String x:Key="Common.Status">ステータス</x:String>
+    <x:String x:Key="Common.Hash">ハッシュ</x:String>
+
     <x:String x:Key="NavbarView.Customers">顧客</x:String>
     <x:String x:Key="Customers.Title">顧客管理</x:String>
     <x:String x:Key="Customers.SearchWatermark">顧客を検索...</x:String>

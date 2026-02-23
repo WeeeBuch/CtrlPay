@@ -31,6 +31,22 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">Přeplatek</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">Vytvořené</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">Přehled transakcí</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">Tabuľka</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">Průtok</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">Příchozí</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">Odchozí</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">Zákazník</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">Hledat platbe...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">Všeci zákazníci</x:String>
+
+    <x:String x:Key="Common.ID">ID</x:String>
+    <x:String x:Key="Common.Date">Datum</x:String>
+    <x:String x:Key="Common.Type">Typ</x:String>
+    <x:String x:Key="Common.Amount">Suma</x:String>
+    <x:String x:Key="Common.Status">Stav</x:String>
+    <x:String x:Key="Common.Hash">Haš</x:String>
+
     <x:String x:Key="NavbarView.Customers">Klienti</x:String>
     <x:String x:Key="Customers.Title">Naši lidi</x:String>
     <x:String x:Key="Customers.SearchWatermark">Hledej macka...</x:String>

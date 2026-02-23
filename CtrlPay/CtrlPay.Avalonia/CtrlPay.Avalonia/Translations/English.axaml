@@ -30,6 +30,22 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">Surplus</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">Created At</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">Transaction Overview</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">Table View</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">Flow View</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">Incoming</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">Outgoing</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">Customer</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">Search transactions...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">All Customers</x:String>
+
+    <x:String x:Key="Common.ID">ID</x:String>
+    <x:String x:Key="Common.Date">Date</x:String>
+    <x:String x:Key="Common.Type">Type</x:String>
+    <x:String x:Key="Common.Amount">Amount</x:String>
+    <x:String x:Key="Common.Status">Status</x:String>
+    <x:String x:Key="Common.Hash">Hash</x:String>
+
     <!-- Login Window -->
     <x:String x:Key="LoginWindow.Title">Login</x:String>
 

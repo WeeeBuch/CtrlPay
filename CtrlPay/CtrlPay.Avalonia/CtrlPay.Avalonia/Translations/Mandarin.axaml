@@ -36,6 +36,22 @@
     <x:String x:Key="LoginView.Button.Login">进入</x:String>
     <x:String x:Key="LoginView.Button.Register">创建账户</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">交易概览</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">表格视图</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">流程视图</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">收入</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">支出</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">客户</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">搜索交易...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">所有客户</x:String>
+
+    <x:String x:Key="Common.ID">ID</x:String>
+    <x:String x:Key="Common.Date">日期</x:String>
+    <x:String x:Key="Common.Type">类型</x:String>
+    <x:String x:Key="Common.Amount">金额</x:String>
+    <x:String x:Key="Common.Status">状态</x:String>
+    <x:String x:Key="Common.Hash">哈希</x:String>
+
     <x:String x:Key="NavbarView.Customers">客户</x:String>
     <x:String x:Key="Customers.Title">客户管理</x:String>
     <x:String x:Key="Customers.SearchWatermark">搜索客户...</x:String>

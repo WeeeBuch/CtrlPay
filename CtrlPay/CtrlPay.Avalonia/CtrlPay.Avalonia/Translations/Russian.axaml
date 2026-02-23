@@ -31,6 +31,22 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">Переплата</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">Создано</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">Обзор транзакций</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">Таблица</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">Поток</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">Входящие</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">Исходящие</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">Клиент</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">Поиск транзакций...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">Все клиенты</x:String>
+
+    <x:String x:Key="Common.ID">ID</x:String>
+    <x:String x:Key="Common.Date">Дата</x:String>
+    <x:String x:Key="Common.Type">Тип</x:String>
+    <x:String x:Key="Common.Amount">Сумма</x:String>
+    <x:String x:Key="Common.Status">Статус</x:String>
+    <x:String x:Key="Common.Hash">Хэш</x:String>
+
     <x:String x:Key="NavbarView.Customers">Клиенты</x:String>
     <x:String x:Key="Customers.Title">Управление клиентами</x:String>
     <x:String x:Key="Customers.SearchWatermark">Поиск клиентов...</x:String>
