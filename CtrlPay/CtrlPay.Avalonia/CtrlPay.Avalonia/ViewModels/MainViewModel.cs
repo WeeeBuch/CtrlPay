@@ -75,6 +75,7 @@ namespace CtrlPay.Avalonia.ViewModels
             {
                 NavigationItems.Add(new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers));
                 NavigationItems.Add(new NavItem("NavbarView.PaymentManagement", new PaymentManagementView(), IconData.Cash));
+                NavigationItems.Add(new NavItem("NavbarView.AccountantTransactions", new AccountantTransactionsView(), IconData.Cash));
             }
 
             if (role == Role.Admin)

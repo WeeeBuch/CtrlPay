@@ -1,12 +1,19 @@
-﻿<Application xmlns="https://github.com/avaloniaui"
+<Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:CtrlPay.Avalonia"
+             xmlns:conv="clr-namespace:CtrlPay.Avalonia.Converters"
              x:Class="CtrlPay.Avalonia.App"
              RequestedThemeVariant="Default">
 
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
+
+    <Application.Resources>
+        <conv:BoolToFlowTableTextConverter x:Key="BoolToFlowTableTextConverter"/>
+        <conv:TransactionTypeToColorConverter x:Key="TransactionTypeToColorConverter"/>
+        <conv:StatusToBrushConverter x:Key="StatusToBrushConverter"/>
+    </Application.Resources>
 
     <Application.Styles>
         <FluentTheme/>
