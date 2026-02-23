@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.HelperClasses;
+using CtrlPay.Avalonia.Translations;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System;
@@ -15,11 +16,14 @@ public partial class AccountantTransactionsViewModel : ViewModelBase
     [ObservableProperty] private bool isFlowView;
     [ObservableProperty] private string searchTerm = string.Empty;
     [ObservableProperty] private string? selectedCustomer;
+    
+    // Řazení
+    [ObservableProperty] private string sortColumn = "Date";
+    [ObservableProperty] private bool isSortAscending = false;
 
     public ObservableCollection<AccountantTransactionDTO> AllTransactions { get; } = new();
     public RangeObservableCollection<AccountantTransactionDTO> FilteredTransactions { get; } = new();
     
-    // Pro Flow View (Incoming vlevo, Outgoing vpravo)
     public RangeObservableCollection<AccountantTransactionDTO> IncomingTransactions { get; } = new();
     public RangeObservableCollection<AccountantTransactionDTO> OutgoingTransactions { get; } = new();
 
@@ -28,49 +32,49 @@ public partial class AccountantTransactionsViewModel : ViewModelBase
     public AccountantTransactionsViewModel()
     {
         LoadData();
-
-        // Registrace pro automatické aktualizace
         UpdateHandler.NewPaymentsAddedActions.Add(LoadData);
         UpdateHandler.NewDebtsAddedActions.Add(LoadData);
         UpdateHandler.UpdatedCustomers.Add(LoadData);
     }
 
+    [RelayCommand]
+    private void SortBy(string column)
+    {
+        if (SortColumn == column)
+        {
+            IsSortAscending = !IsSortAscending;
+        }
+        else
+        {
+            SortColumn = column;
+            IsSortAscending = true;
+        }
+        ApplyFilters();
+    }
+
     private void LoadData()
     {
-        AppLogger.Info("AccountantTransactionsViewModel: Loading data...");
-        var data = ToDoRepo.GetMockAccountantTransactions();
-        
+        var data = ToDoRepo.GetAccountantTransactions();
+
         AllTransactions.Clear();
         foreach (var t in data) AllTransactions.Add(t);
         
-        // Aktualizace seznamu zákazníků (zachováme výběr, pokud je to možné)
         var currentSelection = SelectedCustomer;
-        var newCustomerList = AllTransactions.Select(t => t.CustomerName)
-                                            .Distinct()
-                                            .OrderBy(c => c)
-                                            .ToList();
-        newCustomerList.Insert(0, "All Customers");
+        var newCustomerList = AllTransactions.Select(t => t.CustomerName).Distinct().OrderBy(c => c).ToList();
+        newCustomerList.Insert(0, TranslationManager.GetString("Accountant.Transactions.AllCustomers"));
 
         if (!Customers.SequenceEqual(newCustomerList))
         {
             Customers.Clear();
             foreach (var c in newCustomerList) Customers.Add(c);
-            
-            if (currentSelection != null && Customers.Contains(currentSelection))
-                SelectedCustomer = currentSelection;
-            else
-                SelectedCustomer = Customers[0];
+            SelectedCustomer = Customers.Contains(currentSelection ?? "") ? currentSelection : Customers[0];
         }
 
         ApplyFilters();
-        AppLogger.Info($"AccountantTransactionsViewModel: Loaded {AllTransactions.Count} transactions.");
     }
 
     [RelayCommand]
-    private void ToggleView()
-    {
-        IsFlowView = !IsFlowView;
-    }
+    private void ToggleView() => IsFlowView = !IsFlowView;
 
     partial void OnSearchTermChanged(string value) => ApplyFilters();
     partial void OnSelectedCustomerChanged(string? value) => ApplyFilters();
@@ -86,18 +90,26 @@ public partial class AccountantTransactionsViewModel : ViewModelBase
                 t.Title.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase));
         }
 
-        if (SelectedCustomer != "All Customers" && !string.IsNullOrEmpty(SelectedCustomer))
+        if (SelectedCustomer != TranslationManager.GetString("Accountant.Transactions.AllCustomers") && !string.IsNullOrEmpty(SelectedCustomer))
         {
             filtered = filtered.Where(t => t.CustomerName == SelectedCustomer);
         }
 
+        // Aplikace řazení
+        filtered = SortColumn switch
+        {
+            "Id" => IsSortAscending ? filtered.OrderBy(t => t.Id) : filtered.OrderByDescending(t => t.Id),
+            "Date" => IsSortAscending ? filtered.OrderBy(t => t.Timestamp) : filtered.OrderByDescending(t => t.Timestamp),
+            "Customer" => IsSortAscending ? filtered.OrderBy(t => t.CustomerName) : filtered.OrderByDescending(t => t.CustomerName),
+            "Amount" => IsSortAscending ? filtered.OrderBy(t => t.Amount) : filtered.OrderByDescending(t => t.Amount),
+            "Status" => IsSortAscending ? filtered.OrderBy(t => t.State) : filtered.OrderByDescending(t => t.State),
+            _ => filtered.OrderByDescending(t => t.Timestamp)
+        };
+
         var list = filtered.ToList();
-        
-        // Důležité: ReplaceAll zajistí, že se UI dozví o změně celé kolekce naráz
         FilteredTransactions.ReplaceAll(list);
 
-        // Rozdělení pro Flow View
-        IncomingTransactions.ReplaceAll([.. list.Where(t => t.Type == Entities.TransactionTypeEnum.Incoming)]);
-        OutgoingTransactions.ReplaceAll([.. list.Where(t => t.Type == Entities.TransactionTypeEnum.Outgoing)]);
+        IncomingTransactions.ReplaceAll(list.Where(t => t.Type == Entities.TransactionTypeEnum.Incoming).ToList());
+        OutgoingTransactions.ReplaceAll(list.Where(t => t.Type == Entities.TransactionTypeEnum.Outgoing).ToList());
     }
 }

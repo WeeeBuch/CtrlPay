@@ -83,6 +83,15 @@
     <x:String x:Key="Accountant.Transactions.Outgoing">Accountant.Transactions.Outgoing</x:String>
     <x:String x:Key="Accountant.Transactions.Customer">Accountant.Transactions.Customer</x:String>
     <x:String x:Key="Accountant.Transactions.Search">Accountant.Transactions.Search</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">Accountant.Transactions.AllCustomers</x:String>
+
+    <!-- Common Table Headers -->
+    <x:String x:Key="Common.ID">Common.ID</x:String>
+    <x:String x:Key="Common.Date">Common.Date</x:String>
+    <x:String x:Key="Common.Type">Common.Type</x:String>
+    <x:String x:Key="Common.Amount">Common.Amount</x:String>
+    <x:String x:Key="Common.Status">Common.Status</x:String>
+    <x:String x:Key="Common.Hash">Common.Hash</x:String>
 
     <!-- Credit Counter Piece -->
     <x:String x:Key="CounterPiece.Credits.Title">CounterPiece.Credits.Title</x:String>

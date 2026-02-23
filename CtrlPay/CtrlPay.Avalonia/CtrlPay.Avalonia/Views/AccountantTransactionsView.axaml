@@ -11,6 +11,25 @@
         <vm:AccountantTransactionsViewModel/>
     </Design.DataContext>
 
+    <UserControl.Styles>
+        <Style Selector="Button.headerBtn">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Padding" Value="0"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
+        <Style Selector="Button.headerBtn:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Opacity" Value="0.8"/>
+        </Style>
+        <Style Selector="TextBlock.headerLabel">
+            <Setter Property="FontWeight" Value="Bold"/>
+            <Setter Property="Opacity" Value="0.5"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+    </UserControl.Styles>
+
     <Grid RowDefinitions="Auto, *">
         <!-- Toolbar -->
         <Border Grid.Row="0" Background="{DynamicResource Color.Background}" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource Color.Border}" Padding="15">
@@ -25,13 +44,13 @@
                 <Separator Width="1" Height="20" Background="{DynamicResource Color.Border}"/>
 
                 <StackPanel Orientation="Horizontal" Spacing="10">
-                    <TextBlock Text="Customer:" VerticalAlignment="Center" Opacity="0.6"/>
+                    <TextBlock Text="{DynamicResource Accountant.Transactions.Customer}" VerticalAlignment="Center" Opacity="0.6"/>
                     <ComboBox ItemsSource="{Binding Customers}" 
                               SelectedItem="{Binding SelectedCustomer}" 
                               Width="180"/>
                 </StackPanel>
 
-                <TextBox Watermark="Search by Hash or Customer..." Width="300" Text="{Binding SearchTerm}"/>
+                <TextBox Watermark="{DynamicResource Accountant.Transactions.Search}" Width="300" Text="{Binding SearchTerm}"/>
             </StackPanel>
         </Border>
 
@@ -39,16 +58,26 @@
         <Grid Grid.Row="1">
             <!-- Table View -->
             <Grid IsVisible="{Binding !IsFlowView}" RowDefinitions="Auto, *">
-                <!-- Table Header -->
+                <!-- Table Header with Sorting -->
                 <Border Grid.Row="0" Background="{DynamicResource Color.Surface}" BorderThickness="0,0,0,1" BorderBrush="{DynamicResource Color.Border}" Padding="15,10">
                     <Grid ColumnDefinitions="50, 130, *, 200, 100, 200, 120">
-                        <TextBlock Grid.Column="0" Text="ID" FontWeight="Bold" Opacity="0.5"/>
-                        <TextBlock Grid.Column="1" Text="Date" FontWeight="Bold" Opacity="0.5"/>
-                        <TextBlock Grid.Column="2" Text="Customer" FontWeight="Bold" Opacity="0.5"/>
-                        <TextBlock Grid.Column="3" Text="TX Hash (XMR)" FontWeight="Bold" Opacity="0.5"/>
-                        <TextBlock Grid.Column="4" Text="Type" FontWeight="Bold" Opacity="0.5" HorizontalAlignment="Center"/>
-                        <TextBlock Grid.Column="5" Text="Amount" FontWeight="Bold" Opacity="0.5" HorizontalAlignment="Right"/>
-                        <TextBlock Grid.Column="6" Text="Status" FontWeight="Bold" Opacity="0.5" HorizontalAlignment="Center"/>
+                        <Button Grid.Column="0" Classes="headerBtn" Command="{Binding SortByCommand}" CommandParameter="Id">
+                            <TextBlock Text="{DynamicResource Common.ID}" Classes="headerLabel"/>
+                        </Button>
+                        <Button Grid.Column="1" Classes="headerBtn" Command="{Binding SortByCommand}" CommandParameter="Date">
+                            <TextBlock Text="{DynamicResource Common.Date}" Classes="headerLabel"/>
+                        </Button>
+                        <Button Grid.Column="2" Classes="headerBtn" Command="{Binding SortByCommand}" CommandParameter="Customer">
+                            <TextBlock Text="{DynamicResource Accountant.Transactions.Customer}" Classes="headerLabel"/>
+                        </Button>
+                        <TextBlock Grid.Column="3" Text="{DynamicResource Common.Hash}" Classes="headerLabel" VerticalAlignment="Center"/>
+                        <TextBlock Grid.Column="4" Text="{DynamicResource Common.Type}" Classes="headerLabel" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <Button Grid.Column="5" Classes="headerBtn" Command="{Binding SortByCommand}" CommandParameter="Amount">
+                            <TextBlock Text="{DynamicResource Common.Amount}" Classes="headerLabel" HorizontalAlignment="Right"/>
+                        </Button>
+                        <Button Grid.Column="6" Classes="headerBtn" Command="{Binding SortByCommand}" CommandParameter="Status">
+                            <TextBlock Text="{DynamicResource Common.Status}" Classes="headerLabel" HorizontalAlignment="Center"/>
+                        </Button>
                     </Grid>
                 </Border>
                 
@@ -68,28 +97,17 @@
                                 <TextBlock Grid.Column="1" Text="{Binding Timestamp, StringFormat='{}{0:dd.MM.yy HH:mm}'}" VerticalAlignment="Center" FontSize="13"/>
                                 <TextBlock Grid.Column="2" Text="{Binding CustomerName}" VerticalAlignment="Center" FontWeight="SemiBold" TextTrimming="CharacterEllipsis"/>
                                 
-                                <!-- Monero Hash: Shortened with Tooltip -->
                                 <StackPanel Grid.Column="3" VerticalAlignment="Center" ToolTip.Tip="{Binding Title}">
-                                    <TextBlock Text="{Binding Title}" 
-                                               FontSize="11" 
-                                               FontFamily="Cascadia Code,Consolas,Monospace"
-                                               Opacity="0.7" 
-                                               TextTrimming="CharacterEllipsis"/>
+                                    <TextBlock Text="{Binding Title}" FontSize="11" FontFamily="Monospace" Opacity="0.7" TextTrimming="CharacterEllipsis"/>
                                 </StackPanel>
                                 
                                 <Border Grid.Column="4" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Type}" 
-                                               FontSize="12"
-                                               Foreground="{Binding Type, Converter={StaticResource TransactionTypeToColorConverter}}" 
-                                               />
+                                    <TextBlock Text="{Binding Type}" FontSize="12" Foreground="{Binding Type, Converter={StaticResource TransactionTypeToColorConverter}}" FontWeight="Bold"/>
                                 </Border>
 
                                 <StackPanel Grid.Column="5" Orientation="Horizontal" HorizontalAlignment="Right" VerticalAlignment="Center">
-                                    <TextBlock Text="{Binding Amount, StringFormat='{}{0:F12}'}" 
-                                               FontFamily="Cascadia Code,Consolas,Monospace"
-                                               FontWeight="Bold"
-                                               FontSize="13"/>
-                                    <TextBlock Text=" XMR" FontSize="9" Opacity="0.4" VerticalAlignment="Bottom" Margin="4,0,0,2"/>
+                                    <TextBlock Text="{Binding Amount, StringFormat='{}{0:F12}'}" FontFamily="Monospace" FontWeight="Bold" FontSize="13"/>
+                                    <TextBlock Text="{DynamicResource App.Currency}" FontSize="9" Opacity="0.4" VerticalAlignment="Bottom" Margin="4,0,0,2"/>
                                 </StackPanel>
 
                                 <Border Grid.Column="6" HorizontalAlignment="Center" VerticalAlignment="Center"
@@ -106,9 +124,9 @@
             <!-- Flow View -->
             <ScrollViewer IsVisible="{Binding IsFlowView}">
                 <Grid ColumnDefinitions="*, 250, *" Margin="20">
-                    <!-- INCOMING (LEFT) -->
+                    <!-- INCOMING -->
                     <StackPanel Grid.Column="0" Spacing="8">
-                        <TextBlock Text="Incoming (Credits)" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,10" Opacity="0.5" FontSize="12"/>
+                        <TextBlock Text="{DynamicResource Accountant.Transactions.Incoming}" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,10" Opacity="0.5" FontSize="12"/>
                         <ItemsControl ItemsSource="{Binding IncomingTransactions}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate x:DataType="repos:AccountantTransactionDTO">
@@ -134,13 +152,13 @@
                         </Panel>
                         <TextBlock Text="{Binding SelectedCustomer}" HorizontalAlignment="Center" Margin="0,20,0,5" FontWeight="Black" FontSize="20" TextAlignment="Center" TextWrapping="Wrap"/>
                         <Border Background="{DynamicResource Color.Surface}" Padding="10,4" CornerRadius="15" HorizontalAlignment="Center">
-                             <TextBlock Text="TRANSACTION HUB" LetterSpacing="2" FontSize="10" FontWeight="Bold" Opacity="0.5"/>
+                             <TextBlock Text="{DynamicResource Accountant.Transactions.Title}" LetterSpacing="2" FontSize="10" FontWeight="Bold" Opacity="0.5"/>
                         </Border>
                     </StackPanel>
 
-                    <!-- OUTGOING (RIGHT) -->
+                    <!-- OUTGOING -->
                     <StackPanel Grid.Column="2" Spacing="8">
-                        <TextBlock Text="Outgoing (Debits)" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,10" Opacity="0.5" FontSize="12"/>
+                        <TextBlock Text="{DynamicResource Accountant.Transactions.Outgoing}" HorizontalAlignment="Center" FontWeight="Bold" Margin="0,0,0,10" Opacity="0.5" FontSize="12"/>
                         <ItemsControl ItemsSource="{Binding OutgoingTransactions}">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate x:DataType="repos:AccountantTransactionDTO">
