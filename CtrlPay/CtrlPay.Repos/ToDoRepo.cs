@@ -1,4 +1,4 @@
-using CtrlPay.Entities;
+﻿using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
@@ -42,6 +42,14 @@ public static class ToDoRepo
                 Type = types[rng.Next(types.Length)]
             });
         }
-        return list.OrderByDescending(t => t.Timestamp).ToList();
+        return [.. list.OrderByDescending(t => t.Timestamp)];
+    }
+
+    public static List<AccountantTransactionDTO> GetAccountantTransactions()
+    {
+        if (DebugMode.MockAccountantTransactions) return GetMockAccountantTransactions();
+
+        // TODO: Karele toto
+        throw new NotImplementedException();
     }
 }
