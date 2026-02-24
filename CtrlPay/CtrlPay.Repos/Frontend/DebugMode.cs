@@ -34,6 +34,8 @@ public static class DebugMode
 
     public static bool MockCustomers { get; set; } = false;
 
+    public static bool MockAdminUsers { get; set; } = true;
+
     public static bool OverrideRole { get; set; } = false;
     public static Role DebugRole { get; set; } = Role.Customer;
 
