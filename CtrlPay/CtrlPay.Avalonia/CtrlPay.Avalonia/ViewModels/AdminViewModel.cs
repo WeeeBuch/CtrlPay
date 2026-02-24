@@ -17,14 +17,23 @@ public partial class AdminViewModel : ViewModelBase
     [ObservableProperty] private string? _searchText;
     [ObservableProperty] private string _selectedRole = "All";
 
-    private List<FrontendUserDTO> _allUsers = new();
-    public ObservableCollection<FrontendUserDTO> SystemUsers { get; } = new();
+    private List<FrontendUserDTO> _allUsers = [];
+    public ObservableCollection<FrontendUserDTO> SystemUsers { get; } = [];
 
-    public List<string> Roles { get; } = new() { "All", "Admin", "Accountant", "Employee", "Customer" };
+    public List<string> Roles { get; }
 
     public AdminViewModel()
     {
+        // Dynamické načtení rolí
+        Roles = ["All", .. Enum.GetNames(typeof(Role))];
+
         LoadUsers();
+
+        // Dynamické aktualizace
+        UpdateHandler.UpdatedAdminUsers.Add(() =>
+        {
+            LoadUsers();
+        });
     }
 
     public async void LoadUsers()
