@@ -36,6 +36,7 @@
     <x:String x:Key="Customers.SearchWatermark">顧客を検索...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">新規顧客</x:String>
     <x:String x:Key="Customers.Button.Edit">編集</x:String>
+    <x:String x:Key="Customers.Button.Promote">昇格</x:String>
     <x:String x:Key="Customers.Button.Delete">削除</x:String>
     <x:String x:Key="Customers.Button.Cancel">キャンセル</x:String>
     <x:String x:Key="Customers.Button.Save">保存</x:String>

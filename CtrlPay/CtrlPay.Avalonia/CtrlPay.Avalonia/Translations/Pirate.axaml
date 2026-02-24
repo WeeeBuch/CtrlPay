@@ -36,6 +36,7 @@
     <x:String x:Key="Customers.SearchWatermark">Spyglass for merchants...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">New Contract</x:String>
     <x:String x:Key="Customers.Button.Edit">Amend terms</x:String>
+    <x:String x:Key="Customers.Button.Promote">Make Matey</x:String>
     <x:String x:Key="Customers.Button.Delete">Toss overboard</x:String>
     <x:String x:Key="Customers.Button.Cancel">Belay</x:String>
     <x:String x:Key="Customers.Button.Save">Seal with wax</x:String>
