@@ -38,6 +38,8 @@ public static class DebugMode
     public static Role DebugRole { get; set; } = Role.Customer;
 
     public static bool MockPaymentManager { get; set; } = false;
+
+    public static bool FakePromote { get; set; } = false;
 }
 
 public class DebugProperty
