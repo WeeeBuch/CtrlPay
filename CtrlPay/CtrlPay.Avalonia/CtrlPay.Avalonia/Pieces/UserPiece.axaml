@@ -1,0 +1,46 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800"
+             x:Class="CtrlPay.Avalonia.UserPiece"
+             x:DataType="vm:UserPieceViewModel">
+
+    <Border BorderBrush="{DynamicResource Color.Border}" 
+            BorderThickness="0,0,0,1" 
+            Padding="5,12">
+        <Grid ColumnDefinitions="*, Auto">
+            <!-- Normal View -->
+            <StackPanel Grid.Column="0" IsVisible="{Binding !Editing}" VerticalAlignment="Center">
+                <TextBlock Text="{Binding Model.Username}" FontWeight="Medium" FontSize="15"/>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBlock Text="{Binding Model.Role}" FontSize="12" 
+                               Foreground="{Binding Model.RoleColor}"/>
+                    <TextBlock Text="2FA Enabled" FontSize="12" 
+                               Foreground="#44AAFF" 
+                               IsVisible="{Binding Model.TwoFactorEnabled}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <!-- Edit View -->
+            <StackPanel Grid.Column="0" IsVisible="{Binding Editing}" Spacing="10">
+                <TextBox Text="{Binding Model.Username}" Watermark="Username" Width="250" HorizontalAlignment="Left"/>
+                <ComboBox ItemsSource="{Binding RolesList}" 
+                          SelectedItem="{Binding Model.Role}" 
+                          Width="200"/>
+            </StackPanel>
+
+            <!-- Actions -->
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
+                <Button Content="Edit" Command="{Binding StartEditCommand}" 
+                        IsVisible="{Binding !Editing}" Classes="secondary"/>
+                
+                <Button Content="Cancel" Command="{Binding CancelEditCommand}" 
+                        IsVisible="{Binding Editing}" Classes="secondary"/>
+                <Button Content="Save" Command="{Binding SaveCommand}" 
+                        IsVisible="{Binding Editing}"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</UserControl>

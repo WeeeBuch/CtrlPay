@@ -25,4 +25,15 @@ public static class ToDoRepo
         // string? json = await HttpWorker.HttpGet("api/admin/users", true, ct);
         return new List<FrontendUserDTO>();
     }
+
+    public static async Task UpdateAdminUser(FrontendUserDTO user)
+    {
+        AppLogger.Info($"Updating admin user {user.Username}...");
+        
+        if (DebugMode.MockAdminUsers)
+        {
+            await Task.Delay(500); 
+            return;
+        }
+    }
 }
