@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using CtrlPay.Avalonia.Translations;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
@@ -15,7 +16,7 @@ public partial class AdminViewModel : ViewModelBase
 {
     [ObservableProperty] private string _title = "System Administration";
     [ObservableProperty] private string? _searchText;
-    [ObservableProperty] private string _selectedRole = "All";
+    [ObservableProperty] private string _selectedRole;
 
     private List<FrontendUserDTO> _allUsers = [];
     public ObservableCollection<UserPieceViewModel> SystemUsers { get; } = [];
@@ -25,7 +26,9 @@ public partial class AdminViewModel : ViewModelBase
     public AdminViewModel()
     {
         // Dynamické načtení rolí
-        Roles = ["All", .. Enum.GetNames(typeof(Role))];
+        Roles = [TranslationManager.GetString("Accountant.Transactions.AllCustomers"), .. Enum.GetNames(typeof(Role))];
+
+        SelectedRole = Roles[0];
 
         LoadUsers();
 
