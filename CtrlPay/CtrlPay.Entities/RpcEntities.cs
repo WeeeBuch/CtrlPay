@@ -61,4 +61,10 @@ namespace CtrlPay.Entities
         public string Address { get; set; }
         public int Address_Index { get; set; }
     }
+
+    public class RpcCreateAccountResult
+    {
+        public int Account_Index { get; set; }
+        public string Address { get; set; }
+    }
 }

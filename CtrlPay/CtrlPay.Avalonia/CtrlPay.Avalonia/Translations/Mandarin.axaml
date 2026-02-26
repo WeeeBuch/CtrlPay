@@ -41,6 +41,7 @@
     <x:String x:Key="Customers.SearchWatermark">搜索客户...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">新客户</x:String>
     <x:String x:Key="Customers.Button.Edit">编辑</x:String>
+    <x:String x:Key="Customers.Button.Promote">升级</x:String>
     <x:String x:Key="Customers.Button.Delete">删除</x:String>
     <x:String x:Key="Customers.Button.Cancel">取消</x:String>
     <x:String x:Key="Customers.Button.Save">保存</x:String>

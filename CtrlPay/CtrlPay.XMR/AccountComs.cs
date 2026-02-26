@@ -119,8 +119,44 @@ namespace CtrlPay.XMR
 
             RpcSubaddr rpcSubaddr = rpcResponse.Result;
             string oneTimeAddress = rpcSubaddr.Address;
-            
+
             return oneTimeAddress;
+        }
+        public static async Task<int> CreateNewAccount(HttpClient httpClient, string uri, CancellationToken cancellationToken)
+        {
+            var payload = new
+            {
+                jsonrpc = "2.0",
+                id = "0",
+                method = "create_account"
+            };
+            string json = JsonSerializer.Serialize(payload);
+            var content = new StringContent(
+                json,
+                Encoding.UTF8,
+                "application/json"
+            );
+            HttpResponseMessage response = await httpClient.PostAsync(
+                uri,
+                content,
+                cancellationToken
+            );
+            string body = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new Exception($"HTTP error {response.StatusCode}: {body}");
+            }
+            var rpcResponse = JsonSerializer.Deserialize<RpcResponse<RpcCreateAccountResult>>(body,
+                new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            if (rpcResponse?.Error != null)
+            {
+                throw new Exception($"RPC error {rpcResponse.Error.Code}: {rpcResponse.Error.Message}");
+            }
+            RpcCreateAccountResult result = rpcResponse.Result;
+
+            return result.Account_Index;
         }
     }
 }
+
+    

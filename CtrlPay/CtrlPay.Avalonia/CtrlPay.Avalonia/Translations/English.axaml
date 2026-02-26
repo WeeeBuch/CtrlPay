@@ -38,6 +38,7 @@
     <x:String x:Key="Customers.SearchWatermark">Search customers...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">New Customer</x:String>
     <x:String x:Key="Customers.Button.Edit">Edit</x:String>
+    <x:String x:Key="Customers.Button.Promote">Promote</x:String>
     <x:String x:Key="Customers.Button.Delete">Delete</x:String>
     <x:String x:Key="Customers.Button.Cancel">Cancel</x:String>
     <x:String x:Key="Customers.Button.Save">Save</x:String>

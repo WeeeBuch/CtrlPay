@@ -1,0 +1,65 @@
+﻿@model RegistrationEmailModel
+@{
+    Layout = "_EmailLayout";
+    ViewData["Title"] = "Registrace do aplikace CtrlPay";
+}
+
+<p>Dobrý den @Model.CustomerName,</p>
+
+<p>
+    gratulujeme — byl jste uznán za <strong>stálého zákazníka</strong>
+    a získáváte přístup do aplikace <strong>CtrlPay</strong>.
+</p>
+
+<p>
+    Pro dokončení registrace si prosím stáhněte aplikaci pomocí odkazu níže
+    a při registraci použijte svůj jedinečný registrační kód.
+</p>
+
+<table width="100%" cellpadding="0" cellspacing="0"
+       style="background:#f9fafb;border-radius:6px;padding:20px;margin:25px 0;">
+    <tr>
+        <td style="font-size:14px;color:#374151;">
+
+            <strong>Odkaz ke stažení aplikace:</strong><br>
+            <a href="@Model.DownloadLink" style="color:#111827;">
+                @Model.DownloadLink
+            </a>
+
+            <br><br>
+
+            <strong>Váš registrační kód:</strong><br>
+            <span style="font-size:18px;font-weight:bold;letter-spacing:1px;">
+                @Model.RegistrationCode
+            </span>
+
+        </td>
+    </tr>
+</table>
+
+<p>
+    Registrační kód je jedinečný a slouží k propojení vašeho účtu
+    s existujícími platbami v systému CtrlPay.
+</p>
+
+<table width="100%" cellpadding="0" cellspacing="0"
+       style="background:#fff4f4;border-radius:6px;padding:15px;margin:20px 0;
+              border:1px solid #f3d1d1;">
+    <tr>
+        <td style="font-size:14px;color:#7f1d1d;">
+            <strong>Bezpečnostní upozornění:</strong><br>
+            Registrační kód je určen pouze pro vás.
+            Nikomu jej nepředávejte ani nesdílejte s třetími stranami.
+        </td>
+    </tr>
+</table>
+
+<p>
+    V případě dotazů nás můžete kontaktovat na adrese
+    <strong>@Model.SupportEmail</strong>.
+</p>
+
+<p style="margin-top:30px;">
+    Těšíme se na spolupráci,<br>
+    <strong>Tým CtrlPay</strong>
+</p>

@@ -36,6 +36,7 @@
     <x:String x:Key="Customers.SearchWatermark">534RCH_DB...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">4DD_N3W</x:String>
     <x:String x:Key="Customers.Button.Edit">3D17</x:String>
+    <x:String x:Key="Customers.Button.Promote">PR0M073</x:String>
     <x:String x:Key="Customers.Button.Delete">D3L373</x:String>
     <x:String x:Key="Customers.Button.Cancel">4B0R7</x:String>
     <x:String x:Key="Customers.Button.Save">WR173</x:String>

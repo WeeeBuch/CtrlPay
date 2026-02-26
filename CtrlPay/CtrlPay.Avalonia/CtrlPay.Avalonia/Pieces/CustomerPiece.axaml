@@ -23,6 +23,11 @@
                 </StackPanel>
 
                 <StackPanel Grid.Column="3" Orientation="Horizontal" Spacing="5">
+                    <Button Content="{DynamicResource Customers.Button.Promote}" 
+                            Command="{Binding PromoteCommand}" 
+                            IsVisible="{Binding !Model.IsLoyal}"
+                            FontWeight="SemiBold">
+                    </Button>
                     <Button Content="{DynamicResource Customers.Button.Edit}" Command="{Binding StartEditCommand}" IsVisible="{Binding !Editing}"/>
                     <Button Content="{DynamicResource Customers.Button.Delete}" Command="{Binding DeleteEditCommand}" IsVisible="{Binding Editing}"/>
                     <Button Content="{DynamicResource Customers.Button.Cancel}" Command="{Binding CancelEditCommand}" IsVisible="{Binding Editing}"/>

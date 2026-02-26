@@ -36,6 +36,7 @@
     <x:String x:Key="Customers.SearchWatermark">Hľadať zákazníkov...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">Nový zákazník</x:String>
     <x:String x:Key="Customers.Button.Edit">Upraviť</x:String>
+    <x:String x:Key="Customers.Button.Promote">Povýšiť</x:String>
     <x:String x:Key="Customers.Button.Delete">Zmazať</x:String>
     <x:String x:Key="Customers.Button.Cancel">Zrušiť</x:String>
     <x:String x:Key="Customers.Button.Save">Uložiť</x:String>

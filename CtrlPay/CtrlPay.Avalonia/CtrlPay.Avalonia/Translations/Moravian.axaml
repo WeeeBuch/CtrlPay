@@ -36,6 +36,7 @@
     <x:String x:Key="Customers.SearchWatermark">Hledej macka...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">Nový člen</x:String>
     <x:String x:Key="Customers.Button.Edit">Poladit</x:String>
+    <x:String x:Key="Customers.Button.Promote">Povýšit</x:String>
     <x:String x:Key="Customers.Button.Delete">Vymazat</x:String>
     <x:String x:Key="Customers.Button.Cancel">Prdět na to</x:String>
     <x:String x:Key="Customers.Button.Save">Vytesat</x:String>

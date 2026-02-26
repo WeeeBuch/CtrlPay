@@ -83,4 +83,12 @@ public partial class CustomerPieceViewModel : ViewModelBase
         await CustomerRepo.DeleteCustomer(Model);
         UpdateHandler.HandleUpdatedCustomers();
     }
+
+    [RelayCommand]
+    public async Task Promote()
+    {
+        await CustomerRepo.PromoteCustomer(Model);
+        
+        OnPropertyChanged(nameof(Model));
+    }
 }

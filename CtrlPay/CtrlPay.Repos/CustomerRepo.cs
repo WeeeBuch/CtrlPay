@@ -1,8 +1,12 @@
 ﻿using CtrlPay.Entities;
+using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 using System.Numerics;
+using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -186,5 +190,26 @@ public class CustomerRepo
         if (!cust.Physical && string.IsNullOrWhiteSpace(cust.Company))
             isValid = false;
         return isValid;
+    }
+    public static async Task PromoteCustomer(FrontendCustomerDTO dto)
+    {
+        AppLogger.Info($"Promoting customer {dto.Id} to Loyal Customer...");
+
+        if (DebugMode.FakePromote)
+        {
+            dto.IsLoyal = true;
+            return;
+        }
+
+        string? json = await HttpWorker.HttpPost($"api/customers/promote/{dto.Id}", "", true, default);
+
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            AppLogger.Warning($"Promote response was NULL.");
+            return;
+        }
+
+        dto.IsLoyal = true;
+        AppLogger.Info($"Customer {dto.Id} promoted successfully.");
     }
 }
