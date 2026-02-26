@@ -13,6 +13,7 @@
         <conv:BoolToFlowTableTextConverter x:Key="BoolToFlowTableTextConverter"/>
         <conv:TransactionTypeToColorConverter x:Key="TransactionTypeToColorConverter"/>
         <conv:StatusToBrushConverter x:Key="StatusToBrushConverter"/>
+        <conv:StatusToTextConverter x:Key="StatusToTextConverter"/>
     </Application.Resources>
 
     <Application.Styles>

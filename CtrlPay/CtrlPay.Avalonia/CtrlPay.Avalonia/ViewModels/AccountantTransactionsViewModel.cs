@@ -29,6 +29,18 @@ public partial class AccountantTransactionsViewModel : ViewModelBase
     public RangeObservableCollection<AccountantTransactionDTO> OutgoingTransactions { get; } = new();
 
     public ObservableCollection<string> Customers { get; } = new();
+    
+    public List<StatusEnum?> Statuses { get; } = new() 
+    { 
+        null, 
+        StatusEnum.Completed, 
+        StatusEnum.Pending, 
+        StatusEnum.Confirmed,
+        StatusEnum.Overpaid, 
+        StatusEnum.PartiallyPaid, 
+        StatusEnum.Expired, 
+        StatusEnum.Cancelled 
+    };
 
     public AccountantTransactionsViewModel()
     {
