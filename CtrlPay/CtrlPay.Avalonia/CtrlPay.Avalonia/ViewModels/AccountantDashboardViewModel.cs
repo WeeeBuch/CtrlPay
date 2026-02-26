@@ -1,12 +1,27 @@
+﻿using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CtrlPay.Avalonia.Settings;
+using CtrlPay.Avalonia.Styles;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
+using LiveChartsCore;
+using LiveChartsCore.SkiaSharpView;
+using LiveChartsCore.SkiaSharpView.Painting;
+using SkiaSharp;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
 public partial class AccountantDashboardViewModel : ViewModelBase
 {
-    // Čtyři samostatné ViewModely pro jednotlivé kostky
+    // Grafy
+    [ObservableProperty] private ISeries[] _incomeSeries;
+    [ObservableProperty] private Axis[] _xAxes;
+    [ObservableProperty] private ISeries[] _statusSeries;
+
+    // Kostky
     [ObservableProperty] private DashboardTileViewModel _overpaidTile;
     [ObservableProperty] private DashboardTileViewModel _overdueTile;
     [ObservableProperty] private DashboardTileViewModel _partialTile;
@@ -67,5 +82,36 @@ public partial class AccountantDashboardViewModel : ViewModelBase
 
         WaitingTile.Amount = summary.WaitingAmount;
         WaitingTile.Count = summary.WaitingCount;
+
+        // Načteme data pro grafy
+        var chartData = ToDoRepo.GetAccountantChartData();
+
+        // 1. Graf příjmů (Trend)
+        IncomeSeries =
+        [
+            new LineSeries<decimal>
+            {
+                Values = [.. chartData.IncomeHistory.Select(x => x.Amount)],
+                Name = "Příjem (XMR)",
+                GeometrySize = 0,
+                LineSmoothness = 1
+            }
+        ];
+
+        XAxes =
+        [
+            new Axis
+            {
+                Labels = [.. chartData.IncomeHistory.Select(x => x.Date.ToString("dd.MM."))],
+                LabelsRotation = 15,
+            }
+        ];
+
+        // 2. Graf stavů (Koláč)
+        StatusSeries = [.. chartData.StatusBreakdown.Select(x => new PieSeries<int>
+        {
+            Values = [x.Count],
+            Name = x.Status
+        })];
     }
 }

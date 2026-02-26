@@ -64,6 +64,35 @@ public static class ToDoRepo
         throw new NotImplementedException();
     }
 
+    public static AccountantChartDataDTO GetAccountantChartData()
+    {
+        if (DebugMode.MockAccountantTransactions)
+        {
+            var data = new AccountantChartDataDTO();
+            var rng = new Random();
+
+            // Generujeme 30 dní historie příjmů
+            for (int i = 30; i >= 0; i--)
+            {
+                data.IncomeHistory.Add(new IncomeChartPointDTO
+                {
+                    Date = DateTime.Today.AddDays(-i),
+                    Amount = (decimal)(rng.NextDouble() * 2.5) // Náhodné příjmy 0-2.5 XMR
+                });
+            }
+
+            data.StatusBreakdown = new List<(string Status, int Count)>
+            {
+                ("Paid", 145),
+                ("Overpaid", 12),
+                ("Underpaid", 8),
+                ("Expired", 24)
+            };
+            return data;
+        }
+        throw new NotImplementedException();
+    }
+
     public static List<AccountantTransactionDTO> GetMockAccountantTransactions()
     {
         var rng = new Random();

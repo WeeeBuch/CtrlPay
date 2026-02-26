@@ -5,6 +5,7 @@
              xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
              xmlns:p="using:CtrlPay.Avalonia.Pieces"
              xmlns:icons="using:CtrlPay.Avalonia"
+             xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
              mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="800"
              x:Class="CtrlPay.Avalonia.AccountantDashboardView"
              x:DataType="vm:AccountantDashboardViewModel">
@@ -25,18 +26,28 @@
                 <p:DashboardTile DataContext="{Binding WaitingTile}" Margin="10,0,0,0"/>
             </UniformGrid>
 
-            <!-- Placeholder pro grafy -->
-            <Border Background="{DynamicResource Brush.Surface}" 
-                    BorderBrush="{DynamicResource Brush.Border}" 
-                    BorderThickness="1" 
-                    CornerRadius="15" 
-                    Height="400"
-                    Padding="30">
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10">
-                    <PathIcon Data="{x:Static icons:IconData.Dashboard}" Width="48" Height="48" Opacity="0.1"/>
-                    <TextBlock Text="Grafy trendů budou doplněny později" Opacity="0.3" FontSize="16"/>
-                </StackPanel>
-            </Border>
+            <!-- Grafy -->
+            <Grid ColumnDefinitions="*, 400" Height="400" Margin="0,10,0,0">
+                <!-- Trend příjmů -->
+                <Border Grid.Column="0" Background="{DynamicResource Brush.Surface}" 
+                        BorderBrush="{DynamicResource Brush.Border}" 
+                        BorderThickness="1" CornerRadius="15" Padding="20" Margin="0,0,20,0">
+                    <StackPanel>
+                        <TextBlock Text="Historie příjmů (30 dní)" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <lvc:CartesianChart Series="{Binding IncomeSeries}" XAxes="{Binding XAxes}" Height="320"/>
+                    </StackPanel>
+                </Border>
+
+                <!-- Rozdělení stavů -->
+                <Border Grid.Column="1" Background="{DynamicResource Brush.Surface}" 
+                        BorderBrush="{DynamicResource Brush.Border}" 
+                        BorderThickness="1" CornerRadius="15" Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Stavy plateb" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <lvc:PieChart Series="{Binding StatusSeries}" Height="320"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
         </StackPanel>
     </ScrollViewer>
 </UserControl>
