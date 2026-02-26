@@ -11,6 +11,18 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Avalonia;
+using Avalonia.Controls.ApplicationLifetimes;
+using Avalonia.Data.Core;
+using Avalonia.Data.Core.Plugins;
+using Avalonia.Markup.Xaml;
+using CommunityToolkit.Mvvm.Messaging;
+using CtrlPay.Avalonia.HelperClasses;
+using CtrlPay.Avalonia.Translations;
+using CtrlPay.Avalonia.ViewModels;
+using System.Reflection;
+using Avalonia.Controls;
+using Avalonia.Media;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -86,13 +98,15 @@ public partial class AccountantDashboardViewModel : ViewModelBase
         // Načteme data pro grafy
         var chartData = ToDoRepo.GetAccountantChartData();
 
-        // 1. Graf příjmů (Trend)
+        // 1. Graf příjmů (Trend) s akcentní barvou
         IncomeSeries =
         [
             new LineSeries<decimal>
             {
                 Values = [.. chartData.IncomeHistory.Select(x => x.Amount)],
                 Name = "Příjem (XMR)",
+                Fill = new SolidColorPaint(SKColors.CornflowerBlue.WithAlpha(50)),
+                Stroke =  new SolidColorPaint(SKColors.CornflowerBlue) { StrokeThickness = 3 },
                 GeometrySize = 0,
                 LineSmoothness = 1
             }
@@ -107,11 +121,20 @@ public partial class AccountantDashboardViewModel : ViewModelBase
             }
         ];
 
-        // 2. Graf stavů (Koláč)
+        // 2. Graf stavů (Koláč -> Donut) s logickými barvami
         StatusSeries = [.. chartData.StatusBreakdown.Select(x => new PieSeries<int>
         {
             Values = [x.Count],
-            Name = x.Status
+            Name = x.Status,
+            Fill = x.Status switch
+            {
+                "Paid" => new SolidColorPaint(SKColors.MediumSeaGreen),
+                "Overpaid" => new SolidColorPaint(SKColors.CornflowerBlue),
+                "Underpaid" => new SolidColorPaint(SKColors.Orange),
+                "Expired" => new SolidColorPaint(SKColors.Crimson),
+                _ => new SolidColorPaint(SKColors.Gray)
+            },
+            InnerRadius = 60
         })];
     }
 }
