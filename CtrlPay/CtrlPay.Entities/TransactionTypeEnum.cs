@@ -8,8 +8,8 @@ namespace CtrlPay.Entities
 {
     public enum TransactionTypeEnum
     {
-        In = 0,
-        Out = 1,
+        Incoming = 0,
+        Outgoing = 1,
         Internal = 2
     }
 }

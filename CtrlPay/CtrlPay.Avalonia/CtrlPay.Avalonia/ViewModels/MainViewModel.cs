@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -75,6 +75,7 @@ public partial class MainViewModel : ViewModelBase
         {
             NavigationItems.Add(new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers));
             NavigationItems.Add(new NavItem("NavbarView.PaymentManagement", new PaymentManagementView(), IconData.Cash));
+                NavigationItems.Add(new NavItem("NavbarView.AccountantTransactions", new AccountantTransactionsView(), IconData.Cash));
         }
 
         if (role == Role.Admin)

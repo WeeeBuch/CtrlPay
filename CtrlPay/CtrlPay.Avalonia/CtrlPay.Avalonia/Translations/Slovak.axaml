@@ -31,6 +31,22 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">Preplatok</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">Vytvorené dňa</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">Prehľad transakcií</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">Tabuľkové zobrazenie</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">Prietokové zobrazenie</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">Prichádzajúce</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">Odchádzajúce</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">Zákazník</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">Hľadať transakcie...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">Všetci zákazníci</x:String>
+
+    <x:String x:Key="Common.ID">ID</x:String>
+    <x:String x:Key="Common.Date">Dátum</x:String>
+    <x:String x:Key="Common.Type">Typ</x:String>
+    <x:String x:Key="Common.Amount">Suma</x:String>
+    <x:String x:Key="Common.Status">Stav</x:String>
+    <x:String x:Key="Common.Hash">Hash</x:String>
+
     <x:String x:Key="NavbarView.Customers">Zákazníci</x:String>
     <x:String x:Key="Customers.Title">Správa zákazníkov</x:String>
     <x:String x:Key="Customers.SearchWatermark">Hľadať zákazníkov...</x:String>

@@ -1,4 +1,4 @@
-﻿using CtrlPay.Entities;
+using CtrlPay.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,6 +33,8 @@ public static class DebugMode
     public static bool SkipCreditAddressLogic { get; set; } = false;
 
     public static bool MockCustomers { get; set; } = false;
+
+    public static bool MockAccountantTransactions { get; set; } = true;
 
     public static bool MockAdminUsers { get; set; } = true;
 

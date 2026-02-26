@@ -31,6 +31,22 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">5urplu5</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">Cr34t3d 4t</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">Tr4n54ct10n 0v3rv13w</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">T4bl3 V13w</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">Fl0w V13w</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">1nc0m1ng</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">0utg01ng</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">Cu5t0m3r</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">534rch tr4n54ct10n5...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">4ll Cu5t0m3r5</x:String>
+
+    <x:String x:Key="Common.ID">1D</x:String>
+    <x:String x:Key="Common.Date">D4t3</x:String>
+    <x:String x:Key="Common.Type">Typ3</x:String>
+    <x:String x:Key="Common.Amount">Am0unt</x:String>
+    <x:String x:Key="Common.Status">5t4tu5</x:String>
+    <x:String x:Key="Common.Hash">H45h</x:String>
+
     <x:String x:Key="NavbarView.Customers">CU570M3R5</x:String>
     <x:String x:Key="Customers.Title">M4N4G3_U53R5</x:String>
     <x:String x:Key="Customers.SearchWatermark">534RCH_DB...</x:String>

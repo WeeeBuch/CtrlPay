@@ -1,4 +1,4 @@
-using CtrlPay.DB;
+﻿using CtrlPay.DB;
 using CtrlPay.Entities;
 using Microsoft.EntityFrameworkCore;
 using Mysqlx.Session;
@@ -74,7 +74,7 @@ namespace CtrlPay.XMR
                 {
                     Address = dbContext.Addresses.FirstOrDefault(a => a.AddressXMR == t.Address),
                     TransactionIdXMR = t.Txid,
-                    Type = TransactionTypeEnum.In,
+                    Type = TransactionTypeEnum.Incoming,
                     Status = t.Locked ? TransactionStatusEnum.Pending : TransactionStatusEnum.Confirmed,
                     Amount = t.Amount / 1_000_000_000_000m,
                     Fee = t.Fee,
@@ -168,7 +168,7 @@ namespace CtrlPay.XMR
                 {
                     Address = dbContext.Addresses.FirstOrDefault(a => a.AddressXMR == t.Address),
                     TransactionIdXMR = t.Txid,
-                    Type = TransactionTypeEnum.In,
+                    Type = TransactionTypeEnum.Incoming,
                     Status = t.Locked ? TransactionStatusEnum.Pending : TransactionStatusEnum.Confirmed,
                     Amount = t.Amount / 1_000_000_000_000m,
                     Fee = t.Fee,
