@@ -1,5 +1,7 @@
-﻿using CtrlPay.DB;
+﻿using CtrlPay.Core;
+using CtrlPay.DB;
 using CtrlPay.Entities;
+using CtrlPay.XMR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,14 +16,14 @@ namespace CtrlPay.API.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly CtrlPayDbContext _db;
-        private readonly bool _mergedAccountants;
+        private readonly MoneroRpcOptions _rpcOptions;
 
-
-        public CustomerController(IConfiguration configuration)
+        public CustomerController(IOptions<MoneroRpcOptions> rpcOptions)
         {
             _db = new CtrlPayDbContext();
-            _mergedAccountants = configuration.GetValue<bool>("MergeAccountantAndPayrollAccountant");
+            _rpcOptions = rpcOptions.Value;
         }
+
         [HttpPost("api/customers/create")]
         // POST : api/customers/create
         public IActionResult CreateCustomer([FromBody] CustomerApiDTO request)
@@ -117,14 +119,14 @@ namespace CtrlPay.API.Controllers
         [HttpPost]
         [Route("api/customers/promote/{id}")]
         // POST : api/customers/promote/{id}
-        public IActionResult PromoteToLoyalCustomer(int id)
+        public async Task<IActionResult> PromoteToLoyalCustomer(int id)
         {
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
             if (role != Role.Accountant && role != Role.Admin)
             {
                 return Forbid();
             }
-            //TODO: Dodělat promote to loyal customer
+            await XMRComs.PromoteCustomer(id, _rpcOptions);
             return Ok(new ReturnModel("Z0", ReturnModelSeverityEnum.Ok));
         }
     }

@@ -87,7 +87,7 @@ public partial class CustomerPieceViewModel : ViewModelBase
     [RelayCommand]
     public async Task Promote()
     {
-        await ToDoRepo.PromoteCustomer(Model);
+        await CustomerRepo.PromoteCustomer(Model);
         
         OnPropertyChanged(nameof(Model));
     }
