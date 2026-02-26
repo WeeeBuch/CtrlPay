@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using CtrlPay.Avalonia.Translations;
@@ -6,9 +6,6 @@ using CtrlPay.Repos.Frontend;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
-/// <summary>
-/// Zpráva odesílaná při kliknutí na kartu pro filtrování transakcí.
-/// </summary>
 public record NavigationFilterMessage(StatusEnum Filter);
 
 public partial class DashboardTileViewModel : ViewModelBase

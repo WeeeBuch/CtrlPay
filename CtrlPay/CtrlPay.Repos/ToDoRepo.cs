@@ -42,6 +42,28 @@ public static class ToDoRepo
             return;
         }
     }
+
+    public static AccountantDashboardSummaryDTO GetAccountantDashboardSummary()
+    {
+        if (DebugMode.MockAccountantTransactions)
+        {
+            return new AccountantDashboardSummaryDTO
+            {
+                OverpaidAmount = 1.25m,
+                OverpaidCount = 4,
+                OverdueAmount = 5.80m,
+                OverdueCount = 12,
+                PartiallyPaidAmount = 0.45m,
+                PartiallyPaidCount = 2,
+                WaitingAmount = 15.20m,
+                WaitingCount = 25
+            };
+        }
+
+        // TODO: Propojit s reálným API v AccountantPaymentRepo
+        throw new NotImplementedException();
+    }
+
     public static List<AccountantTransactionDTO> GetMockAccountantTransactions()
     {
         var rng = new Random();
