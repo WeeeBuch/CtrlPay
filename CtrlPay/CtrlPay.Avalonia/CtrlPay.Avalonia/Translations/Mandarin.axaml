@@ -44,6 +44,8 @@
     <x:String x:Key="Accountant.Transactions.Customer">客户</x:String>
     <x:String x:Key="Accountant.Transactions.Search">搜索交易...</x:String>
     <x:String x:Key="Accountant.Transactions.AllCustomers">所有客户</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">状态：</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">所有状态</x:String>
 
     <x:String x:Key="Common.ID">ID</x:String>
     <x:String x:Key="Common.Date">日期</x:String>
@@ -77,6 +79,17 @@
     <x:String x:Key="LoginView.Watermark.Code">验证码</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">交易记录</x:String>
+
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">会计概览</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">付款和任务快速概览</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">多付</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">逾期</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">部分付款</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">等待中</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> 待处理</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">收入历史 (30天)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">付款状态</x:String>
 
     <x:String x:Key="NavbarView.Menu">菜单</x:String>
     <x:String x:Key="NavbarView.Dashboard">仪表板</x:String>

@@ -39,6 +39,8 @@
     <x:String x:Key="Accountant.Transactions.Customer">Matey</x:String>
     <x:String x:Key="Accountant.Transactions.Search">Spyglass for coin...</x:String>
     <x:String x:Key="Accountant.Transactions.AllCustomers">Whole Crew</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">Status, matey:</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">All flags</x:String>
 
     <x:String x:Key="Common.ID">Mark</x:String>
     <x:String x:Key="Common.Date">Moon</x:String>
@@ -77,6 +79,17 @@
     <x:String x:Key="LoginView.Watermark.Code">Secret Cipher</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">Bounty Log</x:String>
+
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">Quartermaster's Ledger</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Quick peek at ye gold and duties</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">TOO MUCH BOOTY</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">WALK THE PLANK</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">BIT OF GOLD</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">CALM SEAS</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> to be settled</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">Loot History (30 tides)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">Loot Status</x:String>
 
     <x:String x:Key="NavbarView.Menu">Compass</x:String>
     <x:String x:Key="NavbarView.Dashboard">Main Deck</x:String>

@@ -39,6 +39,8 @@
     <x:String x:Key="Accountant.Transactions.Customer">顧客</x:String>
     <x:String x:Key="Accountant.Transactions.Search">取引を検索...</x:String>
     <x:String x:Key="Accountant.Transactions.AllCustomers">すべての顧客</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">ステータス：</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">すべてのステータス</x:String>
 
     <x:String x:Key="Common.ID">ID</x:String>
     <x:String x:Key="Common.Date">日付</x:String>
@@ -77,6 +79,17 @@
     <x:String x:Key="LoginView.Watermark.Code">認証コード</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">取引履歴</x:String>
+
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">会計概要</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">支払いとタスクのクイック概要</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">過払い</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">期限切れ</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">一部支払い済み</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">待機中</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> 件の処理待ち</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">収益履歴 (30日間)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">支払いステータス</x:String>
 
     <x:String x:Key="NavbarView.Menu">メニュー</x:String>
     <x:String x:Key="NavbarView.Dashboard">ダッシュボード</x:String>
