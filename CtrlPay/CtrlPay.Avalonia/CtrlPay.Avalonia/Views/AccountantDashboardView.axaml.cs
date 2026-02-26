@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using CtrlPay.Avalonia.ViewModels;
 
 namespace CtrlPay.Avalonia;
 
@@ -7,7 +8,7 @@ public partial class AccountantDashboardView : UserControl
     public AccountantDashboardView()
     {
         InitializeComponent();
-        // Poznámka: DataContext se většinou nastavuje v MainViewModelu při navigaci,
-        // ale pro jistotu (nebo design-time) ho můžeme inicializovat i zde.
+        // Nastavení DataContextu, aby View vědělo, odkud brát data
+        DataContext = new AccountantDashboardViewModel();
     }
 }

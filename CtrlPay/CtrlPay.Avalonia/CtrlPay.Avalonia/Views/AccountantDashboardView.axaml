@@ -11,21 +11,21 @@
 
     <ScrollViewer>
         <StackPanel Spacing="30">
-            <!-- Nadpis sekce -->
+            <!-- Nadpis -->
             <StackPanel Spacing="5">
                 <TextBlock Text="Přehled účetnictví" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource Brush.Text.Primary}"/>
                 <TextBlock Text="Rychlý přehled plateb a úkolů k vyřízení" FontSize="14" Foreground="{DynamicResource Brush.Text.Secondary}"/>
             </StackPanel>
 
-            <!-- Mřížka s kostkami -->
-            <UniformGrid Columns="4" Rows="1">
+            <!-- Kostky -->
+            <UniformGrid Columns="4" Rows="1" ClipToBounds="False">
                 <p:DashboardTile DataContext="{Binding OverpaidTile}" Margin="0,0,10,0"/>
                 <p:DashboardTile DataContext="{Binding OverdueTile}" Margin="10,0,10,0"/>
                 <p:DashboardTile DataContext="{Binding PartialTile}" Margin="10,0,10,0"/>
                 <p:DashboardTile DataContext="{Binding WaitingTile}" Margin="10,0,0,0"/>
             </UniformGrid>
 
-            <!-- Prostor pro budoucí grafy -->
+            <!-- Placeholder pro grafy -->
             <Border Background="{DynamicResource Brush.Surface}" 
                     BorderBrush="{DynamicResource Brush.Border}" 
                     BorderThickness="1" 
@@ -33,7 +33,7 @@
                     Height="400"
                     Padding="30">
                 <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center" Spacing="10">
-                    <!-- PathIcon Data="{x:Static icons:IconData.Dashboard}" Width="48" Height="48" Opacity="0.1"/-->
+                    <PathIcon Data="{x:Static icons:IconData.Dashboard}" Width="48" Height="48" Opacity="0.1"/>
                     <TextBlock Text="Grafy trendů budou doplněny později" Opacity="0.3" FontSize="16"/>
                 </StackPanel>
             </Border>

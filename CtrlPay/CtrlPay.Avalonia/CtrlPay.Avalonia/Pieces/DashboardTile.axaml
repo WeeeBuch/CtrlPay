@@ -1,29 +1,43 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
              mc:Ignorable="d" d:DesignWidth="300" d:DesignHeight="150"
              x:Class="CtrlPay.Avalonia.Pieces.DashboardTile"
-             x:DataType="vm:DashboardTileViewModel">
+             x:DataType="vm:DashboardTileViewModel"
+             ClipToBounds="False">
 
-    <!-- Celá karta je tlačítko, aby byla klikací -->
-    <Button Classes="plain" Command="{Binding ClickCommand}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Padding="0">
+    <Button Classes="plain" Command="{Binding ClickCommand}" 
+            HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
+            Padding="0" ClipToBounds="False">
         <Button.Styles>
-            <!-- Styl pro "čisté" tlačítko bez výchozího šedého pozadí -->
             <Style Selector="Button.plain">
                 <Setter Property="Background" Value="Transparent"/>
                 <Setter Property="Padding" Value="0"/>
                 <Setter Property="BorderThickness" Value="0"/>
+                <!-- Přidáme výchozí margin, aby měla karta 'rezervu' nahoře -->
+                <Setter Property="Margin" Value="0,5,0,0"/>
                 <Setter Property="Template">
                     <ControlTemplate>
-                        <ContentPresenter Background="{TemplateBinding Background}"
+                        <!-- Přidáno Name="PART_ContentPresenter" -->
+                        <ContentPresenter Name="PART_ContentPresenter"
+                                          Background="{TemplateBinding Background}"
                                           Content="{TemplateBinding Content}"
                                           Padding="{TemplateBinding Padding}"/>
                     </ControlTemplate>
                 </Setter>
             </Style>
-            <!-- Efekt při najetí myší - karta se lehce stínuje a posune -->
+
+            <!-- Totální vynucení průhlednosti při najetí myší -->
+            <Style Selector="Button.plain:pointerover /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+            <Style Selector="Button.plain:pressed /template/ ContentPresenter#PART_ContentPresenter">
+                <Setter Property="Background" Value="Transparent"/>
+            </Style>
+
+            <!-- Náš vlastní vizuální efekt - stín a posun -->
             <Style Selector="Button.plain:pointerover Border#MainBorder">
                 <Setter Property="BoxShadow" Value="0 4 12 0 #20000000"/>
                 <Setter Property="Margin" Value="0, -2, 0, 2"/>
@@ -44,7 +58,6 @@
             </Border.Transitions>
 
             <StackPanel Spacing="10">
-                <!-- Horní část: Ikona a Nadpis -->
                 <Grid ColumnDefinitions="Auto, *">
                     <Border Background="{Binding Color}" Width="32" Height="32" CornerRadius="8" Opacity="0.2"/>
                     <PathIcon Data="{Binding Icon}" Foreground="{Binding Color}" Width="18" Height="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
@@ -55,7 +68,6 @@
                                HorizontalAlignment="Right" VerticalAlignment="Top"/>
                 </Grid>
 
-                <!-- Střední část: Částka v XMR -->
                 <StackPanel Margin="0,5,0,0">
                     <StackPanel Orientation="Horizontal" Spacing="4">
                         <TextBlock Text="{Binding Amount, StringFormat=\{0:N4\}}" 
@@ -64,7 +76,6 @@
                         <TextBlock Text="XMR" FontSize="12" Opacity="0.5" VerticalAlignment="Bottom" Margin="0,0,0,4"/>
                     </StackPanel>
                     
-                    <!-- Spodní část: Počet položek -->
                     <StackPanel Orientation="Horizontal" Spacing="4">
                         <TextBlock Text="{Binding Count}" FontSize="13" Foreground="{DynamicResource Brush.Text.Secondary}"/>
                         <TextBlock Text="{DynamicResource Accountant.Dashboard.ItemsToProcess}" FontSize="13" Foreground="{DynamicResource Brush.Text.Secondary}"/>
