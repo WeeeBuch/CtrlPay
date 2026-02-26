@@ -32,6 +32,8 @@ public partial class AccountantDashboardViewModel : ViewModelBase
     [ObservableProperty] private ISeries[] _incomeSeries;
     [ObservableProperty] private Axis[] _xAxes;
     [ObservableProperty] private ISeries[] _statusSeries;
+    [ObservableProperty] private SolidColorPaint? _tooltipBackgroundPaint;
+    [ObservableProperty] private SolidColorPaint? _tooltipTextPaint;
 
     // Kostky
     [ObservableProperty] private DashboardTileViewModel _overpaidTile;
@@ -101,13 +103,25 @@ public partial class AccountantDashboardViewModel : ViewModelBase
         // Získáme akcentní barvu z aplikace
         var accentColor = SKColors.CornflowerBlue; // Fallback
 
+        // Nastavení barev pro tooltipy (Tmavý režim)
+        var surfaceColor = SKColors.Black; // Fallback
+        var textColor = SKColors.White; // Fallback
+
+        if (Application.Current?.TryFindResource("Color.Surface", out var sRes) == true && sRes is Color sColor)
+            surfaceColor = new SKColor(sColor.R, sColor.G, sColor.B);
+        
+        if (Application.Current?.TryFindResource("Color.Text.Primary", out var tRes) == true && tRes is Color tColor)
+            textColor = new SKColor(tColor.R, tColor.G, tColor.B);
+
+        TooltipBackgroundPaint = new SolidColorPaint(surfaceColor.WithAlpha(230)); // Lehce průhledná tmavá
+        TooltipTextPaint = new SolidColorPaint(textColor);
+
         // 1. Graf příjmů (Trend) s akcentní barvou a překladem
         IncomeSeries =
         [
             new LineSeries<decimal>
             {
                 Values = [.. chartData.IncomeHistory.Select(x => x.Amount)],
-                Name = TranslationManager.GetString("Accountant.Dashboard.IncomeHistory"),
                 Fill = new SolidColorPaint(accentColor.WithAlpha(40)),
                 Stroke = new SolidColorPaint(accentColor) { StrokeThickness = 3 },
                 GeometrySize = 0,

@@ -34,7 +34,11 @@
                         BorderThickness="1" CornerRadius="15" Padding="20" Margin="0,0,20,0">
                     <StackPanel>
                         <TextBlock Text="{DynamicResource Accountant.Dashboard.IncomeHistory}" FontWeight="Bold" Margin="0,0,0,10"/>
-                        <lvc:CartesianChart Series="{Binding IncomeSeries}" XAxes="{Binding XAxes}" Height="320"/>
+                        <lvc:CartesianChart Series="{Binding IncomeSeries}" 
+                                            XAxes="{Binding XAxes}" 
+                                            Height="320"
+                                            TooltipBackgroundPaint="{Binding TooltipBackgroundPaint}"
+                                            TooltipTextPaint="{Binding TooltipTextPaint}"/>
                     </StackPanel>
                 </Border>
 
@@ -44,7 +48,10 @@
                         BorderThickness="1" CornerRadius="15" Padding="20">
                     <StackPanel>
                         <TextBlock Text="{DynamicResource Accountant.Dashboard.PaymentStatus}" FontWeight="Bold" Margin="0,0,0,10"/>
-                        <lvc:PieChart Series="{Binding StatusSeries}" Height="320"/>
+                        <lvc:PieChart Series="{Binding StatusSeries}" 
+                                      Height="320"
+                                      TooltipBackgroundPaint="{Binding TooltipBackgroundPaint}"
+                                      TooltipTextPaint="{Binding TooltipTextPaint}"/>
                     </StackPanel>
                 </Border>
             </Grid>
