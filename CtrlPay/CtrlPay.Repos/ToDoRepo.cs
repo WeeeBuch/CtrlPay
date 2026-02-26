@@ -85,7 +85,7 @@ public static class ToDoRepo
             {
                 ("Paid", 145),
                 ("Overpaid", 12),
-                ("Underpaid", 8),
+                ("PartiallyPaid", 8),
                 ("Expired", 24)
             };
             return data;

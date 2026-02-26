@@ -73,7 +73,7 @@
                         <TextBlock Text="{Binding Amount, StringFormat=\{0:N4\}}" 
                                    FontSize="24" FontWeight="Bold"
                                    Foreground="{DynamicResource Brush.Text.Primary}"/>
-                        <TextBlock Text="XMR" FontSize="12" Opacity="0.5" VerticalAlignment="Bottom" Margin="0,0,0,4"/>
+                        <TextBlock Text="{DynamicResource App.Currency}" FontSize="12" Opacity="0.5" VerticalAlignment="Bottom" Margin="0,0,0,4"/>
                     </StackPanel>
                     
                     <StackPanel Orientation="Horizontal" Spacing="4">

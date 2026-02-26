@@ -1,4 +1,5 @@
 using Avalonia.Data.Converters;
+using CtrlPay.Avalonia.Translations;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Globalization;
@@ -11,20 +12,12 @@ public class StatusToTextConverter : IValueConverter
     {
         if (value is StatusEnum status)
         {
-            // Tady by ideálně měly být překlady z TranslationManageru
-            return status switch
-            {
-                StatusEnum.Pending => "Čekající",
-                StatusEnum.Completed => "Dokončeno",
-                StatusEnum.Confirmed => "Potvrzeno",
-                StatusEnum.Overpaid => "Přeplatek",
-                StatusEnum.PartiallyPaid => "Částečně zaplaceno",
-                StatusEnum.Expired => "Po splatnosti",
-                StatusEnum.Cancelled => "Zrušeno",
-                _ => status.ToString()
-            };
+            // Použijeme stávající klíče pro statusy transakcí
+            return TranslationManager.GetString($"Transaction.Status.{status}");
         }
-        return "Všechny stavy";
+        
+        // Pro volbu null (všechny stavy)
+        return TranslationManager.GetString("Accountant.Transactions.Filter.AllStatuses");
     }
 
     public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture)

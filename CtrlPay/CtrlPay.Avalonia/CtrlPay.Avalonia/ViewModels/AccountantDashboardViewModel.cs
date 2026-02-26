@@ -98,15 +98,18 @@ public partial class AccountantDashboardViewModel : ViewModelBase
         // Načteme data pro grafy
         var chartData = ToDoRepo.GetAccountantChartData();
 
-        // 1. Graf příjmů (Trend) s akcentní barvou
+        // Získáme akcentní barvu z aplikace
+        var accentColor = SKColors.CornflowerBlue; // Fallback
+
+        // 1. Graf příjmů (Trend) s akcentní barvou a překladem
         IncomeSeries =
         [
             new LineSeries<decimal>
             {
                 Values = [.. chartData.IncomeHistory.Select(x => x.Amount)],
-                Name = "Příjem (XMR)",
-                Fill = new SolidColorPaint(SKColors.CornflowerBlue.WithAlpha(50)),
-                Stroke =  new SolidColorPaint(SKColors.CornflowerBlue) { StrokeThickness = 3 },
+                Name = TranslationManager.GetString("Accountant.Dashboard.IncomeHistory"),
+                Fill = new SolidColorPaint(accentColor.WithAlpha(40)),
+                Stroke = new SolidColorPaint(accentColor) { StrokeThickness = 3 },
                 GeometrySize = 0,
                 LineSmoothness = 1
             }
@@ -121,16 +124,16 @@ public partial class AccountantDashboardViewModel : ViewModelBase
             }
         ];
 
-        // 2. Graf stavů (Koláč -> Donut) s logickými barvami
+        // 2. Graf stavů (Koláč -> Donut) s logickými barvami a překlady
         StatusSeries = [.. chartData.StatusBreakdown.Select(x => new PieSeries<int>
         {
             Values = [x.Count],
-            Name = x.Status,
+            Name = TranslationManager.GetString($"Transaction.Status.{x.Status}"),
             Fill = x.Status switch
             {
                 "Paid" => new SolidColorPaint(SKColors.MediumSeaGreen),
                 "Overpaid" => new SolidColorPaint(SKColors.CornflowerBlue),
-                "Underpaid" => new SolidColorPaint(SKColors.Orange),
+                "PartiallyPaid" => new SolidColorPaint(SKColors.Orange),
                 "Expired" => new SolidColorPaint(SKColors.Crimson),
                 _ => new SolidColorPaint(SKColors.Gray)
             },

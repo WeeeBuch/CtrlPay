@@ -14,8 +14,8 @@
         <StackPanel Spacing="30">
             <!-- Nadpis -->
             <StackPanel Spacing="5">
-                <TextBlock Text="Přehled účetnictví" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource Brush.Text.Primary}"/>
-                <TextBlock Text="Rychlý přehled plateb a úkolů k vyřízení" FontSize="14" Foreground="{DynamicResource Brush.Text.Secondary}"/>
+                <TextBlock Text="{DynamicResource Accountant.Dashboard.Title}" FontSize="28" FontWeight="Bold" Foreground="{DynamicResource Brush.Text.Primary}"/>
+                <TextBlock Text="{DynamicResource Accountant.Dashboard.Subtitle}" FontSize="14" Foreground="{DynamicResource Brush.Text.Secondary}"/>
             </StackPanel>
 
             <!-- Kostky -->
@@ -33,7 +33,7 @@
                         BorderBrush="{DynamicResource Brush.Border}" 
                         BorderThickness="1" CornerRadius="15" Padding="20" Margin="0,0,20,0">
                     <StackPanel>
-                        <TextBlock Text="Historie příjmů (30 dní)" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <TextBlock Text="{DynamicResource Accountant.Dashboard.IncomeHistory}" FontWeight="Bold" Margin="0,0,0,10"/>
                         <lvc:CartesianChart Series="{Binding IncomeSeries}" XAxes="{Binding XAxes}" Height="320"/>
                     </StackPanel>
                 </Border>
@@ -43,7 +43,7 @@
                         BorderBrush="{DynamicResource Brush.Border}" 
                         BorderThickness="1" CornerRadius="15" Padding="20">
                     <StackPanel>
-                        <TextBlock Text="Stavy plateb" FontWeight="Bold" Margin="0,0,0,10"/>
+                        <TextBlock Text="{DynamicResource Accountant.Dashboard.PaymentStatus}" FontWeight="Bold" Margin="0,0,0,10"/>
                         <lvc:PieChart Series="{Binding StatusSeries}" Height="320"/>
                     </StackPanel>
                 </Border>
