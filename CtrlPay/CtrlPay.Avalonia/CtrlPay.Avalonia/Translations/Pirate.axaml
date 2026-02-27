@@ -13,9 +13,11 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">Too much booty</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">Map o' the Coin</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">Recruit Loot</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">Patch up</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">Belay that</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">Lock in chest</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">Toss overboard</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Trade for chits</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Name</x:String>

@@ -13,9 +13,11 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">Uniquement trop-perçus</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">Détails du paiement</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">Ajouter</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">Modifier</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">Annuler</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">Enregistrer</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">Supprimer</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Convertir en crédit</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Titre</x:String>

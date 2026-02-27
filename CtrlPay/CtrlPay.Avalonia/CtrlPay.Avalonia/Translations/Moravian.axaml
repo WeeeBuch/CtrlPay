@@ -13,9 +13,11 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">Inu přeplatky</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">Detail platby</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">Přihodiť</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">Upraviť</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">Zrušiť</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">Uložiť</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">Vymazat</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Vyměniť za kredit</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Název</x:String>

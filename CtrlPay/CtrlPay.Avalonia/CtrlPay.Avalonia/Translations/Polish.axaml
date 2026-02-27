@@ -13,9 +13,11 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">Tylko nadpłaty</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">Szczegóły płatności</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">Dodaj</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">Edytuj</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">Anuluj</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">Zapisz</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">Usuń</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Konwertuj na kredyt</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Tytuł</x:String>

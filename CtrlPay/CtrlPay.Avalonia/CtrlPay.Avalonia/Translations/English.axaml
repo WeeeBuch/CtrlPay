@@ -12,9 +12,11 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">Only overpaid</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">Payment Detail</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">Add</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">Edit</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">Cancel</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">Save</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">Delete</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Convert to Credit</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Title</x:String>

@@ -60,7 +60,7 @@
                         </StackPanel>
 
                         
-                        <Button Content="Add" HorizontalAlignment="Right" Grid.Column="1"
+                        <Button Content="{DynamicResource PaymentManagerView.Button.Add}" HorizontalAlignment="Right" Grid.Column="1"
                                 Command="{Binding AddNewPaymentCommand}"/>
                     </Grid>
                 </Border>
@@ -203,7 +203,7 @@
                                         </StackPanel>
                                     </UniformGrid>
 
-                                    <Button Content="Delete" IsVisible="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).CanBeDeleted }" Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).DeletePaymentCommand}"/>
+                                    <Button Content="{DynamicResource PaymentManagerView.Button.Delete}" IsVisible="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).CanBeDeleted }" Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).DeletePaymentCommand}"/>
                                 </StackPanel>
                             </ScrollViewer>
                         </DataTemplate>

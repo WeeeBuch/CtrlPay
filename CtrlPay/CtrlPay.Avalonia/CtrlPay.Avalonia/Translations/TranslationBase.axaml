@@ -13,9 +13,11 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">PaymentManagerView.OnlyOverpaid</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">PaymentManagerView.Detail.Title</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">PaymentManagerView.Button.Add</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">PaymentManagerView.Button.Edit</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">PaymentManagerView.Button.Cancel</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">PaymentManagerView.Button.Save</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">PaymentManagerView.Button.Delete</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">PaymentManagerView.Button.ConvertToCredit</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">PaymentManagerView.Label.Title</x:String>
