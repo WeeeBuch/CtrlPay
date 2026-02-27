@@ -96,6 +96,8 @@
     <x:String x:Key="NavbarView.Settings">Einstellungen</x:String>
     <x:String x:Key="NavbarView.Debts">Schulden</x:String>
     <x:String x:Key="NavbarView.Transactions">Zahlungseingänge</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">Transaktionsübersicht</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">Admin-Bereich</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Guthaben</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Ausstehend</x:String>

@@ -96,6 +96,8 @@
     <x:String x:Key="NavbarView.Settings">Ship's Rules</x:String>
     <x:String x:Key="NavbarView.Debts">Debts to the Sea</x:String>
     <x:String x:Key="NavbarView.Transactions">Incoming Booty</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">Log o' Loot</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">Captain's Quarters</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Treasure</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Buried Gold</x:String>

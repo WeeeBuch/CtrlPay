@@ -86,6 +86,7 @@
     <x:String x:Key="NavbarView.Debts">NavbarView.Debts</x:String>
     <x:String x:Key="NavbarView.Transactions">NavbarView.Transactions</x:String>
     <x:String x:Key="NavbarView.AccountantTransactions">NavbarView.AccountantTransactions</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">NavbarView.AdminPanel</x:String>
 
     <!-- Accountant Transactions View -->
     <x:String x:Key="Accountant.Transactions.Title">Accountant.Transactions.Title</x:String>

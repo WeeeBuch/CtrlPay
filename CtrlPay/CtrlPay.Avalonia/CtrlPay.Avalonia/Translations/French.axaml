@@ -96,6 +96,8 @@
     <x:String x:Key="NavbarView.Settings">Paramètres</x:String>
     <x:String x:Key="NavbarView.Debts">Dettes</x:String>
     <x:String x:Key="NavbarView.Transactions">Paiements entrants</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">Aperçu des transactions</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">Panneau d'administration</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Solde</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">En attente</x:String>

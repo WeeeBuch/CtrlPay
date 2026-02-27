@@ -96,6 +96,8 @@
     <x:String x:Key="NavbarView.Settings">Nastavení</x:String>
     <x:String x:Key="NavbarView.Debts">Sekery</x:String>
     <x:String x:Key="NavbarView.Transactions">Prachy, co přifrčely</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">Kšefty, co hlídám</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">Velkej šéf (Admin)</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Mám u sebe</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Na cestě</x:String>

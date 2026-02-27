@@ -96,6 +96,8 @@
     <x:String x:Key="NavbarView.Settings">Nastavení</x:String>
     <x:String x:Key="NavbarView.Debts">Dluhy</x:String>
     <x:String x:Key="NavbarView.Transactions">Příchozí platby</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">Přehled transakcí</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">Administrace</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Zůstatek</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Čekající</x:String>

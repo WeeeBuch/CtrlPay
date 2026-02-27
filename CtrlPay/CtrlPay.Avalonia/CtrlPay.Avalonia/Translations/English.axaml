@@ -101,6 +101,8 @@
     <x:String x:Key="NavbarView.Settings">Settings</x:String>
     <x:String x:Key="NavbarView.Debts">Debts</x:String>
     <x:String x:Key="NavbarView.Transactions">Incoming Payments</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">Transaction Overview</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">Admin Panel</x:String>
 
     <!-- Credit Counter Piece -->
     <x:String x:Key="CounterPiece.Credits.Title">Credits</x:String>
