@@ -53,7 +53,7 @@ public partial class AdminViewModel : ViewModelBase
 
     public async void LoadUsers()
     {
-        _allUsers = await ToDoRepo.GetAdminUsers();
+        _allUsers = await AdminRepo.GetAdminUsers();
         ApplyFilter();
     }
 

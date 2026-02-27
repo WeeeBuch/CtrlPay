@@ -20,7 +20,7 @@ public static class ChangeChecker
         await PaymentRepo.UpdatePaymentSumCacheFromApi(default);
         await PaymentRepo.UpdatePaymetsCacheFromApi(default);
         await CustomerRepo.UpdateCustomersFromApi(default);
-        await AccountantPaymentRepo.UpdatePaymetsCacheFromApi(default);
+        await AccountantRepo.UpdateAccountantCachesFromApi(default);
         // TODO: Karele tu aktualizace
 
         // Sem se píšou všechny kontroly změn, které chceme provádět

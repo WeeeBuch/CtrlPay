@@ -20,10 +20,12 @@ namespace CtrlPay.Entities
         private int AccountId { get; set; }
         [Column("our_xmr")]
         public decimal OurXMR { get; set; }
+        [Column("reg_code")]
+        public string? RegCode { get; set; }
 
         [ForeignKey("CustomerId")]
         public virtual Customer? Customer { get; set; }
-        public virtual List<User> Users { get; set; }
+        public virtual List<User>? Users { get; set; }
         [ForeignKey("AccountId")]
         public virtual Account Account { get; set; }
     }

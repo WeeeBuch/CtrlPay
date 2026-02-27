@@ -48,7 +48,7 @@ public partial class UserPieceViewModel : ViewModelBase
         Editing = false;
         Model.EndEdit();
         
-        await ToDoRepo.UpdateAdminUser(Model);
+        await AdminRepo.UpdateAdminUser(Model);
         UpdateHandler.HandleUpdatedAdminUsers();
     }
 }

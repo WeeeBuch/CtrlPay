@@ -17,11 +17,15 @@ namespace CtrlPay.API.Controllers
     {
         private readonly CtrlPayDbContext _db;
         private readonly MoneroRpcOptions _rpcOptions;
+        private readonly EmailService _post;
+        private readonly MailRenderService _mailRenderer;
 
-        public CustomerController(IOptions<MoneroRpcOptions> rpcOptions)
+        public CustomerController(IOptions<MoneroRpcOptions> rpcOptions, EmailService post, MailRenderService mailRenderer)
         {
             _db = new CtrlPayDbContext();
             _rpcOptions = rpcOptions.Value;
+            _post = post;
+            _mailRenderer = mailRenderer;
         }
 
         [HttpPost("api/customers/create")]
@@ -62,7 +66,7 @@ namespace CtrlPay.API.Controllers
             List<CustomerApiDTO> customers = new();
             _db.Customers.ToList().ForEach(c =>
             {
-                customers.Add(c.LoyalCustomer == null ? new CustomerApiDTO(c) : new CustomerApiDTO(c, c.LoyalCustomer, c.LoyalCustomer.Users.FirstOrDefault()));
+                customers.Add(c.LoyalCustomer == null ? new CustomerApiDTO(c) : new CustomerApiDTO(c, c.LoyalCustomer));
             });
             return Ok(new ReturnModel<List<CustomerApiDTO>>("Z0", ReturnModelSeverityEnum.Ok, customers));
         }
@@ -126,7 +130,10 @@ namespace CtrlPay.API.Controllers
             {
                 return Forbid();
             }
-            await XMRComs.PromoteCustomer(id, _rpcOptions);
+            Customer customer = _db.Customers.Where(c => c.Id == id).First();
+            string code = await XMRComs.PromoteCustomer(id, _rpcOptions);
+            string mail = await _mailRenderer.RenderToStringAsync("Mails/Registration", new RegistrationEmailModel(customer.FullName, code, "https://github.com/WeeeBuch/CtrlPay/releases", "tumail"));
+            _post.SendAsync(customer.Email, "Změna statusu zákazníka", mail);
             return Ok(new ReturnModel("Z0", ReturnModelSeverityEnum.Ok));
         }
     }

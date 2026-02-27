@@ -54,7 +54,7 @@ public partial class AccountantTransactionsViewModel : ViewModelBase
 
     private void LoadData()
     {
-        var data = ToDoRepo.GetAccountantTransactions();
+        var data = AccountantRepo.GetAccountantTransactions();
 
         AllTransactions.Clear();
         foreach (var t in data) AllTransactions.Add(t);

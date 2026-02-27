@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
 using System.Threading;
@@ -60,7 +62,7 @@ namespace CtrlPay.Core
                 return address;
             }
         }
-        public static async Task PromoteCustomer(int customerId, MoneroRpcOptions _rpcOptions)
+        public static async Task<string> PromoteCustomer(int customerId, MoneroRpcOptions _rpcOptions)
         {
             CancellationToken cancellationToken = new CancellationToken();
             string username = _rpcOptions.Username;
@@ -87,14 +89,33 @@ namespace CtrlPay.Core
             }
             int newAccountIndex = await AccountComs.CreateNewAccount(httpClient, uri, cancellationToken);
             await AccountComs.Synchronize(httpClient, uri, cancellationToken);
+
+            string Chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
+            var result = new StringBuilder(11);
+            var buffer = new byte[11];
+
+            using var rng = RandomNumberGenerator.Create();
+            rng.GetBytes(buffer);
+
+            foreach (var b in buffer)
+            {
+                result.Append(Chars[b % Chars.Length]);
+            }
+
+            string code = result.ToString().Remove(5, 1).Insert(5, "-");
+
             LoyalCustomer newLoyal = new LoyalCustomer()
             {
                 Customer = customer,
                 Account = dbContext.Accounts.FirstOrDefault(a => a.Index == newAccountIndex) ?? throw new Exception("New account not found in database."),
-                OurXMR = 0
+                OurXMR = 0,
+                RegCode = code
             };
+
             dbContext.LoyalCustomers.Add(newLoyal);
             await dbContext.SaveChangesAsync();
+            return code;
         }
 
     }

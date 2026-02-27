@@ -106,7 +106,7 @@ public partial class PaymentManagementViewModel : ViewModelBase
 
         try
         {
-            await AccountantPaymentRepo.UpdatePayment(SelectedPayment);
+            await AccountantRepo.UpdatePayment(SelectedPayment);
 
             RefreshAllData();
         }
@@ -135,7 +135,7 @@ public partial class PaymentManagementViewModel : ViewModelBase
     [RelayCommand]
     public async Task DeletePayment()
     {
-        await AccountantPaymentRepo.DeletePayment(SelectedPayment);
+        await AccountantRepo.DeletePayment(SelectedPayment);
     }
 
     public string GetCustomerName(int? id) => Customers.FirstOrDefault(c => c.Id == id)?.FullName ?? "Neznámý";
@@ -144,7 +144,7 @@ public partial class PaymentManagementViewModel : ViewModelBase
     {
         AppLogger.Info($"Sorting Payments by: {sortingMethod}");
 
-        var newData = AccountantPaymentRepo.GetSortedPayments(sortingMethod);
+        var newData = AccountantRepo.GetSortedPayments(sortingMethod);
 
         if (ShowOnlyOverpaid)
             newData = newData.Where(p => p.Status == StatusEnum.Overpaid).ToList();
@@ -212,7 +212,7 @@ public partial class PaymentManagementViewModel : ViewModelBase
         if (SelectedPayment == null) return;
         if (SelectedPayment.Status != StatusEnum.Overpaid) return;
 
-        bool success = await AccountantPaymentRepo.ConvertOverpaymentToCredit(SelectedPayment);
+        bool success = await AccountantRepo.ConvertOverpaymentToCredit(SelectedPayment);
         if (success)
         {
             AppLogger.Info($"Přebytek platby {SelectedPayment.Id} úspěšně převeden do kreditů.");

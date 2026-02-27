@@ -1,24 +1,29 @@
 ﻿using CtrlPay.Entities;
+using CtrlPay.Repos;
+using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace CtrlPay.Repos
 {
-    public class AccountantPaymentRepo
+    public class AccountantRepo
     {
         // Data jsou statická, ale unikátní pro každý typ TApiDto (takže se nemíchají)
-        protected static List<FrontendPaymentDTO> Cache { get; set; } = [];
+        protected static List<FrontendPaymentDTO> PaymentCache { get; set; } = [];
+        protected static List<FrontendTransactionDTO> TransactionCache { get; set; } = [];
         protected static DateTime LastUpdated { get; set; } = DateTime.MinValue;
         protected static string SortMethod = "DateDesc";
         protected static JsonSerializerOptions SerializerOptions = new() { PropertyNameCaseInsensitive = true };
 
         // Společná metoda pro načtení seznamu
-        protected static async Task LoadListFromApi(
+        protected static async Task LoadPaymentListFromApi(
             string url,
             Func<PaymentApiDTO, FrontendPaymentDTO> mapper, // Funkce pro převod DTO
             CancellationToken ct)
@@ -41,7 +46,39 @@ namespace CtrlPay.Repos
 
                 // Atomická aktualizace - vytvoříme nový list a pak ho přiřadíme
                 // Kdyby někdo zrovna četl Cache, aplikace nespadne
-                Cache = [.. apiList.Select(mapper)];
+                PaymentCache = [.. apiList.Select(mapper)];
+                LastUpdated = DateTime.UtcNow;
+                AppLogger.Info($"Cached Payments updated at {LastUpdated}.");
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Error($"Payment list parsing failed.", ex);
+            }
+        }
+        protected static async Task LoadTransactionListFromApi(
+            string url,
+            Func<TransactionApiDTO, FrontendTransactionDTO> mapper, // Funkce pro převod DTO
+            CancellationToken ct)
+        {
+            AppLogger.Info($"Getting json from API...");
+            string? json = await HttpWorker.HttpGet(url, true, ct);
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                AppLogger.Warning($"Get response was NULL.");
+                return;
+            }
+
+            try
+            {
+                AppLogger.Info($"Deserializing response...");
+                var result = JsonSerializer.Deserialize<ReturnModel<List<TransactionApiDTO>>>(json, SerializerOptions);
+
+                // Pokud je Body null, použijeme prázdný list, aby to nespadlo
+                var apiList = result?.Body ?? [];
+
+                // Atomická aktualizace - vytvoříme nový list a pak ho přiřadíme
+                // Kdyby někdo zrovna četl Cache, aplikace nespadne
+                TransactionCache = [.. apiList.Select(mapper)];
                 LastUpdated = DateTime.UtcNow;
                 AppLogger.Info($"Cached Transactions updated at {LastUpdated}.");
             }
@@ -50,6 +87,7 @@ namespace CtrlPay.Repos
                 AppLogger.Error($"Transaction list parsing failed.", ex);
             }
         }
+
 
         // Společné řazení
         protected static List<FrontendPaymentDTO> SortData(List<FrontendPaymentDTO> data, string? sortingMethod)
@@ -67,19 +105,20 @@ namespace CtrlPay.Repos
                 _ => [.. data.OrderByDescending(d => d.CreatedAt)] // Default DateDesc
             };
         }
-        public static async Task UpdatePaymetsCacheFromApi(CancellationToken ct)
+        public static async Task UpdateAccountantCachesFromApi(CancellationToken ct)
         {
             AppLogger.Info($"Updating Cached Payments...");
             #region Debug
             if (DebugMode.MockPaymentManager)
             {
                 AppLogger.Info($"Returning Mock payments...");
-                Cache = GetMockPayments();
+                PaymentCache = GetMockPayments();
                 return;
             }
             #endregion
 
-            await LoadListFromApi("/api/payments/all", p => new FrontendPaymentDTO(p), ct);
+            await LoadPaymentListFromApi("/api/payments/all", p => new FrontendPaymentDTO(p), ct);
+            await LoadTransactionListFromApi("/api/transactions/all", t => new FrontendTransactionDTO(t), ct);
         }
         private static List<FrontendPaymentDTO> GetMockPayments() =>
         [
@@ -159,11 +198,11 @@ namespace CtrlPay.Repos
 
         public static List<FrontendPaymentDTO> GetSortedPayments(string? sortingMethod)
         {
-            return Cache;
+            return PaymentCache;
         }
         public static async Task UpdatePayment(FrontendPaymentDTO dto)
         {
-            int id = Cache.FindIndex(c => c.Id == dto.Id);
+            int id = PaymentCache.FindIndex(c => c.Id == dto.Id);
             if (id == -1)
             {
                 AppLogger.Info($"Adding payment to API...");
@@ -173,11 +212,11 @@ namespace CtrlPay.Repos
                     AppLogger.Warning($"Create payment response was NULL.");
                     return;
                 }
-                Cache.Add(dto);
+                PaymentCache.Add(dto);
             }
             else
             {
-                Cache[id] = dto;
+                PaymentCache[id] = dto;
                 AppLogger.Info($"Updating payment in API...");
                 string? json = await HttpWorker.HttpPost($"api/payments/update", dto.ToApiDto(), true, default);
                 if (string.IsNullOrWhiteSpace(json))
@@ -189,7 +228,7 @@ namespace CtrlPay.Repos
         }
         public static async Task DeletePayment(FrontendPaymentDTO toDelete)
         {
-            Cache.Remove(toDelete);
+            PaymentCache.Remove(toDelete);
             AppLogger.Info($"Deleting payment in API...");
             string? json = await HttpWorker.HttpDelete($"/api/payments/delete/{toDelete.Id}", true);
             if (string.IsNullOrWhiteSpace(json))
@@ -218,14 +257,56 @@ namespace CtrlPay.Repos
             }
 
             // Lokálně aktualizujeme cache – přebytek se "vyčerpá", status se změní
-            int idx = Cache.FindIndex(c => c.Id == payment.Id);
+            int idx = PaymentCache.FindIndex(c => c.Id == payment.Id);
             if (idx != -1)
             {
-                Cache[idx].PaidAmountXMR = Cache[idx].ExpectedAmountXMR; // přebytek pryč
-                Cache[idx].Status = StatusEnum.Paid;
+                PaymentCache[idx].PaidAmountXMR = PaymentCache[idx].ExpectedAmountXMR; // přebytek pryč
+                PaymentCache[idx].Status = StatusEnum.Paid;
             }
 
             return true;
+        }
+
+        private static List<AccountantTransactionDTO> GetMockAccountantTransactions()
+        {
+            var rng = new Random();
+            var customers = new[] { "Alice Corp.", "Bob's Burgers", "Charlie Chap", "Delta Force", "Echo Base", "Cyberdyne Systems", "Initech", "Umbrella Corp" };
+            var types = new[] { TransactionTypeEnum.Incoming, TransactionTypeEnum.Outgoing };
+            var statuses = new[] { StatusEnum.Completed, StatusEnum.Pending, StatusEnum.Cancelled, StatusEnum.Confirmed, StatusEnum.Overpaid };
+
+            var list = new List<AccountantTransactionDTO>();
+            for (int i = 0; i < 50; i++)
+            {
+                // Generování 64-znakového Monero TX Hashe
+                byte[] hashBytes = new byte[32];
+                rng.NextBytes(hashBytes);
+                string xmrHash = BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+
+                // Generování Monero částky (0.000000000001 až 10.0 XMR)
+                // Použijeme náhodné piconera a převedeme na decimal
+                long piconero = (long)(rng.NextDouble() * 10000000000000L); // až 10 XMR
+                decimal amount = (decimal)piconero / 1000000000000m;
+
+                list.Add(new AccountantTransactionDTO
+                {
+                    Id = i + 1,
+                    Title = xmrHash,
+                    CustomerName = customers[rng.Next(customers.Length)],
+                    Amount = amount,
+                    Timestamp = DateTimeOffset.UtcNow.AddDays(-rng.Next(30)).AddMinutes(-rng.Next(1440)),
+                    State = statuses[rng.Next(statuses.Length)],
+                    Type = types[rng.Next(types.Length)]
+                });
+            }
+            return [.. list.OrderByDescending(t => t.Timestamp)];
+        }
+
+        public static List<AccountantTransactionDTO> GetAccountantTransactions()
+        {
+            if (DebugMode.MockAccountantTransactions) return GetMockAccountantTransactions();
+
+            // TODO: Karele toto
+            throw new NotImplementedException();
         }
     }
 }

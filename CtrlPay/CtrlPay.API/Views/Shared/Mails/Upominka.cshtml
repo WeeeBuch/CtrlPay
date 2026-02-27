@@ -1,3 +1,4 @@
+@using CtrlPay.Entities;
 @model PaymentReminderEmailModel
 @{
     Layout = "_EmailLayout";
@@ -17,12 +18,9 @@
             <strong>ID platby:</strong> @Model.PaymentId<br>
             <strong>Vytvořeno:</strong> @Model.CreatedAt.ToString("dd.MM.yyyy HH:mm")<br>
 
-            @if (Model.DueDate.HasValue)
-            {
                 <text>
-                <strong>Datum splatnosti:</strong> @Model.DueDate.Value.ToString("dd.MM.yyyy")<br><br>
+                <strong>Datum splatnosti:</strong> @Model.DueDate<br><br>
                 </text>
-            }
 
             <strong>Požadovaná částka:</strong> @Model.ExpectedAmountXMR.ToString("0.000000000000") XMR<br>
             <strong>Již uhrazeno:</strong> @Model.PaidAmountXMR.ToString("0.000000000000") XMR<br>

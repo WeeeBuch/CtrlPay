@@ -85,6 +85,6 @@ public class FrontendPaymentDTO : IEditableObject
     public void EndEdit()
     {
         _backup = null;
-        AccountantPaymentRepo.UpdatePayment(this);
+        AccountantRepo.UpdatePayment(this);
     }
 }

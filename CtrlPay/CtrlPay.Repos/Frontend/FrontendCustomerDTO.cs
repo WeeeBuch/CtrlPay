@@ -25,12 +25,9 @@ public class FrontendCustomerDTO : IEditableObject
     public string? Company { get; set; }
 
     public bool IsLoyal { get; set; }
-    public string Username { get; set; }
-    public string AccountId { get; set; }
-    public string BaseAddress { get; set; }
 
     public string FullName => Physical
-        ? $"{FirstName} {LastName}".Trim()
+        ? $"{Title} {FirstName} {LastName}".Trim()
         : (string.IsNullOrWhiteSpace(Company) ? $"{FirstName} {LastName}".Trim() : Company);
 
     public FrontendCustomerDTO() { }
@@ -47,9 +44,6 @@ public class FrontendCustomerDTO : IEditableObject
         Email = customer.Email;
         Phone = customer.Phone;
         IsLoyal = customer.IsLoyal ?? false;
-        Username = customer.Username ?? string.Empty;
-        AccountId = customer.AccountID?.ToString() ?? string.Empty;
-        BaseAddress = customer.BaseAddress ?? string.Empty;
         City = customer.City;
         PostalCode = customer.PostalCode;
         Email = customer.Email;
@@ -99,9 +93,6 @@ public class FrontendCustomerDTO : IEditableObject
         this.Physical = oldVersion.Physical;
         this.Company = oldVersion.Company;
         this.IsLoyal = oldVersion.IsLoyal;
-        this.BaseAddress = oldVersion.BaseAddress;
-        this.AccountId = oldVersion.AccountId;
-        this.Username = oldVersion.Username;
     }
 
     public void EndEdit()
