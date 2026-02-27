@@ -155,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Previous">Назад</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">Завершить</x:String>
 
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">Администрирование системы</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">Поиск пользователей...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">Добавить пользователя</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">Системные пользователи</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">Все роли</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">Изменить</x:String>
+    <x:String x:Key="UserPiece.Button.Save">Сохранить</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">Отмена</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA включено</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">Имя пользователя</x:String>
+
     <x:String x:Key="ErrorCode.A0">Успешный вход в систему</x:String>
     <x:String x:Key="ErrorCode.A1">Пользователь с таким именем уже существует</x:String>
     <x:String x:Key="ErrorCode.A2">Неверный пароль</x:String>

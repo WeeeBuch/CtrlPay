@@ -155,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Previous">Turn the Tides</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">Drop Anchor</x:String>
 
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">Captain's Quarters (Admin)</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">Spyglass for sailors...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">Recruit new scallywag</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">The Crew</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">All ranks</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">Amend terms</x:String>
+    <x:String x:Key="UserPiece.Button.Save">Seal with wax</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">Belay</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">Secret Cipher On</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">Pirate Name</x:String>
+
     <x:String x:Key="ErrorCode.A0">Welcome aboard, matey!</x:String>
     <x:String x:Key="ErrorCode.A1">Another scallywag already claims that name</x:String>
     <x:String x:Key="ErrorCode.A2">Wrong secret word, landlubber</x:String>

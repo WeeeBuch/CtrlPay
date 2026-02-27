@@ -163,6 +163,20 @@
     <x:String x:Key="OnboardingView.Button.Previous">Previous</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">Finish</x:String>
 
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">System Administration</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">Search users...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">Add User</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">System Users</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">All roles</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">Edit</x:String>
+    <x:String x:Key="UserPiece.Button.Save">Save</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">Cancel</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA Enabled</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">Username</x:String>
+
     <x:String x:Key="ErrorCode.A0">Successfully logged in</x:String>
     <x:String x:Key="ErrorCode.A1">User with the same username already exists</x:String>
     <x:String x:Key="ErrorCode.A2">Wrong password</x:String>

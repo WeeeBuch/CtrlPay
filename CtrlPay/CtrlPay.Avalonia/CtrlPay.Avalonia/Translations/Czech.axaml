@@ -155,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Previous">Předchozí</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">Dokončit</x:String>
 
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">Administrace systému</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">Hledat uživatele...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">Přidat uživatele</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">Systémoví uživatelé</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">Všechny role</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">Upravit</x:String>
+    <x:String x:Key="UserPiece.Button.Save">Uložit</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">Zrušit</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA zapnuto</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">Uživatelské jméno</x:String>
+
     <x:String x:Key="ErrorCode.A0">Přihlášení proběhlo úspěšně</x:String>
     <x:String x:Key="ErrorCode.A1">Uživatel se stejným jménem již existuje</x:String>
     <x:String x:Key="ErrorCode.A2">Nesprávné heslo</x:String>

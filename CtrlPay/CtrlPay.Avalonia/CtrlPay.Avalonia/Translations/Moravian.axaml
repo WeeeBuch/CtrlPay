@@ -155,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Previous">Návrat o kusanec</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">A je to v cajku</x:String>
 
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">Velký šéfování (Administrace)</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">Hledej ogary...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">Přihodit ogara</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">Naše banda</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">Všecky fleky</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">Poladit</x:String>
+    <x:String x:Key="UserPiece.Button.Save">Vytesat</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">Prdět na to</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">Dvojitý hlídání (2FA)</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">Meno ogara</x:String>
+
     <x:String x:Key="ErrorCode.A0">Už seš tam, ogare!</x:String>
     <x:String x:Key="ErrorCode.A1">Takový tu už jeden straší</x:String>
     <x:String x:Key="ErrorCode.A2">Trefils blbé heslo</x:String>

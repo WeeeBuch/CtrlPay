@@ -155,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Previous">PR3V10U5</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">F1N15H_L1N3</x:String>
 
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">4DM1N_P4N3L</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">534RCH_U53R5...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">4DD_U53R</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">5Y573M_U53R5</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">4LL_R0L35</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">3D17</x:String>
+    <x:String x:Key="UserPiece.Button.Save">WR173</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">4B0R7</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2F4_0N</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">U53RN4M3</x:String>
+
     <x:String x:Key="ErrorCode.A0">L0G1N_5UCC355FUL</x:String>
     <x:String x:Key="ErrorCode.A1">U53R_4LR34DY_3X1575</x:String>
     <x:String x:Key="ErrorCode.A2">WR0N6_P455W0RD</x:String>

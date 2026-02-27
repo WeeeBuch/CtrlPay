@@ -155,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Previous">前へ</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">完了</x:String>
 
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">システム管理</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">ユーザーを検索...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">ユーザーを追加</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">システムユーザー</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">すべてのロール</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">編集</x:String>
+    <x:String x:Key="UserPiece.Button.Save">保存</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">キャンセル</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA 有効</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">ユーザー名</x:String>
+
     <x:String x:Key="ErrorCode.A0">ログインに成功しました</x:String>
     <x:String x:Key="ErrorCode.A1">同じユーザー名が既に存在します</x:String>
     <x:String x:Key="ErrorCode.A2">パスワードが間違っています</x:String>

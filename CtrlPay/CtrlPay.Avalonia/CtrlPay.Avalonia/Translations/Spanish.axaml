@@ -155,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Previous">Anterior</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">Finalizar</x:String>
 
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">Administración del sistema</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">Buscar usuarios...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">Añadir usuario</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">Usuarios del sistema</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">Todos los roles</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">Editar</x:String>
+    <x:String x:Key="UserPiece.Button.Save">Guardar</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">Cancelar</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA activado</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">Nombre de usuario</x:String>
+
     <x:String x:Key="ErrorCode.A0">Sesión iniciada correctamente</x:String>
     <x:String x:Key="ErrorCode.A1">Ya existe un usuario con el mismo nombre</x:String>
     <x:String x:Key="ErrorCode.A2">Contraseña incorrecta</x:String>
