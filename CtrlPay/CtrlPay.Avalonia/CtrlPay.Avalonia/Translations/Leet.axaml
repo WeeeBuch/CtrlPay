@@ -39,6 +39,8 @@
     <x:String x:Key="Accountant.Transactions.Customer">Cu5t0m3r</x:String>
     <x:String x:Key="Accountant.Transactions.Search">534rch tr4n54ct10n5...</x:String>
     <x:String x:Key="Accountant.Transactions.AllCustomers">4ll Cu5t0m3r5</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">5747u5:</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">4ll 5747u535</x:String>
 
     <x:String x:Key="Common.ID">1D</x:String>
     <x:String x:Key="Common.Date">D4t3</x:String>
@@ -77,6 +79,17 @@
     <x:String x:Key="LoginView.Watermark.Code">V3R1F1C4710N_C0D3</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">Tr4n54c710n_L06</x:String>
+
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">4cc0un74n7 0v3rv13w</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Qu1ck p33k 47 p4ym3n75</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">0V3RP41D</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">0V3RDU3</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">P4R714L P4YD</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">W4171N6</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> 70 pr0c355</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">1nc0m3 H1570ry (30d)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">P4ym3n7 5747u535</x:String>
 
     <x:String x:Key="NavbarView.Menu">R007_M3NU</x:String>
     <x:String x:Key="NavbarView.Dashboard">D45HB04RD</x:String>

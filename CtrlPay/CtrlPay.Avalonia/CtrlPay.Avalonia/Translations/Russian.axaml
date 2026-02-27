@@ -39,6 +39,8 @@
     <x:String x:Key="Accountant.Transactions.Customer">Клиент</x:String>
     <x:String x:Key="Accountant.Transactions.Search">Поиск транзакций...</x:String>
     <x:String x:Key="Accountant.Transactions.AllCustomers">Все клиенты</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">Статус:</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">Все статусы</x:String>
 
     <x:String x:Key="Common.ID">ID</x:String>
     <x:String x:Key="Common.Date">Дата</x:String>
@@ -77,6 +79,17 @@
     <x:String x:Key="LoginView.Watermark.Code">Код подтверждения</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">История транзакций</x:String>
+
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">Обзор бухгалтерии</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Быстрый обзор платежей и задач</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">ПЕРЕПЛАТА</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">ПРОСРОЧЕНО</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">ЧАСТИЧНО ОПЛАЧЕНО</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">В ОЖИДАНИИ</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> к обработке</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">История доходов (30 дней)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">Статусы платежей</x:String>
 
     <x:String x:Key="NavbarView.Menu">Меню</x:String>
     <x:String x:Key="NavbarView.Dashboard">Панель управления</x:String>

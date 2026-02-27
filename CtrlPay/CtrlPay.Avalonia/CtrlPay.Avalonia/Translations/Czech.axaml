@@ -39,6 +39,8 @@
     <x:String x:Key="Accountant.Transactions.Customer">Zákazník</x:String>
     <x:String x:Key="Accountant.Transactions.Search">Hledat transakce...</x:String>
     <x:String x:Key="Accountant.Transactions.AllCustomers">Všichni zákazníci</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">Stav:</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">Všechny stavy</x:String>
 
     <x:String x:Key="Common.ID">ID</x:String>
     <x:String x:Key="Common.Date">Datum</x:String>
@@ -77,6 +79,17 @@
     <x:String x:Key="LoginView.Watermark.Code">Ověřovací kód</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">Seznam transakcí</x:String>
+
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">Přehled účetnictví</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Rychlý přehled plateb a úkolů k vyřízení</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">PŘEPLATKY</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">PO SPLATNOSTI</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">ČÁSTEČNĚ PLACENO</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">ČEKAJÍCÍ</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> k vyřízení</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">Historie příjmů (30 dní)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">Stavy plateb</x:String>
 
     <x:String x:Key="NavbarView.Menu">Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">Nástěnka</x:String>

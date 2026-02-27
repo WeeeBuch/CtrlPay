@@ -42,6 +42,57 @@ public static class ToDoRepo
             return;
         }
     }
+
+    public static AccountantDashboardSummaryDTO GetAccountantDashboardSummary()
+    {
+        if (DebugMode.MockAccountantTransactions)
+        {
+            return new AccountantDashboardSummaryDTO
+            {
+                OverpaidAmount = 1.25m,
+                OverpaidCount = 4,
+                OverdueAmount = 5.80m,
+                OverdueCount = 12,
+                PartiallyPaidAmount = 0.45m,
+                PartiallyPaidCount = 2,
+                WaitingAmount = 15.20m,
+                WaitingCount = 25
+            };
+        }
+
+        // TODO: Propojit s reálným API v AccountantPaymentRepo
+        throw new NotImplementedException();
+    }
+
+    public static AccountantChartDataDTO GetAccountantChartData()
+    {
+        if (DebugMode.MockAccountantTransactions)
+        {
+            var data = new AccountantChartDataDTO();
+            var rng = new Random();
+
+            // Generujeme 30 dní historie příjmů
+            for (int i = 30; i >= 0; i--)
+            {
+                data.IncomeHistory.Add(new IncomeChartPointDTO
+                {
+                    Date = DateTime.Today.AddDays(-i),
+                    Amount = (decimal)(rng.NextDouble() * 2.5) // Náhodné příjmy 0-2.5 XMR
+                });
+            }
+
+            data.StatusBreakdown = new List<(string Status, int Count)>
+            {
+                ("Paid", 145),
+                ("Overpaid", 12),
+                ("PartiallyPaid", 8),
+                ("Expired", 24)
+            };
+            return data;
+        }
+        throw new NotImplementedException();
+    }
+
     public static List<AccountantTransactionDTO> GetMockAccountantTransactions()
     {
         var rng = new Random();

@@ -68,6 +68,17 @@
     <!-- Dashboard View -->
     <x:String x:Key="DashboardView.TransactionList">DashboardView.TransactionList</x:String>
 
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">Accountant.Dashboard.Title</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Accountant.Dashboard.Subtitle</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">Accountant.Dashboard.Overpaid</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">Accountant.Dashboard.Overdue</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">Accountant.Dashboard.PartiallyPaid</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">Accountant.Dashboard.Waiting</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess">Accountant.Dashboard.ItemsToProcess</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">Accountant.Dashboard.IncomeHistory</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">Accountant.Dashboard.PaymentStatus</x:String>
+
     <!-- Navbar View -->
     <x:String x:Key="NavbarView.Menu">NavbarView.Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">NavbarView.Dashboard</x:String>
@@ -85,6 +96,8 @@
     <x:String x:Key="Accountant.Transactions.Customer">Accountant.Transactions.Customer</x:String>
     <x:String x:Key="Accountant.Transactions.Search">Accountant.Transactions.Search</x:String>
     <x:String x:Key="Accountant.Transactions.AllCustomers">Accountant.Transactions.AllCustomers</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">Accountant.Transactions.Filter.Status</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">Accountant.Transactions.Filter.AllStatuses</x:String>
 
     <!-- Common Table Headers -->
     <x:String x:Key="Common.ID">Common.ID</x:String>

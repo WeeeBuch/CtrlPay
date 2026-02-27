@@ -39,6 +39,8 @@
     <x:String x:Key="Accountant.Transactions.Customer">Kunde</x:String>
     <x:String x:Key="Accountant.Transactions.Search">Transaktionen suchen...</x:String>
     <x:String x:Key="Accountant.Transactions.AllCustomers">Alle Kunden</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">Status:</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">Alle Status</x:String>
 
     <x:String x:Key="Common.ID">ID</x:String>
     <x:String x:Key="Common.Date">Datum</x:String>
@@ -77,6 +79,17 @@
     <x:String x:Key="LoginView.Watermark.Code">Bestätigungscode</x:String>
 
     <x:String x:Key="DashboardView.TransactionList">Transaktionsliste</x:String>
+
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">Buchhaltungsübersicht</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Schnellübersicht über Zahlungen und Aufgaben</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">ÜBERZAHLT</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">FÄLLIG</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">TEILWEISE BEZAHLT</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">WARTEND</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> zu bearbeiten</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">Einnahmenverlauf (30 Tage)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">Zahlungsstatus</x:String>
 
     <x:String x:Key="NavbarView.Menu">Menü</x:String>
     <x:String x:Key="NavbarView.Dashboard">Dashboard</x:String>

@@ -16,6 +16,7 @@ public partial class AccountantTransactionsViewModel : ViewModelBase
     [ObservableProperty] private bool isFlowView;
     [ObservableProperty] private string searchTerm = string.Empty;
     [ObservableProperty] private string? selectedCustomer;
+    [ObservableProperty] private StatusEnum? selectedStatus;
     
     // Řazení
     [ObservableProperty] private string sortColumn = "Date";
@@ -28,6 +29,18 @@ public partial class AccountantTransactionsViewModel : ViewModelBase
     public RangeObservableCollection<AccountantTransactionDTO> OutgoingTransactions { get; } = new();
 
     public ObservableCollection<string> Customers { get; } = new();
+    
+    public List<StatusEnum?> Statuses { get; } = new() 
+    { 
+        null, 
+        StatusEnum.Completed, 
+        StatusEnum.Pending, 
+        StatusEnum.Confirmed,
+        StatusEnum.Overpaid, 
+        StatusEnum.PartiallyPaid, 
+        StatusEnum.Expired, 
+        StatusEnum.Cancelled 
+    };
 
     public AccountantTransactionsViewModel()
     {
@@ -78,6 +91,7 @@ public partial class AccountantTransactionsViewModel : ViewModelBase
 
     partial void OnSearchTermChanged(string value) => ApplyFilters();
     partial void OnSelectedCustomerChanged(string? value) => ApplyFilters();
+    partial void OnSelectedStatusChanged(StatusEnum? value) => ApplyFilters();
 
     private void ApplyFilters()
     {
@@ -93,6 +107,11 @@ public partial class AccountantTransactionsViewModel : ViewModelBase
         if (SelectedCustomer != TranslationManager.GetString("Accountant.Transactions.AllCustomers") && !string.IsNullOrEmpty(SelectedCustomer))
         {
             filtered = filtered.Where(t => t.CustomerName == SelectedCustomer);
+        }
+
+        if (SelectedStatus.HasValue)
+        {
+            filtered = filtered.Where(t => t.State == SelectedStatus.Value);
         }
 
         // Aplikace řazení
