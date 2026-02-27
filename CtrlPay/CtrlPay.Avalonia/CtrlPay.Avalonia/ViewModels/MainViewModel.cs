@@ -66,7 +66,7 @@ public partial class MainViewModel : ViewModelBase
             // Nastavíme filtr v cílovém ViewModelu
             if (target.ViewModel.DataContext is AccountantTransactionsViewModel vm)
             {
-                vm.SelectedStatus = filter;
+                vm.SelectedStatusItem = vm.Statuses.Where(s => s.Value == filter).FirstOrDefault();
             }
         }
     }
@@ -102,7 +102,7 @@ public partial class MainViewModel : ViewModelBase
 
         if (role == Role.Admin)
         {
-            NavigationItems.Add(new NavItem("Admin Panel", new AdminView(), IconData.Admin));
+            NavigationItems.Add(new NavItem("NavbarView.AdminPanel", new AdminView(), IconData.Admin));
         }
 
         if (role == Role.Employee)

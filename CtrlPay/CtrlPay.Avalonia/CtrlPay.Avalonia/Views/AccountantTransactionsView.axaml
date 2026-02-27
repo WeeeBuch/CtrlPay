@@ -38,13 +38,10 @@
                 <Grid ColumnDefinitions="*, Auto">
                     <TextBox Watermark="{DynamicResource Accountant.Transactions.Search}" 
                              Text="{Binding SearchTerm}" 
-                             Height="40"/>
+                             Height="35"/>
                     <Button Grid.Column="1" Command="{Binding ToggleViewCommand}" 
-                            Background="Transparent" Margin="15,0,0,0" VerticalAlignment="Center">
-                        <StackPanel Orientation="Horizontal" Spacing="8">
-                            <PathIcon Data="{StaticResource Icon.SwapHorizontal}" Width="16" Height="16"/>
-                            <TextBlock Text="{Binding IsFlowView, Converter={StaticResource BoolToFlowTableTextConverter}}" VerticalAlignment="Center"/>
-                        </StackPanel>
+                            Background="Transparent" Margin="15,0,0,0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                        <TextBlock Text="{Binding ToggleViewText}" VerticalAlignment="Center"/>
                     </Button>
                 </Grid>
 
@@ -62,11 +59,11 @@
                     <StackPanel Orientation="Horizontal" Spacing="10">
                         <TextBlock Text="{DynamicResource Accountant.Transactions.Filter.Status}" VerticalAlignment="Center" FontSize="12" Opacity="0.6" FontWeight="SemiBold"/>
                         <ComboBox ItemsSource="{Binding Statuses}" 
-                                  SelectedItem="{Binding SelectedStatus}" 
+                                  SelectedItem="{Binding SelectedStatusItem}" 
                                   Width="180">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Converter={StaticResource StatusToTextConverter}}"/>
+                                    <TextBlock Text="{Binding Name}"/>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
