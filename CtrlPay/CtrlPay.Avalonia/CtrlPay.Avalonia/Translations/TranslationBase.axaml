@@ -171,6 +171,20 @@
     <x:String x:Key="OnboardingView.Button.Previous">OnboardingView.Button.Previous</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">OnboardingView.Button.Finish</x:String>
 
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">AdminView.Title</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">AdminView.SearchWatermark</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">AdminView.Button.AddUser</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">AdminView.UsersList.Title</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">AdminView.Filter.AllRoles</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">UserPiece.Button.Edit</x:String>
+    <x:String x:Key="UserPiece.Button.Save">UserPiece.Button.Save</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">UserPiece.Button.Cancel</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">UserPiece.Label.TwoFactorEnabled</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">UserPiece.Watermark.Username</x:String>
+
     <!-- Error Codes -->
     <x:String x:Key="ErrorCode.A0">ErrorCode.A0</x:String>
     <x:String x:Key="ErrorCode.A1">ErrorCode.A1</x:String>
