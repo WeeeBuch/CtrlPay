@@ -17,6 +17,7 @@ namespace CtrlPay.Avalonia.HelperClasses;
 public partial class TransactionItem : ObservableObject
 {
     [ObservableProperty] private string _description;
+    [ObservableProperty] private string? _subDescription;
     [ObservableProperty] private decimal _amount;
 
     [ObservableProperty] private string creditPayString;
@@ -31,6 +32,7 @@ public partial class TransactionItem : ObservableObject
     public TransactionItem(FrontendTransactionDTO transaction)
     {
         Description = transaction.Title;
+        SubDescription = transaction.SubTitle;
         Amount = transaction.Amount;
         Status = transaction.State;
         Timestamp = transaction.Timestamp;
