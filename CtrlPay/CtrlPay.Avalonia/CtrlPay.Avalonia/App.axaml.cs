@@ -13,6 +13,8 @@ using CtrlPay.Repos.Frontend;
 using System.Linq;
 using System.Reflection;
 using CtrlPay.Repos;
+using CtrlPay.Avalonia.Views;
+using CtrlPay.Avalonia.Views.Mobile;
 
 namespace CtrlPay.Avalonia
 {
@@ -91,7 +93,7 @@ namespace CtrlPay.Avalonia
                 {
                     var nav = new NavigationService(singleView);
 
-                    singleView.MainView = new LoginView
+                    singleView.MainView = new LoginViewMobile
                     {
                         DataContext = new LoginViewModel(nav)
                     };

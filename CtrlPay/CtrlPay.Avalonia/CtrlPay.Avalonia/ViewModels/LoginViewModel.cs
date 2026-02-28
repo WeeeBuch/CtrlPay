@@ -61,12 +61,12 @@ public partial class LoginViewModel : ViewModelBase
     [RelayCommand]
     private async Task LoginAsync()
     {
-        SettingsManager.Current.ConnectionString = "https://www.action-games.cz/";
+        SettingsManager.Current.ConnectionString = "";
 
 
         ReturnModel<bool> returnModel = await AuthRepo.Login(Username, Password, default);
         bool success = returnModel.Body;
-        Message = $"Body={returnModel.Body} Code={returnModel.ReturnCode}";
+        Message = $"b{Credentials.BaseUri} Body={returnModel.Body} Code={returnModel.ReturnCode}";
 
         if (success)
         {
