@@ -134,4 +134,10 @@ public static class ToDoRepo
         // TODO: Karele toto
         throw new NotImplementedException();
     }
+
+    public static async Task<bool> SendReminder(FrontendPaymentDTO payment)
+    {
+        // TODO: karele tuhle to funkci propojit s reálným API endpointem pro odesílání upomínek
+        return true;
+    }
 }

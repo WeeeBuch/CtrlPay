@@ -12,6 +12,7 @@
              x:Class="CtrlPay.Avalonia.PaymentManagementView">
     <UserControl.Resources>
         <hc:IsOverpaidConverter x:Key="IsOverpaidConverter"/>
+        <hc:IsExpiredConverter x:Key="IsExpiredConverter"/>
     </UserControl.Resources>
 
     <Grid RowDefinitions="Auto, 10, *" Margin="10">
@@ -128,6 +129,11 @@
                                             <Button Content="{DynamicResource PaymentManagerView.Button.ConvertToCredit}"
                                                     Classes="accent"
                                                     IsVisible="{Binding Status, Converter={StaticResource IsOverpaidConverter}}"
+                                                    Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).ConvertOverpaymentToCreditCommand}"/>
+
+                                            <Button Content="{DynamicResource PaymentManagerView.Button.SendReminder}"
+                                                    Classes="accent"
+                                                    IsVisible="{Binding Status, Converter={StaticResource IsExpiredConverter}}"
                                                     Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).ConvertOverpaymentToCreditCommand}"/>
                                         </StackPanel>
                                     </Grid>

@@ -223,4 +223,19 @@ public partial class PaymentManagementViewModel : ViewModelBase
             AppLogger.Warning($"Převod přebytku selhal.");
         }
     }
+
+    [RelayCommand]
+    public async Task SendReminder()
+    {
+        if (SelectedPayment == null) return;
+        bool success = await ToDoRepo.SendReminder(SelectedPayment);
+        if (success)
+        {
+            AppLogger.Info($"Upomínka pro platbu {SelectedPayment.Id} úspěšně odeslána.");
+        }
+        else
+        {
+            AppLogger.Warning($"Odeslání upomínky selhalo.");
+        }
+    }
 }
