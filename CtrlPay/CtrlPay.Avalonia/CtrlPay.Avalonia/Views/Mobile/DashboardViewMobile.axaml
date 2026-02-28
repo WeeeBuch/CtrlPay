@@ -12,49 +12,98 @@
              xmlns:p="using:CtrlPay.Avalonia">
 
 	<ScrollViewer>
-		<Grid Margin="16">
+		<Grid>
 
-			<Grid.RowDefinitions>
-				<!-- Counter 1 -->
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="12"/>
+			<!-- DESKTOP -->
+			<Grid Name="DesktopLayout">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="*"/>
+					<ColumnDefinition Width="20"/>
+					<ColumnDefinition Width="*"/>
+				</Grid.ColumnDefinitions>
+				<Grid.RowDefinitions>
+					<RowDefinition Height="150"/>
+					<RowDefinition Height="50"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
 
-				<!-- Counter 2 -->
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="16"/>
+				<Grid ColumnDefinitions="*,20,*"
+						  RowDefinitions="150,50,*">
 
-				<!-- Nadpis -->
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="12"/>
+					<!-- Horní čítače -->
+					<p:CounterPiece Grid.Row="0" Grid.Column="0"
+							  DataContext="{Binding TotalCredits}"/>
 
-				<!-- List 1 -->
-				<RowDefinition Height="Auto"/>
-				<RowDefinition Height="16"/>
+					<p:CounterPiece Grid.Row="0" Grid.Column="2"
+								  DataContext="{Binding PendingCredits}"/>
 
-				<!-- List 2 -->
-				<RowDefinition Height="Auto"/>
-			</Grid.RowDefinitions>
+					<!-- Popisky Listů -->
+					<TextBlock Grid.Column="0" Grid.Row="1"
+							   Text="{DynamicResource DashboardView.TransactionList}"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Bottom"
+							   FontSize="20"
+							   FontWeight="Bold"
+							   Margin="0,0,0,5"/>
 
-			<!-- Horní čítače -->
-			<p:CounterPiece Grid.Row="0"
-                            DataContext="{Binding TotalCredits}"/>
+					<TextBlock Grid.Column="2" Grid.Row="1"
+							   HorizontalAlignment="Center"
+							   VerticalAlignment="Bottom"
+							   Margin="0,0,0,5"
+							   FontSize="20"
+							   FontWeight="Bold"
+							   Text="{DynamicResource DashboardView.TransactionList}"/>
 
-			<p:CounterPiece Grid.Row="2"
-                            DataContext="{Binding PendingCredits}"/>
+					<!-- Listy -->
+					<p:TransactionListPiece Grid.Row="2" Grid.Column="0"
+											  DataContext="{Binding CreditTransactionList}"/>
 
-			<!-- Popisek listů -->
-			<TextBlock Grid.Row="4"
-                       Text="{DynamicResource DashboardView.TransactionList}"
-                       HorizontalAlignment="Center"
-                       FontSize="20"
-                       FontWeight="Bold"/>
+					<p:TransactionListPiece Grid.Row="2" Grid.Column="2"
+											  DataContext="{Binding PendingTransactionList}"/>
 
-			<!-- Listy -->
-			<p:TransactionListPiece Grid.Row="6"
-                                    DataContext="{Binding CreditTransactionList}"/>
+				</Grid>
+			</Grid>
 
-			<p:TransactionListPiece Grid.Row="8"
-                                    DataContext="{Binding PendingTransactionList}"/>
+			<!-- MOBILE -->
+			<Grid Name="MobileLayout">
+
+				<Grid.RowDefinitions>
+					<!-- Horní čítače -->
+					<RowDefinition Height="150"/>
+					<RowDefinition Height="150"/>
+
+					<!-- Nadpis -->
+					<RowDefinition Height="50"/>
+
+					<!-- Listy -->
+					<RowDefinition Height="*"/>
+					<RowDefinition Height="*"/>
+				</Grid.RowDefinitions>
+
+				<!-- Horní čítače -->
+				<p:CounterPiece Grid.Row="0"
+								DataContext="{Binding TotalCredits}"/>
+
+				<p:CounterPiece Grid.Row="1"
+								DataContext="{Binding PendingCredits}"/>
+
+				<!-- Popisek listů -->
+				<TextBlock Grid.Row="2"
+						   Text="{DynamicResource DashboardView.TransactionList}"
+						   HorizontalAlignment="Center"
+						   VerticalAlignment="Bottom"
+						   FontSize="20"
+						   FontWeight="Bold"
+						   Margin="0,0,0,5"/>
+
+				<!-- Listy -->
+				<p:TransactionListPiece Grid.Row="3"
+										DataContext="{Binding CreditTransactionList}"/>
+
+				<p:TransactionListPiece Grid.Row="4"
+										DataContext="{Binding PendingTransactionList}"/>
+
+			</Grid>
 
 		</Grid>
 	</ScrollViewer>

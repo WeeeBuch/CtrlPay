@@ -26,12 +26,14 @@ public partial class DashboardViewModel : ViewModelBase
 
     public DashboardViewModel()
     {
-        LoadInitialData();
 
         TotalCredits.HasButton = true;
         TotalCredits.ButtonPress = new RelayCommand(() => AddCredits());
     }
-
+    public void Load()
+    {
+        LoadInitialData();
+    }
     private void LoadInitialData()
     {
         AppLogger.Info($"Started loading data into dashboard...");

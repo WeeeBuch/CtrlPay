@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Avalonia.Views;
@@ -16,44 +17,42 @@ namespace CtrlPay.Avalonia
 {
     public interface INavigationService
     {
-        void NavigateToMain();
         void NavigateToLogin();
+        void NavigateToMain();
+        void NavigateToOnboarding();
     }
 
-    public sealed class NavigationService : INavigationService
+    public class NavigationService : INavigationService
     {
-        private readonly MainViewModel _main;
+        private readonly ISingleViewApplicationLifetime _lifetime;
 
-        public NavigationService(MainViewModel main)
+        public NavigationService(ISingleViewApplicationLifetime lifetime)
         {
-            _main = main;
-        }
-
-        public void NavigateToMain()
-        {
-            var first = _main.NavigationItems[0];
-            _main.SelectedNavigationItem = first;
-            _main.CurrentPage = first.View; // tady dáváš UserControl (View)
+            _lifetime = lifetime;
         }
 
         public void NavigateToLogin()
         {
-            _main.SelectedNavigationItem = null;
+            _lifetime.MainView = new LoginView
+            {
+                DataContext = new LoginViewModel(this)
+            };
+        }
 
-            if (OperatingSystem.IsAndroid())
+        public void NavigateToMain()
+        {
+            _lifetime.MainView = new MainView
             {
-                _main.CurrentPage = new LoginViewMobile
-                {
-                    DataContext = new LoginViewModel(this)
-                };
-            }
-            else
+                DataContext = new MainViewModel()
+            };
+        }
+
+        public void NavigateToOnboarding()
+        {
+            _lifetime.MainView = new OnboardingView
             {
-                _main.CurrentPage = new LoginView
-                {
-                    DataContext = new LoginViewModel(this)
-                };
-            }
+                DataContext = new OnboardingViewModel()
+            };
         }
     }
 }

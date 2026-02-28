@@ -45,7 +45,6 @@ namespace CtrlPay.Avalonia.ViewModels
 
         public MainViewModel()
         {
-            _navigation = new CtrlPay.Avalonia.NavigationService(this);
 
             if (OperatingSystem.IsAndroid())
             {
@@ -58,12 +57,7 @@ namespace CtrlPay.Avalonia.ViewModels
 
                 };
 
-                CurrentPage = new LoginViewMobile
-                {
-                    DataContext = new LoginViewModel(_navigation)
-                };
 
-                SelectedNavigationItem = null;
             }
             else
             {
@@ -75,13 +69,14 @@ namespace CtrlPay.Avalonia.ViewModels
                     new NavItem("NavbarView.Transaction", new TransactionViewMobile(), IconData.Customers)
 
                 };
+                SelectedNavigationItem = NavigationItems[0];
+                CurrentPage = NavigationItems[0].View;
 
-                CurrentPage = new LoginView
+                if (CurrentPage is DashboardViewMobile mobile &&
+                    mobile.DataContext is DashboardViewModel vm)
                 {
-                    DataContext = new LoginViewModel(_navigation)
-                };
-
-                SelectedNavigationItem = null;
+                    vm.Load();
+                }
             }
         }
 

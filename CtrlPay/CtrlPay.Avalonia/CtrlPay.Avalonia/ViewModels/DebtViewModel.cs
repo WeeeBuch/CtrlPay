@@ -31,20 +31,21 @@ public partial class DebtViewModel : ViewModelBase
     [ObservableProperty] private SortOption selectedSortOrder;
     [ObservableProperty] private List<SortOption> sortOptions;
     [ObservableProperty] private string searchTerm;
-
+    public void Load()
+    {
+        ApplySorting(SelectedSortOrder.Key);
+    }
     public DebtViewModel()
     {
         SortOptions =
-        [
-            new ("AmountAsc", "DebtView.SortOption.AmountAsc"),
-            new ("AmountDesc", "DebtView.SortOption.AmountDesc"),
-            new ("DateAsc", "DebtView.SortOption.DateAsc"),
-            new ("DateDesc", "DebtView.SortOption.DateDesc")
-        ];
+    [
+        new ("AmountAsc", "DebtView.SortOption.AmountAsc"),
+        new ("AmountDesc", "DebtView.SortOption.AmountDesc"),
+        new ("DateAsc", "DebtView.SortOption.DateAsc"),
+        new ("DateDesc", "DebtView.SortOption.DateDesc")
+    ];
 
         SelectedSortOrder = SortOptions[0];
-
-        ApplySorting(SelectedSortOrder.Key);
 
         UpdateHandler.CreditAvailableUpdateActions.Add(OnCreditChanged);
         UpdateHandler.NewDebtsAddedActions.Add(TransactionsUpdated);

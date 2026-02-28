@@ -27,6 +27,7 @@ namespace CtrlPay.Avalonia
 
             IsConfigured = !SettingsManager.Init();
             TranslationManager.Apply(TranslationManager.GetCurrentSystemLanguage());
+            _ = ChangeChecker.StartChecking();
             AvaloniaXamlLoader.Load(this);
         }
 
@@ -88,7 +89,12 @@ namespace CtrlPay.Avalonia
 
                 if (IsConfigured)
                 {
-                    singleView.MainView = new MainView { DataContext = new MainViewModel() };
+                    var nav = new NavigationService(singleView);
+
+                    singleView.MainView = new LoginView
+                    {
+                        DataContext = new LoginViewModel(nav)
+                    };
                 }
                 else
                 {

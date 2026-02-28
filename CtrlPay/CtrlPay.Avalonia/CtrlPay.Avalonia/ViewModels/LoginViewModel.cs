@@ -61,7 +61,7 @@ public partial class LoginViewModel : ViewModelBase
     [RelayCommand]
     private async Task LoginAsync()
     {
-        Credentials.BaseUri = "https://www.action-games.cz/";
+        SettingsManager.Current.ConnectionString = "https://www.action-games.cz/";
 
 
         ReturnModel<bool> returnModel = await AuthRepo.Login(Username, Password, default);
