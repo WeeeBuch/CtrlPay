@@ -19,6 +19,7 @@
     <x:String x:Key="PaymentManagerView.Button.Save">Uložiť</x:String>
     <x:String x:Key="PaymentManagerView.Button.Delete">Zmazať</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Previesť na kredit</x:String>
+    <x:String x:Key="PaymentManagerView.Button.SendReminder">Poslať upomienku</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Názov</x:String>
     <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Zadajte názov...</x:String>

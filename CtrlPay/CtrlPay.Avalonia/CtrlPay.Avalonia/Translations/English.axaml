@@ -18,6 +18,7 @@
     <x:String x:Key="PaymentManagerView.Button.Save">Save</x:String>
     <x:String x:Key="PaymentManagerView.Button.Delete">Delete</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Convert to Credit</x:String>
+    <x:String x:Key="PaymentManagerView.Button.SendReminder">Send Reminder</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Title</x:String>
     <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Enter title...</x:String>

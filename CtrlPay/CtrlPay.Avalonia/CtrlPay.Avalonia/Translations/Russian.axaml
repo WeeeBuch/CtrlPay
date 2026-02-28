@@ -19,6 +19,7 @@
     <x:String x:Key="PaymentManagerView.Button.Save">Сохранить</x:String>
     <x:String x:Key="PaymentManagerView.Button.Delete">Удалить</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">В кредит</x:String>
+    <x:String x:Key="PaymentManagerView.Button.SendReminder">Отправить напоминание</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Заголовок</x:String>
     <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Введите заголовок...</x:String>
