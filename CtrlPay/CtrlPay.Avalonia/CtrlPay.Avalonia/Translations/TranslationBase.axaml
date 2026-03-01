@@ -13,10 +13,13 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">PaymentManagerView.OnlyOverpaid</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">PaymentManagerView.Detail.Title</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">PaymentManagerView.Button.Add</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">PaymentManagerView.Button.Edit</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">PaymentManagerView.Button.Cancel</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">PaymentManagerView.Button.Save</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">PaymentManagerView.Button.Delete</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">PaymentManagerView.Button.ConvertToCredit</x:String>
+    <x:String x:Key="PaymentManagerView.Button.SendReminder">PaymentManagerView.Button.SendReminder</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">PaymentManagerView.Label.Title</x:String>
     <x:String x:Key="PaymentManagerView.Label.TitleWatermark">PaymentManagerView.Label.TitleWatermark</x:String>
@@ -68,6 +71,17 @@
     <!-- Dashboard View -->
     <x:String x:Key="DashboardView.TransactionList">DashboardView.TransactionList</x:String>
 
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">Accountant.Dashboard.Title</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Accountant.Dashboard.Subtitle</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">Accountant.Dashboard.Overpaid</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">Accountant.Dashboard.Overdue</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">Accountant.Dashboard.PartiallyPaid</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">Accountant.Dashboard.Waiting</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess">Accountant.Dashboard.ItemsToProcess</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">Accountant.Dashboard.IncomeHistory</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">Accountant.Dashboard.PaymentStatus</x:String>
+
     <!-- Navbar View -->
     <x:String x:Key="NavbarView.Menu">NavbarView.Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">NavbarView.Dashboard</x:String>
@@ -75,6 +89,7 @@
     <x:String x:Key="NavbarView.Debts">NavbarView.Debts</x:String>
     <x:String x:Key="NavbarView.Transactions">NavbarView.Transactions</x:String>
     <x:String x:Key="NavbarView.AccountantTransactions">NavbarView.AccountantTransactions</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">NavbarView.AdminPanel</x:String>
 
     <!-- Accountant Transactions View -->
     <x:String x:Key="Accountant.Transactions.Title">Accountant.Transactions.Title</x:String>
@@ -85,6 +100,8 @@
     <x:String x:Key="Accountant.Transactions.Customer">Accountant.Transactions.Customer</x:String>
     <x:String x:Key="Accountant.Transactions.Search">Accountant.Transactions.Search</x:String>
     <x:String x:Key="Accountant.Transactions.AllCustomers">Accountant.Transactions.AllCustomers</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">Accountant.Transactions.Filter.Status</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">Accountant.Transactions.Filter.AllStatuses</x:String>
 
     <!-- Common Table Headers -->
     <x:String x:Key="Common.ID">Common.ID</x:String>
@@ -154,6 +171,20 @@
     <x:String x:Key="OnboardingView.Button.Next">OnboardingView.Button.Next</x:String>
     <x:String x:Key="OnboardingView.Button.Previous">OnboardingView.Button.Previous</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">OnboardingView.Button.Finish</x:String>
+
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">AdminView.Title</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">AdminView.SearchWatermark</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">AdminView.Button.AddUser</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">AdminView.UsersList.Title</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">AdminView.Filter.AllRoles</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">UserPiece.Button.Edit</x:String>
+    <x:String x:Key="UserPiece.Button.Save">UserPiece.Button.Save</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">UserPiece.Button.Cancel</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">UserPiece.Label.TwoFactorEnabled</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">UserPiece.Watermark.Username</x:String>
 
     <!-- Error Codes -->
     <x:String x:Key="ErrorCode.A0">ErrorCode.A0</x:String>

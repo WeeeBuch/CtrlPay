@@ -14,29 +14,51 @@ namespace CtrlPay.Avalonia.ViewModels;
 
 public partial class AdminViewModel : ViewModelBase
 {
-    [ObservableProperty] private string _title = "System Administration";
+    public class RoleFilterItem
+    {
+        public string Name { get; set; } = string.Empty;
+        public Role? Value { get; set; }
+        public override string ToString() => Name;
+    }
+
     [ObservableProperty] private string? _searchText;
-    [ObservableProperty] private string _selectedRole;
+    [ObservableProperty] private RoleFilterItem? _selectedRoleItem;
 
     private List<FrontendUserDTO> _allUsers = [];
     public ObservableCollection<UserPieceViewModel> SystemUsers { get; } = [];
 
-    public List<string> Roles { get; }
+    public ObservableCollection<RoleFilterItem> Roles { get; } = [];
 
     public AdminViewModel()
     {
-        // Dynamické načtení rolí
-        Roles = [TranslationManager.GetString("Accountant.Transactions.AllCustomers"), .. Enum.GetNames(typeof(Role))];
-
-        SelectedRole = Roles[0];
-
+        InitializeRoles();
         LoadUsers();
+
+        TranslationManager.LanguageChanged.Add(() => 
+        {
+            var currentRole = SelectedRoleItem?.Value;
+            InitializeRoles();
+            SelectedRoleItem = Roles.FirstOrDefault(r => r.Value == currentRole) ?? Roles[0];
+        });
 
         // Dynamické aktualizace
         UpdateHandler.UpdatedAdminUsers.Add(() =>
         {
             LoadUsers();
         });
+    }
+
+    private void InitializeRoles()
+    {
+        Roles.Clear();
+        Roles.Add(new RoleFilterItem { Name = TranslationManager.GetString("AdminView.Filter.AllRoles"), Value = null });
+
+        foreach (Role role in Enum.GetValues(typeof(Role)))
+        {
+            Roles.Add(new RoleFilterItem { Name = role.ToString(), Value = role });
+        }
+
+        if (SelectedRoleItem == null) SelectedRoleItem = Roles[0];
     }
 
     [RelayCommand]
@@ -58,7 +80,7 @@ public partial class AdminViewModel : ViewModelBase
     }
 
     partial void OnSearchTextChanged(string? value) => ApplyFilter();
-    partial void OnSelectedRoleChanged(string value) => ApplyFilter();
+    partial void OnSelectedRoleItemChanged(RoleFilterItem? value) => ApplyFilter();
 
     private void ApplyFilter()
     {
@@ -69,9 +91,9 @@ public partial class AdminViewModel : ViewModelBase
             filtered = filtered.Where(u => u.Username.Contains(SearchText, StringComparison.OrdinalIgnoreCase));
         }
 
-        if (SelectedRole != "All")
+        if (SelectedRoleItem?.Value != null)
         {
-            filtered = filtered.Where(u => u.Role.ToString() == SelectedRole);
+            filtered = filtered.Where(u => u.Role == SelectedRoleItem.Value);
         }
 
         SyncCollections(filtered.ToList());

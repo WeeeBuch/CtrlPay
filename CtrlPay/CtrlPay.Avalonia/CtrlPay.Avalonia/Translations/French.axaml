@@ -13,10 +13,13 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">Uniquement trop-perçus</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">Détails du paiement</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">Ajouter</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">Modifier</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">Annuler</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">Enregistrer</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">Supprimer</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Convertir en crédit</x:String>
+    <x:String x:Key="PaymentManagerView.Button.SendReminder">Envoyer un rappel</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Titre</x:String>
     <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Saisir le titre...</x:String>
@@ -39,6 +42,8 @@
     <x:String x:Key="Accountant.Transactions.Customer">Client</x:String>
     <x:String x:Key="Accountant.Transactions.Search">Rechercher des transactions...</x:String>
     <x:String x:Key="Accountant.Transactions.AllCustomers">Tous les clients</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">Statut :</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">Tous les statuts</x:String>
 
     <x:String x:Key="Common.ID">ID</x:String>
     <x:String x:Key="Common.Date">Date</x:String>
@@ -78,11 +83,24 @@
 
     <x:String x:Key="DashboardView.TransactionList">Liste des transactions</x:String>
 
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">Aperçu de la comptabilité</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Aperçu rapide des paiements et des tâches</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">TROP-PERÇU</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">EN RETARD</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">PARTIELLEMENT PAYÉ</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">EN ATTENTE</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> à traiter</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">Historique des revenus (30 jours)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">Statuts de paiement</x:String>
+
     <x:String x:Key="NavbarView.Menu">Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">Tableau de bord</x:String>
     <x:String x:Key="NavbarView.Settings">Paramètres</x:String>
     <x:String x:Key="NavbarView.Debts">Dettes</x:String>
     <x:String x:Key="NavbarView.Transactions">Paiements entrants</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">Aperçu des transactions</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">Panneau d'administration</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Solde</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">En attente</x:String>
@@ -137,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Next">Suivant</x:String>
     <x:String x:Key="OnboardingView.Button.Previous">Précédent</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">Terminer</x:String>
+
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">Administration du système</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">Rechercher des utilisateurs...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">Ajouter un utilisateur</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">Utilisateurs du système</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">Tous les rôles</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">Modifier</x:String>
+    <x:String x:Key="UserPiece.Button.Save">Enregistrer</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">Annuler</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA activé</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">Nom d'utilisateur</x:String>
 
     <x:String x:Key="ErrorCode.A0">Connexion réussie</x:String>
     <x:String x:Key="ErrorCode.A1">Un utilisateur avec le même nom existe déjà</x:String>

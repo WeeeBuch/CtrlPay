@@ -35,64 +35,103 @@ public partial class LoginViewModel : ViewModelBase
     [ObservableProperty] private string? regPassword;
     [ObservableProperty] private string? regConfirmPassword;
 
+    [ObservableProperty] private bool isBusy;
+    [ObservableProperty] private string? apiUrl;
+
     // --- API adresa ---
     private bool hasAPI;
 
     [RelayCommand]
-    private async Task Register()
+    private async Task OpenApiSettings()
     {
-        AppLogger.Info($"Registering...");
-        ReturnModel<bool> returnModel = await AuthRepo.Register(RegUsername, RegCode, RegPassword, RegConfirmPassword);
-        bool success = returnModel.Body;
+        AppLogger.Info("Opening API connect window manually...");
+        var vm = new APIConnectViewModel();
+        var window = new ConnectAPIWindow { DataContext = vm };
+        vm.CloseAction = () => window.Close();
 
-        if (success) 
+        var desktop = Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
+        var owner = desktop?.MainWindow;
+
+        if (owner != null)
         {
-            AppLogger.Info($"Register succesfull, closing Login window and starting Main window...");
-            _navigation.ShowMainWindow();
-            _navigation.CloseLogin();
+            await window.ShowDialog(owner);
         }
         else
         {
-            AppLogger.Error("Failed to Register", returnModel);
-            Message = TranslationManager.GetErrorCode(returnModel);
+            window.Show(); // Fallback pokud není owner
+        }
+
+        // Po zavření aktualizujeme stav
+        ApiUrl = Credentials.BaseUri;
+        hasAPI = !string.IsNullOrEmpty(ApiUrl);
+    }
+
+    [RelayCommand]
+    private async Task Register()
+    {
+        if (!hasAPI)
+        {
+            await OpenApiSettings();
+            if (!hasAPI) return;
+        }
+
+        IsBusy = true;
+        try
+        {
+            AppLogger.Info($"Registering...");
+            ReturnModel<bool> returnModel = await AuthRepo.Register(RegUsername, RegCode, RegPassword, RegConfirmPassword);
+            bool success = returnModel.Body;
+
+            if (success) 
+            {
+                AppLogger.Info($"Register succesfull, closing Login window and starting Main window...");
+                _navigation.ShowMainWindow();
+                _navigation.CloseLogin();
+            }
+            else
+            {
+                AppLogger.Error("Failed to Register", returnModel);
+                Message = TranslationManager.GetErrorCode(returnModel);
+            }
+        }
+        finally
+        {
+            IsBusy = false;
         }
     }
 
     [RelayCommand]
     private async Task LoginAsync()
     {
-        AppLogger.Info($"Logining....");
-
         if (!hasAPI)
         {
             AppLogger.Warning("Settings does not have API connection. Summoning API connect window...");
-            var vm = new APIConnectViewModel();
-            var window = new ConnectAPIWindow { DataContext = vm };
-            // TADY CHYBĚLO:
-            vm.CloseAction = () => window.Close();
+            await OpenApiSettings();
+            if (!hasAPI) return;
+        }
 
-            var desktop = Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
-            var owner = desktop?.MainWindow;
+        IsBusy = true;
+        try
+        {
+            AppLogger.Info($"Logining....");
+            ReturnModel<bool> returnModel = await AuthRepo.Login(Username, Password, default);
+            bool success = returnModel.Body;
 
-            if (owner != null)
+            if (success)
             {
-                await window.ShowDialog(owner);
+                AppLogger.Info($"Loged in succesfully, closing Login window and starting Main window...");
+                _navigation.ShowMainWindow();
+                _navigation.CloseLogin();
+            }
+            else
+            {
+                AppLogger.Error("Failed to Login", returnModel);
+                Message = TranslationManager.GetErrorCode(returnModel);
             }
         }
-
-        ReturnModel<bool> returnModel = await AuthRepo.Login(Username, Password, default);
-        bool success = returnModel.Body;
-
-        if (success)
+        finally
         {
-            AppLogger.Info($"Loged in succesfully, closing Login window and starting Main window...");
-            _navigation.ShowMainWindow();
-            _navigation.CloseLogin();
-        }
-        else
-        {
-            AppLogger.Error("Failed to Login", returnModel);
-            Message = TranslationManager.GetErrorCode(returnModel);
+            IsBusy = false;
         }
     }
 
@@ -102,6 +141,7 @@ public partial class LoginViewModel : ViewModelBase
     public LoginViewModel(INavigationService navigation)
     {
         _navigation = navigation;
-        hasAPI = Credentials.BaseUri != "";
+        ApiUrl = Credentials.BaseUri;
+        hasAPI = !string.IsNullOrEmpty(ApiUrl);
     }
 }

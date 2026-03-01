@@ -13,10 +13,13 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">Nur Überzahlungen</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">Zahlungsdetails</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">Hinzufügen</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">Bearbeiten</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">Abbrechen</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">Speichern</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">Löschen</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">In Guthaben umwandeln</x:String>
+    <x:String x:Key="PaymentManagerView.Button.SendReminder">Zahlungserinnerung senden</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Titel</x:String>
     <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Titel eingeben...</x:String>
@@ -39,6 +42,8 @@
     <x:String x:Key="Accountant.Transactions.Customer">Kunde</x:String>
     <x:String x:Key="Accountant.Transactions.Search">Transaktionen suchen...</x:String>
     <x:String x:Key="Accountant.Transactions.AllCustomers">Alle Kunden</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">Status:</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">Alle Status</x:String>
 
     <x:String x:Key="Common.ID">ID</x:String>
     <x:String x:Key="Common.Date">Datum</x:String>
@@ -78,11 +83,24 @@
 
     <x:String x:Key="DashboardView.TransactionList">Transaktionsliste</x:String>
 
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">Buchhaltungsübersicht</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Schnellübersicht über Zahlungen und Aufgaben</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">ÜBERZAHLT</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">FÄLLIG</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">TEILWEISE BEZAHLT</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">WARTEND</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> zu bearbeiten</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">Einnahmenverlauf (30 Tage)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">Zahlungsstatus</x:String>
+
     <x:String x:Key="NavbarView.Menu">Menü</x:String>
     <x:String x:Key="NavbarView.Dashboard">Dashboard</x:String>
     <x:String x:Key="NavbarView.Settings">Einstellungen</x:String>
     <x:String x:Key="NavbarView.Debts">Schulden</x:String>
     <x:String x:Key="NavbarView.Transactions">Zahlungseingänge</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">Transaktionsübersicht</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">Admin-Bereich</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Guthaben</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Ausstehend</x:String>
@@ -137,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Next">Weiter</x:String>
     <x:String x:Key="OnboardingView.Button.Previous">Zurück</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">Abschließen</x:String>
+
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">Systemverwaltung</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">Benutzer suchen...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">Benutzer hinzufügen</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">Systembenutzer</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">Alle Rollen</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">Bearbeiten</x:String>
+    <x:String x:Key="UserPiece.Button.Save">Speichern</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">Abbrechen</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA aktiviert</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">Benutzername</x:String>
 
     <x:String x:Key="ErrorCode.A0">Erfolgreich eingeloggt</x:String>
     <x:String x:Key="ErrorCode.A1">Benutzer mit diesem Namen existiert bereits</x:String>

@@ -11,6 +11,7 @@ namespace CtrlPay.Repos
     public class FrontendTransactionDTO
     {
         public string? Title { get; init; }
+        public string? SubTitle { get; init; }
         public decimal Amount { get; init; }
         public DateTimeOffset Timestamp { get; init; }
         public StatusEnum State { get; init; }
@@ -19,6 +20,7 @@ namespace CtrlPay.Repos
         public FrontendTransactionDTO(string title, decimal amount, DateTimeOffset timestamp, TransactionStatusEnum state, int id)
         {
             Title = title;
+            SubTitle = id.ToString();
             Amount = amount;
             Timestamp = timestamp;
             State = StatusConverter.ConvertTransactionStatusToFrontendStatus(state);
@@ -27,7 +29,8 @@ namespace CtrlPay.Repos
 
         public FrontendTransactionDTO(Transaction transaction)
         {
-            Title = transaction.TransactionIdXMR;
+            Title = string.IsNullOrEmpty(transaction.TransactionIdXMR) ? "Transaction" : transaction.TransactionIdXMR;
+            SubTitle = transaction.TransactionIdXMR;
             Amount = transaction.Amount;
             Timestamp = transaction.Timestamp;
             State = StatusConverter.ConvertTransactionStatusToFrontendStatus(transaction.Status);
@@ -35,7 +38,8 @@ namespace CtrlPay.Repos
         }
         public FrontendTransactionDTO(TransactionApiDTO transaction)
         {
-            Title = transaction.TransactionIdXMR;
+            Title = string.IsNullOrEmpty(transaction.TransactionIdXMR) ? "Transaction" : transaction.TransactionIdXMR;
+            SubTitle = transaction.TransactionIdXMR;
             Amount = transaction.Amount;
             Timestamp = transaction.Timestamp;
             State = StatusConverter.ConvertTransactionStatusToFrontendStatus(transaction.Status);
@@ -43,7 +47,8 @@ namespace CtrlPay.Repos
         }
         public FrontendTransactionDTO(PaymentApiDTO payment)
         {
-            Title = payment.Id.ToString();
+            Title = string.IsNullOrEmpty(payment.Title) ? $"Payment #{payment.Id}" : payment.Title;
+            SubTitle = $"#{payment.Id}";
             Amount = payment.ExpectedAmountXMR;
             Timestamp = payment.CreatedAt;
             State = StatusConverter.ConvertPaymentStatusToFrontendStatus(payment.Status);

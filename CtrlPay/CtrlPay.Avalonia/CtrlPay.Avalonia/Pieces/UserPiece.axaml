@@ -17,7 +17,7 @@
                 <StackPanel Orientation="Horizontal" Spacing="10">
                     <TextBlock Text="{Binding Model.Role}" FontSize="12" 
                                Foreground="{Binding Model.RoleColor}"/>
-                    <TextBlock Text="2FA Enabled" FontSize="12" 
+                    <TextBlock Text="{DynamicResource UserPiece.Label.TwoFactorEnabled}" FontSize="12" 
                                Foreground="#44AAFF" 
                                IsVisible="{Binding Model.TwoFactorEnabled}"/>
                 </StackPanel>
@@ -25,7 +25,9 @@
 
             <!-- Edit View -->
             <StackPanel Grid.Column="0" IsVisible="{Binding Editing}" Spacing="10">
-                <TextBox Text="{Binding Model.Username}" Watermark="Username" Width="250" HorizontalAlignment="Left"/>
+                <TextBox Text="{Binding Model.Username}" 
+                         Watermark="{DynamicResource UserPiece.Watermark.Username}" 
+                         Width="250" HorizontalAlignment="Left"/>
                 <ComboBox ItemsSource="{Binding RolesList}" 
                           SelectedItem="{Binding Model.Role}" 
                           Width="200"/>
@@ -33,12 +35,12 @@
 
             <!-- Actions -->
             <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="5" VerticalAlignment="Center">
-                <Button Content="Edit" Command="{Binding StartEditCommand}" 
+                <Button Content="{DynamicResource UserPiece.Button.Edit}" Command="{Binding StartEditCommand}" 
                         IsVisible="{Binding !Editing}" Classes="secondary"/>
                 
-                <Button Content="Cancel" Command="{Binding CancelEditCommand}" 
+                <Button Content="{DynamicResource UserPiece.Button.Cancel}" Command="{Binding CancelEditCommand}" 
                         IsVisible="{Binding Editing}" Classes="secondary"/>
-                <Button Content="Save" Command="{Binding SaveCommand}" 
+                <Button Content="{DynamicResource UserPiece.Button.Save}" Command="{Binding SaveCommand}" 
                         IsVisible="{Binding Editing}"/>
             </StackPanel>
         </Grid>

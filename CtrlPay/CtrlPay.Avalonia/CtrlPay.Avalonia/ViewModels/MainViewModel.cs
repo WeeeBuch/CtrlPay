@@ -1,4 +1,4 @@
-using Avalonia.Controls;
+﻿using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -7,8 +7,11 @@ using CtrlPay.Avalonia.Translations;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
+using CtrlPay.Avalonia;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using CommunityToolkit.Mvvm.Messaging;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -48,6 +51,24 @@ public partial class MainViewModel : ViewModelBase
 
         CurrentPage = NavigationItems[0].ViewModel;
         SelectedNavigationItem = NavigationItems[0];
+
+        // Nasloucháme zprávám z Dashboardu pro navigaci s filtrem
+        WeakReferenceMessenger.Default.Register<NavigationFilterMessage>(this, (r, m) => HandleNavigationFilter(m.Filter));
+    }
+
+    private void HandleNavigationFilter(StatusEnum filter)
+    {
+        // Najdeme položku v menu, která odpovídá seznamu transakcí
+        var target = NavigationItems.FirstOrDefault(i => i.ViewModel is AccountantTransactionsView);
+        if (target != null)
+        {
+            SelectedNavigationItem = target;
+            // Nastavíme filtr v cílovém ViewModelu
+            if (target.ViewModel.DataContext is AccountantTransactionsViewModel vm)
+            {
+                vm.SelectedStatusItem = vm.Statuses.Where(s => s.Value == filter).FirstOrDefault();
+            }
+        }
     }
 
     private void GenerateNavItems()
@@ -73,14 +94,15 @@ public partial class MainViewModel : ViewModelBase
 
         if (role == Role.Accountant)
         {
+            NavigationItems.Add(new NavItem("NavbarView.Dashboard", new AccountantDashboardView(), IconData.Dashboard));
             NavigationItems.Add(new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers));
             NavigationItems.Add(new NavItem("NavbarView.PaymentManagement", new PaymentManagementView(), IconData.Cash));
-                NavigationItems.Add(new NavItem("NavbarView.AccountantTransactions", new AccountantTransactionsView(), IconData.Cash));
+            NavigationItems.Add(new NavItem("NavbarView.AccountantTransactions", new AccountantTransactionsView(), IconData.Cash));
         }
 
         if (role == Role.Admin)
         {
-            NavigationItems.Add(new NavItem("Admin Panel", new AdminView(), IconData.Admin));
+            NavigationItems.Add(new NavItem("NavbarView.AdminPanel", new AdminView(), IconData.Admin));
         }
 
         if (role == Role.Employee)
