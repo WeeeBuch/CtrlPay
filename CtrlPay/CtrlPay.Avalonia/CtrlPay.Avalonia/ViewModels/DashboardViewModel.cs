@@ -32,6 +32,8 @@ public partial class DashboardViewModel : ViewModelBase
     }
     public void Load()
     {
+        AppLogger.Info("DASHBOARD LOAD CALLED");
+
         LoadInitialData();
     }
     private void LoadInitialData()

@@ -23,7 +23,7 @@ namespace CtrlPay.Avalonia.Settings
         }
 
         // Připojení aplikace k API
-        private string _connectionString = "http://192.168.197.126:5000";
+        private string _connectionString = "http://192.168.197.126:5000/";
         public string ConnectionString
         {
             get => _connectionString;

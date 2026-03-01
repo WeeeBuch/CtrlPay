@@ -61,7 +61,7 @@ public partial class LoginViewModel : ViewModelBase
     [RelayCommand]
     private async Task LoginAsync()
     {
-        SettingsManager.Current.ConnectionString = "";
+        SettingsManager.Current.ConnectionString = "http://10.0.2.2:5000";
 
 
         ReturnModel<bool> returnModel = await AuthRepo.Login(Username, Password, default);

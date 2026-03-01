@@ -72,10 +72,14 @@ namespace CtrlPay.Avalonia.ViewModels
                 SelectedNavigationItem = NavigationItems[0];
                 CurrentPage = NavigationItems[0].View;
 
-                if (CurrentPage is DashboardViewMobile mobile &&
-                    mobile.DataContext is DashboardViewModel vm)
+                var view = CurrentPage as DashboardViewMobile;
+                if (view != null)
                 {
-                    vm.Load();
+                    var vm = view.DataContext as DashboardViewModel;
+                    if (vm != null)
+                    {
+                        vm.Load();
+                    }
                 }
             }
         }
