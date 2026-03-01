@@ -15,4 +15,15 @@ public class AccountantTransactionDTO
     public TransactionTypeEnum Type { get; init; } // In/Out
 
     public AccountantTransactionDTO() { }
+
+    public AccountantTransactionDTO(TransactionApiDTO dto)
+    {
+        Id = dto.Id;
+        Title = dto.TransactionIdXMR;
+        CustomerName = dto.CustomerName;
+        Amount = dto.Amount;
+        Timestamp = dto.Timestamp;
+        State = StatusConverter.ConvertTransactionStatusToFrontendStatus(dto.Status);
+        Type = dto.Type;
+    }
 }

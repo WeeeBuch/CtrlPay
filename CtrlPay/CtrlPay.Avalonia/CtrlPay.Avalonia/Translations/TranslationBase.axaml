@@ -56,6 +56,7 @@
     <x:String x:Key="Customers.Label.Phone">Customers.Label.Phone</x:String>
     <x:String x:Key="Customers.Label.Email">Customers.Label.Email</x:String>
     <x:String x:Key="Customers.Label.Address">Customers.Label.Address</x:String>
+	<x:String x:Key="Customers.Name.OneTime">Customers.Name.OneTime</x:String>
 
     <!-- Login View -->
     <x:String x:Key="LoginView.Button.Switch.Login">LoginView.Button.Switch.Login</x:String>

@@ -22,6 +22,7 @@ namespace CtrlPay.Entities
         public decimal Fee { get; set; }
         public DateTime Timestamp { get; set; }
         public int? PaymentId { get; set; }
+        public string CustomerName { get; set; }
 
         public TransactionApiDTO()
         {
@@ -55,7 +56,9 @@ namespace CtrlPay.Entities
             if (transaction.Payment != null)
             {
                 PaymentId = transaction.Payment.Id;
+                CustomerName = transaction.Payment.Customer.FullName;
             }
+            CustomerName = transaction.Account.Index == 0 ? CustomerName = "Customers.Name.OneTime" : CustomerName = transaction.Account.LoyalCustomer.Customer.FullName;
         }
     }
     public class PaymentApiDTO

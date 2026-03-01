@@ -1,11 +1,9 @@
 ﻿using CtrlPay.Entities;
 using CtrlPay.Repos;
-using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
@@ -15,9 +13,8 @@ namespace CtrlPay.Repos
 {
     public class AccountantRepo
     {
-        // Data jsou statická, ale unikátní pro každý typ TApiDto (takže se nemíchají)
         protected static List<FrontendPaymentDTO> PaymentCache { get; set; } = [];
-        protected static List<FrontendTransactionDTO> TransactionCache { get; set; } = [];
+        protected static List<AccountantTransactionDTO> TransactionCache { get; set; } = [];
         protected static DateTime LastUpdated { get; set; } = DateTime.MinValue;
         protected static string SortMethod = "DateDesc";
         protected static JsonSerializerOptions SerializerOptions = new() { PropertyNameCaseInsensitive = true };
@@ -25,7 +22,7 @@ namespace CtrlPay.Repos
         // Společná metoda pro načtení seznamu
         protected static async Task LoadPaymentListFromApi(
             string url,
-            Func<PaymentApiDTO, FrontendPaymentDTO> mapper, // Funkce pro převod DTO
+            Func<PaymentApiDTO, FrontendPaymentDTO> mapper,
             CancellationToken ct)
         {
             AppLogger.Info($"Getting json from API...");
@@ -57,7 +54,7 @@ namespace CtrlPay.Repos
         }
         protected static async Task LoadTransactionListFromApi(
             string url,
-            Func<TransactionApiDTO, FrontendTransactionDTO> mapper, // Funkce pro převod DTO
+            Func<TransactionApiDTO, AccountantTransactionDTO> mapper,
             CancellationToken ct)
         {
             AppLogger.Info($"Getting json from API...");
@@ -118,7 +115,7 @@ namespace CtrlPay.Repos
             #endregion
 
             await LoadPaymentListFromApi("/api/payments/all", p => new FrontendPaymentDTO(p), ct);
-            await LoadTransactionListFromApi("/api/transactions/all", t => new FrontendTransactionDTO(t), ct);
+            await LoadTransactionListFromApi("/api/transactions/all", t => new AccountantTransactionDTO(t), ct);
         }
         private static List<FrontendPaymentDTO> GetMockPayments() =>
         [
@@ -305,8 +302,36 @@ namespace CtrlPay.Repos
         {
             if (DebugMode.MockAccountantTransactions) return GetMockAccountantTransactions();
 
-            // TODO: Karele toto
-            throw new NotImplementedException();
+            return TransactionCache;
+        }
+        public static AccountantDashboardSummaryDTO GetAccountantDashboardSummary()
+        {
+            if (DebugMode.MockAccountantTransactions)
+            {
+                return new AccountantDashboardSummaryDTO
+                {
+                    OverpaidAmount = 1.25m,
+                    OverpaidCount = 4,
+                    OverdueAmount = 5.80m,
+                    OverdueCount = 12,
+                    PartiallyPaidAmount = 0.45m,
+                    PartiallyPaidCount = 2,
+                    WaitingAmount = 15.20m,
+                    WaitingCount = 25
+                };
+            }
+
+            return new AccountantDashboardSummaryDTO
+            {
+                OverpaidAmount = PaymentCache.Where(p => p.Status == StatusEnum.Overpaid).Sum(p => p.PaidAmountXMR - p.ExpectedAmountXMR),
+                OverpaidCount = PaymentCache.Where(p => p.Status == StatusEnum.Overpaid).Count(),
+                OverdueAmount = PaymentCache.Where(p => p.Status == StatusEnum.Expired).Sum(p => p.ExpectedAmountXMR - p.PaidAmountXMR),
+                OverdueCount = PaymentCache.Where(p => p.Status == StatusEnum.Expired).Count(),
+                PartiallyPaidAmount = PaymentCache.Where(p => p.Status == StatusEnum.PartiallyPaid).Sum(p => p.PaidAmountXMR),
+                PartiallyPaidCount = PaymentCache.Where(p => p.Status == StatusEnum.PartiallyPaid).Count(),
+                WaitingAmount = PaymentCache.Where(p => p.Status == StatusEnum.Pending || p.Status == StatusEnum.WaitingForPayment).Sum(p => p.ExpectedAmountXMR),
+                WaitingCount = PaymentCache.Where(p => p.Status == StatusEnum.Pending || p.Status == StatusEnum.WaitingForPayment).Count()
+            };
         }
     }
 }

@@ -82,7 +82,7 @@ public partial class AccountantDashboardViewModel : ViewModelBase
     private void LoadData()
     {
         // Načteme souhrnná data z ToDoRepo (zatím Mock data)
-        var summary = ToDoRepo.GetAccountantDashboardSummary();
+        var summary = AccountantRepo.GetAccountantDashboardSummary();
 
         // Rozdistribuujeme data do jednotlivých kostek
         OverpaidTile.Amount = summary.OverpaidAmount;

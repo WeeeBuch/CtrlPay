@@ -3,6 +3,7 @@ using CtrlPay.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -88,19 +89,45 @@ namespace CtrlPay.Core
                 payment.Status = PaymentStatusEnum.Paid;
                 payment.PaidAt = DateTime.Now;
                 _db.LoyalCustomers.Where(lc => lc.Account.Index == customer.Account.Index).First().OurXMR += amountToPay;
+                Transaction transaction = new Transaction
+                {
+                    Account = customer.Account,
+                    Address = customer.Account.BaseAddress,
+                    Amount = amountToPay,
+                    Fee = 0,
+                    Status = TransactionStatusEnum.Completed,
+                    Timestamp = DateTime.UtcNow,
+                    Type = TransactionTypeEnum.Internal,
+                    Payment = payment,
+                    TransactionIdXMR = $"internal-{Convert.ToBase64String(RandomNumberGenerator.GetBytes(4))}"
+                };
             }
             else
             {
                 payment.PaidAmountXMR += credit;
                 payment.Status = PaymentStatusEnum.PartiallyPaid;
                 _db.LoyalCustomers.Where(lc => lc.Account.Index == customer.Account.Index).First().OurXMR += credit;
+                Transaction transaction = new Transaction
+                {
+                    Account = customer.Account,
+                    Address = customer.Account.BaseAddress,
+                    Amount = credit,
+                    Fee = 0,
+                    Status = TransactionStatusEnum.Completed,
+                    Timestamp = DateTime.UtcNow,
+                    Type = TransactionTypeEnum.Internal,
+                    Payment = payment,
+                    TransactionIdXMR = $"internal-{Convert.ToBase64String(RandomNumberGenerator.GetBytes(4))}"
+                };
             }
             await _db.SaveChangesAsync(cancellationToken);
         }
 
         public static async Task MarkExpiredPayments(CancellationToken cancellationToken)
         {
-            List<Payment> paymentsToExpire = _db.Payments.Where(p => p.Status == PaymentStatusEnum.WaitingForPayment ||p.Status == PaymentStatusEnum.Unpaid ||p.Status == PaymentStatusEnum.PartiallyPaid)
+            List<Payment> paymentsToExpire = _db.Payments.Where(p => p.Status == PaymentStatusEnum.WaitingForPayment || 
+                                                                     p.Status == PaymentStatusEnum.Unpaid || 
+                                                                     p.Status == PaymentStatusEnum.PartiallyPaid)
                                                                 .Where(p => p.DueDate <= DateTimeOffset.Now).ToList();
             foreach (var payment in paymentsToExpire)
             {

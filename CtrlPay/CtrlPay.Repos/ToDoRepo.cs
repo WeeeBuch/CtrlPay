@@ -11,59 +11,6 @@ namespace CtrlPay.Repos;
 
 public static class ToDoRepo
 {
-    public static List<FrontendUserDTO> Cache = [];
-
-    public static async Task<List<FrontendUserDTO>> GetAdminUsers(CancellationToken ct = default)
-    {
-        if (DebugMode.MockAdminUsers)
-        {
-            Cache = [
-                new() { Id = 1, Username = "admin_karel", Role = Role.Admin, TwoFactorEnabled = true },
-                new() { Id = 2, Username = "uctarni_jana", Role = Role.Accountant, TwoFactorEnabled = false },
-                new() { Id = 3, Username = "zamestnanec_pepa", Role = Role.Employee, TwoFactorEnabled = false }
-            ];
-
-            return Cache;
-            
-        }
-
-        // string? json = await HttpWorker.HttpGet("api/admin/users", true, ct);
-        return [];
-    }
-
-    public static async Task UpdateAdminUser(FrontendUserDTO user)
-    {
-        AppLogger.Info($"Updating admin user {user.Username}...");
-        
-        if (DebugMode.MockAdminUsers)
-        {
-            await Task.Delay(500); 
-            Cache.Add(user);
-            return;
-        }
-    }
-
-    public static AccountantDashboardSummaryDTO GetAccountantDashboardSummary()
-    {
-        if (DebugMode.MockAccountantTransactions)
-        {
-            return new AccountantDashboardSummaryDTO
-            {
-                OverpaidAmount = 1.25m,
-                OverpaidCount = 4,
-                OverdueAmount = 5.80m,
-                OverdueCount = 12,
-                PartiallyPaidAmount = 0.45m,
-                PartiallyPaidCount = 2,
-                WaitingAmount = 15.20m,
-                WaitingCount = 25
-            };
-        }
-
-        // TODO: Propojit s reálným API v AccountantPaymentRepo
-        throw new NotImplementedException();
-    }
-
     public static AccountantChartDataDTO GetAccountantChartData()
     {
         if (DebugMode.MockAccountantTransactions)
