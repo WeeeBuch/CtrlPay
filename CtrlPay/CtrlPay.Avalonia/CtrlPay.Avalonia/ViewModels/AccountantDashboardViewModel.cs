@@ -1,4 +1,4 @@
-﻿using Avalonia.Media;
+using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.Styles;
@@ -28,12 +28,26 @@ namespace CtrlPay.Avalonia.ViewModels;
 
 public partial class AccountantDashboardViewModel : ViewModelBase
 {
+    // Data
+    private AccountantChartDataDTO? _lastChartData;
+
     // Grafy
     [ObservableProperty] private ISeries[] _incomeSeries;
     [ObservableProperty] private Axis[] _xAxes;
     [ObservableProperty] private ISeries[] _statusSeries;
     [ObservableProperty] private SolidColorPaint? _tooltipBackgroundPaint;
     [ObservableProperty] private SolidColorPaint? _tooltipTextPaint;
+
+    // Fixní instance sérií pro stabilitu barev a animací
+    private readonly LineSeries<decimal> _incomeLineSeries = new()
+    {
+        GeometrySize = 10,
+        LineSmoothness = 1,
+        Stroke = new SolidColorPaint(SKColors.CornflowerBlue) { StrokeThickness = 3 },
+        Fill = new SolidColorPaint(SKColors.CornflowerBlue.WithAlpha(40)),
+        GeometryFill = new SolidColorPaint(SKColors.CornflowerBlue),
+        GeometryStroke = new SolidColorPaint(SKColors.CornflowerBlue) { StrokeThickness = 2 }
+    };
 
     // Kostky
     [ObservableProperty] private DashboardTileViewModel _overpaidTile;
@@ -76,8 +90,56 @@ public partial class AccountantDashboardViewModel : ViewModelBase
         };
         _waitingTile.GiveTitleKey("Accountant.Dashboard.Waiting");
 
+        // Nastavíme pole sérií jednou
+        IncomeSeries = [_incomeLineSeries];
+
         LoadData();
+
+        UpdateHandler.UpdatedData.Add(LoadData);
+        
+        // Přihlášení ke změně jazyka
+        TranslationManager.LanguageChanged.Add(RefreshTranslations);
     }
+
+    private void RefreshTranslations()
+    {
+        if (_lastChartData == null) return;
+
+        // Pokud už série existují a mají stejný počet jako data, jen aktualizujeme jejich vlastnosti (aby se nepřebarvovaly a neblikaly)
+        if (StatusSeries != null && StatusSeries.Length == _lastChartData.StatusBreakdown.Count)
+        {
+            for (int i = 0; i < StatusSeries.Length; i++)
+            {
+                if (StatusSeries[i] is PieSeries<int> series)
+                {
+                    var dataPoint = _lastChartData.StatusBreakdown[i];
+                    series.Name = TranslationManager.GetString($"Transaction.Status.{dataPoint.Status}");
+                    series.Values = [dataPoint.Count];
+                    // Fill ponecháváme stejný, aby barvy neblikaly
+                }
+            }
+        }
+        else
+        {
+            // Vytvoříme série úplně znovu (např. při prvním načtení)
+            StatusSeries = [.. _lastChartData.StatusBreakdown.Select(x => new PieSeries<int>
+            {
+                Values = [x.Count],
+                Name = TranslationManager.GetString($"Transaction.Status.{x.Status}"),
+                Fill = GetColorForStatus(x.Status),
+                InnerRadius = 60
+            })];
+        }
+    }
+
+    private SolidColorPaint GetColorForStatus(string status) => status switch
+    {
+        "Paid" => new SolidColorPaint(SKColors.MediumSeaGreen),
+        "Overpaid" => new SolidColorPaint(SKColors.CornflowerBlue),
+        "PartiallyPaid" => new SolidColorPaint(SKColors.Orange),
+        "Expired" => new SolidColorPaint(SKColors.Crimson),
+        _ => new SolidColorPaint(SKColors.Gray)
+    };
 
     private void LoadData()
     {
@@ -98,14 +160,23 @@ public partial class AccountantDashboardViewModel : ViewModelBase
         WaitingTile.Count = summary.WaitingCount;
 
         // Načteme data pro grafy
-        var chartData = ToDoRepo.GetAccountantChartData();
+        var data = ToDoRepo.GetAccountantChartData();
 
-        // Získáme akcentní barvu z aplikace
+        // Jednoduchá kontrola změn obsahu (protože mock vrací vždy novou instanci objektu)
+        bool dataChanged = _lastChartData == null || 
+                           _lastChartData.StatusBreakdown.Count != data.StatusBreakdown.Count ||
+                           !_lastChartData.StatusBreakdown.SequenceEqual(data.StatusBreakdown) ||
+                           !_lastChartData.IncomeHistory.Select(x => x.Amount).SequenceEqual(data.IncomeHistory.Select(x => x.Amount));
+
+        _lastChartData = data;
+
+        // Získáme barvy z aplikace pro aktuální téma
         var accentColor = SKColors.CornflowerBlue; // Fallback
-
-        // Nastavení barev pro tooltipy (Tmavý režim)
         var surfaceColor = SKColors.Black; // Fallback
         var textColor = SKColors.White; // Fallback
+
+        if (Application.Current?.TryFindResource("Color.Accent", out var aRes) == true && aRes is Color aColor)
+            accentColor = new SKColor(aColor.R, aColor.G, aColor.B);
 
         if (Application.Current?.TryFindResource("Color.Surface", out var sRes) == true && sRes is Color sColor)
             surfaceColor = new SKColor(sColor.R, sColor.G, sColor.B);
@@ -113,45 +184,27 @@ public partial class AccountantDashboardViewModel : ViewModelBase
         if (Application.Current?.TryFindResource("Color.Text.Primary", out var tRes) == true && tRes is Color tColor)
             textColor = new SKColor(tColor.R, tColor.G, tColor.B);
 
-        TooltipBackgroundPaint = new SolidColorPaint(surfaceColor.WithAlpha(230)); // Lehce průhledná tmavá
+        TooltipBackgroundPaint = new SolidColorPaint(surfaceColor.WithAlpha(230));
         TooltipTextPaint = new SolidColorPaint(textColor);
 
-        // 1. Graf příjmů (Trend) s akcentní barvou a překladem
-        IncomeSeries =
-        [
-            new LineSeries<decimal>
-            {
-                Values = [.. chartData.IncomeHistory.Select(x => x.Amount)],
-                Fill = new SolidColorPaint(accentColor.WithAlpha(40)),
-                Stroke = new SolidColorPaint(accentColor) { StrokeThickness = 3 },
-                GeometrySize = 0,
-                LineSmoothness = 1
-            }
-        ];
+        // Aktualizace spojnicového grafu (IncomeSeries)
+        _incomeLineSeries.Values = [.. _lastChartData.IncomeHistory.Select(x => x.Amount)];
+        _incomeLineSeries.Stroke = new SolidColorPaint(accentColor) { StrokeThickness = 3 };
+        _incomeLineSeries.Fill = new SolidColorPaint(accentColor.WithAlpha(40));
+        _incomeLineSeries.GeometryFill = new SolidColorPaint(accentColor);
+        _incomeLineSeries.GeometryStroke = new SolidColorPaint(accentColor) { StrokeThickness = 1 };
+        _incomeLineSeries.GeometrySize = 0;
 
         XAxes =
         [
             new Axis
             {
-                Labels = [.. chartData.IncomeHistory.Select(x => x.Date.ToString("dd.MM."))],
+                Labels = [.. _lastChartData.IncomeHistory.Select(x => x.Date.ToString("dd.MM."))],
                 LabelsRotation = 15,
             }
         ];
 
-        // 2. Graf stavů (Koláč -> Donut) s logickými barvami a překlady
-        StatusSeries = [.. chartData.StatusBreakdown.Select(x => new PieSeries<int>
-        {
-            Values = [x.Count],
-            Name = TranslationManager.GetString($"Transaction.Status.{x.Status}"),
-            Fill = x.Status switch
-            {
-                "Paid" => new SolidColorPaint(SKColors.MediumSeaGreen),
-                "Overpaid" => new SolidColorPaint(SKColors.CornflowerBlue),
-                "PartiallyPaid" => new SolidColorPaint(SKColors.Orange),
-                "Expired" => new SolidColorPaint(SKColors.Crimson),
-                _ => new SolidColorPaint(SKColors.Gray)
-            },
-            InnerRadius = 60
-        })];
+        // Aktualizace koláčového grafu (StatusSeries)
+        RefreshTranslations();
     }
 }

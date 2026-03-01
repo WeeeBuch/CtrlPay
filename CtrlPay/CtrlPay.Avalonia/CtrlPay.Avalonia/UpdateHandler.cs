@@ -37,5 +37,10 @@ public static class UpdateHandler
     public static List<Action> UpdatedAdminUsers = [];
     public static void HandleUpdatedAdminUsers()
         => UpdatedAdminUsers.ForEach(action => action.Invoke());
+
+    // Changed data for Accountant
+    public static List<Action> UpdatedData = [];
+    public static void HandleUpdatedData() 
+        => UpdatedData.ForEach(action => action.Invoke());
 }
 
