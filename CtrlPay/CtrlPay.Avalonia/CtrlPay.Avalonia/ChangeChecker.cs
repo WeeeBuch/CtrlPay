@@ -22,6 +22,7 @@ public static class ChangeChecker
         await CustomerRepo.UpdateCustomersFromApi(default);
         await AccountantRepo.UpdateAccountantCachesFromApi(default);
         // TODO: Karele tu aktualizace
+        // TODO: Karele tu další aktualizace pro accountant
 
         // Sem se píšou všechny kontroly změn, které chceme provádět
         UpdateHandler.HandleCreditAvailableUpdate(TransactionRepo.GetTransactionSum());
@@ -30,6 +31,7 @@ public static class ChangeChecker
         UpdateHandler.HandleNewPaymentsAdded();
         UpdateHandler.HandleUpdatedCustomers();
         UpdateHandler.HandleUpdatedAdminUsers();
+        UpdateHandler.HandleUpdatedData();
 
         Credentials.BaseUri = SettingsManager.Current.ConnectionString;
         AppLogger.Info($"Checking completed.");

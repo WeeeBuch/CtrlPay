@@ -28,6 +28,9 @@ namespace CtrlPay.Avalonia.ViewModels;
 
 public partial class AccountantDashboardViewModel : ViewModelBase
 {
+    // Data
+    private AccountantChartDataDTO? _lastChartData;
+
     // Grafy
     [ObservableProperty] private ISeries[] _incomeSeries;
     [ObservableProperty] private Axis[] _xAxes;
@@ -77,11 +80,38 @@ public partial class AccountantDashboardViewModel : ViewModelBase
         _waitingTile.GiveTitleKey("Accountant.Dashboard.Waiting");
 
         LoadData();
+
+        UpdateHandler.UpdatedData.Add(LoadData);
+        
+        // Přihlášení ke změně jazyka
+        TranslationManager.LanguageChanged.Add(RefreshTranslations);
+    }
+
+    private void RefreshTranslations()
+    {
+        if (_lastChartData == null) return;
+
+        // Aktualizujeme popisky v koláčovém grafu
+        StatusSeries = [.. _lastChartData.StatusBreakdown.Select(x => new PieSeries<int>
+        {
+            Values = [x.Count],
+            Name = TranslationManager.GetString($"Transaction.Status.{x.Status}"),
+            Fill = x.Status switch
+            {
+                "Paid" => new SolidColorPaint(SKColors.MediumSeaGreen),
+                "Overpaid" => new SolidColorPaint(SKColors.CornflowerBlue),
+                "PartiallyPaid" => new SolidColorPaint(SKColors.Orange),
+                "Expired" => new SolidColorPaint(SKColors.Crimson),
+                _ => new SolidColorPaint(SKColors.Gray)
+            },
+            InnerRadius = 60
+        })];
     }
 
     private void LoadData()
     {
         // Načteme souhrnná data z ToDoRepo (zatím Mock data)
+        // TODO: Karele tu pak nezapomeň přepsat
         var summary = ToDoRepo.GetAccountantDashboardSummary();
 
         // Rozdistribuujeme data do jednotlivých kostek
@@ -98,7 +128,11 @@ public partial class AccountantDashboardViewModel : ViewModelBase
         WaitingTile.Count = summary.WaitingCount;
 
         // Načteme data pro grafy
-        var chartData = ToDoRepo.GetAccountantChartData();
+        var data = ToDoRepo.GetAccountantChartData();
+
+        if (data == _lastChartData) return;
+
+        _lastChartData = data;
 
         // Získáme akcentní barvu z aplikace
         var accentColor = SKColors.CornflowerBlue; // Fallback
@@ -116,12 +150,12 @@ public partial class AccountantDashboardViewModel : ViewModelBase
         TooltipBackgroundPaint = new SolidColorPaint(surfaceColor.WithAlpha(230)); // Lehce průhledná tmavá
         TooltipTextPaint = new SolidColorPaint(textColor);
 
-        // 1. Graf příjmů (Trend) s akcentní barvou a překladem
+        // 1. Graf příjmů (Trend)
         IncomeSeries =
         [
             new LineSeries<decimal>
             {
-                Values = [.. chartData.IncomeHistory.Select(x => x.Amount)],
+                Values = [.. _lastChartData.IncomeHistory.Select(x => x.Amount)],
                 Fill = new SolidColorPaint(accentColor.WithAlpha(40)),
                 Stroke = new SolidColorPaint(accentColor) { StrokeThickness = 3 },
                 GeometrySize = 0,
@@ -133,25 +167,13 @@ public partial class AccountantDashboardViewModel : ViewModelBase
         [
             new Axis
             {
-                Labels = [.. chartData.IncomeHistory.Select(x => x.Date.ToString("dd.MM."))],
+                Labels = [.. _lastChartData.IncomeHistory.Select(x => x.Date.ToString("dd.MM."))],
                 LabelsRotation = 15,
             }
         ];
 
         // 2. Graf stavů (Koláč -> Donut) s logickými barvami a překlady
-        StatusSeries = [.. chartData.StatusBreakdown.Select(x => new PieSeries<int>
-        {
-            Values = [x.Count],
-            Name = TranslationManager.GetString($"Transaction.Status.{x.Status}"),
-            Fill = x.Status switch
-            {
-                "Paid" => new SolidColorPaint(SKColors.MediumSeaGreen),
-                "Overpaid" => new SolidColorPaint(SKColors.CornflowerBlue),
-                "PartiallyPaid" => new SolidColorPaint(SKColors.Orange),
-                "Expired" => new SolidColorPaint(SKColors.Crimson),
-                _ => new SolidColorPaint(SKColors.Gray)
-            },
-            InnerRadius = 60
-        })];
+        // Odebraná duplicita kódu
+        RefreshTranslations();
     }
 }
