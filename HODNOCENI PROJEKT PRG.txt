@@ -1,0 +1,18 @@
+váha 2 1) funkčnost - 2x CRUD
+váha 1 2) design
+váha 0,5 3) prezentace
+váha 0,5 4) dokumentace ke kódu
+
+prezentace
+9 - 10 min pro tým 3 lidi
+
+
+dokumentace
+min 1 - 2 stránky textu, 500-600 slov
+složení - struktury projektů
+struktura asp - controllery
+DB
+entity
+vypíchnout speciality - razor pages v mailech
+hlavně backend + co jsme se naučili ve Frontendu
+neprezentovat, jen odevzdat - mail nebo odstudentu nebo git před datumem odevzdání
