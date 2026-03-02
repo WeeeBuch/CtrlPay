@@ -86,7 +86,6 @@ namespace CtrlPay.Repos
         }
 
 
-        // Společné řazení
         protected static List<FrontendPaymentDTO> SortData(List<FrontendPaymentDTO> data, string? sortingMethod)
         {
             if (sortingMethod != null) SortMethod = sortingMethod;
@@ -195,7 +194,7 @@ namespace CtrlPay.Repos
 
         public static List<FrontendPaymentDTO> GetSortedPayments(string? sortingMethod)
         {
-            return PaymentCache;
+            return SortData(PaymentCache, sortingMethod);
         }
         public static async Task UpdatePayment(FrontendPaymentDTO dto)
         {
@@ -333,5 +332,54 @@ namespace CtrlPay.Repos
                 WaitingCount = PaymentCache.Where(p => p.Status == StatusEnum.Pending || p.Status == StatusEnum.WaitingForPayment).Count()
             };
         }
+        public static AccountantChartDataDTO GetAccountantChartData()
+        {
+            var data = new AccountantChartDataDTO();
+            if (DebugMode.MockAccountantTransactions)
+            {
+                var rng = new Random();
+
+                // Generujeme 30 dní historie příjmů
+                for (int i = 30; i >= 0; i--)
+                {
+                    data.IncomeHistory.Add(new IncomeChartPointDTO
+                    {
+                        Date = DateTime.Today.AddDays(-i),
+                        Amount = (decimal)(rng.NextDouble() * 2.5) // Náhodné příjmy 0-2.5 XMR
+                    });
+                }
+
+                data.StatusBreakdown = new List<(string Status, int Count)>
+                {
+                    ("Paid", 145),
+                    ("Overpaid", 12),
+                    ("PartiallyPaid", 8),
+                    ("Expired", 24)
+                };
+                return data;
+            }
+
+            for (int i = 30; i >= 0; i--)
+            {
+                DateTime date = DateTime.Today.AddDays(-i);
+                data.IncomeHistory.Add(new IncomeChartPointDTO
+                {
+                    Date = date,
+                    Amount = TransactionCache.Where(t => t.Timestamp == date).Sum(t => t.Amount),
+                });
+            }
+
+            List<FrontendPaymentDTO> filteredCache = PaymentCache.Where(t => (DateTimeOffset.Now - t.CreatedAt).TotalDays <= 30).ToList();
+
+            data.StatusBreakdown = new List<(string Status, int Count)>
+            {
+                ("Paid", filteredCache.Count(p => p.Status == StatusEnum.Paid)),
+                ("Overpaid", filteredCache.Count(p => p.Status == StatusEnum.Overpaid)),
+                ("PartiallyPaid", filteredCache.Count(p => p.Status == StatusEnum.PartiallyPaid)),
+                ("Expired", filteredCache.Count(p => p.Status == StatusEnum.Expired))
+            };
+            return data;
+        }
+
     }
 }

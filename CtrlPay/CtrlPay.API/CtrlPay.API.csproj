@@ -36,7 +36,7 @@
     <Content Update="Views\Shared\Mails\Registration.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="Views\Shared\Mails\Upominka.cshtml">
+    <Content Update="Views\Shared\Mails\Reminder.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

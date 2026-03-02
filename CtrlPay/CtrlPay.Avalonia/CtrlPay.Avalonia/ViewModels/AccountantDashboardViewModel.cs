@@ -23,6 +23,7 @@ using CtrlPay.Avalonia.ViewModels;
 using System.Reflection;
 using Avalonia.Controls;
 using Avalonia.Media;
+using System.Threading.Tasks;
 
 namespace CtrlPay.Avalonia.ViewModels;
 
@@ -160,7 +161,7 @@ public partial class AccountantDashboardViewModel : ViewModelBase
         WaitingTile.Count = summary.WaitingCount;
 
         // Načteme data pro grafy
-        var data = ToDoRepo.GetAccountantChartData();
+        var data = AccountantRepo.GetAccountantChartData();
 
         // Jednoduchá kontrola změn obsahu (protože mock vrací vždy novou instanci objektu)
         bool dataChanged = _lastChartData == null || 

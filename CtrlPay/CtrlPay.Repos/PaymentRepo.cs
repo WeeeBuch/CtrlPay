@@ -4,6 +4,7 @@ using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -75,5 +76,25 @@ public class PaymentRepo : BaseRepo<PaymentApiDTO>
             throw new Exception($"API error: {result.BaseMessage} - {result.DetailMessage}");
         }
         return result;
+    }
+    public static async Task<bool> SendReminder(FrontendPaymentDTO payment)
+    {
+        string? json = await HttpWorker.HttpPost("api/payments/send-reminder", payment.ToApiDto(), true, default);
+        if (string.IsNullOrWhiteSpace(json))
+        {
+            AppLogger.Warning($"Get response was NULL.");
+            return false;
+        }
+
+        AppLogger.Info($"Deserializing response...");
+        var result = JsonSerializer.Deserialize<ReturnModel>(json, SerializerOptions);
+
+        if(result.Severity == ReturnModelSeverityEnum.Ok)
+        {
+            return true;
+        } else
+        {
+            return false;
+        }
     }
 }

@@ -40,7 +40,7 @@ namespace CtrlPay.Entities
         public string CustomerName { get; set; }
         public string PaymentId { get; set; }
         public DateTimeOffset CreatedAt { get; set; }
-        public DateTimeOffset DueDate { get; set; }
+        public DateTimeOffset? DueDate { get; set; }
         public decimal ExpectedAmountXMR { get; set; }
         public decimal PaidAmountXMR { get; set; }
         public decimal RemainingAmountXMR => ExpectedAmountXMR - PaidAmountXMR;

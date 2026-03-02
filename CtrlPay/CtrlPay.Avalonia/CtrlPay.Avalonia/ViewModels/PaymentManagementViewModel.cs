@@ -228,7 +228,7 @@ public partial class PaymentManagementViewModel : ViewModelBase
     public async Task SendReminder()
     {
         if (SelectedPayment == null) return;
-        bool success = await ToDoRepo.SendReminder(SelectedPayment);
+        bool success = await PaymentRepo.SendReminder(SelectedPayment);
         if (success)
         {
             AppLogger.Info($"Upomínka pro platbu {SelectedPayment.Id} úspěšně odeslána.");
