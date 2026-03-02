@@ -267,8 +267,8 @@ namespace CtrlPay.Repos
         {
             var rng = new Random();
             var customers = new[] { "Alice Corp.", "Bob's Burgers", "Charlie Chap", "Delta Force", "Echo Base", "Cyberdyne Systems", "Initech", "Umbrella Corp" };
-            var types = new[] { TransactionTypeEnum.Incoming, TransactionTypeEnum.Outgoing };
-            var statuses = new[] { StatusEnum.Completed, StatusEnum.Pending, StatusEnum.Cancelled, StatusEnum.Confirmed, StatusEnum.Overpaid };
+            var types = new[] { TransactionTypeEnum.Incoming, TransactionTypeEnum.Outgoing, TransactionTypeEnum.Internal };
+            var statuses = new[] { StatusEnum.Completed, StatusEnum.Pending, StatusEnum.Cancelled, StatusEnum.Confirmed, StatusEnum.Overpaid, StatusEnum.Created, StatusEnum.Failed, StatusEnum.WaitingForPayment, StatusEnum.PartiallyPaid, StatusEnum.Paid, StatusEnum.Expired };
 
             var list = new List<AccountantTransactionDTO>();
             for (int i = 0; i < 50; i++)
