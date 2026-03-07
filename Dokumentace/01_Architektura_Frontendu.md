@@ -1,24 +1,20 @@
-# 01 Architektura Frontendu
+﻿# 01 Architektura Frontendu
 
-  Tento soubor popisuje základní stavební kameny klientské aplikace `CtrlPay.Avalonia`. Architektura je navržena jako modulární a podporuje více platforem (Desktop, Android, Browser). V tomto souboru se zaměříme na Desktop, konkrétněji Windows.
-  
+Tento soubor popisuje základní stavební kameny klientské aplikace `CtrlPay.Avalonia`. Architektura je navržena jako modulární a podporuje více platforem (Desktop, Android, Browser). V tomto souboru se zaměříme na Desktop, konkrétněji Windows.
+
 ## Hlavní technologie
-   - **Avalonia UI**: Cross-platformní UI framework pro .NET.
-   - **CommunityToolkit.Mvvm**: Knihovna pro implementaci vzoru MVVM (Model-View-ViewModel).
-   - **ReactiveUI / Messaging**: Pro komunikaci mezi komponentami bez pevné vazby (využívá se `WeakReferenceMessenger`).
-
+- **Avalonia UI**: Cross-platformní UI framework pro .NET.
+- **CommunityToolkit.Mvvm**: Knihovna pro implementaci vzoru MVVM (Model-View-ViewModel).
+- **ReactiveUI / Messaging**: Pro komunikaci mezi komponentami bez pevné vazby (využívá se `WeakReferenceMessenger`).
 
 ## Vzor MVVM (Model-View-ViewModel)
-  
-  Aplikace striktně odděluje vzhled od logiky:
-
+Aplikace striktně odděluje vzhled od logiky:
 1. **Views** (`Views/` a `Windows/`): Definují vzhled pomocí XAML. Obsahují pouze kód nezbytný pro UI (tzv. Code-behind).
-2. **ViewModels** (`ViewModels/`): Obsahují logiku. Dědí z `ViewModelBase` (který využívá `ObservableObject`). Zde se zpracovávají příkazy (`RelayCommand`) a drží se data pro zobrazení.
+2. **ViewModels** (`ViewModels/` a `Pieces/ViewModels`): Obsahují logiku. Dědí z `ViewModelBase` (který využívá `ObservableObject`). Zde se zpracovávají příkazy (`RelayCommand`) a drží se data pro zobrazení.
 3. **Models / DTOs**: Data přicházející z `CtrlPay.Repos`.
 
 ### Diagram toku dat:
-
-``` mermaid
+```mermaid
 graph
 View -- "Binding / Commands" --> ViewModel
 ViewModel -- "Calls" --> Repository
@@ -29,35 +25,45 @@ ViewModel -- "NotifyPropertyChanged" --> View
 ```
 
 ## Inicializace a Start Aplikace (`App.axaml.cs`)
-  Při spuštění aplikace probíhá rozhodovací proces, který určuje, jaké okno se uživateli zobrazí. Tento proces závisí na souboru `settings.json`.
+Při spuštění aplikace probíhá rozhodovací proces, který určuje, jaké okno se uživateli zobrazí. Tento proces závisí na souboru `settings.json`.
 
-``` csharp
+```csharp
 public override void OnFrameworkInitializationCompleted()
 {
-	if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
-	{
-		if (IsConfigured) // Máme nastavené API a jazyk?
-		{
-			desktop.MainWindow = new LoginWindow();
-		}
-		else
-		{
-			// Pokud ne, spustíme průvodce nastavením
-			desktop.MainWindow = new OnboardingWindow { DataContext = new OnboardingViewModel() };
-		}
-	}
-	// ... podpora pro Mobile/Web SingleView
+    if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+    {
+        if (IsConfigured) // Máme nastavené API a jazyk?
+        {
+            desktop.MainWindow = new LoginWindow();
+        }
+        else
+        {
+            // Pokud ne, spustíme průvodce nastavením
+            desktop.MainWindow = new OnboardingWindow { DataContext = new OnboardingViewModel() };
+        }
+    }
 }
 ```
 
-## Navigace a přepínání pohledů
-  Navigace v rámci hlavního okna není řešena otevíráním nových oken, ale dynamickou výměnou obsahu (`ContentControl`) pomocí třídy Navigator.cs.
+## Životní cyklus a Onboarding (První spuštění)
+Aplikace je navržena tak, aby byla po stažení ihned použitelná bez složité ruční editace konfiguračních souborů. Při startu probíhá kontrola existence lokálního nastavení (`settings.json`) přes `SettingsManager`:
 
-   - `ViewLocator`: Automaticky mapuje ViewModel na odpovídající View na základě názvu (např. MainViewModel -> MainView).
-   - `Navigator`: Umožňuje z ViewModelu zavolat změnu stránky, aniž by ViewModel věděl o existenci UI komponent.
+1. **Stav: Neexistuje konfigurace** -> Spustí se `OnboardingWindow`. Uživatel zadá URL adresu API a základní preference. Data se uloží.
+2. **Stav: Konfigurace existuje** -> Proběhne inicializace `Credentials.BaseUri` a aplikace rovnou zobrazí `LoginWindow`.
 
+## Navigace a Role-based UI
+Aplikace využívá dynamickou navigaci v rámci `MainView` pomocí `MainViewModel`. Obsah se mění podle role přihlášeného uživatele (Customer, Accountant, Admin, Employee).
 
-## Klíčové komponenty
-   - `SettingsManager`: Stará se o ukládání a načítání lokální konfigurace aplikace.
-   - `TranslationManager`: Zajišťuje lokalizaci textů (vícejazyčnost) za běhu aplikace.
-   - `ThemeManager`: Přepíná mezi světlým a tmavým režimem úpravou zdrojů (Styles).
+- **Role-based Menu**: Navigační položky jsou generovány v `MainViewModel.GenerateNavItems()` na základě role z `Credentials.Role`.
+- **NavItem**: Každá položka menu drží referenci na konkrétní `UserControl` (View) a ikonu.
+- **Dynamic Content**: Výběr položky v menu aktualizuje vlastnost `CurrentPage`, která je nabindovaná na hlavní `ContentControl` v `MainView`.
+
+## Modulární UI (Pieces)
+Pro zvýšení znovupoužitelnosti kódu dělíme UI na menší části – **Pieces** (složka `Pieces/`).
+- Každý "Piece" je samostatná komponenta (např. `TransactionListPiece`, `CounterPiece`).
+- Tyto komponenty mají své vlastní ViewModely, což umožňuje jejich snadné vkládání do různých částí aplikace bez duplikace logiky.
+
+## Klíčové manažery
+- **SettingsManager**: Stará se o ukládání a načítání lokální konfigurace (`settings.json`).
+- **TranslationManager**: Zajišťuje lokalizaci textů za běhu aplikace.
+- **ThemeManager**: Spravuje barevná témata aplikace (např. Lime, Blue, Purple atd.) načítáním příslušných `.axaml` stylů.
