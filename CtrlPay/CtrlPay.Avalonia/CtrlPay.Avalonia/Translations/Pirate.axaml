@@ -13,10 +13,13 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">Too much booty</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">Map o' the Coin</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">Recruit Loot</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">Patch up</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">Belay that</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">Lock in chest</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">Toss overboard</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Trade for chits</x:String>
+    <x:String x:Key="PaymentManagerView.Button.SendReminder">Send a Parrot</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Name</x:String>
     <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Mark the scroll...</x:String>
@@ -31,11 +34,30 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">Extra booty</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">First logged</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">Ledger o' the Sea</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">Chart View</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">Current View</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">Loot Comin' In</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">Gold Goin' Out</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">Matey</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">Spyglass for coin...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">Whole Crew</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">Status, matey:</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">All flags</x:String>
+
+    <x:String x:Key="Common.ID">Mark</x:String>
+    <x:String x:Key="Common.Date">Moon</x:String>
+    <x:String x:Key="Common.Type">Sort</x:String>
+    <x:String x:Key="Common.Amount">Booty</x:String>
+    <x:String x:Key="Common.Status">Wind</x:String>
+    <x:String x:Key="Common.Hash">Seal</x:String>
+
     <x:String x:Key="NavbarView.Customers">Ports</x:String>
     <x:String x:Key="Customers.Title">Trade Partners</x:String>
     <x:String x:Key="Customers.SearchWatermark">Spyglass for merchants...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">New Contract</x:String>
     <x:String x:Key="Customers.Button.Edit">Amend terms</x:String>
+    <x:String x:Key="Customers.Button.Promote">Make Matey</x:String>
     <x:String x:Key="Customers.Button.Delete">Toss overboard</x:String>
     <x:String x:Key="Customers.Button.Cancel">Belay</x:String>
     <x:String x:Key="Customers.Button.Save">Seal with wax</x:String>
@@ -61,11 +83,24 @@
 
     <x:String x:Key="DashboardView.TransactionList">Bounty Log</x:String>
 
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">Quartermaster's Ledger</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Quick peek at ye gold and duties</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">TOO MUCH BOOTY</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">WALK THE PLANK</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">BIT OF GOLD</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">CALM SEAS</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> to be settled</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">Loot History (30 tides)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">Loot Status</x:String>
+
     <x:String x:Key="NavbarView.Menu">Compass</x:String>
     <x:String x:Key="NavbarView.Dashboard">Main Deck</x:String>
     <x:String x:Key="NavbarView.Settings">Ship's Rules</x:String>
     <x:String x:Key="NavbarView.Debts">Debts to the Sea</x:String>
     <x:String x:Key="NavbarView.Transactions">Incoming Booty</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">Log o' Loot</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">Captain's Quarters</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Treasure</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Buried Gold</x:String>
@@ -120,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Next">Sail On</x:String>
     <x:String x:Key="OnboardingView.Button.Previous">Turn the Tides</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">Drop Anchor</x:String>
+
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">Captain's Quarters (Admin)</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">Spyglass for sailors...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">Recruit new scallywag</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">The Crew</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">All ranks</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">Amend terms</x:String>
+    <x:String x:Key="UserPiece.Button.Save">Seal with wax</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">Belay</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">Secret Cipher On</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">Pirate Name</x:String>
 
     <x:String x:Key="ErrorCode.A0">Welcome aboard, matey!</x:String>
     <x:String x:Key="ErrorCode.A1">Another scallywag already claims that name</x:String>

@@ -74,5 +74,23 @@ namespace CtrlPay.API.Controllers
             credit -= ourXmr;
             return Ok(new ReturnModel<decimal>("T0", ReturnModelSeverityEnum.Ok, credit));
         }
+        [HttpGet]
+        [Route("all")]
+        // GET : api/transactions/all
+        public IActionResult All()
+        {
+            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
+            if (role != Role.Accountant && role != Role.Admin)
+            {
+                return Forbid();
+            }
+            List<Entities.Transaction> transactions = _db.Transactions.ToList();
+            List<TransactionApiDTO> transactionsDTO = new List<TransactionApiDTO>();
+            foreach (var transaction in transactions)
+            {
+                transactionsDTO.Add(new TransactionApiDTO(transaction));
+            }
+            return Ok(new ReturnModel<List<TransactionApiDTO>>("T0", ReturnModelSeverityEnum.Ok, transactionsDTO));
+        }
     }
 }

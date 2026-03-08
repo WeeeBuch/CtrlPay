@@ -20,7 +20,9 @@ public static class ChangeChecker
         await PaymentRepo.UpdatePaymentSumCacheFromApi(default);
         await PaymentRepo.UpdatePaymetsCacheFromApi(default);
         await CustomerRepo.UpdateCustomersFromApi(default);
-        await AccountantPaymentRepo.UpdatePaymetsCacheFromApi(default);
+        await AccountantRepo.UpdateAccountantCachesFromApi(default);
+        // TODO: Karele tu aktualizace
+        // TODO: Karele tu další aktualizace pro accountant
 
         // Sem se píšou všechny kontroly změn, které chceme provádět
         UpdateHandler.HandleCreditAvailableUpdate(TransactionRepo.GetTransactionSum());
@@ -28,6 +30,8 @@ public static class ChangeChecker
         UpdateHandler.HandleNewDebtsAdded();
         UpdateHandler.HandleNewPaymentsAdded();
         UpdateHandler.HandleUpdatedCustomers();
+        UpdateHandler.HandleUpdatedAdminUsers();
+        UpdateHandler.HandleUpdatedData();
 
         Credentials.BaseUri = SettingsManager.Current.ConnectionString;
         AppLogger.Info($"Checking completed.");

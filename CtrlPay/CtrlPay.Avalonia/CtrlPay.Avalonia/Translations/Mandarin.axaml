@@ -13,10 +13,13 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">仅限多付</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">付款详情</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">添加</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">编辑</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">取消</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">保存</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">删除</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">转换为余额</x:String>
+    <x:String x:Key="PaymentManagerView.Button.SendReminder">发送提醒</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">标题</x:String>
     <x:String x:Key="PaymentManagerView.Label.TitleWatermark">输入标题...</x:String>
@@ -36,11 +39,30 @@
     <x:String x:Key="LoginView.Button.Login">进入</x:String>
     <x:String x:Key="LoginView.Button.Register">创建账户</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">交易概览</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">表格视图</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">流程视图</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">收入</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">支出</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">客户</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">搜索交易...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">所有客户</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">状态：</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">所有状态</x:String>
+
+    <x:String x:Key="Common.ID">ID</x:String>
+    <x:String x:Key="Common.Date">日期</x:String>
+    <x:String x:Key="Common.Type">类型</x:String>
+    <x:String x:Key="Common.Amount">金额</x:String>
+    <x:String x:Key="Common.Status">状态</x:String>
+    <x:String x:Key="Common.Hash">哈希</x:String>
+
     <x:String x:Key="NavbarView.Customers">客户</x:String>
     <x:String x:Key="Customers.Title">客户管理</x:String>
     <x:String x:Key="Customers.SearchWatermark">搜索客户...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">新客户</x:String>
     <x:String x:Key="Customers.Button.Edit">编辑</x:String>
+    <x:String x:Key="Customers.Button.Promote">升级</x:String>
     <x:String x:Key="Customers.Button.Delete">删除</x:String>
     <x:String x:Key="Customers.Button.Cancel">取消</x:String>
     <x:String x:Key="Customers.Button.Save">保存</x:String>
@@ -61,11 +83,24 @@
 
     <x:String x:Key="DashboardView.TransactionList">交易记录</x:String>
 
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">会计概览</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">付款和任务快速概览</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">多付</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">逾期</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">部分付款</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">等待中</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> 待处理</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">收入历史 (30天)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">付款状态</x:String>
+
     <x:String x:Key="NavbarView.Menu">菜单</x:String>
     <x:String x:Key="NavbarView.Dashboard">仪表板</x:String>
     <x:String x:Key="NavbarView.Settings">设置</x:String>
     <x:String x:Key="NavbarView.Debts">债务</x:String>
     <x:String x:Key="NavbarView.Transactions">入账款项</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">交易概览</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">管理面板</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">余额</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">待处理</x:String>
@@ -120,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Next">下一步</x:String>
     <x:String x:Key="OnboardingView.Button.Previous">上一步</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">完成</x:String>
+
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">系统管理</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">搜索用户...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">添加用户</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">系统用户</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">所有角色</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">编辑</x:String>
+    <x:String x:Key="UserPiece.Button.Save">保存</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">取消</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">已启用 2FA</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">用户名</x:String>
 
     <x:String x:Key="ErrorCode.A0">成功登录</x:String>
     <x:String x:Key="ErrorCode.A1">相同用户名的用户已存在</x:String>

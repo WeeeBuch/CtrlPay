@@ -55,7 +55,7 @@ namespace CtrlPay.Core
             } 
             return new ReturnModel("A0", ReturnModelSeverityEnum.Ok);            
         }
-        public static ReturnModel AddUser(string username, string password, Role role)
+        public static ReturnModel<User> AddUser(string username, string password, Role role)
         {
             byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
 
@@ -72,7 +72,7 @@ namespace CtrlPay.Core
             User newUser = new User(username, hash, salt, role);
             db.Users.Add(newUser);
             db.SaveChanges();
-            return new ReturnModel("A0", ReturnModelSeverityEnum.Ok);
+            return new ReturnModel<User>("A0", ReturnModelSeverityEnum.Ok, newUser);
         }
         public static ReturnModel TotpLogin(byte[] secret, string code)
         {

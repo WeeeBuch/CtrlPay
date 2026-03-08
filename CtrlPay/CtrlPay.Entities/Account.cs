@@ -19,6 +19,7 @@ namespace CtrlPay.Entities
         private int BaseAddressId { get; set; }
         [ForeignKey("BaseAddressId")]
         public virtual Address? BaseAddress { get; set; }
+        public virtual LoyalCustomer? LoyalCustomer { get; set; }
         //public virtual List<Address> Addresses { get; set; }
     }
 }

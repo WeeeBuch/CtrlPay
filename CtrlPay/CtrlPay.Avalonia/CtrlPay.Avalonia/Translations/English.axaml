@@ -12,10 +12,13 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">Only overpaid</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">Payment Detail</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">Add</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">Edit</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">Cancel</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">Save</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">Delete</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Convert to Credit</x:String>
+    <x:String x:Key="PaymentManagerView.Button.SendReminder">Send Reminder</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Title</x:String>
     <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Enter title...</x:String>
@@ -30,6 +33,24 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">Surplus</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">Created At</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">Transaction Overview</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">Table View</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">Flow View</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">Incoming</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">Outgoing</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">Customer</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">Search transactions...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">All Customers</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">Status:</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">All statuses</x:String>
+
+    <x:String x:Key="Common.ID">ID</x:String>
+    <x:String x:Key="Common.Date">Date</x:String>
+    <x:String x:Key="Common.Type">Type</x:String>
+    <x:String x:Key="Common.Amount">Amount</x:String>
+    <x:String x:Key="Common.Status">Status</x:String>
+    <x:String x:Key="Common.Hash">Hash</x:String>
+
     <!-- Login Window -->
     <x:String x:Key="LoginWindow.Title">Login</x:String>
 
@@ -38,6 +59,7 @@
     <x:String x:Key="Customers.SearchWatermark">Search customers...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">New Customer</x:String>
     <x:String x:Key="Customers.Button.Edit">Edit</x:String>
+    <x:String x:Key="Customers.Button.Promote">Promote</x:String>
     <x:String x:Key="Customers.Button.Delete">Delete</x:String>
     <x:String x:Key="Customers.Button.Cancel">Cancel</x:String>
     <x:String x:Key="Customers.Button.Save">Save</x:String>
@@ -63,7 +85,18 @@
     <x:String x:Key="LoginView.Watermark.Code">Verification Code</x:String>
 
     <!-- Dashboard View -->
-    <x:String x:Key="DashboardView.TransactionList">List of last transactions</x:String>
+    <x:String x:Key="DashboardView.TransactionList">Transaction List</x:String>
+
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">Accountant Overview</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Quick overview of payments and tasks</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">OVERPAID</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">OVERDUE</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">PARTIALLY PAID</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">WAITING</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> to process</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">Income History (30 days)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">Payment Statuses</x:String>
 
     <!-- Navbar View -->
     <x:String x:Key="NavbarView.Menu">Menu</x:String>
@@ -71,6 +104,8 @@
     <x:String x:Key="NavbarView.Settings">Settings</x:String>
     <x:String x:Key="NavbarView.Debts">Debts</x:String>
     <x:String x:Key="NavbarView.Transactions">Incoming Payments</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">Transaction Overview</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">Admin Panel</x:String>
 
     <!-- Credit Counter Piece -->
     <x:String x:Key="CounterPiece.Credits.Title">Credits</x:String>
@@ -128,6 +163,20 @@
     <x:String x:Key="OnboardingView.Button.Next">Next</x:String>
     <x:String x:Key="OnboardingView.Button.Previous">Previous</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">Finish</x:String>
+
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">System Administration</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">Search users...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">Add User</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">System Users</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">All roles</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">Edit</x:String>
+    <x:String x:Key="UserPiece.Button.Save">Save</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">Cancel</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA Enabled</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">Username</x:String>
 
     <x:String x:Key="ErrorCode.A0">Successfully logged in</x:String>
     <x:String x:Key="ErrorCode.A1">User with the same username already exists</x:String>

@@ -7,123 +7,144 @@ using CtrlPay.Avalonia.Translations;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
+using CtrlPay.Avalonia;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
+using CommunityToolkit.Mvvm.Messaging;
 
-namespace CtrlPay.Avalonia.ViewModels
+namespace CtrlPay.Avalonia.ViewModels;
+
+public partial class MainViewModel : ViewModelBase
 {
-    public partial class MainViewModel : ViewModelBase
+    [ObservableProperty]
+    private object _currentPage;
+
+    [ObservableProperty]
+    private NavItem _selectedNavigationItem;
+
+    [ObservableProperty]
+    private bool _isPaneOpen = true;
+
+    public double PaneWidth => IsPaneOpen ? 200 : 65;
+
+    // A uprav TogglePane, aby o tom dal vědět
+    [RelayCommand]
+    private void TogglePane()
     {
-        [ObservableProperty]
-        private object _currentPage;
+        IsPaneOpen = !IsPaneOpen;
+        OnPropertyChanged(nameof(PaneWidth));
+    }
 
-        [ObservableProperty]
-        private NavItem _selectedNavigationItem;
+    [ObservableProperty]
+    private string menuIcon = IconData.Menu;
 
-        [ObservableProperty]
-        private bool _isPaneOpen = true;
+    public ObservableCollection<NavItem> NavigationItems { get; private set; }
 
-        public double PaneWidth => IsPaneOpen ? 200 : 65;
+    public MainViewModel()
+    {
+        // Spuštění kontrol změn na pozadí
+        AppLogger.Info($"Starting Checker...");
+        _ = ChangeChecker.StartChecking();
 
-        // A uprav TogglePane, aby o tom dal vědět
-        [RelayCommand]
-        private void TogglePane()
+        GenerateNavItems();
+
+        CurrentPage = NavigationItems[0].ViewModel;
+        SelectedNavigationItem = NavigationItems[0];
+
+        // Nasloucháme zprávám z Dashboardu pro navigaci s filtrem
+        WeakReferenceMessenger.Default.Register<NavigationFilterMessage>(this, (r, m) => HandleNavigationFilter(m.Filter));
+    }
+
+    private void HandleNavigationFilter(StatusEnum filter)
+    {
+        // Najdeme položku v menu, která odpovídá seznamu transakcí
+        var target = NavigationItems.FirstOrDefault(i => i.ViewModel is AccountantTransactionsView);
+        if (target != null)
         {
-            IsPaneOpen = !IsPaneOpen;
-            OnPropertyChanged(nameof(PaneWidth));
-        }
-
-        [ObservableProperty]
-        private string menuIcon = IconData.Menu;
-
-        public ObservableCollection<NavItem> NavigationItems { get; private set; }
-
-        public MainViewModel()
-        {
-            // Spuštění kontrol změn na pozadí
-            AppLogger.Info($"Starting Checker...");
-            _ = ChangeChecker.StartChecking();
-
-            GenerateNavItems();
-
-            CurrentPage = NavigationItems[0].ViewModel;
-            SelectedNavigationItem = NavigationItems[0];
-        }
-
-        private void GenerateNavItems()
-        {
-            Role role;
-            if (DebugMode.OverrideRole)
+            SelectedNavigationItem = target;
+            // Nastavíme filtr v cílovém ViewModelu
+            if (target.ViewModel.DataContext is AccountantTransactionsViewModel vm)
             {
-                role = DebugMode.DebugRole;
+                vm.SelectedStatusItem = vm.Statuses.Where(s => s.Value == filter).FirstOrDefault();
             }
-            else
-            {
-                role = Credentials.Role;
-            }
-
-            NavigationItems = [];
-
-            if (role == Role.Customer)
-            {
-                NavigationItems.Add(new NavItem("NavbarView.Dashboard", new DashboardView(), IconData.Dashboard));
-                NavigationItems.Add(new NavItem("NavbarView.Debts", new DebtView(), IconData.Debt));
-                NavigationItems.Add(new NavItem("NavbarView.Transactions", new TransactionView(), IconData.Cash));
-            }
-
-            if (role == Role.Accountant)
-            {
-                NavigationItems.Add(new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers));
-                NavigationItems.Add(new NavItem("NavbarView.PaymentManagement", new PaymentManagementView(), IconData.Cash));
-            }
-
-            if (role == Role.Admin)
-            {
-
-            }
-
-            if (role == Role.Employee)
-            {
-
-            }
-
-            NavigationItems.Add(new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog));
-        }
-
-        partial void OnSelectedNavigationItemChanged(NavItem value)
-        {
-            if (value != null)
-                CurrentPage = value.ViewModel;
         }
     }
 
-    public partial class NavItem : ObservableObject
+    private void GenerateNavItems()
     {
-        [ObservableProperty]
-        private string name;
-
-        public string NameKey { get; }
-        public UserControl ViewModel { get; }
-        public string Icon { get; }
-
-        public NavItem(string nameKey, UserControl viewModel, string icon)
+        Role role;
+        if (DebugMode.OverrideRole)
         {
-            NameKey = nameKey;
-            ViewModel = viewModel;
-            Icon = icon;
+            role = DebugMode.DebugRole;
+        }
+        else
+        {
+            role = Credentials.Role;
+        }
 
-            // Prvotní překlad
+        NavigationItems = [];
+
+        if (role == Role.Customer)
+        {
+            NavigationItems.Add(new NavItem("NavbarView.Dashboard", new DashboardView(), IconData.Dashboard));
+            NavigationItems.Add(new NavItem("NavbarView.Debts", new DebtView(), IconData.Debt));
+            NavigationItems.Add(new NavItem("NavbarView.Transactions", new TransactionView(), IconData.Cash));
+        }
+
+        if (role == Role.Accountant)
+        {
+            NavigationItems.Add(new NavItem("NavbarView.Dashboard", new AccountantDashboardView(), IconData.Dashboard));
+            NavigationItems.Add(new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers));
+            NavigationItems.Add(new NavItem("NavbarView.PaymentManagement", new PaymentManagementView(), IconData.Cash));
+            NavigationItems.Add(new NavItem("NavbarView.AccountantTransactions", new AccountantTransactionsView(), IconData.Cash));
+        }
+
+        if (role == Role.Admin)
+        {
+            NavigationItems.Add(new NavItem("NavbarView.AdminPanel", new AdminView(), IconData.Admin));
+        }
+
+        if (role == Role.Employee)
+        {
+
+        }
+
+        NavigationItems.Add(new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog));
+    }
+
+    partial void OnSelectedNavigationItemChanged(NavItem value)
+    {
+        if (value != null)
+            CurrentPage = value.ViewModel;
+    }
+}
+
+public partial class NavItem : ObservableObject
+{
+    [ObservableProperty]
+    private string name;
+
+    public string NameKey { get; }
+    public UserControl ViewModel { get; }
+    public string Icon { get; }
+
+    public NavItem(string nameKey, UserControl viewModel, string icon)
+    {
+        NameKey = nameKey;
+        ViewModel = viewModel;
+        Icon = icon;
+
+        // Prvotní překlad
+        Name = TranslationManager.GetString(NameKey);
+
+        // Přihlášení k odběru změn jazyka
+        TranslationManager.LanguageChanged.Add(UpdateName);
+    }
+
+    private void UpdateName()
+    {
+        if (!string.IsNullOrEmpty(NameKey))
             Name = TranslationManager.GetString(NameKey);
-
-            // Přihlášení k odběru změn jazyka
-            TranslationManager.LanguageChanged.Add(UpdateName);
-        }
-
-        private void UpdateName()
-        {
-            if (!string.IsNullOrEmpty(NameKey))
-                Name = TranslationManager.GetString(NameKey);
-        }
     }
-
 }

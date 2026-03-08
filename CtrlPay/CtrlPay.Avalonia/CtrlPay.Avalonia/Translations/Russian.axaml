@@ -13,10 +13,13 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">Только переплаты</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">Детали платежа</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">Добавить</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">Редактировать</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">Отмена</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">Сохранить</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">Удалить</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">В кредит</x:String>
+    <x:String x:Key="PaymentManagerView.Button.SendReminder">Отправить напоминание</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Заголовок</x:String>
     <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Введите заголовок...</x:String>
@@ -31,11 +34,30 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">Переплата</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">Создано</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">Обзор транзакций</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">Таблица</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">Поток</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">Входящие</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">Исходящие</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">Клиент</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">Поиск транзакций...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">Все клиенты</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">Статус:</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">Все статусы</x:String>
+
+    <x:String x:Key="Common.ID">ID</x:String>
+    <x:String x:Key="Common.Date">Дата</x:String>
+    <x:String x:Key="Common.Type">Тип</x:String>
+    <x:String x:Key="Common.Amount">Сумма</x:String>
+    <x:String x:Key="Common.Status">Статус</x:String>
+    <x:String x:Key="Common.Hash">Хэш</x:String>
+
     <x:String x:Key="NavbarView.Customers">Клиенты</x:String>
     <x:String x:Key="Customers.Title">Управление клиентами</x:String>
     <x:String x:Key="Customers.SearchWatermark">Поиск клиентов...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">Новый клиент</x:String>
     <x:String x:Key="Customers.Button.Edit">Изменить</x:String>
+    <x:String x:Key="Customers.Button.Promote">Повысить</x:String>
     <x:String x:Key="Customers.Button.Delete">Удалить</x:String>
     <x:String x:Key="Customers.Button.Cancel">Отмена</x:String>
     <x:String x:Key="Customers.Button.Save">Сохранить</x:String>
@@ -61,11 +83,24 @@
 
     <x:String x:Key="DashboardView.TransactionList">История транзакций</x:String>
 
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">Обзор бухгалтерии</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Быстрый обзор платежей и задач</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">ПЕРЕПЛАТА</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">ПРОСРОЧЕНО</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">ЧАСТИЧНО ОПЛАЧЕНО</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">В ОЖИДАНИИ</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> к обработке</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">История доходов (30 дней)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">Статусы платежей</x:String>
+
     <x:String x:Key="NavbarView.Menu">Меню</x:String>
     <x:String x:Key="NavbarView.Dashboard">Панель управления</x:String>
     <x:String x:Key="NavbarView.Settings">Настройки</x:String>
     <x:String x:Key="NavbarView.Debts">Долги</x:String>
     <x:String x:Key="NavbarView.Transactions">Входящие платежи</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">Обзор транзакций</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">Панель администратора</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Баланс</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">В ожидании</x:String>
@@ -120,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Next">Далее</x:String>
     <x:String x:Key="OnboardingView.Button.Previous">Назад</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">Завершить</x:String>
+
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">Администрирование системы</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">Поиск пользователей...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">Добавить пользователя</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">Системные пользователи</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">Все роли</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">Изменить</x:String>
+    <x:String x:Key="UserPiece.Button.Save">Сохранить</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">Отмена</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA включено</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">Имя пользователя</x:String>
 
     <x:String x:Key="ErrorCode.A0">Успешный вход в систему</x:String>
     <x:String x:Key="ErrorCode.A1">Пользователь с таким именем уже существует</x:String>

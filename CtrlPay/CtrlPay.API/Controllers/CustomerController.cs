@@ -1,5 +1,7 @@
-﻿using CtrlPay.DB;
+﻿using CtrlPay.Core;
+using CtrlPay.DB;
 using CtrlPay.Entities;
+using CtrlPay.XMR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,14 +16,18 @@ namespace CtrlPay.API.Controllers
     public class CustomerController : ControllerBase
     {
         private readonly CtrlPayDbContext _db;
-        private readonly bool _mergedAccountants;
+        private readonly MoneroRpcOptions _rpcOptions;
+        private readonly EmailService _post;
+        private readonly MailRenderService _mailRenderer;
 
-
-        public CustomerController(IConfiguration configuration)
+        public CustomerController(IOptions<MoneroRpcOptions> rpcOptions, EmailService post, MailRenderService mailRenderer)
         {
             _db = new CtrlPayDbContext();
-            _mergedAccountants = configuration.GetValue<bool>("MergeAccountantAndPayrollAccountant");
+            _rpcOptions = rpcOptions.Value;
+            _post = post;
+            _mailRenderer = mailRenderer;
         }
+
         [HttpPost("api/customers/create")]
         // POST : api/customers/create
         public IActionResult CreateCustomer([FromBody] CustomerApiDTO request)
@@ -60,7 +66,7 @@ namespace CtrlPay.API.Controllers
             List<CustomerApiDTO> customers = new();
             _db.Customers.ToList().ForEach(c =>
             {
-                customers.Add(c.LoyalCustomer == null ? new CustomerApiDTO(c) : new CustomerApiDTO(c, c.LoyalCustomer, c.LoyalCustomer.Users.FirstOrDefault()));
+                customers.Add(c.LoyalCustomer == null ? new CustomerApiDTO(c) : new CustomerApiDTO(c, c.LoyalCustomer));
             });
             return Ok(new ReturnModel<List<CustomerApiDTO>>("Z0", ReturnModelSeverityEnum.Ok, customers));
         }
@@ -117,14 +123,17 @@ namespace CtrlPay.API.Controllers
         [HttpPost]
         [Route("api/customers/promote/{id}")]
         // POST : api/customers/promote/{id}
-        public IActionResult PromoteToLoyalCustomer(int id)
+        public async Task<IActionResult> PromoteToLoyalCustomer(int id)
         {
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
             if (role != Role.Accountant && role != Role.Admin)
             {
                 return Forbid();
             }
-            //TODO: Dodělat promote to loyal customer
+            Customer customer = _db.Customers.Where(c => c.Id == id).First();
+            string code = await XMRComs.PromoteCustomer(id, _rpcOptions);
+            string mail = await _mailRenderer.RenderToStringAsync("Mails/Registration", new RegistrationEmailModel(customer.FullName, code, "https://github.com/WeeeBuch/CtrlPay/releases", "tumail"));
+            _post.SendAsync(customer.Email, "Změna statusu zákazníka", mail);
             return Ok(new ReturnModel("Z0", ReturnModelSeverityEnum.Ok));
         }
     }

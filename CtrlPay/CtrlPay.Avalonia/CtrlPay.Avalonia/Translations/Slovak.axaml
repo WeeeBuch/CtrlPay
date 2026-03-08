@@ -13,10 +13,13 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">Iba preplatky</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">Detail platby</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">Pridať</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">Upraviť</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">Zrušiť</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">Uložiť</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">Zmazať</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Previesť na kredit</x:String>
+    <x:String x:Key="PaymentManagerView.Button.SendReminder">Poslať upomienku</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Názov</x:String>
     <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Zadajte názov...</x:String>
@@ -31,11 +34,30 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">Preplatok</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">Vytvorené dňa</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">Prehľad transakcií</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">Tabuľkové zobrazenie</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">Prietokové zobrazenie</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">Prichádzajúce</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">Odchádzajúce</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">Zákazník</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">Hľadať transakcie...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">Všetci zákazníci</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">Stav:</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">Všetky stavy</x:String>
+
+    <x:String x:Key="Common.ID">ID</x:String>
+    <x:String x:Key="Common.Date">Dátum</x:String>
+    <x:String x:Key="Common.Type">Typ</x:String>
+    <x:String x:Key="Common.Amount">Suma</x:String>
+    <x:String x:Key="Common.Status">Stav</x:String>
+    <x:String x:Key="Common.Hash">Hash</x:String>
+
     <x:String x:Key="NavbarView.Customers">Zákazníci</x:String>
     <x:String x:Key="Customers.Title">Správa zákazníkov</x:String>
     <x:String x:Key="Customers.SearchWatermark">Hľadať zákazníkov...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">Nový zákazník</x:String>
     <x:String x:Key="Customers.Button.Edit">Upraviť</x:String>
+    <x:String x:Key="Customers.Button.Promote">Povýšiť</x:String>
     <x:String x:Key="Customers.Button.Delete">Zmazať</x:String>
     <x:String x:Key="Customers.Button.Cancel">Zrušiť</x:String>
     <x:String x:Key="Customers.Button.Save">Uložiť</x:String>
@@ -61,11 +83,24 @@
 
     <x:String x:Key="DashboardView.TransactionList">Zoznam transakcií</x:String>
 
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">Prehľad účtovníctva</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Rýchly prehľad platieb a úloh na vybavenie</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">PREPLATKY</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">PO SPLATNOSTI</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">ČIASTOČNE PLATENÉ</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">ČAKAJÚCE</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> na vybavenie</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">História príjmov (30 dní)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">Stavy platieb</x:String>
+
     <x:String x:Key="NavbarView.Menu">Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">Nástenka</x:String>
     <x:String x:Key="NavbarView.Settings">Nastavenia</x:String>
     <x:String x:Key="NavbarView.Debts">Dlhy</x:String>
     <x:String x:Key="NavbarView.Transactions">Prichádzajúce platby</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">Prehľad transakcií</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">Administrácia</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Zostatok</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Čakajúce</x:String>
@@ -120,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Next">Ďalej</x:String>
     <x:String x:Key="OnboardingView.Button.Previous">Späť</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">Dokončiť</x:String>
+
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">Administrácia systému</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">Hľadať používateľov...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">Pridať používateľa</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">Systémoví používatelia</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">Všetky role</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">Upraviť</x:String>
+    <x:String x:Key="UserPiece.Button.Save">Uložiť</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">Zrušiť</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA zapnuté</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">Používateľské meno</x:String>
 
     <x:String x:Key="ErrorCode.A0">Prihlásenie prebehlo úspešne</x:String>
     <x:String x:Key="ErrorCode.A1">Používateľ s rovnakým menom už existuje</x:String>

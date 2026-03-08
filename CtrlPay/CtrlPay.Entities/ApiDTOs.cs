@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
@@ -21,6 +22,7 @@ namespace CtrlPay.Entities
         public decimal Fee { get; set; }
         public DateTime Timestamp { get; set; }
         public int? PaymentId { get; set; }
+        public string CustomerName { get; set; }
 
         public TransactionApiDTO()
         {
@@ -54,7 +56,9 @@ namespace CtrlPay.Entities
             if (transaction.Payment != null)
             {
                 PaymentId = transaction.Payment.Id;
+                CustomerName = transaction.Payment.Customer.FullName;
             }
+            CustomerName = transaction.Account.Index == 0 ? CustomerName = "Customers.Name.OneTime" : CustomerName = transaction.Account.LoyalCustomer.Customer.FullName;
         }
     }
     public class PaymentApiDTO
@@ -105,9 +109,6 @@ namespace CtrlPay.Entities
         public bool Physical { get; set; }
         public string? Company { get; set; }
         public bool? IsLoyal { get; set; }
-        public string? Username { get; set; }
-        public int? AccountID { get; set; }
-        public string? BaseAddress { get; set; }
         public CustomerApiDTO()
         {
             
@@ -127,7 +128,7 @@ namespace CtrlPay.Entities
             Company = customer.Company;
             IsLoyal = false;
         }
-        public CustomerApiDTO(Customer customer, LoyalCustomer loyalCustomer, User user)
+        public CustomerApiDTO(Customer customer, LoyalCustomer loyalCustomer)
         {
             Id = customer.Id;
             FirstName = customer.FirstName;
@@ -141,9 +142,42 @@ namespace CtrlPay.Entities
             Physical = customer.Physical;
             Company = customer.Company;
             IsLoyal = true;
+        }
+    }
+    public class UserApiDTO
+    {
+        public int Id { get; set; }
+        public Role Role { get; set; }
+        public int? LoyalCustomerId { get; set; }
+        public string Username { get; set; }
+        public byte[] PasswordHash { get; set; }
+        public byte[] PasswordSalt { get; set; }
+        public byte[]? TwoFactorSecret { get; set; }
+        public bool TwoFactorEnabled { get; set; }
+        private string? TwoFactorRecoveryCodesJson { get; set; } = string.Empty;
+
+        [NotMapped]
+        public string[] TwoFactorRecoveryCodes
+        {
+            get => string.IsNullOrWhiteSpace(TwoFactorRecoveryCodesJson)
+                   ? Array.Empty<string>()
+                   : JsonSerializer.Deserialize<string[]>(TwoFactorRecoveryCodesJson)!;
+            set => TwoFactorRecoveryCodesJson = JsonSerializer.Serialize(value);
+        }
+
+        public UserApiDTO()
+        {
+
+        }
+        public UserApiDTO(User user)
+        {
+            Id = user.Id;
+            Role = user.Role;
+            LoyalCustomerId = user.LoyalCustomer.Id;
             Username = user.Username;
-            AccountID = loyalCustomer.Account.Index;
-            BaseAddress = loyalCustomer.Account.BaseAddress.AddressXMR;
+            PasswordHash = user.PasswordHash;
+            PasswordSalt = user.PasswordSalt;
+            TwoFactorEnabled = user.TwoFactorEnabled;
         }
     }
 }

@@ -27,6 +27,7 @@ namespace CtrlPay.API
             // Add services to the container.
 
             builder.Services.AddControllers();
+            builder.Services.AddRazorPages();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -35,6 +36,7 @@ namespace CtrlPay.API
             builder.Services.Configure<SmtpSettings>(
                 builder.Configuration.GetSection("Smtp"));
             builder.Services.AddScoped<EmailService>();
+            builder.Services.AddScoped<MailRenderService>();
 
             // Načtení JWT sekce z configu
             var jwtSection = builder.Configuration.GetSection("Jwt");

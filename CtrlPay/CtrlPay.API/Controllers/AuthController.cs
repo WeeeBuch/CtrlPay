@@ -105,18 +105,37 @@ namespace CtrlPay.API.Controllers
             return Ok(newJwt);
         }
         [HttpPost("register")]
-        public IActionResult Register(string username, string password, string role)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
-            var result = AuthLogic.AddUser(username, password, (Role)int.Parse(role));
+            List<string> regCodes = _db.LoyalCustomers.Select(l => l.RegCode).ToList();
+            if(!regCodes.Contains(request.Code))
+            {
+                return BadRequest(new ReturnModel("R6", ReturnModelSeverityEnum.Error));
+            }
+
+            var result = AuthLogic.AddUser(request.Username, request.Password, Role.Customer);
             if (result.Severity != ReturnModelSeverityEnum.Ok)
                 return BadRequest(result);
-            return Ok(result);
+            User newUser = result.Body;
+            LoyalCustomer loyalCustomer = _db.LoyalCustomers.Where(l => l.RegCode == request.Code).FirstOrDefault();
+            User user = _db.Users.Where(u => u.Id == newUser.Id).FirstOrDefault();
+            user.LoyalCustomer = loyalCustomer;
+            loyalCustomer.RegCode = null;
+            await _db.SaveChangesAsync();
+            return Ok(new ReturnModel("R0", ReturnModelSeverityEnum.Ok));
         }
 
         public class LoginRequest
         {
             public string Username { get; set; }
             public string Password { get; set; }
+        }
+
+        public class RegisterRequest
+        {
+            public string Username { get; set; }
+            public string Password { get; set; }
+            public string Code { get; set; }
         }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
+using CtrlPay.Entities;
 
 
 namespace CtrlPay.API
@@ -36,7 +37,11 @@ namespace CtrlPay.API
             var viewResult = _viewEngine.FindView(actionContext, viewName, false);
 
             if (!viewResult.Success)
-                throw new InvalidOperationException($"View {viewName} not found.");
+            {
+                var locations = string.Join("\n", viewResult.SearchedLocations);
+                throw new InvalidOperationException(
+                    $"View '{viewName}' not found. Searched locations:\n{locations}");
+            }
 
             var viewDictionary = new ViewDataDictionary(
                 new EmptyModelMetadataProvider(),

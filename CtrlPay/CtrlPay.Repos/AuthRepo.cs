@@ -19,12 +19,6 @@ namespace CtrlPay.Repos
         public static async Task<ReturnModel<bool>> Register(string? username, string? code, string? password, string? confirmPassword)
         {
             if (DebugMode.SkipAuthReg) return new("R0", ReturnModelSeverityEnum.Ok, true);
-            /* TODO: Register logic
-             * Tu logika pro registraci
-             *
-             * Vrací standardní ReturnModel<bool> s kódem R0 při úspěchu, jinak s příslušným chybovým kódem a zprávou.
-             * To be done
-             */
 
             #region Validations out of Api
             if (string.IsNullOrWhiteSpace(username)) return new("R1", ReturnModelSeverityEnum.Error, false);
@@ -33,6 +27,15 @@ namespace CtrlPay.Repos
             if (password != confirmPassword) return new("R4", ReturnModelSeverityEnum.Error, false);
             if (string.IsNullOrWhiteSpace(code)) return new("R5", ReturnModelSeverityEnum.Error, false);
             #endregion
+
+            string? body = await HttpWorker.HttpPost("/auth/register", new
+            {
+                username,
+                password,
+                code
+            }, requireAuth: false, default);
+
+            await Login(username, password, default);
 
             return new ("R0", ReturnModelSeverityEnum.Ok, true);
         }

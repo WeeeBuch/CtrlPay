@@ -13,10 +13,13 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">Inu přeplatky</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">Detail platby</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">Přihodiť</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">Upraviť</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">Zrušiť</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">Uložiť</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">Vymazat</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">Vyměniť za kredit</x:String>
+    <x:String x:Key="PaymentManagerView.Button.SendReminder">Poslať upomínku</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">Název</x:String>
     <x:String x:Key="PaymentManagerView.Label.TitleWatermark">Napište název...</x:String>
@@ -31,11 +34,30 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">Přeplatek</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">Vytvořené</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">Přehled transakcí</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">Tabuľka</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">Průtok</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">Příchozí</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">Odchozí</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">Zákazník</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">Hledat platbe...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">Všeci zákazníci</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">Jak to vypadá:</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">Všecky stavy</x:String>
+
+    <x:String x:Key="Common.ID">ID</x:String>
+    <x:String x:Key="Common.Date">Datum</x:String>
+    <x:String x:Key="Common.Type">Typ</x:String>
+    <x:String x:Key="Common.Amount">Suma</x:String>
+    <x:String x:Key="Common.Status">Stav</x:String>
+    <x:String x:Key="Common.Hash">Haš</x:String>
+
     <x:String x:Key="NavbarView.Customers">Klienti</x:String>
     <x:String x:Key="Customers.Title">Naši lidi</x:String>
     <x:String x:Key="Customers.SearchWatermark">Hledej macka...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">Nový člen</x:String>
     <x:String x:Key="Customers.Button.Edit">Poladit</x:String>
+    <x:String x:Key="Customers.Button.Promote">Povýšit</x:String>
     <x:String x:Key="Customers.Button.Delete">Vymazat</x:String>
     <x:String x:Key="Customers.Button.Cancel">Prdět na to</x:String>
     <x:String x:Key="Customers.Button.Save">Vytesat</x:String>
@@ -61,11 +83,24 @@
 
     <x:String x:Key="DashboardView.TransactionList">Přehled platení</x:String>
 
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">Přehled teho učené</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Rychlé kukanec na platby a co je třeba zrobit</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">PŘEPLATKY (MOC DAL)</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">PO TERMÍNU</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">TROCHU DAL</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">ČEKÁ SE</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> je třeba zrobit</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">Jak sa sypalo (měsíc)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">Stavy tych kšeftů</x:String>
+
     <x:String x:Key="NavbarView.Menu">Nabídka</x:String>
     <x:String x:Key="NavbarView.Dashboard">Hlavní rynk</x:String>
     <x:String x:Key="NavbarView.Settings">Nastavení</x:String>
     <x:String x:Key="NavbarView.Debts">Sekery</x:String>
     <x:String x:Key="NavbarView.Transactions">Prachy, co přifrčely</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">Kšefty, co hlídám</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">Velkej šéf (Admin)</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">Mám u sebe</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Na cestě</x:String>
@@ -120,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Next">Valíme dál</x:String>
     <x:String x:Key="OnboardingView.Button.Previous">Návrat o kusanec</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">A je to v cajku</x:String>
+
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">Velký šéfování (Administrace)</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">Hledej ogary...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">Přihodit ogara</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">Naše banda</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">Všecky fleky</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">Poladit</x:String>
+    <x:String x:Key="UserPiece.Button.Save">Vytesat</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">Prdět na to</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">Dvojitý hlídání (2FA)</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">Meno ogara</x:String>
 
     <x:String x:Key="ErrorCode.A0">Už seš tam, ogare!</x:String>
     <x:String x:Key="ErrorCode.A1">Takový tu už jeden straší</x:String>

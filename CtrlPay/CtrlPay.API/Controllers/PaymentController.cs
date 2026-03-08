@@ -1,4 +1,5 @@
-﻿using CtrlPay.API.BackgroundServices;
+﻿using Castle.Core.Resource;
+using CtrlPay.API.BackgroundServices;
 using CtrlPay.Core;
 using CtrlPay.DB;
 using CtrlPay.Entities;
@@ -19,9 +20,13 @@ namespace CtrlPay.API.Controllers
     public class PaymentController : ControllerBase
     {
         private readonly CtrlPayDbContext _db;
-        public PaymentController()
+        private readonly EmailService _post;
+        private readonly MailRenderService _mailRenderer;
+        public PaymentController(EmailService post, MailRenderService mailRenderer)
         {
             _db = new CtrlPayDbContext();
+            _post = post;
+            _mailRenderer = mailRenderer;
         }
         [HttpGet]
         [Route("my")]
@@ -274,6 +279,31 @@ namespace CtrlPay.API.Controllers
             payment.Status = PaymentStatusEnum.Paid;
             _db.SaveChanges();
             return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));
+        }
+        [HttpPost]
+        [Route("send-reminder")]
+        // POST: api/payments/send-reminder
+        public async Task<IActionResult> SendReminder([FromBody] PaymentApiDTO request)
+        {
+            Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value);
+            if (role != Role.Accountant && role != Role.Admin)
+            {
+                return Forbid();
+            }
+            Payment payment = _db.Payments.Where(p => p.Id == request.Id).FirstOrDefault();
+            PaymentReminderEmailModel model = new PaymentReminderEmailModel()
+            {
+                CustomerName = payment.Customer.FullName,
+                PaymentId = payment.Id.ToString(),
+                CreatedAt = payment.CreatedAt,
+                DueDate = payment.DueDate,
+                ExpectedAmountXMR = payment.ExpectedAmountXMR,
+                PaidAmountXMR = payment.PaidAmountXMR,
+            };
+            string mail = await _mailRenderer.RenderToStringAsync("Mails/Reminder", model);
+            _post.SendAsync(payment.Customer.Email, "Upominka", mail);
+            return Ok(new ReturnModel("P0", ReturnModelSeverityEnum.Ok));
+
         }
     }
     public class CreatePaymentRequest

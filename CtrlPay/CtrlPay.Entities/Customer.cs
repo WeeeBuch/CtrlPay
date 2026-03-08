@@ -35,6 +35,10 @@ namespace CtrlPay.Entities
         [Column("company")]
         public string? Company { get; set; }
 
+        public string FullName => Physical
+            ? $"{Title} {FirstName} {LastName}".Trim()
+            : (string.IsNullOrWhiteSpace(Company) ? $"{FirstName} {LastName}".Trim() : Company);
+
         public virtual LoyalCustomer? LoyalCustomer { get; set; }
 
         public Customer()

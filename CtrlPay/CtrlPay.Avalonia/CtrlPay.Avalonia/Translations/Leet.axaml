@@ -13,10 +13,13 @@
     <x:String x:Key="PaymentManagerView.OnlyOverpaid">0nly 0v3rp41d</x:String>
 
     <x:String x:Key="PaymentManagerView.Detail.Title">P4ym3nt D3t41l</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Add">4DD</x:String>
     <x:String x:Key="PaymentManagerView.Button.Edit">3d1t</x:String>
     <x:String x:Key="PaymentManagerView.Button.Cancel">C4nc3l</x:String>
     <x:String x:Key="PaymentManagerView.Button.Save">54v3</x:String>
+    <x:String x:Key="PaymentManagerView.Button.Delete">D3L373</x:String>
     <x:String x:Key="PaymentManagerView.Button.ConvertToCredit">C0nv3rt t0 Cr3d1t</x:String>
+    <x:String x:Key="PaymentManagerView.Button.SendReminder">53nd R3m1nd3r</x:String>
 
     <x:String x:Key="PaymentManagerView.Label.Title">T1tl3</x:String>
     <x:String x:Key="PaymentManagerView.Label.TitleWatermark">3nt3r t1tl3...</x:String>
@@ -31,11 +34,30 @@
     <x:String x:Key="PaymentManagerView.Info.Surplus">5urplu5</x:String>
     <x:String x:Key="PaymentManagerView.Info.CreatedAt">Cr34t3d 4t</x:String>
 
+    <x:String x:Key="Accountant.Transactions.Title">Tr4n54ct10n 0v3rv13w</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Table">T4bl3 V13w</x:String>
+    <x:String x:Key="Accountant.Transactions.View.Flow">Fl0w V13w</x:String>
+    <x:String x:Key="Accountant.Transactions.Incoming">1nc0m1ng</x:String>
+    <x:String x:Key="Accountant.Transactions.Outgoing">0utg01ng</x:String>
+    <x:String x:Key="Accountant.Transactions.Customer">Cu5t0m3r</x:String>
+    <x:String x:Key="Accountant.Transactions.Search">534rch tr4n54ct10n5...</x:String>
+    <x:String x:Key="Accountant.Transactions.AllCustomers">4ll Cu5t0m3r5</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.Status">5747u5:</x:String>
+    <x:String x:Key="Accountant.Transactions.Filter.AllStatuses">4ll 5747u535</x:String>
+
+    <x:String x:Key="Common.ID">1D</x:String>
+    <x:String x:Key="Common.Date">D4t3</x:String>
+    <x:String x:Key="Common.Type">Typ3</x:String>
+    <x:String x:Key="Common.Amount">Am0unt</x:String>
+    <x:String x:Key="Common.Status">5t4tu5</x:String>
+    <x:String x:Key="Common.Hash">H45h</x:String>
+
     <x:String x:Key="NavbarView.Customers">CU570M3R5</x:String>
     <x:String x:Key="Customers.Title">M4N4G3_U53R5</x:String>
     <x:String x:Key="Customers.SearchWatermark">534RCH_DB...</x:String>
     <x:String x:Key="Customers.NewCustomerButton">4DD_N3W</x:String>
     <x:String x:Key="Customers.Button.Edit">3D17</x:String>
+    <x:String x:Key="Customers.Button.Promote">PR0M073</x:String>
     <x:String x:Key="Customers.Button.Delete">D3L373</x:String>
     <x:String x:Key="Customers.Button.Cancel">4B0R7</x:String>
     <x:String x:Key="Customers.Button.Save">WR173</x:String>
@@ -61,11 +83,24 @@
 
     <x:String x:Key="DashboardView.TransactionList">Tr4n54c710n_L06</x:String>
 
+    <!-- Accountant Dashboard -->
+    <x:String x:Key="Accountant.Dashboard.Title">4cc0un74n7 0v3rv13w</x:String>
+    <x:String x:Key="Accountant.Dashboard.Subtitle">Qu1ck p33k 47 p4ym3n75</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overpaid">0V3RP41D</x:String>
+    <x:String x:Key="Accountant.Dashboard.Overdue">0V3RDU3</x:String>
+    <x:String x:Key="Accountant.Dashboard.PartiallyPaid">P4R714L P4YD</x:String>
+    <x:String x:Key="Accountant.Dashboard.Waiting">W4171N6</x:String>
+    <x:String x:Key="Accountant.Dashboard.ItemsToProcess"> 70 pr0c355</x:String>
+    <x:String x:Key="Accountant.Dashboard.IncomeHistory">1nc0m3 H1570ry (30d)</x:String>
+    <x:String x:Key="Accountant.Dashboard.PaymentStatus">P4ym3n7 5747u535</x:String>
+
     <x:String x:Key="NavbarView.Menu">R007_M3NU</x:String>
     <x:String x:Key="NavbarView.Dashboard">D45HB04RD</x:String>
     <x:String x:Key="NavbarView.Settings">C0NF16</x:String>
     <x:String x:Key="NavbarView.Debts">D3B75</x:String>
     <x:String x:Key="NavbarView.Transactions">1NC0M1N6_P4YM3N75</x:String>
+    <x:String x:Key="NavbarView.AccountantTransactions">7r4n54c710n_0v3rv13w</x:String>
+    <x:String x:Key="NavbarView.AdminPanel">4dm1n_p4n3l</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">455375</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Qu3u3d</x:String>
@@ -120,6 +155,20 @@
     <x:String x:Key="OnboardingView.Button.Next">N3X7_573P</x:String>
     <x:String x:Key="OnboardingView.Button.Previous">PR3V10U5</x:String>
     <x:String x:Key="OnboardingView.Button.Finish">F1N15H_L1N3</x:String>
+
+    <!-- Admin View -->
+    <x:String x:Key="AdminView.Title">4DM1N_P4N3L</x:String>
+    <x:String x:Key="AdminView.SearchWatermark">534RCH_U53R5...</x:String>
+    <x:String x:Key="AdminView.Button.AddUser">4DD_U53R</x:String>
+    <x:String x:Key="AdminView.UsersList.Title">5Y573M_U53R5</x:String>
+    <x:String x:Key="AdminView.Filter.AllRoles">4LL_R0L35</x:String>
+
+    <!-- User Piece -->
+    <x:String x:Key="UserPiece.Button.Edit">3D17</x:String>
+    <x:String x:Key="UserPiece.Button.Save">WR173</x:String>
+    <x:String x:Key="UserPiece.Button.Cancel">4B0R7</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2F4_0N</x:String>
+    <x:String x:Key="UserPiece.Watermark.Username">U53RN4M3</x:String>
 
     <x:String x:Key="ErrorCode.A0">L0G1N_5UCC355FUL</x:String>
     <x:String x:Key="ErrorCode.A1">U53R_4LR34DY_3X1575</x:String>

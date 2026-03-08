@@ -67,7 +67,12 @@
                                    FontWeight="Medium"
                                    Foreground="{DynamicResource Brush.Text.Primary}"
                                    TextTrimming="CharacterEllipsis"/>
-                        </StackPanel>
+                        <TextBlock Text="{Binding SubDescription}" 
+                                   FontSize="11" 
+                                   Opacity="0.5"
+                                   Foreground="{DynamicResource Brush.Text.Primary}"
+                                   TextTrimming="CharacterEllipsis"/>
+                    </StackPanel>
 
                     <StackPanel Grid.Column="2" 
                                 Orientation="Horizontal" 
