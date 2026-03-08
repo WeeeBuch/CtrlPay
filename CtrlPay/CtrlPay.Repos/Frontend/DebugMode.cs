@@ -10,6 +10,7 @@ namespace CtrlPay.Repos.Frontend;
 
 public static class DebugMode
 {
+#if DEBUG
     public static bool StartDebug { get; set; } = true;
 
     // Skip loginu a Registeru
@@ -44,8 +45,28 @@ public static class DebugMode
     public static bool MockPaymentManager { get; set; } = false;
 
     public static bool FakePromote { get; set; } = false;
+#else
+    public static bool StartDebug => false;
+    public static bool SkipAuthReg => false;
+    public static bool SkipAuthLogin => false;
+    public static bool MockTransactionSum => false;
+    public static bool MockTransactions => false;
+    public static bool MockPaymentSum => false;
+    public static bool MockPayments => false;
+    public static bool SkipApiConnectionTest => false;
+    public static bool SkipOneTimeAddressGeneration => false;
+    public static bool SkipCreditAddressLogic => false;
+    public static bool MockCustomers => false;
+    public static bool MockAccountantTransactions => false;
+    public static bool MockAdminUsers => false;
+    public static bool OverrideRole => false;
+    public static Role DebugRole => Role.Customer;
+    public static bool MockPaymentManager => false;
+    public static bool FakePromote => false;
+#endif
 }
 
+#if DEBUG
 public class DebugProperty
 {
     private PropertyInfo _info;
@@ -62,3 +83,4 @@ public class DebugProperty
         Name = info.Name;
     }
 }
+#endif
