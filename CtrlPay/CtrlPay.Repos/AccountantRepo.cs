@@ -105,17 +105,20 @@ namespace CtrlPay.Repos
         {
             AppLogger.Info($"Updating Cached Payments...");
             #region Debug
+#if DEBUG
             if (DebugMode.MockPaymentManager)
             {
                 AppLogger.Info($"Returning Mock payments...");
                 PaymentCache = GetMockPayments();
                 return;
             }
+#endif
             #endregion
 
             await LoadPaymentListFromApi("/api/payments/all", p => new FrontendPaymentDTO(p), ct);
             await LoadTransactionListFromApi("/api/transactions/all", t => new AccountantTransactionDTO(t), ct);
         }
+#if DEBUG
         private static List<FrontendPaymentDTO> GetMockPayments() =>
         [
             new FrontendPaymentDTO
@@ -191,7 +194,7 @@ namespace CtrlPay.Repos
                 DueDate = DateTime.UtcNow.AddDays(7)
             }
         ];
-
+#endif
         public static List<FrontendPaymentDTO> GetSortedPayments(string? sortingMethod)
         {
             return SortData(PaymentCache, sortingMethod);
@@ -262,7 +265,7 @@ namespace CtrlPay.Repos
 
             return true;
         }
-
+#if DEBUG
         private static List<AccountantTransactionDTO> GetMockAccountantTransactions()
         {
             var rng = new Random();
@@ -296,15 +299,17 @@ namespace CtrlPay.Repos
             }
             return [.. list.OrderByDescending(t => t.Timestamp)];
         }
-
+#endif
         public static List<AccountantTransactionDTO> GetAccountantTransactions()
         {
+#if DEBUG
             if (DebugMode.MockAccountantTransactions) return GetMockAccountantTransactions();
-
+#endif
             return TransactionCache;
         }
         public static AccountantDashboardSummaryDTO GetAccountantDashboardSummary()
         {
+#if DEBUG
             if (DebugMode.MockAccountantTransactions)
             {
                 return new AccountantDashboardSummaryDTO
@@ -319,7 +324,7 @@ namespace CtrlPay.Repos
                     WaitingCount = 25
                 };
             }
-
+#endif
             return new AccountantDashboardSummaryDTO
             {
                 OverpaidAmount = PaymentCache.Where(p => p.Status == StatusEnum.Overpaid).Sum(p => p.PaidAmountXMR - p.ExpectedAmountXMR),
@@ -335,6 +340,7 @@ namespace CtrlPay.Repos
         public static AccountantChartDataDTO GetAccountantChartData()
         {
             var data = new AccountantChartDataDTO();
+#if DEBUG
             if (DebugMode.MockAccountantTransactions)
             {
                 var rng = new Random();
@@ -358,7 +364,7 @@ namespace CtrlPay.Repos
                 };
                 return data;
             }
-
+#endif
             for (int i = 30; i >= 0; i--)
             {
                 DateTime date = DateTime.Today.AddDays(-i);

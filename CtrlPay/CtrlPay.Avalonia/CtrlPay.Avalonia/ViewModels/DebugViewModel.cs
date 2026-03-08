@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿#if DEBUG
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.Messaging;
 using CtrlPay.Repos.Frontend;
@@ -69,3 +70,4 @@ public partial class DebugWindowViewModel : ObservableObject
         DebugItems = new ObservableCollection<DebugPropertyViewModel>(props);
     }
 }
+#endif

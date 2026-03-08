@@ -17,12 +17,14 @@ public class PaymentRepo : BaseRepo<PaymentApiDTO>
     {
         AppLogger.Info($"Updating Cached Payments...");
         #region Debug
+#if DEBUG
         if (DebugMode.MockPayments)
         {
             AppLogger.Info($"Returning Mock payments...");
             Cache = GetMockPayments();
             return;
         }
+#endif
         #endregion
 
         await LoadListFromApi("/api/payments/my", p => new FrontendTransactionDTO(p), ct);
@@ -30,7 +32,9 @@ public class PaymentRepo : BaseRepo<PaymentApiDTO>
 
     public static async Task UpdatePaymentSumCacheFromApi(CancellationToken ct)
     {
+#if DEBUG
         if (DebugMode.MockPaymentSum) { SumCache = 500; AppLogger.Info($"Using Mock sums."); return; }
+#endif
         await LoadSumFromApi("/api/payments/amount-due", ct);
     }
 
@@ -47,6 +51,7 @@ public class PaymentRepo : BaseRepo<PaymentApiDTO>
 
     public static decimal GetPaymentSum() => SumCache;
 
+#if DEBUG
     private static List<FrontendTransactionDTO> GetMockPayments() =>
     [
         new() { Title = "Debug Debt 1", Amount = 52, Timestamp = DateTime.UtcNow, State = StatusEnum.Pending, Id = 1 },
@@ -59,6 +64,7 @@ public class PaymentRepo : BaseRepo<PaymentApiDTO>
         new() { Title = "Debug Debt 8", Amount = 735, Timestamp = DateTime.UtcNow.AddDays(-14), State = StatusEnum.Paid, Id = 8 },
         new() { Title = "Debug Debt 9", Amount = 486, Timestamp = DateTime.UtcNow.AddDays(-15), State = StatusEnum.Cancelled, Id = 9 }
     ];
+#endif
 
     public static async Task<ReturnModel?> PayFromCredit(FrontendTransactionDTO payment)
     {
