@@ -119,7 +119,7 @@ namespace CtrlPay.Repos
             await LoadTransactionListFromApi("/api/transactions/all", t => new AccountantTransactionDTO(t), ct);
         }
 
-        public static List<FrontendPaymentDTO> GetPaymentsByStatus(StatusEnum state) => PaymentCache.Where(p => p.Status == state).ToList();
+        public static List<FrontendPaymentDTO> GetPaymentsByStatus(StatusEnum? state) => [.. PaymentCache.Where(p => p.Status == state)];
 #if DEBUG
         private static List<FrontendPaymentDTO> GetMockPayments() =>
         [

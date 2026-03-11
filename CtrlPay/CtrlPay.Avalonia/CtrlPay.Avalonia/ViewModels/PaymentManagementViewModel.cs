@@ -192,7 +192,7 @@ public partial class PaymentManagementViewModel : ViewModelBase
         // Filtrování podle stavu
         if (SelectedStatusItem?.Value != null)
         {
-            newData = newData.Where(p => p.Status == SelectedStatusItem.Value).ToList();
+            newData = AccountantRepo.GetPaymentsByStatus(SelectedStatusItem.Value);
         }
 
         // Filtrování podle vyhledávání
