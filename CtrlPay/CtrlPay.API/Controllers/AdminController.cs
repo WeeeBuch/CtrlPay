@@ -48,7 +48,7 @@ namespace CtrlPay.API.Controllers
             {
                 return Forbid();
             }
-
+            //TODO: Implement user creation logic
             return Ok(new ReturnModel("G0", ReturnModelSeverityEnum.Ok));
         }
 
@@ -62,7 +62,7 @@ namespace CtrlPay.API.Controllers
             {
                 return Forbid();
             }
-            
+            //TODO: Implement user update logic
             return Ok(new ReturnModel("G0", ReturnModelSeverityEnum.Ok));
         }
 
