@@ -15,7 +15,7 @@ public partial class UserPieceViewModel : ViewModelBase
     [ObservableProperty] private FrontendUserDTO _model;
     [ObservableProperty] private bool _editing = false;
     
-    public Role[] RolesList => Enum.GetValues<Role>();
+    public static Role[] RolesList => Enum.GetValues<Role>();
 
     public UserPieceViewModel(FrontendUserDTO model)
     {
@@ -48,7 +48,7 @@ public partial class UserPieceViewModel : ViewModelBase
         Editing = false;
         Model.EndEdit();
         
-        await AdminRepo.UpdateAdminUser(Model);
+        await AdminRepo.UpdateUser(Model);
         UpdateHandler.HandleUpdatedAdminUsers();
     }
 }

@@ -49,6 +49,8 @@ public class PaymentRepo : BaseRepo<PaymentApiDTO>
         return SortData(filtered, sortingMethod);
     }
 
+    public static List<FrontendTransactionDTO> GetPaymentsByStatus(StatusEnum state) => Cache.Where(p => p.State == state).ToList();
+
     public static decimal GetPaymentSum() => SumCache;
 
 #if DEBUG

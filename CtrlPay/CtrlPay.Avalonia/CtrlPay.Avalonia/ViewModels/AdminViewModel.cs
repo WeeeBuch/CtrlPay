@@ -75,7 +75,7 @@ public partial class AdminViewModel : ViewModelBase
 
     public async void LoadUsers()
     {
-        _allUsers = await AdminRepo.GetAdminUsers();
+        _allUsers = AdminRepo.GetUsers();
         ApplyFilter();
     }
 

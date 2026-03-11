@@ -15,7 +15,7 @@ namespace CtrlPay.Repos
 {
     public class AdminRepo
     {
-        public static List<FrontendUserDTO> UserCache;
+        private static List<FrontendUserDTO> UserCache;
 
 
         public static async Task UpdateUserCacheFromApi()
@@ -35,9 +35,9 @@ namespace CtrlPay.Repos
             string? json = await HttpWorker.HttpGet("api/admin/users", true, default);
         }
 
-        public static async Task<List<FrontendUserDTO>> GetAdminUsers(CancellationToken ct = default) => UserCache.Where(u => u.Role == Role.Admin).ToList();
+        public static List<FrontendUserDTO> GetUsers() => UserCache;
 
-        public static async Task UpdateAdminUser(FrontendUserDTO user)
+        public static async Task UpdateUser(FrontendUserDTO user)
         {
             AppLogger.Info($"Updating admin user {user.Username}...");
 #if DEBUG
