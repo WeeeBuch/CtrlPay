@@ -21,6 +21,7 @@ public static class ChangeChecker
         await PaymentRepo.UpdatePaymetsCacheFromApi(default);
         await CustomerRepo.UpdateCustomersFromApi(default);
         await AccountantRepo.UpdateAccountantCachesFromApi(default);
+        await AdminRepo.UpdateUserCacheFromApi();
         // TODO: Karele tu aktualizace
         // TODO: Karele tu další aktualizace pro accountant
 
