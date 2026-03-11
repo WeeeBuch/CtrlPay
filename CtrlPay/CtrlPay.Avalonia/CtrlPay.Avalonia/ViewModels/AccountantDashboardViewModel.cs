@@ -1,4 +1,4 @@
-using Avalonia.Media;
+﻿using Avalonia.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.Styles;
@@ -87,7 +87,7 @@ public partial class AccountantDashboardViewModel : ViewModelBase
         {
             Color = "#AAAAAA", // Šedá
             Icon = IconData.Dashboard,
-            FilterStatus = StatusEnum.WaitingForPayment
+            FilterStatus = StatusEnum.Pending
         };
         _waitingTile.GiveTitleKey("Accountant.Dashboard.Waiting");
 

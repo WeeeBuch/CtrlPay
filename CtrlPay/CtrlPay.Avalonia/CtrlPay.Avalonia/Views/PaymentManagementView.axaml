@@ -56,8 +56,20 @@
                                 </ListBox.ItemTemplate>
                             </ListBox>
 
-                            <CheckBox Content="{DynamicResource PaymentManagerView.OnlyOverpaid}" 
-                                      IsChecked="{Binding ShowOnlyOverpaid}"/>
+                            <TextBlock Text="{DynamicResource Accountant.Transactions.Filter.Status}" 
+                                       FontWeight="Bold" Opacity="0.6" Margin="10,0,0,5"
+                                       HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                            <ComboBox ItemsSource="{Binding Statuses}"
+                                      SelectedItem="{Binding SelectedStatusItem}"
+                                      Width="200"
+                                      VerticalAlignment="Center">
+                                <ComboBox.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}"/>
+                                    </DataTemplate>
+                                </ComboBox.ItemTemplate>
+                            </ComboBox>
                         </StackPanel>
 
                         
