@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.HelperClasses;
+using CtrlPay.Avalonia.Translations;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
@@ -14,6 +15,12 @@ namespace CtrlPay.Avalonia.ViewModels;
 
 public partial class PaymentManagementViewModel : ViewModelBase
 {
+    public class StatusFilterItem
+    {
+        public string Name { get; set; } = string.Empty;
+        public StatusEnum? Value { get; set; }
+        public override string ToString() => Name;
+    }
 
     [ObservableProperty] private SortOption selectedSortOrder;
     [ObservableProperty] private List<SortOption> sortOptions;
@@ -26,12 +33,13 @@ public partial class PaymentManagementViewModel : ViewModelBase
 
     [ObservableProperty] private ObservableCollection<FrontendCustomerDTO> customers = [];
 
-    [ObservableProperty] private bool showOnlyOverpaid;
-
-    partial void OnShowOnlyOverpaidChanged(bool value) => ApplySorting(SelectedSortOrder?.Key);
+    [ObservableProperty] private StatusFilterItem? selectedStatusItem;
+    public ObservableCollection<StatusFilterItem> Statuses { get; } = new();
 
     public PaymentManagementViewModel() 
     {
+        InitializeStatuses();
+
         SortOptions =
         [
             new ("AmountAsc", "DebtView.SortOption.AmountAsc"),
@@ -48,6 +56,41 @@ public partial class PaymentManagementViewModel : ViewModelBase
 
         UpdateHandler.UpdatedCustomers.Add(() => SyncCustomers(CustomerRepo.GetCustomers()));
         UpdateHandler.NewPaymentsAddedActions.Add(() => ApplySorting(null));
+
+        TranslationManager.LanguageChanged.Add(RefreshTranslations);
+    }
+
+    private void RefreshTranslations()
+    {
+        var currentStatusValue = SelectedStatusItem?.Value;
+        InitializeStatuses();
+        SelectedStatusItem = Statuses.FirstOrDefault(s => s.Value == currentStatusValue) ?? Statuses[0];
+        ApplySorting(SelectedSortOrder?.Key);
+    }
+
+    private void InitializeStatuses()
+    {
+        Statuses.Clear();
+        Statuses.Add(new StatusFilterItem 
+        { 
+            Name = TranslationManager.GetString("Accountant.Transactions.Filter.AllStatuses"), 
+            Value = null 
+        });
+
+        foreach (StatusEnum status in Enum.GetValues(typeof(StatusEnum)))
+        {
+            string translationKey = $"Transaction.Status.{status}";
+            string translatedName = TranslationManager.GetString(translationKey);
+            
+            if (string.IsNullOrEmpty(translatedName) || translatedName == translationKey)
+            {
+                translatedName = status.ToString();
+            }
+
+            Statuses.Add(new StatusFilterItem { Name = translatedName, Value = status });
+        }
+
+        SelectedStatusItem = Statuses[0];
     }
 
     [RelayCommand]
@@ -146,8 +189,17 @@ public partial class PaymentManagementViewModel : ViewModelBase
 
         var newData = AccountantRepo.GetSortedPayments(sortingMethod);
 
-        if (ShowOnlyOverpaid)
-            newData = newData.Where(p => p.Status == StatusEnum.Overpaid).ToList();
+        // Filtrování podle stavu
+        if (SelectedStatusItem?.Value != null)
+        {
+            newData = newData.Where(p => p.Status == SelectedStatusItem.Value).ToList();
+        }
+
+        // Filtrování podle vyhledávání
+        if (!string.IsNullOrWhiteSpace(SearchTerm))
+        {
+            newData = newData.Where(vm => vm.Title.Contains(SearchTerm, StringComparison.OrdinalIgnoreCase)).ToList();
+        }
 
         var selectedId = SelectedPayment?.Id;
 
@@ -189,22 +241,8 @@ public partial class PaymentManagementViewModel : ViewModelBase
     public void TransactionsUpdated() => ApplySorting(null);
     partial void OnSelectedSortOrderChanged(SortOption value) => ApplySorting(value.Key);
 
-    partial void OnSearchTermChanged(string value)
-    {
-        ApplySorting(null);
-
-        if (string.IsNullOrWhiteSpace(value))
-        {
-            return;
-        }
-
-        var resultList = Payments.Where(vm => vm.Title.ToLower().Contains(value.ToLower())).ToList();
-
-        if (ShowOnlyOverpaid)
-            resultList = resultList.Where(p => p.Status == StatusEnum.Overpaid).ToList();
-
-        Payments.ReplaceAll(resultList);
-    }
+    partial void OnSearchTermChanged(string value) => ApplySorting(SelectedSortOrder?.Key);
+    partial void OnSelectedStatusItemChanged(StatusFilterItem? value) => ApplySorting(SelectedSortOrder?.Key);
 
     [RelayCommand]
     public async Task ConvertOverpaymentToCredit()

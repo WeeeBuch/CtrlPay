@@ -58,15 +58,15 @@ public partial class MainViewModel : ViewModelBase
 
     private void HandleNavigationFilter(StatusEnum filter)
     {
-        // Najdeme položku v menu, která odpovídá seznamu transakcí
-        var target = NavigationItems.FirstOrDefault(i => i.ViewModel is AccountantTransactionsView);
+        // Najdeme položku v menu, která odpovídá správě plateb
+        var target = NavigationItems.FirstOrDefault(i => i.ViewModel is PaymentManagementView);
         if (target != null)
         {
             SelectedNavigationItem = target;
             // Nastavíme filtr v cílovém ViewModelu
-            if (target.ViewModel.DataContext is AccountantTransactionsViewModel vm)
+            if (target.ViewModel.DataContext is PaymentManagementViewModel vm)
             {
-                vm.SelectedStatusItem = vm.Statuses.Where(s => s.Value == filter).FirstOrDefault();
+                vm.SelectedStatusItem = vm.Statuses.FirstOrDefault(s => s.Value == filter);
             }
         }
     }
