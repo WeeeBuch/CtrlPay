@@ -49,8 +49,6 @@ public class PaymentRepo : BaseRepo<PaymentApiDTO>
         return SortData(filtered, sortingMethod);
     }
 
-    public static List<FrontendTransactionDTO> GetPaymentsByStatus(StatusEnum state) => Cache.Where(p => p.State == state).ToList();
-
     public static decimal GetPaymentSum() => SumCache;
 
 #if DEBUG
@@ -71,7 +69,7 @@ public class PaymentRepo : BaseRepo<PaymentApiDTO>
     public static async Task<ReturnModel?> PayFromCredit(FrontendTransactionDTO payment)
     {
         AppLogger.Info($"Paying from credit..., Payment id = {payment.Id}");
-        string response = await HttpWorker.HttpPost("/api/payments/pay-from-credit", new { paymentId = payment.Id });
+        string? response = await HttpWorker.HttpPost("/api/payments/pay-from-credit", new { paymentId = payment.Id });
         if (response == null)
         {
             AppLogger.Error($"Failed to pay from credit for payment id = {payment.Id}. No response from API.");

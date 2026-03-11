@@ -75,6 +75,8 @@ public class CustomerRepo
     }
     public static List<FrontendCustomerDTO> GetCustomers() => Cache;
 
+    public static FrontendCustomerDTO? GetCustomerById(int id) => Cache.FirstOrDefault(c => c.Id == id);
+
     public static List<FrontendCustomerDTO> Filter(string input)
     {
         return Cache.Where(c =>

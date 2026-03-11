@@ -39,7 +39,7 @@ namespace CtrlPay.Repos
 
         public static async Task UpdateUser(FrontendUserDTO user)
         {
-            AppLogger.Info($"Updating admin user {user.Username}...");
+            AppLogger.Info($"Updating/Creating user {user.Username}...");
 #if DEBUG
             if (DebugMode.MockAdminUsers)
             {
@@ -48,7 +48,43 @@ namespace CtrlPay.Repos
                 return;
             }
 #endif
+
+            int id = UserCache.FindIndex(c => c.Id == user.Id);
+            if (id == -1)
+            {
+                AppLogger.Info($"Adding customer to API...");
+                string? json = await HttpWorker.HttpPost($"api/admin/users/create", user.ToApiDTO(), true, default);
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    AppLogger.Warning($"Get response was NULL.");
+                    return;
+                }
+                UserCache.Add(user);
+            }
+            else
+            {
+                AppLogger.Info($"Updating customer in API...");
+                string? json = await HttpWorker.HttpPost($"api/admin/users/edit", user.ToApiDTO(), true, default);
+                if (string.IsNullOrWhiteSpace(json))
+                {
+                    AppLogger.Warning($"Get response was NULL.");
+                    return;
+                }
+                UserCache[id] = user;
+            }
         }
 
+        public static async Task DeleteUser(FrontendUserDTO user)
+        {
+            AppLogger.Info($"Deleting user {user.Username}...");
+
+            string? json = await HttpWorker.HttpDelete($"api/admin/users/delete/{user.Id}", "", true, default);
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                AppLogger.Warning($"Get response was NULL.");
+                return;
+            }
+            UserCache.Remove(user);
+        }
     }
 }

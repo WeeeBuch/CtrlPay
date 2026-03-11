@@ -149,10 +149,10 @@ namespace CtrlPay.Entities
         public int Id { get; set; }
         public Role Role { get; set; }
         public int? LoyalCustomerId { get; set; }
+        public int? AccountId { get; set; }
+        public int? CustomerId { get; set; }
         public string Username { get; set; }
-        public byte[] PasswordHash { get; set; }
-        public byte[] PasswordSalt { get; set; }
-        public byte[]? TwoFactorSecret { get; set; }
+        public string Password { get; set; } = string.Empty;
         public bool TwoFactorEnabled { get; set; }
         private string? TwoFactorRecoveryCodesJson { get; set; } = string.Empty;
 
@@ -173,11 +173,20 @@ namespace CtrlPay.Entities
         {
             Id = user.Id;
             Role = user.Role;
-            LoyalCustomerId = user.LoyalCustomer.Id;
             Username = user.Username;
-            PasswordHash = user.PasswordHash;
-            PasswordSalt = user.PasswordSalt;
             TwoFactorEnabled = user.TwoFactorEnabled;
+            TwoFactorRecoveryCodes = user.TwoFactorRecoveryCodes;
+        }
+        public UserApiDTO(User user, LoyalCustomer loyalCustomer)
+        {
+            Id = user.Id;
+            Role = user.Role;
+            LoyalCustomerId = loyalCustomer.Id;
+            AccountId = loyalCustomer.Account.Index;
+            CustomerId = loyalCustomer.CustomerId;
+            Username = user.Username;
+            TwoFactorEnabled = user.TwoFactorEnabled;
+            TwoFactorRecoveryCodes = user.TwoFactorRecoveryCodes;
         }
     }
 }
