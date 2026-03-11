@@ -63,6 +63,7 @@ namespace CtrlPay.API.Controllers
                 return Forbid();
             }
             //TODO: Implement user update logic
+            User user = _db.Users.FirstOrDefault(u => u.Id == user.Id);
             return Ok(new ReturnModel("G0", ReturnModelSeverityEnum.Ok));
         }
 

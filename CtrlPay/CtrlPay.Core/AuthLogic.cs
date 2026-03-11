@@ -23,7 +23,7 @@ namespace CtrlPay.Core
         {
             CtrlPayDbContext db = new CtrlPayDbContext();
             User? user = db.Users.FirstOrDefault(u => u.Username == username);
-            if(user == null)
+            if (user == null)
             {
                 return new ReturnModel("A3", ReturnModelSeverityEnum.Error);
             }
@@ -44,7 +44,7 @@ namespace CtrlPay.Core
                             computedHash,
                             storedHash);
 
-            if( !valid )
+            if (!valid)
             {
                 return new ReturnModel("A2", ReturnModelSeverityEnum.Error);
             }
@@ -52,8 +52,8 @@ namespace CtrlPay.Core
             if (user.TwoFactorEnabled)
             {
                 new ReturnModel("A5", ReturnModelSeverityEnum.Ok);
-            } 
-            return new ReturnModel("A0", ReturnModelSeverityEnum.Ok);            
+            }
+            return new ReturnModel("A0", ReturnModelSeverityEnum.Ok);
         }
         public static ReturnModel<User> AddUser(string username, string password, Role role)
         {
@@ -77,7 +77,7 @@ namespace CtrlPay.Core
         public static ReturnModel TotpLogin(byte[] secret, string code)
         {
             bool valid = VerifyTotp(secret, code);
-            if( valid )
+            if (valid)
             {
                 return new ReturnModel("A0", ReturnModelSeverityEnum.Ok);
             }
@@ -120,5 +120,26 @@ namespace CtrlPay.Core
             return otp.ToString("D6");
         }
 
+        public static void ChangePassword(int userId, string newPassword)
+        {
+            CtrlPayDbContext db = new CtrlPayDbContext();
+            User? user = db.Users.FirstOrDefault(u => u.Id == userId);
+            if (user == null)
+            {
+                throw new Exception("User not found.");
+            }
+            byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
+            var pbkdf2 = new Rfc2898DeriveBytes(
+                newPassword,
+                salt,
+                Iterations,
+                HashAlgorithmName.SHA256
+            );
+            byte[] hash = pbkdf2.GetBytes(KeySize);
+            user.PasswordSalt = salt;
+            user.PasswordHash = hash;
+            db.SaveChanges();
+
+        }
     }
 }

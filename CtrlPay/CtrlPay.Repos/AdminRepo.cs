@@ -4,11 +4,13 @@ using CtrlPay.Repos;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace CtrlPay.Repos
@@ -16,6 +18,8 @@ namespace CtrlPay.Repos
     public class AdminRepo
     {
         private static List<FrontendUserDTO> UserCache;
+        private static DateTime LastUpdated { get; set; } = DateTime.MinValue;
+        private static JsonSerializerOptions SerializerOptions = new() { PropertyNameCaseInsensitive = true };
 
 
         public static async Task UpdateUserCacheFromApi()
@@ -32,7 +36,32 @@ namespace CtrlPay.Repos
                 return;
             }
 #endif
+            AppLogger.Info($"Getting json from API...");
             string? json = await HttpWorker.HttpGet("api/admin/users", true, default);
+            if (string.IsNullOrWhiteSpace(json))
+            {
+                AppLogger.Warning($"Get response was NULL.");
+                return;
+            }
+
+            try
+            {
+                AppLogger.Info($"Deserializing response...");
+                var result = JsonSerializer.Deserialize<ReturnModel<List<UserApiDTO>>>(json, SerializerOptions);
+
+                // Pokud je Body null, použijeme prázdný list, aby to nespadlo
+                var apiList = result?.Body ?? [];
+
+                // Atomická aktualizace - vytvoříme nový list a pak ho přiřadíme
+                // Kdyby někdo zrovna četl Cache, aplikace nespadne
+                UserCache = [.. apiList.Select(u => new FrontendUserDTO(u))];
+                LastUpdated = DateTime.UtcNow;
+                AppLogger.Info($"Cached Users updated at {LastUpdated}.");
+            }
+            catch (Exception ex)
+            {
+                AppLogger.Error($"Users list parsing failed.", ex);
+            }
         }
 
         public static List<FrontendUserDTO> GetUsers() => UserCache;
