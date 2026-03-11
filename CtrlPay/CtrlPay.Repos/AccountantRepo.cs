@@ -249,7 +249,6 @@ namespace CtrlPay.Repos
 
             AppLogger.Info($"Převod přebytku {surplus} XMR do kreditů pro zákazníka {payment.CustomerId}...");
 
-            // TODO: Karele toto
             string? json = await HttpWorker.HttpPost("api/payments/overpay-to-credit", payment.ToApiDto(), true, default);
             if (string.IsNullOrWhiteSpace(json))
             {

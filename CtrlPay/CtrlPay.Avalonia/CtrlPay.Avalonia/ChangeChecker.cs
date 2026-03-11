@@ -22,8 +22,6 @@ public static class ChangeChecker
         await CustomerRepo.UpdateCustomersFromApi(default);
         await AccountantRepo.UpdateAccountantCachesFromApi(default);
         await AdminRepo.UpdateUserCacheFromApi();
-        // TODO: Karele tu aktualizace
-        // TODO: Karele tu další aktualizace pro accountant
 
         // Sem se píšou všechny kontroly změn, které chceme provádět
         UpdateHandler.HandleCreditAvailableUpdate(TransactionRepo.GetTransactionSum());

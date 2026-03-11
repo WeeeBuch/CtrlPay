@@ -30,7 +30,7 @@ namespace CtrlPay.API.Controllers
             }
 
             List<UserApiDTO> users = new List<UserApiDTO>();
-            foreach (var user in _db.Users)
+            foreach (var user in _db.Users.ToList())
             {
                 users.Add(user.Role == Role.Customer ? new UserApiDTO(user, user.LoyalCustomer) : new UserApiDTO(user));
             }
@@ -63,7 +63,13 @@ namespace CtrlPay.API.Controllers
                 return Forbid();
             }
             //TODO: Implement user update logic
-            User user = _db.Users.FirstOrDefault(u => u.Id == user.Id);
+            User dbUser = _db.Users.FirstOrDefault(u => u.Id == user.Id);
+            if (dbUser == null) 
+            {
+                return NotFound(new ReturnModel("G1", ReturnModelSeverityEnum.Error));
+            }
+
+
             return Ok(new ReturnModel("G0", ReturnModelSeverityEnum.Ok));
         }
 
