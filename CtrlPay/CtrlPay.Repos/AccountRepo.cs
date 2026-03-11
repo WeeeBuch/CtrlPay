@@ -27,8 +27,9 @@ namespace CtrlPay.Repos
         }
         private static async Task<string> UpdateCreditAddress()
         {
+#if DEBUG
             if (DebugMode.SkipCreditAddressLogic) return "DEBUG_address_for_credits";
-
+#endif
             string? response = await HttpWorker.HttpGet("api/account/credit-address", true, new CancellationToken());
             if (response == null)
             {
@@ -49,12 +50,12 @@ namespace CtrlPay.Repos
         {
             AppLogger.Info("Generating one-time address for loyal customer...");
             #region Debug
-
+#if DEBUG
             if (DebugMode.SkipOneTimeAddressGeneration)
             {
                 return "one_time_address_debug";
             }
-
+#endif
             #endregion
 
             int paymentId = transaction.Id;

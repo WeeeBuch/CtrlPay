@@ -9,12 +9,14 @@ public class TransactionRepo : BaseRepo<TransactionApiDTO>
     {
         AppLogger.Info($"Updating cached Transactions from API...");
         #region Debug
+#if DEBUG
         if (DebugMode.MockTransactions)
         {
             Cache = GetMockTransactions();
             AppLogger.Info($"Using Mock transactions.");
             return;
         }
+#endif
         #endregion
 
         // Voláme metodu z BaseRepo, řekneme URL a jak převést data (t => new(t))
@@ -24,7 +26,9 @@ public class TransactionRepo : BaseRepo<TransactionApiDTO>
     public static async Task UpdateTransactionSumCacheFromApi(CancellationToken ct)
     {
         AppLogger.Info($"Updating cached Transactions Sum from API...");
+#if DEBUG
         if (DebugMode.MockTransactionSum) { SumCache = 1234; AppLogger.Info($"Using Mock sum."); return; }
+#endif
         await LoadSumFromApi("/api/transactions/credit", ct);
     }
 
@@ -36,6 +40,7 @@ public class TransactionRepo : BaseRepo<TransactionApiDTO>
 
     public static decimal GetTransactionSum() => SumCache;
 
+#if DEBUG
     // Tvůj mock helper (zkráceno pro přehlednost, klidně si tam nech ten svůj dlouhý list)
     private static List<FrontendTransactionDTO> GetMockTransactions() =>
     [
@@ -49,4 +54,5 @@ public class TransactionRepo : BaseRepo<TransactionApiDTO>
         new() { Title = "Debug Transaction 8", Amount = 321, Timestamp = DateTime.UtcNow.AddDays(-14), State = StatusEnum.Paid, Id = 8 },
         new() { Title = "Debug Transaction 9", Amount = 05, Timestamp = DateTime.UtcNow.AddDays(-15), State = StatusEnum.Cancelled, Id = 9 }
     ];
+#endif
 }

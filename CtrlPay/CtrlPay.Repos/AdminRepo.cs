@@ -20,6 +20,7 @@ namespace CtrlPay.Repos
 
         public static async Task UpdateUserCacheFromApi()
         {
+#if DEBUG
             if (DebugMode.MockAdminUsers)
             {
                 UserCache = [
@@ -30,6 +31,7 @@ namespace CtrlPay.Repos
 
                 return;
             }
+#endif
             string? json = await HttpWorker.HttpGet("api/admin/users", true, default);
         }
 
@@ -38,13 +40,14 @@ namespace CtrlPay.Repos
         public static async Task UpdateAdminUser(FrontendUserDTO user)
         {
             AppLogger.Info($"Updating admin user {user.Username}...");
-        
+#if DEBUG
             if (DebugMode.MockAdminUsers)
             {
                 await Task.Delay(500);
                 UserCache.Add(user);
                 return;
             }
+#endif
         }
 
     }

@@ -14,11 +14,13 @@ namespace CtrlPay.Repos
         public static async Task<bool> TestConnectionToAPI(string connString)
         {
             #region Debug
+#if DEBUG
             if (DebugMode.SkipApiConnectionTest)
             {
                 await Task.Delay(2000);
                 return !string.IsNullOrWhiteSpace(connString);
             }
+#endif
             #endregion
 
             try

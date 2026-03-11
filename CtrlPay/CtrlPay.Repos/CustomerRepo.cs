@@ -22,6 +22,7 @@ public class CustomerRepo
     {
         AppLogger.Info($"Updating Cached Customers...");
         #region Debug
+#if DEBUG
         if (DebugMode.MockCustomers)
         {
             AppLogger.Info($"Returning Mock customers...");
@@ -42,6 +43,7 @@ public class CustomerRepo
 
             return;
         }
+#endif
         #endregion
 
         AppLogger.Info($"Getting json from API...");
@@ -195,12 +197,13 @@ public class CustomerRepo
     {
         AppLogger.Info($"Promoting customer {dto.Id} to Loyal Customer...");
 
+#if DEBUG
         if (DebugMode.FakePromote)
         {
             dto.IsLoyal = true;
             return;
         }
-
+#endif
         string? json = await HttpWorker.HttpPost($"api/customers/promote/{dto.Id}", "", true, default);
 
         if (string.IsNullOrWhiteSpace(json))

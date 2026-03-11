@@ -74,11 +74,13 @@ public partial class MainViewModel : ViewModelBase
     private void GenerateNavItems()
     {
         Role role;
+#if DEBUG
         if (DebugMode.OverrideRole)
         {
             role = DebugMode.DebugRole;
         }
         else
+#endif
         {
             role = Credentials.Role;
         }

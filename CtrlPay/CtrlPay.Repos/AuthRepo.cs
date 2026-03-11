@@ -18,8 +18,9 @@ namespace CtrlPay.Repos
 
         public static async Task<ReturnModel<bool>> Register(string? username, string? code, string? password, string? confirmPassword)
         {
+#if DEBUG
             if (DebugMode.SkipAuthReg) return new("R0", ReturnModelSeverityEnum.Ok, true);
-
+#endif
             #region Validations out of Api
             if (string.IsNullOrWhiteSpace(username)) return new("R1", ReturnModelSeverityEnum.Error, false);
             if (string.IsNullOrWhiteSpace(password)) return new("R2", ReturnModelSeverityEnum.Error, false);
@@ -42,8 +43,9 @@ namespace CtrlPay.Repos
 
         public static async Task<ReturnModel<bool>> Login(string? username, string? password, CancellationToken cancellationToken)
         {
+#if DEBUG
             if (DebugMode.SkipAuthLogin) return new("A0", ReturnModelSeverityEnum.Ok, true);
-
+#endif
             #region Validations out of Api
             if (string.IsNullOrWhiteSpace(username)) return new("A10", ReturnModelSeverityEnum.Error, false);
             if (string.IsNullOrWhiteSpace(password)) return new("A11", ReturnModelSeverityEnum.Error, false);

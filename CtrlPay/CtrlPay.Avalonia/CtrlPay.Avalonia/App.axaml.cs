@@ -38,6 +38,7 @@ namespace CtrlPay.Avalonia
                 DisableAvaloniaDataAnnotationValidation();
 
                 #region Debug
+#if DEBUG
                 if (DebugMode.StartDebug)
                 {
                     AppLogger.Info($"Starting Debug Window...");
@@ -48,6 +49,7 @@ namespace CtrlPay.Avalonia
                     debugWin.Show();
                     AppLogger.Info($"Debug window started.");
                 }
+#endif
                 #endregion
 
                 if (IsConfigured)
