@@ -1,4 +1,5 @@
 ﻿using CtrlPay.Avalonia.Settings;
+using CtrlPay.Entities;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System;
@@ -15,14 +16,31 @@ public static class ChangeChecker
     public static async void ToCheck() 
     {
         AppLogger.Info($"Checking....");
-        await TransactionRepo.UpdateTransactionsCacheFromApi(default);
-        await TransactionRepo.UpdateTransactionSumCacheFromApi(default);
-        await PaymentRepo.UpdatePaymentSumCacheFromApi(default);
-        await PaymentRepo.UpdatePaymetsCacheFromApi(default);
-        await CustomerRepo.UpdateCustomersFromApi(default);
-        await AccountantRepo.UpdateAccountantCachesFromApi(default);
-        await AdminRepo.UpdateUserCacheFromApi();
-
+        switch (Credentials.Role)
+        {
+            case Role.Accountant:
+                AppLogger.Info($"Role: Accountant");
+                await CustomerRepo.UpdateCustomersFromApi(default);
+                await AccountantRepo.UpdateAccountantCachesFromApi(default);
+                break;
+            case Role.Admin:
+                AppLogger.Info($"Role: Admin");
+                await CustomerRepo.UpdateCustomersFromApi(default);
+                await AccountantRepo.UpdateAccountantCachesFromApi(default);
+                await AdminRepo.UpdateUserCacheFromApi();
+                break;
+            case Role.Customer:
+                AppLogger.Info($"Role: Customer");
+                await TransactionRepo.UpdateTransactionsCacheFromApi(default);
+                await TransactionRepo.UpdateTransactionSumCacheFromApi(default);
+                await PaymentRepo.UpdatePaymentSumCacheFromApi(default);
+                await PaymentRepo.UpdatePaymetsCacheFromApi(default);
+                break;
+            default:
+                AppLogger.Warning($"Unknown role: {Credentials.Role}");
+                break;
+        }
+        
         // Sem se píšou všechny kontroly změn, které chceme provádět
         UpdateHandler.HandleCreditAvailableUpdate(TransactionRepo.GetTransactionSum());
         UpdateHandler.HandlePendingPaymentsUpdate(PaymentRepo.GetPaymentSum());
