@@ -19,7 +19,7 @@
                                Foreground="{Binding Model.RoleColor}"/>
                     
                     <!-- Ukážeme jméno zákazníka, pokud to je Customer -->
-                    <TextBlock Text="{Binding CustomerDisplayName, StringFormat='Zákazník: {0}'}" 
+                    <TextBlock Text="{Binding CustomerDisplayName}" 
                                FontSize="12" Foreground="#888888"
                                IsVisible="{Binding ShowCustomerSelection}"/>
 
@@ -34,45 +34,45 @@
                 <!-- Username a Heslo -->
                 <Grid ColumnDefinitions="*, *">
                     <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                        <TextBlock Text="Uživatelské jméno" FontSize="11" Foreground="#888888"/>
-                        <TextBox Text="{Binding Model.Username}" Watermark="Jméno"/>
+                        <TextBlock Text="{DynamicResource UserPiece.Label.Username}" FontSize="11" Foreground="#888888"/>
+                        <TextBox Text="{Binding Model.Username}" Watermark="{DynamicResource UserPiece.Watermark.Username}"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="5,0,0,0">
-                        <TextBlock Text="Heslo" FontSize="11" Foreground="#888888"/>
-                        <TextBox Text="{Binding Model.Password}" PasswordChar="*" Watermark="Nové heslo"/>
+                        <TextBlock Text="{DynamicResource UserPiece.Label.Password}" FontSize="11" Foreground="#888888"/>
+                        <TextBox Text="{Binding Model.Password}" PasswordChar="*" Watermark="{DynamicResource UserPiece.Watermark.Password}"/>
                     </StackPanel>
                 </Grid>
 
                 <!-- Role, Zákazník a Account ID -->
                 <Grid ColumnDefinitions="Auto, *, Auto">
                     <StackPanel Grid.Column="0" Margin="0,0,5,0">
-                        <TextBlock Text="Role" FontSize="11" Foreground="#888888"/>
+                        <TextBlock Text="{DynamicResource UserPiece.Label.Role}" FontSize="11" Foreground="#888888"/>
                         <ComboBox ItemsSource="{Binding RolesList}" SelectedItem="{Binding Model.Role}" 
                                   SelectionChanged="OnRoleSelectionChanged" Width="130"/>
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="5,0,5,0" IsVisible="{Binding ShowCustomerSelection}">
-                        <TextBlock Text="Spárovaný zákazník" FontSize="11" Foreground="#888888"/>
+                        <TextBlock Text="{DynamicResource UserPiece.Label.Customer}" FontSize="11" Foreground="#888888"/>
                         <ComboBox ItemsSource="{Binding Customers}" SelectedItem="{Binding SelectedCustomer}" 
-                                  PlaceholderText="Vyberte..." HorizontalAlignment="Stretch">
+                                  PlaceholderText="{DynamicResource UserPiece.Placeholder.Customer}" HorizontalAlignment="Stretch">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate><TextBlock Text="{Binding FullName}"/></DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
                     </StackPanel>
                     <StackPanel Grid.Column="2" Margin="5,0,0,0">
-                        <TextBlock Text="Account ID" FontSize="11" Foreground="#888888"/>
+                        <TextBlock Text="{DynamicResource UserPiece.Label.AccountId}" FontSize="11" Foreground="#888888"/>
                         <NumericUpDown Value="{Binding Model.AccountId}" Minimum="0" Maximum="999" Width="110"/>
                     </StackPanel>
                 </Grid>
 
                 <!-- 2FA a Recovery Codes -->
                 <StackPanel Spacing="5">
-                    <CheckBox IsChecked="{Binding Model.TwoFactorEnabled}" Content="Aktivovat 2FA"/>
+                    <CheckBox IsChecked="{Binding Model.TwoFactorEnabled}" Content="{DynamicResource UserPiece.Label.TwoFactorEnable}"/>
                     
-                    <TextBlock Text="Recovery Kódy (každý na nový řádek)" FontSize="11" Foreground="#888888"/>
+                    <TextBlock Text="{DynamicResource UserPiece.Label.RecoveryCodes}" FontSize="11" Foreground="#888888"/>
                     <TextBox Text="{Binding RecoveryCodesText}" 
                              AcceptsReturn="True" Height="80" 
-                             Watermark="Sem vložte kódy..." 
+                             Watermark="{DynamicResource UserPiece.Watermark.RecoveryCodes}" 
                              FontSize="12"/>
                 </StackPanel>
             </StackPanel>

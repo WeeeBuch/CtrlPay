@@ -69,7 +69,6 @@
                                Foreground="#FF4444"
                                VerticalAlignment="Center"
                                IsVisible="{Binding IsPaneOpen}"/>
-                    <TextBlock Text="{DynamicResource NavbarView.Logout}"/>
                 </StackPanel>
             </Button>
         </Grid>
