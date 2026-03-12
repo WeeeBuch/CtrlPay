@@ -1,4 +1,4 @@
-<UserControl xmlns="https://github.com/avaloniaui"
+﻿<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewmodels="using:CtrlPay.Avalonia.ViewModels"
              xmlns:local="using:CtrlPay.Avalonia"
@@ -69,6 +69,7 @@
                                Foreground="#FF4444"
                                VerticalAlignment="Center"
                                IsVisible="{Binding IsPaneOpen}"/>
+                    <TextBlock Text="{DynamicResource NavbarView.Logout}"/>
                 </StackPanel>
             </Button>
         </Grid>

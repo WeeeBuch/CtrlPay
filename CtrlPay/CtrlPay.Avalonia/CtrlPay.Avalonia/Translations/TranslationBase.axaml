@@ -87,6 +87,7 @@
     <x:String x:Key="NavbarView.Menu">NavbarView.Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">NavbarView.Dashboard</x:String>
     <x:String x:Key="NavbarView.Settings">NavbarView.Settings</x:String>
+    <x:String x:Key="NavbarView.Logout">NavbarView.Logout</x:String>
     <x:String x:Key="NavbarView.Debts">NavbarView.Debts</x:String>
     <x:String x:Key="NavbarView.Transactions">NavbarView.Transactions</x:String>
     <x:String x:Key="NavbarView.AccountantTransactions">NavbarView.AccountantTransactions</x:String>

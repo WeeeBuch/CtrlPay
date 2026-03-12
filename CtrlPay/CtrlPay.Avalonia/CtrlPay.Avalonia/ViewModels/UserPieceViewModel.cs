@@ -37,6 +37,17 @@ public partial class UserPieceViewModel : ViewModelBase
     // Viditelnost výběru zákazníka (pouze pro roli Customer)
     public bool ShowCustomerSelection => Model.Role == Role.Customer;
 
+    // Vlastnost pro editaci kódů jako text (každý kód na novém řádku)
+    public string RecoveryCodesText
+    {
+        get => string.Join(Environment.NewLine, Model.TwoFactorRecoveryCodes);
+        set
+        {
+            Model.TwoFactorRecoveryCodes = value.Split(new[] { Environment.NewLine, "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
+            OnPropertyChanged(nameof(RecoveryCodesText));
+        }
+    }
+
     public UserPieceViewModel(FrontendUserDTO model)
     {
         _model = model;
