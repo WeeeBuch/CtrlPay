@@ -1,4 +1,4 @@
-using CtrlPay.Entities;
+﻿using CtrlPay.Entities;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json;
@@ -17,11 +17,10 @@ public class FrontendUserDTO : IEditableObject
     public bool TwoFactorEnabled { get; set; }
     private string? TwoFactorRecoveryCodesJson { get; set; } = string.Empty;
 
-    [NotMapped]
     public string[] TwoFactorRecoveryCodes
     {
         get => string.IsNullOrWhiteSpace(TwoFactorRecoveryCodesJson)
-               ? Array.Empty<string>()
+               ? []
                : JsonSerializer.Deserialize<string[]>(TwoFactorRecoveryCodesJson)!;
         set => TwoFactorRecoveryCodesJson = JsonSerializer.Serialize(value);
     }

@@ -1,4 +1,4 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -17,6 +17,12 @@
                 <StackPanel Orientation="Horizontal" Spacing="10">
                     <TextBlock Text="{Binding Model.Role}" FontSize="12" 
                                Foreground="{Binding Model.RoleColor}"/>
+                    
+                    <!-- Ukážeme jméno zákazníka, pokud to je Customer -->
+                    <TextBlock Text="{Binding CustomerDisplayName, StringFormat='Zákazník: {0}'}" 
+                               FontSize="12" Foreground="#888888"
+                               IsVisible="{Binding ShowCustomerSelection}"/>
+
                     <TextBlock Text="{DynamicResource UserPiece.Label.TwoFactorEnabled}" FontSize="12" 
                                Foreground="#44AAFF" 
                                IsVisible="{Binding Model.TwoFactorEnabled}"/>
@@ -25,12 +31,36 @@
 
             <!-- Edit View -->
             <StackPanel Grid.Column="0" IsVisible="{Binding Editing}" Spacing="10">
-                <TextBox Text="{Binding Model.Username}" 
-                         Watermark="{DynamicResource UserPiece.Watermark.Username}" 
-                         Width="250" HorizontalAlignment="Left"/>
-                <ComboBox ItemsSource="{Binding RolesList}" 
-                          SelectedItem="{Binding Model.Role}" 
-                          Width="200"/>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBox Text="{Binding Model.Username}" 
+                             Watermark="{DynamicResource UserPiece.Watermark.Username}" 
+                             Width="200" HorizontalAlignment="Left"/>
+                    
+                    <TextBox Text="{Binding Model.Password}" 
+                             PasswordChar="*"
+                             Watermark="Heslo (ponechte prázdné)" 
+                             Width="200"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <ComboBox ItemsSource="{Binding RolesList}" 
+                              SelectedItem="{Binding Model.Role}" 
+                              SelectionChanged="OnRoleSelectionChanged"
+                              Width="150"/>
+
+                    <!-- Výběr zákazníka -->
+                    <ComboBox ItemsSource="{Binding Customers}"
+                              SelectedItem="{Binding SelectedCustomer}"
+                              PlaceholderText="Vyberte zákazníka"
+                              IsVisible="{Binding ShowCustomerSelection}"
+                              Width="250">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding FullName}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </StackPanel>
             </StackPanel>
 
             <!-- Actions -->

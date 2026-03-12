@@ -42,10 +42,7 @@ public partial class AdminViewModel : ViewModelBase
         });
 
         // Dynamické aktualizace
-        UpdateHandler.UpdatedAdminUsers.Add(() =>
-        {
-            LoadUsers();
-        });
+        UpdateHandler.UpdatedAdminUsers.Add(LoadUsers);
     }
 
     private void InitializeRoles()
