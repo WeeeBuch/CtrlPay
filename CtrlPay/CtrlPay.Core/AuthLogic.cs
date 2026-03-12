@@ -21,7 +21,7 @@ namespace CtrlPay.Core
 
         public static ReturnModel Login(string username, string password)
         {
-            CtrlPayDbContext db = new CtrlPayDbContext();
+            CtrlPayDbContext db = new();
             User? user = db.Users.FirstOrDefault(u => u.Username == username);
             if (user == null)
             {
@@ -51,7 +51,7 @@ namespace CtrlPay.Core
 
             if (user.TwoFactorEnabled)
             {
-                new ReturnModel("A5", ReturnModelSeverityEnum.Ok);
+                return new ReturnModel("A5", ReturnModelSeverityEnum.Ok);
             }
             return new ReturnModel("A0", ReturnModelSeverityEnum.Ok);
         }
@@ -68,8 +68,8 @@ namespace CtrlPay.Core
 
             byte[] hash = pbkdf2.GetBytes(KeySize);
 
-            CtrlPayDbContext db = new CtrlPayDbContext();
-            User newUser = new User(username, hash, salt, role);
+            CtrlPayDbContext db = new();
+            User newUser = new(username, hash, salt, role);
             db.Users.Add(newUser);
             db.SaveChanges();
             return new ReturnModel<User>("A0", ReturnModelSeverityEnum.Ok, newUser);
@@ -122,12 +122,8 @@ namespace CtrlPay.Core
 
         public static void ChangePassword(int userId, string newPassword)
         {
-            CtrlPayDbContext db = new CtrlPayDbContext();
-            User? user = db.Users.FirstOrDefault(u => u.Id == userId);
-            if (user == null)
-            {
-                throw new Exception("User not found.");
-            }
+            CtrlPayDbContext db = new();
+            User? user = db.Users.FirstOrDefault(u => u.Id == userId) ?? throw new Exception("User not found.");
             byte[] salt = RandomNumberGenerator.GetBytes(SaltSize);
             var pbkdf2 = new Rfc2898DeriveBytes(
                 newPassword,
