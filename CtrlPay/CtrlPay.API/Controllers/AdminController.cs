@@ -57,7 +57,7 @@ namespace CtrlPay.API.Controllers
         [HttpPost]
         [Route("users/update")]
         //POST: api/admin/users/update
-        public IActionResult UpdateUser([FromBody] UserApiDTO user)
+        public async Task<IActionResult> UpdateUser([FromBody] UserApiDTO user)
         {
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
             if (role != Role.Admin)
@@ -78,14 +78,14 @@ namespace CtrlPay.API.Controllers
                 AuthLogic.ChangePassword(dbUser.Id, user.Password);
             }
 
-
+            await _db.SaveChangesAsync();
             return Ok(new ReturnModel("G0", ReturnModelSeverityEnum.Ok));
         }
 
         [HttpDelete]
         [Route("users/delete/{id}")]
         //DELETE: api/admin/users/delete/{id}
-        public IActionResult DeleteUser(int id)
+        public async Task<IActionResult> DeleteUser(int id)
         {
             Role role = (Role)int.Parse(User.FindFirst(ClaimTypes.Role)?.Value!);
             if (role != Role.Admin)
@@ -98,7 +98,7 @@ namespace CtrlPay.API.Controllers
                 return NotFound(new ReturnModel("G1", ReturnModelSeverityEnum.Error));
             }
             _db.Users.Remove(dbUser);
-            _db.SaveChanges();
+            await _db.SaveChangesAsync();
             return Ok(new ReturnModel("G0", ReturnModelSeverityEnum.Ok));
 
         }
