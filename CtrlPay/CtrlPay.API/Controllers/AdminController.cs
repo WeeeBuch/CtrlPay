@@ -1,4 +1,5 @@
-﻿using CtrlPay.DB;
+﻿using CtrlPay.Core;
+using CtrlPay.DB;
 using CtrlPay.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -12,7 +13,7 @@ namespace CtrlPay.API.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-        public CtrlPayDbContext _db { get; set; }
+        private readonly CtrlPayDbContext _db;
         public AdminController(CtrlPayDbContext ctrlPayDbContext)
         {
             _db = ctrlPayDbContext;
@@ -29,7 +30,7 @@ namespace CtrlPay.API.Controllers
                 return Forbid();
             }
 
-            List<UserApiDTO> users = new List<UserApiDTO>();
+            List<UserApiDTO> users = new();
             foreach (var user in _db.Users.ToList())
             {
                 users.Add(user.Role == Role.Customer ? new UserApiDTO(user, user.LoyalCustomer) : new UserApiDTO(user));
@@ -48,7 +49,8 @@ namespace CtrlPay.API.Controllers
             {
                 return Forbid();
             }
-            //TODO: Implement user creation logic
+            AuthLogic.AddUser(user.Username, user.Password, user.Role);
+
             return Ok(new ReturnModel("G0", ReturnModelSeverityEnum.Ok));
         }
 
@@ -62,11 +64,18 @@ namespace CtrlPay.API.Controllers
             {
                 return Forbid();
             }
-            //TODO: Implement user update logic
             User dbUser = _db.Users.FirstOrDefault(u => u.Id == user.Id);
             if (dbUser == null) 
             {
                 return NotFound(new ReturnModel("G1", ReturnModelSeverityEnum.Error));
+            }
+            dbUser.Username = user.Username;
+            dbUser.Role = user.Role;
+            dbUser.TwoFactorEnabled = user.TwoFactorEnabled;
+
+            if(user.Password != "")
+            {
+                AuthLogic.ChangePassword(dbUser.Id, user.Password);
             }
 
 
