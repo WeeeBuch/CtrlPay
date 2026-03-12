@@ -94,5 +94,15 @@ namespace CtrlPay.Repos
                 return new ReturnModel<bool>("A9", ReturnModelSeverityEnum.Error, false) { DetailMessage = "Serialization error." };
             }
         }
+
+        public static void Logout()
+        {
+            Credentials.JwtAccessToken = null;
+            Credentials.AccessTokenExpiresAtUtc = DateTime.MinValue;
+            Credentials.RefreshToken = null;
+            Credentials.RefreshTokenExpiresAtUtc = DateTime.MinValue;
+            Credentials.Role = Role.Employee;
+            AppLogger.Info("User logged out, credentials cleared.");
+        }
     }
 }

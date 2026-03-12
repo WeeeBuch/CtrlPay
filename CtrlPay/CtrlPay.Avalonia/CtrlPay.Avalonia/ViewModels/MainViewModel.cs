@@ -41,8 +41,11 @@ public partial class MainViewModel : ViewModelBase
 
     public ObservableCollection<NavItem> NavigationItems { get; private set; }
 
-    public MainViewModel()
+    private readonly INavigationService _navigation;
+
+    public MainViewModel(INavigationService navigation)
     {
+        _navigation = navigation;
         // Spuštění kontrol změn na pozadí
         AppLogger.Info($"Starting Checker...");
         _ = ChangeChecker.StartChecking();
@@ -54,6 +57,14 @@ public partial class MainViewModel : ViewModelBase
 
         // Nasloucháme zprávám z Dashboardu pro navigaci s filtrem
         WeakReferenceMessenger.Default.Register<NavigationFilterMessage>(this, (r, m) => HandleNavigationFilter(m.Filter));
+    }
+
+    [RelayCommand]
+    private void Logout(Window? currentWindow)
+    {
+        if (currentWindow == null) return;
+        AuthRepo.Logout();
+        _navigation.Logout(currentWindow);
     }
 
     private void HandleNavigationFilter(StatusEnum filter)

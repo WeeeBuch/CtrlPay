@@ -1,6 +1,7 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:viewmodels="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:local="using:CtrlPay.Avalonia"
              x:Class="CtrlPay.Avalonia.NavbarView"
              x:DataType="viewmodels:MainViewModel"
              x:Name="Root"
@@ -22,8 +23,9 @@
             </Transitions>
         </Border.Transitions>
 
-        <StackPanel Spacing="5" Margin="10">
-            <StackPanel Orientation="Horizontal" Margin="0,10,0,20">
+        <Grid RowDefinitions="Auto, *, Auto" Margin="10">
+            <!-- Top part: Toggle -->
+            <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,10,0,20">
                 <Button Command="{Binding TogglePaneCommand}"
                         Background="Transparent">
                     <PathIcon Data="{Binding MenuIcon}" Width="20" Height="20" 
@@ -34,7 +36,8 @@
                            VerticalAlignment="Center" Margin="10,0,0,0" FontWeight="Bold"/>
             </StackPanel>
 
-            <ListBox ItemsSource="{Binding NavigationItems}"
+            <!-- Middle part: Navigation items -->
+            <ListBox Grid.Row="1" ItemsSource="{Binding NavigationItems}"
                      SelectedItem="{Binding SelectedNavigationItem}"
                      Background="Transparent">
                 <ListBox.ItemTemplate>
@@ -51,6 +54,23 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-        </StackPanel>
+
+            <!-- Bottom part: Logout -->
+            <Button Grid.Row="2" 
+                    Command="{Binding LogoutCommand}"
+                    CommandParameter="{Binding $parent[Window]}"
+                    Background="Transparent"
+                    HorizontalAlignment="Stretch"
+                    Margin="0,20,0,10">
+                <StackPanel Orientation="Horizontal" Spacing="10" Background="Transparent">
+                    <PathIcon Data="{x:Static local:IconData.Logout}" Width="20" Height="20"
+                              Foreground="#FF4444"/>
+                    <TextBlock Text="{DynamicResource NavbarView.Logout}" 
+                               Foreground="#FF4444"
+                               VerticalAlignment="Center"
+                               IsVisible="{Binding IsPaneOpen}"/>
+                </StackPanel>
+            </Button>
+        </Grid>
     </Border>
 </UserControl>
