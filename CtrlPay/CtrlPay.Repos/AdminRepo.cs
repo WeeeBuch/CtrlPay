@@ -93,7 +93,7 @@ namespace CtrlPay.Repos
             else
             {
                 AppLogger.Info($"Updating customer in API...");
-                string? json = await HttpWorker.HttpPost($"api/admin/users/edit", user.ToApiDTO(), true, default);
+                string? json = await HttpWorker.HttpPost($"api/admin/users/update", user.ToApiDTO(), true, default);
                 if (string.IsNullOrWhiteSpace(json))
                 {
                     AppLogger.Warning($"Get response was NULL.");

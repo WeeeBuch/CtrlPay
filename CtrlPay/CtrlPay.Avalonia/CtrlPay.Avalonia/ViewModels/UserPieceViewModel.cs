@@ -32,7 +32,7 @@ public partial class UserPieceViewModel : ViewModelBase
     }
 
     // Pomocná vlastnost pro zobrazení jména zákazníka v needitačním režimu
-    public string CustomerDisplayName => Model.GetCustFullName() ?? "---";
+    public string CustomerDisplayName => Model.CustomerFullName ?? "---";
 
     // Viditelnost výběru zákazníka (pouze pro roli Customer)
     public bool ShowCustomerSelection => Model.Role == Role.Customer;

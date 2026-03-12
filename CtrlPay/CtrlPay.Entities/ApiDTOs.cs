@@ -155,6 +155,7 @@ namespace CtrlPay.Entities
         public string Password { get; set; } = string.Empty;
         public bool TwoFactorEnabled { get; set; }
         private string? TwoFactorRecoveryCodesJson { get; set; } = string.Empty;
+        public string? CustomerFullName { get; set; }
 
         [NotMapped]
         public string[] TwoFactorRecoveryCodes
@@ -187,6 +188,7 @@ namespace CtrlPay.Entities
             Username = user.Username;
             TwoFactorEnabled = user.TwoFactorEnabled;
             TwoFactorRecoveryCodes = user.TwoFactorRecoveryCodes;
+            CustomerFullName = loyalCustomer.Customer.FullName;
         }
     }
 }

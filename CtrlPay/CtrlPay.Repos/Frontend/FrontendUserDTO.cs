@@ -16,6 +16,7 @@ public class FrontendUserDTO : IEditableObject
     public string Password { get; set; } = string.Empty;
     public bool TwoFactorEnabled { get; set; }
     private string? TwoFactorRecoveryCodesJson { get; set; } = string.Empty;
+    public string? CustomerFullName { get; set; }
 
     public string[] TwoFactorRecoveryCodes
     {
@@ -30,6 +31,7 @@ public class FrontendUserDTO : IEditableObject
     {
         Role.Admin => "#FF4444",
         Role.Accountant => "#44FF44",
+        Role.Employee => "#05faf6",
         _ => "#AAAAAA"
     };
 
@@ -46,6 +48,7 @@ public class FrontendUserDTO : IEditableObject
         Password = user.Password;
         TwoFactorEnabled = user.TwoFactorEnabled;
         TwoFactorRecoveryCodes = user.TwoFactorRecoveryCodes;
+        CustomerFullName = user.CustomerFullName;
     }
 
     // --- IEditableObject implementace ---
