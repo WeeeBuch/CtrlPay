@@ -1,4 +1,4 @@
-﻿using Avalonia;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
@@ -87,11 +87,13 @@ namespace CtrlPay.Avalonia
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleView)
             {
                 AppLogger.Info($"Starting Mobile or Web version...");
-                var nav = new NavigationService();
+                var nav = new MobileNavigationService(singleView);
 
                 if (IsConfigured)
                 {
-                    singleView.MainView = new MainView { DataContext = new MainViewModel(nav) };
+                    // Start with Login flow on mobile when already configured,
+                    // to mirror desktop behavior.
+                    singleView.MainView = new LoginView { DataContext = new LoginViewModel(nav) };
                 }
                 else
                 {
@@ -100,7 +102,8 @@ namespace CtrlPay.Avalonia
 
                 WeakReferenceMessenger.Default.Register<OnboardingFinishedMessage>(this, (r, m) =>
                 {
-                    singleView.MainView = new MainView { DataContext = new MainViewModel(nav) };
+                    // After onboarding is finished, proceed to login screen on mobile.
+                    singleView.MainView = new LoginView { DataContext = new LoginViewModel(nav) };
                 });
             }
 

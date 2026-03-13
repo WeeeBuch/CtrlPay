@@ -1,4 +1,4 @@
-﻿using Avalonia;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
@@ -44,24 +44,35 @@ public partial class LoginViewModel : ViewModelBase
     [RelayCommand]
     private async Task OpenApiSettings()
     {
-        AppLogger.Info("Opening API connect window manually...");
-        var vm = new APIConnectViewModel();
-        var window = new ConnectAPIWindow { DataContext = vm };
-        vm.CloseAction = () => window.Close();
+        AppLogger.Info("Opening API connect settings...");
 
-        var desktop = Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
-        var owner = desktop?.MainWindow;
+        var lifetime = Application.Current?.ApplicationLifetime;
 
-        if (owner != null)
+        // Desktop / multi-window behavior unchanged
+        if (lifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            await window.ShowDialog(owner);
+            var vm = new APIConnectViewModel();
+            var window = new ConnectAPIWindow { DataContext = vm };
+            vm.CloseAction = () => window.Close();
+
+            var owner = desktop.MainWindow;
+
+            if (owner != null)
+            {
+                await window.ShowDialog(owner);
+            }
+            else
+            {
+                window.Show();
+            }
         }
         else
         {
-            window.Show(); // Fallback pokud není owner
+            // On mobile / web we currently don't support a separate window.
+            AppLogger.Warning("API connect window is only available on desktop.");
         }
 
-        // Po zavření aktualizujeme stav
+        // After closing / attempting settings, refresh API info
         ApiUrl = Credentials.BaseUri;
         hasAPI = !string.IsNullOrEmpty(ApiUrl);
     }
