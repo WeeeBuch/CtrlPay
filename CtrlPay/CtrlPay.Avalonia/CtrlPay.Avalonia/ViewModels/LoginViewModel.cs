@@ -4,6 +4,8 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.Views;
+using CtrlPay.Avalonia.Views.MobileViews;
+using CtrlPay.Avalonia.Settings;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
@@ -48,7 +50,7 @@ public partial class LoginViewModel : ViewModelBase
 
         var lifetime = Application.Current?.ApplicationLifetime;
 
-        // Desktop / multi-window behavior unchanged
+        // Desktop / multi-window behavior
         if (lifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             var vm = new APIConnectViewModel();
@@ -66,14 +68,28 @@ public partial class LoginViewModel : ViewModelBase
                 window.Show();
             }
         }
-        else
+        // Android / mobile / browser: use single-view lifetime and show MobileAPIConnectView full-screen
+        else if (lifetime is ISingleViewApplicationLifetime singleView)
         {
-            // On mobile / web we currently don't support a separate window.
-            AppLogger.Warning("API connect window is only available on desktop.");
+            var vm = new APIConnectViewModel();
+            vm.ApiUrl = !string.IsNullOrWhiteSpace(SettingsManager.Current.ConnectionString)
+                ? SettingsManager.Current.ConnectionString
+                : Credentials.BaseUri;
+
+            var apiView = new MobileAPIConnectView { DataContext = vm };
+
+            vm.CloseAction = () =>
+            {
+                singleView.MainView = new MobileLoginView { DataContext = new LoginViewModel(_navigation) };
+            };
+
+            singleView.MainView = apiView;
         }
 
-        // After closing / attempting settings, refresh API info
-        ApiUrl = Credentials.BaseUri;
+        // After closing / attempting settings, refresh API info from settings/credentials
+        ApiUrl = string.IsNullOrWhiteSpace(SettingsManager.Current.ConnectionString)
+            ? Credentials.BaseUri
+            : SettingsManager.Current.ConnectionString;
         hasAPI = !string.IsNullOrEmpty(ApiUrl);
     }
 
@@ -124,6 +140,7 @@ public partial class LoginViewModel : ViewModelBase
         IsBusy = true;
         try
         {
+            SettingsManager.Current.ConnectionString = "https://www.action-games.cz";
             AppLogger.Info($"Logining....");
             ReturnModel<bool> returnModel = await AuthRepo.Login(Username, Password, default);
             bool success = returnModel.Body;
@@ -136,8 +153,8 @@ public partial class LoginViewModel : ViewModelBase
             }
             else
             {
+                Message = $"{returnModel.ReturnCode}: {TranslationManager.GetErrorCode(returnModel)}";
                 AppLogger.Error("Failed to Login", returnModel);
-                Message = TranslationManager.GetErrorCode(returnModel);
             }
         }
         finally

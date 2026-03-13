@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
@@ -8,6 +8,7 @@ using CtrlPay.Entities;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using CtrlPay.Avalonia;
+using CtrlPay.Avalonia.Views.MobileViews;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -42,10 +43,12 @@ public partial class MainViewModel : ViewModelBase
     public ObservableCollection<NavItem> NavigationItems { get; private set; }
 
     private readonly INavigationService _navigation;
+    private readonly bool _useMobileViews;
 
-    public MainViewModel(INavigationService navigation)
+    public MainViewModel(INavigationService navigation, bool useMobileViews = false)
     {
         _navigation = navigation;
+        _useMobileViews = useMobileViews;
         // Spuštění kontrol změn na pozadí
         AppLogger.Info($"Starting Checker...");
         _ = ChangeChecker.StartChecking();
@@ -62,9 +65,8 @@ public partial class MainViewModel : ViewModelBase
     [RelayCommand]
     private void Logout(Window? currentWindow)
     {
-        if (currentWindow == null) return;
         AuthRepo.Logout();
-        _navigation.Logout(currentWindow);
+        _navigation.Logout(currentWindow!);
     }
 
     private void HandleNavigationFilter(StatusEnum filter)
@@ -98,32 +100,56 @@ public partial class MainViewModel : ViewModelBase
 
         NavigationItems = [];
 
-        if (role == Role.Customer)
+        if (_useMobileViews)
         {
-            NavigationItems.Add(new NavItem("NavbarView.Dashboard", new DashboardView(), IconData.Dashboard));
-            NavigationItems.Add(new NavItem("NavbarView.Debts", new DebtView(), IconData.Debt));
-            NavigationItems.Add(new NavItem("NavbarView.Transactions", new TransactionView(), IconData.Cash));
+            if (role == Role.Customer)
+            {
+                NavigationItems.Add(new NavItem("NavbarView.Dashboard", new MobileDashboardView(), IconData.Dashboard));
+                NavigationItems.Add(new NavItem("NavbarView.Debts", new MobileDebtView(), IconData.Debt));
+                NavigationItems.Add(new NavItem("NavbarView.Transactions", new MobileTransactionView(), IconData.Cash));
+            }
+            else if (role == Role.Accountant)
+            {
+                NavigationItems.Add(new NavItem("NavbarView.Dashboard", new AccountantDashboardView(), IconData.Dashboard));
+                NavigationItems.Add(new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers));
+                NavigationItems.Add(new NavItem("NavbarView.PaymentManagement", new PaymentManagementView(), IconData.Cash));
+                NavigationItems.Add(new NavItem("NavbarView.AccountantTransactions", new AccountantTransactionsView(), IconData.Cash));
+            }
+            else if (role == Role.Admin)
+            {
+                NavigationItems.Add(new NavItem("NavbarView.AdminPanel", new AdminView(), IconData.Admin));
+            }
+            NavigationItems.Add(new NavItem("NavbarView.Settings", new MobileSettingsView(), IconData.Cog));
         }
-
-        if (role == Role.Accountant)
+        else
         {
-            NavigationItems.Add(new NavItem("NavbarView.Dashboard", new AccountantDashboardView(), IconData.Dashboard));
-            NavigationItems.Add(new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers));
-            NavigationItems.Add(new NavItem("NavbarView.PaymentManagement", new PaymentManagementView(), IconData.Cash));
-            NavigationItems.Add(new NavItem("NavbarView.AccountantTransactions", new AccountantTransactionsView(), IconData.Cash));
+            if (role == Role.Customer)
+            {
+                NavigationItems.Add(new NavItem("NavbarView.Dashboard", new DashboardView(), IconData.Dashboard));
+                NavigationItems.Add(new NavItem("NavbarView.Debts", new DebtView(), IconData.Debt));
+                NavigationItems.Add(new NavItem("NavbarView.Transactions", new TransactionView(), IconData.Cash));
+            }
+
+            if (role == Role.Accountant)
+            {
+                NavigationItems.Add(new NavItem("NavbarView.Dashboard", new AccountantDashboardView(), IconData.Dashboard));
+                NavigationItems.Add(new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers));
+                NavigationItems.Add(new NavItem("NavbarView.PaymentManagement", new PaymentManagementView(), IconData.Cash));
+                NavigationItems.Add(new NavItem("NavbarView.AccountantTransactions", new AccountantTransactionsView(), IconData.Cash));
+            }
+
+            if (role == Role.Admin)
+            {
+                NavigationItems.Add(new NavItem("NavbarView.AdminPanel", new AdminView(), IconData.Admin));
+            }
+
+            if (role == Role.Employee)
+            {
+
+            }
+
+            NavigationItems.Add(new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog));
         }
-
-        if (role == Role.Admin)
-        {
-            NavigationItems.Add(new NavItem("NavbarView.AdminPanel", new AdminView(), IconData.Admin));
-        }
-
-        if (role == Role.Employee)
-        {
-
-        }
-
-        NavigationItems.Add(new NavItem("NavbarView.Settings", new SettingsView(), IconData.Cog));
     }
 
     partial void OnSelectedNavigationItemChanged(NavItem value)

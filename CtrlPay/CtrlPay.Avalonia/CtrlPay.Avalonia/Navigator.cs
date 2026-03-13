@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using CtrlPay.Avalonia.Views;
+using CtrlPay.Avalonia.Views.MobileViews;
 using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
@@ -66,9 +67,9 @@ namespace CtrlPay.Avalonia
 
         public void ShowMainWindow()
         {
-            var mainView = new MainView
+            var mainView = new MobileMainView
             {
-                DataContext = new MainViewModel(this)
+                DataContext = new MainViewModel(this, useMobileViews: true)
             };
 
             _lifetime.MainView = mainView;
@@ -82,13 +83,13 @@ namespace CtrlPay.Avalonia
 
         public void Logout(Window currentWindow)
         {
-            var loginView = new LoginView
+            var loginView = new MobileLoginView
             {
                 DataContext = new LoginViewModel(this)
             };
 
             _lifetime.MainView = loginView;
-            AppLogger.Info("Logged out: switched to LoginView (mobile single-view).");
+            AppLogger.Info("Logged out: switched to MobileLoginView (mobile single-view).");
         }
     }
 }

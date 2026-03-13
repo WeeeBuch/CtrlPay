@@ -1,4 +1,4 @@
-﻿using CtrlPay.Entities;
+using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,8 @@ namespace CtrlPay.Repos
     public static class Credentials
     {
         public static string JwtAccessToken { get; set; }
-        public static string BaseUri { get; set; }
+        // Default base URL – can be overridden from settings / API dialog
+        public static string BaseUri { get; set; } = "https://www.action-games.cz/";
         public static DateTime AccessTokenExpiresAtUtc { get; set; }
         public static string RefreshToken { get; set; }
         public static DateTime RefreshTokenExpiresAtUtc { get; set; }

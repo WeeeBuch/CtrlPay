@@ -9,6 +9,7 @@ using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.ViewModels;
+using CtrlPay.Avalonia.Views.MobileViews;
 using CtrlPay.Repos.Frontend;
 using System.Linq;
 using System.Reflection;
@@ -91,19 +92,16 @@ namespace CtrlPay.Avalonia
 
                 if (IsConfigured)
                 {
-                    // Start with Login flow on mobile when already configured,
-                    // to mirror desktop behavior.
-                    singleView.MainView = new LoginView { DataContext = new LoginViewModel(nav) };
+                    singleView.MainView = new MobileLoginView { DataContext = new LoginViewModel(nav) };
                 }
                 else
                 {
-                    singleView.MainView = new OnboardingView { DataContext = new OnboardingViewModel() };
+                    singleView.MainView = new MobileOnboardingView { DataContext = new OnboardingViewModel() };
                 }
 
                 WeakReferenceMessenger.Default.Register<OnboardingFinishedMessage>(this, (r, m) =>
                 {
-                    // After onboarding is finished, proceed to login screen on mobile.
-                    singleView.MainView = new LoginView { DataContext = new LoginViewModel(nav) };
+                    singleView.MainView = new MobileLoginView { DataContext = new LoginViewModel(nav) };
                 });
             }
 

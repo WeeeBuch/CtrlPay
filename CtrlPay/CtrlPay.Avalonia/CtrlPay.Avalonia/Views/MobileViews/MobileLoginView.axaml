@@ -1,0 +1,58 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             x:DataType="vm:LoginViewModel"
+             x:Class="CtrlPay.Avalonia.Views.MobileViews.MobileLoginView"
+             Background="{DynamicResource Color.Background}">
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Margin="16" Spacing="0" HorizontalAlignment="Stretch">
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,24,0,0" Spacing="12">
+        <Button Content="{DynamicResource LoginView.Button.Switch.Login}" 
+                MinHeight="48" MinWidth="0" HorizontalAlignment="Stretch"
+                Command="{Binding ToggleLoginCommand}" IsEnabled="{Binding !IsBusy}"/>
+        <Button Content="{DynamicResource LoginView.Button.Switch.Register}" 
+                MinHeight="48" MinWidth="0" HorizontalAlignment="Stretch"
+                Command="{Binding ToggleRegisterCommand}" IsEnabled="{Binding !IsBusy}"/>
+      </StackPanel>
+
+      <Border CornerRadius="12" Background="#FF2A2A2A" Padding="16" Margin="0,20,0,0">
+        <StackPanel Spacing="12">
+          <StackPanel Spacing="10" IsVisible="{Binding IsLoginSelected}">
+            <TextBox Text="{Binding Username, Mode=TwoWay}" MinHeight="48"
+                     Watermark="{DynamicResource LoginView.Watermark.Username}" IsEnabled="{Binding !IsBusy}"/>
+            <TextBox Text="{Binding Password, Mode=TwoWay}" MinHeight="48" PasswordChar="#"
+                     Watermark="{DynamicResource LoginView.Watermark.Password}" IsEnabled="{Binding !IsBusy}"/>
+            <Button Content="{DynamicResource LoginView.Button.Login}" MinHeight="48"
+                    Command="{Binding LoginCommand}" IsEnabled="{Binding !IsBusy}" FontWeight="Bold"/>
+          </StackPanel>
+          <StackPanel Spacing="10" IsVisible="{Binding !IsLoginSelected}">
+            <TextBox Text="{Binding RegUsername, Mode=TwoWay}" MinHeight="48"
+                     Watermark="{DynamicResource LoginView.Watermark.Username}" IsEnabled="{Binding !IsBusy}"/>
+            <TextBox Text="{Binding RegCode, Mode=TwoWay}" MinHeight="48"
+                     Watermark="{DynamicResource LoginView.Watermark.Code}" IsEnabled="{Binding !IsBusy}"/>
+            <TextBox Text="{Binding RegPassword, Mode=TwoWay}" MinHeight="48" PasswordChar="#"
+                     Watermark="{DynamicResource LoginView.Watermark.Password}" IsEnabled="{Binding !IsBusy}"/>
+            <TextBox Text="{Binding RegConfirmPassword, Mode=TwoWay}" MinHeight="48" PasswordChar="#"
+                     Watermark="{DynamicResource LoginView.Watermark.ConfirmPassword}" IsEnabled="{Binding !IsBusy}"/>
+            <Button Content="{DynamicResource LoginView.Button.Register}" MinHeight="48"
+                    Command="{Binding RegisterCommand}" IsEnabled="{Binding !IsBusy}" FontWeight="Bold"/>
+          </StackPanel>
+        </StackPanel>
+      </Border>
+
+      <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsBusy}" Margin="0,12,0,0" Height="4"/>
+      <TextBlock Text="{Binding Message}" Foreground="{DynamicResource Brush.Error}" 
+                 HorizontalAlignment="Center" Margin="0,8,0,0" TextWrapping="Wrap"/>
+
+      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,16,0,24" Spacing="6">
+        <TextBlock Text="API:" FontSize="11" VerticalAlignment="Center" Opacity="0.6"/>
+        <TextBlock Text="{Binding ApiUrl}" FontSize="11" VerticalAlignment="Center" Opacity="0.8" 
+                   TextTrimming="CharacterEllipsis" MaxWidth="160"/>
+        <Button Command="{Binding OpenApiSettingsCommand}" MinWidth="44" MinHeight="44"
+                Background="Transparent" BorderThickness="0" IsEnabled="{Binding !IsBusy}">
+          <TextBlock Text="✎" Foreground="{DynamicResource Brush.Accent}"/>
+        </Button>
+      </StackPanel>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>
