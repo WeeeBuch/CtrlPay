@@ -97,6 +97,7 @@
     <x:String x:Key="NavbarView.Menu">Menú</x:String>
     <x:String x:Key="NavbarView.Dashboard">Panel</x:String>
     <x:String x:Key="NavbarView.Settings">Ajustes</x:String>
+    <x:String x:Key="NavbarView.Logout">Cerrar sesión</x:String>
     <x:String x:Key="NavbarView.Debts">Deudas</x:String>
     <x:String x:Key="NavbarView.Transactions">Pagos recibidos</x:String>
     <x:String x:Key="NavbarView.AccountantTransactions">Resumen de transacciones</x:String>
@@ -168,7 +169,18 @@
     <x:String x:Key="UserPiece.Button.Save">Guardar</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">Cancelar</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA activado</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnable">Activar 2FA</x:String>
+    <x:String x:Key="UserPiece.Label.Username">Nombre de usuario</x:String>
+    <x:String x:Key="UserPiece.Label.Password">Contraseña</x:String>
+    <x:String x:Key="UserPiece.Label.Role">Rol</x:String>
+    <x:String x:Key="UserPiece.Label.Customer">Cliente</x:String>
+    <x:String x:Key="UserPiece.Label.AccountId">ID de la cuenta</x:String>
+    <x:String x:Key="UserPiece.Label.RecoveryCodes">Códigos de recuperación</x:String>
+    <x:String x:Key="UserPiece.Label.CustomerDisplay">Vista del cliente</x:String>
     <x:String x:Key="UserPiece.Watermark.Username">Nombre de usuario</x:String>
+    <x:String x:Key="UserPiece.Watermark.Password">Ingrese la contraseña...</x:String>
+    <x:String x:Key="UserPiece.Watermark.RecoveryCodes">Ingrese los códigos (separados por espacio)...</x:String>
+    <x:String x:Key="UserPiece.Placeholder.Customer">Seleccione un cliente...</x:String>
 
     <x:String x:Key="ErrorCode.A0">Sesión iniciada correctamente</x:String>
     <x:String x:Key="ErrorCode.A1">Ya existe un usuario con el mismo nombre</x:String>

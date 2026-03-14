@@ -101,6 +101,7 @@
     <x:String x:Key="NavbarView.Transactions">入金履歴</x:String>
     <x:String x:Key="NavbarView.AccountantTransactions">取引概要</x:String>
     <x:String x:Key="NavbarView.AdminPanel">管理パネル</x:String>
+    <x:String x:Key="NavbarView.Logout">ログアウト</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">残高</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">保留中</x:String>
@@ -168,7 +169,18 @@
     <x:String x:Key="UserPiece.Button.Save">保存</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">キャンセル</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA 有効</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnable">2FAを有効にする</x:String>
+    <x:String x:Key="UserPiece.Label.Username">ユーザー名</x:String>
+    <x:String x:Key="UserPiece.Label.Password">パスワード</x:String>
+    <x:String x:Key="UserPiece.Label.Role">ロール</x:String>
+    <x:String x:Key="UserPiece.Label.Customer">顧客</x:String>
+    <x:String x:Key="UserPiece.Label.AccountId">アカウントID</x:String>
+    <x:String x:Key="UserPiece.Label.RecoveryCodes">リカバリーコード</x:String>
+    <x:String x:Key="UserPiece.Label.CustomerDisplay">顧客表示</x:String>
     <x:String x:Key="UserPiece.Watermark.Username">ユーザー名</x:String>
+    <x:String x:Key="UserPiece.Watermark.Password">パスワードを入力...</x:String>
+    <x:String x:Key="UserPiece.Watermark.RecoveryCodes">コードを入力 (スペース区切り)...</x:String>
+    <x:String x:Key="UserPiece.Placeholder.Customer">顧客を選択...</x:String>
 
     <x:String x:Key="ErrorCode.A0">ログインに成功しました</x:String>
     <x:String x:Key="ErrorCode.A1">同じユーザー名が既に存在します</x:String>

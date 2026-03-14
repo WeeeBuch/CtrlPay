@@ -102,6 +102,7 @@
     <x:String x:Key="NavbarView.Menu">Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">Dashboard</x:String>
     <x:String x:Key="NavbarView.Settings">Settings</x:String>
+    <x:String x:Key="NavbarView.Logout">Logout</x:String>
     <x:String x:Key="NavbarView.Debts">Debts</x:String>
     <x:String x:Key="NavbarView.Transactions">Incoming Payments</x:String>
     <x:String x:Key="NavbarView.AccountantTransactions">Transaction Overview</x:String>
@@ -176,7 +177,18 @@
     <x:String x:Key="UserPiece.Button.Save">Save</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">Cancel</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA Enabled</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnable">Enable 2FA</x:String>
+    <x:String x:Key="UserPiece.Label.Username">Username</x:String>
+    <x:String x:Key="UserPiece.Label.Password">Password</x:String>
+    <x:String x:Key="UserPiece.Label.Role">Role</x:String>
+    <x:String x:Key="UserPiece.Label.Customer">Customer</x:String>
+    <x:String x:Key="UserPiece.Label.AccountId">Account ID</x:String>
+    <x:String x:Key="UserPiece.Label.RecoveryCodes">Recovery Codes</x:String>
+    <x:String x:Key="UserPiece.Label.CustomerDisplay">Customer Display</x:String>
     <x:String x:Key="UserPiece.Watermark.Username">Username</x:String>
+    <x:String x:Key="UserPiece.Watermark.Password">Enter password...</x:String>
+    <x:String x:Key="UserPiece.Watermark.RecoveryCodes">Enter codes (space separated)...</x:String>
+    <x:String x:Key="UserPiece.Placeholder.Customer">Select customer...</x:String>
 
     <x:String x:Key="ErrorCode.A0">Successfully logged in</x:String>
     <x:String x:Key="ErrorCode.A1">User with the same username already exists</x:String>

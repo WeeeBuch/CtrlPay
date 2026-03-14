@@ -97,6 +97,7 @@
     <x:String x:Key="NavbarView.Menu">Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">Nástenka</x:String>
     <x:String x:Key="NavbarView.Settings">Nastavenia</x:String>
+    <x:String x:Key="NavbarView.Logout">Odhlásiť sa</x:String>
     <x:String x:Key="NavbarView.Debts">Dlhy</x:String>
     <x:String x:Key="NavbarView.Transactions">Prichádzajúce platby</x:String>
     <x:String x:Key="NavbarView.AccountantTransactions">Prehľad transakcií</x:String>
@@ -168,7 +169,18 @@
     <x:String x:Key="UserPiece.Button.Save">Uložiť</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">Zrušiť</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA zapnuté</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnable">Zapnúť 2FA</x:String>
+    <x:String x:Key="UserPiece.Label.Username">Používateľské meno</x:String>
+    <x:String x:Key="UserPiece.Label.Password">Heslo</x:String>
+    <x:String x:Key="UserPiece.Label.Role">Rola</x:String>
+    <x:String x:Key="UserPiece.Label.Customer">Zákazník</x:String>
+    <x:String x:Key="UserPiece.Label.AccountId">ID účtu</x:String>
+    <x:String x:Key="UserPiece.Label.RecoveryCodes">Obnovovacie kódy</x:String>
+    <x:String x:Key="UserPiece.Label.CustomerDisplay">Zobrazenie zákazníka</x:String>
     <x:String x:Key="UserPiece.Watermark.Username">Používateľské meno</x:String>
+    <x:String x:Key="UserPiece.Watermark.Password">Zadajte heslo...</x:String>
+    <x:String x:Key="UserPiece.Watermark.RecoveryCodes">Zadajte kódy (oddelené medzerou)...</x:String>
+    <x:String x:Key="UserPiece.Placeholder.Customer">Vyberte zákazníka...</x:String>
 
     <x:String x:Key="ErrorCode.A0">Prihlásenie prebehlo úspešne</x:String>
     <x:String x:Key="ErrorCode.A1">Používateľ s rovnakým menom už existuje</x:String>

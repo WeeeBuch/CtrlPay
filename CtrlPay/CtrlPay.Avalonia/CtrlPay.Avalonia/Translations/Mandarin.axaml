@@ -101,6 +101,7 @@
     <x:String x:Key="NavbarView.Transactions">入账款项</x:String>
     <x:String x:Key="NavbarView.AccountantTransactions">交易概览</x:String>
     <x:String x:Key="NavbarView.AdminPanel">管理面板</x:String>
+    <x:String x:Key="NavbarView.Logout">注销</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">余额</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">待处理</x:String>
@@ -168,7 +169,18 @@
     <x:String x:Key="UserPiece.Button.Save">保存</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">取消</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">已启用 2FA</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnable">启用 2FA</x:String>
+    <x:String x:Key="UserPiece.Label.Username">用户名</x:String>
+    <x:String x:Key="UserPiece.Label.Password">密码</x:String>
+    <x:String x:Key="UserPiece.Label.Role">角色</x:String>
+    <x:String x:Key="UserPiece.Label.Customer">客户</x:String>
+    <x:String x:Key="UserPiece.Label.AccountId">账户 ID</x:String>
+    <x:String x:Key="UserPiece.Label.RecoveryCodes">恢复代码</x:String>
+    <x:String x:Key="UserPiece.Label.CustomerDisplay">客户显示</x:String>
     <x:String x:Key="UserPiece.Watermark.Username">用户名</x:String>
+    <x:String x:Key="UserPiece.Watermark.Password">输入密码...</x:String>
+    <x:String x:Key="UserPiece.Watermark.RecoveryCodes">输入代码 (以空格分隔)...</x:String>
+    <x:String x:Key="UserPiece.Placeholder.Customer">选择客户...</x:String>
 
     <x:String x:Key="ErrorCode.A0">成功登录</x:String>
     <x:String x:Key="ErrorCode.A1">相同用户名的用户已存在</x:String>
