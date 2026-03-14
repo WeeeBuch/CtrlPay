@@ -71,8 +71,9 @@ public partial class MainViewModel : ViewModelBase
 
     private void HandleNavigationFilter(StatusEnum filter)
     {
-        // Najdeme položku v menu, která odpovídá správě plateb
-        var target = NavigationItems.FirstOrDefault(i => i.ViewModel is PaymentManagementView);
+        // Najdeme položku v menu, která odpovídá správě plateb (desktop nebo mobile)
+        var target = NavigationItems.FirstOrDefault(i =>
+            i.ViewModel is PaymentManagementView or MobilePaymentManagementView);
         if (target != null)
         {
             SelectedNavigationItem = target;
@@ -110,10 +111,10 @@ public partial class MainViewModel : ViewModelBase
             }
             else if (role == Role.Accountant)
             {
-                NavigationItems.Add(new NavItem("NavbarView.Dashboard", new AccountantDashboardView(), IconData.Dashboard));
-                NavigationItems.Add(new NavItem("NavbarView.Customers", new CustomersListView(), IconData.Customers));
-                NavigationItems.Add(new NavItem("NavbarView.PaymentManagement", new PaymentManagementView(), IconData.Cash));
-                NavigationItems.Add(new NavItem("NavbarView.AccountantTransactions", new AccountantTransactionsView(), IconData.Cash));
+                NavigationItems.Add(new NavItem("NavbarView.Dashboard", new MobileAccountantDashboardView(), IconData.Dashboard));
+                NavigationItems.Add(new NavItem("NavbarView.Customers", new MobileCustomersListView(), IconData.Customers));
+                NavigationItems.Add(new NavItem("NavbarView.PaymentManagement", new MobilePaymentManagementView(), IconData.Cash));
+                NavigationItems.Add(new NavItem("NavbarView.AccountantTransactions", new MobileAccountantTransactionsView(), IconData.Cash));
             }
             else if (role == Role.Admin)
             {
