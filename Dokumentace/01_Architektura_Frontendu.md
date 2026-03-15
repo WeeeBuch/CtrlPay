@@ -1,4 +1,4 @@
-﻿# 01 Architektura Frontendu
+# 01 Architektura Frontendu
 
 Tento soubor popisuje základní stavební kameny klientské aplikace `CtrlPay.Avalonia`. Architektura je navržena jako modulární a podporuje více platforem (Desktop, Android, Browser). V tomto souboru se zaměříme na Desktop, konkrétněji Windows.
 

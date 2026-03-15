@@ -1,4 +1,4 @@
-﻿# 02 Komunikace s API
+# 02 Komunikace s API
 
 Tento soubor popisuje, jak klientská aplikace komunikuje se serverem (API) pomocí protokolu HTTP.
 
@@ -29,7 +29,6 @@ Tyto třídy najdeš ve složce `CtrlPay.Repos/Frontend`. Například:
 - **`FrontendPaymentDTO`**: Detaily o platbě (částka, adresa, stav).
 - **`FrontendCustomerDTO`**: Informace o zákazníkovi.
 - **`FrontendTransactionDTO`**: Detaily o blockchainové transakci.
-
 ### Převod dat (Deserializace):
 Data přicházející z API se automaticky mění na tyto objekty pomocí knihovny `System.Text.Json` (s nastavením `PropertyNameCaseInsensitive = true`).
 
