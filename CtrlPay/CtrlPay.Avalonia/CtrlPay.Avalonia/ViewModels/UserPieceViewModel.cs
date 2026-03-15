@@ -103,4 +103,11 @@ public partial class UserPieceViewModel : ViewModelBase
         await AdminRepo.UpdateUser(Model);
         UpdateHandler.HandleUpdatedAdminUsers();
     }
+
+    [RelayCommand]
+    public async Task Delete()
+    {
+        await AdminRepo.DeleteUser(Model);
+        UpdateHandler.HandleUpdatedAdminUsers();
+    }
 }
