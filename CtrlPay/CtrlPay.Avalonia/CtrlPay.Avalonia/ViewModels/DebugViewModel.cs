@@ -70,4 +70,23 @@ public partial class DebugWindowViewModel : ObservableObject
         DebugItems = new ObservableCollection<DebugPropertyViewModel>(props);
     }
 }
+#else
+using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.ObjectModel;
+namespace CtrlPay.Avalonia.ViewModels;
+
+public partial class DebugPropertyViewModel : ObservableObject
+{
+    public string Name => "";
+    public bool IsBool => false;
+    public bool IsEnum => false;
+    public System.Collections.IEnumerable? EnumValues => null;
+    public object Value { get; set; } = new();
+}
+
+public partial class DebugWindowViewModel : ObservableObject
+{
+    public ObservableCollection<DebugPropertyViewModel> DebugItems { get; } = new();
+    public DebugWindowViewModel() { }
+}
 #endif

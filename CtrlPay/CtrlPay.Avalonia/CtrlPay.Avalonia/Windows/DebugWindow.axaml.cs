@@ -4,6 +4,7 @@ using Avalonia.Markup.Xaml;
 
 namespace CtrlPay.Avalonia;
 
+#if DEBUG
 public partial class DebugWindow : Window
 {
     public DebugWindow()
@@ -11,3 +12,9 @@ public partial class DebugWindow : Window
         InitializeComponent();
     }
 }
+#else
+public partial class DebugWindow : Window
+{
+    public DebugWindow() { }
+}
+#endif
