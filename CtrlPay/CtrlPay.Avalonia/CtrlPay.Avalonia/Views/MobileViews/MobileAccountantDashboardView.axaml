@@ -1,0 +1,44 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:p="using:CtrlPay.Avalonia.Pieces"
+             xmlns:lvc="using:LiveChartsCore.SkiaSharpView.Avalonia"
+             x:DataType="vm:AccountantDashboardViewModel"
+             x:Class="CtrlPay.Avalonia.Views.MobileViews.MobileAccountantDashboardView"
+             Background="{DynamicResource Color.Background}">
+  <ScrollViewer>
+    <StackPanel Margin="12" Spacing="16">
+      <StackPanel Spacing="4">
+        <TextBlock Text="{DynamicResource Accountant.Dashboard.Title}" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource Brush.Text.Primary}"/>
+        <TextBlock Text="{DynamicResource Accountant.Dashboard.Subtitle}" FontSize="12" Foreground="{DynamicResource Brush.Text.Secondary}"/>
+      </StackPanel>
+
+      <UniformGrid Columns="2" Rows="2">
+        <p:DashboardTile DataContext="{Binding OverpaidTile}" Margin="0,0,4,4"/>
+        <p:DashboardTile DataContext="{Binding OverdueTile}" Margin="4,0,0,4"/>
+        <p:DashboardTile DataContext="{Binding PartialTile}" Margin="0,4,4,0"/>
+        <p:DashboardTile DataContext="{Binding WaitingTile}" Margin="4,4,0,0"/>
+      </UniformGrid>
+
+      <Border Background="{DynamicResource Brush.Surface}" BorderBrush="{DynamicResource Brush.Border}"
+              BorderThickness="1" CornerRadius="10" Padding="12" Margin="0,8,0,0">
+        <StackPanel Spacing="8">
+          <TextBlock Text="{DynamicResource Accountant.Dashboard.IncomeHistory}" FontWeight="Bold" FontSize="13"/>
+          <lvc:CartesianChart Series="{Binding IncomeSeries}" XAxes="{Binding XAxes}"
+                              Height="200" TooltipBackgroundPaint="{Binding TooltipBackgroundPaint}"
+                              TooltipTextPaint="{Binding TooltipTextPaint}"/>
+        </StackPanel>
+      </Border>
+
+      <Border Background="{DynamicResource Brush.Surface}" BorderBrush="{DynamicResource Brush.Border}"
+              BorderThickness="1" CornerRadius="10" Padding="12">
+        <StackPanel Spacing="8">
+          <TextBlock Text="{DynamicResource Accountant.Dashboard.PaymentStatus}" FontWeight="Bold" FontSize="13"/>
+          <lvc:PieChart Series="{Binding StatusSeries}" Height="200"
+                        TooltipBackgroundPaint="{Binding TooltipBackgroundPaint}"
+                        TooltipTextPaint="{Binding TooltipTextPaint}"/>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

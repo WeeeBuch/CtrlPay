@@ -1,0 +1,70 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:styles="using:CtrlPay.Avalonia.Styles"
+             xmlns:translations="using:CtrlPay.Avalonia.Translations"
+             xmlns:conv="using:CtrlPay.Avalonia.Converters"
+             x:Class="CtrlPay.Avalonia.Views.MobileViews.MobileOnboardingView"
+             x:DataType="vm:OnboardingViewModel"
+             Background="{DynamicResource Brush.Background}">
+  <UserControl.Resources>
+    <conv:ThemeToColorConverter x:Key="ThemeToColorConverter" />
+  </UserControl.Resources>
+  <Grid RowDefinitions="*,Auto">
+    <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto">
+      <Carousel SelectedIndex="{Binding CurrentStep}" Margin="16">
+        <Carousel.PageTransition>
+          <PageSlide Duration="0:0:0.3" Orientation="Horizontal" />
+        </Carousel.PageTransition>
+        <StackPanel Spacing="12">
+          <TextBlock Text="{DynamicResource SettingsView.Appearance.Title}" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+          <ListBox ItemsSource="{Binding AvailableThemes}" SelectedItem="{Binding SelectedTheme}" Classes="PillList" Padding="4">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="styles:ThemeManager+AppTheme">
+                <StackPanel Orientation="Horizontal" Spacing="8">
+                  <Ellipse Width="10" Height="10" Fill="{Binding Converter={StaticResource ThemeToColorConverter}}"/>
+                  <TextBlock Text="{Binding}" FontWeight="Medium"/>
+                </StackPanel>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </StackPanel>
+        <StackPanel Spacing="12">
+          <TextBlock Text="{DynamicResource SettingsView.Translation.Title}" FontSize="16" FontWeight="SemiBold" HorizontalAlignment="Center"/>
+          <ListBox ItemsSource="{Binding AvailableLanguages}" SelectedItem="{Binding SelectedLanguage}" Classes="PillList" Padding="4">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="translations:TranslationManager+AppLanguage">
+                <TextBlock Text="{Binding}" FontWeight="Medium"/>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </StackPanel>
+        <StackPanel Spacing="12" Margin="0,8">
+          <TextBlock Text="🔌" FontSize="36" HorizontalAlignment="Center"/>
+          <TextBlock Text="{DynamicResource SettingsView.API.Title}" FontSize="18" FontWeight="Bold" HorizontalAlignment="Center"/>
+          <Border Background="{DynamicResource Brush.Surface}" Padding="16" CornerRadius="12">
+            <StackPanel Spacing="12">
+              <TextBox Text="{Binding ApiUrl}" Watermark="https://www.action-games.cz/" MinHeight="48"/>
+              <Button Content="{DynamicResource SettingsView.API.Test}" Command="{Binding TestConnectionCommand}" MinHeight="48"/>
+              <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsTestingConnection}" Height="2" Foreground="{DynamicResource Brush.Accent}"/>
+              <TextBlock Text="{Binding StatusBoxText}" IsVisible="{Binding IsErrorVisible}" Foreground="{DynamicResource Color.Error}"/>
+              <TextBlock Text="{Binding StatusBoxText}" IsVisible="{Binding IsSuccessVisible}" Foreground="{DynamicResource Color.Success}"/>
+            </StackPanel>
+          </Border>
+        </StackPanel>
+      </Carousel>
+    </ScrollViewer>
+    <Border Grid.Row="1" Padding="12,8">
+      <Grid ColumnDefinitions="Auto,*">
+        <Button Content="{DynamicResource OnboardingView.Button.Previous}" Command="{Binding BackCommand}" 
+                IsVisible="{Binding CanGoBack}" MinHeight="44" Margin="0,0,8,0"/>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right" Spacing="8">
+          <Button Content="{DynamicResource OnboardingView.Button.Next}" Command="{Binding NextCommand}" 
+                  IsVisible="{Binding IsNotLastStep}" MinHeight="44"/>
+          <Button Content="{DynamicResource OnboardingView.Button.Finish}" Command="{Binding FinishCommand}" 
+                  IsVisible="{Binding IsLastStep}" MinHeight="44"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>

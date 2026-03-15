@@ -1,0 +1,51 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:hc="using:CtrlPay.Avalonia.HelperClasses"
+             x:DataType="vm:TransactionViewModel"
+             x:Class="CtrlPay.Avalonia.Views.MobileViews.MobileTransactionView"
+             Background="{DynamicResource Color.Background}">
+  <ScrollViewer>
+    <StackPanel Margin="12" Spacing="12">
+      <TextBox Watermark="{DynamicResource DebtView.Watermark.SearchBar}" MinHeight="44" Text="{Binding SearchTerm}"/>
+      <Border BorderBrush="{DynamicResource Color.Border}" BorderThickness="1" Padding="10" CornerRadius="6">
+        <StackPanel Spacing="8">
+          <TextBlock Text="{DynamicResource DebtView.Sorting}" FontWeight="Bold" FontSize="13" Opacity="0.6"/>
+          <ListBox Background="Transparent" BorderThickness="0" SelectedItem="{Binding SelectedSortOrder}"
+                   ItemsSource="{Binding SortOptions}">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="hc:SortOption">
+                <TextBlock Text="{Binding DisplayName}" FontSize="13"/>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+        </StackPanel>
+      </Border>
+
+      <ItemsControl ItemsSource="{Binding Debts}" Margin="0,8,0,0">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="hc:TransactionItem">
+            <Border Classes="customerCard" Margin="0,0,0,6" Padding="12,0" MinHeight="56">
+              <Grid ColumnDefinitions="Auto,*,Auto">
+                <Border Grid.Column="0" Classes="indicator" Tag="{Binding Status}" CornerRadius="2"
+                        Height="20" Width="4" VerticalAlignment="Center" Margin="0,0,12,0"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                  <TextBlock Text="{Binding Description}" FontSize="14" FontWeight="Medium"
+                             Foreground="{DynamicResource Brush.Text.Primary}" TextTrimming="CharacterEllipsis"/>
+                  <TextBlock Text="{Binding SubDescription}" FontSize="11" Opacity="0.5"
+                             Foreground="{DynamicResource Brush.Text.Primary}" TextTrimming="CharacterEllipsis"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                  <TextBlock Text="{Binding Amount, StringFormat=\{0:N12\}}" FontSize="15" FontWeight="Bold"
+                             Foreground="{DynamicResource Brush.Text.Primary}"/>
+                  <TextBlock Text="{DynamicResource App.Currency}" Margin="4,0,0,0" VerticalAlignment="Bottom" FontSize="11"
+                             Foreground="{DynamicResource Brush.Text.Secondary}"/>
+                </StackPanel>
+              </Grid>
+            </Border>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

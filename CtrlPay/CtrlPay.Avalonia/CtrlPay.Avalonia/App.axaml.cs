@@ -1,4 +1,4 @@
-﻿using Avalonia;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Data.Core;
 using Avalonia.Data.Core.Plugins;
@@ -9,6 +9,7 @@ using CtrlPay.Avalonia.Settings;
 using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.ViewModels;
+using CtrlPay.Avalonia.Views.MobileViews;
 using CtrlPay.Repos.Frontend;
 using System.Linq;
 using System.Reflection;
@@ -87,20 +88,20 @@ namespace CtrlPay.Avalonia
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleView)
             {
                 AppLogger.Info($"Starting Mobile or Web version...");
-                var nav = new NavigationService();
+                var nav = new MobileNavigationService(singleView);
 
                 if (IsConfigured)
                 {
-                    singleView.MainView = new MainView { DataContext = new MainViewModel(nav) };
+                    singleView.MainView = new MobileLoginView { DataContext = new LoginViewModel(nav) };
                 }
                 else
                 {
-                    singleView.MainView = new OnboardingView { DataContext = new OnboardingViewModel() };
+                    singleView.MainView = new MobileOnboardingView { DataContext = new OnboardingViewModel() };
                 }
 
                 WeakReferenceMessenger.Default.Register<OnboardingFinishedMessage>(this, (r, m) =>
                 {
-                    singleView.MainView = new MainView { DataContext = new MainViewModel(nav) };
+                    singleView.MainView = new MobileLoginView { DataContext = new LoginViewModel(nav) };
                 });
             }
 

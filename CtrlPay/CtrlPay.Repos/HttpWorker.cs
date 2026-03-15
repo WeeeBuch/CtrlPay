@@ -10,17 +10,22 @@ public class HttpWorker
     // Statická instance, aby nedocházelo k vyčerpání socketů
     private static readonly HttpClient _httpClient = new(new HttpClientHandler { UseProxy = false });
 
+    private static string BuildUrl(string path)
+    {
+        var baseUri = (Credentials.BaseUri ?? "").TrimEnd('/');
+        if (path.Length > 0 && path[0] != '/') path = "/" + path;
+        return baseUri + path;
+    }
+
     public static async Task<string?> HttpGet(string url, bool requireAuth = true, CancellationToken cancellationToken = default)
     {
-        if (url[0] != '/')
-        {
+        if (url.Length > 0 && url[0] != '/')
             url = "/" + url;
-        }
 
         try
         {
             AppLogger.Info($"Praparing http GET...");
-            using var request = new HttpRequestMessage(HttpMethod.Get, $"{Credentials.BaseUri}{url}");
+            using var request = new HttpRequestMessage(HttpMethod.Get, BuildUrl(url));
 
             if (requireAuth)
             {
@@ -44,15 +49,13 @@ public class HttpWorker
 
     public static async Task<string?> HttpPost(string url, object payload, bool requireAuth = true, CancellationToken cancellationToken = default)
     {
-        if (url[0] != '/')
-        {
+        if (url.Length > 0 && url[0] != '/')
             url = "/" + url;
-        }
 
         try
         {
             AppLogger.Info($"Praparing http POST...");
-            using var request = new HttpRequestMessage(HttpMethod.Post, $"{Credentials.BaseUri}{url}");
+            using var request = new HttpRequestMessage(HttpMethod.Post, BuildUrl(url));
 
             // 1. Přidání hlavičky pouze pokud je vyžadována (Login ji nepotřebuje)
             if (requireAuth)
@@ -85,15 +88,13 @@ public class HttpWorker
 
     public static async Task<string?> HttpDelete(string url, object payload, bool requireAuth = true, CancellationToken cancellationToken = default)
     {
-        if (url[0] != '/')
-        {
+        if (url.Length > 0 && url[0] != '/')
             url = "/" + url;
-        }
 
         try
         {
             AppLogger.Info($"Praparing http POST...");
-            using var request = new HttpRequestMessage(HttpMethod.Delete, $"{Credentials.BaseUri}{url}");
+            using var request = new HttpRequestMessage(HttpMethod.Delete, BuildUrl(url));
 
             // 1. Přidání hlavičky pouze pokud je vyžadována (Login ji nepotřebuje)
             if (requireAuth)

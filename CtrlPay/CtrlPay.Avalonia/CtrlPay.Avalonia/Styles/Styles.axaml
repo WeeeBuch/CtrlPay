@@ -1,4 +1,4 @@
-﻿<Styles xmlns="https://github.com/avaloniaui"
+<Styles xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:avalonia="using:CtrlPay.Avalonia">
   <Design.PreviewWith>
@@ -56,7 +56,24 @@
     </Style>
 
     <Style Selector="ListBoxItem:selected /template/ ContentPresenter#PART_ContentPresenter">
-        <Setter Property="Background" Value="{DynamicResource Color.Surface}" /> 
+        <Setter Property="Background" Value="{DynamicResource Brush.Surface}" /> 
+    </Style>
+
+    <!-- ComboBox: readable text and background (main + dropdown) -->
+    <Style Selector="ComboBox">
+        <Setter Property="Background" Value="{DynamicResource Brush.Surface}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource Brush.Border}" />
+    </Style>
+    <Style Selector="ComboBox /template/ Popup#PART_Popup Border">
+        <Setter Property="Background" Value="{DynamicResource Brush.Surface}" />
+    </Style>
+    <Style Selector="ComboBox /template/ Popup#PART_Popup ListBox">
+        <Setter Property="Background" Value="{DynamicResource Brush.Surface}" />
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
+    </Style>
+    <Style Selector="ComboBox /template/ ToggleButton /template/ ContentPresenter#PART_ContentPresenter">
+        <Setter Property="Foreground" Value="{DynamicResource Brush.Text.Primary}" />
     </Style>
 
     <Style Selector="CheckBox">

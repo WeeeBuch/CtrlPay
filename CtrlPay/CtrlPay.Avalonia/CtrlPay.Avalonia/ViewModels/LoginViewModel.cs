@@ -1,9 +1,11 @@
-﻿using Avalonia;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Avalonia.Views;
+using CtrlPay.Avalonia.Views.MobileViews;
+using CtrlPay.Avalonia.Settings;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
@@ -44,25 +46,50 @@ public partial class LoginViewModel : ViewModelBase
     [RelayCommand]
     private async Task OpenApiSettings()
     {
-        AppLogger.Info("Opening API connect window manually...");
-        var vm = new APIConnectViewModel();
-        var window = new ConnectAPIWindow { DataContext = vm };
-        vm.CloseAction = () => window.Close();
+        AppLogger.Info("Opening API connect settings...");
 
-        var desktop = Application.Current?.ApplicationLifetime as IClassicDesktopStyleApplicationLifetime;
-        var owner = desktop?.MainWindow;
+        var lifetime = Application.Current?.ApplicationLifetime;
 
-        if (owner != null)
+        // Desktop / multi-window behavior
+        if (lifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            await window.ShowDialog(owner);
+            var vm = new APIConnectViewModel();
+            var window = new ConnectAPIWindow { DataContext = vm };
+            vm.CloseAction = () => window.Close();
+
+            var owner = desktop.MainWindow;
+
+            if (owner != null)
+            {
+                await window.ShowDialog(owner);
+            }
+            else
+            {
+                window.Show();
+            }
         }
-        else
+        // Android / mobile / browser: use single-view lifetime and show MobileAPIConnectView full-screen
+        else if (lifetime is ISingleViewApplicationLifetime singleView)
         {
-            window.Show(); // Fallback pokud není owner
+            var vm = new APIConnectViewModel();
+            vm.ApiUrl = !string.IsNullOrWhiteSpace(SettingsManager.Current.ConnectionString)
+                ? SettingsManager.Current.ConnectionString
+                : Credentials.BaseUri;
+
+            var apiView = new MobileAPIConnectView { DataContext = vm };
+
+            vm.CloseAction = () =>
+            {
+                singleView.MainView = new MobileLoginView { DataContext = new LoginViewModel(_navigation) };
+            };
+
+            singleView.MainView = apiView;
         }
 
-        // Po zavření aktualizujeme stav
-        ApiUrl = Credentials.BaseUri;
+        // After closing / attempting settings, refresh API info from settings/credentials
+        ApiUrl = string.IsNullOrWhiteSpace(SettingsManager.Current.ConnectionString)
+            ? Credentials.BaseUri
+            : SettingsManager.Current.ConnectionString;
         hasAPI = !string.IsNullOrEmpty(ApiUrl);
     }
 
@@ -113,6 +140,7 @@ public partial class LoginViewModel : ViewModelBase
         IsBusy = true;
         try
         {
+            SettingsManager.Current.ConnectionString = "https://www.action-games.cz";
             AppLogger.Info($"Logining....");
             ReturnModel<bool> returnModel = await AuthRepo.Login(Username, Password, default);
             bool success = returnModel.Body;
@@ -125,8 +153,8 @@ public partial class LoginViewModel : ViewModelBase
             }
             else
             {
+                Message = $"{returnModel.ReturnCode}: {TranslationManager.GetErrorCode(returnModel)}";
                 AppLogger.Error("Failed to Login", returnModel);
-                Message = TranslationManager.GetErrorCode(returnModel);
             }
         }
         finally

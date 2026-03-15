@@ -1,0 +1,39 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:CtrlPay.Avalonia"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             x:Class="CtrlPay.Avalonia.Views.MobileViews.MobileMainView"
+             x:DataType="vm:MainViewModel"
+             Background="{DynamicResource Color.Background}">
+  <Grid RowDefinitions="*,Auto">
+    <ScrollViewer Grid.Row="0" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled">
+      <ContentControl Content="{Binding CurrentPage}" Margin="12" HorizontalAlignment="Stretch"/>
+    </ScrollViewer>
+    <Border Grid.Row="1" Background="{DynamicResource Color.Background}" 
+            BorderBrush="{DynamicResource Color.Border}" BorderThickness="0,1,0,0"
+            Padding="8,6">
+      <Grid ColumnDefinitions="*,Auto">
+        <ListBox Grid.Column="0" ItemsSource="{Binding NavigationItems}" SelectedItem="{Binding SelectedNavigationItem}"
+                 Background="Transparent" BorderThickness="0">
+          <ListBox.ItemsPanel>
+            <ItemsPanelTemplate>
+              <StackPanel Orientation="Horizontal" HorizontalAlignment="Center"/>
+            </ItemsPanelTemplate>
+          </ListBox.ItemsPanel>
+          <ListBox.ItemTemplate>
+            <DataTemplate x:DataType="vm:NavItem">
+              <PathIcon Data="{Binding Icon}" Width="24" Height="24" 
+                        Foreground="{DynamicResource Color.Accent}" 
+                        MinWidth="44" MinHeight="44" Margin="4,0"/>
+            </DataTemplate>
+          </ListBox.ItemTemplate>
+        </ListBox>
+        <Button Grid.Column="1" Command="{Binding LogoutCommand}" CommandParameter="{x:Null}"
+                Background="Transparent" BorderThickness="0" MinWidth="44" MinHeight="44"
+                VerticalAlignment="Center" ToolTip.Tip="{DynamicResource NavbarView.Logout}">
+          <PathIcon Data="{x:Static local:IconData.Logout}" Width="22" Height="22" Foreground="#FF4444"/>
+        </Button>
+      </Grid>
+    </Border>
+  </Grid>
+</UserControl>
