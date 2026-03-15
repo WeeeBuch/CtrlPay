@@ -1,4 +1,4 @@
-﻿# 04 Debug a Logování
+# 04 Debug a Logování
 
 Tento soubor popisuje nástroje pro diagnostiku chyb a sledování běhu aplikace.
 
