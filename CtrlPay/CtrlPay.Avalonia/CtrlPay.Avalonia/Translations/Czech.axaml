@@ -97,6 +97,7 @@
     <x:String x:Key="NavbarView.Menu">Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">Nástěnka</x:String>
     <x:String x:Key="NavbarView.Settings">Nastavení</x:String>
+    <x:String x:Key="NavbarView.Logout">Odhlásit se</x:String>
     <x:String x:Key="NavbarView.Debts">Dluhy</x:String>
     <x:String x:Key="NavbarView.Transactions">Příchozí platby</x:String>
     <x:String x:Key="NavbarView.AccountantTransactions">Přehled transakcí</x:String>
@@ -166,9 +167,21 @@
     <!-- User Piece -->
     <x:String x:Key="UserPiece.Button.Edit">Upravit</x:String>
     <x:String x:Key="UserPiece.Button.Save">Uložit</x:String>
+    <x:String x:Key="UserPiece.Button.Delete">Smazat</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">Zrušit</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA zapnuto</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnable">Povolit 2FA</x:String>
+    <x:String x:Key="UserPiece.Label.Username">Uživatelské jméno</x:String>
+    <x:String x:Key="UserPiece.Label.Password">Heslo</x:String>
+    <x:String x:Key="UserPiece.Label.Role">Role</x:String>
+    <x:String x:Key="UserPiece.Label.Customer">Zákazník</x:String>
+    <x:String x:Key="UserPiece.Label.AccountId">ID účtu</x:String>
+    <x:String x:Key="UserPiece.Label.RecoveryCodes">Obnovovací kódy</x:String>
+    <x:String x:Key="UserPiece.Label.CustomerDisplay">Zobrazení zákazníka</x:String>
     <x:String x:Key="UserPiece.Watermark.Username">Uživatelské jméno</x:String>
+    <x:String x:Key="UserPiece.Watermark.Password">Zadejte heslo...</x:String>
+    <x:String x:Key="UserPiece.Watermark.RecoveryCodes">Zadejte kódy (oddělené mezerou)...</x:String>
+    <x:String x:Key="UserPiece.Placeholder.Customer">Vyberte zákazníka...</x:String>
 
     <x:String x:Key="ErrorCode.A0">Přihlášení proběhlo úspěšně</x:String>
     <x:String x:Key="ErrorCode.A1">Uživatel se stejným jménem již existuje</x:String>

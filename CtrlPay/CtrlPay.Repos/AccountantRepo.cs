@@ -1,4 +1,4 @@
-﻿using CtrlPay.Entities;
+using CtrlPay.Entities;
 using CtrlPay.Repos;
 using CtrlPay.Repos.Frontend;
 using System;
@@ -118,6 +118,8 @@ namespace CtrlPay.Repos
             await LoadPaymentListFromApi("/api/payments/all", p => new FrontendPaymentDTO(p), ct);
             await LoadTransactionListFromApi("/api/transactions/all", t => new AccountantTransactionDTO(t), ct);
         }
+
+        public static List<FrontendPaymentDTO> GetPaymentsByStatus(StatusEnum? state) => [.. PaymentCache.Where(p => p.Status == state)];
 #if DEBUG
         private static List<FrontendPaymentDTO> GetMockPayments() =>
         [
@@ -247,7 +249,6 @@ namespace CtrlPay.Repos
 
             AppLogger.Info($"Převod přebytku {surplus} XMR do kreditů pro zákazníka {payment.CustomerId}...");
 
-            // TODO: Karele toto
             string? json = await HttpWorker.HttpPost("api/payments/overpay-to-credit", payment.ToApiDto(), true, default);
             if (string.IsNullOrWhiteSpace(json))
             {

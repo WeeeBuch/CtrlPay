@@ -1,31 +1,54 @@
-using CtrlPay.Entities;
+﻿using CtrlPay.Entities;
 using System.ComponentModel;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json;
 
 namespace CtrlPay.Repos.Frontend;
 
 public class FrontendUserDTO : IEditableObject
 {
     public int Id { get; set; }
-    public string Username { get; set; } = string.Empty;
     public Role Role { get; set; }
+    public int? LoyalCustomerId { get; set; }
+    public int? AccountId { get; set; }
+    public int? CustomerId { get; set; }
+    public string Username { get; set; }
+    public string Password { get; set; } = string.Empty;
     public bool TwoFactorEnabled { get; set; }
+    private string? TwoFactorRecoveryCodesJson { get; set; } = string.Empty;
+    public string? CustomerFullName { get; set; }
+
+    public string[] TwoFactorRecoveryCodes
+    {
+        get => string.IsNullOrWhiteSpace(TwoFactorRecoveryCodesJson)
+               ? []
+               : JsonSerializer.Deserialize<string[]>(TwoFactorRecoveryCodesJson)!;
+        set => TwoFactorRecoveryCodesJson = JsonSerializer.Serialize(value);
+    }
 
     // Pomocná vlastnost pro zobrazení barvy role v UI
     public string RoleColor => Role switch
     {
         Role.Admin => "#FF4444",
         Role.Accountant => "#44FF44",
+        Role.Employee => "#05faf6",
         _ => "#AAAAAA"
     };
 
     public FrontendUserDTO() { }
 
-    public FrontendUserDTO(User user)
+    public FrontendUserDTO(UserApiDTO user)
     {
         Id = user.Id;
-        Username = user.Username;
         Role = user.Role;
+        LoyalCustomerId = user.LoyalCustomerId;
+        AccountId = user.AccountId;
+        CustomerId = user.CustomerId;
+        Username = user.Username;
+        Password = user.Password;
         TwoFactorEnabled = user.TwoFactorEnabled;
+        TwoFactorRecoveryCodes = user.TwoFactorRecoveryCodes;
+        CustomerFullName = user.CustomerFullName;
     }
 
     // --- IEditableObject implementace ---
@@ -48,5 +71,28 @@ public class FrontendUserDTO : IEditableObject
     public void EndEdit()
     {
         _oldVersion = null;
+    }
+
+    public UserApiDTO ToApiDTO()
+    {
+        return new UserApiDTO
+        {
+            Id = this.Id,
+            Role = this.Role,
+            LoyalCustomerId = this.LoyalCustomerId,
+            AccountId = this.AccountId,
+            CustomerId = this.CustomerId,
+            Username = this.Username,
+            Password = this.Password,
+            TwoFactorEnabled = this.TwoFactorEnabled,
+            TwoFactorRecoveryCodes = this.TwoFactorRecoveryCodes
+        };
+    }
+
+    public string? GetCustFullName()
+    {
+        if (CustomerId == null) return null;
+        var customer = CustomerRepo.GetCustomerById(CustomerId.Value);
+        return customer != null ? customer.FullName : null;
     }
 }

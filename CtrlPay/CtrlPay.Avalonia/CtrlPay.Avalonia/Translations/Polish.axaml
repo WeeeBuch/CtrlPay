@@ -97,6 +97,7 @@
     <x:String x:Key="NavbarView.Menu">Menu</x:String>
     <x:String x:Key="NavbarView.Dashboard">Panel główny</x:String>
     <x:String x:Key="NavbarView.Settings">Ustawienia</x:String>
+    <x:String x:Key="NavbarView.Logout">Wyloguj się</x:String>
     <x:String x:Key="NavbarView.Debts">Długi</x:String>
     <x:String x:Key="NavbarView.Transactions">Płatności przychodzące</x:String>
     <x:String x:Key="NavbarView.AccountantTransactions">Przegląd transakcji</x:String>
@@ -166,9 +167,21 @@
     <!-- User Piece -->
     <x:String x:Key="UserPiece.Button.Edit">Edytuj</x:String>
     <x:String x:Key="UserPiece.Button.Save">Zapisz</x:String>
+    <x:String x:Key="UserPiece.Button.Delete">Usuń</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">Anuluj</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA włączone</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnable">Włącz 2FA</x:String>
+    <x:String x:Key="UserPiece.Label.Username">Nazwa użytkownika</x:String>
+    <x:String x:Key="UserPiece.Label.Password">Hasło</x:String>
+    <x:String x:Key="UserPiece.Label.Role">Rola</x:String>
+    <x:String x:Key="UserPiece.Label.Customer">Klient</x:String>
+    <x:String x:Key="UserPiece.Label.AccountId">ID konta</x:String>
+    <x:String x:Key="UserPiece.Label.RecoveryCodes">Kody odzyskiwania</x:String>
+    <x:String x:Key="UserPiece.Label.CustomerDisplay">Wyświetlanie klienta</x:String>
     <x:String x:Key="UserPiece.Watermark.Username">Nazwa użytkownika</x:String>
+    <x:String x:Key="UserPiece.Watermark.Password">Wpisz hasło...</x:String>
+    <x:String x:Key="UserPiece.Watermark.RecoveryCodes">Wpisz kody (oddzielone spacją)...</x:String>
+    <x:String x:Key="UserPiece.Placeholder.Customer">Wybierz klienta...</x:String>
 
     <x:String x:Key="ErrorCode.A0">Pomyślnie zalogowano</x:String>
     <x:String x:Key="ErrorCode.A1">Użytkownik o tej samej nazwie już istnieje</x:String>

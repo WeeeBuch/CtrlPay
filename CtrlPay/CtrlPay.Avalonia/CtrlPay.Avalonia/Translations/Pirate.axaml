@@ -97,6 +97,7 @@
     <x:String x:Key="NavbarView.Menu">Compass</x:String>
     <x:String x:Key="NavbarView.Dashboard">Main Deck</x:String>
     <x:String x:Key="NavbarView.Settings">Ship's Rules</x:String>
+    <x:String x:Key="NavbarView.Logout">Abandon Ship</x:String>
     <x:String x:Key="NavbarView.Debts">Debts to the Sea</x:String>
     <x:String x:Key="NavbarView.Transactions">Incoming Booty</x:String>
     <x:String x:Key="NavbarView.AccountantTransactions">Log o' Loot</x:String>
@@ -166,9 +167,21 @@
     <!-- User Piece -->
     <x:String x:Key="UserPiece.Button.Edit">Amend terms</x:String>
     <x:String x:Key="UserPiece.Button.Save">Seal with wax</x:String>
+    <x:String x:Key="UserPiece.Button.Delete">Walk the plank</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">Belay</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">Secret Cipher On</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnable">Hoist 2FA Flag</x:String>
+    <x:String x:Key="UserPiece.Label.Username">Pirate Name</x:String>
+    <x:String x:Key="UserPiece.Label.Password">Secret Sign</x:String>
+    <x:String x:Key="UserPiece.Label.Role">Rank</x:String>
+    <x:String x:Key="UserPiece.Label.Customer">Matey</x:String>
+    <x:String x:Key="UserPiece.Label.AccountId">Bounty ID</x:String>
+    <x:String x:Key="UserPiece.Label.RecoveryCodes">Emergency Maps</x:String>
+    <x:String x:Key="UserPiece.Label.CustomerDisplay">Matey's Face</x:String>
     <x:String x:Key="UserPiece.Watermark.Username">Pirate Name</x:String>
+    <x:String x:Key="UserPiece.Watermark.Password">Whisper the sign...</x:String>
+    <x:String x:Key="UserPiece.Watermark.RecoveryCodes">Inscribe the maps (with spaces)...</x:String>
+    <x:String x:Key="UserPiece.Placeholder.Customer">Pick a matey...</x:String>
 
     <x:String x:Key="ErrorCode.A0">Welcome aboard, matey!</x:String>
     <x:String x:Key="ErrorCode.A1">Another scallywag already claims that name</x:String>

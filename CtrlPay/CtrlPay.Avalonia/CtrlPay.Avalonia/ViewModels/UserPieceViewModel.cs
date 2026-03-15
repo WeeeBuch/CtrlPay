@@ -1,4 +1,4 @@
-using CommunityToolkit.Mvvm.ComponentModel;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using CtrlPay.Entities;
 using CtrlPay.Repos;
@@ -15,11 +15,63 @@ public partial class UserPieceViewModel : ViewModelBase
     [ObservableProperty] private FrontendUserDTO _model;
     [ObservableProperty] private bool _editing = false;
     
-    public Role[] RolesList => Enum.GetValues<Role>();
+    public static Role[] RolesList => Enum.GetValues<Role>();
+
+    // Seznam zákazníků z repozitáře
+    public List<FrontendCustomerDTO> Customers => CustomerRepo.GetCustomers();
+
+    // Vlastnost pro snadné nabindování vybraného zákazníka v ComboBoxu
+    public FrontendCustomerDTO? SelectedCustomer
+    {
+        get => Customers.FirstOrDefault(c => c.Id == Model.CustomerId);
+        set
+        {
+            Model.CustomerId = value?.Id;
+            OnPropertyChanged(nameof(SelectedCustomer));
+        }
+    }
+
+    // Pomocná vlastnost pro zobrazení jména zákazníka v needitačním režimu
+    public string CustomerDisplayName => Model.CustomerFullName ?? "---";
+
+    // Viditelnost výběru zákazníka (pouze pro roli Customer)
+    public bool ShowCustomerSelection => Model.Role == Role.Customer;
+
+    // Vlastnost pro editaci kódů jako text (každý kód na novém řádku)
+    public string RecoveryCodesText
+    {
+        get => string.Join(Environment.NewLine, Model.TwoFactorRecoveryCodes);
+        set
+        {
+            Model.TwoFactorRecoveryCodes = value.Split(new[] { Environment.NewLine, "\n", "\r" }, StringSplitOptions.RemoveEmptyEntries);
+            OnPropertyChanged(nameof(RecoveryCodesText));
+        }
+    }
 
     public UserPieceViewModel(FrontendUserDTO model)
     {
         _model = model;
+        // Přidáme listener na změnu vlastností v modelu, pokud implementuje INotifyPropertyChanged
+        // Model FrontendUserDTO zatím neimplementuje INotifyPropertyChanged pro Role, 
+        // ale my můžeme hlídat celou změnu Modelu.
+    }
+
+    // Musíme hlídat změny v modelu, aby UI vědělo o ShowCustomerSelection
+    protected override void OnPropertyChanged(System.ComponentModel.PropertyChangedEventArgs e)
+    {
+        base.OnPropertyChanged(e);
+        if (e.PropertyName == nameof(Model))
+        {
+            OnPropertyChanged(nameof(ShowCustomerSelection));
+            OnPropertyChanged(nameof(SelectedCustomer));
+            OnPropertyChanged(nameof(CustomerDisplayName));
+        }
+    }
+
+    // Tuhle metodu zavoláme z XAML přes EventTrigger nebo ji budeme volat manuálně při změně Role
+    public void RefreshRoleVisibility()
+    {
+        OnPropertyChanged(nameof(ShowCustomerSelection));
     }
 
     [RelayCommand]
@@ -48,7 +100,14 @@ public partial class UserPieceViewModel : ViewModelBase
         Editing = false;
         Model.EndEdit();
         
-        await AdminRepo.UpdateAdminUser(Model);
+        await AdminRepo.UpdateUser(Model);
+        UpdateHandler.HandleUpdatedAdminUsers();
+    }
+
+    [RelayCommand]
+    public async Task Delete()
+    {
+        await AdminRepo.DeleteUser(Model);
         UpdateHandler.HandleUpdatedAdminUsers();
     }
 }

@@ -69,7 +69,7 @@ public class PaymentRepo : BaseRepo<PaymentApiDTO>
     public static async Task<ReturnModel?> PayFromCredit(FrontendTransactionDTO payment)
     {
         AppLogger.Info($"Paying from credit..., Payment id = {payment.Id}");
-        string response = await HttpWorker.HttpPost("/api/payments/pay-from-credit", new { paymentId = payment.Id });
+        string? response = await HttpWorker.HttpPost("/api/payments/pay-from-credit", new { paymentId = payment.Id });
         if (response == null)
         {
             AppLogger.Error($"Failed to pay from credit for payment id = {payment.Id}. No response from API.");

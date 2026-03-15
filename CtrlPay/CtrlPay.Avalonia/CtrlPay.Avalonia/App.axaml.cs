@@ -87,10 +87,11 @@ namespace CtrlPay.Avalonia
             else if (ApplicationLifetime is ISingleViewApplicationLifetime singleView)
             {
                 AppLogger.Info($"Starting Mobile or Web version...");
+                var nav = new NavigationService();
 
                 if (IsConfigured)
                 {
-                    singleView.MainView = new MainView { DataContext = new MainViewModel() };
+                    singleView.MainView = new MainView { DataContext = new MainViewModel(nav) };
                 }
                 else
                 {
@@ -99,7 +100,7 @@ namespace CtrlPay.Avalonia
 
                 WeakReferenceMessenger.Default.Register<OnboardingFinishedMessage>(this, (r, m) =>
                 {
-                    singleView.MainView = new MainView { DataContext = new MainViewModel() };
+                    singleView.MainView = new MainView { DataContext = new MainViewModel(nav) };
                 });
             }
 

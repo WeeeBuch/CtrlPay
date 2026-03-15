@@ -1,5 +1,6 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using CtrlPay.Avalonia.Views;
+using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
 using System;
@@ -14,6 +15,7 @@ namespace CtrlPay.Avalonia
     {
         void ShowMainWindow();
         void CloseLogin();
+        void Logout(Window currentWindow);
     }
 
     public class NavigationService : INavigationService
@@ -28,6 +30,7 @@ namespace CtrlPay.Avalonia
         public void ShowMainWindow()
         {
             var main = new MainWindow();
+            main.DataContext = new MainViewModel(this);
             main.Show();
             AppLogger.Info($"Main window started.");
         }
@@ -36,6 +39,14 @@ namespace CtrlPay.Avalonia
         {
             _loginWindow?.Close();
             AppLogger.Info($"Login window closed.");
+        }
+
+        public void Logout(Window currentWindow)
+        {
+            var login = new LoginWindow();
+            login.Show();
+            currentWindow.Close();
+            AppLogger.Info("Logged out: Closed Main window and opened Login window.");
         }
     }
 }

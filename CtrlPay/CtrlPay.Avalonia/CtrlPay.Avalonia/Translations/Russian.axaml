@@ -97,6 +97,7 @@
     <x:String x:Key="NavbarView.Menu">Меню</x:String>
     <x:String x:Key="NavbarView.Dashboard">Панель управления</x:String>
     <x:String x:Key="NavbarView.Settings">Настройки</x:String>
+    <x:String x:Key="NavbarView.Logout">Выйти</x:String>
     <x:String x:Key="NavbarView.Debts">Долги</x:String>
     <x:String x:Key="NavbarView.Transactions">Входящие платежи</x:String>
     <x:String x:Key="NavbarView.AccountantTransactions">Обзор транзакций</x:String>
@@ -166,9 +167,21 @@
     <!-- User Piece -->
     <x:String x:Key="UserPiece.Button.Edit">Изменить</x:String>
     <x:String x:Key="UserPiece.Button.Save">Сохранить</x:String>
+    <x:String x:Key="UserPiece.Button.Delete">Удалить</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">Отмена</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA включено</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnable">Включить 2FA</x:String>
+    <x:String x:Key="UserPiece.Label.Username">Имя пользователя</x:String>
+    <x:String x:Key="UserPiece.Label.Password">Пароль</x:String>
+    <x:String x:Key="UserPiece.Label.Role">Роль</x:String>
+    <x:String x:Key="UserPiece.Label.Customer">Клиент</x:String>
+    <x:String x:Key="UserPiece.Label.AccountId">ID аккаунта</x:String>
+    <x:String x:Key="UserPiece.Label.RecoveryCodes">Коды восстановления</x:String>
+    <x:String x:Key="UserPiece.Label.CustomerDisplay">Отображение клиента</x:String>
     <x:String x:Key="UserPiece.Watermark.Username">Имя пользователя</x:String>
+    <x:String x:Key="UserPiece.Watermark.Password">Введите пароль...</x:String>
+    <x:String x:Key="UserPiece.Watermark.RecoveryCodes">Введите коды (через пробел)...</x:String>
+    <x:String x:Key="UserPiece.Placeholder.Customer">Выберите клиента...</x:String>
 
     <x:String x:Key="ErrorCode.A0">Успешный вход в систему</x:String>
     <x:String x:Key="ErrorCode.A1">Пользователь с таким именем уже существует</x:String>

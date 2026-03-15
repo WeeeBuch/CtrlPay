@@ -33,6 +33,7 @@ namespace CtrlPay.Entities
             { "C1", "user does not have account" },
             { "H0", "i'm alive" },
             { "G0", "operation successful" },
+            { "G1", "user not found" },
             { "P0", "operation successful" },
             { "P1", "user does not have account" },
             { "P2", "payment not found" },

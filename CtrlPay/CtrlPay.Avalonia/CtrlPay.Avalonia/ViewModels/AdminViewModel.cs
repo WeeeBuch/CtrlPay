@@ -42,10 +42,7 @@ public partial class AdminViewModel : ViewModelBase
         });
 
         // Dynamické aktualizace
-        UpdateHandler.UpdatedAdminUsers.Add(() =>
-        {
-            LoadUsers();
-        });
+        UpdateHandler.UpdatedAdminUsers.Add(LoadUsers);
     }
 
     private void InitializeRoles()
@@ -75,7 +72,10 @@ public partial class AdminViewModel : ViewModelBase
 
     public async void LoadUsers()
     {
-        _allUsers = await AdminRepo.GetAdminUsers();
+        _allUsers = AdminRepo.GetUsers();
+
+        if (_allUsers == null || _allUsers.Count == 0) return;
+
         ApplyFilter();
     }
 

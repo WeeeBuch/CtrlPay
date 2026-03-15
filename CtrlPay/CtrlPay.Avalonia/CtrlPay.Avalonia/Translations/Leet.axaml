@@ -101,6 +101,7 @@
     <x:String x:Key="NavbarView.Transactions">1NC0M1N6_P4YM3N75</x:String>
     <x:String x:Key="NavbarView.AccountantTransactions">7r4n54c710n_0v3rv13w</x:String>
     <x:String x:Key="NavbarView.AdminPanel">4dm1n_p4n3l</x:String>
+    <x:String x:Key="NavbarView.Logout">L060U7</x:String>
 
     <x:String x:Key="CounterPiece.Credits.Title">455375</x:String>
     <x:String x:Key="CounterPiece.Pending.Title">Qu3u3d</x:String>
@@ -166,9 +167,21 @@
     <!-- User Piece -->
     <x:String x:Key="UserPiece.Button.Edit">3D17</x:String>
     <x:String x:Key="UserPiece.Button.Save">WR173</x:String>
+    <x:String x:Key="UserPiece.Button.Delete">PWN</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">4B0R7</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2F4_0N</x:String>
+    <x:String x:Key="UserPiece.Label.TwoFactorEnable">3N4BL3_2F4</x:String>
+    <x:String x:Key="UserPiece.Label.Username">U53RN4M3</x:String>
+    <x:String x:Key="UserPiece.Label.Password">P455W0RD</x:String>
+    <x:String x:Key="UserPiece.Label.Role">R0L3</x:String>
+    <x:String x:Key="UserPiece.Label.Customer">CU570M3R</x:String>
+    <x:String x:Key="UserPiece.Label.AccountId">4CC_1D</x:String>
+    <x:String x:Key="UserPiece.Label.RecoveryCodes">R3C0V3RY_C0D35</x:String>
+    <x:String x:Key="UserPiece.Label.CustomerDisplay">CU57_D15PL4Y</x:String>
     <x:String x:Key="UserPiece.Watermark.Username">U53RN4M3</x:String>
+    <x:String x:Key="UserPiece.Watermark.Password">3N73R_P455...</x:String>
+    <x:String x:Key="UserPiece.Watermark.RecoveryCodes">3N73R_C0D35 (5P4C3_53P)...</x:String>
+    <x:String x:Key="UserPiece.Placeholder.Customer">53L3C7_CU57...</x:String>
 
     <x:String x:Key="ErrorCode.A0">L0G1N_5UCC355FUL</x:String>
     <x:String x:Key="ErrorCode.A1">U53R_4LR34DY_3X1575</x:String>
