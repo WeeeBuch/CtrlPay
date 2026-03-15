@@ -43,7 +43,7 @@ public partial class QrCodeViewModel : ViewModelBase
     private Bitmap GenQR(FrontendTransactionDTO tx)
     {
         AppLogger.Info($"Generating QR for payment...");
-        MoneroTransaction generator = new(Address, (float)tx.Amount, tx.Id.ToString(), "You", tx.Title);
+        MoneroTransaction generator = new(Address, (float)tx.Amount);
         return GenQRImage(generator);
     }
 
