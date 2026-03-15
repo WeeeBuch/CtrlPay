@@ -1,281 +1,107 @@
- CtrlPay — Android / mobile documentation
+# Android 
 
-This document describes everything related to the **Android** (and single-view / mobile) version of CtrlPay: how it starts, how navigation works, which views exist, and how to change or extend behavior.
+Tento dokument popisuje vše co souvisí s Android frontend. 
 
 ---
 
-## 1. How Android is detected and started
+## Balíčky 
 
-### 1.1 Entry point
+- Avalonia framework
+- .NET SDK - vše, co potřebujete k vytváření a spouštění .NET aplikací
+- .NET Android workload - umožňuje .NET aplikaci běžet na Androidu
+- Android SDK - oficiální Android vývojový balík
+- Android Emulator - Virtuální telefon
 
-- **Android project:** `CtrlPay.Avalonia.Android`
-- **MainActivity:** `MainActivity.cs` — inherits `AvaloniaMainActivity<App>`, optionally customizes the app (e.g. `WithInterFont()`).
-- **Target:** `net8.0-android34.0`
-- **Min SDK:** 21
-- **Package:** `com.CompanyName.CtrlPay.Avalonia`
+## Spuštění aplikace
 
-References the shared UI project:
+Android aplikace je hostována v projektu:
+
+`CtrlPay.Avalonia.Android`
+
+Vstupním bodem aplikace je soubor:
+
+`MainActivity.cs`
+
+Tento soubor inicializuje Avalonia aplikaci a spouští sdílený frontend projekt:
 
 `CtrlPay.Avalonia`
 
-which contains the same UI code as the desktop version.
+Samotná logika aplikace je tedy sdílena mezi desktop verzí a Android verzí.
 
-### Application class
+## Diagram - spouštění
+```mermaid
+flowchart TD
 
-`CtrlPay.Avalonia/App.axaml.cs`
-
-The method:
-
-`OnFrameworkInitializationCompleted()`
-
-branches based on **application lifetime**:
-
-Desktop:
-
-`IClassicDesktopStyleApplicationLifetime`
-
-→ opens windows
-
-- LoginWindow
-- MainWindow
-
-Mobile / Android / Browser:
-
-`ISingleViewApplicationLifetime`
-
-→ uses **single root view** instead of windows.
-
-So **Android always uses** `ISingleViewApplicationLifetime` and the mobile code path inside `App.axaml.cs`.
-
----
-
-## 1.2 What runs on Android (single-view path)
-
-When
-
-`ApplicationLifetime is ISingleViewApplicationLifetime singleView`
-
-the following happens:
-
-### Dark theme
-
-`RequestedThemeVariant = ThemeVariant.Dark`
-
-This ensures the entire UI (including dropdowns) uses the **dark theme** and remains readable on Android.
-
-### Navigation
-
-The app creates:
-
-`MobileNavigationService(singleView)`
-
-This service keeps a reference to `singleView` and switches screens by changing:
-
-`singleView.MainView`
-
-### Initial screen
-
-If the app **is configured**:
-
-```csharp
-singleView.MainView =
-    new MobileLoginView
-    {
-        DataContext = new LoginViewModel(nav)
-    };
+A[Spuštění aplikace] --> B[App.axaml.cs]
+B --> C{Typ lifetime}
+C -->|Desktop| D[Desktop režim]
+C -->|Android| E[Single View režim]
+E --> F[MobileNavigationService]
+F --> G{Je aplikace nakonfigurovaná?}
+G -->|Ano| H[LoginView]
+G -->|Ne| I[OnboardingView]
+I --> H
+H --> J{Login úspěšný?}
+J -->|Ano| K[MainView]
+J -->|Ne| H
 ```
+## Logika
 
-If the app **is not configured (first run)**:
 
-```csharp
-singleView.MainView =
-    new MobileOnboardingView
-    {
-        DataContext = new OnboardingViewModel()
-    };
-```
+Logika aplikace je téměř totožná s desktop verzí jediným rozdílem že Avalonia na Androidu nepoužívá okna, ale jedno "root" view neboli "Single View režim"
 
-### After onboarding
+Je implementována ve složce:
 
-The app uses `WeakReferenceMessenger`.
+`CtrlPay.Avalonia/ViewModels`
 
-When `OnboardingFinishedMessage` is sent, the root view switches to `MobileLoginView` with a new `LoginViewModel`.
+## Single View režim
 
-Theme, language and API base URL are then applied from `SettingsManager.Current`.
+Android verze používá tzv. **Single View režim**.
 
----
+To znamená, že aplikace má pouze jednu hlavní view (`MainView`), ve které se přepíná obsah jednotlivých obrazovek.
 
-## 2. Navigation on Android (single-view)
+Na rozdíl od desktop verze se tedy neotevírají nová okna, ale pouze se mění aktuální view uvnitř této hlavní obrazovky.
 
-### 2.1 Navigation service
+## Views - Design
 
-Interface:
+Design používá jednodušší layout než desktop. Místo více sloupců nebo samostatných oken se obsah skládá převážně vertikálně pod sebe
 
-`INavigationService`
+## Seznam aktuálních views
 
-Defined in:
-
-`Navigator.cs`
-
-Methods:
-
-- `ShowMainWindow()` — opens the main application
-- `CloseLogin()` — closes login (no-op on mobile)
-- `Logout(Window?)` — returns the user back to login
-
-### Android implementation
-
-`MobileNavigationService`
-
-Contains:
-
-`ISingleViewApplicationLifetime _lifetime`
-
-ShowMainWindow:
-
-```csharp
-_lifetime.MainView =
-    new MobileMainView
-    {
-        DataContext = new MainViewModel(this, useMobileViews: true)
-    };
-```
-
-Logout:
-
-```csharp
-_lifetime.MainView =
-    new MobileLoginView
-    {
-        DataContext = new LoginViewModel(this)
-    };
-```
-
-Logout always switches the **root view back to login**.
-
----
-
-## 2.2 Main screen and tabs
-
-Container:
-
-`MobileMainView`
-
-Structure:
-
-Top:
-
-`CurrentPage` scrollable content.
-
-Bottom:
-
-Navigation bar (icons) + Logout button.
-
-The `MainViewModel` is created with:
-
-`useMobileViews: true`
-
-which generates **mobile navigation items**.
-
-### Tab selection
-
-The properties
-
-- `SelectedNavigationItem`
-- `CurrentPage`
-
-are bound to the same `NavItem`.
-
-Changing the selected item updates the visible view.
-
----
-
-## 3. Mobile views (screens)
-
-All mobile views are located in:
-
-`CtrlPay.Avalonia/Views/MobileViews/`
-
-Desktop views are located in:
-
-`Views/DesktopViews/`
-
-ViewModels are shared.
-
-### 3.1 Mobile view list
-
-| View | Purpose |
+### Zákazník:
+| View | Popis |
 |-----|-----|
-| MobileLoginView | Login form |
-| MobileOnboardingView | First run setup |
-| MobileAPIConnectView | API configuration |
-| MobileMainView | Main mobile shell |
-| MobileDashboardView | Customer dashboard |
-| MobileDebtView | Customer debts |
-| MobileTransactionView | Customer transactions |
-| MobileSettingsView | Settings |
-| MobileAccountantDashboardView | Accountant dashboard |
-| MobileCustomersListView | Customers |
-| MobilePaymentManagementView | Payment management |
-| MobileAccountantTransactionsView | Accountant transactions |
+| **MobileLoginView** | Slouží pro přihlášení uživatele také možnost otevřít nastavení API. |
+| **MobileMainView** | Funguje jako hlavní kontejner aplikace. Obsahuje navigaci a zobrazuje aktuálně zvolenou stránku. |
+| **MobileDashboardView** | Zobrazuje základní přehled informací, například souhrny nebo poslední položky. |
+| **MobileDebtView** | Slouží pro práci s dluhy. Obsahuje vyhledávání, filtrování a seznam jednotlivých položek. |
+| **MobileTransactionView** | Zobrazuje přehled transakcí. |
+| **MobileSettingsView** | Obsahuje nastavení aplikace, například jazyk, vzhled nebo API připojení. |
 
-Admin does **not** have a mobile view and uses `AdminView`.
+### Učetní má navíc:
+| View | Popis |
+|-----|-----|
+| **MobileAPIConnectView** | nastavení API z přihlášení nebo onboardingu. **ViewModel:** `APIConnectViewModel`. |
+| **MobileAccountantDashboardView** | Dashboard pro roli účetní: dlaždice (`DashboardTile`) a grafy zobrazující přehled příjmů a stavů plateb. **ViewModel:** `AccountantDashboardViewModel`. |
+| **MobileCustomersListView** | Seznam zákazníků: vyhledávání, tlačítko pro přidání zákazníka a seznam zákaznických záznamů. |
+| **MobilePaymentManagementView** | Správa plateb: vyhledávání, řazení, filtr stavu, tlačítko Přidat, seznam plateb a detail vybrané platby s možností úprav. **ViewModel:** `PaymentManagementViewModel`. |
+| **MobileAccountantTransactionsView** | Přehled transakcí účetního: vyhledávání, filtry (zákazník, stav), přepínač zobrazení a seznam transakcí. **ViewModel:** `AccountantTransactionsViewModel`. |
 
----
+## Navigace v aplikaci
 
-## 3.2 Views by role
+Navigace v mobilní aplikaci je řízena pomocí `MobileNavigationService`.  
 
-Defined in:
 
-`MainViewModel.GenerateNavItems()`
+## Role uživatelů
 
-when `_useMobileViews == true`.
+Aplikace podporuje více typů uživatelů.  
+Podle role se může měnit dostupná funkcionalita nebo navigace.
 
-Customer:
+Role v aplikaci:
 
-- Dashboard
-- Debts
-- Transactions
-- Settings
+- Customer
+- Accountant
+- Admin
 
-Accountant:
-
-- Dashboard
-- Customers
-- Payment management
-- Accountant transactions
-- Settings
-
-Admin:
-
-- Admin panel
-- Settings
-
-Logout is a separate button in the navigation bar.
-
----
-
-## 4. API settings on Android
-
-From the login screen the user can open **API settings**.
-
-Method:
-
-`LoginViewModel.OpenApiSettings()`
-
-Creates:
-
-- `APIConnectViewModel`
-- `MobileAPIConnectView`
-
-After Finish:
-
-```csharp
-singleView.MainView =
-    new MobileLoginView
-    {
-        DataContext = new LoginViewModel(_navigation)
-    };
-```
 
 

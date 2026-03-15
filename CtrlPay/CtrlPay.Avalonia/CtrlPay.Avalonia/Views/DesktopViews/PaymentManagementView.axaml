@@ -183,7 +183,9 @@
 
                                         <StackPanel Spacing="5">
                                             <TextBlock Text="{DynamicResource PaymentManagerView.Label.DueDate}" Opacity="0.6"/>
-                                            <DatePicker SelectedDate="{Binding DueDate}" HorizontalAlignment="Stretch"/>
+											<DatePicker SelectedDate="{Binding DueDate}"
+                                        Foreground="Black"
+                                        Background="{DynamicResource Brush.Surface}"/>
                                         </StackPanel>
                                     </StackPanel>
 
