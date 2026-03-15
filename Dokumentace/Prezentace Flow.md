@@ -37,14 +37,44 @@
 Na `Local` se pustí poprvé aplikace (nebude mít settings aby se spustilo onbording)
 Potom se přihlásí `admin`
 
+#### Ukazat
+- Spustit aplikaci
+- Vybrat oranžovou barvu
+- Nechat jazyk na CZ
+- Připojit k API `https://www.action-games.cz`
+- Testnout konekci
+- Přihlásit jako `adam`
+
+### 1.1 Upravit nastavení
+Na `locale` si upravit nastavení
+
+#### Ukazat
+- Settings přepnout na `Lime`
+- Translation na `Pirate`
+- Obovování na `10 sec`
+
 ### 2. Crud PC1 (Admin)
 `Admin` udělá uživatele sekretářce a ukáže že může dělat CRUD
+
+#### Ukazat
+- Vytvořit uživatele `sedita` s heslem
+- Vytvořit uživatele `horalka` s heslem
 
 ### 3. Sekretářka
 Na `Mobilu` a `Localu` se sekretářka přihlásí
 
+#### Ukazat
+- Na `mobilu` se přihlásí `sedita`
+
 ### 4. Novej Zákazník CRUD Mobil1
 Na `Mobilu` sekretářka udělá nového `Customera`
+
+#### Ukazat
+- `Sedita` vytvoří zákazníka `Jan Novák`
+- Promotne ho
+- `Cloud` se přihlásí přes odkaz v mailu
+- Zvorá heslo
+- `Admin` změní heslo Novákovi
 
 ### 5. Zákazník přihlášení
 Na `Cloudu` se zákazník přihlásí pomocí poskytnutého kódu od sekretářky
