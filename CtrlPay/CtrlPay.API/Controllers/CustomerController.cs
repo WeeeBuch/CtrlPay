@@ -132,8 +132,8 @@ namespace CtrlPay.API.Controllers
             }
             Customer customer = _db.Customers.Where(c => c.Id == id).First();
             string code = await XMRComs.PromoteCustomer(id, _rpcOptions);
-            string mail = await _mailRenderer.RenderToStringAsync("Mails/Registration", new RegistrationEmailModel(customer.FullName, code, "https://github.com/WeeeBuch/CtrlPay/releases", "tumail"));
-            _post.SendAsync(customer.Email, "Změna statusu zákazníka", mail);
+            string mail = await _mailRenderer.RenderToStringAsync("Mails/Registration", new RegistrationEmailModel(customer.FullName, code, "https://github.com/WeeeBuch/CtrlPay/releases", "podpora@ctrlpay.cz"));
+            await _post.SendAsync(customer.Email, "Změna statusu zákazníka", mail);
             return Ok(new ReturnModel("Z0", ReturnModelSeverityEnum.Ok));
         }
     }
