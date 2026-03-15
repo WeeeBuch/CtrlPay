@@ -167,6 +167,7 @@
     <!-- User Piece -->
     <x:String x:Key="UserPiece.Button.Edit">Upravit</x:String>
     <x:String x:Key="UserPiece.Button.Save">Uložit</x:String>
+    <x:String x:Key="UserPiece.Button.Delete">Smazat</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">Zrušit</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA zapnuto</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnable">Povolit 2FA</x:String>

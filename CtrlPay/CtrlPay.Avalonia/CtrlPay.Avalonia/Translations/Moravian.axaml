@@ -167,6 +167,7 @@
     <!-- User Piece -->
     <x:String x:Key="UserPiece.Button.Edit">Poladit</x:String>
     <x:String x:Key="UserPiece.Button.Save">Vytesat</x:String>
+    <x:String x:Key="UserPiece.Button.Delete">Vyhodit</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">Prdět na to</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">Dvojitý hlídání (2FA)</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnable">Zapnót 2FA</x:String>

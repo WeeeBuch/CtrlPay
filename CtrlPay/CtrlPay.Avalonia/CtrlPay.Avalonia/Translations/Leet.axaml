@@ -167,6 +167,7 @@
     <!-- User Piece -->
     <x:String x:Key="UserPiece.Button.Edit">3D17</x:String>
     <x:String x:Key="UserPiece.Button.Save">WR173</x:String>
+    <x:String x:Key="UserPiece.Button.Delete">PWN</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">4B0R7</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2F4_0N</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnable">3N4BL3_2F4</x:String>

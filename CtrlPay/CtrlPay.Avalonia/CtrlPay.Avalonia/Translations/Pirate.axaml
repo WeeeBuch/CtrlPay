@@ -167,6 +167,7 @@
     <!-- User Piece -->
     <x:String x:Key="UserPiece.Button.Edit">Amend terms</x:String>
     <x:String x:Key="UserPiece.Button.Save">Seal with wax</x:String>
+    <x:String x:Key="UserPiece.Button.Delete">Walk the plank</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">Belay</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">Secret Cipher On</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnable">Hoist 2FA Flag</x:String>

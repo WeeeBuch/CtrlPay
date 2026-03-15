@@ -184,6 +184,7 @@
     <!-- User Piece -->
     <x:String x:Key="UserPiece.Button.Edit">UserPiece.Button.Edit</x:String>
     <x:String x:Key="UserPiece.Button.Save">UserPiece.Button.Save</x:String>
+    <x:String x:Key="UserPiece.Button.Delete">UserPiece.Button.Delete</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">UserPiece.Button.Cancel</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">UserPiece.Label.TwoFactorEnabled</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnable">UserPiece.Label.TwoFactorEnable</x:String>

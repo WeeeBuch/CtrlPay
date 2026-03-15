@@ -167,6 +167,7 @@
     <!-- User Piece -->
     <x:String x:Key="UserPiece.Button.Edit">编辑</x:String>
     <x:String x:Key="UserPiece.Button.Save">保存</x:String>
+    <x:String x:Key="UserPiece.Button.Delete">删除</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">取消</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">已启用 2FA</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnable">启用 2FA</x:String>

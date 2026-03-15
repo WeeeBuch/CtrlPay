@@ -167,6 +167,7 @@
     <!-- User Piece -->
     <x:String x:Key="UserPiece.Button.Edit">編集</x:String>
     <x:String x:Key="UserPiece.Button.Save">保存</x:String>
+    <x:String x:Key="UserPiece.Button.Delete">削除</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">キャンセル</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA 有効</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnable">2FAを有効にする</x:String>

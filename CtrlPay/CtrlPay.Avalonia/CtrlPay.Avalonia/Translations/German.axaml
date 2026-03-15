@@ -167,6 +167,7 @@
     <!-- User Piece -->
     <x:String x:Key="UserPiece.Button.Edit">Bearbeiten</x:String>
     <x:String x:Key="UserPiece.Button.Save">Speichern</x:String>
+    <x:String x:Key="UserPiece.Button.Delete">Löschen</x:String>
     <x:String x:Key="UserPiece.Button.Cancel">Abbrechen</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnabled">2FA aktiviert</x:String>
     <x:String x:Key="UserPiece.Label.TwoFactorEnable">2FA aktivieren</x:String>
