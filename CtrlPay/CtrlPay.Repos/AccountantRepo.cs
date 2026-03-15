@@ -368,11 +368,14 @@ namespace CtrlPay.Repos
 #endif
             for (int i = 30; i >= 0; i--)
             {
-                DateTime date = DateTime.Today.AddDays(-i);
+                DateTime date = DateTime.UtcNow.AddDays(-i);
                 data.IncomeHistory.Add(new IncomeChartPointDTO
                 {
                     Date = date,
-                    Amount = TransactionCache.Where(t => t.Timestamp == date).Sum(t => t.Amount),
+                    Amount = TransactionCache.Where(t => t.Timestamp.Day == date.Day &&
+                                                    t.Timestamp.Month == date.Month &&
+                                                    t.Timestamp.Year == date.Year)
+                                             .Sum(t => t.Amount),
                 });
             }
 
