@@ -49,7 +49,7 @@
               <Grid ColumnDefinitions="Auto,*,Auto">
                 <Border Grid.Column="0" Classes="indicator" Tag="{Binding Status}" Width="4" Height="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
                 <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                  <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="Medium"/>
+                  <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="Medium" TextWrapping="Wrap"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2" VerticalAlignment="Center">
                   <TextBlock Text="{Binding ExpectedAmountXMR, StringFormat=\{0:N12\}}" FontSize="14" FontWeight="Bold"/>

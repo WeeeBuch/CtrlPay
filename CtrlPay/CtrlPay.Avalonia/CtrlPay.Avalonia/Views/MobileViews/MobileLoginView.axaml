@@ -4,55 +4,173 @@
              x:DataType="vm:LoginViewModel"
              x:Class="CtrlPay.Avalonia.Views.MobileViews.MobileLoginView"
              Background="{DynamicResource Color.Background}">
-  <ScrollViewer VerticalScrollBarVisibility="Auto">
-    <StackPanel Margin="16" Spacing="0" HorizontalAlignment="Stretch">
-      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,24,0,0" Spacing="12">
-        <Button Content="{DynamicResource LoginView.Button.Switch.Login}" 
-                MinHeight="48" MinWidth="0" HorizontalAlignment="Stretch"
-                Command="{Binding ToggleLoginCommand}" IsEnabled="{Binding !IsBusy}"/>
-        <Button Content="{DynamicResource LoginView.Button.Switch.Register}" 
-                MinHeight="48" MinWidth="0" HorizontalAlignment="Stretch"
-                Command="{Binding ToggleRegisterCommand}" IsEnabled="{Binding !IsBusy}"/>
-      </StackPanel>
+	<ScrollViewer VerticalScrollBarVisibility="Auto">
+		<Grid HorizontalAlignment="Center"
+			  VerticalAlignment="Center"
+			  Margin="20,50,20,20">
 
-      <Border CornerRadius="12" Background="#FF2A2A2A" Padding="16" Margin="0,20,0,0">
-        <StackPanel Spacing="12">
-          <StackPanel Spacing="10" IsVisible="{Binding IsLoginSelected}">
-            <TextBox Text="{Binding Username, Mode=TwoWay}" MinHeight="48"
-                     Watermark="{DynamicResource LoginView.Watermark.Username}" IsEnabled="{Binding !IsBusy}"/>
-            <TextBox Text="{Binding Password, Mode=TwoWay}" MinHeight="48" PasswordChar="#"
-                     Watermark="{DynamicResource LoginView.Watermark.Password}" IsEnabled="{Binding !IsBusy}"/>
-            <Button Content="{DynamicResource LoginView.Button.Login}" MinHeight="48"
-                    Command="{Binding LoginCommand}" IsEnabled="{Binding !IsBusy}" FontWeight="Bold"/>
-          </StackPanel>
-          <StackPanel Spacing="10" IsVisible="{Binding !IsLoginSelected}">
-            <TextBox Text="{Binding RegUsername, Mode=TwoWay}" MinHeight="48"
-                     Watermark="{DynamicResource LoginView.Watermark.Username}" IsEnabled="{Binding !IsBusy}"/>
-            <TextBox Text="{Binding RegCode, Mode=TwoWay}" MinHeight="48"
-                     Watermark="{DynamicResource LoginView.Watermark.Code}" IsEnabled="{Binding !IsBusy}"/>
-            <TextBox Text="{Binding RegPassword, Mode=TwoWay}" MinHeight="48" PasswordChar="#"
-                     Watermark="{DynamicResource LoginView.Watermark.Password}" IsEnabled="{Binding !IsBusy}"/>
-            <TextBox Text="{Binding RegConfirmPassword, Mode=TwoWay}" MinHeight="48" PasswordChar="#"
-                     Watermark="{DynamicResource LoginView.Watermark.ConfirmPassword}" IsEnabled="{Binding !IsBusy}"/>
-            <Button Content="{DynamicResource LoginView.Button.Register}" MinHeight="48"
-                    Command="{Binding RegisterCommand}" IsEnabled="{Binding !IsBusy}" FontWeight="Bold"/>
-          </StackPanel>
-        </StackPanel>
-      </Border>
+			<StackPanel Spacing="16"
+						Width="340"
+						HorizontalAlignment="Center">
 
-      <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsBusy}" Margin="0,12,0,0" Height="4"/>
-      <TextBlock Text="{Binding Message}" Foreground="{DynamicResource Brush.Error}" 
-                 HorizontalAlignment="Center" Margin="0,8,0,0" TextWrapping="Wrap"/>
+				<!-- Switch buttons -->
+				<StackPanel Orientation="Horizontal"
+							HorizontalAlignment="Center"
+							Spacing="12">
 
-      <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,16,0,24" Spacing="6">
-        <TextBlock Text="API:" FontSize="11" VerticalAlignment="Center" Opacity="0.6"/>
-        <TextBlock Text="{Binding ApiUrl}" FontSize="11" VerticalAlignment="Center" Opacity="0.8" 
-                   TextTrimming="CharacterEllipsis" MaxWidth="160"/>
-        <Button Command="{Binding OpenApiSettingsCommand}" MinWidth="44" MinHeight="44"
-                Background="Transparent" BorderThickness="0" IsEnabled="{Binding !IsBusy}">
-          <TextBlock Text="✎" Foreground="{DynamicResource Brush.Accent}"/>
-        </Button>
-      </StackPanel>
-    </StackPanel>
-  </ScrollViewer>
+					<Button Content="{DynamicResource LoginView.Button.Switch.Login}"
+							MinHeight="52"
+							Width="150"
+							FontSize="18"
+							HorizontalContentAlignment="Center"
+							VerticalContentAlignment="Center"
+							Command="{Binding ToggleLoginCommand}"
+							IsEnabled="{Binding !IsBusy}"/>
+
+					<Button Content="{DynamicResource LoginView.Button.Switch.Register}"
+							MinHeight="52"
+							Width="150"
+							FontSize="18"
+							HorizontalContentAlignment="Center"
+							VerticalContentAlignment="Center"
+							Command="{Binding ToggleRegisterCommand}"
+							IsEnabled="{Binding !IsBusy}"/>
+
+				</StackPanel>
+
+				<!-- Card -->
+				<Border CornerRadius="14"
+						Background="#FF2A2A2A"
+						Padding="20">
+
+					<StackPanel Spacing="14">
+
+						<!-- LOGIN -->
+						<StackPanel Spacing="12"
+									IsVisible="{Binding IsLoginSelected}">
+
+							<TextBox Text="{Binding Username, Mode=TwoWay}"
+									 MinHeight="52"
+									 FontSize="18"
+									 HorizontalContentAlignment="Center"
+									 VerticalContentAlignment="Center"
+									 Watermark="{DynamicResource LoginView.Watermark.Username}"
+									 IsEnabled="{Binding !IsBusy}"/>
+
+							<TextBox Text="{Binding Password, Mode=TwoWay}"
+									 MinHeight="52"
+									 FontSize="18"
+									 PasswordChar="#"
+									 HorizontalContentAlignment="Center"
+									 VerticalContentAlignment="Center"
+									 Watermark="{DynamicResource LoginView.Watermark.Password}"
+									 IsEnabled="{Binding !IsBusy}"/>
+
+							<Button Content="{DynamicResource LoginView.Button.Login}"
+									MinHeight="54"
+									Width="200"
+									FontSize="20"
+									HorizontalAlignment="Center"
+									HorizontalContentAlignment="Center"
+									VerticalContentAlignment="Center"
+									Command="{Binding LoginCommand}"
+									IsEnabled="{Binding !IsBusy}"
+									FontWeight="Bold"/>
+						</StackPanel>
+
+						<!-- REGISTER -->
+						<StackPanel Spacing="12"
+									IsVisible="{Binding !IsLoginSelected}">
+
+							<TextBox Text="{Binding RegUsername, Mode=TwoWay}"
+									 MinHeight="52"
+									 FontSize="18"
+									 HorizontalContentAlignment="Center"
+									 VerticalContentAlignment="Center"
+									 Watermark="{DynamicResource LoginView.Watermark.Username}"
+									 IsEnabled="{Binding !IsBusy}"/>
+
+							<TextBox Text="{Binding RegCode, Mode=TwoWay}"
+									 MinHeight="52"
+									 FontSize="18"
+									 HorizontalContentAlignment="Center"
+									 VerticalContentAlignment="Center"
+									 Watermark="{DynamicResource LoginView.Watermark.Code}"
+									 IsEnabled="{Binding !IsBusy}"/>
+
+							<TextBox Text="{Binding RegPassword, Mode=TwoWay}"
+									 MinHeight="52"
+									 FontSize="18"
+									 PasswordChar="#"
+									 HorizontalContentAlignment="Center"
+									 VerticalContentAlignment="Center"
+									 Watermark="{DynamicResource LoginView.Watermark.Password}"
+									 IsEnabled="{Binding !IsBusy}"/>
+
+							<TextBox Text="{Binding RegConfirmPassword, Mode=TwoWay}"
+									 MinHeight="52"
+									 FontSize="18"
+									 PasswordChar="#"
+									 HorizontalContentAlignment="Center"
+									 VerticalContentAlignment="Center"
+									 Watermark="{DynamicResource LoginView.Watermark.ConfirmPassword}"
+									 IsEnabled="{Binding !IsBusy}"/>
+
+							<Button Content="{DynamicResource LoginView.Button.Register}"
+									MinHeight="54"
+									Width="200"
+									FontSize="20"
+									HorizontalAlignment="Center"
+									HorizontalContentAlignment="Center"
+									VerticalContentAlignment="Center"
+									Command="{Binding RegisterCommand}"
+									IsEnabled="{Binding !IsBusy}"
+									FontWeight="Bold"/>
+						</StackPanel>
+
+					</StackPanel>
+				</Border>
+
+				<ProgressBar IsIndeterminate="True"
+							 IsVisible="{Binding IsBusy}"
+							 Height="4"/>
+
+				<TextBlock Text="{Binding Message}"
+						   FontSize="16"
+						   Foreground="{DynamicResource Brush.Error}"
+						   HorizontalAlignment="Center"
+						   TextAlignment="Center"
+						   TextWrapping="Wrap"/>
+
+				<StackPanel Orientation="Horizontal"
+							HorizontalAlignment="Center"
+							Spacing="8">
+
+					<TextBlock Text="API:"
+							   FontSize="12"
+							   Opacity="0.6"
+							   VerticalAlignment="Center"/>
+
+					<TextBlock Text="{Binding ApiUrl}"
+							   FontSize="12"
+							   VerticalAlignment="Center"
+							   TextTrimming="CharacterEllipsis"
+							   MaxWidth="160"/>
+
+					<Button Command="{Binding OpenApiSettingsCommand}"
+							MinWidth="44"
+							MinHeight="44"
+							Background="Transparent"
+							BorderThickness="0"
+							IsEnabled="{Binding !IsBusy}">
+						<TextBlock Text="✎"
+								   FontSize="18"
+								   Foreground="{DynamicResource Brush.Accent}"/>
+					</Button>
+
+				</StackPanel>
+
+			</StackPanel>
+		</Grid>
+	</ScrollViewer>
 </UserControl>

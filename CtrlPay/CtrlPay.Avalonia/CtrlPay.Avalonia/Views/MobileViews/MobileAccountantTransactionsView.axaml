@@ -33,7 +33,6 @@
         </StackPanel>
       </Grid>
 
-      <Button Content="{Binding ToggleViewText}" Command="{Binding ToggleViewCommand}" MinHeight="40"/>
 
       <ItemsControl ItemsSource="{Binding FilteredTransactions}" Margin="0,8,0,0">
         <ItemsControl.ItemTemplate>
