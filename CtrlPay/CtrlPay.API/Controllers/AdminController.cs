@@ -49,7 +49,16 @@ namespace CtrlPay.API.Controllers
             {
                 return Forbid();
             }
-            AuthLogic.AddUser(user.Username, user.Password, user.Role);
+            User newUser = AuthLogic.AddUser(user.Username, user.Password, user.Role).Body;
+            User dbUser = _db.Users.FirstOrDefault(u => u.Id == newUser.Id);
+            dbUser.TwoFactorEnabled = user.TwoFactorEnabled;
+            Customer cust = _db.Customers.FirstOrDefault(c => c.Id == user.CustomerId);
+            if(user.Role == Role.Customer && cust.LoyalCustomer != null)
+            {
+                dbUser.LoyalCustomer = cust.LoyalCustomer;
+            }
+            _db.Users.Update(dbUser);
+            _db.SaveChanges();
 
             return Ok(new ReturnModel("G0", ReturnModelSeverityEnum.Ok));
         }
