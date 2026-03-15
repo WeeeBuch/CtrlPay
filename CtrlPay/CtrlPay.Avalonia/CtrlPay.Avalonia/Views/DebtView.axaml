@@ -86,7 +86,8 @@
                                 <Border Padding="20" 
                                         Background="Transparent"
                                         BorderBrush="{DynamicResource Color.Border}"
-                                        BorderThickness="0,1,0,0">
+                                        BorderThickness="0,1,0,0"
+                                        IsVisible="{Binding CanBePaid}">
                                     <Grid ColumnDefinitions="Auto, *, Auto">
                                         <StackPanel Orientation="Horizontal" Spacing="10">
                                             <Button Content="{DynamicResource DebtView.PayFromCredit}" 
