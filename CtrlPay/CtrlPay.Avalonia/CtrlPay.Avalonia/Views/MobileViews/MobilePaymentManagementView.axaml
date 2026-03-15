@@ -1,0 +1,122 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:hc="using:CtrlPay.Avalonia.HelperClasses"
+             xmlns:repos="using:CtrlPay.Repos"
+             xmlns:frontend="using:CtrlPay.Repos.Frontend"
+             x:DataType="vm:PaymentManagementViewModel"
+             x:Class="CtrlPay.Avalonia.Views.MobileViews.MobilePaymentManagementView"
+             Background="{DynamicResource Color.Background}">
+  <UserControl.Resources>
+    <hc:IsOverpaidConverter x:Key="IsOverpaidConverter"/>
+    <hc:IsExpiredConverter x:Key="IsExpiredConverter"/>
+  </UserControl.Resources>
+  <ScrollViewer>
+    <StackPanel Margin="12" Spacing="12">
+      <TextBox Watermark="{DynamicResource PaymentManagerView.SearchWaterMark}" MinHeight="44" Text="{Binding SearchTerm}"/>
+
+      <Grid ColumnDefinitions="*,Auto">
+        <StackPanel Spacing="8" Grid.Column="0">
+          <TextBlock Text="{DynamicResource PaymentManagerView.SortBy}" FontSize="12" FontWeight="Bold" Opacity="0.6"/>
+          <ListBox Background="Transparent" BorderThickness="0" SelectedItem="{Binding SelectedSortOrder}"
+                   ItemsSource="{Binding SortOptions}" MaxHeight="120">
+            <ListBox.ItemTemplate>
+              <DataTemplate x:DataType="hc:SortOption">
+                <TextBlock Text="{Binding DisplayName}" FontSize="13"/>
+              </DataTemplate>
+            </ListBox.ItemTemplate>
+          </ListBox>
+          <TextBlock Text="{DynamicResource Accountant.Transactions.Filter.Status}" FontSize="12" FontWeight="Bold" Opacity="0.6"/>
+          <ComboBox ItemsSource="{Binding Statuses}" SelectedItem="{Binding SelectedStatusItem}" MinHeight="44">
+            <ComboBox.ItemTemplate>
+              <DataTemplate>
+                <TextBlock Text="{Binding Name}"/>
+              </DataTemplate>
+            </ComboBox.ItemTemplate>
+          </ComboBox>
+        </StackPanel>
+        <Button Grid.Column="1" Content="{DynamicResource PaymentManagerView.Button.Add}"
+                Command="{Binding AddNewPaymentCommand}" MinHeight="44" VerticalAlignment="Top" Margin="8,0,0,0"/>
+      </Grid>
+
+      <TextBlock Text="{DynamicResource PaymentManagerView.Detail.Title}" FontSize="16" FontWeight="Bold" Margin="0,8,0,0"/>
+
+      <ListBox ItemsSource="{Binding Payments}" SelectedItem="{Binding SelectedPayment}"
+               Background="Transparent" BorderThickness="0">
+        <ListBox.ItemTemplate>
+          <DataTemplate x:DataType="repos:FrontendPaymentDTO">
+            <Border Classes="customerCard" Margin="0,0,0,6" Padding="12" MinHeight="52">
+              <Grid ColumnDefinitions="Auto,*,Auto">
+                <Border Grid.Column="0" Classes="indicator" Tag="{Binding Status}" Width="4" Height="20" VerticalAlignment="Center" Margin="0,0,10,0"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                  <TextBlock Text="{Binding Title}" FontSize="14" FontWeight="Medium" TextWrapping="Wrap"/>
+                </StackPanel>
+                <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                  <TextBlock Text="{Binding ExpectedAmountXMR, StringFormat=\{0:N12\}}" FontSize="14" FontWeight="Bold"/>
+                </StackPanel>
+              </Grid>
+            </Border>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+
+      <ContentControl Content="{Binding SelectedPayment}" Margin="0,12,0,0">
+        <ContentControl.ContentTemplate>
+          <DataTemplate x:DataType="repos:FrontendPaymentDTO">
+            <Border Background="{DynamicResource Brush.Surface}" Padding="12" CornerRadius="8" BorderBrush="{DynamicResource Color.Border}" BorderThickness="1">
+              <StackPanel Spacing="10">
+                <Grid ColumnDefinitions="*,Auto">
+                  <TextBlock Text="{DynamicResource PaymentManagerView.Detail.Title}" FontSize="14" FontWeight="Bold"/>
+                  <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="6">
+                    <Button Content="{DynamicResource PaymentManagerView.Button.Edit}" FontSize="12" Padding="8,4"
+                            IsVisible="{Binding !$parent[UserControl].((vm:PaymentManagementViewModel)DataContext).IsEditing}"
+                            Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).StartEditCommand}"
+                            CommandParameter="{Binding}"/>
+                    <Button Content="{DynamicResource PaymentManagerView.Button.Cancel}" FontSize="12" Padding="8,4"
+                            IsVisible="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).IsEditing}"
+                            Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).CancelEditCommand}"
+                            CommandParameter="{Binding}"/>
+                    <Button Content="{DynamicResource PaymentManagerView.Button.Save}" FontSize="12" Padding="8,4"
+                            IsVisible="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).IsEditing}"
+                            Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).SavePaymentAsync}"/>
+                  </StackPanel>
+                </Grid>
+                <StackPanel Spacing="6" IsEnabled="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).IsEditing}">
+                  <TextBox Text="{Binding Title}" Watermark="{DynamicResource PaymentManagerView.Label.TitleWatermark}" MinHeight="40"/>
+                  <ComboBox ItemsSource="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).Customers}"
+                            SelectedValue="{Binding CustomerId, Mode=TwoWay}"
+                            SelectedValueBinding="{Binding Id}" MinHeight="40">
+                    <ComboBox.ItemTemplate>
+                      <DataTemplate x:DataType="frontend:FrontendCustomerDTO">
+                        <TextBlock Text="{Binding FullName}"/>
+                      </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                  </ComboBox>
+                  <NumericUpDown Value="{Binding ExpectedAmountXMR}" Minimum="0" MinHeight="40"/>
+                  <DatePicker SelectedDate="{Binding DueDate}"/>
+                </StackPanel>
+                <StackPanel Spacing="4">
+                  <TextBlock Text="{DynamicResource PaymentManagerView.Info.Status}" FontSize="11" Opacity="0.7"/>
+                  <TextBlock Text="{Binding Status}" FontWeight="Bold"/>
+                  <TextBlock Text="{DynamicResource PaymentManagerView.Info.ExpectedAmount}" FontSize="11" Opacity="0.7"/>
+                  <TextBlock Text="{Binding ExpectedAmountXMR, StringFormat={}{0:N12} XMR}" FontWeight="Bold"/>
+                  <TextBlock Text="{DynamicResource PaymentManagerView.Info.PaidAmount}" FontSize="11" Opacity="0.7"/>
+                  <TextBlock Text="{Binding PaidAmountXMR, StringFormat={}{0:N12} XMR}" FontWeight="Bold"/>
+                </StackPanel>
+                <Button Content="{DynamicResource PaymentManagerView.Button.ConvertToCredit}"
+                        IsVisible="{Binding Status, Converter={StaticResource IsOverpaidConverter}}"
+                        Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).ConvertOverpaymentToCreditCommand}"/>
+                <Button Content="{DynamicResource PaymentManagerView.Button.SendReminder}"
+                        IsVisible="{Binding Status, Converter={StaticResource IsExpiredConverter}}"
+                        Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).SendReminderCommand}"/>
+                <Button Content="{DynamicResource PaymentManagerView.Button.Delete}"
+                        IsVisible="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).CanBeDeleted}"
+                        Command="{Binding $parent[UserControl].((vm:PaymentManagementViewModel)DataContext).DeletePaymentCommand}"/>
+              </StackPanel>
+            </Border>
+          </DataTemplate>
+        </ContentControl.ContentTemplate>
+      </ContentControl>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

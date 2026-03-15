@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:local="using:CtrlPay.Avalonia"
+             x:DataType="vm:CustomersListViewModel"
+             x:Class="CtrlPay.Avalonia.Views.MobileViews.MobileCustomersListView"
+             Background="{DynamicResource Color.Background}">
+  <Grid RowDefinitions="Auto,Auto,*">
+    <TextBlock Grid.Row="0" Text="{DynamicResource Customers.Title}" FontSize="18" FontWeight="Bold" Margin="12,12,12,8"/>
+
+    <Grid Grid.Row="1" ColumnDefinitions="*,Auto" Margin="12,0,12,8">
+      <TextBox Grid.Column="0" Text="{Binding SearchTextInput}"
+               Watermark="{DynamicResource Customers.SearchWatermark}" MinHeight="44" Margin="0,0,8,0"/>
+      <Button Grid.Column="1" Command="{Binding AddCustomerCommand}" MinHeight="44" Padding="12,0">
+        <StackPanel Orientation="Horizontal" Spacing="6">
+          <TextBlock Text="+" FontSize="16" FontWeight="Bold" VerticalAlignment="Center"/>
+          <TextBlock Text="{DynamicResource Customers.NewCustomerButton}" VerticalAlignment="Center" FontSize="13"/>
+        </StackPanel>
+      </Button>
+    </Grid>
+
+    <ScrollViewer Grid.Row="2" Margin="12,0">
+      <ItemsControl ItemsSource="{Binding Customers}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate x:DataType="vm:CustomerPieceViewModel">
+            <local:CustomerPiece/>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </Grid>
+</UserControl>

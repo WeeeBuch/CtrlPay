@@ -1,4 +1,4 @@
-﻿# 04 Debug a Logování
+# 04 Debug a Logování
 
 Tento soubor popisuje nástroje pro diagnostiku chyb a sledování běhu aplikace.
 
@@ -27,4 +27,9 @@ Aplikace obsahuje integrovaný režim pro vývojáře, který umožňuje simulov
 - **Simulace chyb**: Možnost testovat chování aplikace při selhání API nebo generování adres.
 
 ### DebugWindow
-Při spuštění v debug režimu se otevře samostatné okno, které dynamicky (přes reflexi) zobrazuje všechny vlastnosti z `DebugMode.cs`. Změna hodnoty se okamžitě projeví v celé aplikaci díky `WeakReferenceMessenger`.
+Při spuštění v debug režimu se otevře samostatné okno, které slouží jako ovládací panel pro vývojáře. 
+
+**Klíčové vlastnosti:**
+- **Dynamické UI (Reflexe)**: Okno nevyužívá pevně definovaný XAML pro každé nastavení. Místo toho pomocí reflexe projde všechny vlastnosti třídy `DebugMode.cs` a automaticky pro ně vygeneruje příslušné ovládací prvky (CheckBoxy pro bool, TextBoxy pro string atd.). To umožňuje přidávat nová ladicí nastavení bez úpravy UI okna.
+- **Okamžitá odezva**: Změna jakékoli hodnoty v tomto okně okamžitě aktualizuje globální stav aplikace. Pro komunikaci se využívá `WeakReferenceMessenger`, aby nedocházelo k memory leakům při častém otevírání/zavírání oken.
+

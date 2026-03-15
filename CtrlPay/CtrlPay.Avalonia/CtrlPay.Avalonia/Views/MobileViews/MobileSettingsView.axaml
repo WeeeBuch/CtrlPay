@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:styles="using:CtrlPay.Avalonia.Styles"
+             xmlns:translations="using:CtrlPay.Avalonia.Translations"
+             xmlns:conv="using:CtrlPay.Avalonia.Converters"
+             x:Class="CtrlPay.Avalonia.Views.MobileViews.MobileSettingsView"
+             x:DataType="vm:SettingsViewModel"
+             Background="{DynamicResource Brush.Background}">
+  <UserControl.Resources>
+    <conv:ThemeToColorConverter x:Key="ThemeToColorConverter" />
+  </UserControl.Resources>
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Spacing="20" Margin="16">
+      <TextBlock Text="{DynamicResource SettingsView.Title}" FontSize="20" FontWeight="Bold" Foreground="{DynamicResource Color.Accent}"/>
+      <TextBlock Text="{DynamicResource SettingsView.Description}" FontSize="12" Opacity="0.5"/>
+
+      <TextBlock Text="{DynamicResource SettingsView.Appearance.Title}" FontSize="14" FontWeight="SemiBold"/>
+      <ListBox ItemsSource="{Binding AvailableThemes}" SelectedItem="{Binding SelectedTheme}"
+               Classes="PillList" Padding="4">
+        <ListBox.ItemTemplate>
+          <DataTemplate x:DataType="styles:ThemeManager+AppTheme">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Ellipse Width="10" Height="10" Fill="{Binding Converter={StaticResource ThemeToColorConverter}}"/>
+              <TextBlock Text="{Binding}" FontWeight="Medium" FontSize="13"/>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+
+      <TextBlock Text="{DynamicResource SettingsView.Translation.Title}" FontSize="14" FontWeight="SemiBold"/>
+      <ListBox ItemsSource="{Binding AvailableLanguages}" SelectedItem="{Binding SelectedLanguage}"
+               Classes="PillList" Padding="4">
+        <ListBox.ItemTemplate>
+          <DataTemplate x:DataType="translations:TranslationManager+AppLanguage">
+            <TextBlock Text="{Binding}" FontWeight="Medium" FontSize="13"/>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+
+      <TextBlock Text="{DynamicResource SettingsView.API.Title}" FontSize="14" FontWeight="SemiBold"/>
+      <Border Background="{DynamicResource Brush.Surface}" Padding="12" CornerRadius="10">
+        <StackPanel Spacing="12">
+          <TextBox Text="{Binding ApiUrl}" Watermark="https://..." MinHeight="44"/>
+          <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsTestingConnection}" Height="2" Foreground="{DynamicResource Brush.Accent}"/>
+          <TextBlock Text="{Binding StatusBoxText}" Foreground="{DynamicResource Color.Error}" IsVisible="{Binding IsErrorVisible}" FontSize="12"/>
+          <TextBlock Text="{Binding StatusBoxText}" Foreground="{DynamicResource Color.Success}" IsVisible="{Binding IsSuccessVisible}" FontSize="12"/>
+          <Button Content="{DynamicResource SettingsView.API.Test}" Command="{Binding TestConnectionCommand}" MinHeight="44"/>
+          <TextBlock Text="{DynamicResource SettingsView.API.UpdateFreq}" FontSize="11" Opacity="0.6"/>
+          <NumericUpDown Value="{Binding RefreshIntervalSeconds}" Minimum="5" Maximum="3600" MinHeight="44"/>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

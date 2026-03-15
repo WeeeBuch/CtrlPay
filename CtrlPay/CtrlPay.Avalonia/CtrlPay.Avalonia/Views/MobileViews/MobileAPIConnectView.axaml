@@ -1,0 +1,23 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:CtrlPay.Avalonia.ViewModels"
+             x:Class="CtrlPay.Avalonia.Views.MobileViews.MobileAPIConnectView"
+             x:DataType="local:APIConnectViewModel"
+             Background="{DynamicResource Brush.Background}">
+  <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <StackPanel Margin="16" Spacing="16" VerticalAlignment="Center">
+      <TextBlock Text="{DynamicResource SettingsView.API.Title}" FontSize="20" FontWeight="Bold" HorizontalAlignment="Center"/>
+      <Border Background="{DynamicResource Brush.Surface}" Padding="16" CornerRadius="12">
+        <StackPanel Spacing="12">
+          <TextBox Text="{Binding ApiUrl}" Watermark="https://www.action-games.cz/" MinHeight="48"/>
+          <Button Content="{DynamicResource SettingsView.API.Test}" Command="{Binding TestConnectionCommand}" MinHeight="48"/>
+          <ProgressBar IsIndeterminate="True" IsVisible="{Binding IsTestingConnection}" Height="2" Foreground="{DynamicResource Brush.Accent}"/>
+          <TextBlock Text="{Binding StatusBoxText}" IsVisible="{Binding IsErrorVisible}" Foreground="{DynamicResource Color.Error}" TextWrapping="Wrap"/>
+          <TextBlock Text="{Binding StatusBoxText}" IsVisible="{Binding IsSuccessVisible}" Foreground="{DynamicResource Color.Success}" TextWrapping="Wrap"/>
+          <Button Content="{DynamicResource OnboardingView.Button.Finish}" Command="{Binding FinishCommand}" 
+                  IsVisible="{Binding IsSuccessVisible}" MinHeight="48"/>
+        </StackPanel>
+      </Border>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

@@ -1,5 +1,7 @@
 using Avalonia.Controls;
+using Avalonia.Controls.ApplicationLifetimes;
 using CtrlPay.Avalonia.Views;
+using CtrlPay.Avalonia.Views.MobileViews;
 using CtrlPay.Avalonia.ViewModels;
 using CtrlPay.Entities;
 using CtrlPay.Repos.Frontend;
@@ -47,6 +49,47 @@ namespace CtrlPay.Avalonia
             login.Show();
             currentWindow.Close();
             AppLogger.Info("Logged out: Closed Main window and opened Login window.");
+        }
+    }
+
+    /// <summary>
+    /// Mobile / single-view implementation of navigation.
+    /// Uses ISingleViewApplicationLifetime and swaps the root view instead of opening windows.
+    /// </summary>
+    public class MobileNavigationService : INavigationService
+    {
+        private readonly ISingleViewApplicationLifetime _lifetime;
+
+        public MobileNavigationService(ISingleViewApplicationLifetime lifetime)
+        {
+            _lifetime = lifetime;
+        }
+
+        public void ShowMainWindow()
+        {
+            var mainView = new MobileMainView
+            {
+                DataContext = new MainViewModel(this, useMobileViews: true)
+            };
+
+            _lifetime.MainView = mainView;
+            AppLogger.Info("Main view started (mobile single-view).");
+        }
+
+        public void CloseLogin()
+        {
+            // Not needed for single-view; ShowMainWindow replaces the root view.
+        }
+
+        public void Logout(Window currentWindow)
+        {
+            var loginView = new MobileLoginView
+            {
+                DataContext = new LoginViewModel(this)
+            };
+
+            _lifetime.MainView = loginView;
+            AppLogger.Info("Logged out: switched to MobileLoginView (mobile single-view).");
         }
     }
 }

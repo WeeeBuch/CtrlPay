@@ -72,6 +72,11 @@ public partial class TransactionItem : ObservableObject
 
     public StatusEnum Status { get; set; }
 
+    public bool CanBePaid => Status == StatusEnum.Pending || 
+                             Status == StatusEnum.WaitingForPayment || 
+                             Status == StatusEnum.PartiallyPaid || 
+                             Status == StatusEnum.Created;
+
     public void UpdateCreditAmount(decimal amount)
     {
         CreditAmount = amount;

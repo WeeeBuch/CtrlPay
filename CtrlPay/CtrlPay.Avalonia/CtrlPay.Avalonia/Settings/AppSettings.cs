@@ -1,4 +1,4 @@
-﻿using CtrlPay.Avalonia.Styles;
+using CtrlPay.Avalonia.Styles;
 using CtrlPay.Avalonia.Translations;
 using CtrlPay.Repos;
 using System.Collections.Generic;
@@ -21,8 +21,8 @@ namespace CtrlPay.Avalonia.Settings
             set { _theme = value; Save(); }
         }
 
-        // Připojení aplikace k API
-        private string _connectionString = string.Empty;
+        // Připojení aplikace k API – default, uživatel může změnit v API dialogu
+        private string _connectionString = "https://www.action-games.cz/";
         public string ConnectionString
         {
             get => _connectionString;
@@ -34,7 +34,7 @@ namespace CtrlPay.Avalonia.Settings
         }
 
         // Uložená připojení
-        private List<string> _savedConnections = ["127.0.0.1"];
+        private List<string> _savedConnections = ["https://www.action-games.cz/"];
         public List<string> SavedConnections
         {
             get => _savedConnections;

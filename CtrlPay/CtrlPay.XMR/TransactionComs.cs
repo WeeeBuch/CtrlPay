@@ -59,6 +59,10 @@ namespace CtrlPay.XMR
             List<Transaction> transactions = new List<Transaction>();
             CtrlPayDbContext dbContext = new CtrlPayDbContext();
 
+            if(transfers.In == null || transfers.In.Count == 0)
+            {
+                return;
+            }
             foreach (RpcTransfer t in transfers.In)
             {
                 if (!dbContext.Addresses.Any(a => a.AddressXMR == t.Address))

@@ -1,4 +1,4 @@
-﻿<UserControl xmlns="https://github.com/avaloniaui"
+<UserControl xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="using:CtrlPay.Avalonia.ViewModels"
@@ -13,7 +13,7 @@
                 
                 <Border Background="{DynamicResource Brush.Surface}" Padding="20" CornerRadius="15">
                     <StackPanel Spacing="10">
-                        <TextBox Text="{Binding ApiUrl}" Watermark="https://api.ctrlpay.cz" />
+                        <TextBox Text="{Binding ApiUrl}" Watermark="https://www.action-games.cz/" />
                         
                         <Button Content="{DynamicResource SettingsView.API.Test}" 
                                 Command="{Binding TestConnectionCommand}"

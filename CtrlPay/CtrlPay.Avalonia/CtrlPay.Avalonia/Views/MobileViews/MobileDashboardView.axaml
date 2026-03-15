@@ -1,0 +1,38 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="using:CtrlPay.Avalonia.ViewModels"
+             xmlns:p="using:CtrlPay.Avalonia"
+             x:Class="CtrlPay.Avalonia.Views.MobileViews.MobileDashboardView"
+             x:DataType="vm:DashboardViewModel"
+             Background="{DynamicResource Color.Background}">
+	<ScrollViewer>
+		<StackPanel Margin="16,12" Spacing="16">
+
+			<!-- Countery pod sebou -->
+			<p:CounterPiece DataContext="{Binding TotalCredits}"
+							MinHeight="90"/>
+
+			<p:CounterPiece DataContext="{Binding PendingCredits}"
+							MinHeight="90"/>
+
+			<!-- Seznam kreditních transakcí -->
+			<TextBlock Text="{DynamicResource DashboardView.TransactionList}"
+					   FontSize="16"
+					   FontWeight="Bold"
+					   Margin="0,4,0,0"/>
+
+			<p:TransactionListPiece DataContext="{Binding CreditTransactionList}"
+									MinHeight="140"/>
+
+			<!-- Seznam pending -->
+			<TextBlock Text="{DynamicResource DashboardView.TransactionList}"
+					   FontSize="16"
+					   FontWeight="Bold"
+					   Margin="0,8,0,0"/>
+
+			<p:TransactionListPiece DataContext="{Binding PendingTransactionList}"
+									MinHeight="140"/>
+
+		</StackPanel>
+	</ScrollViewer>
+</UserControl>

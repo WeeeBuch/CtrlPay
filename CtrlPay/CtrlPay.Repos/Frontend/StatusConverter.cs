@@ -16,9 +16,9 @@ namespace CtrlPay.Repos.Frontend
                 PaymentStatusEnum.Unpaid => StatusEnum.Pending,
                 PaymentStatusEnum.WaitingForPayment => StatusEnum.WaitingForPayment,
                 PaymentStatusEnum.PartiallyPaid => StatusEnum.PartiallyPaid,
-                PaymentStatusEnum.Paid => StatusEnum.Completed,
+                PaymentStatusEnum.Paid => StatusEnum.Paid,
                 PaymentStatusEnum.Overpaid => StatusEnum.Overpaid,
-                PaymentStatusEnum.Expired => StatusEnum.Failed,
+                PaymentStatusEnum.Expired => StatusEnum.Expired,
                 PaymentStatusEnum.Cancelled => StatusEnum.Failed,
                 _ => StatusEnum.Error,
             };

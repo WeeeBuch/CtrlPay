@@ -75,6 +75,8 @@ namespace CtrlPay.Core
             decimal amountToPay = payment.ExpectedAmountXMR - payment.PaidAmountXMR;
             decimal credit = _db.Transactions
                 .Where(t => t.Account.Index == customer.Account.Index)
+                .Where(t => t.Address == customer.Account.BaseAddress)
+                .Where(t => t.Type == TransactionTypeEnum.Incoming)
                 .Where(t => t.Status == TransactionStatusEnum.Completed || t.Status == TransactionStatusEnum.Confirmed)
                 .Sum(p => p.Amount);
             decimal ourXmr = _db.LoyalCustomers
