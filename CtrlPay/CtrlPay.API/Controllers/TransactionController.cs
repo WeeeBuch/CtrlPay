@@ -65,6 +65,7 @@ namespace CtrlPay.API.Controllers
             }
             decimal credit = _db.Transactions
                 .Where(t => t.Account.Index == accountIndex)
+                .Where(t => t.Address == user.LoyalCustomer.Account.BaseAddress)
                 .Where(t => t.Status == TransactionStatusEnum.Completed || t.Status == TransactionStatusEnum.Confirmed)
                 .Sum(p => p.Amount);
             decimal ourXmr = _db.LoyalCustomers
