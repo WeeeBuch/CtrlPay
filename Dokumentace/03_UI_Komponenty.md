@@ -26,6 +26,11 @@ Při prvním spuštění (nebo pokud chybí konfigurace) aplikace vynutí průvo
 2. **APIConnectView**: Nastavení adresy serveru a ověření spojení.
 Jakmile je hotovo, `SettingsManager` uloží data do `settings.json` a aplikace se restartuje do přihlašovacího okna.
 
+## Zdroje a Stylování
+V celém projektu důsledně využíváme **`DynamicResource`** místo `StaticResource`. Důvodem je podpora dynamických změn bez nutnosti restartu aplikace. 
+
+Při změně tématu nebo jazyka se aktualizují prostředky v `Application.Current.Resources` a všechny prvky s `DynamicResource` se na tuto změnu automaticky překreslí.
+
 ## Dynamická lokalizace (`TranslationManager.cs`)
 Aplikace podporuje změnu jazyka za běhu bez nutnosti restartu. Překlady jsou uloženy v XAML slovnících ve složce `Translations/`.
 
@@ -50,7 +55,14 @@ Aplikace nepoužívá jen jednoduchý světlý/tmavý režim, ale umožňuje vý
 Téma se aplikuje metodou `ThemeManager.Apply(AppTheme theme)`, která dynamicky odstraní předchozí téma z `MergedDictionaries` a přidá nové.
 
 ## Vlastní komponenty (Pieces)
-V projektu využíváme vlastní UI prvky pro sjednocení vzhledu:
+V projektu využíváme vlastní UI prvky pro sjednocení vzhledu a modularitu:
+
+### Kompozice a ViewModely
+Každý "Piece" je zapouzdřená komponenta, která má svůj vlastní ViewModel (pokud je to potřeba). 
+- **Nezávislost**: `TransactionListPiece` může být použit v `DashboardView` i v `TransactionView`.
+- **Komunikace**: Pokud spolu "Pieces" potřebují mluvit, využívají k tomu buď `WeakReferenceMessenger` (CommunityToolkit.Mvvm), nebo sdílené události v `UpdateHandleru`.
+
+Dostupné Pieces:
 - **CounterPiece**: Zobrazuje číselné statistiky (např. celkový dluh).
 - **CustomerPiece**: Karta s informacemi o zákazníkovi.
 - **TransactionListPiece**: Komponenta pro zobrazení seznamu transakcí.
