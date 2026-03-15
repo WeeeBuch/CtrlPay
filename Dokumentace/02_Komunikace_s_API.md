@@ -3,7 +3,7 @@
 Tento soubor popisuje, jak klientská aplikace komunikuje se serverem (API) pomocí protokolu HTTP.
 
 ## Třída `HttpWorker.cs`
-Hlavním komunikačním uzlem aplikace je třída `HttpWorker` (v `CtrlPay.Repos`), která se stará o všechny síťové požadavky. Používá statickou instanci `HttpClient`, aby se zabránilo vyčerpání systémových socketů.
+Hlavním komunikačním uzlem aplikace je třída `HttpWorker` (v `CtrlPay.Repos`), která se stará o všechny síťové požadavky. Používá statickou instanci `HttpClient`, což je kritické pro prevenci **vyčerpání systémových socketů (socket exhaustion)** v operačním systému Windows při častém volání API.
 
 ### Hlavní metody:
 - **`HttpGet(url, auth)`**: Stáhne data (JSON) ze serveru.
@@ -11,6 +11,18 @@ Hlavním komunikačním uzlem aplikace je třída `HttpWorker` (v `CtrlPay.Repos
 - **`HttpDelete(url, payload, auth)`**: Pošle požadavek na smazání dat.
 
 Metody automaticky doplňují základní URL z `Credentials.BaseUri` a v případě potřeby přidávají Authorization hlavičku.
+
+## Standardizace odpovědí (`ReturnModel` a `RepoResult`)
+Aplikace nevyužívá jen syrové HTTP status kódy, ale balí odpovědi do vlastních struktur:
+
+### 1. ReturnModel
+Zajišťuje, že uživatel vždy dostane srozumitelnou informaci. Každý `ReturnModel` obsahuje:
+- **Severity**: Vážnost zprávy (Success, Info, Warning, Error).
+- **Message**: Krátká textová zpráva (např. "Platba úspěšně vytvořena").
+- **Code**: Unikátní identifikátor chyby pro diagnostiku.
+
+### 2. RepoResult
+V repozitářích (např. `AuthRepo`, `PaymentRepo`) se používá pro navrácení výsledku operace včetně dat. Příklad návratového typu: `Task<RepoResult<FrontendPaymentDTO>>`.
 
 ## Autentizace a JWT
 Aplikace využívá pro zabezpečení **JWT (JSON Web Token)**. Jakmile se uživatel přihlásí přes `AuthRepo.Login`, tokeny a role se uloží do statické třídy `Credentials`. `HttpWorker` tyto údaje automaticky používá pro autorizované požadavky:

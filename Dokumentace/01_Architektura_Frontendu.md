@@ -63,6 +63,21 @@ Pro zvýšení znovupoužitelnosti kódu dělíme UI na menší části – **Pi
 - Každý "Piece" je samostatná komponenta (např. `TransactionListPiece`, `CounterPiece`).
 - Tyto komponenty mají své vlastní ViewModely, což umožňuje jejich snadné vkládání do různých částí aplikace bez duplikace logiky.
 
+## Synchronizace a vzory
+Aby aplikace zůstala svižná a konzistentní, využívá dva důležité mechanismy:
+
+### 1. UpdateHandler (Globální události)
+Protože v aplikaci může být otevřeno více oken nebo pohledů najednou, používáme `UpdateHandler` pro synchronizaci dat. 
+- Když se například v jednom okně změní uživatel, zavolá se `UpdateHandler.HandleUpdatedAdminUsers()`.
+- Všechny ostatní komponenty, které toto téma zajímá (např. `AdminViewModel`), mají zaregistrovaný callback a automaticky si refreshnou data z repozitáře.
+
+### 2. Vzor IEditableObject (Bezpečné úpravy)
+Všechna hlavní DTOčka (např. `FrontendUserDTO`) implementují rozhraní `IEditableObject`. To umožňuje:
+- **BeginEdit()**: Vytvoří se záložní kopie objektu.
+- **CancelEdit()**: Pokud uživatel klikne na "Zrušit", objekt se automaticky vrátí do původního stavu.
+- **EndEdit()**: Potvrdí změny a uvolní zálohu.
+Díky tomu nemusíme ručně hlídat původní hodnoty v každém ViewModelu zvlášť.
+
 ## Klíčové manažery
 - **SettingsManager**: Stará se o ukládání a načítání lokální konfigurace (`settings.json`).
 - **TranslationManager**: Zajišťuje lokalizaci textů za běhu aplikace.
