@@ -18,13 +18,12 @@ namespace CtrlPay.API
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
-            DatabaseSettings databaseSettings = builder.Configuration.GetSection("Database").Get<DatabaseSettings>();
+            DatabaseSettings databaseSettings = builder.Configuration.GetSection("Database").Get<DatabaseSettings>()!;
             builder.Services.AddLinqToDBContext<AppDataConnection>((provider, options) =>
-            {
                 options
-                    .UseMySql($"Server={databaseSettings.ProviderIp};Port={databaseSettings.ProviderPort};Database={databaseSettings.DbName};Uid={databaseSettings.DbLogin};Pwd={databaseSettings.DbPassword};");
+                    .UseMySql($"Server={databaseSettings.ProviderIp};Port={databaseSettings.ProviderPort};Database={databaseSettings.DbName};Uid={databaseSettings.DbLogin};Pwd={databaseSettings.DbPassword};")
                     //.AddDefaultLogging(provider);                                    // loguje SQL do ILogger (volitelné)
-            });
+            );
 
             var app = builder.Build();
 
@@ -32,9 +31,14 @@ namespace CtrlPay.API
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
-            }
 
-            app.UseHttpsRedirection();
+                app.UseSwaggerUI(options =>
+                {
+                    options.SwaggerEndpoint("/openapi/v1.json", "v1");
+                });
+            }
+             
+            //app.UseHttpsRedirection();
 
             app.UseAuthorization();
 
