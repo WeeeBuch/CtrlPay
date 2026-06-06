@@ -52,4 +52,8 @@
     <PackageReference Include="MySqlConnector" Version="2.6.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CtrlPay.Entities\CtrlPay.Entities.csproj" />
+  </ItemGroup>
+
 </Project>

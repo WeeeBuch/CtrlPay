@@ -1,5 +1,8 @@
-﻿using LinqToDB;
+﻿using CtrlPay.Entities;
+using LinqToDB;
 using LinqToDB.Data;
+using LinqToDB.AspNet;
+using LinqToDB.Configuration; 
 
 namespace CtrlPay.DB
 {
@@ -10,5 +13,7 @@ namespace CtrlPay.DB
         {
 
         }
+
+        public ITable<User> Users => this.GetTable<User>();
     }
 }
