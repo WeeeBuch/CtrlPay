@@ -18,7 +18,8 @@ namespace CtrlPay.API
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
 
-            DatabaseSettings databaseSettings = builder.Configuration.GetSection("Database").Get<DatabaseSettings>()!;
+            var databaseSettings = builder.Configuration.GetSection("Database").Get<DatabaseSettings>()
+                ?? throw new InvalidOperationException("Missing required configuration section: 'Database'.");
             builder.Services.AddLinqToDBContext<AppDataConnection>((provider, options) =>
                 options
                     .UseMySql($"Server={databaseSettings.ProviderIp};Port={databaseSettings.ProviderPort};Database={databaseSettings.DbName};Uid={databaseSettings.DbLogin};Pwd={databaseSettings.DbPassword};")
