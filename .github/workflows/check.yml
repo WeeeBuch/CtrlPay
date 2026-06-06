@@ -1,15 +1,15 @@
-name: Checkos
+name: Unanimously Approved
 
 on:
-  push:
-    branches: [ main ]
   pull_request:
-    branches: [ main ]
+    types: [opened, reopened, synchronize, review_requested, review_request_removed]
+  pull_request_review:
+    types: [submitted, dismissed]
 
 jobs:
-  build:
+  unanimously-approved:
     runs-on: ubuntu-latest
+    timeout-minutes: 1
+
     steps:
-      - uses: actions/checkout@v4
-      - name: Run a simple check
-        run: echo "Všechno je v pořádku!"
+      - uses: snow-actions/unanimously-approved@v3.0.0
