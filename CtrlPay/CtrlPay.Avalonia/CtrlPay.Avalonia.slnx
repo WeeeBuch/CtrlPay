@@ -1,0 +1,11 @@
+﻿<Solution>
+  <Project Path="CtrlPay.Avalonia.Android/CtrlPay.Avalonia.Android.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="CtrlPay.Avalonia.Browser/CtrlPay.Avalonia.Browser.csproj" />
+  <Project Path="CtrlPay.Avalonia.Desktop/CtrlPay.Avalonia.Desktop.csproj" />
+  <Project Path="CtrlPay.Avalonia.iOS/CtrlPay.Avalonia.iOS.csproj">
+    <Deploy />
+  </Project>
+  <Project Path="CtrlPay.Avalonia/CtrlPay.Avalonia.csproj" />
+</Solution>

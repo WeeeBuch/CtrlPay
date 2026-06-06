@@ -1,5 +1,14 @@
 <Solution>
   <Project Path="CtrlPay.API/CtrlPay.API.csproj" />
+  <Project Path="CtrlPay.Avalonia/CtrlPay.Avalonia.Android/CtrlPay.Avalonia.Android.csproj" Id="57c45e7c-d5c9-46bf-833b-9023335b5941">
+    <Deploy />
+  </Project>
+  <Project Path="CtrlPay.Avalonia/CtrlPay.Avalonia.Browser/CtrlPay.Avalonia.Browser.csproj" Id="7ce18082-3381-4948-9a18-b62d0d57dc3e" />
+  <Project Path="CtrlPay.Avalonia/CtrlPay.Avalonia.Desktop/CtrlPay.Avalonia.Desktop.csproj" Id="a0d463b5-4db9-41bf-bd7c-07bcb91dcc7d" />
+  <Project Path="CtrlPay.Avalonia/CtrlPay.Avalonia.iOS/CtrlPay.Avalonia.iOS.csproj" Id="4f70aaea-9ca5-46a8-8efc-56b9b7b848b4">
+    <Deploy />
+  </Project>
+  <Project Path="CtrlPay.Avalonia/CtrlPay.Avalonia/CtrlPay.Avalonia.csproj" Id="dcd128ab-5e0d-4f3a-96c7-4577531fd5f0" />
   <Project Path="CtrlPay.Core/CtrlPay.Core.csproj" />
   <Project Path="CtrlPay.DB/CtrlPay.DB.csproj" />
   <Project Path="CtrlPay.Entities/CtrlPay.Entities.csproj" />
