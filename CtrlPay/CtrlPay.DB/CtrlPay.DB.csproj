@@ -6,4 +6,16 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="linq2db" Version="6.3.0" />
+    <PackageReference Include="linq2db.AspNet" Version="5.4.1.9" />
+    <PackageReference Include="linq2db.Extensions" Version="6.3.0" />
+    <PackageReference Include="linq2db.MySqlConnector" Version="5.4.1.9" />
+    <PackageReference Include="MySqlConnector" Version="2.6.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CtrlPay.Entities\CtrlPay.Entities.csproj" />
+  </ItemGroup>
+
 </Project>
