@@ -13,7 +13,5 @@ namespace CtrlPay.DB
         {
 
         }
-
-        public ITable<User> Users => this.GetTable<User>();
     }
 }
