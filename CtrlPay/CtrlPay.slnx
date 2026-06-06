@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="CtrlPay.API/CtrlPay.API.csproj" />
+  <Project Path="CtrlPay.Core/CtrlPay.Core.csproj" />
+  <Project Path="CtrlPay.DB/CtrlPay.DB.csproj" />
+  <Project Path="CtrlPay.Entities/CtrlPay.Entities.csproj" />
+  <Project Path="CtrlPay.Repos/CtrlPay.Repos.csproj" />
+  <Project Path="CtrlPay.XMR/CtrlPay.XMR.csproj" />
+</Solution>
